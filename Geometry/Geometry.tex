@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{amsmath} %数学
+	\makeatletter % '@' now normal "letter"
+	\@addtoreset{equation}{section}
+	\makeatother  % '@' is restored as "non-letter"
+	\renewcommand\theequation{\oldstylenums{\thesection}%
+					-\oldstylenums{\arabic{equation}}}
+\usepackage{amsthm} %定义、证明、定理等
+	\theoremstyle{plain}
+	\theoremstyle{definition}
+		\newtheorem{dfn}{Definition}[section] %定义
+		\newtheorem{thrm}{Theorem}[section] %定理
+		\newtheorem{crll}{Corollary} %推论
+		\newtheorem{lmm}{Lemma} %引理
+		\newtheorem{prp}{Proposition} %命题
+	\renewcommand{\proofname}{\textbf{Proof}}
+\usepackage{amssymb} %数学格式
+\usepackage{mathrsfs} %花体
+\usepackage{enumerate} %编号
+\usepackage{makeidx} %索引
+	\makeindex
+\usepackage[colorlinks=true,bookmarks=true]{hyperref}%hyperlinks for reference, table of contents and indexes
+\hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}%More options read texdoc hyperref
+\newcommand{\me}{\mathrm{e}}
+\newcommand{\mi}{\mathrm{i}}
+\newcommand{\md}{\mathrm{d}}
+\DeclareMathOperator{\ctg}{ctg}
+\newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}}
+\newcommand*{\bv}{\boldsymbol}
+\newcommand*{\bm}{\boldsymbol}
+\newcommand*{\indexbf}[1]{\textbf{#1}\index{#1}}
+\begin{document}
+\tableofcontents
+\newpage
+\section{Geometry in Regions of a Space}
+\subsection{Co-odinate and its transformation}
+\begin{dfn}
+A transformation of co-odinate from $\boldsymbol{x}$ to $\boldsymbol{y}$
+\begin{align*}
+	\bv y(\bv x ) = y^i(x^j)\basis e_i=y(x^j).
+\end{align*}
+Its \indexbf{Jacobian}:
+\begin{align}\label{Jacobian of transformation}
+	\bm J = 
+	\begin{pmatrix}
+		\cfrac{\partial y^i}{\partial x^j}
+	\end{pmatrix}
+\end{align}
+\end{dfn}
+A vector $\bv u$ at point $\bv x_0$ under such transformation would follow:
+\begin{align}\label{vector}
+	v^i = \left.\frac{\partial y^i}{\partial x^j}\right|_{\bv x_0} u^i
+\end{align}
+\begin{align*}
+	\text{i.e.}&&
+	\bv v = \bm J_0\bv u
+\end{align*}
+
+A linear form $\ell: \bv x\mapsto\ell(\bv x) =l_ix^i $ under such transformation would follow:
+\begin{align}\label{linear form}
+	l_i'\md y^i = l_j\md x^j 
+	&&\Rightarrow&&
+	l'_i = \left.\frac{\partial x^j}{\partial y_i}\right|_{\bv x_0}l_j
+\end{align}
+\begin{align*}
+	\text{i.e.}&&
+	\bv l' = \bv l \bm J^{-1}_0
+\end{align*}
+
+A linear transformation $\mathscr{L}:\bv x \mapsto \bm L\bv x$ where $\bm L = \left( L^i_{\;j}\right)$ under such transformation would follow:
+\begin{align*}
+	\md y\left(\mathscr L^i(\bv x)\right) 
+	&=(L')^i_{\;j} \md y^j 
+	\\
+	&=  \left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} \md \mathscr L^k (\bv x)
+	=\left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} L^k_{\;h} \md x^h
+	=\left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} 
+	L^k_{\;h} 
+	\left.\frac{\partial x^h}{\partial y_j}\right|_{\bv x_0}\md y^j
+\end{align*} 
+\begin{align}\label{linear transformation} 
+	(L')^i_{\;j} = 
+	\left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} 
+	L^k_{\;h} 
+	\left.\frac{\partial x^h}{\partial y_j}\right|_{\bv x_0} 
+	&&\text{or}&&
+	\bm L'  = \bm J_0\bm L\bm J^{-1}_0 
+\end{align} 
+
+A bilinear form $\mathscr{B}: \bv x \mapsto \bv x^{\mathrm{T}} \bm b \bv x = x^{\;i}b_{ij}x^j$: 
+\begin{align*}
+	b'_{ij}\md y^{\;i} \md y^j 
+	= b'_{ij} \left.\frac{\partial y^{\,i}}{\partial x^{\;k}}\right|_{\bv x_0}
+	\left.\frac{\partial y^j}{\partial x^h}\right|_{\bv x_0}\md x^{\;k}\md x^h 
+	=b_{kh} \md x^{\;k}\md x^h 
+	&&\Rightarrow&&
+	b'_{ij} =\left. \frac{\partial x^{\;k}}{\partial y^{\;h}}\right|_{\bv x_0}
+	b_{kh} 
+	\left.\frac{\partial x^h}{\partial y^j}\right|_{\bv x_0}
+\end{align*}
+\begin{align}\label{bilinear form}
+	\text{i.e.} &&
+	\bm b' = (\bm J^{-1}_0)^{\mathrm{T}} \bm b \bm J^{-1}_0
+\end{align}
+\printindex
+\end{document}

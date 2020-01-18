@@ -1,0 +1,284 @@
+\documentclass[UTF8,AutoFakeBold]{ctexart}
+\usepackage{amsmath} %数学
+	\makeatletter % '@' now normal "letter"
+	\@addtoreset{equation}{section}
+	\makeatother  % '@' is restored as "non-letter"
+	\renewcommand\theequation{\thesection%
+					-\arabic{equation}}
+\usepackage{amsthm} %定义、证明、定理等
+	\theoremstyle{plain}
+		\newtheorem{axion}{Axion} %公理
+		\newtheorem{theorem}{Theorem}[section] %定理
+		\newtheorem{corollary}{Corollary} %推论
+		\newtheorem{lemma}{Lemma} %引理
+	\theoremstyle{definition}
+		\newtheorem{definition}{Definition}[section] %定义
+		\newtheorem{propposition}{Proposition} %命题
+	\renewcommand{\proofname}{\textbf{Proof}}
+\usepackage{amssymb} %mathematical symbols
+\usepackage{mathrsfs} %allow you to use \mathscr to display captial letters in script style
+\usepackage{makeidx} %Generate index
+	\makeindex
+\usepackage{enumerate} %编号
+\usepackage{tikz}
+\usepackage[colorlinks=true,bookmarks=true]{hyperref}%hyperlinks for reference, table of contents and indexes
+\hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}%More options read texdoc hyperref
+
+\usepackage[style=gb7714-2015]{biblatex}
+\addbibresource{SetTheory.bib}
+
+
+\newcommand*{\indexbf}[1]{\textit{\textbf{#1}}\index{#1}}
+\newcommand*{\indexfm}[2]{#1\index{ 公式@笔记中出现的符号!#2@$#1$}}
+
+\def\reflect#1{{\setbox0=\hbox{#1}\rlap{\kern0.5\wd0
+  \special{x:gsave}\special{x:scale -1 1}}\box0 \special{x:grestore}}}
+\def\XeTeX{\leavevmode
+  \setbox0=\hbox{X\lower.5ex\hbox{\kern-.15em\reflect{E}}\kern-.1667em \TeX}%
+  \dp0=0pt\ht0=0pt\box0 }
+
+\newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}}%基底
+\newcommand*{\bv}{\boldsymbol}%向量加粗
+\newcommand*{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand*{\diff}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand*{\properclass}[1]{\mathbf{#1}}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\ctg}{ctg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\ch}{ch}
+
+\title{Set Theory}
+\author{Hoyan Mok}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{集合与公理}
+在介绍集合论的
+$\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念. 
+
+
+\subsection{数理逻辑准备}
+
+句法概念如\indexbf{形式语言}, \indexbf{逻辑符号}, \indexbf{非逻辑符号}, \indexbf{项}, \indexbf{公式}, \indexbf{自由变元}, \indexbf{约束变元}, \indexbf{语句}等主要见\cite{2014数理逻辑}.
+
+设$\Sigma$是一个公式集, $\varphi$是一个公式.
+
+\begin{definition}
+有穷公式序列$\varphi_1,\,\cdots,\,\varphi_n$表示从$\Sigma$到$\varphi$的一个\indexbf{推演}, 如果其中的任意$\varphi_i$要么是属于$\Sigma$的, 要么可从之前的公式$\varphi_j$和$\varphi_k=\varphi_j\to\varphi_i$得到, 而且$\varphi_n=\varphi$. 记作$\indexfm{\Sigma\vdash\varphi}{Sigma_vdash_varphi}$.
+
+特别地, 如果$T$是语句集, 而$\sigma$是语句, 如果$\indexfm{T\vdash\sigma}{T_vdash_sigma}$, 就称存在从$T$到$\sigma$的一个\indexbf{证明}.
+\end{definition}
+
+如果语句集$T$满足: 对任意语句$\sigma$, $T\vdash\sigma$当且仅当$\sigma\in T$, 即$T$是一个对证明封闭的语句集, 就称$T$为\indexbf{理论}. 假设$T$是理论, 如果存在一个语句集$A\subseteq T$使得对任意的$\sigma\in T$都有$A\vdash \sigma$, 就称$A$为$T$的一集\indexbf{公理}.
+
+如果理论$T$的公理$A$是\indexbf{递归的} (\indexbf{可判定的}, \indexbf{可计算的}) i.e.\ 任给一语句, 总可以在有穷步骤内完全机械地判定它是否属于$A$, 就称$T$是\indexbf{可公理化的}. 理论$T$往往不是递归的, 但如果任给$\sigma\in T$, 我们可在有穷的步骤内得出结论, 但如果$\sigma\notin T$, 我们可能不能在有穷步骤内得出结论, 则称其为\indexbf{递归可枚举的}.
+
+一个理论是\indexbf{一致的}当且仅当没有语句$\sigma$ s.t.\ $T\vdash \sigma\wedge \neg\sigma$.
+
+\begin{definition}
+若$\psi$是性质.
+\begin{align}
+	\exists ! x \psi(x) :=
+		\exists x\psi(x)\wedge \forall x\forall y (
+			\psi(x)\wedge\psi(y)\to x = y)
+\end{align}
+\end{definition}
+
+\subsection{\texorpdfstring{$\properclass{ZFC}$公理}{ZFC公理}}
+
+\setcounter{axion}{-1}
+\begin{axion}\label{Exi} \indexbf{存在公理} (\indexbf{Exi})
+存在一个集合, i.e.
+\begin{align}
+	\exists x (x = x).
+\end{align}
+\end{axion}
+\begin{axion} \indexbf{外延公理} (\indexbf{Ext})
+两个有相同元素的集合相等, i.e.
+\begin{align}
+	\forall X\forall Y\forall u (u\in X\leftrightarrow u\in Y) \rightarrow X=Y.
+\end{align}
+\end{axion}
+
+而逻辑上有$X=Y\rightarrow \forall X\forall Y\forall u (u\in X\leftrightarrow u\in Y)$, 所以:
+\begin{align}
+	\forall X\forall Y\forall u (u\in X\leftrightarrow u\in Y) \leftrightarrow X=Y
+\end{align}
+
+记$\neg(X=Y) =: X\neq Y$.
+
+\begin{axion}\label{Sep} \indexbf{分离公理模式} (\indexbf{Sep})
+
+令$\varphi(u)$为公式. 对任意集合$X$, 存在一个集合$Y=\{u\in X\mid \varphi(u)\}$, i.e.
+\begin{align}
+	\forall X\exists Y\forall u (u\in Y\leftrightarrow u\in X \wedge \varphi(u)).
+\end{align}	
+\end{axion}
+
+\begin{corollary}\label{Russell set}
+\begin{align}
+	\forall X\exists R_X (R_X\notin R_X)
+\end{align}
+\end{corollary}
+\begin{proof}
+令$R_X = \{x\in X\mid x\notin x\}$即可.
+\end{proof}
+
+令$\varphi(u)$为一个性质. 倘若$\exists X\forall u(\varphi(u)\to u\in X)$, 则${u\mid \varphi(u)} = {u\mid \varphi(u)}$, 根据Sep (Axion \ref{Sep}), $\exists \varnothing = {u\mid \varphi(u)}$. 分离于不同的集合$X$和$X'$的$\varnothing$是相同的. 考虑到$x\neq x \to x \in X$是重言式, 再根据Exi (Axion \ref{Exi}), 可以得出:
+
+\begin{definition}
+	$\varnothing=\{x\mid x\neq x\}$是集合, 称为\indexbf{空集}.
+\end{definition}
+
+\begin{definition}
+$\varphi(u)$是一个性质. 称$\{u\mid u(u)\}$为一个\indexbf{类} (class). 若一个类不是集合, 则称其为\indexbf{真类} (proper class).
+\end{definition}
+
+如所有集合的类$\indexfm{\properclass{V}}{V}$就是一个真类 (根据Corollary \ref{Russell set}). 
+
+\begin{definition}
+由Sep, 两个集合的\indexbf{交}和\indexbf{差}也是集合:
+\begin{align}
+	X\cap Y = \{u\in X\mid u\in Y\}
+	&&
+	X - Y = \{u\in X\mid u\notin Y\}
+\end{align}
+\end{definition}
+
+\begin{corollary}
+而非空集$X\neq \varnothing$的\indexbf{任意交}
+\begin{align}
+	\bigcap X = \{u\mid \forall Y\in X( u\in Y)\}
+\end{align}
+也是集合.
+\end{corollary}
+\begin{proof}
+因$X\neq\varnothing$, $\exists x_0\in X$. 由Sep, 
+\begin{align*}
+	Y = \{ y\in x_0\mid \forall x\in X(y\in x) \}
+\end{align*}
+是集合. 
+\end{proof}
+
+\begin{axion} \indexbf{对集公理} (\indexbf{Pai})
+\begin{align}
+	\forall a\forall b\exists c \forall x ( x\in c\leftrightarrow x=a\vee x=b).
+\end{align}
+这样的$c$可记为$\{a,b\}$. 
+\end{axion}
+
+\begin{axion} \indexbf{并集公理} (\indexbf{Uni})
+\begin{align}
+	\forall X\exists Y \forall u (u\in Y\leftrightarrow \exists z\in X(u\in z).
+\end{align}
+\end{axion}
+
+\begin{definition} \indexbf{子集}和\indexbf{真子集}关系定义如下:
+\begin{align}
+	X\subseteq Y &:= \forall x\in X(x\in Y) ,\\
+	X \supseteq Y &:= Y\subseteq X, \\
+	X \subset Y &:= X\subseteq Y \wedge X\neq Y,\\
+	X \supset Y&:= X.
+\end{align}
+\end{definition}
+
+\begin{corollary}
+$\forall X(\varnothing\subseteq X).$
+\end{corollary}
+
+\begin{axion} \indexbf{幂集公理} (\indexbf{Pow})
+\begin{align}
+	\forall X\exists Y\forall u (u\in Y\leftrightarrow u\subseteq X).
+\end{align}
+这样的$Y$称为$X$的\indexbf{幂集}, 记为$\indexfm{\mathscr{P}(X)}{PX}$或$\indexfm{2^X}{2X}$.
+\end{axion}
+
+\begin{definition}
+对任意集合$x$, $x\cup \{ x\} $称为其\indexbf{后继}, 记为$\indexfm{S(x)}{ S(x)}$或$\indexfm{x^+}{ x+}$.
+\end{definition}
+
+\begin{axion} \indexbf{无穷公理} (\indexbf{Inf})
+\begin{align}
+	\exists X \big( 
+		\varnothing \in X\wedge \forall x(
+			x\in X\to S(x)\in X)\big).
+\end{align}
+\end{axion}
+
+\begin{axion}\label{Fnd} \indexbf{基础公理} (\indexbf{Fnd})
+\begin{align}
+	\forall x\big( 
+		x\neq \varnothing\rightarrow \exists y\in x (
+			x\cap y=\varnothing )\big).
+\end{align}
+\end{axion}
+
+\begin{theorem}\label{Russell}
+\begin{align}
+	\forall x (x\notin x).
+\end{align}
+\begin{proof}
+考虑$X=\{x\}$. 与Fnd矛盾.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+\begin{align}
+	\nexists X\big( 
+		X\neq\varnothing\wedge\forall x\in X(
+			\exists y\in X(
+				y\in x))\big).
+\end{align}
+\end{theorem}
+\begin{proof}
+\begin{align*}
+	\text{Fnd} \wedge \forall x\in X\big(
+		\exists y\in X (
+			y\in x\cap X)\big) =\bot.
+\end{align*}
+\end{proof}
+
+\begin{axion}\label{Rep} \indexbf{替换公理模式} (\indexbf{Rep})
+对公式$\psi(x,y)$, $\forall x$都存在唯一的$y$ s.t.\ $\psi(x,y)$成立. 那么$\forall A\in \properclass V$, 存在集合:
+\begin{align}\label{range(Rep)}
+	B = \{ 
+		y \mid \exists x\in A\,\psi(x,y)\}
+\end{align}
+i.e.\ 
+\begin{align}
+	\forall A\forall x\in A\,\exists! y\,\psi(x,y) \to
+		\exists B\forall x\in A\,\exists y\in B\,\psi(x,y)
+\end{align}
+\end{axion}
+
+\begin{axion}\label{AC} \indexbf{选择公理} ($\indexfm{\properclass{AC}}{AC}$)
+对任意非空集合$X\neq \varnothing$, 若
+\begin{enumerate}
+\item[\textup{(1)}] $\varnothing \notin X$,
+\item[\textup{(2)}] $X$中两两不交, 即$\forall x\in X\,\forall y\in X$且$x\neq y$, 那么$x\cap y=\varnothing$,
+\end{enumerate}
+则存在集合$S$, 对$\forall x\in S$, $S\cap x$是单点集. i.e. 
+\begin{align}
+\begin{aligned}
+	\forall X\big( 
+		\varnothing\in X\wedge \forall x\in X\,&\forall y\in X (
+			x= y\vee x\cap y =\varnothing)\\
+				&\to  \exists S\forall x\in X\,\exists!y(
+					S\cap x = \{y\})\big).
+\end{aligned}
+\end{align}
+\end{axion}
+
+Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenkel系统}, 记为$\properclass{ZF}$, 加上选择公理则记为$\properclass{ZFC}$.
+
+
+\section{关系与函数}
+
+
+
+\printindex
+\printbibliography
+\end{document}
