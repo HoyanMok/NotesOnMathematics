@@ -47,6 +47,8 @@
 \DeclareMathOperator{\arctg}{arctg}
 \DeclareMathOperator{\sh}{sh}
 \DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
 
 \title{Set Theory}
 \author{Hoyan Mok}
@@ -96,7 +98,7 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 	\exists x (x = x).
 \end{align}
 \end{axion}
-\begin{axion} \indexbf{外延公理} (\indexbf{Ext})
+\begin{axion}\label{Ext} \indexbf{外延公理} (\indexbf{Ext})
 两个有相同元素的集合相等, i.e.
 \begin{align}
 	\forall X\forall Y\forall u (u\in X\leftrightarrow u\in Y) \rightarrow X=Y.
@@ -120,7 +122,7 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 
 \begin{corollary}\label{Russell set}
 \begin{align}
-	\forall X\exists R_X (R_X\notin R_X)
+	\forall X\exists R_X (R_X\notin R_X).
 \end{align}
 \end{corollary}
 \begin{proof}
@@ -237,7 +239,7 @@ $\forall X(\varnothing\subseteq X).$
 \begin{align*}
 	\text{Fnd} \wedge \forall x\in X\big(
 		\exists y\in X (
-			y\in x\cap X)\big) =\bot.
+			y\in x\cap X)\big) \rightarrow\bot.
 \end{align*}
 \end{proof}
 
@@ -276,6 +278,54 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 
 
 \section{关系与函数}
+
+\subsection{关系}
+\begin{definition}
+集合$a,b$的\indexbf{有序对}$\indexfm{( a,b)}{(a,b)} := \big\{\{a\},\{a,b\}\big\}$.
+\end{definition}
+
+\begin{theorem}
+\begin{align*}
+	(a,b)=(a',b') \leftrightarrow a=a'\wedge b=b'.
+\end{align*}
+\end{theorem}
+\begin{proof}
+只证明 "$\rightarrow$":
+\begin{enumerate}[(1)]
+\item $a=b$. $(a,b) = \big\{\{a\}\big\}=(a',b')$, 故$(a',b')=\{\{a\}\}=\big\{\{a'\},\{a',b'\}\big\}$, 由Ext (axion \ref{Ext}), $\{a'\} = \{a',b'\}=\{a\}$, 即$a=b=a'=b'$.
+\item $a\neq b$. 假设$\{a,b\}=\{a'\}$, 得$\forall x\in \{a,b\} (x=a')$即$a=b=a'$与$a\neq b$矛盾. 从而只有$\{a,b\}=\{a',b'\}\wedge\{a\}=\{a'\}$, 仍然由Ext易证.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+令$X$和$Y$是集合, 其\indexbf{直积}或\indexbf{Cartesian积}定义为:
+\begin{align}
+	\indexfm{X\times Y}{X_times_Y} := \{ ( x,y) \mid x\in X\wedge y\in Y\}.
+\end{align}
+简记$X\times X =: \indexfm{ X^2}{X2}$.
+\end{definition}
+
+\begin{theorem}
+对于$\forall X\forall Y$, $X\times Y$是集合.
+\end{theorem}
+\begin{proof}
+令$\varphi(z) = \exists x\in X\exists y\in Y( (x,y)=z)$, 取$Z=\{z\in 2^\{X\cup Y\}\mid \varphi(z)\}$, 由Ext和Sep (Axion \ref{Sep}) 即可知$X\times Y = Z$.
+\end{proof}
+
+\begin{definition}
+如果存在集合$X,Y$ s.t.\ $R\subseteq X\times Y$, 则称集合$R$是\indexbf{二元关系}. 通常记$(x,y)\in R =: \indexfm{R(x,y)}{R(x,y)}$, 或$\indexfm{xRy}{xRy}$. $\dom R := \{ x \mid \exists y R(x,y)\}$称为其\indexbf{定义域}, $\ran R=\{ y\mid \exists x R(x,y)\}$称为其\indexbf{值域}. 
+
+特别地, 如果$R\subseteq X^2$, 则称其为$X$上的二元关系.
+\end{definition}
+
+\begin{definition}
+集合$X$在关系$R$的\indexbf{像}$R[X]$定义为$\{ y\in\ran R \mid \exists x\in X\,(R(x,y) )\}$. 
+集合$Y$的逆像$R^{-1} [Y]$则定义为$\{x\in\dom R \mid \exists y\in Y\,( R(x,y))\}$. 
+二元关系$R$的\indexbf{逆}$R^{-1}$是$\{ (x,y) \mid R(y,x)\}$. 
+两个二元关系$R$, $S$的\indexbf{复合}$S\circ R$则定义为$\{ (x,z) \mid \exists y ( R(x,y) \wedge S(y,z)) \}$.
+\end{definition}
+
+\subsection{函数}
 
 
 
