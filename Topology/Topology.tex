@@ -1,0 +1,236 @@
+\documentclass{article}%默认英文, 中文请使用:{ctexart}
+\usepackage{amsmath} %数学
+	\makeatletter % '@' now normal "letter"
+	\@addtoreset{equation}{section}
+	\makeatother  % '@' is restored as "non-letter"
+	\renewcommand\theequation{\oldstylenums{\thesection}%
+					-\oldstylenums{\arabic{equation}}}
+\usepackage{amsthm} %定义、证明、定理等
+	\theoremstyle{plain}
+		\newtheorem{axion}{Axion} %公理
+		\newtheorem{theorem}{Theorem}[section] %定理
+		\newtheorem{corollary}{Corollary} %推论
+		\newtheorem{lemma}{Lemma} %引理
+	\theoremstyle{definition}
+		\newtheorem{definition}{Definition}[section] %定义
+		\newtheorem{proposition}{Proposition} %命题
+	\renewcommand{\proofname}{\textbf{Proof}}
+\usepackage{amssymb} %mathematical symbols
+\usepackage{mathrsfs} %allow you to use \mathscr to display captial letters in script style
+\usepackage{makeidx} %Generate index
+	\makeindex
+\usepackage{enumerate} %编号
+\usepackage{tikz}
+\usepackage[colorlinks=true,bookmarks=true]{hyperref}%hyperlinks for reference, table of contents and indexes
+\hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}%More options read texdoc hyperref
+
+% \usepackage[style=gb7714-2015]{biblatex}
+% \addbibresource{<File>.bib}
+
+\newcommand*{\indexbf}[1]{\textit{\textbf{#1}}\index{#1}}
+\newcommand*{\indexfm}[2]{#1\index{  Symbols@Symbols used!#2@$#1$}}
+
+\def\reflect#1{{\setbox0=\hbox{#1}\rlap{\kern0.5\wd0
+  \special{x:gsave}\special{x:scale -1 1}}\box0 \special{x:grestore}}}
+\def\XeTeX{\leavevmode
+  \setbox0=\hbox{X\lower.5ex\hbox{\kern-.15em\reflect{E}}\kern-.1667em \TeX}%
+  \dp0=0pt\ht0=0pt\box0 }
+
+\newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}}%基底
+\newcommand*{\bv}{\boldsymbol}%向量加粗
+\newcommand*{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand*{\diff}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\ctg}{ctg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+
+\title{Point Set Topology}
+\author{Hoyan Mok}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Topological Spaces and Continuous Mappings}
+\subsection{Metric Space}
+\begin{definition}\label{metric_def}
+function
+\begin{align}\label{metric}
+	\indexfm{d}{d}\colon X^2\to\mathbb{R}
+\end{align}
+$\forall x_1,x_2,x_2\in X$ satisfied: 
+\begin{enumerate}[a)]
+	\item	$d(x_1,x_2)=0\Leftrightarrow x_1=x_2$;
+	\item	$d(x_1,x_2)=d(x_2,x_1)$ (symmetry);
+	\item	$d(x_1,x_3)\leqslant d(x_1,x_2)+d(x_2,x_3)$ (Triangle inequality),
+\end{enumerate}
+is called a \indexbf{metric} or \indexbf{distance} in $X$. Such $X$ is said to be equiped with metric $d$, $(X;d)$ is called a \indexbf{metric space}.
+\end{definition}
+
+Some examples:
+\begin{itemize}
+\item $(\mathbb{R}^n;d_p)$, where $d_p(x_1,x_2)=\left(\sum^n_{i=1}\left|x^i_1-x^i_2\right|^p\right)^{1/p}$, while $d_\infty(x_1,x_2)=
+\max\limits_{1\leqslant i\leqslant n}
+\left|x^i_1-x^i_2\right|$.
+\item Similarly we can define metric spaces as $(C[a,b];d_p)$ or $C_p[a,b]$. $d_p(f,g)=\left(
+	\int^b_a\left|f-g\right|^p\,\mathrm{d}x
+\right)^{\frac{1}{p}}$. $C_\infty$ is called a \textbf{Chebyshev metric}\index{Chebyshev metric}.
+\item On class $\mathfrak{\tilde{R}}[a,b]$ over $\mathfrak{R}[a,b]$ similar metric can be defined. Functions are considered of one same class if they are equivalent expect on a set not larger than null set. 
+\end{itemize}
+
+\indexbf{Hilbert space} denoted by $(\indexfm{\mathbb{H}}{H};d)$ is defined as:
+
+\begin{align}
+	\mathbb{H}=\left\{ 
+		x=(x_1,x_2,\cdots) \mid \forall i\in \mathbb{Z}_+\left( 
+			\forall x_i\in \mathbb{R}\wedge \sum^\infty_{i=1} x_1^2 < \infty\right)\right\}
+\end{align}
+equiped with a metirc $d$:
+
+\begin{align}
+	d\colon \mathbb{H}^2\to \mathbb{R}; \,x,y\mapsto \sqrt {\sum^\infty_{i=1} (x_i-y_i)^2 }.
+\end{align}
+
+To justify this definition, we need to introduce a lemma:
+\begin{lemma}\label{Schwarz_inequality}
+\begin{align}\label{Schwarz}
+	\forall n\in\mathbb{Z}\forall \bv u\in\mathbb{R}^n\forall \bv v\in\mathbb{R}^n\left(
+		\sum^n_{i=1} u_iv_i \leq \sqrt{ \sum^n_{i=1} u_i^2}\sqrt{ \sum^n_{i=1} v_i^2}\right)
+\end{align}
+This is called \indexbf{Schwarz inequality}.
+\end{lemma}
+\begin{proof}
+If $\forall i=1,\cdots,n ( v_i=0)$ the equivalence has already been satisfied, therefore the following consider the situation that $\exists i\in \{1,\cdots n\}( v_i\neq 0)$. $\forall \lambda \in\mathbb R$
+\begin{align*}
+	\sum ^n_{i=1} (u_i+\lambda v_i)^2 = 
+		\sum ^n_{i=1} u_i^2 +2\lambda \sum ^n_{i=1} u_iv_i + \lambda^2 \sum ^n_{i=1} v_i^2 \geq 0
+\end{align*}
+has at most one root. Hence $\Delta \leq 0$ will lead to the inequality \ref{Schwarz}.
+\end{proof}
+
+Apply this inequality to $\sum ^n_{i=1} ( u_i+v_i)^2 = 
+	\sum ^n_{i=1} u_i^2 +\sum ^n_{i=1}  v_i^2 +2\sum ^n_{i=1}  v_i\sum ^n_{i=1} u_i$ we can get
+\begin{align*}
+	\sum ^n_{i=1} ( u_i+v_i)^2 \leq 
+		\sum ^n_{i=1} u_i^2 +\sum ^n_{i=1}  v_i^2 +
+			2\sqrt{ \sum^n_{i=1} u_i^2}\sqrt{ \sum^n_{i=1} v_i^2} = \left(
+				\sqrt{ \sum^n_{i=1} u_i^2}+\sqrt{ \sum^n_{i=1} v_i^2} \right)^2 ,
+\end{align*}
+in which substitude $u_i,v_i$ by $x_i-y_i, x_i+y_i$ will result in triangle inequality. The inequality holds as the $n$ limits to $+\infty$.
+
+A metric space $(X;d)$ is called \indexbf{discrete} if 
+\begin{align*}
+	\forall x\in X\left(
+		\exists \delta_x\in \mathbb{R}_+ \big(
+			\forall y \in X(
+				y\neq x\to d(x,y)>\delta_x)\big)\right) .
+\end{align*}
+
+\begin{lemma}\label{quadruple_inequality}
+If $(X;d)$ is a metric space, then $\forall a,b,u,v $, $\left| d(a,b) - d(u,v) \right| \leq d(a,u)+d(b,v) $.
+\end{lemma}
+\begin{proof}
+	Without loss of generality, we assume that $d(a,b) > d(u,v)$. According to the triangle inequality (see def. \ref{metric_def}), $d(a,b) \leq d(a,u)+d(u,v)+d(v,b)$, which is to prove.  
+\end{proof}
+
+\begin{definition}\label{delta_ball}
+$\delta\in\mathbb{R}_+$, $a\in X$. Set
+\[
+	B(a;\delta)=\{x\in X \mid d(a,x)<\delta\}
+\]
+is then called a \indexbf{ball} with centre $a\in X$, and a radius of $\delta$, or a \indexbf{$\delta$-ball} of point $a$.
+\end{definition}
+
+\begin{definition}\label{open_set_metric}
+An \indexbf{open set} $G\subset X$ in metric space $(X;d)$ satisfies: $\forall x\in G$, $\exists B(x;\delta)$, s.t. $B(x;\delta)\subset G$.
+\end{definition}
+
+\begin{definition}\label{closed_set_metric}
+A set $F\subset X$ in metric space $(X;d)$ is said to be a \indexbf{closed set} if its complement $\complement_X(F)$ is open.
+\end{definition}
+
+It can be proved that $\varnothing$ and $X$ itself is both open and closed.
+
+\begin{proposition}\label{open_set_pro}
+\begin{enumerate}[a)]
+\item An infinite union of open sets is an open set.
+\item A finite intersection of open sets is an open set.
+\item A finite union of closed sets is a closed set.
+\item An infinite intersection of closed sets is a closed set.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[a)]
+	\item If open sets $G_\alpha\subset X,\forall\alpha\in A$, $\forall a\in\bigcap\limits_{\alpha\in A}G_\alpha$, $\exists\alpha_0\in A$, $a\in G_{\alpha_0}$, $\exists B(a;\delta)\subset G_{\alpha_0}\subset \bigcap\limits_{\alpha\in A}G_\alpha$.
+	\item Open sets $G_1\cup G_2\subset X$, $a\in G_1\cap G_2$, therefore $\exists\delta_1,\delta_2\in\mathbb{R}_+$, $B(a;\delta_1)\subset G_1,B(a;\delta_2)\subset G_2$, without loss of generality, let $\delta_1\geq\delta_2$, 那么$a\in B(a;\delta_1)\cap B(a;\delta_2)=B(a;\delta_2)\subset G_1\cap G_2$.
+	\item Just consider $\complement_X
+		\left(\bigcap_{\alpha\in A}F_\alpha\right)
+		=\bigcup_{\alpha\in A}\complement_X(F_\alpha)$ and a).
+	\item Similarly, $\complement_X\left(F_1\cup F_2\right)=\complement_X(F_1)\cap\complement_X(F_2)$.
+	
+\end{enumerate}
+\end{proof}
+
+\subsection{Topological Space and Continuous Mapping}
+\begin{definition}\label{topological_space}
+We say $X$ is equiped with a \indexbf{topological space} or epuiped with \indexbf{topology} if we assigned a $\indexfm{\mathscr{T}}{T}\subset 2^X$, which has got the following propoties:
+\begin{enumerate}[a)]
+	\item $\varnothing\in\mathscr{T}; X\in\mathscr{T}$.
+	\item $\forall\alpha\in A(
+		G_\alpha\in\mathscr{T})\to 
+			\bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}$.
+	\item $G_1\in\mathscr{T}\wedge G_2\in\mathscr{T}\to G_1\cap G_2\in \mathscr{T}$.
+\end{enumerate}
+
+Then we call $(X;\mathscr{T})$ a \indexbf{topological space}. Every $G\in \mathscr{T}$ is called an \indexbf{open set}. 
+\end{definition}
+
+\begin{definition}\label{induced_topology}
+A topology $\mathscr{T}_d$ insisting of the open sets in a metric space $( X; d)$ is called a \indexbf{topology induced by metric} $d$.
+\end{definition}
+
+A trivial example of topological space is \indexbf{trivial topology}, which consists only of empty set and the space itself, i.e.\ $\mathscr{T}=\{\varnothing, X\}$. Another trivial example of topological space is \indexbf{discrete topology}, which consists of all the subsets of the space i.e.\ $\mathscr{T} = 2^X$.
+
+A \indexbf{cofinite space} is a base set $X$ equiped with a topology $\mathscr{T}$ defined as follows:
+\begin{align}\label{cofinite_space}
+	\mathscr{T} = \{ U\in 2^X\mid U=\varnothing \vee \complement_X U \text{ is finite} \}
+\end{align}
+\begin{proposition}
+The set $\mathscr{T}$ under definition \ref{cofinite_space} is a topology.
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[a)]
+\item $\varnothing \in \mathscr{T}$, $X\in\mathscr T$.
+\item $\forall i \in I \left(
+	\left|\complement_X  A_i\right| \in \mathbb N\right) \to
+		\forall i_0\in I\left(
+			\left| \bigcap_{i\in I} \complement_X A_i\right| \leq 
+				\left|\complement_X A_{i_0}\right|\right)$, therefore $\bigcup_{i\in I}  A_i \in \mathscr T$.
+\item $\forall A\in \mathscr T \forall B \in \mathscr T(
+	A\cap B=\varnothing\in \mathscr{T} \vee
+		\complement_X (A\cap B) = \complement_X A\cup \complement_X B \text{ is finite} )$, 
+	therefore $\forall A\in \mathscr T \forall B \in \mathscr T(
+		A\cap B \in \mathscr T)$.
+\end{enumerate}
+\end{proof}
+
+Similarly, \indexbf{countable complement space} can be defined.
+
+\begin{definition}\label{matrization}
+Let $(X; \mathscr T)$ be a topological space. If there exists a metric $d\colon X^2\to \mathbb R$ s.t.\ $(X; \mathscr T)$ is induced by $d$ then call $(X; \mathscr T)$ a \indexbf{metrizable space}, $(X; d)$ is its \indexbf{metrization}.
+\end{definition}
+
+\begin{definition}\label{continuouseness}
+Let $(X; \mathscr T)$, $(Y; \mathscr S)$ be two topological space. A mapping $f$ is said to be continuous if
+\begin{align*}
+	\forall V\in \mathscr S\big(
+		\exists U \in \mathscr T(
+			U=f^{-1}(V) ) \big).
+\end{align*}
+\end{definition}
+\printindex
+% \printbibliography
+\end{document}
