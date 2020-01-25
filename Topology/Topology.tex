@@ -67,7 +67,7 @@ $\forall x_1,x_2,x_2\in X$ satisfied:
 	\item	$d(x_1,x_2)=d(x_2,x_1)$ (symmetry);
 	\item	$d(x_1,x_3)\leqslant d(x_1,x_2)+d(x_2,x_3)$ (Triangle inequality),
 \end{enumerate}
-is called a \indexbf{metric} or \indexbf{distance} in $X$. Such $X$ is said to be equiped with metric $d$, $(X;d)$ is called a \indexbf{metric space}.
+is called a \indexbf{metric} or \indexbf{distance} in $X$. Such $X$ is said to be equiped with metric $d$, $(X,d)$ is called a \indexbf{metric space}.
 \end{definition}
 
 Some examples:
@@ -121,7 +121,7 @@ Apply this inequality to $\sum ^n_{i=1} ( u_i+v_i)^2 =
 \end{align*}
 in which substitude $u_i,v_i$ by $x_i-y_i, x_i+y_i$ will result in triangle inequality. The inequality holds as the $n$ limits to $+\infty$.
 
-A metric space $(X;d)$ is called \indexbf{discrete} if 
+A metric space $(X,d)$ is called \indexbf{discrete} if 
 \begin{align*}
 	\forall x\in X\left(
 		\exists \delta_x\in \mathbb{R}_+ \big(
@@ -130,7 +130,7 @@ A metric space $(X;d)$ is called \indexbf{discrete} if
 \end{align*}
 
 \begin{lemma}\label{quadruple_inequality}
-If $(X;d)$ is a metric space, then $\forall a,b,u,v $, $\left| d(a,b) - d(u,v) \right| \leq d(a,u)+d(b,v) $.
+If $(X,d)$ is a metric space, then $\forall a,b,u,v $, $\left| d(a,b) - d(u,v) \right| \leq d(a,u)+d(b,v) $.
 \end{lemma}
 \begin{proof}
 	Without loss of generality, we assume that $d(a,b) > d(u,v)$. According to the triangle inequality (see def. \ref{metric_def}), $d(a,b) \leq d(a,u)+d(u,v)+d(v,b)$, which is to prove.  
@@ -145,11 +145,11 @@ is then called a \indexbf{ball} with centre $a\in X$, and a radius of $\delta$, 
 \end{definition}
 
 \begin{definition}\label{open_set_metric}
-An \indexbf{open set} $G\subset X$ in metric space $(X;d)$ satisfies: $\forall x\in G$, $\exists B(x;\delta)$, s.t. $B(x;\delta)\subset G$.
+An \indexbf{open set} $G\subset X$ in metric space $(X,d)$ satisfies: $\forall x\in G$, $\exists B(x;\delta)$, s.t. $B(x;\delta)\subset G$.
 \end{definition}
 
 \begin{definition}\label{closed_set_metric}
-A set $F\subset X$ in metric space $(X;d)$ is said to be a \indexbf{closed set} if its complement $\complement_X(F)$ is open.
+A set $F\subset X$ in metric space $(X,d)$ is said to be a \indexbf{closed set} if its complement $\complement_X(F)$ is open.
 \end{definition}
 
 It can be proved that $\varnothing$ and $X$ itself is both open and closed.
@@ -174,9 +174,9 @@ It can be proved that $\varnothing$ and $X$ itself is both open and closed.
 \end{enumerate}
 \end{proof}
 
-\subsection{Topological Space and Continuous Mapping}
+\subsection{Topological Space}
 \begin{definition}\label{topological_space}
-We say $X$ is equiped with a \indexbf{topological space} or epuiped with \indexbf{topology} if we assigned a $\indexfm{\mathscr{T}}{T}\subset 2^X$, which has got the following propoties:
+We say $X$ is equiped with a \indexbf{topological space} or equiped with \indexbf{topology} if we assigned a $\indexfm{\mathscr{T}}{T}\subset 2^X$, which has got the following propoties:
 \begin{enumerate}[a)]
 	\item $\varnothing\in\mathscr{T}; X\in\mathscr{T}$.
 	\item $\forall\alpha\in A(
@@ -185,11 +185,11 @@ We say $X$ is equiped with a \indexbf{topological space} or epuiped with \indexb
 	\item $G_1\in\mathscr{T}\wedge G_2\in\mathscr{T}\to G_1\cap G_2\in \mathscr{T}$.
 \end{enumerate}
 
-Then we call $(X;\mathscr{T})$ a \indexbf{topological space}. Every $G\in \mathscr{T}$ is called an \indexbf{open set}. 
+Then we call $(X,\mathscr{T})$ a \indexbf{topological space}. Every $G\in \mathscr{T}$ is called an \indexbf{open set}. 
 \end{definition}
 
 \begin{definition}\label{induced_topology}
-A topology $\mathscr{T}_d$ insisting of the open sets in a metric space $( X; d)$ is called a \indexbf{topology induced by metric} $d$.
+A topology $\mathscr{T}_d$ insisting of the open sets in a metric space $( X, d)$ is called a \indexbf{topology induced by metric} $d$.
 \end{definition}
 
 A trivial example of topological space is \indexbf{trivial topology}, which consists only of empty set and the space itself, i.e.\ $\mathscr{T}=\{\varnothing, X\}$. Another trivial example of topological space is \indexbf{discrete topology}, which consists of all the subsets of the space i.e.\ $\mathscr{T} = 2^X$.
@@ -219,18 +219,104 @@ The set $\mathscr{T}$ under definition \ref{cofinite_space} is a topology.
 
 Similarly, \indexbf{countable complement space} can be defined.
 
+Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. $\mathscr T_1\cup \mathscr T_2$ is possibly not a topology of $X$. For example, $\mathscr T _1 = \{ (x,+\infty) \mid x\in\mathbb R\}\cup\{ \varnothing,\mathbb R\}$ and $\mathscr T_2 = \{ (-\infty, y) \mid y\in\mathbb R\}\cup\{ \varnothing,\mathbb R\}$ are both topologies of $\mathbb R$, but there union $T_1\cup T_2$ is not. 
+
+\begin{theorem}
+Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. Their intersection $\mathscr T_1\cap \mathscr T_2$ is also a topology on $X$.
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[a)]
+\item $\{\varnothing, X\} \subseteq \mathscr T_1\wedge 
+	\{\varnothing, X\} \subseteq  \mathscr T_2 \to 
+		\{\varnothing, X\}\subseteq \mathscr T_1\cap \mathscr T_2$.
+\item $\forall\alpha\in A(
+		G_\alpha\in\mathscr T_1\cap \mathscr T_2)\to 
+			\bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}_1 \wedge \bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}_2$. 
+\item $\forall G_1\in \mathscr T_1\cap \mathscr T_2 \forall G_2 \in \mathscr T_1\cap \mathscr T_2 \big(
+		G_1\cap G_2 \in \mathscr T_1 \wedge G_1\cap G_2\in\mathscr T_2\big)$			
+\end{enumerate}
+\end{proof}
+
 \begin{definition}\label{matrization}
-Let $(X; \mathscr T)$ be a topological space. If there exists a metric $d\colon X^2\to \mathbb R$ s.t.\ $(X; \mathscr T)$ is induced by $d$ then call $(X; \mathscr T)$ a \indexbf{metrizable space}, $(X; d)$ is its \indexbf{metrization}.
+Let $(X, \mathscr T)$ be a topological space. If there exists a metric $d\colon X^2\to \mathbb R$ s.t.\ $(X, \mathscr T)$ is induced by $d$ then call $(X, \mathscr T)$ a \indexbf{metrizable space}, $(X, d)$ is its \indexbf{metrization}.
 \end{definition}
 
-\begin{definition}\label{continuouseness}
-Let $(X; \mathscr T)$, $(Y; \mathscr S)$ be two topological space. A mapping $f$ is said to be continuous if
+\subsection{Neighbourhood}
+\begin{definition}\label{neighbourhood}
+Let $(X,\mathscr T)$ be a topological space. A set $U(x)$ is said to be a \indexbf{neighbourhood} of a point $x\in X$ if $\exists G\in \mathscr T(G\subseteq U(x)\wedge x\in G)$. 
+If $U(x)\in \mathscr T$, it is called a \indexbf{open neighbourhood}.
+Subset class $\{U(x)\subseteq X\mid U(x) \text{ is a neighbourhood of } x\}$ is called the \indexbf{neighbourhood system} of point $x$, denoted by $\mathscr U_x$
+\end{definition}
+
+\begin{theorem}
+Let $(X,\mathscr T)$ be a topological space, $U$ is a subset of $X$. 
+$U$ is an open set \emph{iff} $\forall x\in U$, $U$ is a neighbourhood of $x$.
+\end{theorem}
+\begin{proof}
+The necessity is trivial. $\forall x\in U\exists V(x)$ s.t.\ $V(x)$, being a subset of $U$, is a open neighbourhood of $x$. By definition of topology, $\bigcup\limits_{ x\in U}V(x) \in \mathscr T$. $\forall x\in U( x\in \bigcup\limits_{ x\in U}V(x) ) \to U\subseteq V$, while $\forall x\in U (V( x)\subseteq U)\to \bigcup\limits_{ x\in U}V(x) \subseteq U$, therefore $U=\bigcup\limits_{ x\in U}V(x) \in \mathscr T$.
+\end{proof}
+
+\begin{theorem}
+Let $(X,\mathscr T)$ be a topological space, $\mathscr U_x$ is a neighbourhood system of point $x\in X$.
+\begin{align*}
+	\forall U\in \mathscr U_x\forall V\in \mathscr U_x( U\cap V\in \mathscr U_x)
+\end{align*}
+\end{theorem}
+\begin{proof}
+$\forall U\in \mathscr U_x\forall V\in \mathscr U_x\exists U_0\in \mathscr T\exists V_0\in \mathscr T(U_0\subseteq U\wedge V_0\subseteq V\wedge x\in U_0\cap V_0 )$, By definition of topology, $\mathscr T\ni U_0\cap V_0\subseteq U\cap V$. 
+\end{proof}
+
+
+\subsection{Continuous Mappings}
+\begin{definition}\label{continuousness}
+A mapping $f\colon X\to Y$, where $X$,$Y$ is respectively equiped with topology $\mathscr{T}_X$,$\mathscr{T}_Y$, is said to be \indexbf{continuous} at $x_0\in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. It is \indexbf{continuous} in $X$ if it is continuous at each point $x\in X$. 
+\end{definition}
+
+The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X,Y)$ or $C(X)$ when $Y$ is clear. 
+
+It can be easily proved that an identify function $e_X\colon X\to X$ where $X$ is equiped with a topology $\mathscr T$ is a continuous function.
+
+\begin{theorem}\label{criterion_continuity} (\indexbf{criterion of continuity})
+
+Let $(X, \mathscr T)$, $(Y; \mathscr S)$ be two topological space. A mapping $f \colon X \to Y$ is continuous \emph{iff}
 \begin{align*}
 	\forall V\in \mathscr S\big(
 		\exists U \in \mathscr T(
 			U=f^{-1}(V) ) \big).
 \end{align*}
+\end{theorem}
+\begin{proof}
+$\rightarrow$: It is obvious if $f  ^{-1}(G_Y) = \varnothing$. If $f  ^{-1}(G_Y) \neq \varnothing$ and $x_0 \in X$, since $f \in C(X,Y)$, for $G_Y$, $\exists U( x_0) $ s.t $f ( U( x_0)) \subset G_Y$. Also notice that $f ( U( x_0)) \subset G_Y \Rightarrow U( x_0) \subset f  ^{-1}(G_Y)$, therefore $f  ^{-1}(G_Y) $ is open.
+
+$\leftarrow$: $\forall x_0 \in X$, let $y_0 = f ( x_0)$, $f ^{-1} ( U( y_0)) \in \mathscr{T}_X$. Notice that $x_0 \in f ^{-1} ( U( y_0))$, therefore $f \in C( X, Y) $.
+\end{proof}
+
+\begin{theorem}
+	Let $(X, \mathscr T_X)$, $(Y, \mathscr T_Y)$, $(Z, \mathscr T_Z)$ be topological spaces.
+	If $f\colon X\to Y$ and $g\colon Y\to Z$ are both continuous, $g\circ f\colon X\to Z$ is also continuous. 
+\end{theorem}
+\begin{proof}
+\begin{align*}
+	\forall W\in \mathscr T_Z\left(
+		g^{-1} (W)\in \mathscr T_Y\right) \rightarrow 
+			\forall W\in \mathscr T_Z\left(
+				f^{-1}\big( 
+					g^{-1} (W)\big)\right)
+\end{align*}
+Since $f^{-1}\big(  g^{-1} (W)\big) = ( g\circ f)^{-1} (W)$, the theorem has been proved.
+\end{proof}
+
+\begin{definition}\label{homeomorphism}
+$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. A bijective mapping $f \colon X\to Y$ is a \indexbf{homeomorphism} if $f \in C( X, Y) \wedge f ^{ -1} \in C( Y, X)$. 
 \end{definition}
+\begin{definition}\label{homeomorphic}
+Two topological spaces $(X,\mathscr{T}_X)$ and $(Y, \mathscr{T}_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f \colon X\to Y$.
+\end{definition}
+
+Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other. In fact homeomorphic relations are equivalent relations.
+
+
+
 \printindex
 % \printbibliography
 \end{document}
