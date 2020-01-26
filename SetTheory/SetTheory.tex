@@ -42,6 +42,11 @@
 \newcommand*{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand*{\diff}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
 \newcommand*{\properclass}[1]{\mathbf{#1}}
+
+\newcommand*{\id}{\mathrm{id}}
+\newcommand*{\me}{\mathrm{e}}
+\newcommand*{\imagine}{\mathrm{i}}
+
 \DeclareMathOperator{\tg}{tg}
 \DeclareMathOperator{\ctg}{ctg}
 \DeclareMathOperator{\arctg}{arctg}
@@ -331,10 +336,105 @@ Cartesian积可递归地推广到$n$元:
 	X_1\times\cdots\times X_n = \{ (x_1,\cdots, x_n)\mid x_1\in X_1\wedge\cdots \wedge x_n\in X_n\} 
 \end{align}
 
-其子集可类似地定义\indexbf{$n$元关系}.
+$n$元Cartesian积的子集可类似地定义\indexbf{$n$元关系}.
 
 \subsection{函数}
 
+\begin{definition}
+二元关系$f$倘满足: 
+\begin{align*}
+	\forall x\big(
+		(x,y)\in f\wedge (x,z)\in f \to y=z\big),
+\end{align*}
+则称$f$是\indexbf{函数}, $y$是$f$在$x$处的\indexbf{值}, 记为$f(x) = y$, 或$f\colon x\mapsto y$. 倘若$\dom f = X$, $\ran f \subseteq Y$, 则称$f$是$X$到$Y$的函数, 记为$f\colon X\to Y$. 
+\end{definition}
+
+对任意集合$X$定义$\id _X \colon X\to X$为$\forall x\in X(\id _X(x)=x)$, 称为\indexbf{等同函数}.
+
+\begin{theorem}
+令$f$, $g$都是函数.
+\begin{align*}
+	f=g\leftrightarrow 
+		\dom f=\dom g \wedge \forall x\in \dom f \big(
+			f(x)=g(x)\big). 
+\end{align*}
+\end{theorem}
+\begin{proof}
+只证明 "$\leftarrow$":
+\begin{align*}
+	\forall (x,y)\in f  \big(
+		x\in \dom f\wedge y=f(x)\big) \wedge
+		\dom f=\dom g \wedge \forall x\in \dom f \big(
+			f(x)=g(x)\big) &\\\rightarrow
+		\forall (x,y)\in f\big(
+			x\in \dom g\wedge y=g(x)\big).
+	\qquad\qquad&
+\end{align*}
+同理, $
+\forall (x,y)\in g\big(
+	x\in \dom f\wedge y=f(x)\big)$, 
+即$\forall (x,y) \big(
+	y=f(x)\leftrightarrow y=g(x)\big)$. 由Ext, $f=g$.
+\end{proof}
+
+\begin{theorem}
+如果$f$和$g$是函数, 它们的复合$h=g\circ f$也是函数. 
+而且$
+\dom h=  f^{-1}\big(
+	\dom g\big)$.
+\end{theorem}
+\textbf{注}: 这里的复合和通常的定义有细微不同, 但保持了与二元关系的统一. 
+\begin{proof}
+复合的定义: $
+h=g\circ f \leftrightarrow 
+	\forall (x,z)\in h\Big(
+		\exists y\big(
+			y=f(x)\wedge z=g(y)\big)\Big)$.
+倘若$(x,u)\in h\wedge (x,u)\in h$, 有$\exists! y$ s.t. $y=f(x)$, 且$u=v=g(y)$. 因而$h$也是函数. 
+
+其定义域$
+\dom h = \{
+	x\mid \exists z\big(
+		z=h(x)\big)\}$, 
+又因$
+\exists z(z=h(x)) \leftrightarrow \exists z\exists y\big(
+	y=f(x)\wedge z=g(y)\big)$, 后者又等价于$
+\exists y\Big(
+	y=f(x)\wedge \exists z\big(
+		z=g(y)\big)\Big)$, i.e.\ $
+\exists y\in \dom g \big(
+	y=f(x)\big)$, 
+\begin{align*}
+	\dom h 
+		= \{x\mid \exists y\in \dom g \big(
+			y=f(x)\big)\}
+		= f^{-1}(\dom g).
+\end{align*}
+\end{proof}
+
+\begin{definition}
+令$f\colon X\to Y$是函数. 若$f(x_1) = f(x_2) \leftrightarrow x_1=x_2$则称$f$为\indexbf{单射}. 若$\ran f = Y$则称其为满射. 既单又满的函数称为双射. 如果函数的逆$f^{-1}$也是函数, 则函数$f$称为\indexbf{可逆}的.
+\end{definition}
+
+作为例子, 若空映射$\ran f=\dom f=\varnothing$, $f=\varnothing$总是单的, $f^{-1} = \{(y,x)\mid y=f(x)\} = \varnothing$也是空映射. 
+
+\textbf{注}: 这里函数的逆的定义与通常不同, 因$\dom f^{-1} = \ran f$而非$Y$. 因而下面的定理在这样的定义下是成立的 (否则还要加上满射的条件):
+
+\begin{theorem}
+函数$f$可逆 \emph{iff} $f$是单射. 
+\end{theorem}
+\begin{proof}
+可逆意味着$(y,x_1)\in f^{-1}\wedge (y, x_2) \in f^{-1} \leftrightarrow x_1=x_2$, 又由逆的定义, $y=f(x_1)\wedge y=f(x_2)\leftrightarrow x_1=x_2$, 这即是单射的定义.
+\end{proof}
+
+\begin{theorem}
+函数$f$若可逆, 则$f^{-1}$可逆, 且$(f^{-1})^{-1} = f$.
+\end{theorem}
+证明从略.
+
+\begin{definition}
+令$f$是任意函数, $A$是任意集合. 函数$f\upharpoonright A = \{ (x,y) \in f\mid x\in A\}$是$f$在$A$上的\indexbf{限制}. 若$g=f\upharpoonright A$, 则称$f$是$g$在$\dom f$的\indexbf{扩张}.
+\end{definition}
 
 \printindex
 \printbibliography
