@@ -207,7 +207,7 @@ $\forall X(\varnothing\subseteq X).$
 对任意集合$x$, $x\cup \{ x\} $称为其\indexbf{后继}, 记为$\indexfm{S(x)}{ S(x)}$或$\indexfm{x^+}{ x+}$.
 \end{definition}
 
-\begin{axion} \indexbf{无穷公理} (\indexbf{Inf})
+\begin{axion}\label{Inf} \indexbf{无穷公理} (\indexbf{Inf})
 \begin{align}
 	\exists X \big( 
 		\varnothing \in X\wedge \forall x(
@@ -285,11 +285,10 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \section{关系与函数}
 
 \subsection{关系}
-\begin{definition}
-集合$a,b$的\indexbf{有序对}$\indexfm{( a,b)}{(a,b)} := \big\{\{a\},\{a,b\}\big\}$.
+\begin{definition}集合$a,b$的\indexbf{有序对}$\indexfm{( a,b)}{(a,b)} := \big\{\{a\},\{a,b\}\big\}$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{equality_ordered_pair}
 \begin{align*}
 	(a,b)=(a',b') \leftrightarrow a=a'\wedge b=b'.
 \end{align*}
@@ -302,7 +301,7 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \end{enumerate}
 \end{proof}
 
-\begin{definition}
+\begin{definition}\label{Cartesian_product}
 令$X$和$Y$是集合, 其\indexbf{直积}或\indexbf{Cartesian积}定义为:
 \begin{align}
 	\indexfm{X\times Y}{X_times_Y} := \{ ( x,y) \mid x\in X\wedge y\in Y\}.
@@ -310,8 +309,7 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 简记$X\times X =: \indexfm{ X^2}{X2}$.
 \end{definition}
 
-\begin{theorem}
-对于$\forall X\forall Y$, $X\times Y$是集合.
+\begin{theorem}对于$\forall X\forall Y$, $X\times Y$是集合.
 \end{theorem}
 \begin{proof}
 令$\varphi(z) = \exists x\in X\exists y\in Y( (x,y)=z)$, 取$Z=\{z\in 2^\{X\cup Y\}\mid \varphi(z)\}$, 由Ext和Sep (Axion \ref{Sep}) 即可知$X\times Y = Z$.
@@ -330,6 +328,10 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 两个二元关系$R$, $S$的\indexbf{复合}$S\circ R$则定义为$\{ (x,z) \mid \exists y ( R(x,y) \wedge S(y,z)) \}$.
 \end{definition}
 
+\begin{theorem}
+令$R$是二元关系, $A,B$是集合. $R[ A\cup B] = R[A] \cup R[B]$, $R[ A\cap B] \subseteq R[A]\cap R[B]$, $R[A -B] \supseteq R[A] - R[B]$.
+\end{theorem}
+
 Cartesian积可递归地推广到$n$元: 
 \begin{align}
 	(x_1,\cdots,x_{n+1}) = ( (x_1,\cdots,x_n),x_{n+1});\\
@@ -338,9 +340,13 @@ Cartesian积可递归地推广到$n$元:
 
 $n$元Cartesian积的子集可类似地定义\indexbf{$n$元关系}.
 
+\begin{theorem}
+$n$元Cartesian积$X_1\times X_2\times \cdots \times X_n$是空集, 则存在$X_i = \varnothing$.
+\end{theorem}
+
 \subsection{函数}
 
-\begin{definition}
+\begin{definition}\label{function}
 二元关系$f$倘满足: 
 \begin{align*}
 	\forall x\big(
@@ -351,7 +357,7 @@ $n$元Cartesian积的子集可类似地定义\indexbf{$n$元关系}.
 
 对任意集合$X$定义$\id _X \colon X\to X$为$\forall x\in X(\id _X(x)=x)$, 称为\indexbf{等同函数}.
 
-\begin{theorem}
+\begin{theorem}\label{equality_function}
 令$f$, $g$都是函数.
 \begin{align*}
 	f=g\leftrightarrow 
@@ -377,7 +383,53 @@ $n$元Cartesian积的子集可类似地定义\indexbf{$n$元关系}.
 	y=f(x)\leftrightarrow y=g(x)\big)$. 由Ext, $f=g$.
 \end{proof}
 
+通常以集合为值的函数$i\mapsto X_i$, 其中$i\in I$, 可视为\indexbf{指标系统}, $I$是\indexbf{指标集}. 记为$X=\{X_i\mid i\in I\}$或$\{X_i\}_{i\in I}$. 
+
 \begin{theorem}
+$\psi (i,x)$是公式. $\forall I\forall X$, 
+\begin{align*}
+	\bigcup_{i\in I}\{x\in X\mid \psi(i,x)\} &=
+		\{x\in X\mid \exists i\in I\big(
+			\psi(i,x)\big)\},\\
+	\bigcap_{i\in I}\{x\in X\mid \psi(i,x)\} &=
+		\{x\in X\mid \forall i\in I\big(
+			\psi(i,x)\big)\}.
+\end{align*}
+\end{theorem}
+
+\begin{definition}
+令$X=\{X_i\mid i\in I\}$是一个指标系统. $X$的\indexbf{一般Cartesian积}为:
+\begin{align*}
+	\prod_{i\in I}X_i := \{ f\mid f\colon I\to X_i\}.
+\end{align*}
+另, $p_i\colon \prod_{i\in I}X_i\to X_i$称为\indexbf{指标函数}.
+\end{definition}
+
+\textbf{注}: 虽然这样的定义和Cartesian积不同, 但接下来的概念确保了, 两者之间可以一一对应, 从而是等同的.
+
+\begin{definition}
+令$f\colon X\to Y$是函数. 若$f(x_1) = f(x_2) \leftrightarrow x_1=x_2$则称$f$为\indexbf{单射}. 若$\ran f = Y$则称其为满射. 既单又满的函数称为双射. 如果函数的逆$f^{-1}$也是函数, 则函数$f$称为\indexbf{可逆}的.
+\end{definition}
+
+作为例子, 若空映射$\ran f=\dom f=\varnothing$, $f=\varnothing$总是单的, $f^{-1} = \{(y,x)\mid y=f(x)\} = \varnothing$也是空映射. 
+
+\textbf{注}: 这里函数的逆的定义与通常不同, 因$\dom f^{-1} = \ran f$而非$Y$. 因而下面的定理在这样的定义下是成立的 (否则还要加上满射的条件):
+
+记$\indexfm{Y^X}{YX} := \{ f \mid f\colon X\to Y\}$. $\forall Y\big(Y^\varnothing = \{\varnothing_Y\}\big)$, 而若$X\neq \varnothing$, $\varnothing^X=\varnothing$.
+\begin{theorem}
+函数$f$可逆 \emph{iff} $f$是单射. 
+\end{theorem}
+\begin{proof}
+可逆意味着$(y,x_1)\in f^{-1}\wedge (y, x_2) \in f^{-1} \leftrightarrow x_1=x_2$, 又由逆的定义, $y=f(x_1)\wedge y=f(x_2)\leftrightarrow x_1=x_2$, 这即是单射的定义.
+\end{proof}
+
+\begin{theorem}
+函数$f$若可逆, 则$f^{-1}$可逆, 且$(f^{-1})^{-1} = f$.
+\end{theorem}
+证明从略.
+
+
+\begin{theorem}\label{composition_functions}
 如果$f$和$g$是函数, 它们的复合$h=g\circ f$也是函数. 
 而且$
 \dom h=  f^{-1}\big(
@@ -412,29 +464,268 @@ h=g\circ f \leftrightarrow
 \end{align*}
 \end{proof}
 
-\begin{definition}
-令$f\colon X\to Y$是函数. 若$f(x_1) = f(x_2) \leftrightarrow x_1=x_2$则称$f$为\indexbf{单射}. 若$\ran f = Y$则称其为满射. 既单又满的函数称为双射. 如果函数的逆$f^{-1}$也是函数, 则函数$f$称为\indexbf{可逆}的.
-\end{definition}
-
-作为例子, 若空映射$\ran f=\dom f=\varnothing$, $f=\varnothing$总是单的, $f^{-1} = \{(y,x)\mid y=f(x)\} = \varnothing$也是空映射. 
-
-\textbf{注}: 这里函数的逆的定义与通常不同, 因$\dom f^{-1} = \ran f$而非$Y$. 因而下面的定理在这样的定义下是成立的 (否则还要加上满射的条件):
-
-\begin{theorem}
-函数$f$可逆 \emph{iff} $f$是单射. 
-\end{theorem}
-\begin{proof}
-可逆意味着$(y,x_1)\in f^{-1}\wedge (y, x_2) \in f^{-1} \leftrightarrow x_1=x_2$, 又由逆的定义, $y=f(x_1)\wedge y=f(x_2)\leftrightarrow x_1=x_2$, 这即是单射的定义.
-\end{proof}
-
-\begin{theorem}
-函数$f$若可逆, 则$f^{-1}$可逆, 且$(f^{-1})^{-1} = f$.
-\end{theorem}
-证明从略.
 
 \begin{definition}
 令$f$是任意函数, $A$是任意集合. 函数$f\upharpoonright A = \{ (x,y) \in f\mid x\in A\}$是$f$在$A$上的\indexbf{限制}. 若$g=f\upharpoonright A$, 则称$f$是$g$在$\dom f$的\indexbf{扩张}.
 \end{definition}
+
+\begin{definition}
+函数$f$, $g$被认为是\indexbf{相容}的, 如果:
+\begin{align*}
+	\forall x\in \dom f\cap \dom g\big(
+		f(x)=g(x)\big)
+\end{align*}
+指标系统$\mathcal F = \{f_i\mid i\in I\}$被称为\indexbf{相容系统}, 如果
+\begin{align*}
+\forall f_i\in \mathcal F\forall f_j\in \mathcal F\big(
+	\text{ $f_i$ 和$f_j$相容.} \big)
+\end{align*}
+\end{definition}
+
+\begin{theorem}\label{compatibility}
+$f$和$g$是函数.以下的命题是等价的:
+\begin{enumerate}[(1)]
+\item $f$与$g$相容;
+\item $f\cup g$是函数;
+\item $f\upharpoonright \big(
+	\dom f\cap \dom g\big) =
+	g\upharpoonright \big(
+	\dom f\cap \dom g\big)$.
+\end{enumerate}
+
+\end{theorem}
+\begin{proof}
+(1)$\leftrightarrow$(3): 注意到$\dom \Big(
+	{f\upharpoonright \big(
+		\dom f\cap \dom g\big)}\Big) = \dom f\cap \dom g$. 由相容的定义和定理\ref{equality_function}可得证.
+
+(2)$\leftrightarrow$(1): 假设$f$与$g$不相容, 即$\exists x\in \dom f\cap \dom g\subseteq \dom{f\cup g}$ s.t.\ $f(x)\neq g(x)$, 这与函数$f\cup g$的定义不相符. 若$f\cup g$不是函数, 它至少是$\dom f\cup \dom g \times \ran f\cup \ran g$上的二元关系, 由函数的定义, $\exists x\in \dom{f\cup g}$ s.t.\ $\exists y_1\exists y_2\big(
+	(x,y_1)\in f\cup g\wedge (x,y_2)\in f\cup g\wedge y_1\neq y_2\big)$. 通过对$x$在$\dom f - \dom g$, $\dom g - \dom f$, $\dom g\cap \dom g$讨论, 可以得出要么$f$或$g$不是函数 (从而与题设矛盾), 要么$f$, $g$不相容.
+\end{proof}
+
+\setcounter{axion}{8} %这样下面的axion才会计数为9
+\begin{axion}\label{AC2} \indexbf{选择公理} (第二形式) ($\indexfm{\properclass{AC\;II} }{AC2}$)
+
+\begin{align*}
+	\forall \mathcal F\Big(
+		\varnothing \notin \mathcal F\wedge 
+			\mathcal F\neq \varnothing \wedge
+				\exists f\colon \mathcal F\to \cup \mathcal F \big(
+					\forall F\in \mathcal F(
+						f(F)\in F)\big)\Big)
+\end{align*}
+
+其中这样的$f$通常被称为\indexbf{选择函数}.
+\end{axion}
+
+对于任意非空$\omega$ (尤其是当$\omega$是无穷集时), $\prod_{i\in \omega X_i} = \varnothing \to \exists i\in \omega ( X_i = \varnothing)$与选择公理等价.\footnote{\href{https://zh.wikipedia.org/wiki/\%E7\%AC\%9B\%E5\%8D\%A1\%E5\%84\%BF\%E7\%A7\%AF\#\%E6\%97\%A0\%E7\%A9\%B7\%E4\%B9\%98\%E7\%A7\%AF
+	}{维基百科页面}}
+
+\subsection{等价和划分}
+\begin{definition}
+令$R\subseteq X^2$是$X$上的二元关系. $R$是:
+\begin{enumerate}[(1)]
+\item \indexbf{自反}的, 若$\forall x\in X(xRx)$;
+\item \indexbf{对称}的, 若$\forall x\in X\forall y\in X( xRy \to yRx)$;
+\item \indexbf{传递}的, 若$\forall  x\in X\forall y\in X\forall z\in X (xRy\wedge yRz \to xRz)$;
+\item \indexbf{等价关系}或\indexbf{等价}的, 若$R$自反, 对称, 传递. 记为$\sim$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+令$\sim$是$X$上的等价关系, $x\in X$. $x$关于$\sim$的\indexbf{等价类}定义为:
+\begin{align*}
+	[x]_\sim := \{ t\in X\mid t\sim x\}.
+\end{align*}
+\end{definition}
+
+\textbf{注}: 由Sep, 等价类是集合而不是真类. 
+
+\begin{theorem}
+令$\sim$是$X$上的等价关系.
+\begin{align*}
+	\forall x\in X\forall y\in Y\big(
+		[x]_\sim=[y]_\sim \wedge{}[x]_\sim \cap{} [y]_\sim =\varnothing\big)
+\end{align*}
+\end{theorem}
+
+\begin{definition}
+令$X$是一集合, $S\subseteq 2^X$. $S$被称为$X$的一个\indexbf{划分}如果:
+\begin{align*}
+	\forall a\in S\forall b\in S(
+		a=b \vee a\cap b=\varnothing) \wedge 
+		\cup S=X.
+\end{align*}
+\end{definition}
+
+\begin{definition}
+令$\sim$是$X$上的等价关系. $X/\sim := \{[x]_\sim \mid x\in X \}$称为$X$的\indexbf{商集}.
+\end{definition}
+
+\begin{theorem}
+令$\sim$是$X$上的等价关系. $X/\sim$是$X$的一个划分.
+\end{theorem}
+
+\begin{theorem}
+令$S$为$X$的划分, 定义二元关系:
+\begin{align*}
+	\sim_S := \{(x,y) \in X^2 \mid \exists s\in S(
+		x\in s\wedge y\in s)\}.
+\end{align*}
+那么, $\sim_S$是等价关系, $X/ \sim_S = S$. 若$X$上的等价关系$\sim $满足$X/\sim =S$, 则$\sim_S=\sim$.
+\end{theorem}
+\begin{proof}
+$\cup S=X \to 
+	\forall x\in X\exists s\in S(
+		x\in s)$, 即$\sim_S$是自反的. 对称和传递性显然. 从而, $\sim_S$是等价关系. 
+
+依商集和等价类的定义, $\forall s\in X/\sim_S \exists x\in X \forall t\big(
+	t\in s \leftrightarrow
+		\exists s'\in S(
+			x\in s'\wedge t\in s')\big)$. 
+这之后我遇到了困难.
+\end{proof}
+
+\subsection{序}
+\begin{definition}
+如果$X$上的二元关系$\leq$满足:
+\begin{enumerate}
+\item 自反 i.e.\ $\forall x\in X( x\leq x)$;
+\item \indexbf{反对称} i.e.\ $\forall x\in X\forall y\in X(
+	x\leq y\wedge y\leq x \to 
+		x=y)$;
+\item 传递 i.e.\ $\forall x\in X\forall y\in X\forall z\in X(
+	x\leq y\wedge y\leq z \to x\leq z)$,
+\end{enumerate}
+则称其为$X$上的\indexbf{偏序} (partial order) 或\indexbf{序}, 记$(X,\leq)$, 并称$X$是一个\indexbf{偏序集} (partially ordered set, appr.\ poset). 
+如果它还是\indexbf{连接}的 i.e.\ $\forall x\in X\forall y\in X(
+	x\leq y\vee y\leq x)$, 那么它是$X$上的\indexbf{线序}或\indexbf{全序} (total order), 此时也称$X$是一个\indexbf{线序集}.
+\end{definition}
+
+通常记$\geq := \leq^{-1}$, $< := \leq \cap \neq $, $> := <^{-1}$.
+
+
+\begin{definition}
+如果$X$上的关系$\indexfm{\preceq}{ preceq}$只满足传递和自反, 称其为$X$上的\indexbf{拟序} (quasi-order)或\indexbf{预序} (preorder). $\succeq:=\preceq^{-1}$.
+\end{definition}
+
+\begin{theorem}
+令$\preceq$是$X$上的拟序, 等价关系$\sim$可由$\sim=\preceq\cap\succeq$定义, 且商集$X/\sim$上的偏序关系$\leq$可定义为
+\begin{align*}
+	[x]\leq{} [y] \leftrightarrow x\preceq y.
+\end{align*}
+\end{theorem}
+
+\begin{definition}
+如果对于$a\in X$满足$\forall x\in X( \neg (a>x))$, 则称$a$为$X$的\indexbf{极小元}. 
+如果对于$a\in X$满足$\forall x\in X (a\leq x)$, 则称$a$为$X$的\indexbf{最小元}. 
+相反则有\indexbf{极大元}和\indexbf{最大元}.
+
+令$X_0\subseteq X$. 如果$\exists a\in X\forall x\in X_0 (a\leq x)$, 则称$X_0$在$X$中有下界, $a$是$X_0$在$X$中的\indexbf{下界}. 
+如果这样的下界$a$的集合有最大元$a_0$, 称其为\indexbf{下确界}, 记为$\inf X_0$. 同理有\indexbf{上界}和\indexbf{上确界}$\sup X_0$.
+\end{definition}
+
+作为例子, 令$X\neq \varnothing$, $(2^X, \subseteq)$是偏序集. 对于$\forall S\subseteq 2^X$, $S$有上下确界, $\sup S = \cup S$, $\inf S = \cap S$.
+
+\begin{definition}
+如果$X$和其上的线序$(X,\leq)$满足任意$X_0\in 2^X$, $X_0$都有最小元, 则称$\leq$为$X$上的\indexbf{良序}, $X$被称为\indexbf{良序集}.
+\end{definition}
+
+\section{实数}
+\subsection{自然数}
+根据Inf (axion \ref{Inf}), 这样的集合是存在的:
+\begin{definition}
+如果集合$X$满足:
+\begin{align*}
+	\varnothing \in X\wedge 
+		\forall x(x\in X \to x^+\in X)
+\end{align*}
+则称其为\indexbf{归纳集}.
+\end{definition}
+
+容易知道$0:=\varnothing$属于任何归纳集, $1:=0^+$也属于任何归纳集, ..., 以此类推. 最小的归纳集被称为\indexbf{自然数集}, 它的严格定义如下:
+\begin{definition}
+\begin{align*}
+	\indexfm{\mathbb{N}}{N} :=\{n\mid \forall X(X\text{ 是归纳集} \to n\in X)\}.
+\end{align*}
+$\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
+\end{definition}
+
+从定义上可以看出, $\mathbb N$是归纳集, 而且是任何归纳集的子集.
+
+\begin{theorem} \indexbf{归纳原理} 令$\varphi(n)$是一个性质. 
+如果
+\begin{enumerate}
+\item $\varphi(0)$成立;
+\item $\forall n\in\mathbb N (\varphi(n)\to\varphi(n^+))$成立,
+\end{enumerate}
+那么, $\forall n\in \mathbb N \,\varphi(n)$成立. 
+\end{theorem}
+\begin{proof}
+构造集合$M = \{n\in\mathbb N\mid \varphi(n)\}$, 根据它是归纳集, 可知$\mathbb N \subseteq M$, 但$M$是根据Sep从$\mathbb N$中分离出来的, 得知$M=\mathbb N$.
+\end{proof}
+
+在$\mathbb N$上定义偏序关系$\leq = \in \cap =$, 而且可以证明, 这是一个良序.
+
+\begin{theorem} \indexbf{第二归纳原理}
+令$\varphi(n)$是一个性质.
+\[
+	\forall n\in \mathbb N (
+		\forall k\in n\,\varphi(k) \to \varphi(n)) \to
+		\forall n\in \mathbb N \,\varphi(n)
+\]
+\end{theorem}
+
+\subsection{递归定理}
+接下来我们要定义一些二元函数, 即我们熟悉的自然数集上的运算. 
+我们可以递归地给出它们的定义, 但这种定义的合理性需要递归定理的辩护. 
+
+\begin{definition}
+以$n\in \mathbb N$或$\mathbb N$为定义域的函数称为\indexbf{序列}, 其中前者称为长度为$n$的\indexbf{有穷序列}, 后者称为\indexbf{无穷序列}, 通常分别记为$\langle a_k\mid k<n \rangle$或$\langle a_k \mid k\in \mathbb N\rangle$, 或简记为$\langle a_k\rangle_{k<n}$或$\langle a_k\rangle_{k\in \mathbb N}$.
+值域通常记为$\{x_k\mid k<n\}$或$\{x_k\mid k\in \mathbb N\}$, 或简记为$\{ a_k\}_{k<n}$或$\{ a_k\}_{k\in \mathbb N}$.
+特别地, 长度为$0$的序列称为\indexbf{空序列}.
+
+若序列的到达域是$Y$, 则通常称为$Y$内的序列. 
+$Y$内所有有穷序列的集合可记为$A^{<\mathbb N} := \bigcup_{n\in \mathbb N} A^n$.
+\end{definition}
+
+\begin{theorem} \indexbf{递归定理}
+\begin{align*}
+	\forall A\forall a\in A\forall g \in A^{A\times \mathbb N}\exists ! f\in A^\mathbb N\big(
+		f(0)=a \wedge \forall n\in \mathbb N(
+			f(n^+) = g(f(n),n))\big).
+\end{align*}
+\end{theorem}
+这里的$g$扮演了一个 "递推式" 的角色.
+\begin{proof}
+首先, 我们需要证明$f$的\emph{存在性}. 
+
+注意到$f$是$A$中的无穷序列, 我们考虑用满足条件的有穷序列去逼近它.
+基于$a$和$g$的\indexbf{$m$-近似}定义为有穷序列$t\colon m^+\to A$满足
+\begin{align*}
+	t_0 = a\wedge \forall k\in m^+\big(
+		t_{k^+} = g(t_k,k)\big).
+\end{align*}
+并记$
+\mathcal F = \{ t\in 2^{\mathbb N\times A}\mid t\text{是$m$-近似}\}$, 及$
+f = \cup \mathcal F$. 接下来我们证明这个$f$是所寻找的函数.
+
+首先证明它是函数. 
+由theorem \ref{compatibility}, 知这当且仅当$\mathcal F$相容. 
+令$t,u\in F$. 记$m=\dom t$, $n=\dom u$. 不妨设$m\leq n$.
+$t,u$相容\emph{iff} $\forall k\in m (t_k = u_k)$. 
+这由1) $t_0=u_0=a$; 2) $t_k =u_k \to t_{k^+} = g( t_k,k) = g(u_k,k) = u_{k^+}$ 的成立和归纳原理保证.
+
+接着确定$f \in A^\mathbb N$. $\dom f \subseteq \mathbb N $和$\ran f \subseteq A$是显然的.
+下证$\mathbb N \subseteq \dom f$. 注意到$\dom f = \cup \{ n\in \mathbb N\mid \text{存在$n$-近似}\}$.
+接下来就是证明$\dom f$是归纳集, 即$\forall n\in \mathbb N$存在$n$-近似. 
+$0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^+, g(t_k, k))\}$即可得到$k^+$近似.
+
+至于$f$满足$f(0)=a$与$\forall n\in \mathbb N(f(n^+) = g(f(n),n))$, 用其任意近似证明即可, 只需想到$f$与近似的相容性.
+
+如此我们确定了$f$的存在性, 然后来证明它的\emph{唯一性}. 
+假设有$h: \mathbb N \to A$也满足定理, 只需用归纳法证明$h(n)=f(n)$对任意$n\in \mathbb N$成立即可. 
+\end{proof}
 
 \printindex
 \printbibliography
