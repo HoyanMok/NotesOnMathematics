@@ -312,7 +312,7 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \begin{theorem}对于$\forall X\forall Y$, $X\times Y$是集合.
 \end{theorem}
 \begin{proof}
-令$\varphi(z) = \exists x\in X\exists y\in Y( (x,y)=z)$, 取$Z=\{z\in 2^\{X\cup Y\}\mid \varphi(z)\}$, 由Ext和Sep (Axion \ref{Sep}) 即可知$X\times Y = Z$.
+令$\varphi(z) = \exists x\in X\exists y\in Y( (x,y)=z)$, 取$Z=\{z\in \mathscr P(X\cup Y)\mid \varphi(z)\}$, 由Ext和Sep (Axion \ref{Sep}) 即可知$X\times Y = Z$.
 \end{proof}
 
 \begin{definition}
@@ -550,7 +550,7 @@ $f$和$g$是函数.以下的命题是等价的:
 \end{theorem}
 
 \begin{definition}
-令$X$是一集合, $S\subseteq 2^X$. $S$被称为$X$的一个\indexbf{划分}如果:
+令$X$是一集合, $S\subseteq \mathscr P(X)$. $S$被称为$X$的一个\indexbf{划分}如果:
 \begin{align*}
 	\forall a\in S\forall b\in S(
 		a=b \vee a\cap b=\varnothing) \wedge 
@@ -625,10 +625,10 @@ $\cup S=X \to
 如果这样的下界$a$的集合有最大元$a_0$, 称其为\indexbf{下确界}, 记为$\inf X_0$. 同理有\indexbf{上界}和\indexbf{上确界}$\sup X_0$.
 \end{definition}
 
-作为例子, 令$X\neq \varnothing$, $(2^X, \subseteq)$是偏序集. 对于$\forall S\subseteq 2^X$, $S$有上下确界, $\sup S = \cup S$, $\inf S = \cap S$.
+作为例子, 令$X\neq \varnothing$, $(\mathscr P(X), \subseteq)$是偏序集. 对于$\forall S\subseteq \mathscr P(X)$, $S$有上下确界, $\sup S = \cup S$, $\inf S = \cap S$.
 
 \begin{definition}
-如果$X$和其上的线序$(X,\leq)$满足任意$X_0\in 2^X$, $X_0$都有最小元, 则称$\leq$为$X$上的\indexbf{良序}, $X$被称为\indexbf{良序集}.
+如果$X$和其上的线序$(X,\leq)$满足任意$X_0\in \mathscr P(X)$, $X_0$都有最小元, 则称$\leq$为$X$上的\indexbf{良序}, $X$被称为\indexbf{良序集}.
 \end{definition}
 
 \section{实数}
@@ -696,7 +696,7 @@ $Y$内所有有穷序列的集合可记为$A^{<\mathbb N} := \bigcup_{n\in \math
 			f(n^+) = g(f(n),n))\big).
 \end{align*}
 \end{theorem}
-这里的$g$扮演了一个 "递推式" 的角色.
+这里的$g$扮演了一个 ``递推式'' 的角色.
 \begin{proof}
 首先, 我们需要证明$f$的\emph{存在性}. 
 
@@ -707,7 +707,7 @@ $Y$内所有有穷序列的集合可记为$A^{<\mathbb N} := \bigcup_{n\in \math
 		t_{k^+} = g(t_k,k)\big).
 \end{align*}
 并记$
-\mathcal F = \{ t\in 2^{\mathbb N\times A}\mid t\text{是$m$-近似}\}$, 及$
+\mathcal F = \{ t\in \mathscr P(\mathbb N\times A)\mid t\text{是$m$-近似}\}$, 及$
 f = \cup \mathcal F$. 接下来我们证明这个$f$是所寻找的函数.
 
 首先证明它是函数. 
@@ -727,6 +727,74 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 假设有$h: \mathbb N \to A$也满足定理, 只需用归纳法证明$h(n)=f(n)$对任意$n\in \mathbb N$成立即可. 
 \end{proof}
 
+这样的$f$只能是一元函数, 定义运算需要带参数的版本:
+
+\begin{theorem} \indexbf{带参数的递归定理}
+\begin{align*}
+&
+	\forall A\forall P\forall a\in A^P
+	\forall g \in A^{P\times A\times \mathbb N}
+	\exists ! f\in A^{P\times \mathbb N}\big(
+\\ &\qquad
+		\forall p\in P\,f(p,0)=a(p) \wedge \forall n\in \mathbb N\forall p\in P(
+			f(p,n^+) = g(p,f(n),n))\big).
+\end{align*}
+
+\end{theorem}
+\textbf{注}: 如果固定$p$, 这个定理与递归定理几乎一致, 从而我们需要考虑以$p$为变元的函数作为递归定理中的到达域.
+\begin{proof}
+令$G\colon A^P\times \mathbb N \to A^P$; $(t,n) \mapsto h$, 其中$h$满足$\forall p\in P \big(
+	h(p) = g(p,t(p),n)\big)$. 
+考虑到$t$和$g$都是函数, 复合的$h$当然是函数, 而且唯一.
+
+由递归定理, 有这样的函数$F \colon \mathbb N \to A^P$满足 
+1) $\forall p\in P\big(
+	F(0)=a\in A^P\big)$; 
+2) $\forall n\in \mathbb N\big(
+	F(n^+) = G(F(n), n)\big)$. 
+
+可以验证$f(p,n) = F(n)(p)$即是我们想找的函数.
+\end{proof}
+
+有了带参数的递归定理, 自然数上的运算可以看作以下存在而且唯一的二元函数:
+
+\begin{definition}
+\indexbf{加法}$+\colon \mathbb N\times \mathbb N \to \mathbb N$, 满足
+1) $\forall m\in \mathbb N \big( 
+	+(m,0)=m\big)$;
+2) $\forall m\in\mathbb N\forall n\in \mathbb N \big(
+	+(m,n^+)=(+(m,n))^+\big)$. 通常记$+(m,n) =: m+n$.
+\end{definition}
+
+\begin{definition}
+\indexbf{乘法}$\cdot \colon \mathbb N\times \mathbb N \to \mathbb N$, 满足
+1) $\forall m\in \mathbb N \big( 
+	\cdot(m,0)=m\big)$;
+2) $\forall m\in\mathbb N\forall n\in \mathbb N \big(
+	\cdot(m,n^+)=(\cdot(m,n))^+\big)$. 通常记$\cdot(m,n) $为$mn$或$m\cdot n$.
+\end{definition}
+
+我们熟悉的关于乘法和加法的性质都可以由归纳原理证出, 此处不再赘述.
+
+\subsection{势}
+
+\begin{definition}\label{equinumerosity}
+两个集合$X$, $Y$\indexbf{等势} (equinumerous) 指的是$\exists f \in Y^X (f\text{是双射 })$, 记为$|X|=|Y|$.
+\end{definition}
+
+\begin{definition}
+若存在$f \in Y^X$ s.t. $f$是单射, 则称$|X|\leq |Y|$. 
+当$|X|\leq |Y|$而$|X|\neq |Y|$时, 我们就称$X$的势小于$Y$的势, 记为$|X| < |Y|$.
+\end{definition}
+
+\begin{theorem}
+\begin{align*}
+|X| \leq |Y| \leftrightarrow \exists Y_0\in \mathscr P(Y) \big(|X| = |Y_0| \big).
+\end{align*}
+\end{theorem}
+\begin{proof}
+取$Y_0 = \ran f$即可.
+\end{proof}
 \printindex
 \printbibliography
 \end{document}
