@@ -22,8 +22,8 @@
 \usepackage[colorlinks=true,bookmarks=true]{hyperref}%hyperlinks for reference, table of contents and indexes
 \hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}%More options read texdoc hyperref
 \newcommand{\me}{\mathrm{e}}
-\newcommand{\mi}{\mathrm{i}}
-\newcommand{\md}{\mathrm{d}}
+\newcommand*{\imagine}{\mathrm{i}}
+\newcommand\dif{\mathop{}\!\mathrm{d}}
 \DeclareMathOperator{\ctg}{ctg}
 \newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}}
 \newcommand*{\bv}{\boldsymbol}
@@ -58,7 +58,7 @@ A vector $\bv u$ at point $\bv x_0$ under such transformation would follow:
 
 A linear form $\ell: \bv x\mapsto\ell(\bv x) =l_ix^i $ under such transformation would follow:
 \begin{align}\label{linear form}
-	l_i'\md y^i = l_j\md x^j 
+	l_i'\dif y^i = l_j\dif x^j 
 	&&\Rightarrow&&
 	l'_i = \left.\frac{\partial x^j}{\partial y_i}\right|_{\bv x_0}l_j
 \end{align}
@@ -69,14 +69,14 @@ A linear form $\ell: \bv x\mapsto\ell(\bv x) =l_ix^i $ under such transformation
 
 A linear transformation $\mathscr{L}:\bv x \mapsto \bm L\bv x$ where $\bm L = \left( L^i_{\;j}\right)$ under such transformation would follow:
 \begin{align*}
-	\md y\left(\mathscr L^i(\bv x)\right) 
-	&=(L')^i_{\;j} \md y^j 
+	\dif y\left(\mathscr L^i(\bv x)\right) 
+	&=(L')^i_{\;j} \dif y^j 
 	\\
-	&=  \left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} \md \mathscr L^k (\bv x)
-	=\left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} L^k_{\;h} \md x^h
+	&=  \left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} \dif \mathscr L^k (\bv x)
+	=\left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} L^k_{\;h} \dif x^h
 	=\left.\frac{\partial y^i}{\partial x^k}\right|_{\bv x_0} 
 	L^k_{\;h} 
-	\left.\frac{\partial x^h}{\partial y_j}\right|_{\bv x_0}\md y^j
+	\left.\frac{\partial x^h}{\partial y_j}\right|_{\bv x_0}\dif y^j
 \end{align*} 
 \begin{align}\label{linear transformation} 
 	(L')^i_{\;j} = 
@@ -89,10 +89,10 @@ A linear transformation $\mathscr{L}:\bv x \mapsto \bm L\bv x$ where $\bm L = \l
 
 A bilinear form $\mathscr{B}: \bv x \mapsto \bv x^{\mathrm{T}} \bm b \bv x = x^{\;i}b_{ij}x^j$: 
 \begin{align*}
-	b'_{ij}\md y^{\;i} \md y^j 
+	b'_{ij}\dif y^{\;i} \dif y^j 
 	= b'_{ij} \left.\frac{\partial y^{\,i}}{\partial x^{\;k}}\right|_{\bv x_0}
-	\left.\frac{\partial y^j}{\partial x^h}\right|_{\bv x_0}\md x^{\;k}\md x^h 
-	=b_{kh} \md x^{\;k}\md x^h 
+	\left.\frac{\partial y^j}{\partial x^h}\right|_{\bv x_0}\dif x^{\;k}\dif x^h 
+	=b_{kh} \dif x^{\;k}\dif x^h 
 	&&\Rightarrow&&
 	b'_{ij} =\left. \frac{\partial x^{\;k}}{\partial y^{\;h}}\right|_{\bv x_0}
 	b_{kh} 
