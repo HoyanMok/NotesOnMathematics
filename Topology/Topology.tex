@@ -248,7 +248,7 @@ If $U(x)\in \mathscr T$, it is called a \indexbf{open neighbourhood}.
 Subset class $\{U(x)\subseteq X\mid U(x) \text{ is a neighbourhood of } x\}$ is called the \indexbf{neighbourhood system} of point $x$, denoted by $\mathscr U_x$
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{open_iff_neighbourhood}
 Let $(X,\mathscr T)$ be a topological space, $U$ is a subset of $X$. 
 $U$ is an open set \emph{iff} $\forall x\in U$, $U$ is a neighbourhood of $x$.
 \end{theorem}
@@ -266,6 +266,49 @@ Let $(X,\mathscr T)$ be a topological space, $\mathscr U_x$ is a neighbourhood s
 $\forall U\in \mathscr U_x\forall V\in \mathscr U_x\exists U_0\in \mathscr T\exists V_0\in \mathscr T(U_0\subseteq U\wedge V_0\subseteq V\wedge x\in U_0\cap V_0 )$, By definition of topology, $\mathscr T\ni U_0\cap V_0\subseteq U\cap V$. 
 \end{proof}
 
+In history topologies were once built on neighbourhood systems. The following theorem shows the way.
+ 
+\begin{theorem}\label{topology_built_on_neighbourhood}
+Let $X$ be a set and $\forall x \in X$ a collection of subsets $\mathscr U_x \in \mathscr P(X)$ is appointed, satisfying:
+\begin{enumerate}[(1)]
+\item $\forall x\in X\big(
+	\mathscr U_x \neq \varnothing \wedge
+		\forall U\in \mathscr U_x (x\in U)\big)$; 
+\item $\forall x\in X\forall U\in\mathscr U_x\forall V\in\mathscr U_x (
+	U\cap V\in \mathscr U_x)$;
+\item $\forall x\in X\forall U\in\mathscr U_x\forall V\in \mathscr P(X)( 
+	U\subseteq V \to V\in \mathscr U_x)$;
+\item $\forall x\in X\forall U\in\mathscr U_x\exists V\in\mathscr U_x \big(
+	V\subseteq U \wedge \forall y\in V(V\in \mathscr U_y)\big)$,
+\end{enumerate}
+then there exists only one topology $\mathscr T$ on $X$ s.t.\ $\forall x\in X$, $\mathscr U_x$ is the neighbourhood system of $x$ in $(X,\mathscr T)$.
+\end{theorem}
+\begin{proof}
+Let $\mathscr T = \{G\in \mathscr P(X) \mid \forall x\in G( G\in \mathscr U_x)\}$.
+\begin{enumerate}[a)]
+\item Obviously $\varnothing \in \mathscr T$. 
+	Since the condition (1) and the condition (3) in theorem \ref{topology_built_on_neighbourhood}, $X\in \mathscr T$.
+\item Let $A, B\in \mathscr T$. Consider the condition (2) in theorem \ref{topology_built_on_neighbourhood} applied to $x\in A\cap B$.
+\item Let $\forall i\in I( G_i \in \mathscr T)$. 
+$\forall x\in \bigcup_{i\in I} G_i$, there must exists a $i\in I$ s.t.\ $x\in G_i$ and $G_i \in \mathscr U_x$. 
+Since the condition (3) in theorem \ref{topology_built_on_neighbourhood}, $G_i \subseteq \bigcup_{i\in I} G_i$ has implied $\bigcup_{i\in I} G_i \in \mathscr U_x$.
+\end{enumerate}
+These tells that $\mathscr T$ is a topology on $X$.
+
+The condition (4) in theorem \ref{topology_built_on_neighbourhood} tells that there always exists a $G\subset U$ for all $x\in X$ and $U\in \mathscr U_x$ s.t.\ $G\in \mathscr T$. Therefore $\mathscr U_x$ must be a subset of the neighbourhood system of $x$. 
+
+For all neighbourhood $U$ of $x\in X$, there must be a open neighbourhood subset $G\subseteq U$, which is also a member of $\mathscr U_x$. Since the condition (3) in theorem \ref{topology_built_on_neighbourhood}, $U\in \mathscr U_x$. Therefore the neighbourhood system of $x$ must be a subset of $\mathscr U_x$. 
+
+Therefore, $\mathscr U_x$ is the neighbourhood system of $x$.
+
+Now prove the uniqueness. Let there be another topology $\mathscr T '$.
+Since theorem \ref{open_iff_neighbourhood}, 
+$\forall U\big(
+	G\in \mathscr T' \leftrightarrow 
+		\forall x\in G(
+			G\in \mathscr U_x)\big)$. 
+Therefore $\mathscr T' = \mathscr T$.
+\end{proof}
 
 \subsection{Continuous Mappings}
 \begin{definition}\label{continuousness}
@@ -315,8 +358,94 @@ Two topological spaces $(X,\mathscr{T}_X)$ and $(Y, \mathscr{T}_Y)$ are said to 
 
 Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other. In fact homeomorphic relations are equivalent relations.
 
+\subsection{Closure}
+\begin{definition}
+Let $X$ be a topological space and $A$ be a subset of $X$. Let $x\in X$.
+If $\forall U\in \mathscr U_x \big(
+	U\cap (A-\{x\}) \neq \varnothing\big)$, 
+then $x$ is called a \indexbf{accumulation point}, \indexbf{cluster point} or \indexbf{limit point} of $A$. 
+The set $A' := \{x\in X\mid x\text{ is a accumulation point of } A\}$ is called the \indexbf{derived set} of $A$.
+A point $a\in A$ is called a \indexbf{isolated point} of $A$ if $a\notin A'$.
+\end{definition}
 
+\begin{theorem}\label{propoties_derived}
+Let $X$ be a topological space and $A$, $B$ be subsets of $X$. 
+1) $A\subseteq B \to A'\subseteq B'$; 
+2) $(A\cup B)' = A'\cup B'$;
+3) $(A')' \subseteq A\cup A'$.
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[1)]
+\item When $A\subseteq B$, $U\cap (A-\{x\}) \subseteq U\cap (B-\{x\})$.
+\item $(A\cup B)' = \{x\in X\mid \forall U\in \mathscr U_x \big(
+	U\cap (A\cup B-\{x\}) \neq \varnothing\big)\}$. 
+Also $U\cap (A\cup B - \{x\}) = U\cap (X-\{x\})\cap (A\cup B) = (U\cap A-\{x\})\cup (U\cap B-\{x\})$.
+\item If $x\notin A\cup A'$, then $\exists G\in \mathscr U_x\cap \mathscr T \big(
+	G\cap (A-\{x\}) = G\cap A = \varnothing\big)$. 
+$\forall y \in G$, $G$ itself is a neighbourhood of $y$ that $G\cap (A-\{y\}) = G\cap A =\varnothing$, therefore $y\notin A'$. 
+This means that $G$ is a neibourhood of $x$ that $G\cap (A'-\{x\}) = G\cap A' =\varnothing$, i.e.\ $x\notin (A')'$.
+\end{enumerate}
+\end{proof}
 
+\begin{definition}\label{closed_set}
+Let $(X,\mathscr T)$ be a topological space and $F$ be a subset of $X$. $F$ is said to be \indexbf{closed} \emph{iff} $\complement_X (F) \in \mathscr T$. The collection all closed sets is denoted by $\mathscr F$.
+\end{definition}
+
+\begin{theorem}\label{closed_iff_accumulation}
+Let $(X,\mathscr T)$ be a topological space and $F$ be a subset of $X$. $F$ is closed \emph{iff} $\forall x\in F' (x\in F)$.
+\end{theorem}
+\begin{proof}
+$\to$: 
+If $x\notin F$ then $x\in \complement_X (F)$, which is open in $(X,\mathscr T)$. 
+Then $\complement_X (F)$ is a neighbourhood that $\complement_X (F) \cap (F-\{x\}) = \complement_X (F) \cap F =\varnothing$, i.e.\ $x\notin F'$.
+
+$\leftarrow$:
+$\forall x\notin F(x\notin F')$, then there exists a open neighbourhood $U$ of $x$ that $U\cap F = \varnothing$, then $\complement_X (F)$ is always a neighbourhood of its elements, since theorem \ref{open_iff_neighbourhood}, $\complement_X (F) \in \mathscr T$.
+\end{proof}
+
+\begin{definition}\label{closure}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. Set $\overline A := A\cup A'$ is called a \indexbf{closure} of $A$.
+\end{definition}
+
+\begin{theorem}\label{closed_iff_closure}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
+$A$ is closed in $(X,\mathscr T)$ \emph{iff} $A=\overline A$.
+\end{theorem}
+\begin{proof}
+Since theorem \ref{closed_iff_accumulation}, $A$ is closed iff $A'\subseteq A$, which iff $A = A\cup A' = \overline A$.
+\end{proof}
+
+\begin{corollary}\label{closure_closed}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
+$\overline A$ is always closed.
+\end{corollary}
+\begin{proof}
+Since (3) of theorem \ref{propoties_derived}, $\overline{\overline A} = \overline A$.
+\end{proof}
+
+\begin{lemma}\label{subset_closure}
+Let $(X,\mathscr T)$ be a topological space and $A$, $B$ be subsets of $X$.
+$A\subseteq B \to \overline A\subseteq \overline B$.
+\end{lemma}
+\begin{proof}
+$A\subseteq B \to A'\subseteq B'$ ((1) of theorem \ref{propoties_derived}), so $A\cup A'\subseteq B\cup B'$, i.e.\ $\overline A\subseteq \overline B$.
+\end{proof}
+
+We can say that the closure of a set is the smallest closed set containing it, as long as we prove the following theorem:
+
+\begin{theorem}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
+\begin{align*}
+	\overline A = \bigcap_{F\in \mathscr F \wedge A\subseteq F} F.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Since $\overline A$ itself is closed (corollary \ref{closure_closed}), $\bigcap_{F\in \mathscr F \wedge A\subseteq F} F \subseteq \overline A$. 
+On the other hand, $\bigcap_{F\in \mathscr F \wedge A\subseteq F} F$ is closed, so $\overline{\bigcap_{F\in \mathscr F \wedge A\subseteq F} F} = \bigcap_{F\in \mathscr F \wedge A\subseteq F} F$.
+Therefore, $A\subseteq \bigcap_{F\in \mathscr F \wedge A\subseteq F} F \to \overline A \subseteq \bigcap_{F\in \mathscr F \wedge A\subseteq F} F$ (Lemma \ref{subset_closure}). 
+\end{proof}
+
+\section{Subspace}
 \printindex
 % \printbibliography
 \end{document}
