@@ -122,6 +122,18 @@ Apply this inequality to $\sum ^n_{i=1} ( u_i+v_i)^2 =
 \end{align*}
 in which substitude $u_i,v_i$ by $x_i-y_i, x_i+y_i$ will result in triangle inequality. The inequality holds as the $n$ limits to $+\infty$.
 
+\begin{definition}
+Let $(X,d)$ be a metric space, the \indexbf{distant} between a non-empty set $\varnothing\neq A\in \mathscr P(X)$ and a point $x$ is defined as:
+\begin{align*}
+	d(A,x) = \inf \{d(x,y)\mid y\in A\},
+\end{align*}
+and we let $d(x,A) = d(A,x)$. 
+Also, the \indexbf{distant} between two non-empty sets $A,B$ is defined as:
+\begin{align*}
+	d(A,B) = \inf \{d(x,y)\mid x\in A\wedge y\in B\}.
+\end{align*}
+\end{definition}
+
 A metric space $(X,d)$ is called \indexbf{discrete} if 
 \begin{align*}
 	\forall x\in X\left(
@@ -360,7 +372,7 @@ Two topological spaces $(X,\mathscr{T}_X)$ and $(Y, \mathscr{T}_Y)$ are said to 
 Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other. In fact homeomorphic relations are equivalent relations.
 
 \subsection{Closure}
-\begin{definition}
+\begin{definition}\label{accumulation_point}
 Let $X$ be a topological space and $A$ be a subset of $X$. Let $x\in X$.
 If $\forall U\in \mathscr U_x \big(
 	U\cap (A-\{x\}) \neq \varnothing\big)$, 
@@ -446,6 +458,62 @@ On the other hand, $\bigcap_{F\in \mathscr F \wedge A\subseteq F} F$ is closed, 
 Therefore, $A\subseteq \bigcap_{F\in \mathscr F \wedge A\subseteq F} F \to \overline A \subseteq \bigcap_{F\in \mathscr F \wedge A\subseteq F} F$ (Lemma \ref{subset_closure}). 
 \end{proof}
 
+\begin{theorem}
+Let $(X,d)$ be a metric space and $A$ be a non-empty subset of $X$.
+\begin{enumerate}[1)]
+\item $\forall x\in X$, $x\in A' \leftrightarrow d(x,A-\{x\}) = 0$.
+\item $\forall x\in X$, $x\in \overline A \leftrightarrow d(x,A)=0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[1)]
+\item We have $x\in A' $ \emph{iff} $\forall \varepsilon\in \mathbb R_+\big(
+	B (x,\varepsilon) \cap (A-\{x\}) \neq \varnothing\big)$, 
+which is established \emph{iff} $\forall \varepsilon \in \mathbb R_+\exists y\in A-\{x\}\big(
+	d(x,y) <\varepsilon\big)$.
+\item We only need to substitude $A-\{x\}$ with $A$ in 1).
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+Let $(X, \mathscr T)$ and $(Y,\mathscr S)$ be two topological spaces, and $f\colon X\to Y$. Note the collections of closed sets in $X$ and $Y$ by $\mathscr F_X$, $\mathscr F_Y$.
+The statements below are equivalent:
+\begin{enumerate}[(1)]
+\item $f\in C(X,Y)$.
+\item $\forall F\in\mathscr F_Y \big(
+	f^{-1} (F) \in \mathscr F_X\big)$.
+\item $\forall A\in \mathscr P(X) \big(
+	f(\overline A) \subseteq \overline{ f(A)}\big)$.
+\item $\forall B\in \mathscr P(Y) \big(
+	\overline{f^{-1} (B)}\subseteq f^{-1} (\overline B) \big)$.
+\end{enumerate} 
+\end{theorem}
+\begin{proof}
+(1) $\to$ (2): Only to notice that $f^{-1} (\complement_Y F ) =\complement_X f^{-1} (F)$. 
+
+(2) $\to$ (3): $\forall A \in \mathscr P(X)$ we have $f(A) \subseteq \overline{f(A)}$, so $A \subseteq f^{-1} \big(
+	\overline{f(A)}\big)$. 
+By (2) we know that $f^{-1} \big(\overline{f(A)}\big)$ is closed, therefore 
+$\overline A \subseteq \overline{f^{-1} \big(\overline{f(A)}\big)} 
+	= f^{-1} \big(\overline{f(A)}\big)$, so $f(\overline A) \subseteq \overline {f(A)}$.
+	
+(3) $\to$ (4): By (3) we know that $\forall B\in \mathscr P(Y)$, 
+$f\big(\overline{f^{-1}(B)}\big) \subseteq \overline{f(f^{-1}(B))}$. 
+Also $f(f^{-1}(B)) \subseteq B$ (equality satisfied when $f$ is surjective), 
+then $f\big(\overline{f^{-1}(B)}\big) \subseteq \overline B$, 
+so $\overline{f^{-1}(B)} \subseteq f^{-1} (\overline B)$.
+
+(4) $\to$ (1): $\forall G\in \mathscr S$, $\complement_Y G \in \mathscr F_Y$, so by (3), we have
+\begin{align*}
+	\overline {\complement_X f^{-1}(G)} =\overline {f^{-1}\big(\complement_Y G\big)} 
+		\subseteq  f^{-1}\big(\overline{\complement_Y G}\big) = f^{-1}\big(\complement_Y G\big)
+			=\complement_X f^{-1}(G).
+\end{align*}
+However by the definition of closure $\complement_X f^{-1}(G) \subseteq \overline {\complement_X f^{-1}(G)}$.
+Therefore $\complement_X f^{-1}(G) = \overline {\complement_X f^{-1}(G)}$, which means $\complement_X f^{-1}(G)$ is closed (theorem \ref{closed_iff_closure}), i.e.\ $f^{-1}(G)$ is open. 
+\end{proof}
+
+\subsection{Interior Points and Boundary}
 \section{Subspace}
 \printindex
 % \printbibliography
