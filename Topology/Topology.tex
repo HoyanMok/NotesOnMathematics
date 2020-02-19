@@ -48,6 +48,7 @@
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\interior}{int}
 
 \title{Point Set Topology}
 \author{Hoyan Mok}
@@ -396,7 +397,7 @@ Also $U\cap (A\cup B - \{x\}) = U\cap (X-\{x\})\cap (A\cup B) = (U\cap A-\{x\})\
 \item If $x\notin A\cup A'$, then $\exists G\in \mathscr U_x\cap \mathscr T \big(
 	G\cap (A-\{x\}) = G\cap A = \varnothing\big)$. 
 $\forall y \in G$, $G$ itself is a neighbourhood of $y$ that $G\cap (A-\{y\}) = G\cap A =\varnothing$, therefore $y\notin A'$. 
-This means that $G$ is a neibourhood of $x$ that $G\cap (A'-\{x\}) = G\cap A' =\varnothing$, i.e.\ $x\notin (A')'$.
+This means that $G$ is a neighbourhood of $x$ that $G\cap (A'-\{x\}) = G\cap A' =\varnothing$, i.e.\ $x\notin (A')'$.
 \end{enumerate}
 \end{proof}
 
@@ -419,6 +420,25 @@ $\forall x\notin F(x\notin F')$, then there exists a open neighbourhood $U$ of $
 \begin{definition}\label{closure}
 Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. Set $\overline A := A\cup A'$ is called a \indexbf{closure} of $A$.
 \end{definition}
+
+\begin{theorem}\label{closure_neighbourhood}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. Let $x\in X$.
+\[
+	x\in \overline A \leftrightarrow
+		\forall U\in\mathscr U(x)(
+			U\cap A\neq \varnothing).
+\]
+\end{theorem}
+\begin{proof}
+$\to$: If $x\in A$ then $\{x\}\subseteq U\cap A$, 
+else if $x\in A'$ then $U\cap A \supset (U-\{x\})\cap A \neq \varnothing$.
+
+$\leftarrow$: 
+If $\exists U\in\mathscr U(x)\big(
+	(U-\{x\})\cap A= \varnothing\big)\wedge x\notin A$, 
+then there exists a $U\in \mathscr U(x)$ s.t.\ $U\cap A=\varnothing$. 
+\end{proof}
+
 
 \begin{theorem}\label{closed_iff_closure}
 Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
@@ -514,6 +534,84 @@ Therefore $\complement_X f^{-1}(G) = \overline {\complement_X f^{-1}(G)}$, which
 \end{proof}
 
 \subsection{Interior Points and Boundary}
+\begin{definition}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
+We call $x$ an \indexbf{interior point} of $A$ if $A$ is a neighbourhood of $x$.
+We call $x$ an \indexbf{exterior point} of $A$ if $\complement_X(A)$ is a neighbourhood of $x$.
+The sets of all interior points of $A$ is the \indexbf{interior} of $A$, noted by $\interior A$.
+\end{definition}
+
+\begin{theorem}\label{interior_and_closure}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
+$\interior A=\complement_X\big(
+	\overline{
+		\complement_X(A)}\big)$, 
+$\overline A = \complement_X\big(
+	\interior \complement_X(A)\big)$.
+\end{theorem}
+\begin{proof}
+$x\in \interior A$ implies an open set $G$ which is a subset of $A$ and $x\in G$.
+The complement of $G$ is closed, thus its closure is $\complement_X(G)$ itself. 
+$\complement_X(A)\subseteq \complement_X(G) \rightarrow 
+	\overline{\complement_X(A)}\subseteq \complement_X(G)$ (Lemma \ref{subset_closure}), 
+therefore $x\notin \overline{\complement_X(A)}$, which is the first equation to prove.
+
+To prove the second one only need to replace the $A$ with $\complement_X(A)$ in the first equation.
+\end{proof}
+
+\begin{theorem}
+Let $(X,\mathscr T)$ be a topological space and $G$ be a subset of $X$. 
+\[
+	G\in \mathscr T \leftrightarrow
+		\interior G=G
+\]
+\end{theorem}
+\begin{proof}
+$G$ is open \emph{iff} the complement of $G$ is closed. And $\complement_X (G) = \overline{\complement_X (G)}$.
+The complement of the both size of this equation and Theorem \ref{interior_and_closure} give the proof of the theorem.
+\end{proof}
+
+With the propoties of closure and Theorem \ref{interior_and_closure} the folowing statements should be easy to prove:
+\begin{theorem}
+Let $(X,\mathscr T)$ be a topological space and $A$, $B$ be subsets of $X$. 
+$\interior (A\cap B) = \interior A \cap \interior B$, $\interior(\interior A) =\interior A$,
+\[
+	\interior A = \bigcup\limits_{G\in\mathscr T \wedge G\subseteq A} G.
+\]
+\end{theorem}
+
+Therefore we can say that the interior of $A$ is the largest open set contianed in $A$.
+
+\begin{definition}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
+A point $x$ is said to be a \indexbf{boundary point} of $A$ if 
+$\forall U\in \mathscr U(x)\big(
+	U\cap A\neq \varnothing \wedge U\cap \complement_X(A)\neq \varnothing\big)$.
+The set of all boundary points of $A$ is called the \indexbf{boundary} of $A$, noted by $\partial A$.
+\end{definition}
+
+\begin{theorem}\label{boundary_propoties}
+Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
+(1) $\partial A = \overline A \cap \overline{\complement_X(A)}$;
+(2) $\interior A = \overline A - \partial A$;
+(3) $\overline A = \interior A\cup \partial A$.
+\end{theorem}
+\begin{proof}
+(1): Apply Theorem \ref{closure_neighbourhood} to both $A$ and $\complement_X(A)$.
+
+(2): $\interior A \cup \partial A=
+	A\cup(\overline A\cap \overline{\complement_X (A)})=
+		\overline A\cap \big(\interior A\cup \complement_X (\interior A)\big) = \overline A$.
+		
+(3) $\overline A -\partial A= 
+	\overline A - (\overline A\cap \overline{\complement_X (A)}) = 
+		\overline A \cap \complement_X\big(
+			\overline{
+				\complement_X(A)}\big) = 
+			\overline A\cap \interior A = 
+				\interior A$.
+\end{proof}
+
 \section{Subspace}
 \printindex
 % \printbibliography
