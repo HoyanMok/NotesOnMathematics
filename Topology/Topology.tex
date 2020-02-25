@@ -612,6 +612,33 @@ Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
 				\interior A$.
 \end{proof}
 
+\subsection{basis}
+\begin{definition}
+Let $(X,\mathscr T)$ be a topological space and $\mathscr B$ be a subset of $\mathscr T$.
+If $\forall G\in \mathscr T 
+	\exists \mathscr B_G\in \mathscr P(\mathscr B) \big(
+		G=\cup \mathscr B_G\big)$, 
+then we call $\mathscr B$ a \indexbf{basis} or a \indexbf{base} of the topology $\mathscr T$.
+\end{definition}
+
+\begin{theorem}
+Let $(X,\mathscr T)$ be a topological space and $\mathscr B$ be a subset of $\mathscr T$.
+$\mathscr B$ is a basis of $\mathscr T$ \emph{iff} 
+$\forall x\in X
+	\forall U\in \mathscr U_x
+		\exists B\in \mathscr B(
+			x\in B\wedge B\subseteq U)$.
+\end{theorem}
+\begin{proof}
+$\to$:
+$U\in \mathscr U_x$ implies an open set $G\in \mathscr P(\mathscr U_x)$ that contians $x$, which is the union of elements in $\mathscr B$.
+Therefore there exists a $B\in \mathscr B$, which is the subset of $U$ and it contians $x$.
+
+$\leftarrow$: 
+$\forall G\in \mathscr T$, it is a neighbourhood of all the points in $G$.
+For all $x$ in $G$ assign a $B_x\in \mathscr B$ which contians $x$ and is the subset of $G$, so that $G$ is the Union of all the $B_x$.
+\end{proof}
+
 \section{Subspace}
 \printindex
 % \printbibliography
