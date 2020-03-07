@@ -409,7 +409,7 @@ $\psi (i,x)$是公式. $\forall I\forall X$,
 \textbf{注}: 虽然这样的定义和Cartesian积不同, 但接下来的概念确保了, 两者之间可以一一对应, 从而是等同的.
 
 \begin{definition}
-令$f\colon X\to Y$是函数. 若$f(x_1) = f(x_2) \leftrightarrow x_1=x_2$则称$f$为\indexbf{单射}. 若$\ran f = Y$则称其为满射. 既单又满的函数称为双射. 如果函数的逆$f^{-1}$也是函数, 则函数$f$称为\indexbf{可逆}的.
+令$f\colon X\to Y$是函数. 若$f(x_1) = f(x_2) \leftrightarrow x_1=x_2$则称$f$为\indexbf{单射} (injection). 若$\ran f = Y$则称其为\indexbf{满射} (surjection). 既单又满的函数称为\indexbf{双射} (bijection). 如果函数的逆$f^{-1}$也是函数, 则函数$f$称为\indexbf{可逆}的.
 \end{definition}
 
 作为例子, 若空映射$\ran f=\dom f=\varnothing$, $f=\varnothing$总是单的, $f^{-1} = \{(y,x)\mid y=f(x)\} = \varnothing$也是空映射. 
@@ -623,7 +623,7 @@ $\cup S=X \to
 相反则有\indexbf{极大元}和\indexbf{最大元}.
 
 令$X_0\subseteq X$. 如果$\exists a\in X\forall x\in X_0 (a\leq x)$, 则称$X_0$在$X$中有下界, $a$是$X_0$在$X$中的\indexbf{下界}. 
-如果这样的下界$a$的集合有最大元$a_0$, 称其为\indexbf{下确界}, 记为$\inf X_0$. 同理有\indexbf{上界}和\indexbf{上确界}$\sup X_0$.
+如果这样的下界$a$的集合有最大元$a_0$, 称其为\indexbf{下确界} (infimun, appr.\ inf), 记为$\inf X_0$. 同理有\indexbf{上界}和\indexbf{上确界} (supremun, appr.\ sup) $\sup X_0$.
 \end{definition}
 
 作为例子, 令$X\neq \varnothing$, $(\mathscr P(X), \subseteq)$是偏序集. 对于$\forall S\subseteq \mathscr P(X)$, $S$有上下确界, $\sup S = \cup S$, $\inf S = \cap S$.
@@ -794,8 +794,97 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 \end{align*}
 \end{theorem}
 \begin{proof}
-取$Y_0 = \ran f$即可.
+对于$f\in Y^X$且$f$是单的, 取$Y_0 = \ran f$即可.
 \end{proof}
+
+下面我们将介绍Cantor-Bernstein-Schr\"oeder 定理, 它的证明当中最重要的一部分是以下引理的证明:
+\begin{lemma}\label{lemma_CBS}
+\begin{align*}
+	A'\subseteq B \subseteq A \wedge |A'|=|A| 
+		\to |B|=|A|.
+\end{align*}
+\end{lemma}
+\textbf{注}: 我们已经知道有$A$到$B$的单射了, 怎么找到一个同时是满的呢? 
+这要求这个双射$h$要把$A-B$和$B$映射到$B$的分划上, 可$h[A-B]$在$B$之中, 它在$h$下必须映射到$h[B]$里; 
+同理$h\big\lbrack h[A-B]\big\rbrack$必须映射到$h[B]-h\big\lbrack h[A-B]\big\rbrack$中\ldots
+
+也就是说: $A$和$A-B$在$h^n$即$h$的任意个复合中, 总是映射到一对不相交的集合$h^n[A]$, $h^n[A-B]$中 (否则不可能是单的), 而且$h^n[A-B]$在$h$的映射下, 又只能落到$h^n[B]$中. 
+从而: $h^n[B]$不断在缩小, 给$h^n[A-B]$腾出空间. 
+这是以下证明的重要思路.
+\begin{proof}
+令$h$见证了$A'$和$A$的等势, 即$h\in A'^A$且$h$是双射.
+记:
+\begin{align*}
+	A_0 := A, && 
+	B_0 := B,
+\end{align*}
+并定义序列:
+\begin{align*}
+	A_{n+1}=h[A_n], &&
+	B_{n+1}=h[B_n].
+\end{align*}
+
+我们可以归纳地证出:
+\begin{align*}
+	\forall n\in \mathbb N(
+		A_{n+1}\subseteq B_n \subseteq A_n),
+\end{align*}
+只需认识到$A_1\subseteq A' \subseteq B_0\subseteq A_0$, 
+且对于任意$k\subseteq \mathbb N$只要$A_{k+1}\subseteq B_k \subseteq A_k$,
+	则$h[A_{k+1}]\subseteq h[B_k]\subseteq  h[A_k]$.
+	
+定义$C_n = A_n - B_n$, 下验证$h[C_n] = C_{n+1}$: 
+\begin{align*}
+	h[C_n] = h[A_n - B_n] = h[A_n] - h[B_n] = A_{n+1} - B_{n+1} = C_{n+1}, 
+\end{align*}
+其中第二个等式的成立依赖于$h$是一个单射, 因为: $h[A_n] $中$h[B_n]$全部由$B_n$映射而来, 这是单性要求的; 从而$h[A_n]-h[B_n]$是$A_n-B_n$的像, 因为映射到自身的值域总是满的.
+
+将这些所有的$C_n$并起来:
+\begin{align*}
+	C:=\bigcup^\infty_{n=0} C_n,
+\end{align*}
+从而
+\begin{align*}
+	h[C] = h\bigg\lbrack\bigcup^\infty_{n=0} C_n\bigg\rbrack = \bigcup^\infty_{n=1} C_n = C - C_0 = C- (A-B).
+\end{align*}
+
+我们可以看到$C$中的元素有这样的性质, 它含于某个$C_n$中, 并将被$h$映射到下一个$C_{n+1}$中; 而且要么它是$C_0=A-B$中的元素, 要么是$C_{n-1}$中某个元素的在$h$下的像. 这有些像Hilbert的无限旅馆. 这说明$h\upharpoonright C$到$h[C]$是一个满射, 而它的单性已由$h$自身的单性保证了. 
+
+而$h$在$A-C$的限制却不一定是满的, 因为$h[A]=A'\subseteq B$本身就不一定是到$B$的满射. 因为
+\begin{align*}
+	A-C = (A - C_0) \cap (A-h[C_0]) \subseteq A-C_0 = A-(A-B) =B,
+\end{align*}
+所以$A-C$和$h[C]$构成了$B$的分划.
+
+因而我们可以这样定义$A$到$B$的双射:
+\begin{align*}
+	i(x)=
+	\begin{cases}
+	h(x), & x\in C;\\
+	x, & x\in A-C.
+	\end{cases}
+\end{align*}
+\end{proof}
+
+
+
+\begin{theorem}\label{Cantor-Bernstein-Schroeder theorem}
+\indexbf{Cantor-Bernstein-Schr\"oeder 定理}
+
+如果$|X|\leq |Y|$且$|Y|\leq |X|$, 则$|X|=|Y|$.
+
+\end{theorem}
+\begin{proof}
+$|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存在, 且有
+\begin{align*}
+	g\big\lbrack f[X]\big\rbrack \subseteq g[Y] \subseteq X, 
+\end{align*}
+和$|g[Y]|=|Y|$, $|g\big\lbrack f[X]\big\rbrack|=|f[X]|=|X|$.
+由引理\ref{lemma_CBS}, 这意味着$|X|=|Y|$.
+\end{proof}
+
+\textbf{注}: 早先的Cantor-Bernstein-Schr\"oeder 定理利用了$\properclass{AC}$, 但这里的证明避免了它.
+
 \printindex
 \printbibliography
 \end{document}
