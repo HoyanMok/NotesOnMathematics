@@ -848,11 +848,11 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 	h[C] = h\bigg\lbrack\bigcup^\infty_{n=0} C_n\bigg\rbrack = \bigcup^\infty_{n=1} C_n = C - C_0 = C- (A-B).
 \end{align*}
 
-我们可以看到$C$中的元素有这样的性质, 它含于某个$C_n$中, 并将被$h$映射到下一个$C_{n+1}$中; 而且要么它是$C_0=A-B$中的元素, 要么是$C_{n-1}$中某个元素的在$h$下的像. 这有些像Hilbert的无限旅馆. 这说明$h\upharpoonright C$到$h[C]$是一个满射, 而它的单性已由$h$自身的单性保证了. 
+我们可以看到$C$中的元素有这样的性质, 它含于某个$C_n$中, 并将被$h$映射到下一个$C_{n+1}$中; 而且要么它是$C_0=A-B$中的元素, 要么是$C_{n-1}$中某个元素的在$h$下的像. 这有些像Hilbert的无限旅馆. $h\upharpoonright C$到是从$C$到它的子集$h[C]$的满射, 而它的单性已由$h$自身的单性保证了. 
 
 而$h$在$A-C$的限制却不一定是满的, 因为$h[A]=A'\subseteq B$本身就不一定是到$B$的满射. 因为
 \begin{align*}
-	A-C = (A - C_0) \cap (A-h[C_0]) \subseteq A-C_0 = A-(A-B) =B,
+	A-C = (A - C_0) \cap (A-h[C]) \subseteq A-C_0 = A-(A-B) =B,
 \end{align*}
 所以$A-C$和$h[C]$构成了$B$的分划.
 
@@ -885,6 +885,7 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 
 \textbf{注}: 早先的Cantor-Bernstein-Schr\"oeder 定理利用了$\properclass{AC}$, 但这里的证明避免了它.
 
+这个定理说明了$\leq$拥有传递性, 这意味着$\leq$是一个偏序. 而且, 在$\mathbb N$中, 它和先前定义的自然数的偏序$\leq$是等同的. 这暗示我们可以这样做: 记$|n| = n$, 只要$n\in \mathbb N$.
 \printindex
 \printbibliography
 \end{document}
