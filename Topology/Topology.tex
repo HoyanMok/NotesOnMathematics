@@ -105,7 +105,7 @@ To justify this definition, we need to introduce a lemma:
 This is called \indexbf{Schwarz inequality}.
 \end{lemma}
 \begin{proof}
-If $\forall i=1,\cdots,n ( v_i=0)$ the equivalence has already been satisfied, therefore the following consider the situation that $\exists i\in \{1,\cdots n\}( v_i\neq 0)$. $\forall \lambda \in\mathbb R$
+If $\forall i=1,\cdots,n ( v_i=0)$ the equivalence has already been satisfied, therefore the following considers the situation that $\exists i\in \{1,\cdots n\}( v_i\neq 0)$. $\forall \lambda \in\mathbb R$, the quadratic polynomial of $\lambda$
 \begin{align*}
 	\sum ^n_{i=1} (u_i+\lambda v_i)^2 = 
 		\sum ^n_{i=1} u_i^2 +2\lambda \sum ^n_{i=1} u_iv_i + \lambda^2 \sum ^n_{i=1} v_i^2 \geq 0
@@ -258,7 +258,7 @@ Let $(X, \mathscr T)$ be a topological space. If there exists a metric $d\colon 
 \subsection{Neighbourhood}
 \begin{definition}\label{neighbourhood}
 Let $(X,\mathscr T)$ be a topological space. A set $U(x)$ is said to be a \indexbf{neighbourhood} of a point $x\in X$ if $\exists G\in \mathscr T(G\subseteq U(x)\wedge x\in G)$. 
-If $U(x)\in \mathscr T$, it is called a \indexbf{open neighbourhood}.
+If $U(x)\in \mathscr T$, it is called an \indexbf{open neighbourhood}.
 Subset class $\{U(x)\subseteq X\mid U(x) \text{ is a neighbourhood of } x\}$ is called the \indexbf{neighbourhood system} of point $x$, denoted by $\mathscr U_x$
 \end{definition}
 
@@ -267,7 +267,12 @@ Let $(X,\mathscr T)$ be a topological space, $U$ is a subset of $X$.
 $U$ is an open set \emph{iff} $\forall x\in U$, $U$ is a neighbourhood of $x$.
 \end{theorem}
 \begin{proof}
-The necessity is trivial. $\forall x\in U\exists V(x)$ s.t.\ $V(x)$, being a subset of $U$, is a open neighbourhood of $x$. By definition of topology, $\bigcup\limits_{ x\in U}V(x) \in \mathscr T$. $\forall x\in U( x\in \bigcup\limits_{ x\in U}V(x) ) \to U\subseteq V$, while $\forall x\in U (V( x)\subseteq U)\to \bigcup\limits_{ x\in U}V(x) \subseteq U$, therefore $U=\bigcup\limits_{ x\in U}V(x) \in \mathscr T$.
+The necessity is trivial. 
+$\forall x\in U\exists V(x)$ s.t.\ $V(x)$, being a subset of $U$, is an open neighbourhood of $x$. 
+By definition of topology, $\bigcup\limits_{ x\in U}V(x) \in \mathscr T$. 
+$\forall x\in U( x\in \bigcup\limits_{ x\in U}V(x) ) \to U\subseteq V$, 
+while $\forall x\in U (V( x)\subseteq U)\to \bigcup\limits_{ x\in U}V(x) \subseteq U$, 
+therefore $U=\bigcup\limits_{ x\in U}V(x) \in \mathscr T$.
 \end{proof}
 
 \begin{theorem}
@@ -343,9 +348,13 @@ Let $(X, \mathscr T)$, $(Y; \mathscr S)$ be two topological space. A mapping $f 
 \end{align*}
 \end{theorem}
 \begin{proof}
-$\rightarrow$: It is obvious if $f  ^{-1}(G_Y) = \varnothing$. If $f  ^{-1}(G_Y) \neq \varnothing$ and $x_0 \in X$, since $f \in C(X,Y)$, for $G_Y$, $\exists U( x_0) $ s.t $f ( U( x_0)) \subset G_Y$. Also notice that $f ( U( x_0)) \subset G_Y \Rightarrow U( x_0) \subset f  ^{-1}(G_Y)$, therefore $f  ^{-1}(G_Y) $ is open.
+$\rightarrow$: It is obvious if $f  ^{-1}(G_Y) = \varnothing$. 
+If $f  ^{-1}(G_Y) \neq \varnothing$ and $\forall x_0 \in f  ^{-1}(G_Y)$, 
+since $f \in C(X,Y)$, for $G_Y \in \mathscr S$, $\exists U( x_0) $ s.t $f ( U( x_0)) \subset G_Y$. 
+Also notice that $f ( U( x_0)) \subset G_Y \Rightarrow U( x_0) \subset f  ^{-1}(G_Y)$, therefore $f  ^{-1}(G_Y) $ is open (Theorem \ref{open_iff_neighbourhood}).
 
-$\leftarrow$: $\forall x_0 \in X$, let $y_0 = f ( x_0)$, $f ^{-1} ( U( y_0)) \in \mathscr{T}_X$. Notice that $x_0 \in f ^{-1} ( U( y_0))$, therefore $f \in C( X, Y) $.
+$\leftarrow$: $\forall x_0 \in X$, let $y_0 = f ( x_0)$, $f ^{-1} ( U( y_0)) \in \mathscr{T}$ if $U(y_0) \in \mathscr S\cap \mathscr U_{y_0}$.
+Notice that $x_0 \in f ^{-1} ( U( y_0))$, $ f ^{-1} ( U( y_0))$ is a neighbourhood of $x_0$, therefore $f \in C( X, Y) $.
 \end{proof}
 
 \begin{theorem}
@@ -406,7 +415,7 @@ Let $(X,\mathscr T)$ be a topological space and $F$ be a subset of $X$. $F$ is s
 \end{definition}
 
 \begin{theorem}\label{closed_iff_accumulation}
-Let $(X,\mathscr T)$ be a topological space and $F$ be a subset of $X$. $F$ is closed \emph{iff} $\forall x\in F' (x\in F)$.
+Let $(X,\mathscr T)$ be a topological space and $F$ be a subset of $X$. $F$ is closed \emph{iff} $ F'  \subseteq F$.
 \end{theorem}
 \begin{proof}
 $\to$: 
@@ -414,7 +423,7 @@ If $x\notin F$ then $x\in \complement_X (F)$, which is open in $(X,\mathscr T)$.
 Then $\complement_X (F)$ is a neighbourhood that $\complement_X (F) \cap (F-\{x\}) = \complement_X (F) \cap F =\varnothing$, i.e.\ $x\notin F'$.
 
 $\leftarrow$:
-$\forall x\notin F(x\notin F')$, then there exists a open neighbourhood $U$ of $x$ that $U\cap F = \varnothing$, then $\complement_X (F)$ is always a neighbourhood of its elements, since theorem \ref{open_iff_neighbourhood}, $\complement_X (F) \in \mathscr T$.
+$\forall x\notin F(x\notin F')$, then there exists an open neighbourhood $U$ of $x$ that $U\cap F = \varnothing$, then $\complement_X (F)$ is always a neighbourhood of its elements, since theorem \ref{open_iff_neighbourhood}, $\complement_X (F) \in \mathscr T$.
 \end{proof}
 
 \begin{definition}\label{closure}
@@ -612,7 +621,7 @@ Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
 				\interior A$.
 \end{proof}
 
-\subsection{basis}
+\subsection{Basis}
 \begin{definition}
 Let $(X,\mathscr T)$ be a topological space and $\mathscr B$ be a subset of $\mathscr T$.
 If $\forall G\in \mathscr T 
@@ -631,7 +640,7 @@ $\forall x\in X
 \end{theorem}
 \begin{proof}
 $\to$:
-$U\in \mathscr U_x$ implies an open set $G\in \mathscr P(\mathscr U_x)$ that contians $x$, which is the union of elements in $\mathscr B$.
+$U\in \mathscr U_x$ implies an open set $G\in \mathscr P(U)$ that contians $x$, which is the union of elements in $\mathscr B$.
 Therefore there exists a $B\in \mathscr B$, which is the subset of $U$ and it contians $x$.
 
 $\leftarrow$: 
@@ -639,6 +648,19 @@ $\forall G\in \mathscr T$, it is a neighbourhood of all the points in $G$.
 For all $x$ in $G$ assign a $B_x\in \mathscr B$ which contians $x$ and is the subset of $G$, so that $G$ is the Union of all the $B_x$.
 \end{proof}
 
+\begin{theorem}\label{intersection_basis}
+Let $\mathscr B$ be a basis of a topological space $(X,\mathscr T)$.
+\begin{align*}
+	\forall B_1\in \mathscr B\,B_2\in\mathscr B_2\,
+		\forall x\in B_1\cap B_2 \,
+			\exists B\in \mathscr B\,(x\in B\subseteq B_1\cap B_2).
+\end{align*}
+\end{theorem}
+
+The topology $\mathscr T$ on $X$ is determinded if the basis $\mathscr B$ is given,
+that is, if the union of $\mathscr B$ is $X$ and it satisfies Theorem \ref{intersection_basis}, 
+then $\mathscr T$, which is defined by the collection of the unions of $B$s in $\mathscr B$,
+is the \emph{only} topology on $X$ such that $\mathscr B$ is a basis of it. 
 \section{Subspace}
 \printindex
 % \printbibliography
