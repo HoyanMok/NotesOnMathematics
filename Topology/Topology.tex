@@ -656,11 +656,39 @@ Let $\mathscr B$ be a basis of a topological space $(X,\mathscr T)$.
 			\exists B\in \mathscr B\,(x\in B\subseteq B_1\cap B_2).
 \end{align*}
 \end{theorem}
+\begin{proof}
+By definition of topology and basis, 
+$B_1$ and $B_2$ are both open and their intersection $B_1\cap B_2$ is open as well.
+Then there exists a collections of sets in $\mathscr B$ whose union is $B_1\cap B_2$, 
+there must be at least a set $B$ that contians $x$.
+\end{proof}
 
 The topology $\mathscr T$ on $X$ is determinded if the basis $\mathscr B$ is given,
 that is, if the union of $\mathscr B$ is $X$ and it satisfies Theorem \ref{intersection_basis}, 
 then $\mathscr T$, which is defined by the collection of the unions of $B$s in $\mathscr B$,
 is the \emph{only} topology on $X$ such that $\mathscr B$ is a basis of it. 
+
+For example, \indexbf{lower limit topology} $\mathscr T_\ell$ on $\mathbb R$ is defined by giving a basis:
+\begin{align*}
+	\mathscr B_\ell = \{
+		[a,b)\mid a,b\in \mathbb R \wedge a<b\},
+\end{align*}
+and $(\mathbb R,\mathscr T_\ell)$ is called the \indexbf{lower limit topological space}, the \indexbf{Sorgenfrey line} or the \indexbf{arrow}, denoted by $\mathbb R_\ell$.
+
+It is obvious that $\mathscr T \varsubsetneqq\mathscr T_\ell$, where $\mathscr T$ is the standard topology on $\mathbb R$.
+
+\begin{definition}\label{subbasis}
+Let $(X,\mathscr T)$ be a topological space and $\mathscr S$ be a subset of $\mathscr T$.
+If the collection $\mathscr B$ of the finite intersections of the non-empty sets in $\mathscr S$ is a basis of $\mathscr T$, i.e.\ 
+\begin{align*}
+	\mathscr B = \left\{
+		\bigcap\limits_{i=1}^n S_i \mid
+			S_i \in \mathscr S,\;i=1,\cdots,n,\;n\in\mathbb N_+\right\},
+\end{align*}
+then we call $\mathscr S$ a \indexbf{subbasis} or a \indexbf{subbase} of $\mathscr T$.
+\end{definition}
+
+
 \section{Subspace}
 \printindex
 % \printbibliography
