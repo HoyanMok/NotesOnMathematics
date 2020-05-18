@@ -630,7 +630,7 @@ If $\forall G\in \mathscr T
 then we call $\mathscr B$ a \indexbf{basis} or a \indexbf{base} of the topology $\mathscr T$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{basis_iff_neighbourhood}
 Let $(X,\mathscr T)$ be a topological space and $\mathscr B$ be a subset of $\mathscr T$.
 $\mathscr B$ is a basis of $\mathscr T$ \emph{iff} 
 $\forall x\in X
@@ -651,7 +651,7 @@ For all $x$ in $G$ assign a $B_x\in \mathscr B$ which contians $x$ and is the su
 \begin{theorem}\label{intersection_basis}
 Let $\mathscr B$ be a basis of a topological space $(X,\mathscr T)$.
 \begin{align*}
-	\forall B_1\in \mathscr B\,B_2\in\mathscr B_2\,
+	\forall B_1\in \mathscr B\,\forall B_2\in\mathscr B\,
 		\forall x\in B_1\cap B_2 \,
 			\exists B\in \mathscr B\,(x\in B\subseteq B_1\cap B_2).
 \end{align*}
@@ -688,6 +688,98 @@ If the collection $\mathscr B$ of the finite intersections of the non-empty sets
 then we call $\mathscr S$ a \indexbf{subbasis} or a \indexbf{subbase} of $\mathscr T$.
 \end{definition}
 
+A set $X$, given a collection $\mathscr S$ of subsets whose union is $X$ itself, can be equiped with only one topology $\mathscr T$ so that $\mathscr S$ is a subbasis of the topology. 
+
+\begin{theorem}\label{continuity_basis}
+Let $(X,\mathscr T_X)$,$(Y,\mathscr T_Y)$ be two topological space and $f \colon X\to Y$.
+The following statements are equivalent:
+\begin{enumerate}[(1)]
+\item $f \in C(X, Y)$;
+\item There exists a basis $\mathscr B_Y$ of $Y$ that $\forall B\in \mathscr B_Y\big(
+	f^{-1}(B) \in \mathscr T_X\big)$;
+\item There exists a subbasis $\mathscr S_Y$ of $Y$ that $\forall S\in \mathscr S_Y\big(
+	f^{-1}(S) \in \mathscr T_X\big)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+It is almost obvious that (1) $\to$ (2) and (1) $\to$ (3). Since
+\begin{align*}
+	f^{-1} \left(
+		\bigcup_{B\in \mathscr B_Y} B\right) &= \bigcup_{B\in \mathscr B_Y}  f^{-1}(B)\\
+	f^{-1}\left(
+		\bigcap^n_{k=1,S_k\in \mathscr S} S_k\right) &=\bigcap^n_{k=1,S_k\in \mathscr S} f^{-1}(S_k)
+\end{align*}
+, (2) $\to$ (1) and (3) $\to$ (2) can be proved. 
+\end{proof}
+
+\begin{definition}\label{basis_subbasis_neighbourhood}
+Let $X$ be a topological space, $x\in X$ and $\mathscr U_x$ be a neighbourhood system of $x$.
+If $\mathscr V_x \subseteq U_x$, and $\forall U\in \mathscr U_x \exists V\in \mathscr V_x (V\subseteq U)$, 
+then we call $\mathscr V_x$ a basis of $\mathscr U_x$ or a basis at point $x$.
+If $\mathscr W_x \subseteq U_x$, If the collection $\mathscr V_x$ of the finite intersections of the non-empty sets in $\mathscr W_x$ is a \indexbf{basis} of $\mathscr U_x$, i.e.\ 
+\begin{align*}
+	\mathscr V_x = \left\{
+		\bigcap\limits_{i=1}^n W_i \mid
+			W_i \in \mathscr W_x,\;i=1,\cdots,n,\;n\in\mathbb N_+\right\},
+\end{align*}
+then we call $\mathscr W_x$ a \indexbf{subbasis} of $\mathscr U_x$ or of the point $x$.
+\end{definition}
+
+There is also a theorem that is similar with the Theorem \ref{continuity_basis}.
+
+\begin{theorem}\label{continuity_basis_neighbourhood}
+Let $(X,\mathscr T_X)$,$(Y,\mathscr T_Y)$ be two topological space and $f \colon X\to Y$.
+$x\in X$, $y = f(x)\in Y$.
+The following statements are equivalent:
+\begin{enumerate}[(1)]
+\item $f $ is continuous at point $x$;
+\item There exists a basis $\mathscr V_y$ at $y$ that $\forall V\in \mathscr V_y\big(
+	f^{-1}(V) \in \mathscr U_x\big)$;
+\item There exists a subbasis $\mathscr W_y$ at $y$ that $\forall W\in \mathscr W_y\big(
+	f^{-1}(W) \in \mathscr U_x\big)$.
+\end{enumerate}
+\end{theorem}
+The proof of this theorem is similar to the proof of the Theorem \ref{continuity_basis}
+
+\begin{theorem}\label{basis_subbasis_topology_and_neighbourhood}
+Let $X$ be a topological space and $x \in X$.
+\begin{enumerate}[(1)]
+\item If $\mathscr B$ is a basis of $X$, then
+\begin{align*}
+	\mathscr B_x = \{B\in \mathscr B\mid x \in B\}
+\end{align*}
+is a basis at point $x$.
+\item If $\mathscr S$ is a subbasis of $X$, then
+\begin{align*}
+	\mathscr S_x = \{S\in \mathscr S\mid x \in S\}
+\end{align*}
+is a subbasis at point $x$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+From Theorem \ref{basis_iff_neighbourhood} (1) can be easily derived. 
+
+Let $\mathscr B_x$ be $\{B\in \mathscr B\mid x\in B\}$ where
+\begin{align*}
+	\mathscr B = \left\{
+		\bigcap\limits_{i=1}^n S_i \mid
+			S_i \in \mathscr S,\;i=1,\cdots,n,\;n\in\mathbb N_+\right\}.
+\end{align*}
+Let
+\begin{align*}
+	\tilde{\mathscr B}_x = \left\{
+		\bigcap\limits_{i=1}^n S_i \mid
+			S_i \in \mathscr S_x,\;i=1,\cdots,n,\;n\in\mathbb N_+\right\}.
+\end{align*}
+
+We need to prove that $\tilde{\mathscr B}_x = \mathscr B_x$. 
+If $U \in \mathscr B_x$ then
+$x\in U$ and $\exists \mathscr S_U \subseteq \mathscr S$ and $\cup \mathscr S_U = U$.
+Since $\forall S_U \in \mathscr S_U (x\in S_U)$ hence $\mathscr S_U \subseteq \mathscr S_x$.
+Therefore $\cup \mathscr S_U = U \in \tilde{\mathscr B}_x$. 
+This is the proof of $\mathscr B_x \subseteq \tilde{\mathscr B}_x$, 
+and $\tilde{\mathscr B}_x \subseteq \mathscr B_x$ can be proved similarly.
+\end{proof}
 
 \section{Subspace}
 \printindex
