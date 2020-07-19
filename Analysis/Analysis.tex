@@ -27,6 +27,8 @@
 \newcommand{\PATH}{PATH/}
 
 % 对目录项等的修改
+\usepackage{chngcntr}
+	\counterwithout{section}{chapter} % So that the section won't reset when newing a chapter
 \renewcommand{\thesection}{\textmd{\S}\arabic{section}}
 \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
 
@@ -123,8 +125,8 @@
 \frontmatter
 \tableofcontents
 \mainmatter
-\section{Metric Space and Continuous Map}
-\subsection{Metric Space}
+\chapter{Metric Space and Continuous Map}
+\section{Metric Space}
 \begin{definition}\label{metric_def} function
 \begin{align}\label{metric}
 	d:X^2\to\mathbb{R}
@@ -227,7 +229,7 @@ Since $\overline{E}$ is closed, its complement is open, which implies that its e
 \begin{definition}\label{subspace_metric}
 We called $(X';d')$ a \indexbf{subspace} of $(X;d)$ when $X'\subset X$ and $\forall x,y\in X',d'(x,y)=d(x,y)$.
 \end{definition}
-\subsection{Topological Space}
+\section{Topological Space}
 \begin{definition}\label{topological_space}
 We say $X$ is equiped with a \indexbf{topological space} or epuiped with \indexbf{topology} if we assigned a $\mathscr{T}\subset 2^X$, which has got the following propoties:
 \begin{enumerate}[label=\alph*)]
@@ -276,7 +278,7 @@ We can also define interior points, exterior points, boundary points, limit poin
 Each subset $Y$ of $X$ equiped with topology $\mathscr{T}$ can be given a \indexbf{subspace topology} $\mathscr{T}_Y$ whose elements $G_Y$ are intersections of the subset with an open set $G$ in $(X;\mathscr{T})$ i.e. $\forall G_Y\in \mathscr{T}_Y$, $\exists G\in \mathscr{T}$ s.t. $G_Y=G\cap Y$. Subset equiped with such topology construct a \emph{\textbf{topological subspace}}\index{subspace} $(Y;\mathscr{T}_Y)$. 
 \end{definition}
 If two topology $\mathscr{T}_1,\mathscr{T}_2$ are defined on the same $X$, $\mathscr{T}_1$ is said to be \indexbf{stronger} than $\mathscr{T}_2$ if $\mathscr{T}_1\subsetneqq \mathscr{T}_2$.
-\subsection{Compact Set}
+\section{Compact Set}
 \begin{definition}\label{compact}
 Set $K$ in topological space $(X;\mathscr{T})$ is called a \indexbf{compact set} if each of its \textbf{open covers}\index{open cover} has a finite \indexbf{subcover}. Class $\Omega$ is called a open cover of $K$ if $K\subset \cup{\Omega}$ and for all sets in $\Omega$ are open sets.
 \end{definition}
@@ -354,7 +356,7 @@ Then get back to theorem \ref{sequentially_compact_metric}.
 	
 	$\Leftarrow$: Assume that there were a open cover $\Omega$ over $K$ having no finite subcover, $\forall n\in\mathbb{N}_+$, $\exists$ finite $\frac{1}{n}$-net (Lemma \ref{sequentially_compact_nested_closed}), in which there would be at least one $x_n$ whose $\tilde{B}(x_n;\frac{1}{n})$ can't be covered finitely. Then $\tilde{B}(x_n;\frac{1}{n})\downarrow B=\{a\}$ (Theorem \ref{nested_compact}) can't be finitely covered by any subcover of $\Omega$ which means $\Omega$ can't cover the whole $K$, leading to the contradiction.
 \end{proof}
-\subsection{Connected Set}
+\section{Connected Set}
 \begin{definition}\label{connected_space}
 Topological space $(X;\mathscr{T})$ is called \indexbf{connected}\index{connected space} if there is no \indexbf{open-closed set} (i.e. both open and closed) besides $\varnothing$ and $X$ itself. 
 \end{definition}
@@ -393,7 +395,7 @@ $E\subset\mathbb{R}$ is connected \emphbf{iff} that if $\forall x,z\in E$, $y\in
 \begin{definition}\label{locally_connected}
 A topological space $( X; \mathscr{T})$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\exists U( x) $ s.t. $U( x)$ is connected.
 \end{definition}
-\subsection{Complete Metric Spaces}
+\section{Complete Metric Spaces}
 We now take a closer look at one of the most important sorts of metric spaces: complete spaces.
 \begin{definition}\label{Cauchy_sequence}
 A sequence $\{x_n\mid n\in \mathbb{N}\}$ of points of a metric space $(X;d)$ is called a \indexbf{fundamental}\index{fundamental sequence} or \indexbf{Cauchy sequence} if $\forall \varepsilon \in\mathbb{R}_+$, $\exists N\in\mathbb{N}$ s.t. as long as $m,n> N$, $d(x_n,x_m) < \varepsilon$.
@@ -436,7 +438,7 @@ There always exists a completion for every metric space.
 \begin{proof}
 	A isometric space $(S_X;d)$ to the metric space $(X;d_X)$ can be constructed, which consists of constant sequence of points in $X$. Its completion $(S;d)$ can be defined as Cauchy sequences whose mutual distances' limits are not $0$.
 \end{proof}
-\subsection{Continuous Mapping}
+\section{Continuous Mapping}
 Let's recall the definition of the limitation.
 \begin{definition}\label{filter_base}
 A set $\mathscr{B}\subset 2^X$ is called a \textbf{(filter) base}\index{filter base}\index{base} in $X$ if the following conditions hold:
@@ -502,7 +504,7 @@ $(X;\mathscr{T}_X)$ and $(Y;\mathscr{T}_Y)$ are both topological spaces. $E\subs
 \begin{proof}
 Only to notice that the open-closed sets in $( f( E) ; \mathscr{T}_{ f( E)})$ have concurrently open-closed pre-images in $( E; \mathscr{T}_E)$.
 \end{proof}
-\subsection{Contraction}
+\section{Contraction}
 \begin{definition}\label{fixed_point}
 A point $a\in X$ is a \indexbf{fixed point} of a mapping $f: X\to X$ if $f( a) = a$.
 \end{definition}
@@ -566,8 +568,8 @@ which can't be true unless $a = a'$.
 By passing to the limit as $k \to \infty$ in the inequality~\ref{inequality_Cauchy_contraction}, we have the inequality~\ref{inequality_fixed-point_principle}.
 \end{proof}
 
-\section{Normed Linear Space and Differential Calculus}
-\subsection{Normed Linear Space}
+\chapter{Normed Linear Space and Differential Calculus}
+\section{Normed Linear Space}
 \begin{definition}
 Let $V$ be a linear space over $\mathbb{R}$ or $\mathbb{C}$. A function $\|\;\|: X\to \mathbb{R}$ assigning to each vector $\boldsymbol{x}\in X$ a real number $\|x\|$ is called a \indexbf{norm} in the linear space $X$ if:
 \begin{enumerate}[label=\alph*)]

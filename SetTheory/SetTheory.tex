@@ -1,10 +1,49 @@
-\documentclass[UTF8,AutoFakeBold]{ctexart}
-\usepackage{amsmath} %数学
+% TeXplates/Mathematics.tex
+% v0.1.0
+% https://github.com/HoyanMok/TeXplates
+\documentclass[openany]{ctexbook} 
+% \documentclass{ctexbook} 如果用中文
+% \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
+% 五号 = 10.5pt，小四=12pt，四号=14pt
+% 其他可选参量如twocolumn, 两行排版
+
+
+\usepackage{biblatex} %[style=gb7714-2015]{biblatex} 可以选择样式
+\addbibresource{SetTheory.bib} % 把这里改成实际的文件名
+
+% 令参考资料能够加入目录中:
+\defbibheading{bibliography}[\bibname]{% 
+	% \addcontentsline{toc}{chapter}{参考文献}
+	\chapter{#1}% 
+	\markboth{#1}{#1}}
+
+\usepackage{imakeidx} %索引
+	\makeindex[intoc]
+	\newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
+	\newcommand*{\indexfm}[2]{#1\index{ 公式@笔记中出现的符号!#2@$#1$}} % Used Symbol
+
+% 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
+% 使用「/」而不是「\」
+\newcommand{\PATH}{PATH/}
+
+% 对目录项等的修改
+\usepackage{chngcntr}
+	\counterwithout{section}{chapter} % So that the section won't reset when newing a chapter
+\renewcommand{\thesection}{\textmd{\S}\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+
+% 引用的宏包:
+% 宏包的使用, 可以在命令行运行texdoc <宏包名>获得文档
+\usepackage{multicol} % 分栏 (全局分栏建议在文档类处设置)
+\usepackage{amsmath} % AMS数学标准
 	\makeatletter % '@' now normal "letter"
-	\@addtoreset{equation}{section}
+	\@addtoreset{equation}{section} % 每次换section就把equation清零
 	\makeatother  % '@' is restored as "non-letter"
-	\renewcommand\theequation{\thesection%
-					-\arabic{equation}}
+	\renewcommand\theequation{\oldstylenums{\arabic{section}}%
+					-\oldstylenums{\arabic{equation}}} % 显示为section数-equation数
+\usepackage{amssymb} % 数学符号
+\usepackage{mathrsfs} % 花体
 \usepackage{amsthm} %定义、证明、定理等
 	\theoremstyle{plain}
 		\newtheorem{axion}{Axion} %公理
@@ -13,41 +52,60 @@
 		\newtheorem{lemma}{Lemma} %引理
 	\theoremstyle{definition}
 		\newtheorem{definition}{Definition}[section] %定义
-		\newtheorem{propposition}{Proposition} %命题
+		\newtheorem{proposition}{Proposition} %命题
 	\renewcommand{\proofname}{\textbf{Proof}}
-\usepackage{amssymb} %mathematical symbols
-\usepackage{mathrsfs} %allow you to use \mathscr to display captial letters in script style
-\usepackage{makeidx} %Generate index
-	\makeindex
-\usepackage{enumerate} %编号
-\usepackage{tikz}
-\usepackage[colorlinks=true,bookmarks=true]{hyperref}%hyperlinks for reference, table of contents and indexes
-\hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}%More options read texdoc hyperref
 
-\usepackage[style=gb7714-2015]{biblatex}
-\addbibresource{SetTheory.bib}
+\renewcommand{\thetheorem}{%
+	\arabic{section}.\arabic{theorem}%
+} % 公式编号不显示`\S`
+\renewcommand{\thedefinition}{%
+	\arabic{section}.\arabic{definition}%
+} % 公式编号不显示`\S`
+
+\usepackage{esint} % 积分
+\usepackage{siunitx} % 标准SI数值和单位处理
+
+\usepackage{tikz} % 绘图
+\usepackage{float} % 浮动体 (供图片, 表格等) 扩展, 主要用于提供h模式
+\usepackage{graphicx} % 插入图片
+\usepackage{titlepic}
+\usepackage[font=small, skip=5pt]{caption} % 缩小题注字体和题注与图片距离
+\usepackage{subcaption} % 子图和子图的题注
+\usepackage{svg} % svg位图
+\usepackage{wrapfig} % 简单的图文绕排
+\usepackage[inline]{enumitem} % 编号
+\usepackage{geometry} % 调整页边距
+% \geometry{left=1.6cm,right=1.6cm}
+\usepackage{xcolor} % 颜色
+\usepackage[colorlinks=true,bookmarks=true]{hyperref} % 引用, 交叉引用, 图表等的链接; 生成书签
+\hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}% 更多设置请查阅: texdoc hyperref
 
 
-\newcommand*{\indexbf}[1]{\textit{\textbf{#1}}\index{#1}}
-\newcommand*{\indexfm}[2]{#1\index{ 公式@笔记中出现的符号!#2@$#1$}}
-
-\def\reflect#1{{\setbox0=\hbox{#1}\rlap{\kern0.5\wd0
-  \special{x:gsave}\special{x:scale -1 1}}\box0 \special{x:grestore}}}
-\def\XeTeX{\leavevmode
-  \setbox0=\hbox{X\lower.5ex\hbox{\kern-.15em\reflect{E}}\kern-.1667em \TeX}%
-  \dp0=0pt\ht0=0pt\box0 }
-
-\newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}}%基底
-\newcommand*{\bv}{\boldsymbol}%向量加粗
-\newcommand*{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand*{\diff}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+% 定义一些笔者常用的指令:
+\newcommand{\me}{\mathrm{e}} % 自然对数的底
+\newcommand{\mi}{\mathrm{i}} % 虚数单位
+\newcommand{\dif}{\mathop{}\!\mathrm{d}} % 微分算子d
+\newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}} % 基底
+\newcommand*{\bv}{\boldsymbol} % 向量加粗
 \newcommand*{\properclass}[1]{\mathbf{#1}}
-
 \newcommand*{\id}{\mathrm{id}}
-\newcommand*{\me}{\mathrm{e}}
-\newcommand*{\imagine}{\mathrm{i}}
-\newcommand\dif{\mathop{}\!\mathrm{d}}
 
+\newcommand*{\diff}[3][1]
+{\if#11%
+	\frac{\mathrm{d} #2}{\mathrm{d} #3}% 导数\diff{y}{x}
+\else%
+	\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}% n阶导数\diff[n]{y}{x}
+\fi}
+\newcommand*{\pdiff}[3][1]
+{\if#11%
+	\frac{\partial #2}{\partial #3}% 偏导数\pdiff{y}{x}
+\else%
+	\frac{\partial^{#1} #2}{\partial #3^{#1}}% n阶偏导数\pdiff[n]{y}{x}
+\fi}
+\newcommand{\emphbf}[1]{\emph{\textbf{#1}}}
+% \indexbf 的定义见前imakeidx的引用下
+
+% 笔者习惯的运算符:
 \DeclareMathOperator{\tg}{tg}
 \DeclareMathOperator{\ctg}{ctg}
 \DeclareMathOperator{\arctg}{arctg}
@@ -55,20 +113,27 @@
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\interior}{int}
+
+% \DeclareMathOperator*{\指令}{显示} 
+% 带星号的版本会像\lim一样
 
 \title{Set Theory}
 \author{Hoyan Mok}
 \begin{document}
-\maketitle
-\tableofcontents
-\newpage
 
-\section{集合与公理}
+\maketitle
+\thispagestyle{empty}
+\frontmatter
+\tableofcontents
+\mainmatter
+
+\chapter{集合与公理}
 在介绍集合论的
 $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念. 
 
 
-\subsection{数理逻辑准备}
+\section{数理逻辑准备}
 
 句法概念如\indexbf{形式语言}, \indexbf{逻辑符号}, \indexbf{非逻辑符号}, \indexbf{项}, \indexbf{公式}, \indexbf{自由变元}, \indexbf{约束变元}, \indexbf{语句}等主要见\cite{2014数理逻辑}.
 
@@ -95,7 +160,7 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 \end{align}
 \end{definition}
 
-\subsection{\texorpdfstring{$\properclass{ZFC}$公理}{ZFC公理}}
+\section{\texorpdfstring{$\properclass{ZFC}$公理}{ZFC公理}}
 
 \setcounter{axion}{-1}
 \begin{axion}\label{Exi} \indexbf{存在公理} (\indexbf{Exi})
@@ -283,9 +348,9 @@ i.e.\
 Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenkel系统}, 记为$\properclass{ZF}$, 加上选择公理则记为$\properclass{ZFC}$.
 
 
-\section{关系与函数}
+\chapter{关系与函数}
 
-\subsection{关系}
+\section{关系}
 \begin{definition}集合$a,b$的\indexbf{有序对}$\indexfm{( a,b)}{(a,b)} := \big\{\{a\},\{a,b\}\big\}$.
 \end{definition}
 
@@ -296,7 +361,7 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \end{theorem}
 \begin{proof}
 只证明 "$\rightarrow$":
-\begin{enumerate}[(1)]
+\begin{enumerate}[label=(\arabic*)]
 \item $a=b$. $(a,b) = \big\{\{a\}\big\}=(a',b')$, 故$(a',b')=\{\{a\}\}=\big\{\{a'\},\{a',b'\}\big\}$, 由Ext (axion \ref{Ext}), $\{a'\} = \{a',b'\}=\{a\}$, 即$a=b=a'=b'$.
 \item $a\neq b$. 假设$\{a,b\}=\{a'\}$, 得$\forall x\in \{a,b\} (x=a')$即$a=b=a'$与$a\neq b$矛盾. 从而只有$\{a,b\}=\{a',b'\}\wedge\{a\}=\{a'\}$, 仍然由Ext易证.
 \end{enumerate}
@@ -345,7 +410,7 @@ $n$元Cartesian积的子集可类似地定义\indexbf{$n$元关系}.
 $n$元Cartesian积$X_1\times X_2\times \cdots \times X_n$是空集, 则存在$X_i = \varnothing$.
 \end{theorem}
 
-\subsection{函数}
+\section{函数}
 
 \begin{definition}\label{function}
 二元关系$f$倘满足: 
@@ -485,7 +550,7 @@ h=g\circ f \leftrightarrow
 
 \begin{theorem}\label{compatibility}
 $f$和$g$是函数.以下的命题是等价的:
-\begin{enumerate}[(1)]
+\begin{enumerate}[label=(\arabic*)]
 \item $f$与$g$相容;
 \item $f\cup g$是函数;
 \item $f\upharpoonright \big(
@@ -522,10 +587,10 @@ $f$和$g$是函数.以下的命题是等价的:
 对于任意非空$\omega$ (尤其是当$\omega$是无穷集时), $\prod_{i\in \omega X_i} = \varnothing \to \exists i\in \omega ( X_i = \varnothing)$与选择公理等价.\footnote{\href{https://zh.wikipedia.org/wiki/\%E7\%AC\%9B\%E5\%8D\%A1\%E5\%84\%BF\%E7\%A7\%AF\#\%E6\%97\%A0\%E7\%A9\%B7\%E4\%B9\%98\%E7\%A7\%AF
 	}{维基百科页面}}
 
-\subsection{等价和划分}
+\section{等价和划分}
 \begin{definition}
 令$R\subseteq X^2$是$X$上的二元关系. $R$是:
-\begin{enumerate}[(1)]
+\begin{enumerate}[label=(\arabic*)]
 \item \indexbf{自反}的, 若$\forall x\in X(xRx)$;
 \item \indexbf{对称}的, 若$\forall x\in X\forall y\in X( xRy \to yRx)$;
 \item \indexbf{传递}的, 若$\forall  x\in X\forall y\in X\forall z\in X (xRy\wedge yRz \to xRz)$;
@@ -587,7 +652,7 @@ $\cup S=X \to
 这之后我遇到了困难.
 \end{proof}
 
-\subsection{序}
+\section{序}
 \begin{definition}
 如果$X$上的二元关系$\leq$满足:
 \begin{enumerate}
@@ -632,8 +697,8 @@ $\cup S=X \to
 如果$X$和其上的线序$(X,\leq)$满足任意$X_0\in \mathscr P(X)$, $X_0$都有最小元, 则称$\leq$为$X$上的\indexbf{良序}, $X$被称为\indexbf{良序集}.
 \end{definition}
 
-\section{实数}
-\subsection{自然数}
+\chapter{实数}
+\section{自然数}
 根据Inf (axion \ref{Inf}), 这样的集合是存在的:
 \begin{definition}
 如果集合$X$满足:
@@ -677,7 +742,7 @@ $\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
 \]
 \end{theorem}
 
-\subsection{递归定理}
+\section{递归定理}
 接下来我们要定义一些二元函数, 即我们熟悉的自然数集上的运算. 
 我们可以递归地给出它们的定义, 但这种定义的合理性需要递归定理的辩护. 
 
@@ -777,7 +842,7 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 
 我们熟悉的关于乘法和加法的性质都可以由归纳原理证出, 此处不再赘述.
 
-\subsection{势}
+\section{势}
 
 \begin{definition}\label{equinumerosity}
 两个集合$X$, $Y$\indexbf{等势} (equinumerous) 指的是$\exists f \in Y^X (f\text{是双射 })$, 记为$|X|=|Y|$.
@@ -886,6 +951,10 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 \textbf{注}: 早先的Cantor-Bernstein-Schr\"oeder 定理利用了$\properclass{AC}$, 但这里的证明避免了它.
 
 这个定理说明了$\leq$拥有传递性, 这意味着$\leq$是一个偏序. 而且, 在$\mathbb N$中, 它和先前定义的自然数的偏序$\leq$是等同的. 这暗示我们可以这样做: 记$|n| = n$, 只要$n\in \mathbb N$.
+\backmatter
+\nocite{*}
+\printbibliography[heading=bibliography, title={参考文献}]
+
 \printindex
-\printbibliography
+
 \end{document}
