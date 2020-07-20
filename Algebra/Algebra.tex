@@ -208,7 +208,20 @@
 	则称$(G, \cdot)$为\indexbf{群}.
 \end{definition}
 
-考虑$n$阶可逆实矩阵的集合$\indexfm[GL n R]{\GL{\mathbb R}}$和在其上定义的矩阵乘法组成的群$(\GL{\mathbb R}, \cdot )$称为$n$阶\indexbf{一般线性群}.
+群也有子群的概念. 
+设$(G, \cdot, e)$是一个群. 当一个集合$G'$满足:
+\begin{enumerate*}[label=SG\arabic*)]
+	\item $e \in G'$;
+	\item $\forall x,y\in G'$, $xy \in G'$;
+	\item $x \in G' \to x^{-1} \in G'$,
+\end{enumerate*}
+则称$(G', \cdot , e)$是一个$G$的\indexbf{子群}.
+倘若还有$G' \neq G$则称其为一个真子群\footnote{\cite{kostrikin1982introduction}等文献把\indexbf{平凡群}$\{e\}$也排在真子群的定义外.}.
+
+作为例子, 考虑$n$阶可逆实矩阵的集合$\indexfm[GL n R]{\GL{\mathbb R}}$和在其上定义的矩阵乘法组成的群$(\GL{\mathbb R}, \cdot )$称为$n$阶\indexbf{一般线性群}. 
+而其中行列式是$\pm 1$的矩阵, 构成一般线性群的一个子群$n$阶正交群$\Orth{\mathbb R}$, 若再要求行列式为$1$, 就再得到子群$\SO{\mathbb R}$.
+
+
 
 \appendix
 
