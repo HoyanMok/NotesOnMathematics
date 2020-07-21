@@ -28,7 +28,7 @@
 \usepackage{imakeidx} %索引
 	\makeindex[intoc]
 	\newcommand*{\indexbf}[1]{\index{#1}\textbf{#1}} % Index for definition
-	\newcommand*{\indexfm}[2][ ]{#2\index{ @使用的符号!#1@$#2$}} % Used Symbol
+	\newcommand*{\indexfm}[2][\ ]{#2\index{ @使用的符号!#1@$#2$}} % Used Symbol
 
 % 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
 % 使用「/」而不是「\」
@@ -125,6 +125,9 @@
 \DeclareMathOperator{\ran}{ran}
 \DeclareMathOperator{\interior}{int}
 \DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -132,6 +135,9 @@
 \newcommand*{\GL}{\mathrm{SL}}
 \newcommand*{\Orth}{\mathrm{O}}
 \newcommand*{\SO}{\mathrm{SO}}
+
+
+
 
 
 
@@ -176,6 +182,8 @@
 \end{definition}
 
 倘若幺半群$(M, *, e)$是有限的 (即其元素有限), 称$\card M$为\indexbf{有限幺半群}的\indexbf{阶}.
+
+作为重要的例子, \indexbf{置换幺半群} 定义为$(X^X, \circ, \id_X)$, 有幺半群结构的$X^X$通常记作$M(X)$.
 
 半群中, 括号的位置是不重要的 (可用数学归纳法证明). 通常我们记$x_1x_2 \cdots x_n$为:
 \begin{equation}
@@ -222,6 +230,10 @@
 
 交换群又叫做\indexbf{Abelian群}.
 
+作为重要的例子, 设 $X$ 是一个集合, $\indexfm[S X]{S(X)} = \{ f \in X^X \mid \text{$f$ 是双射}\}$. 
+我们断言, $(S(X), \circ, \id_X)$ 是一个群, 称为\indexbf{变换群}或\indexbf{置换群}, 其中 $\circ$ 是函数的复合, $\id_X$是恒等变换. 
+当它的阶数 $\card X = n$ 是有限的时候, 记$\indexfm[S n]{S_n} := S(X)$.
+
 群也有子群的概念. 
 设$(G, \cdot, e)$是一个群. 当一个集合$G' \subset G$满足:
 \begin{enumerate*}[label=SG\arabic*)]
@@ -245,7 +257,7 @@
 \end{theorem}
 
 \begin{definition}[循环群]
-	设$(G, \cdot , 1)$是一个乘法群, $\exists g_0 \in G$, 使得$\forall g \in G$, $\exists n \in \mathbb Z$, $a^n = g$, 那么我们称它是一个\indexbf{循环群}, $g_0$是一个\indexbf{生成元}, 并记作$G = \langle g_0 \rangle$.
+	设$(G, \cdot , 1)$是一个乘法群, $\exists g_0 \in G$, 使得$\forall g \in G$, $\exists n \in \mathbb Z$, $a^n = g$, 那么我们称它是一个\indexbf{循环群}, $g_0$是一个\indexbf{生成元} (generator), 并记作$G = \indexfm[g 0]{\langle g_0 \rangle}$.
 \end{definition}
 
 对于群 $G$ 中任意元素 $g$, 我们称 $\card \langle g \rangle$ 为元 $g$ 的\indexbf{阶数}, 或称 $g$ 为 \indexbf{$n$ 阶元}. 而且它将满足:
@@ -264,6 +276,45 @@
 	\end{conditionlist}
 	则称 $f$ 是一个\indexbf{同构映射}或\indexbf{同构}, 并认为两个群是互相\indexbf{同构}的, 记为$\indexfm[G simeq G prime]{G \simeq G'}$.
 \end{definition}
+
+同构关系的自反性, 传递性和对称性是平凡的.
+
+\begin{theorem}
+	设群 $(G, *, 1)$, $(G', \circ, 1')$ 被 $f$ 见证同构, 那么$f(1) = 1'$.
+\end{theorem}
+\begin{proof}
+	$\forall g' \in G'$, 记 $g := f^{-1}(g')$, 那么 $f(g)\circ f(1) = f(g * 1) = g' = f(1 * g) = f(1) \circ f(g)$. 从而$f(1) = 1'$.
+\end{proof}
+
+\begin{theorem}
+	设群 $(G, *, 1)$, $(G', \circ, 1')$ 被 $f$ 见证同构, 那么$\forall g \in G$, $f(g^{-1}) = f(g)^{-1}$.
+\end{theorem}
+\begin{proof}
+	$f(g) \circ f(g^{-1}) = f(g * g^{-1}) = f(1) = 1' 
+		= f(g^{-1} * g) = f(g^{-1})\circ f(g)$.
+\end{proof}
+
+\begin{theorem}
+	$\card \langle g_0\rangle = \card \langle g'_0 \rangle 
+		\to \langle g_0\rangle \simeq \langle g'_0 \rangle$.
+\end{theorem}
+\begin{proof}
+	倘若$\card \langle g_0\rangle = \infty$, 那么$\nexists n \in \mathbb Z - \{0\}$,s.t.\ $g_0^n = e$; 这意味着, 存在这样的双射 $f\colon \mathbb Z \to \langle g_0\rangle$, 满足$f(n) = g_0^n$, 见证了 $(\mathbb Z, +, 0) \simeq (\langle g_0\rangle , *, e)$. 
+
+	如果阶数是有限的, 只需令$f\colon g^k \to g'^k$, 其中$k= 0$, $1$, $\cdots$, $\card\langle g_0\rangle$.
+\end{proof}
+
+\begin{theorem}[\indexbf{Cayley定理}]
+	设 $(G, *, e)$ 任意 $n$ 阶有限群. 
+	$\exists H \subset S_0$ s.t.\ $(H, \circ,\id_X)$是$S_n$的子群且 $G \simeq H$. 
+\end{theorem}
+\begin{proof}
+	取$H := \{L_g \mid g \in G\}$, 其中$L_g \colon G \to G; g' \mapsto gg'$可以证明是双射. 那么 $L\colon G \to H; g \mapsto L_g$ 见证了 $H \simeq G$.
+\end{proof}
+
+若 $\varphi \colon G \to G$ 见证了 $G \simeq G$ (如 $\id_G$), 那么称 $\varphi$ 是群 $G$ 的一个 \indexbf{自同构}. 所有自同构组成的集合 $\Aut(G)$ 和其上的函数复合 $\circ$ 构成了 $S(G)$ 的一个子群.
+
+
 
 \appendix
 
