@@ -1,11 +1,20 @@
 % TeXplates/Mathematics.tex
-% v0.1.2
+% v0.1.3
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{ctexbook} 
 % \documentclass{ctexbook} 如果用中文
 % \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
 % 五号 = 10.5pt，小四=12pt，四号=14pt
 % 其他可选参量如twocolumn, 两行排版
+
+\usepackage{xpatch}
+
+\ExplSyntaxOn
+\xpatchcmd \fontspec_new_script:nn
+	{ \__fontspec_warning:nxx }
+	{ \__fontspec_info:nxx }
+	{}{\fail}
+\ExplSyntaxOff % 沉默字体警告
 
 \usepackage{biblatex} %[style=gb7714-2015]{biblatex} 可以选择样式
 \addbibresource{Algebra.bib} % 把这里改成实际的文件名
@@ -18,7 +27,7 @@
 
 \usepackage{imakeidx} %索引
 	\makeindex[intoc]
-	\newcommand*{\indexbf}[1]{\textbf{#1}\index{#1}} % Index for definition
+	\newcommand*{\indexbf}[1]{\index{#1}\textbf{#1}} % Index for definition
 	\newcommand*{\indexfm}[2][ ]{#2\index{ @使用的符号!#1@$#2$}} % Used Symbol
 
 % 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
@@ -72,6 +81,9 @@
 \usepackage{svg} % svg位图
 \usepackage{wrapfig} % 简单的图文绕排
 \usepackage[inline]{enumitem} % 编号
+	% 新列表:
+	\newlist{conditionlist}{enumerate}{2}
+	\setlist[conditionlist,1,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt}
 \usepackage{geometry} % 调整页边距
 % \geometry{left=1.6cm,right=1.6cm}
 \usepackage{xcolor} % 颜色
@@ -86,6 +98,7 @@
 \newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}} % 基底
 \newcommand*{\bv}{\boldsymbol} % 向量加粗
 \newcommand*{\id}{\mathrm{id}} % 单位映射
+\newcommand*{\IFF}{\;\leftrightarrow\;} % 充要条件
 
 \newcommand*{\diff}[3][1]
 {\if#11%
@@ -116,10 +129,9 @@
 % 带星号的版本会像\lim一样
 
 % 一些符号:
-\newcommand*{\GL}[2][n]{\mathrm{GL}_{#1}\left({#2}\right)}
-\newcommand*{\SL}[2][n]{\mathrm{SL}_{#1}\left({#2}\right)}
-\newcommand*{\Orth}[2][n]{\mathrm{O}_{#1}\left({#2}\right)}
-\newcommand*{\SO}[2][n]{\mathrm{SO}_{#1}\left({#2}\right)}
+\newcommand*{\GL}{\mathrm{SL}}
+\newcommand*{\Orth}{\mathrm{O}}
+\newcommand*{\SO}{\mathrm{SO}}
 
 
 
@@ -179,7 +191,7 @@
 \begin{equation}
 	nx+mx = (n+m)x, \; n(m x) = nm x, \qquad n,m\in \mathbb N_+\,;
 \end{equation}
-\begin{equation}
+\begin{equation}\label{exoponentiation}
 	x^n x^m = x^{n+m}, \; (x^m)^n = x^{nm}, \qquad n,m \in \mathbb N_+\,.
 \end{equation}
 
@@ -199,29 +211,59 @@
 可逆幺半群$G$称为群, 即:
 \begin{definition}[群]
 	设有集合$G$. 若:
-	\begin{enumerate}[label=G\arabic*)]\setcounter{enumi}{-1}
-		\item 定义了二元运算$\cdot \colon G^2 \to G; (x,y) \mapsto xy$.
+	\begin{conditionlist}[label=G\arabic*)]\setcounter{enumi}{-1}
+		\item 定义了二元运算$\mathord{\cdot} \colon G^2 \to G; (x,y) \mapsto xy$.
 		\item 结合性: $\forall x,y,z\in G$, $(xy)z = x(yz)$.
 		\item 单位元: $\exists e\in G \forall x\in G$, $xe = ex = x$.
 		\item 可逆性: $\forall x\in G \exists x^{-1} \in G$, $x x^{-1} = x^{-1} x = e$.
-	\end{enumerate}
+	\end{conditionlist}
 	则称$(G, \cdot)$为\indexbf{群}.
 \end{definition}
 
+交换群又叫做\indexbf{Abelian群}.
+
 群也有子群的概念. 
-设$(G, \cdot, e)$是一个群. 当一个集合$G'$满足:
+设$(G, \cdot, e)$是一个群. 当一个集合$G' \subset G$满足:
 \begin{enumerate*}[label=SG\arabic*)]
 	\item $e \in G'$;
 	\item $\forall x,y\in G'$, $xy \in G'$;
 	\item $x \in G' \to x^{-1} \in G'$,
 \end{enumerate*}
 则称$(G', \cdot , e)$是一个$G$的\indexbf{子群}.
-倘若还有$G' \neq G$则称其为一个真子群\footnote{\cite{kostrikin1982introduction}等文献把\indexbf{平凡群}$\{e\}$也排在真子群的定义外.}.
+倘若还有$G' \neq G$则称其为一个\indexbf{真子群}\footnote{\cite{kostrikin1982introduction}等文献把\indexbf{平凡群}$\{e\}$也排在真子群的定义外.}.
 
-作为例子, 考虑$n$阶可逆实矩阵的集合$\indexfm[GL n R]{\GL{\mathbb R}}$和在其上定义的矩阵乘法组成的群$(\GL{\mathbb R}, \cdot )$称为$n$阶\indexbf{一般线性群}. 
-而其中行列式是$\pm 1$的矩阵, 构成一般线性群的一个子群$n$阶正交群$\Orth{\mathbb R}$, 若再要求行列式为$1$, 就再得到子群$\SO{\mathbb R}$.
+% 作为例子, 考虑$n$阶可逆实矩阵的集合$\indexfm[GL n R]{\GL{\mathbb R}}$和在其上定义的矩阵乘法组成的群$(\GL{\mathbb R}, \cdot )$称为$n$阶\indexbf{一般线性群}. 
+% 而其中行列式是$\pm 1$的矩阵, 构成一般线性群的一个子群$n$阶正交群$\Orth{\mathbb R}$, 若再要求行列式为$1$, 就再得到子群$\SO{\mathbb R}$.
 
+我们把半群的公式~\eqref{exoponentiation} 推广到整数次幂, 证明在此忽略了.
+\begin{theorem}\label{group exoponentiation}
+	$\forall g \in G$, $\forall n,m\in \mathbb Z$,
+	\begin{equation}
+		g^m g^n = g^{m+n}, \quad
+		(g^m)^n = g^{mn}.
+	\end{equation}
+\end{theorem}
 
+\begin{definition}[循环群]
+	设$(G, \cdot , 1)$是一个乘法群, $\exists g_0 \in G$, 使得$\forall g \in G$, $\exists n \in \mathbb Z$, $a^n = g$, 那么我们称它是一个\indexbf{循环群}, $g_0$是一个\indexbf{生成元}, 并记作$G = \langle g_0 \rangle$.
+\end{definition}
+
+对于群 $G$ 中任意元素 $g$, 我们称 $\card \langle g \rangle$ 为元 $g$ 的\indexbf{阶数}, 或称 $g$ 为 \indexbf{$n$ 阶元}. 而且它将满足:
+\begin{theorem}
+	任意群 $G$ 中若有 $q \in \mathbb Z$ 阶元 $g$, 则 $\langle g \rangle = \{e, g, \dots, g^{q-1}\}$, 且:
+	\begin{equation}
+		g^n = e \IFF n = kq, \qquad n \in \mathbb Z\,.
+	\end{equation}
+\end{theorem}
+证明利用带余除法和定理~\ref{group exoponentiation}, 证明是显然的.
+
+\begin{definition}[同构]
+	两个群 $(G, *)$, $(G', \circ)$ 如若满足: $\exists f\colon G \to G'$ s.t.\ \begin{conditionlist}[label=\roman*)]
+		\item $\forall a, b \in G$, $f(a * b) = f(a) \circ f(b)$;
+		\item $f$是双射,
+	\end{conditionlist}
+	则称 $f$ 是一个\indexbf{同构映射}或\indexbf{同构}, 并认为两个群是互相\indexbf{同构}的, 记为$\indexfm[G simeq G prime]{G \simeq G'}$.
+\end{definition}
 
 \appendix
 
