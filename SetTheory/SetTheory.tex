@@ -1,12 +1,14 @@
 % TeXplates/Mathematics.tex
-% v0.1.2
+% v0.1.5
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{ctexbook} 
-% \documentclass{ctexbook} 如果用中文
 % \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
 % 五号 = 10.5pt，小四=12pt，四号=14pt
 % 其他可选参量如twocolumn, 两行排版
 
+% 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
+% 使用「/」而不是「\」
+\newcommand{\PATH}{./}
 
 \usepackage{biblatex} %[style=gb7714-2015]{biblatex} 可以选择样式
 \addbibresource{SetTheory.bib} % 把这里改成实际的文件名
@@ -18,13 +20,13 @@
 	\markboth{#1}{#1}}
 
 \usepackage{imakeidx} %索引
-	\makeindex[intoc]
+	\makeindex[intoc, title={索引}]
+	\makeindex[intoc, name=symbol, title={符号列表}]
 	\newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
-	\newcommand*{\indexfm}[2][ ]{#2\index{ 公式@笔记中出现的符号!#1@$#2$}} % Used Symbol
+	\newcommand*{\indexfm}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
+	% \indexfm[name for sort]{display} 
 
-% 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
-% 使用「/」而不是「\」
-\newcommand{\PATH}{PATH/}
+
 
 % 对目录项等的修改
 \usepackage{chngcntr}
@@ -74,6 +76,9 @@
 \usepackage{svg} % svg位图
 \usepackage{wrapfig} % 简单的图文绕排
 \usepackage[inline]{enumitem} % 编号
+	% 新列表:
+	\newlist{conditionlist}{enumerate}{2}
+	\setlist[conditionlist,1,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt}
 \usepackage{geometry} % 调整页边距
 % \geometry{left=1.6cm,right=1.6cm}
 \usepackage{xcolor} % 颜色
@@ -89,6 +94,7 @@
 \newcommand*{\bv}{\boldsymbol} % 向量加粗
 \newcommand*{\properclass}[1]{\mathbf{#1}}
 \newcommand*{\id}{\mathrm{id}}
+\newcommand*{\IFF}{\;\leftrightarrow\;} % 充要条件
 
 \newcommand*{\diff}[3][1]
 {\if#11%
@@ -120,11 +126,15 @@
 
 \title{Set Theory}
 \author{Hoyan Mok}
+\date{\today}
 \begin{document}
-
+\pagenumbering{Alph}
 \maketitle
-\thispagestyle{empty}
+
+%\thispagestyle{empty}
 \frontmatter
+\phantomsection
+\addcontentsline{toc}{chapter}{目录}
 \tableofcontents
 \mainmatter
 
@@ -329,10 +339,10 @@ i.e.\
 
 \begin{axion}\label{AC} \indexbf{选择公理} ($\indexfm[AC]{\properclass{AC}}$)
 对任意非空集合$X\neq \varnothing$, 若
-\begin{enumerate}
-\item[\textup{(1)}] $\varnothing \notin X$,
-\item[\textup{(2)}] $X$中两两不交, 即$\forall x\in X\,\forall y\in X$且$x\neq y$, 那么$x\cap y=\varnothing$,
-\end{enumerate}
+\begin{conditionlist}[label = (\arabic*)]
+\item $\varnothing \notin X$,
+\item $X$中两两不交, 即$\forall x\in X\,\forall y\in X$且$x\neq y$, 那么$x\cap y=\varnothing$,
+\end{conditionlist}
 则存在集合$S$, 对$\forall x\in S$, $S\cap x$是单点集. i.e. 
 \begin{align}
 \begin{aligned}
@@ -590,12 +600,12 @@ $f$和$g$是函数.以下的命题是等价的:
 \section{等价和划分}
 \begin{definition}
 令$R\subseteq X^2$是$X$上的二元关系. $R$是:
-\begin{enumerate}[label=(\arabic*)]
+\begin{conditionlist}[label=(\arabic*)]
 \item \indexbf{自反}的, 若$\forall x\in X(xRx)$;
 \item \indexbf{对称}的, 若$\forall x\in X\forall y\in X( xRy \to yRx)$;
 \item \indexbf{传递}的, 若$\forall  x\in X\forall y\in X\forall z\in X (xRy\wedge yRz \to xRz)$;
 \item \indexbf{等价关系}或\indexbf{等价}的, 若$R$自反, 对称, 传递. 记为$\sim$.
-\end{enumerate}
+\end{conditionlist}
 \end{definition}
 
 \begin{definition}
@@ -655,14 +665,14 @@ $\cup S=X \to
 \section{序}
 \begin{definition}
 如果$X$上的二元关系$\leq$满足:
-\begin{enumerate}
+\begin{conditionlist}[label=\alph*)]
 \item 自反 i.e.\ $\forall x\in X( x\leq x)$;
 \item \indexbf{反对称} i.e.\ $\forall x\in X\forall y\in X(
 	x\leq y\wedge y\leq x \to 
 		x=y)$;
 \item 传递 i.e.\ $\forall x\in X\forall y\in X\forall z\in X(
 	x\leq y\wedge y\leq z \to x\leq z)$,
-\end{enumerate}
+\end{conditionlist}
 则称其为$X$上的\indexbf{偏序} (partial order) 或\indexbf{序}, 记$(X,\leq)$, 并称$X$是一个\indexbf{偏序集} (partially ordered set, appr.\ poset). 
 如果它还是\indexbf{连接}的 i.e.\ $\forall x\in X\forall y\in X(
 	x\leq y\vee y\leq x)$, 那么它是$X$上的\indexbf{线序}或\indexbf{全序} (total order), 此时也称$X$是一个\indexbf{线序集}.
@@ -721,10 +731,10 @@ $\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
 
 \begin{theorem} \indexbf{归纳原理} 令$\varphi(n)$是一个性质. 
 如果
-\begin{enumerate}
+\begin{conditionlist}[label=\alph*)]
 \item $\varphi(0)$成立;
 \item $\forall n\in\mathbb N (\varphi(n)\to\varphi(n^+))$成立,
-\end{enumerate}
+\end{conditionlist}
 那么, $\forall n\in \mathbb N \,\varphi(n)$成立. 
 \end{theorem}
 \begin{proof}
@@ -951,9 +961,13 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 \textbf{注}: 早先的Cantor-Bernstein-Schr\"oeder 定理利用了$\properclass{AC}$, 但这里的证明避免了它.
 
 这个定理说明了$\leq$拥有传递性, 这意味着$\leq$是一个偏序. 而且, 在$\mathbb N$中, 它和先前定义的自然数的偏序$\leq$是等同的. 这暗示我们可以这样做: 记$|n| = n$, 只要$n\in \mathbb N$.
+
 \backmatter
 \nocite{*}
 \printbibliography[heading=bibliography, title={参考文献}]
+
+\indexprologue{这里列出了笔记中出现的重要符号.}
+\printindex[symbol]
 
 \printindex
 

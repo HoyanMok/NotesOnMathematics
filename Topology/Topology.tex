@@ -1,10 +1,51 @@
-\documentclass{article}%默认英文, 中文请使用:{ctexart}
-\usepackage{amsmath} %数学
+% TeXplates/Mathematics.tex
+% v0.1.4
+% https://github.com/HoyanMok/TeXplates
+\documentclass[openany]{book} 
+% \documentclass{ctexbook} 如果用中文
+% \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
+% 五号 = 10.5pt，小四=12pt，四号=14pt
+% 其他可选参量如twocolumn, 两行排版
+
+\usepackage{xeCJK}
+
+\usepackage{biblatex} %[style=gb7714-2015]{biblatex} 可以选择样式
+\addbibresource{Topology.bib} % 把这里改成实际的文件名
+
+% 令参考资料能够加入目录中:
+\defbibheading{bibliography}[\bibname]{% 
+	% \addcontentsline{toc}{chapter}{参考文献}
+	\chapter{#1}%   
+	\markboth{#1}{#1}}
+
+\usepackage{imakeidx} %索引
+	\makeindex[intoc, title={Index}]
+	\makeindex[intoc, name=symbol, title={Symbol List}]
+	\newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
+	\newcommand*{\indexfm}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
+	% \indexfm[name for sort]{display} 
+
+% 将PATH换成绝对路径或相对路径
+% 使用「/」而不是「\」
+\newcommand{\PATH}{./}
+
+% 对目录项等的修改
+\usepackage{chngcntr}
+	\counterwithout{section}{chapter} % So that the section won't reset when newing a chapter
+\renewcommand{\thesection}{\textmd{\S}\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+% 引用的宏包:
+% 宏包的使用, 可以在命令行运行texdoc <宏包名>获得文档
+\usepackage{multicol} % 分栏 (全局分栏建议在文档类处设置)
+\usepackage{amsmath} % AMS数学标准
 	\makeatletter % '@' now normal "letter"
-	\@addtoreset{equation}{section}
+	\@addtoreset{equation}{section} % 每次换section就把equation清零
 	\makeatother  % '@' is restored as "non-letter"
-	\renewcommand\theequation{\oldstylenums{\thesection}%
-					-\oldstylenums{\arabic{equation}}}
+	\renewcommand\theequation{\oldstylenums{\arabic{section}}%
+					-\oldstylenums{\arabic{equation}}} % 显示为section数-equation数
+\usepackage{amssymb} % 数学符号
+\usepackage{mathrsfs} % 花体
 \usepackage{amsthm} %定义、证明、定理等
 	\theoremstyle{plain}
 		\newtheorem{axion}{Axion} %公理
@@ -15,32 +56,60 @@
 		\newtheorem{definition}{Definition}[section] %定义
 		\newtheorem{proposition}{Proposition} %命题
 	\renewcommand{\proofname}{\textbf{Proof}}
-\usepackage{amssymb} %mathematical symbols
-\usepackage{mathrsfs} %allow you to use \mathscr to display captial letters in script style
-\usepackage{makeidx} %Generate index
-	\makeindex
-\usepackage{enumerate} %编号
-\usepackage{tikz}
-\usepackage[colorlinks=true,bookmarks=true]{hyperref}%hyperlinks for reference, table of contents and indexes
-\hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}%More options read texdoc hyperref
 
-% \usepackage[style=gb7714-2015]{biblatex}
-% \addbibresource{<File>.bib}
+\renewcommand{\thetheorem}{%
+	\arabic{section}.\arabic{theorem}%
+} % 公式编号不显示`\S`
+\renewcommand{\thedefinition}{%
+	\arabic{section}.\arabic{definition}%
+} % 公式编号不显示`\S`
 
-\newcommand*{\indexbf}[1]{\textit{\textbf{#1}}\index{#1}}
-\newcommand*{\indexfm}[2]{#1\index{  Symbols@Symbols used!#2@$#1$}}
+\usepackage{esint} % 积分
+\usepackage{siunitx} % 标准SI数值和单位处理
 
-\def\reflect#1{{\setbox0=\hbox{#1}\rlap{\kern0.5\wd0
-  \special{x:gsave}\special{x:scale -1 1}}\box0 \special{x:grestore}}}
-\def\XeTeX{\leavevmode
-  \setbox0=\hbox{X\lower.5ex\hbox{\kern-.15em\reflect{E}}\kern-.1667em \TeX}%
-  \dp0=0pt\ht0=0pt\box0 }
+\usepackage{tikz} % 绘图
+\usepackage{float} % 浮动体 (供图片, 表格等) 扩展, 主要用于提供h模式
+\usepackage{graphicx} % 插入图片
+\usepackage{titlepic}
+\usepackage[font=small, skip=5pt]{caption} % 缩小题注字体和题注与图片距离
+\usepackage{subcaption} % 子图和子图的题注
+\usepackage{svg} % svg位图
+\usepackage{wrapfig} % 简单的图文绕排
+\usepackage[inline]{enumitem} % 编号
+	% 新列表:
+	\newlist{conditionlist}{enumerate}{2}
+	\setlist[conditionlist,1,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt}
+\usepackage{geometry} % 调整页边距
+% \geometry{left=1.6cm,right=1.6cm}
+\usepackage{xcolor} % 颜色
+\usepackage[colorlinks=true,bookmarks=true]{hyperref} % 引用, 交叉引用, 图表等的链接; 生成书签
+\hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}% 更多设置请查阅: texdoc hyperref
 
-\newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}}%基底
-\newcommand*{\bv}{\boldsymbol}%向量加粗
-\newcommand*{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand*{\diff}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
-\newcommand\dif{\mathop{}\!\mathrm{d}}
+% 定义一些笔者常用的指令:
+\newcommand{\me}{\mathrm{e}} % 自然对数的底
+\newcommand{\mi}{\mathrm{i}} % 虚数单位
+\newcommand{\dif}{\mathop{}\!\mathrm{d}} % 微分算子d
+\newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}} % 基底
+\newcommand*{\bv}{\boldsymbol} % 向量加粗
+\newcommand*{\id}{\mathrm{id}} % 单位映射
+\newcommand*{\IFF}{\;\leftrightarrow\;} % 充要条件
+
+\newcommand*{\diff}[3][1]
+{\if#11%
+	\frac{\mathrm{d} #2}{\mathrm{d} #3}% 导数\diff{y}{x}
+\else%
+	\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}% n阶导数\diff[n]{y}{x}
+\fi}
+\newcommand*{\pdiff}[3][1]
+{\if#11%
+	\frac{\partial #2}{\partial #3}% 偏导数\pdiff{y}{x}
+\else%
+	\frac{\partial^{#1} #2}{\partial #3^{#1}}% n阶偏导数\pdiff[n]{y}{x}
+\fi}
+\newcommand{\emphbf}[1]{\emph{\textbf{#1}}}
+% \indexbf 的定义见前imakeidx的引用下
+
+% 笔者习惯的运算符:
 \DeclareMathOperator{\tg}{tg}
 \DeclareMathOperator{\ctg}{ctg}
 \DeclareMathOperator{\arctg}{arctg}
@@ -49,26 +118,31 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\ran}{ran}
 \DeclareMathOperator{\interior}{int}
+% \DeclareMathOperator*{\指令}{显示} 
+% 带星号的版本会像\lim一样
 
 \title{Point Set Topology}
 \author{Hoyan Mok}
 \begin{document}
 \maketitle
+\frontmatter
+\phantomsection
+\addcontentsline{toc}{chapter}{Contents}
 \tableofcontents
-\newpage
-\section{Topological Spaces and Continuous Mappings}
-\subsection{Metric Space}
+\mainmatter
+\chapter{Topological Spaces and Continuous Mappings}
+\section{Metric Space}
 \begin{definition}\label{metric_def}
 function
 \begin{align}\label{metric}
-	\indexfm{d}{d}\colon X^2\to\mathbb{R}
+	\indexfm[d]{d}\colon X^2\to\mathbb{R}
 \end{align}
 $\forall x_1,x_2,x_2\in X$ satisfied: 
-\begin{enumerate}[a)]
+\begin{conditionlist}[label=\alph*)]
 	\item	$d(x_1,x_2)=0\Leftrightarrow x_1=x_2$;
 	\item	$d(x_1,x_2)=d(x_2,x_1)$ (symmetry);
 	\item	$d(x_1,x_3)\leqslant d(x_1,x_2)+d(x_2,x_3)$ (Triangle inequality),
-\end{enumerate}
+\end{conditionlist}
 is called a \indexbf{metric} or \indexbf{distance} in $X$. Such $X$ is said to be equiped with metric $d$, $(X,d)$ is called a \indexbf{metric space}.
 \end{definition}
 
@@ -83,7 +157,7 @@ Some examples:
 \item On class $\mathfrak{\tilde{R}}[a,b]$ over $\mathfrak{R}[a,b]$ similar metric can be defined. Functions are considered of one same class if they are equivalent expect on a set not larger than null set. 
 \end{itemize}
 
-\indexbf{Hilbert space} denoted by $(\indexfm{\mathbb{H}}{H};d)$ is defined as:
+\indexbf{Hilbert space} denoted by $(\indexfm[H]{\mathbb{H}}; d)$ is defined as:
 
 \begin{align}
 	\mathbb{H}=\left\{ 
@@ -169,7 +243,7 @@ A set $F\subset X$ in metric space $(X,d)$ is said to be a \indexbf{closed set} 
 It can be proved that $\varnothing$ and $X$ itself is both open and closed.
 
 \begin{proposition}\label{open_set_pro}
-\begin{enumerate}[a)]
+\begin{enumerate}[label=\alph*)]
 \item An infinite union of open sets is an open set.
 \item A finite intersection of open sets is an open set.
 \item A finite union of closed sets is a closed set.
@@ -177,7 +251,7 @@ It can be proved that $\varnothing$ and $X$ itself is both open and closed.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
-\begin{enumerate}[a)]
+\begin{enumerate}[label=\alph*)]
 	\item If open sets $G_\alpha\subset X,\forall\alpha\in A$, $\forall a\in\bigcap\limits_{\alpha\in A}G_\alpha$, $\exists\alpha_0\in A$, $a\in G_{\alpha_0}$, $\exists B(a;\delta)\subset G_{\alpha_0}\subset \bigcap\limits_{\alpha\in A}G_\alpha$.
 	\item Open sets $G_1\cup G_2\subset X$, $a\in G_1\cap G_2$, therefore $\exists\delta_1,\delta_2\in\mathbb{R}_+$, $B(a;\delta_1)\subset G_1,B(a;\delta_2)\subset G_2$, without loss of generality, let $\delta_1\geq\delta_2$, 那么$a\in B(a;\delta_1)\cap B(a;\delta_2)=B(a;\delta_2)\subset G_1\cap G_2$.
 	\item Just consider $\complement_X
@@ -188,16 +262,16 @@ It can be proved that $\varnothing$ and $X$ itself is both open and closed.
 \end{enumerate}
 \end{proof}
 
-\subsection{Topological Space}
+\section{Topological Space}
 \begin{definition}\label{topological_space}
-We say $X$ is equiped with a \indexbf{topological space} or equiped with \indexbf{topology} if we assigned a $\indexfm{\mathscr{T}}{T}\subset 2^X$, which has got the following propoties:
-\begin{enumerate}[a)]
+We say $X$ is equiped with a \indexbf{topological space} or equiped with \indexbf{topology} if we assigned a $\indexfm[T]{\mathscr{T}}\subset 2^X$, which has got the following propoties:
+\begin{conditionlist}[label=\alph*)]
 	\item $\varnothing\in\mathscr{T}; X\in\mathscr{T}$.
 	\item $\forall\alpha\in A(
 		G_\alpha\in\mathscr{T})\to 
 			\bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}$.
 	\item $G_1\in\mathscr{T}\wedge G_2\in\mathscr{T}\to G_1\cap G_2\in \mathscr{T}$.
-\end{enumerate}
+\end{conditionlist}
 
 Then we call $(X,\mathscr{T})$ a \indexbf{topological space}. Every $G\in \mathscr{T}$ is called an \indexbf{open set}. 
 \end{definition}
@@ -216,7 +290,7 @@ A \indexbf{cofinite space} is a base set $X$ equiped with a topology $\mathscr{T
 The set $\mathscr{T}$ under definition \ref{cofinite_space} is a topology.
 \end{proposition}
 \begin{proof}
-\begin{enumerate}[a)]
+\begin{enumerate}[label=\alph*)]
 \item $\varnothing \in \mathscr{T}$, $X\in\mathscr T$.
 \item $\forall i \in I \left(
 	\left|\complement_X  A_i\right| \in \mathbb N\right) \to
@@ -239,7 +313,7 @@ Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. $\mathscr T_1
 Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. Their intersection $\mathscr T_1\cap \mathscr T_2$ is also a topology on $X$.
 \end{theorem}
 \begin{proof}
-\begin{enumerate}[a)]
+\begin{enumerate}[label=\alph*)]
 \item $\{\varnothing, X\} \subseteq \mathscr T_1\wedge 
 	\{\varnothing, X\} \subseteq  \mathscr T_2 \to 
 		\{\varnothing, X\}\subseteq \mathscr T_1\cap \mathscr T_2$.
@@ -255,7 +329,7 @@ Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. Their interse
 Let $(X, \mathscr T)$ be a topological space. If there exists a metric $d\colon X^2\to \mathbb R$ s.t.\ $(X, \mathscr T)$ is induced by $d$ then call $(X, \mathscr T)$ a \indexbf{metrizable space}, $(X, d)$ is its \indexbf{metrization}.
 \end{definition}
 
-\subsection{Neighbourhood}
+\section{Neighbourhood}
 \begin{definition}\label{neighbourhood}
 Let $(X,\mathscr T)$ be a topological space. A set $U(x)$ is said to be a \indexbf{neighbourhood} of a point $x\in X$ if $\exists G\in \mathscr T(G\subseteq U(x)\wedge x\in G)$. 
 If $U(x)\in \mathscr T$, it is called an \indexbf{open neighbourhood}.
@@ -289,7 +363,7 @@ In history topologies were once built on neighbourhood systems. The following th
  
 \begin{theorem}\label{topology_built_on_neighbourhood}
 Let $X$ be a set and $\forall x \in X$ a collection of subsets $\mathscr U_x \in \mathscr P(X)$ is appointed, satisfying:
-\begin{enumerate}[(1)]
+\begin{conditionlist}[label=(\arabic*)]
 \item $\forall x\in X\big(
 	\mathscr U_x \neq \varnothing \wedge
 		\forall U\in \mathscr U_x (x\in U)\big)$; 
@@ -299,12 +373,12 @@ Let $X$ be a set and $\forall x \in X$ a collection of subsets $\mathscr U_x \in
 	U\subseteq V \to V\in \mathscr U_x)$;
 \item $\forall x\in X\forall U\in\mathscr U_x\exists V\in\mathscr U_x \big(
 	V\subseteq U \wedge \forall y\in V(V\in \mathscr U_y)\big)$,
-\end{enumerate}
+\end{conditionlist}
 then there exists only one topology $\mathscr T$ on $X$ s.t.\ $\forall x\in X$, $\mathscr U_x$ is the neighbourhood system of $x$ in $(X,\mathscr T)$.
 \end{theorem}
 \begin{proof}
 Let $\mathscr T = \{G\in \mathscr P(X) \mid \forall x\in G( G\in \mathscr U_x)\}$.
-\begin{enumerate}[a)]
+\begin{enumerate}[label=\alph*)]
 \item Obviously $\varnothing \in \mathscr T$. 
 	Since the condition (1) and the condition (3) in theorem \ref{topology_built_on_neighbourhood}, $X\in \mathscr T$.
 \item Let $A, B\in \mathscr T$. Consider the condition (2) in theorem \ref{topology_built_on_neighbourhood} applied to $x\in A\cap B$.
@@ -329,7 +403,7 @@ $\forall U\big(
 Therefore $\mathscr T' = \mathscr T$.
 \end{proof}
 
-\subsection{Continuous Mappings}
+\section{Continuous Mappings}
 \begin{definition}\label{continuousness}
 A mapping $f\colon X\to Y$, where $X$,$Y$ is respectively equiped with topology $\mathscr{T}_X$,$\mathscr{T}_Y$, is said to be \indexbf{continuous} at $x_0\in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. It is \indexbf{continuous} in $X$ if it is continuous at each point $x\in X$. 
 \end{definition}
@@ -381,7 +455,7 @@ Two topological spaces $(X,\mathscr{T}_X)$ and $(Y, \mathscr{T}_Y)$ are said to 
 
 Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other. In fact homeomorphic relations are equivalent relations.
 
-\subsection{Closure}
+\section{Closure}
 \begin{definition}\label{accumulation_point}
 Let $X$ be a topological space and $A$ be a subset of $X$. Let $x\in X$.
 If $\forall U\in \mathscr U_x \big(
@@ -398,7 +472,7 @@ Let $X$ be a topological space and $A$, $B$ be subsets of $X$.
 3) $(A')' \subseteq A\cup A'$.
 \end{theorem}
 \begin{proof}
-\begin{enumerate}[1)]
+\begin{enumerate}[label=\arabic*)]
 \item When $A\subseteq B$, $U\cap (A-\{x\}) \subseteq U\cap (B-\{x\})$.
 \item $(A\cup B)' = \{x\in X\mid \forall U\in \mathscr U_x \big(
 	U\cap (A\cup B-\{x\}) \neq \varnothing\big)\}$. 
@@ -489,13 +563,13 @@ Therefore, $A\subseteq \bigcap_{F\in \mathscr F \wedge A\subseteq F} F \to \over
 
 \begin{theorem}
 Let $(X,d)$ be a metric space and $A$ be a non-empty subset of $X$.
-\begin{enumerate}[1)]
+\begin{enumerate}[label=\arabic*)]
 \item $\forall x\in X$, $x\in A' \leftrightarrow d(x,A-\{x\}) = 0$.
 \item $\forall x\in X$, $x\in \overline A \leftrightarrow d(x,A)=0$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-\begin{enumerate}[1)]
+\begin{enumerate}[label=\arabic*)]
 \item We have $x\in A' $ \emph{iff} $\forall \varepsilon\in \mathbb R_+\big(
 	B (x,\varepsilon) \cap (A-\{x\}) \neq \varnothing\big)$, 
 which is established \emph{iff} $\forall \varepsilon \in \mathbb R_+\exists y\in A-\{x\}\big(
@@ -507,7 +581,7 @@ which is established \emph{iff} $\forall \varepsilon \in \mathbb R_+\exists y\in
 \begin{theorem}
 Let $(X, \mathscr T)$ and $(Y,\mathscr S)$ be two topological spaces, and $f\colon X\to Y$. Note the collections of closed sets in $X$ and $Y$ by $\mathscr F_X$, $\mathscr F_Y$.
 The statements below are equivalent:
-\begin{enumerate}[(1)]
+\begin{conditionlist}[label=(\arabic*)]
 \item $f\in C(X,Y)$.
 \item $\forall F\in\mathscr F_Y \big(
 	f^{-1} (F) \in \mathscr F_X\big)$.
@@ -515,7 +589,7 @@ The statements below are equivalent:
 	f(\overline A) \subseteq \overline{ f(A)}\big)$.
 \item $\forall B\in \mathscr P(Y) \big(
 	\overline{f^{-1} (B)}\subseteq f^{-1} (\overline B) \big)$.
-\end{enumerate} 
+\end{conditionlist} 
 \end{theorem}
 \begin{proof}
 (1) $\to$ (2): Only to notice that $f^{-1} (\complement_Y F ) =\complement_X f^{-1} (F)$. 
@@ -542,7 +616,7 @@ However by the definition of closure $\complement_X f^{-1}(G) \subseteq \overlin
 Therefore $\complement_X f^{-1}(G) = \overline {\complement_X f^{-1}(G)}$, which means $\complement_X f^{-1}(G)$ is closed (theorem \ref{closed_iff_closure}), i.e.\ $f^{-1}(G)$ is open. 
 \end{proof}
 
-\subsection{Interior Points and Boundary}
+\section{Interior Points and Boundary}
 \begin{definition}
 Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
 We call $x$ an \indexbf{interior point} of $A$ if $A$ is a neighbourhood of $x$.
@@ -621,7 +695,7 @@ Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
 				\interior A$.
 \end{proof}
 
-\subsection{Basis}
+\section{Basis}
 \begin{definition}
 Let $(X,\mathscr T)$ be a topological space and $\mathscr B$ be a subset of $\mathscr T$.
 If $\forall G\in \mathscr T 
@@ -693,13 +767,13 @@ A set $X$, given a collection $\mathscr S$ of subsets whose union is $X$ itself,
 \begin{theorem}\label{continuity_basis}
 Let $(X,\mathscr T_X)$,$(Y,\mathscr T_Y)$ be two topological space and $f \colon X\to Y$.
 The following statements are equivalent:
-\begin{enumerate}[(1)]
+\begin{conditionlist}[label=(\arabic*)]
 \item $f \in C(X, Y)$;
 \item There exists a basis $\mathscr B_Y$ of $Y$ that $\forall B\in \mathscr B_Y\big(
 	f^{-1}(B) \in \mathscr T_X\big)$;
 \item There exists a subbasis $\mathscr S_Y$ of $Y$ that $\forall S\in \mathscr S_Y\big(
 	f^{-1}(S) \in \mathscr T_X\big)$.
-\end{enumerate}
+\end{conditionlist}
 \end{theorem}
 \begin{proof}
 It is almost obvious that (1) $\to$ (2) and (1) $\to$ (3). Since
@@ -731,19 +805,19 @@ There is also a theorem that is similar with the Theorem \ref{continuity_basis}.
 Let $(X,\mathscr T_X)$,$(Y,\mathscr T_Y)$ be two topological space and $f \colon X\to Y$.
 $x\in X$, $y = f(x)\in Y$.
 The following statements are equivalent:
-\begin{enumerate}[(1)]
+\begin{conditionlist}[label=(\arabic*)]
 \item $f $ is continuous at point $x$;
 \item There exists a basis $\mathscr V_y$ at $y$ that $\forall V\in \mathscr V_y\big(
 	f^{-1}(V) \in \mathscr U_x\big)$;
 \item There exists a subbasis $\mathscr W_y$ at $y$ that $\forall W\in \mathscr W_y\big(
 	f^{-1}(W) \in \mathscr U_x\big)$.
-\end{enumerate}
+\end{conditionlist}
 \end{theorem}
 The proof of this theorem is similar to the proof of the Theorem \ref{continuity_basis}
 
 \begin{theorem}\label{basis_subbasis_topology_and_neighbourhood}
 Let $X$ be a topological space and $x \in X$.
-\begin{enumerate}[(1)]
+\begin{enumerate}[label=(\arabic*)]
 \item If $\mathscr B$ is a basis of $X$, then
 \begin{align*}
 	\mathscr B_x = \{B\in \mathscr B\mid x \in B\}
@@ -781,7 +855,15 @@ This is the proof of $\mathscr B_x \subseteq \tilde{\mathscr B}_x$,
 and $\tilde{\mathscr B}_x \subseteq \mathscr B_x$ can be proved similarly.
 \end{proof}
 
-\section{Subspace}
+\chapter{Subspace}
+
+\backmatter
+\nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
+\printbibliography[heading=bibliography, title={bibliography}]
+
+\indexprologue{Here listed the important symbols used in this notes}
+\printindex[symbol]
+
 \printindex
 % \printbibliography
 \end{document}

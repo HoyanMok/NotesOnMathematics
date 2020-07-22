@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.1.3
+% v0.1.5
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{ctexbook} 
 % \documentclass{ctexbook} 如果用中文
@@ -16,6 +16,10 @@
 	{}{\fail}
 \ExplSyntaxOff % 沉默字体警告
 
+% 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
+% 使用「/」而不是「\」
+\newcommand{\PATH}{./}
+
 \usepackage{biblatex} %[style=gb7714-2015]{biblatex} 可以选择样式
 \addbibresource{Algebra.bib} % 把这里改成实际的文件名
 
@@ -26,13 +30,12 @@
 	\markboth{#1}{#1}}
 
 \usepackage{imakeidx} %索引
-	\makeindex[intoc]
-	\newcommand*{\indexbf}[1]{\index{#1}\textbf{#1}} % Index for definition
-	\newcommand*{\indexfm}[2][\ ]{#2\index{ @使用的符号!#1@$#2$}} % Used Symbol
+\makeindex[intoc, title={索引}]
+\makeindex[intoc, name=symbol, title={符号列表}]
+\newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
+\newcommand*{\indexfm}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
+% \indexfm[name for sort]{display} 
 
-% 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
-% 使用「/」而不是「\」
-\newcommand{\PATH}{PATH/}
 
 % 对目录项等的修改
 \usepackage{chngcntr}
@@ -149,10 +152,10 @@
 % \titlepic{\includegraphics{\PATH latex-project-logo.pdf}}
 
 \begin{document}
+\pagenumbering{Alph}
 \maketitle % 打印标题
-\thispagestyle{empty}
 \frontmatter
-
+\phantomsection
 \addcontentsline{toc}{chapter}{Contents}
 \tableofcontents
 
@@ -299,7 +302,7 @@
 		\to \langle g_0\rangle \simeq \langle g'_0 \rangle$.
 \end{theorem}
 \begin{proof}
-	倘若$\card \langle g_0\rangle = \infty$, 那么$\nexists n \in \mathbb Z - \{0\}$,s.t.\ $g_0^n = e$; 这意味着, 存在这样的双射 $f\colon \mathbb Z \to \langle g_0\rangle$, 满足$f(n) = g_0^n$, 见证了 $(\mathbb Z, +, 0) \simeq (\langle g_0\rangle , *, e)$. 
+	倘若$\card \langle g_0\rangle = \infty$, 那么$\nexists n \in \mathbb Z - \{0\}$, s.t.\ $g_0^n = e$; 这意味着, 存在这样的双射 $f\colon \mathbb Z \to \langle g_0\rangle$, 满足$f(n) = g_0^n$, 见证了 $(\mathbb Z, +, 0) \simeq (\langle g_0\rangle , *, e)$. 
 
 	如果阶数是有限的, 只需令$f\colon g^k \to g'^k$, 其中$k= 0$, $1$, $\cdots$, $\card\langle g_0\rangle$.
 \end{proof}
@@ -321,6 +324,9 @@
 \backmatter
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
 \printbibliography[heading=bibliography, title={参考文献}]
+
+\indexprologue{这里列出了笔记中出现的重要符号.}
+\printindex[symbol]
 
 
 \printindex
