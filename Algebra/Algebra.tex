@@ -86,7 +86,10 @@
 \usepackage[inline]{enumitem} % 编号
 	% 新列表:
 	\newlist{conditionlist}{enumerate}{2}
-	\setlist[conditionlist,1,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt}
+	\setlist[conditionlist,1]{topsep = 0pt, itemsep = 0pt, parsep = 0pt,%
+		label=\arabic*), leftmargin=2\parindent}
+	\setlist[conditionlist,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt,%
+		label=\alph*), leftmargin=3\parindent}
 \usepackage{geometry} % 调整页边距
 % \geometry{left=1.6cm,right=1.6cm}
 \usepackage{xcolor} % 颜色
@@ -239,16 +242,42 @@
 
 群也有子群的概念. 
 设$(G, \cdot, e)$是一个群. 当一个集合$G' \subset G$满足:
-\begin{enumerate*}[label=SG\arabic*)]
+\begin{conditionlist}[label=SG\arabic*)]
 	\item $e \in G'$;
 	\item $\forall x,y\in G'$, $xy \in G'$;
 	\item $x \in G' \to x^{-1} \in G'$,
-\end{enumerate*}
+\end{conditionlist}
 则称$(G', \cdot , e)$是一个$G$的\indexbf{子群}.
 倘若还有$G' \neq G$则称其为一个\indexbf{真子群}\footnote{\cite{kostrikin1982introduction}等文献把\indexbf{平凡群}$\{e\}$也排在真子群的定义外.}.
 
-% 作为例子, 考虑$n$阶可逆实矩阵的集合$\indexfm[GL n R]{\GL{\mathbb R}}$和在其上定义的矩阵乘法组成的群$(\GL{\mathbb R}, \cdot )$称为$n$阶\indexbf{一般线性群}. 
-% 而其中行列式是$\pm 1$的矩阵, 构成一般线性群的一个子群$n$阶正交群$\Orth{\mathbb R}$, 若再要求行列式为$1$, 就再得到子群$\SO{\mathbb R}$.
+\begin{theorem}
+	非空的 $G'$ 是群 $(G, \cdot, 1)$ 的子群 $\IFF$ $\forall x,y \in G' (xy^{-1} \in G')$.
+\end{theorem}
+\begin{proof} 根据子群的定义, $to$ 是显然的, 下给出 $\leftarrow$ 的证明:
+	\begin{conditionlist}[label=SG\arabic*)]
+		\item $\forall x \in G' (x x^{-1} = 1 \in G)$;
+		\item $\forall x,y\in G'$, $x1^{-1} {1y^{-1}}^{-1} = xy \in G'$;
+		\item $\forall x \in G'$, $1x^{-1} = x^{-1} \in G'$.
+	\end{conditionlist}
+\end{proof}
+
+这里将不加证明地给出:
+\begin{lemma}\label{theorem:子群族的交}
+	群 $G$ 的子群族 $\mathscr H = \{H \mid \text{$H$ 是 $G$ 的子群}\}$ 的交 $\cap \mathscr H$ 也是 $G$ 的子群.
+\end{lemma}
+
+设 $G$ 有子集 $S$ , 我们说群 $(G, \cdot, 1)$ 是由 $S$ 生成的, 意思是说 $G$ 没有包含 $S$ 的真子群. 记为$G = \indexfm[S]{%
+	\langle S\rangle}$.
+\begin{theorem}
+	$\langle S \rangle = \left\{
+		\prod^{n-1}_{i=0} s_i \middle|
+			\forall i \in n(s_i \in S \vee s_i^{-1} \in S)
+\right\}$.
+\end{theorem}
+\begin{proof}
+	根据群的定义, 形如 $\prod^{n-1}_{i=0} s_i$ 的将构成一个群. 如果存在一个不能写成这种形式的元素, 那么它们将构成一个真子群, 这和 $\langle S\rangle$的定义相违背. 
+	
+\end{proof}
 
 我们把半群的公式~\eqref{exoponentiation} 推广到整数次幂, 证明在此忽略了.
 \begin{theorem}\label{group exoponentiation}
@@ -270,14 +299,14 @@
 		g^n = e \IFF n = kq, \qquad n \in \mathbb Z\,.
 	\end{equation}
 \end{theorem}
-证明利用带余除法和定理~\ref{group exoponentiation}, 证明是显然的.
+证明利用带余除法和定理~\ref{group exoponentiation}, 证明是显然的. 从该定理, 我们可以论断: 循环群都是Abelian群.
 
 \begin{definition}[同构]
 	两个群 $(G, *)$, $(G', \circ)$ 如若满足: $\exists f\colon G \to G'$ s.t.\ \begin{conditionlist}[label=\roman*)]
-		\item $\forall a, b \in G$, $f(a * b) = f(a) \circ f(b)$;
+		\item $\forall a, b \in G$, $f(a * b) = f(a) \circ f(b)$; \label{item:保结构}
 		\item $f$是双射,
 	\end{conditionlist}
-	则称 $f$ 是一个\indexbf{同构映射}或\indexbf{同构}, 并认为两个群是互相\indexbf{同构}的, 记为$\indexfm[G simeq G prime]{G \simeq G'}$.
+	则称 $f$ 是一个\indexbf{同构映射}或\indexbf{同构} (isomorphism), 并认为两个群是互相\indexbf{同构}的 (isomorphic), 记为$\indexfm[G simeq G prime]{G \simeq G'}$.
 \end{definition}
 
 同构关系的自反性, 传递性和对称性是平凡的.
@@ -315,10 +344,90 @@
 	取$H := \{L_g \mid g \in G\}$, 其中$L_g \colon G \to G; g' \mapsto gg'$可以证明是双射. 那么 $L\colon G \to H; g \mapsto L_g$ 见证了 $H \simeq G$.
 \end{proof}
 
-若 $\varphi \colon G \to G$ 见证了 $G \simeq G$ (如 $\id_G$), 那么称 $\varphi$ 是群 $G$ 的一个 \indexbf{自同构}. 所有自同构组成的集合 $\Aut(G)$ 和其上的函数复合 $\circ$ 构成了 $S(G)$ 的一个子群.
+若 $\varphi \colon G \to G$ 见证了 $G \simeq G$ (如 $\id_G$), 那么称 $\varphi$ 是群 $G$ 的一个 \indexbf{自同构} (automorphism). 所有自同构组成的集合 $\Aut(G)$ 和其上的函数复合 $\circ$ 构成了 $S(G)$ 的一个子群, 称为$G$的\indexbf{自同构群}.
+
+自同构群有一特殊的子群$\Inn(G) := \{I_a \colon g \mapsto a g a^{-1} \mid a \in G\}$,
+称为\indexbf{内自同构群}. 
+
+\begin{definition}[同态]
+	设有群 $(G, *, e)$ 和 $(G', \circ, e')$, 映射 $f \colon G \to G'$ 若满足
+	\begin{equation*}
+		\forall a, b \in G, \quad 
+			f(a * b) = f(a) \circ f(b),
+	\end{equation*}
+	则称其为群 $(G, *)$ 到群 $(G', \circ)$ 的一个\indexbf{同态} (homomorphism), 也叫\indexbf{态射} (morphism). 类似映射, 可定义\indexbf{单态射} (monomorphism), \indexbf{满态射} (epimorphism).
+
+	集合 $\ker f := f^{-1}(\{e'\})$ 叫做同态 $f$ 的\indexbf{核} (kernel). 群到自身的同态映射称为\indexbf{自同态} (endomorphism).
+\end{definition}
+
+同态 $f$ 的核是$G$的子群， 而 $G$ 在同态下的像是 $G'$ 的子群.
+
+\begin{theorem}
+	如果同态的核是平凡群（即, $\ker f = \{e\}$), 那么这个同态是单的.
+\end{theorem}
+\begin{proof}
+	如果$\exists g_1, g_2 \in G$, s.t.\ $f(g_1) = f(g_2)$, 
+	那么
+	\begin{equation*}
+		f(g_1 * g_2^{-1}) 
+		= f(g_1) \circ f(g_2^{-1}) 
+		= f(g_1) \circ f(g_2)^{-1} \circ f(g_2) \circ f(g_2^{-1})
+		= e' \circ f(e)
+		= e'
+	\end{equation*}
+	从而$g_1 * g_2^{-1} \in \ker f$, 同理$g_2^{-1} * g_1 \in \ker f$, 即$g_1^{-1} = g_2^{-1}$ 或 $g_1 = g_2$, 即: $f$是单的.
+\end{proof}
+
+作为例子, 映射
+\begin{equation*}
+	f \colon G \to \Inn(G);\, g \mapsto I_g
+\end{equation*}
+满足同构的条件~\ref{item:保结构}, 因$f(a) \circ f(b) = I_{ab} = f(ab)$; 但它不一定是双射, 因而是一个同态.
+
+\section{环. 域}
+
+\begin{definition}
+	集合$R$非空, 其上定义了加法 $+$ 和乘法 $\cdot$, 且满足:
+	\begin{conditionlist}[label=R\arabic*)]
+		\item $(R, +, 0)$ 是阿贝尔群;
+		\item $(R, \cdot)$ 是半群; 
+		\item 乘法对加法有\indexbf{分配律}: 
+		\begin{equation*}
+			(a + b) c = ac + bc, \qquad
+			c (a + b) = ca + cb
+		\end{equation*}
+		对$\forall a,b,c \in R$成立.
+	\end{conditionlist}
+	那么, 我们称 $(R, +, \cdot)$ 是一个\indexbf{环} (ring)\footnote{%
+		如果$(R,\cdot)$不结合, 通常称\indexbf{非结合环}.}.
+	而且唤$(R, +)$作其加法群, 称$(R, \cdot)$为其乘法半群. 倘若 $(R, \cdot)$ 还有单位元 $1$, 那么我们称$(R, +, \cdot)$ 为有单位元的环.
+\end{definition}
+
+若环 $R$ 非空的子集 $L$ 满足 
+\begin{equation*}
+	\forall x, y \in L \big(
+		x - y \in L \; \wedge \; xy \in L
+	\big)\,,
+\end{equation*}
+则称 $L$ 是 $R$ 的一个\indexbf{子环}.
+
+若环的乘法半群是交换的, 则称这个环是一个\indexbf{交换环}.
+
+作为例子, $(\mathbb Z, +, \cdot)$ 是我们熟悉的\indexbf{整环}, $n\mathbb Z := \{nk \mid k \in \mathbb Z\}$ 是它的一个子环 ($n \in \mathbb Z$). 
+交换环 $R$ 上的所有 $n$ 阶方阵之集合 $M_n(R)$ 也是环.
 
 
 
+设 $(R,+ ,\cdot)$ 是环, $X$ 是一个集合, 在 $R^X$ 上定义加法和乘法:
+\begin{equation*}
+	f + g \colon x \mapsto f(x) + g(x);
+	\qquad
+	fg \colon x \mapsto f(x) g(x),
+\end{equation*}
+就得到了\indexbf{函数环} $(R^X, +, \cdot)$, 其零元是 $0_X \colon x \mapsto 0$. 如果 $R$ 有单位元 $1$，那么 $R^X$ 也有单位元 $1_X \colon x \mapsto 1$, $\forall x \in X $.
+
+考虑到将$\lbrack k\rbrack _n \in \mathbb Z / \equiv \bmod n $ 映射到 $n^\mathbb Z \ni \bmod n := \{(n, k) \in \mathbb Z \times n \mid n \equiv k \bmod n\}$ 的同构, 
+\indexbf{模$n$的剩余类环}\index{剩余类环} $(\mathbb Z_n, +, \cdot)$ 即是可看作函数环 $n^\mathbb Z$ 的一个交换子环, 其中$\mathbb Z_n := \{\lbrack k\rbrack_n \mid k \in n\}$. 
 \appendix
 
 \backmatter
