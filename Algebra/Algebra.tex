@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.1.5
+% v0.1.6
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{ctexbook} 
 % \documentclass{ctexbook} 如果用中文
@@ -157,12 +157,14 @@
 \begin{document}
 \pagenumbering{Alph}
 \maketitle % 打印标题
+\thispagestyle{empty}
 \frontmatter
 \phantomsection
-\addcontentsline{toc}{chapter}{Contents}
+\addcontentsline{toc}{chapter}{目录}
 \tableofcontents
 
 \mainmatter
+\part{线性代数}
 \chapter{群. 环. 域}
 \section{代数运算}
 \begin{definition}[二元运算]
@@ -219,6 +221,8 @@
 \big)$, 那么称$a$为\indexbf{可逆的} (invertible), $a'$称为其\indexbf{逆元} (inverse element) 或\indexbf{逆} (inverse).
 通常加法逆元记为$- a$, 乘法逆元记为$a^{-1}$, 且为可逆元素引入$n a$, $a^n$的概念, 其中$n \in \mathbb Z$. 当$n$为负数时, $na = -(-na)$, $a^n = (a^{-n})^{-1}$.
 
+因为群未必是Abelian, 我们可以也用弱化的\indexbf{左可逆} $\exists y$ s.t.\ $y * x = 1$或\indexbf{右可逆}的概念.
+
 
 \section{群}
 
@@ -234,7 +238,7 @@
 	则称$(G, \cdot)$为\indexbf{群}.
 \end{definition}
 
-交换群又叫做\indexbf{Abelian群}.
+交换群又叫做\indexbf{Abelian群}. 
 
 作为重要的例子, 设 $X$ 是一个集合, $\indexfm[S X]{S(X)} = \{ f \in X^X \mid \text{$f$ 是双射}\}$. 
 我们断言, $(S(X), \circ, \id_X)$ 是一个群, 称为\indexbf{变换群}或\indexbf{置换群}, 其中 $\circ$ 是函数的复合, $\id_X$是恒等变换. 
@@ -384,9 +388,9 @@
 \end{equation*}
 满足同构的条件~\ref{item:保结构}, 因$f(a) \circ f(b) = I_{ab} = f(ab)$; 但它不一定是双射, 因而是一个同态.
 
-\section{环. 域}
+\section{环}
 
-\begin{definition}
+\begin{definition}[环]
 	集合$R$非空, 其上定义了加法 $+$ 和乘法 $\cdot$, 且满足:
 	\begin{conditionlist}[label=R\arabic*)]
 		\item $(R, +, 0)$ 是阿贝尔群;
@@ -413,10 +417,18 @@
 
 若环的乘法半群是交换的, 则称这个环是一个\indexbf{交换环}.
 
-作为例子, $(\mathbb Z, +, \cdot)$ 是我们熟悉的\indexbf{整环}, $n\mathbb Z := \{nk \mid k \in \mathbb Z\}$ 是它的一个子环 ($n \in \mathbb Z$). 
+作为例子, $(\mathbb Z, +, \cdot)$ 是我们熟悉的\indexbf{整数环}, $n\mathbb Z := \{nk \mid k \in \mathbb Z\}$ 是它的一个子环 ($n \in \mathbb Z$). 
 交换环 $R$ 上的所有 $n$ 阶方阵之集合 $M_n(R)$ 也是环.
 
-
+\begin{definition}[同态]
+	设 $R$ 和 $R'$ 是两个环, 有一个映射 $f$ 对加法群和乘法半群都是同态 (保持运算), 即:
+	\begin{equation*}
+		f(x)f(y) = f(xy),
+		\quad
+		f(x) + f(y) = f(x + y),
+	\end{equation*}
+	那么, 我们称其为 $R$ 到 $R'$ 的一个\indexbf{同态}或\indexbf{态射}, 集合 $\ker f := \{a \in R \mid f(a) = 0\}$ 称为同态的\indexbf{核}. 同态 $f$ 的核是 $R$ 的子环. 类似地我们也有\indexbf{单同态}, \indexbf{满同态}和\indexbf{同构}的概念. 两个环同构记为 $R \cong R'$.
+\end{definition}
 
 设 $(R,+ ,\cdot)$ 是环, $X$ 是一个集合, 在 $R^X$ 上定义加法和乘法:
 \begin{equation*}
@@ -426,8 +438,54 @@
 \end{equation*}
 就得到了\indexbf{函数环} $(R^X, +, \cdot)$, 其零元是 $0_X \colon x \mapsto 0$. 如果 $R$ 有单位元 $1$，那么 $R^X$ 也有单位元 $1_X \colon x \mapsto 1$, $\forall x \in X $.
 
-考虑到将$\indexfm[k n]{\lbrack k\rbrack _n} \in \mathbb Z / \equiv \bmod n $ 映射到 $n^\mathbb Z \ni \bmod n := \{(m, k) \in \mathbb Z \times m \mid n \equiv k \bmod n\}$ 的同构, 
+作为例子, 考虑到将$\indexfm[k n]{\lbrack k\rbrack _n} \in \mathbb Z / \equiv \bmod n $ 映射到 $n^\mathbb Z \ni \bmod n := \{(m, k) \in \mathbb Z \times m \mid n \equiv k \bmod n\}$ 的同构, 
 \indexbf{模$n$的剩余类环}\index{剩余类环} $(\mathbb Z_n, +, \cdot)$ 即可看作函数环 $n^\mathbb Z$ 的一个交换子环, 其中$\indexfm[Z n]{\mathbb Z_n} := \{\lbrack k\rbrack_n \mid k \in n\}$. 
+同构关系让我们也能用剩余类的代表元组成的集合 $n$ 代替剩余类本身进行运算, 这种情况下, $n$ 称为\indexbf{模 $n$ 的剩余类的导出集}, 我们能用加法表和乘法表给出它的代数结构.
+
+\begin{definition}[整环]
+	环 $R$ 中, $a \in R$, 如果 $\exists b \in R - \{0\}$ s.t.\ $ab = 0$, 则称 $a$ 为环 $R$ 的一个零因子; 类似则可定义\indexbf{右零因子}\footnote{\cite{kostrikin1982introduction}中把 $0$ 排除在外了.}. 
+	左零因子和右零因子统称\indexbf{零因子}. 零元 $0$ 则称为\indexbf{平凡零因子}. 
+	
+	若非平凡的交换环 $R$ 带单位元$1 \neq 0$, 且没有非平凡零因子, 则称 $R$ 是一个\indexbf{整环} (entire ring 或 integral domain).
+\end{definition}
+
+也有将无非平凡左零因子的带单位的非平凡环称为 \indexbf{domain} 的.
+
+\begin{theorem}[消去律]
+	设 $R$ 是带单位元 $1 \neq 0$ 的交换环.
+	环 $R$ 是整环 $\IFF$ $\forall x,y,c \in R$, $cx = cy \wedge c\neq 0  \;\to\; x = y$.
+\end{theorem}
+\begin{proof}
+	如果 $R$ 满足消去律, 那么 $ab = 0 = 0b = a0$ 将给出 $a = 0 \vee b = 0$的论断;
+	如果 $R$ 是整环, 那么 $cx = cy$ 即 $c(x - y) = 0$ 将得出 $c = 0 \vee x = y $; 
+	倘若 $c \neq 0$, 那么这就是消去律.
+\end{proof}
+
+有单位元的环 $R$ 中元素 $x$ 的可逆性往往指关于乘法的可逆性. 
+
+\begin{theorem}
+	设 $R$ 是带单位元 $1$ 的环, $U(R) := \{x \in R \mid \text{$x$ 可逆}\}$ 是一个乘法群.
+\end{theorem}
+\begin{proof}
+	单位元 $1$ 当然可逆. 由定义可逆元素的逆也是可逆的. 如果 $x, y \in R$ 可逆, 那么 
+	\begin{equation*}
+		(xy)(y^{-1} x^{-1}) = x(y y^{-1})x^{-1} = xx^{-1} = 1 =y^{-1} x^{-1} x y = (xy)^{-1} (xy),
+	\end{equation*}
+	即 $xy$ 可逆.
+\end{proof}
+
+如果 $U(R) = R - \{0\}$, 那么我们称 $R$ 是一个\indexbf{除环} (division ring), 也称\indexbf{斜域}或\indexbf{反对称域} (skew field). 除环没有零因子.
+
+\section{域}
+
+交换除环 $F$ 称为\indexbf{域} (field). 群 $P^* = U(P)$ 称为域的乘法群. 如果 $y \neq 0$, 那么我们通常记 $x/y = \frac x y := xy^{-1}$. 
+
+
+
+
+
+
+
 \appendix
 
 \backmatter
