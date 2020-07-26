@@ -134,6 +134,7 @@
 
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\characteristic}{char}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -141,6 +142,7 @@
 \newcommand*{\GL}{\mathrm{SL}}
 \newcommand*{\Orth}{\mathrm{O}}
 \newcommand*{\SO}{\mathrm{SO}}
+\newcommand*{\GF}{\mathrm{GF}}
 
 
 
@@ -451,7 +453,7 @@
 
 也有将无非平凡左零因子的带单位的非平凡环称为 \indexbf{domain} 的.
 
-\begin{theorem}[消去律]
+\begin{theorem}[消去律] \label{theorem:消去律}
 	设 $R$ 是带单位元 $1 \neq 0$ 的交换环.
 	环 $R$ 是整环 $\IFF$ $\forall x,y,c \in R$, $cx = cy \wedge c\neq 0  \;\to\; x = y$.
 \end{theorem}
@@ -480,9 +482,75 @@
 
 交换除环 $F$ 称为\indexbf{域} (field). 群 $P^* = U(P)$ 称为域的乘法群. 如果 $y \neq 0$, 那么我们通常记 $x/y = \frac x y := xy^{-1}$. 
 
+我们可类似环, 定义同构和自同构. 同态的意义不大, 因为如果 $F$ 到 $F'$ 的同态 $f$ 的核 $\ker f \neq \{0\}$, 那么 $\ker f = F$. 如果 $F'$ 是域 $F$ 的子环, 而且也是一个域, 则称其为 $F$ 的一个\indexbf{子域}, 反之称 $F$ 为 $F'$ 的一个\indexbf{扩域}.
+
+类似群的生成, 包含 $F \cup\{a\}$ 的最小 $F$ 的扩域, 记为 $F(a)$. 如有理数域 $\mathbb Q$ 的扩域 $\mathbb Q(\sqrt 2)$.
+
+\begin{theorem}\label{theorem:素剩余类环}
+	有限剩余类环 $\mathbb Z_p$ 是域, 当且仅当 $p$ 是素数.
+\end{theorem}
+\begin{proof}
+	记 $\mathbb Z_p$ 的元素为 $[0]$, $[1]$, \ldots, $[p -1]$.
+	由素数的定义, $\forall [k]  \in \mathbb Z_p^* := \mathbb Z_p - \{[0]\}$,
+	\begin{equation*}
+		[k], [2k], \cdots, [(p-1) k]
+	\end{equation*}
+	都不为 $[0]$, 而且两两不等.
+	进而, $\exists i \in \mathbb N_+$ s.t.\ $i < p \wedge [ik] = 1$.
+	又 $\mathbb Z_p$ 是交换环, 可知这个 $[i] = [k]^{-1}$, 即 $\mathbb Z_p$ 的乘法组成一个群.
+\end{proof}
+
+出于 $\mathbb Z_p$ 的这个性质, 我们也记其为 $\mathbb F_p$ 或 $\GF(p)$. $p^n$元有限域 $\GF(p^n)$ 也是存在的.
+
+\begin{corollary}[\indexbf{Fermat小定理}]
+	设 $p$ 是素数, $a \in \mathbb N$ 且 $a \nmid p$. 
+	\begin{equation*}
+		a^{p-1} \equiv 1 \pmod p\,.
+	\end{equation*}
+\end{corollary}
+\begin{proof}
+	当 $[k] \in \mathbb Z_p^*$ 时, $I_{[k]} \colon \mathbb Z_p^* \to \mathbb Z_p^*;\, [n] \mapsto [kn]$ 如定理~\ref{theorem:素剩余类环} 是 $S(\mathbb Z_p^*)$ 的元素.
+	从而:
+	\begin{equation*}
+		\left( \prod_{k=1}^{p-1} [k] \right) [a]^{p-1} = \prod_{k=1}^{p-1} [k]\,.  
+	\end{equation*}
+	因为域都是整环, 满足消去律~\ref{theorem:消去律}, 从而 $[a]^{p-1} = [1]$.
+\end{proof}
+
+\begin{definition}[素域]
+	若域 $P$ 不含任何非平凡真子域, 则称其为\indexbf{素域} (prime field).
+\end{definition}
+
+\begin{lemma}
+	$\mathbb Q$ 和 $\mathbb Z_p$ 是素域. 
+\end{lemma}
+\begin{proof}
+	让集合 $\{0,1\}$ 对加法, 减法, 乘法和除法封闭, 我们将得到 $\mathbb Q$ 或 $\mathbb Z_p$ 的导出集 $p$, 取决于 $1$ 在加法群中的阶数.
+\end{proof}
 
 
+\begin{theorem}
+	任意非平凡域 $F$ 必含且只含一个素子域 $P$, 而且它将同构于 $\mathbb Q$ 或 $\mathbb Z_p$, 其中 $p$ 是素数. 
+\end{theorem}
+\begin{proof}
+	若有两个素子域, 它们的交必然也是 $F$ 的子域, 根据素域的定义, 这个交不可能是真子域, 从而这两个素域相等. 这就保证了, 如果存在这么一个素子域 $P$, 它一定是唯一的. 接下来我们研究它的存在性.
 
+	定义 $\mathbb Z$ 到 $F$ 的同态 $f(n) = ne$, 其中 $e$ 是 $F$ 的单位元. 
+	其核为 $\ker f = m \mathbb Z$, 其中 $m \in \mathbb N$.
+	
+	如果 $m = 0$, 那么 $ne \neq o$, 其中 $o$ 是 $F$ 的零元, 只要 $n \neq 0$. 考虑 $f$ 在 $\mathbb Q$ 上的扩张, 可以证明 $P := f(\mathbb Q) = \{ne \mid n \in \mathbb Z\}$ 即构成了与 $\mathbb Q$ 同构的素子域.
+
+	如果 $m \neq 0$, 那么 $m =p$ 是素数. 
+	如果 $m$ 不是素数, 假设它有两个 ($m$ 和 $1$ 以外的) 因数 $a, b$, $ab e = o$ 意味着 $a e = o$ 或 $b e = o$ (定理~\ref{theorem:消去律}), 将与 $\ker f = m\mathbb Z$ 矛盾.
+	考虑 $f$ 在 $p$ (作为 $\mathbb Z_p$ 的导出集) 上的限制, $P := \{o, e, 2e, \cdots, (p-1)e\}$ 即构成了与 $\mathbb Z_p$ 同构的素子域.
+\end{proof}
+
+在刚才的证明中, 我们已经遭遇了:
+\begin{definition}[特征]
+	设域 $F$ 的单位元和零元分别是$e$, $o$. 若存在$p \in \mathbb N$ 使得 $pe = o$, 则称 $p$ 为域的\indexbf{特征} (characteristic), 记为$\indexfm[char F]{\characteristic(F)} = p$; 特别地, 定义$\characteristic(F) = 0$, 如果不存在这样的 $p$.
+\end{definition}
+
+\chapter{线性空间}
 
 
 
