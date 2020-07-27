@@ -551,10 +551,164 @@
 \end{definition}
 
 \chapter{线性空间}
+\section{线性空间}
+\begin{definition}[线性空间]
+	设 $\mathbb F$ 是一个域, $(V, +, \bv 0)$ 是一个Abelian群. 
+	如果定义标量乘积运算: $\mathbb F \times V \to V ;\, (\lambda, \bv x) \mapsto \lambda \bv x$ 且满足:
+	\begin{conditionlist}
+		\item $1\bv x = \bv x$, $\forall \bv x \in V$ (\indexbf{酉性});
+		\item $(\alpha \beta) \bv x = \alpha (\beta \bv x)$, $\forall \alpha, \beta \in \mathbb F$, $\forall \bv x \in V$;
+		\item $(\alpha + \beta) \bv x = \alpha \bv x + \beta \bv x$, $\forall \alpha, \beta \in \mathbb F$, $\forall \bv x \in V$;
+		\item $\lambda (\bv x + \bv y ) = \lambda \bv x + \lambda \bv y$,
+	\end{conditionlist}
+	那么, 我们称 $V$ 是 $\mathbb F$ 上的一个\indexbf{线性空间}, 或称\indexbf{向量空间}, 其元素称为\indexbf{向量}, 相对而言 $\mathbb F$ 的元素则被称为\indexbf{纯量乘积}.
+\end{definition}
 
+通常我们称 $(\bv x_i)_{i \in I}$ 为\indexbf{向量组},  $I$ 是指标集.
+
+\begin{definition}[线性组合]
+	设 $V$ 是 $\mathbb F$ 上的线性空间. 倘若$\forall i \in n$, $\lambda_i \in \mathbb F$, $\bv x_i \in V$, $n$ 是正整数, 那么
+	\begin{equation*}
+		\sum_{i \in n} \lambda_i \bv x_i
+	\end{equation*}
+	称为向量组 $(\bv x_i)_{i \in n}$ 的一个系数为 $(\lambda_i)_{i \in n}$ 的\indexbf{线性组合}, $i \in n$.
+\end{definition}
+
+可数向量甚至不可数个向量之和的研究, 将在泛函分析中得到更加细致的讨论.
+
+\begin{definition}[线性包络]
+	设 $V$ 是 $\mathbb F$ 上的线性空间, $(\bv x_i)_{i\in n}$ 是其中的一个向量组, $n$ 是正整数. 
+	其\indexbf{线性包络} (linear span)定义为 
+	\begin{equation*}
+		\langle \bv x_i\rangle_{i \in n}
+		= \left\{ 
+			\sum_{i \in n} \lambda_i \bv x_i 
+		\middle|
+			(\lambda_i)_{i \in n} \in \mathbb F^n
+		\right\}\,.
+	\end{equation*}
+	或者, 设 $M \subset V$, 那么其线性包络定义为
+	\begin{equation*}
+		\langle M \rangle 
+		= \left\{ 
+			\sum_{i \in n} \lambda_i \bv x_i
+		\middle|
+			n \in \mathbb N,\, \forall i \in n (\lambda_i \in \mathbb F\, \wedge \, \bv x_i \in M)  
+		\right\}\,.
+	\end{equation*}
+\end{definition}
+
+\begin{definition}
+	设 $V'$ 是 $\mathbb F$ 上的线性空间 $V$ 的加法子群, 且对标量乘积封闭, i.e.\ $\forall \bv x \in V'$, $\forall \lambda \in \mathbb F$, $\lambda \bv x \in V'$, 那么, 我们称 $V'$ 是 $V$ 的一个 (线性) \indexbf{子空间}.
+\end{definition}
+
+显然 $\langle M \rangle$ 对 $\forall M \in 2^V$ 都是 $V$ 的子空间 (而且是包含 $M$ 的最小的那个), 从而我们也说这种情况下 $\langle M \rangle$ 是 $M$ \indexbf{张出} (span) 或\indexbf{生成}的线性空间.
+
+\begin{definition}[线性相关]
+	设 $V$ 是 $\mathbb F$ 上的线性空间, 其中有线性组 $(\bv x_i)_{i \in n}$. 
+	若 $\exists (\alpha_i)_{i\in n} \in \mathbb F^n$ s.t.\ $\exists i \in n (\alpha_i \neq 0)$ 且
+	\begin{equation*}
+		\sum_{i \in n} \alpha_i \bv x_i = \bv 0\,,
+	\end{equation*}
+	那么称向量组 $(\bv x_i)_{i \in n}$ 是\indexbf{线性相关}的. 
+	反之则称它们\indexbf{线性无关}或\indexbf{线性独立}.
+\end{definition}
+
+\begin{theorem}
+	若 $(\bv x_i)_{i \in n}$ 是线性相关的, 则 $\exists i \in n$ s.t.\ 
+	\begin{equation*}
+		\exists (\beta_j)_{j \in n - \{i\}} \in 2^\mathbb F 
+		\quad\text{s.t.\ }\quad 
+			\bv x_i = \sum_{j \in n - \{i\}} \beta_j \bv x_j
+		\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	证明此定理只需取 $i$ 使得见证线性相关的线性组合中 $\bv x_i$ 的系数不为 $0$ 即可.
+\end{proof}
+
+\begin{definition}[维数]
+	设 $V$ 是 $\mathbb F$ 上的线性空间. 若 $\exists n \in \mathbb N$, 满足
+	\begin{equation*}
+		n = \max \{r \mid \exists (x_i)_{i \in r} \text{\ s.t.\ 它们是线性独立的}) \}\,,
+	\end{equation*}
+	那么称 $n$ 是 $V$ 的\indexbf{维数}, 记为 $\dim V = n$, $V$ 是 \textbf{$n$ 维线性空间}. 倘若不存在这样的 $n$, 则 $V$ 是\indexbf{无穷维线性空间}. 
+\end{definition}
+
+特别地, $\dim \{\bv 0\} = 0$.
+
+\begin{definition}[基底]
+	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 倘若线性无关, 则称其为 $V$ 的一组\indexbf{基底}. 特别地, 如果 $\dim V = 0$, 空集 $\varnothing$ 是它的一组基底.
+\end{definition}
+
+\begin{theorem}[唯一分解]
+	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
+	那么 $\forall \bv v \in V$, $\exists ! (v_i)_{i \in n}$, s.t.\ 
+	\begin{equation*}
+		\bv v = \sum_{i \in n} v_i \basis e_i.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	唯一性只需要假定有两组分解, 相减并利用基底的线性独立性即可证明. 
+	下面只证存在性:
+	根据维数的定义, $(\bv v, \basis e_0, \cdots, \basis e_{n - 1})$ 线性相关, 从而
+	$\exists \alpha \in \mathbb F\, \exists (\alpha_i)_{i \in n} \in \mathbb F^n$ s.t.\ $(\alpha, \alpha_0, \cdots, \alpha_{n - 1})$ 不全为 $0$ 且
+	\begin{equation*}
+		\alpha \bv v + \sum_{i \in n} \alpha_i \basis e_i = \bv 0\,,
+	\end{equation*}
+	考虑到基底的线性独立性, $\alpha \neq 0$, 由域的可逆性, 我们得出了一组线性组合系数 $( - \alpha_i / \alpha)_{i \in n}$\,.
+\end{proof}
+
+根据这个定理, 我们断言线性空间 $V$ 的基底 $(\basis e_i)_{i \in n}$ 张出 $V$ 本身, 
+i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$. 
+
+\begin{corollary}
+	设 $V'$ 是 $V$ 的子空间. 如果 $V' \subsetneq V$, 那么 $\dim V' < \dim V$.
+\end{corollary}
+
+\begin{corollary}
+	如果线性无关的向量组 $(\bv e_j)_{j \in n} $ 满足 $\forall j \in n$, $\bv e_j \in  \langle\bv f_i\rangle_{i \in m}$, 那么 $n \leq m$.
+\end{corollary}
+
+\begin{theorem}[\indexbf{Steintz 替换}]
+	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
+	任意线性无关组 $(\basis f_i)_{i \in s}$, 都可从基底中取出 $(\basis e_{i_k})_{i_k \in n,\, k \in t}$ 使得
+	\begin{equation*}
+		(\basis f_0, \cdots, \basis f_{s-1}, \basis e_{i_0}, \cdots, \basis e_{i_{t-1}})
+	\end{equation*}
+	是 $V$ 的一组基底.
+\end{theorem}
+\begin{proof}
+	取 $i_0$ 使得 $\basis e_{i_0} \notin \langle\basis f_i\rangle_{i \in s}$; 
+	接着取 $i_{k+1}$ 使得 $\basis e_{i_{k+1}} \notin \langle \basis f_0, \cdots, \basis f_{s-1}, \basis e_{i_k} \rangle $, 直到不能进行下去, 剩下的基底全部都可由前面的向量组线性表出, 令此时 $k = t - 1$.
+	从而: $V$ 中任何向量都可由基底 $(\basis e_i)_{i \in n}$ 表出, 从而也就可以由
+	$
+		(\basis f_0, \cdots, \basis f_{s-1}, \basis e_{i_0}, \cdots, \basis e_{i_{t-1}})
+	$ 表出， 从而 $s + t \geq n$. 
+
+	另一方面, 不难通过归纳得知, 
+	$
+		(\basis f_0, \cdots, \basis f_{s-1}, \basis e_{i_0}, \cdots, \basis e_{i_{t-1}})
+	$ 是线性无关的, 由维数的定义, 我们断言 $t + s \leq n$. 
+	即 $t + s = n$, 我们已然得到 $V$ 的一组基底了.
+\end{proof}
+
+
+	
+
+\chapter{线性算子}
+
+\chapter{内积空间}
+
+\chapter{张量}
 
 
 \appendix
+\chapter{复数与多项式}
+\section{复数}
+
+\section{多项式}
+
 
 \backmatter
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
