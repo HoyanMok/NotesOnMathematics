@@ -598,7 +598,7 @@
 	\end{equation*}
 \end{definition}
 
-\begin{definition}
+\begin{definition}[子空间]
 	设 $V'$ 是 $\mathbb F$ 上的线性空间 $V$ 的加法子群, 且对标量乘积封闭, i.e.\ $\forall \bv x \in V'$, $\forall \lambda \in \mathbb F$, $\lambda \bv x \in V'$, 那么, 我们称 $V'$ 是 $V$ 的一个 (线性) \indexbf{子空间}.
 \end{definition}
 
@@ -615,7 +615,7 @@
 \end{definition}
 
 \begin{theorem}
-	若 $(\bv x_i)_{i \in n}$ 是线性相关的, 则 $\exists i \in n$ s.t.\ 
+	向量组 $(\bv x_i)_{i \in n}$ 是线性相关的, 当且仅当 $\exists i \in n$ s.t.\ 
 	\begin{equation*}
 		\exists (\beta_j)_{j \in n - \{i\}} \in 2^\mathbb F 
 		\quad\text{s.t.\ }\quad 
@@ -641,9 +641,11 @@
 	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 倘若线性无关, 则称其为 $V$ 的一组\indexbf{基底}. 特别地, 如果 $\dim V = 0$, 空集 $\varnothing$ 是它的一组基底.
 \end{definition}
 
-\begin{theorem}[唯一分解]
+因为基底的顺序并不重要, 有时我们也有基底向量的集合 $\{\basis e_i\}_{i \in n}$ 表示它.
+
+\begin{theorem}[唯一分解]\label{唯一分解}
 	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
-	那么 $\forall \bv v \in V$, $\exists ! (v_i)_{i \in n}$, s.t.\ 
+	那么 $\forall \bv v \in V$, $\exists ! (v_i)_{i \in n}$ (称为 $\bv v$ 在基底 $(\basis e_i)_{i \in n}$ 下的\indexbf{坐标}), s.t.\ 
 	\begin{equation*}
 		\bv v = \sum_{i \in n} v_i \basis e_i.
 	\end{equation*}
@@ -693,10 +695,30 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	即 $t + s = n$, 我们已然得到 $V$ 的一组基底了.
 \end{proof}
 
-
+设 $\mathbb F$ 上的 $n$ 维线性空间有两组基底 $(\basis e_j)_{j \in n}$, $(\basis f_i)_{i \in n}$, 考虑定理~\ref{唯一分解}, 我们写出:
+\begin{equation}
+	\basis f_i = \sum_{j \in n} a_{ji} \basis e_j\,,
+	\qquad
+	\forall i \in n\,.
+\end{equation}
+这里的 $a_{ji}$ 决定了矩阵
+\begin{equation}\label{equation:转换矩阵}
+	\bv A = (a_{ij})_{i,j \in n} =
+	\begin{pmatrix}
+		a_{00} & a_{01} & \cdots & a_{0, n-1} \\
+		a_{10} & a_{11} & \cdots & a_{1, n-1} \\
+		\vdots & \vdots & \ddots & \vdots     \\
+		a_{n-1, 0} & a_{n-1, 1} & \cdots & a_{n-1, n-1}
+	\end{pmatrix}\,.
+\end{equation}
+矩阵~\eqref{equation:转换矩阵} 被称为 $(\basis e_i)_{i \in n}$ 到 $(\basis f_j)_{j \in n}$ 的一个\indexbf{转换矩阵}. 值得注意的是下标的位置 (这与有限维向量空间的线性映射的矩阵差了一个转置, 见~\ref{section:线性映射}). 
 	
 
+
+
 \chapter{线性算子}
+\section{线性映射}
+\label{section:线性映射}
 
 \chapter{内积空间}
 
