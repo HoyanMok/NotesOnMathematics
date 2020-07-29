@@ -135,6 +135,7 @@
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\characteristic}{char}
+\DeclareMathOperator{\codim}{codim}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -143,6 +144,7 @@
 \newcommand*{\Orth}{\mathrm{O}}
 \newcommand*{\SO}{\mathrm{SO}}
 \newcommand*{\GF}{\mathrm{GF}}
+\newcommand*{\Cl}{\mathrm{Cl}}
 
 
 
@@ -259,7 +261,8 @@
 \begin{theorem}
 	非空的 $G'$ 是群 $(G, \cdot, 1)$ 的子群 $\IFF$ $\forall x,y \in G' (xy^{-1} \in G')$.
 \end{theorem}
-\begin{proof} 根据子群的定义, $to$ 是显然的, 下给出 $\leftarrow$ 的证明:
+\begin{proof} 
+	根据子群的定义, $\to$ 是显然的, 下给出 $\gets$ 的证明:
 	\begin{conditionlist}[label=SG\arabic*)]
 		\item $\forall x \in G' (x x^{-1} = 1 \in G)$;
 		\item $\forall x,y\in G'$, $x1^{-1} {1y^{-1}}^{-1} = xy \in G'$;
@@ -333,8 +336,10 @@
 \end{proof}
 
 \begin{theorem}
-	$\card \langle g_0\rangle = \card \langle g'_0 \rangle 
-		\to \langle g_0\rangle \simeq \langle g'_0 \rangle$.
+	\begin{equation*}
+	\card \langle g_0\rangle = \card \langle g'_0 \rangle 
+		\to \langle g_0\rangle \simeq \langle g'_0 \rangle\,.
+	\end{equation*}
 \end{theorem}
 \begin{proof}
 	倘若$\card \langle g_0\rangle = \infty$, 那么$\nexists n \in \mathbb Z - \{0\}$, s.t.\ $g_0^n = e$; 这意味着, 存在这样的双射 $f\colon \mathbb Z \to \langle g_0\rangle$, 满足$f(n) = g_0^n$, 见证了 $(\mathbb Z, +, 0) \simeq (\langle g_0\rangle , *, e)$. 
@@ -350,10 +355,39 @@
 	取$H := \{L_g \mid g \in G\}$, 其中$L_g \colon G \to G; g' \mapsto gg'$可以证明是双射. 那么 $L\colon G \to H; g \mapsto L_g$ 见证了 $H \simeq G$.
 \end{proof}
 
-若 $\varphi \colon G \to G$ 见证了 $G \simeq G$ (如 $\id_G$), 那么称 $\varphi$ 是群 $G$ 的一个 \indexbf{自同构} (automorphism). 所有自同构组成的集合 $\Aut(G)$ 和其上的函数复合 $\circ$ 构成了 $S(G)$ 的一个子群, 称为$G$的\indexbf{自同构群}.
+若 $\varphi \colon G \to G$ 见证了 $G \simeq G$ (如 $\id_G$), 那么称 $\varphi$ 是群 $G$ 的一个 \indexbf{自同构} (automorphism). 所有自同构组成的集合 $\indexfm[Aut G]{\Aut(G)}$ 和其上的函数复合 $\circ$ 构成了 $S(G)$ 的一个子群, 称为$G$的\indexbf{自同构群}.
 
-自同构群有一特殊的子群$\Inn(G) := \{I_a \colon g \mapsto a g a^{-1} \mid a \in G\}$,
-称为\indexbf{内自同构群}. 
+自同构群有一特殊的子群$\indexfm[Inn G]{\Inn(G)} := \{I_a \colon g \mapsto a g a^{-1} \mid a \in G\}$,
+称为\indexbf{内自同构群} (inner isomorphism), 其元素称为\indexbf{共轭映射} (conjugation). 
+
+\begin{definition}[共轭]
+	设 $G$ 是一个群, $a, b \in G$. 如果 $\exists I_g \in \Inn(G)$, 使得 $I_g(a) = b$, 那么我们称 $a$ 和 $b$ 互为\indexbf{共轭} (conjugate).
+\end{definition}
+
+我们毫不费力地就能证明共轭关系是等价关系, 而且当 $G$ 是Abelian群的时候, 其任意元素的共轭都是其自身.
+
+\begin{definition}[共轭类]
+	设 $G$ 是一个群. 由共轭规定的等价类称为\indexbf{共轭类} (Conjugacy class), 记为 $\indexfm[Cl g]{\Cl(g)}$, $g$ 为其代表元. 
+	称 $\card \{ \Cl(g) \mid g \in G\}$ 为 $G$ 的\indexbf{类数} (class number). 
+	如果有一个函数 $f$ 满足 $g' \in \Cl(g) \,\to\, f(g) = g(g')$, 那么称 $f$ 是一个 \indexbf{类函数} (class function).
+\end{definition}
+
+\begin{definition}[正规子群]
+	设 $G$ 是一个群, $N$ 是其子群. 倘若 $\forall I \in \Inn(G)$, $I(N) = N$, 即其在共轭映射下不变, 则称其为 $G$ 的一个\indexbf{正规子群} (normal subgroup), 记为 $\indexfm[N triangleleft G]{N \triangleleft G}$.
+\end{definition}
+
+可以看出Abelian群的所有子群都是正规子群. 
+以下是正规子群的另一种定义方法:
+\begin{theorem}
+\begin{equation*}
+	N \triangleleft G \IFF
+		\forall g, h \in G\; (gh \in N \IFF hg \in N)\,.	
+\end{equation*}
+\end{theorem}
+\begin{proof}
+	只需注意到 $I_g(gh) = g^{-1} gh g = hg$.
+\end{proof}
+
 
 \begin{definition}[同态]
 	设有群 $(G, *, e)$ 和 $(G', \circ, e')$, 映射 $f \colon G \to G'$ 若满足
@@ -363,10 +397,10 @@
 	\end{equation*}
 	则称其为群 $(G, *)$ 到群 $(G', \circ)$ 的一个\indexbf{同态} (homomorphism), 也叫\indexbf{态射} (morphism). 类似映射, 可定义\indexbf{单态射} (monomorphism), \indexbf{满态射} (epimorphism).
 
-	集合 $\ker f := f^{-1}(\{e'\})$ 叫做同态 $f$ 的\indexbf{核} (kernel). 群到自身的同态映射称为\indexbf{自同态} (endomorphism).
+	集合 $\indexfm[ker f]{\ker f} := f^{-1}(\{e'\})$ 叫做同态 $f$ 的\indexbf{核} (kernel). 群到自身的同态映射称为\indexbf{自同态} (endomorphism).
 \end{definition}
 
-同态 $f$ 的核是$G$的子群， 而 $G$ 在同态下的像是 $G'$ 的子群.
+同态 $f$ 的核是 $G$ 的正规子群, 即$\ker f \triangleleft G$, 而 $G$ 在同态下的像是 $G'$ 的子群.
 
 \begin{theorem}
 	如果同态的核是平凡群（即, $\ker f = \{e\}$), 那么这个同态是单的.
@@ -389,6 +423,33 @@
 	f \colon G \to \Inn(G);\, g \mapsto I_g
 \end{equation*}
 满足同构的条件~\ref{item:保结构}, 因$f(a) \circ f(b) = I_{ab} = f(ab)$; 但它不一定是双射, 因而是一个同态.
+
+\begin{definition}[陪集]
+	设 $(G, *, e)$ 是一个群, $S$ 是其子群, $g \in G$, 那么我们称 $\indexfm[g ast S]{g * S} := \{ g * s \mid s \in S\}$ 为 $S$ 在 $G$ 内的\indexbf{左陪集} (left coset); 
+	同理 $\indexfm[S ast g]{S * g} := \{ s * g \mid s \in S\}$ 为 $S$ 在 $G$ 内的\indexbf{右陪集} (right coset). 
+	这里我们称 $g$ 是一个代表元.
+	如果 $g * S = S * g$, 则称其为\indexbf{陪集}.
+\end{definition}
+
+\begin{theorem}
+	\begin{equation*}
+		N \triangleleft G 
+			\IFF \forall g \in G,\; g * N = N * g.
+	\end{equation*}
+\end{theorem}
+
+\begin{definition}[商群]
+	如果 $N \triangleleft G$, 那么我们记 $\indexfm[G N]{G / N} := \{ g * N \mid g \in G\}$, 称为 $G$ 对 $N$ 的\indexbf{商群}. 
+	这个群的乘法定义为子群元素的积的集合: 
+	\begin{equation*}
+		(g * N) \cdot (g'* N)
+		:= \{s * t \mid s \in g * N, \; t \in g; * N\} 
+		= (g * g') * N
+	\end{equation*}, 单位元是 $e * N = N$ 自身.
+\end{definition}
+
+
+
 
 \section{环}
 
@@ -429,7 +490,7 @@
 		\quad
 		f(x) + f(y) = f(x + y),
 	\end{equation*}
-	那么, 我们称其为 $R$ 到 $R'$ 的一个\indexbf{同态}或\indexbf{态射}, 集合 $\ker f := \{a \in R \mid f(a) = 0\}$ 称为同态的\indexbf{核}. 同态 $f$ 的核是 $R$ 的子环. 类似地我们也有\indexbf{单同态}, \indexbf{满同态}和\indexbf{同构}的概念. 两个环同构记为 $R \cong R'$.
+	那么, 我们称其为 $R$ 到 $R'$ 的一个\indexbf{同态}或\indexbf{态射}, 集合 $\ker f := \{a \in R \mid f(a) = 0\}$ 称为同态的\indexbf{核}. 同态 $f$ 的核是 $R$ 的子环. 类似地我们也有\indexbf{单同态}, \indexbf{满同态}和\indexbf{同构}的概念. 两个环同构记为 $\indexfm[R cong R prime]{R \cong R'}$.
 \end{definition}
 
 设 $(R,+ ,\cdot)$ 是环, $X$ 是一个集合, 在 $R^X$ 上定义加法和乘法:
@@ -466,7 +527,7 @@
 有单位元的环 $R$ 中元素 $x$ 的可逆性往往指关于乘法的可逆性. 
 
 \begin{theorem}
-	设 $R$ 是带单位元 $1$ 的环, $U(R) := \{x \in R \mid \text{$x$ 可逆}\}$ 是一个乘法群.
+	设 $R$ 是带单位元 $1$ 的环, $\indexfm[U R]{U(R)} := \{x \in R \mid \text{$x$ 可逆}\}$ 是一个乘法群.
 \end{theorem}
 \begin{proof}
 	单位元 $1$ 当然可逆. 由定义可逆元素的逆也是可逆的. 如果 $x, y \in R$ 可逆, 那么 
@@ -491,7 +552,7 @@
 \end{theorem}
 \begin{proof}
 	记 $\mathbb Z_p$ 的元素为 $[0]$, $[1]$, \ldots, $[p -1]$.
-	由素数的定义, $\forall [k]  \in \mathbb Z_p^* := \mathbb Z_p - \{[0]\}$,
+	由素数的定义, $\forall [k]  \in \indexfm[Z p ast]{\mathbb Z_p^*} := \mathbb Z_p - \{[0]\}$,
 	\begin{equation*}
 		[k], [2k], \cdots, [(p-1) k]
 	\end{equation*}
@@ -500,7 +561,7 @@
 	又 $\mathbb Z_p$ 是交换环, 可知这个 $[i] = [k]^{-1}$, 即 $\mathbb Z_p$ 的乘法组成一个群.
 \end{proof}
 
-出于 $\mathbb Z_p$ 的这个性质, 我们也记其为 $\mathbb F_p$ 或 $\GF(p)$. $p^n$元有限域 $\GF(p^n)$ 也是存在的.
+出于 $\mathbb Z_p$ 的这个性质, 我们也记其为 $\indexfm[F p]{\mathbb F_p}$ 或 $\GF(p)$. 值得一提的是, $p^n$ 元有限域 $\GF(p^n)$ 也是存在的.
 
 \begin{corollary}[\indexbf{Fermat小定理}]
 	设 $p$ 是素数, $a \in \mathbb N$ 且 $a \nmid p$. 
@@ -664,6 +725,8 @@
 根据这个定理, 我们断言线性空间 $V$ 的基底 $(\basis e_i)_{i \in n}$ 张出 $V$ 本身, 
 i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$. 
 
+若 $\bv v$ 在基底 $\hat e = (\basis e_i)_{i \in n}$ 下的坐标为 $(v_i)_{i \in n}$, 记之为 $\left. \bv v \right|_{\hat e}$. 
+
 \begin{corollary}
 	设 $V'$ 是 $V$ 的子空间. 如果 $V' \subsetneq V$, 那么 $\dim V' < \dim V$.
 \end{corollary}
@@ -672,7 +735,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	如果线性无关的向量组 $(\bv e_j)_{j \in n} $ 满足 $\forall j \in n$, $\bv e_j \in  \langle\bv f_i\rangle_{i \in m}$, 那么 $n \leq m$.
 \end{corollary}
 
-\begin{theorem}[\indexbf{Steintz 替换}]
+\begin{theorem}[\indexbf{Steintz 替换}]\label{theorem:Steintz}
 	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
 	任意线性无关组 $(\basis f_i)_{i \in s}$, 都可从基底中取出 $(\basis e_{i_k})_{i_k \in n,\, k \in t}$ 使得
 	\begin{equation*}
@@ -695,7 +758,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	即 $t + s = n$, 我们已然得到 $V$ 的一组基底了.
 \end{proof}
 
-设 $\mathbb F$ 上的 $n$ 维线性空间有两组基底 $(\basis e_j)_{j \in n}$, $(\basis f_i)_{i \in n}$, 考虑定理~\ref{唯一分解}, 我们写出:
+设 $\mathbb F$ 上的 $n$ 维线性空间有两组基底 $\hat e = (\basis e_j)_{j \in n}$, $\hat f = (\basis f_i)_{i \in n}$, 考虑定理~\ref{唯一分解}, 我们写出:
 \begin{equation}
 	\basis f_i = \sum_{j \in n} a_{ji} \basis e_j\,,
 	\qquad
@@ -711,11 +774,152 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 		a_{n-1, 0} & a_{n-1, 1} & \cdots & a_{n-1, n-1}
 	\end{pmatrix}\,.
 \end{equation}
-矩阵~\eqref{equation:转换矩阵} 被称为 $(\basis e_i)_{i \in n}$ 到 $(\basis f_j)_{j \in n}$ 的一个\indexbf{转换矩阵}. 值得注意的是下标的位置 (这与有限维向量空间的线性映射的矩阵差了一个转置, 见~\ref{section:线性映射}). 
+矩阵~\eqref{equation:转换矩阵} 被称为 $\hat e$ 到 $\hat f$ 的一个\indexbf{转换矩阵}. 值得注意的是下标的位置 (这与有限维向量空间的线性映射的矩阵差了一个转置, 见~\ref{section:线性映射}). 让我们引入矩阵和与积的概念%
+\footnote{本笔记不想再重复了, 请参见任意一本初等线性代数教材, 或\cite{kostrikin1982introduction}. },
+用 $\hat f$ 把 $\hat e$ 表出, 就可以得到转换矩阵的逆 $\bv A^{-1}$. 
+这两个矩阵之间的关系是 $\bv A \bv A^{-1} = \bv A^{-1} \bv A = \bv I$.
+
+设 $\bv v \in V$, 
+\begin{equation*}
+	\bv v = \sum_{i \in n} v_i \basis e_i
+	= \sum_{i \in n} v'_i \basis f_i
+	= \sum_{i \in n} v'_i \sum_{j \in n} a_{ji} \basis e_j
+\end{equation*}
+
+那么, 
+\begin{equation*}
+	\left. \bv v \right|_{\hat e} = \left( 
+		\sum_{j \in n} a_{ij} v'_j 
+ \right)_{i \in n}
+\end{equation*}
+或 $\left. \bv v \right|_{\hat e} = \bv A \left. \bv v \right|_{\hat f}$. 同理 $\left. \bv v \right|_{\hat f} = \bv A^{-1} \left. \bv v \right|_{\hat e}$. 
+
+\begin{definition}[同构]
+	如果 $\mathbb F$ 上的线性空间 $V$, $W$ 之间存在 $f \colon V \to W$ s.t.\ 
+	\begin{conditionlist}
+		\item $f$ 是双射;
+		\item $\forall \alpha, \beta \in \mathbb F$, $\forall \bv u, \bv v \in V$, $f(\alpha \bv v + \beta \bv u) = \alpha f(\bv v) + \beta f(\bv u)$,
+	\end{conditionlist}
+	那么, 两个线性空间被认为是\indexbf{同构}的.
+\end{definition}
+
+我们指出同构关系具有等价关系的性质, 并且将基底映射到基底, 并保持维数, 这里不再一一验证了. 
+
+\begin{theorem}
+	所有 $\mathbb F$ 上的 $n$ 维线性空间都同构于 (坐标空间) $\mathbb F^n$.
+\end{theorem}
+\begin{proof}
+	任取 $\mathbb F$ 上的 $n$ 维线性空间 $V$ 中的向量 $\bv v$ 和一组基底 $\hat e$, 向量$\bv v$ 到它的坐标 $\left. \bv v\right|_{\hat e} \in \mathbb F^n$ 都是一个同构.
+\end{proof}
+
+线性空间的交依然是线性空间, 但是它们的并却不一定. 
+
+\begin{definition}[子空间的和]
+	设 $U, W$ 都是 $V$ 的子空间, 定义\footnote{这里不用 $+$ 表示集合的并.}
+	\begin{equation*}
+		U + W := \langle U \cup W \rangle = \{\bv u + \bv w \mid \bv u \in U,\,\bv w \in U\} 
+	\end{equation*}
+	为 $U$ 和 $W$ 的\indexbf{和}. 若 $U \cap W = \varnothing$, 那么记 $U \oplus W := U + W$, 称为\indexbf{直和}.
+\end{definition}
+
+\begin{theorem}[\indexbf{Grassmann 恒等式}]\label{Grassmann}
+\begin{equation*}
+	\dim (U + W) = \dim U + \dim W - \dim (U \cap W)\,.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+	设 $\dim (U \cap W) = m$, 有基底 $\hat e = (\basis e_i)_{i \in m}$, $\dim U = k$, $\dim W = \ell$. 由定理, $\dim U$ 可取基底 $(\basis e_0, \cdots \basis e_{m-1};\; \basis f_0, \cdots, \basis f_{k - m - 1})$, $\dim V$ 可取基底 $(\basis e_0, \cdots \basis e_{m-1};\; \basis g_0, \cdots, \basis g_{\ell - m - 1})$, 那么
+	\begin{equation*}
+		U + W = \langle
+			\basis e_0, \cdots \basis e_{m-1};\;
+			\basis f_0, \cdots, \basis f_{k - m - 1};\;
+			\basis g_0, \cdots, \basis g_{\ell - m - 1}
+		\rangle\,.
+	\end{equation*}
+
+	接下来我们证明向量组
+	\begin{equation*}
+		\basis e_0, \cdots \basis e_{m-1};\;
+		\basis f_0, \cdots, \basis f_{k - m - 1};\;
+		\basis g_0, \cdots, \basis g_{\ell - m - 1}
+	\end{equation*}
+	线性独立. 若存在非平凡的线性组合:
+	\begin{equation*}
+		\sum_{s \in m} \varepsilon_s \basis e_s 
+			+ \sum_{i \in k - m} \varphi_i \basis f_i
+			+ \sum_{j \in \ell - m} \gamma_j \basis g_j
+		= \bv 0\,,
+	\end{equation*}
+	但是前两项是 $U$ 中的元素, 第三项是 $W$ 中的元素, 这将说明它们都属于 $U \cap W$, 这意味着第三项可用 $\hat e$ 表出, 这是一个矛盾.
+\end{proof}
+
+\begin{corollary}
+	若 $U = \sum_{i \in m} U_i$ 是直和, 当且仅当:
+	\begin{equation*}
+		\dim U = \sum_{i \in m} \dim U_i\,.
+	\end{equation*}
+\end{corollary}
+\begin{proof}
+	利用Grassmann恒等式~\ref{Grassmann} 和数学归纳法易证.
+\end{proof}
+
+\begin{theorem}
+	域 $\mathbb F$ 上的 $n$ 维线性空间 $V$ 的任意 $m$ 维线性子空间 $U$, 都能找到 $V$ 的线性子空间 $W$ 使得 $V = U \oplus W$ (称 $V$ 和 $W$ 是\indexbf{互补}的子空间). 
+\end{theorem}
+\begin{proof}
+	证明用Steintz替换~\ref{theorem:Steintz} 即可.
+\end{proof}
+
+记 $\codim U = \dim V - \dim U$.
+
+当 $L$ 是 $V$ 的一个子空间时, 我们记线性空间作为加法群的陪集 $\indexfm[x plus L]{\bv x + L} := \{\bv x + \bv y \mid \bv y \in L\}$, 并记其代表元为. 
+考虑到线性空间作为加法群是Abelian群, 其所有子群 (子空间蕴含了加法子群) 都是正规子群, 从而:
+
+\begin{definition}[商空间]
+	域 $\mathbb F$ 上的线性空间 $V$ 有子空间 $L$, 记线性空间作为加法群的商群 $ V / L$, 并在 $\mathbb F \times V / L$ 上定义标量乘法:
+	\begin{equation*}
+		\alpha (\bv x + L) := \alpha \bv x + L \,,
+	\end{equation*}
+	那么称 $V / L$ 是一个\indexbf{商空间}. 不难验证商空间是一个线性空间.
+\end{definition}
+
+我们记商空间上的同余等价类:
+\begin{equation*}
+	\bv x \equiv \bv x' \mod L \IFF  \bv x - \bv x' \in L\,.
+\end{equation*}
+
+\begin{theorem}
+	设 $V$ 的子空间 $U$ 和 $W$ 互余, 那么
+	\begin{equation*}
+		f \colon W \to V / U; \; \bv w \mapsto \bv w + U
+	\end{equation*}
+	见证了 $W$ 和 $V / U$ 的同构.
+\end{theorem}
+\begin{proof}
+	映射 $f$ 对线性结构的保持是平凡的. 
 	
+	设 $\bv v + U \in V / U$.
+	因为 $V \oplus U + W$, $\exists \bv u \in U$, $\exists \bv w \in W$ s.t.\ $\bv v = \bv u + \bv w$. 从而
+	\begin{equation*}
+		\bv v + U 
+		= (\bv u + \bv w) + U
+		= (\bv x + U) + (\bv w + U)
+		= U + (\bv w + U)
+		= \bv w + U
+		= f(\bv w)\,, 
+	\end{equation*}
+	所以 $f$ 是满的. 满射 $f$ 的单性由
+	\begin{equation*}
+		\ker f = \{\bv w \in W \mid f(\bv w) = U\} 
+		= \{\bv w \in W \mid \bv w \in U\}
+		= W \cap U
+		= \{\bv 0\} 
+	\end{equation*}
+	保证.
+\end{proof}
 
-
-
+\section{对偶空间}
+\section{双线性型与二次型}
 \chapter{线性算子}
 \section{线性映射}
 \label{section:线性映射}
