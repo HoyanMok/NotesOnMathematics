@@ -118,6 +118,11 @@
 \else%
 	\frac{\partial^{#1} #2}{\partial #3^{#1}}% n阶偏导数\pdiff[n]{y}{x}
 \fi}
+
+\newcommand*{\inbasis}[2]{\left.%
+	{#1}\right|_{#2}
+}
+
 \newcommand{\emphbf}[1]{\emph{\textbf{#1}}}
 % \indexbf 的定义见前imakeidx的引用下
 
@@ -803,7 +808,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	那么, 两个线性空间被认为是\indexbf{同构}的.
 \end{definition}
 
-我们指出同构关系具有等价关系的性质, 并且将基底映射到基底, 并保持维数, 这里不再一一验证了. 
+我们指出同构关系具有等价关系的性质, 并且将基底映射到基底, 并保持维数, 这里不再一一验证了. 类似地, 我们建立线性空间\indexbf{同态}的概念, 即保持线性结构的映射, 双同态即是同构. 线性空间 $V$ 到 $U$ 的同态集记作 $\indexfm[L V U]{\mathcal L (V, U)}$.
 
 \begin{theorem}
 	所有 $\mathbb F$ 上的 $n$ 维线性空间都同构于 (坐标空间) $\mathbb F^n$.
@@ -919,14 +924,86 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \end{proof}
 
 \section{对偶空间}
+\begin{definition}[线性型]
+	设 $V$ 是一个域~$\mathbb F$ 上的线性空间.
+	同态~$f \colon V \to \mathbb F$ 被称为 $V$ 上的一个\indexbf{线性型} (linear form). 
+	在不同的情景, 它也可能被称作\indexbf{线性泛函} (linear functional), \indexbf{线性函数}等.
+\end{definition}
+
+作为 $n$ 维有限维空间的例子, 设有线性型 $\ell$, 它作用于 $\bv x \in V$ 时, 设基底为 $\hat e$, 那么:
+\begin{equation*}
+	\ell \colon \bv x \mapsto \left.\bv \ell\right|_{\hat e} \left. \bv x\right|_{\hat e}\,,
+\end{equation*}
+其中 $\left.\bv \ell\right|_{\hat e}$ 是 $1 \times n$ 的行向量. 坐标变换到 $\hat f$ 时, 设转换矩阵是 $\bv P$, 那么:
+\begin{equation*}
+	\inbasis{\bv \ell}{\hat e} \inbasis{\bv x}{\hat e} 
+	= \inbasis{\bv \ell}{\hat e} \bv P \inbasis{\bv x}{\hat f}
+	= \inbasis{\bv \ell}{\hat f} \inbasis{\bv x}{\hat f}\,, 
+\end{equation*}
+即:
+\begin{equation}
+	\inbasis{\bv \ell}{\hat f} = \bv P \inbasis{\bv \ell}{\hat e}\,.
+\end{equation}
+
+定义线性型的线性组合 $\alpha f + \beta g$ 为:
+\begin{equation*}
+	(\alpha f + \beta g)(\bv x) := \alpha f(\bv x) + \beta g(\bv x),
+	\quad \forall \bv x \in V \forall \alpha, \beta \in \mathbb F\,.
+\end{equation*}
+
+如此我们注意到 $V$ 上所有的线性型构成了一个线性空间, 其中零元是 $0_V \colon \bv x \mapsto 0$.
+
+\begin{definition}[对偶空间]
+	线性空间 $V$ 上所有的线性型构成线性空间 $\indexfm[V ast]{V^*}$, 称为 $V$的\indexbf{对偶空间} (dual space), 线性组合和零元已定义如前. 通常对偶空间的元素可称为\indexbf{余向量}, 或\indexbf{共变向量} (与此同时, $V$ 的元素对应地称为\indexbf{反变向量}).
+\end{definition}
+
+为区别两种向量, 有用 $x^i$ 表示反变向量而用 $\ell_i$ 表示共变矢量, 并引入Einstein求和约定的, 见之后第\ref{chapter:张量}章.
+
+我们继续以 $n$ 维线性空间为例子. 
+设 $V$ 中有基底 $\hat e = (\basis e_i)_{i \in n}$, 取 $V^*$ 的基底 $\hat e^* := (\basis e^*_i)_{i \in n}$, 使得 $\basis e^*_i(\basis e_i) = \delta_{ij}$, 其中 $\delta_{ij}$ 是Kronecker符号, 当且仅当 $i = j$ 时取值为 $1$, 否则为 $0$.
+
+不难证明它们是线性独立的, 而且能线性表示所有余向量. 这组基底称为\indexbf{对偶基底}. 
+而且作为推论:
+\begin{theorem}
+设 $V$ 是有限维线性空间, 那么
+\begin{equation*}
+	\dim V^* = \dim V\,.
+\end{equation*}
+\end{theorem}
+
+考虑到 $V^{**} := (V^*)^*$ 和 $V$ 的维数也当相同, 它们之间应该存在同构关系. 这个同构有一个自然的构造:
+
+\begin{theorem}
+	设 $V$ 是 $n$ 维线性空间, 映射 $\varepsilon \colon V \to V^{**}$ 定义如下:
+	\begin{equation*}
+		\bv x \mapsto \varepsilon_{\bv x}\;; 
+		\quad
+		\varepsilon_{\bv x} \colon V^* \to \mathbb F\,; 
+			f \mapsto f(\bv x)\,.
+	\end{equation*}
+	
+	映射 $\varepsilon$ 是一个同构.
+\end{theorem}
+\begin{proof}
+	事实 $\varepsilon \in \mathcal L(V, V^{**})$ 的验证是枯燥的. 
+	这里我们只证明它是个双射:
+
+	选取 $V$ 的基底 $\hat e = (\basis e_i)_{i \in n}$, 就能立马得出结论 $\hat \varepsilon = (\varepsilon_{\basis e_i})_{i \in n}$ 是 $V^{**}$ 的基底. 
+\end{proof}
+
+这个同构被称为\indexbf{自然同构}.
+
+
+
 \section{双线性型与二次型}
 \chapter{线性算子}
 \section{线性映射}
-\label{section:线性映射}
+	\label{section:线性映射}
 
 \chapter{内积空间}
 
 \chapter{张量}
+	\label{chapter:张量}
 
 
 \appendix
