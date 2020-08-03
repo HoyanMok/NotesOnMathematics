@@ -680,7 +680,7 @@
 	反之则称它们\indexbf{线性无关}或\indexbf{线性独立}.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{theorem:线性相关IFF线性组合}
 	向量组 $(\bv x_i)_{i \in n}$ 是线性相关的, 当且仅当 $\exists i \in n$ s.t.\ 
 	\begin{equation*}
 		\exists (\beta_j)_{j \in n - \{i\}} \in 2^\mathbb F 
@@ -730,7 +730,7 @@
 根据这个定理, 我们断言线性空间 $V$ 的基底 $(\basis e_i)_{i \in n}$ 张出 $V$ 本身, 
 i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$. 
 
-若 $\bv v$ 在基底 $\hat e = (\basis e_i)_{i \in n}$ 下的坐标为 $(v_i)_{i \in n}$, 记之为 $\left. \bv v \right|_{\hat e}$. 
+若 $\bv v$ 在基底 $\hat e = (\basis e_i)_{i \in n}$ 下的坐标为 $(v_i)_{i \in n}$, 记之为 $\inbasis{\bv v}{\hat e}$. 
 
 \begin{corollary}
 	设 $V'$ 是 $V$ 的子空间. 如果 $V' \subsetneq V$, 那么 $\dim V' < \dim V$.
@@ -793,11 +793,11 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 那么, 
 \begin{equation*}
-	\left. \bv v \right|_{\hat e} = \left( 
+	\inbasis{\bv v}{\hat e} = \left( 
 		\sum_{j \in n} a_{ij} v'_j 
  \right)_{i \in n}
 \end{equation*}
-或 $\left. \bv v \right|_{\hat e} = \bv A \left. \bv v \right|_{\hat f}$. 同理 $\left. \bv v \right|_{\hat f} = \bv A^{-1} \left. \bv v \right|_{\hat e}$. 
+或 $\inbasis{\bv v}{\hat e} = \bv A \inbasis{\bv v}{\hat f}$. 同理 $\inbasis{\bv v}{\hat f} = \bv A^{-1} \inbasis{\bv v}{\hat e}$. 
 
 \begin{definition}[同构]
 	如果 $\mathbb F$ 上的线性空间 $V$, $W$ 之间存在 $f \colon V \to W$ s.t.\ 
@@ -932,9 +932,9 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 作为 $n$ 维有限维空间的例子, 设有线性型 $\ell$, 它作用于 $\bv x \in V$ 时, 设基底为 $\hat e$, 那么:
 \begin{equation*}
-	\ell \colon \bv x \mapsto \left.\bv \ell\right|_{\hat e} \left. \bv x\right|_{\hat e}\,,
+	\ell \colon \bv x \mapsto \inbasis{\bv \ell}{\hat e} \inbasis{\bv x}{\hat e}\,,
 \end{equation*}
-其中 $\left.\bv \ell\right|_{\hat e}$ 是 $1 \times n$ 的行向量. 坐标变换到 $\hat f$ 时, 设转换矩阵是 $\bv P$, 那么:
+其中 $\inbasis{\bv \ell}{\hat e}$ 是 $1 \times n$ 的行向量. 坐标变换到 $\hat f$ 时, 设转换矩阵是 $\bv P$, 那么:
 \begin{equation*}
 	\inbasis{\bv \ell}{\hat e} \inbasis{\bv x}{\hat e} 
 	= \inbasis{\bv \ell}{\hat e} \bv P \inbasis{\bv x}{\hat f}
@@ -954,10 +954,10 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 如此我们注意到 $V$ 上所有的线性型构成了一个线性空间, 其中零元是 $0_V \colon \bv x \mapsto 0$.
 
 \begin{definition}[对偶空间]
-	线性空间 $V$ 上所有的线性型构成线性空间 $\indexfm[V ast]{V^*}$, 称为 $V$的\indexbf{对偶空间} (dual space), 线性组合和零元已定义如前. 通常对偶空间的元素可称为\indexbf{余向量}, 或\indexbf{共变向量} (与此同时, $V$ 的元素对应地称为\indexbf{反变向量}).
+	线性空间 $V$ 上所有的线性型构成线性空间 $\indexfm[V ast]{V^*}$, 称为 $V$的\indexbf{对偶空间} (dual space), 线性组合和零元已定义如前. 通常对偶空间的元素可称为\indexbf{余向量} (covector), 或\indexbf{共变向量} (covariant vector, 与此同时, $V$ 的元素对应地称为\indexbf{反变向量}, contravariant vector).
 \end{definition}
 
-为区别两种向量, 有用 $x^i$ 表示反变向量而用 $\ell_i$ 表示共变矢量, 并引入Einstein求和约定的, 见之后第\ref{chapter:张量}章.
+为区别两种向量, 有用 $x^i$ 表示反变向量而用 $\ell_i$ 表示共变向量, 并引入Einstein求和约定的, 见之后第\ref{chapter:张量}章.
 
 我们继续以 $n$ 维线性空间为例子. 
 设 $V$ 中有基底 $\hat e = (\basis e_i)_{i \in n}$, 取 $V^*$ 的基底 $\hat e^* := (\basis e^*_i)_{i \in n}$, 使得 $\basis e^*_i(\basis e_i) = \delta_{ij}$, 其中 $\delta_{ij}$ 是Kronecker符号, 当且仅当 $i = j$ 时取值为 $1$, 否则为 $0$.
@@ -973,7 +973,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 考虑到 $V^{**} := (V^*)^*$ 和 $V$ 的维数也当相同, 它们之间应该存在同构关系. 这个同构有一个自然的构造:
 
-\begin{theorem}
+\begin{theorem}[自然同构]
 	设 $V$ 是 $n$ 维线性空间, 映射 $\varepsilon \colon V \to V^{**}$ 定义如下:
 	\begin{equation*}
 		\bv x \mapsto \varepsilon_{\bv x}\;; 
@@ -991,11 +991,87 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	选取 $V$ 的基底 $\hat e = (\basis e_i)_{i \in n}$, 就能立马得出结论 $\hat \varepsilon = (\varepsilon_{\basis e_i})_{i \in n}$ 是 $V^{**}$ 的基底. 
 \end{proof}
 
-这个同构被称为\indexbf{自然同构}.
+这个同构被称为\indexbf{自然同构}, 这样得到的 $\hat e^* = (e^*_i)_{i \in n}$ 被称为 $\hat e$ 的\indexbf{对偶基底}.
+
+\begin{lemma}\label{lemma:子空间的对偶}
+	设 $L$ 是 $n$~维线性空间~$V$ 的子空间, $\hat f := (f_i)_{i \in n}$ 是对偶空间~$V^*$ 的一组基底. 
+	倘若 $(\left. f_i \right|_L)_{i \in n}$ 表示基底各自在 $L$ 上的限制,
+	那么 $L^* = \langle \left. f_i \right|_L \rangle_{i \in n}$.
+\end{lemma}
+\begin{proof}
+	首先, 显然 $\langle \left. f_i \right|_L \rangle_{i \in n} \subseteq L^*$.
+	设 $r := \dim L$, $\hat e := (\basis e_i)_{i \in r}$ 是 $L$ 的基底. 
+	由定理~\ref{theorem:Steintz}, 将其扩充至 $V$ 的基底 $(\basis e_i)_{i \in n}$.
+
+	$\forall f \in L^*$, 取线性型 $\tilde f := \sum_{i \in n} \beta_i f_i \in V^*$ 满足 $\forall i' \leq r$, $\tilde f(\basis e_{i'}) = 0$. 
+	显然 $f = \left. \tilde f \right|_L = \sum_{i \in n} \beta_i \left. f_i \right|_L$.
+\end{proof}
 
 
+\begin{lemma}\label{lemma:线性相关则行列式为0}
+	设线性空间~$V$ 中有线性相关的向量组~$(\bv x_j)_{j\in m}$, 而 $\forall i \in m$, $f_i \in V^*$. 那么:
+	\begin{equation*}
+		\det\left( 
+			f_i (\bv x_j)
+		 \right)_{i,j \in m} = 0\,.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	根据定理~\ref{theorem:线性相关IFF线性组合}, $\exists j_0 \in m$ 使得 $\bv x_{j_0}$ 是其他 $(\bv x_j)_{j\in m;\; j \neq j_0}$ 的线性组合. 
+	根据行列式的性质, 将$j_0$ 列减去其他各列 ($j \neq j_0$) 乘上线性组合的系数~$\lambda_j$, 不改变行列式的值, 但该列变成了
+	\begin{equation*}
+		f_i(\bv x_{j_0}) 
+			- \sum_{j \in m;\; j \neq j_0} \alpha_j f_i(\bv x)
+			= f_i\left(\bv x_{j_0} 
+					- \sum_{j \in m;\; j \neq j_0} \alpha_j \bv x_j
+				\right)
+			= f_i(\bv 0)
+			= 0\,.
+	\end{equation*}
+	
+	这给出了 $
+		\det\left( 
+			f_i (\bv x_j)
+		 \right)_{i,j \in m} = 0\,.
+	$ 的证明.
+\end{proof}
 
-\section{双线性型与二次型}
+\begin{lemma}\label{lemma:线性无关IFF行列式非零}
+	设 $V$ 是 $n$~维线性空间, 而 $\hat f := (f_i)_{i \in n}$ 是对偶空间~$V^*$ 的一组基底.
+	向量组~$(\bv x_j)_{j \in n}$ 线性无关当且仅当
+	\begin{equation*}
+		\det(f_i(\bv x_j))_{i,j \in n} \neq 0\,.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	由引理~\ref{lemma:线性相关则行列式为0}, 我们已经证明了行列式非零则线性无关. 
+	反过来, 若线性无关, 取 $\hat e = \hat f^*$ 即 $\hat f$ 的对偶基底. 
+	考虑到 $\hat x = (\bv x_j)_{j \in n}$ 也是一组基底, 那么存在转换矩阵 $\bv P$, 而且它的行列式恰是 $\det(f_i(\bv x_j))_{i,j \in n}$. 
+	转换矩阵是可逆的, 它的行列式非零.
+\end{proof}
+
+\begin{theorem}
+	设 $V$ 是 $n$~维线性空间, 而 $\hat f := (f_i)_{i \in n}$ 是对偶空间~$V^*$ 的一组基底.
+	那么 $V$ 的子空间~$\langle \bv x_j\rangle_{j \in m}$ 的维数 $r$ 等于
+	\begin{equation*}
+		(f_i(\bv x_j))_{i \in n, j \in m}
+	\end{equation*}
+	的最大非零子式的阶数.
+\end{theorem}
+\begin{proof}
+	由引理~\ref{lemma:线性相关则行列式为0}, 阶数比 $r$ 大的子式必为 $0$, 我们只需证明有 $r$~阶非零子式.
+
+	取 $(\bv x_j)_{j \in m}$ 中的一组线性无关组~$(\bv x_{j_k})_{k \in r}$, 再在 $\left. \hat f \right|_{\langle \bv x_j\rangle_{j \in m}}$ 中取出线性无关组~$(\bar f_{k})_{k \in r}
+	:=
+	\left(  
+		\left. f_{i_k} \right|_{\langle \bv x_j\rangle_{j \in m}}
+	\right)_{k \in r}$ (引理~\ref{lemma:子空间的对偶}), 引理~\ref{lemma:线性无关IFF行列式非零} 告诉我们
+	\begin{equation*}
+		\det(\bar f_i (\bv x_{j_k}))_{i, k \in r} \neq 0\,.
+	\end{equation*}
+\end{proof}
+
+\section{多重线性型}
 \chapter{线性算子}
 \section{线性映射}
 	\label{section:线性映射}
