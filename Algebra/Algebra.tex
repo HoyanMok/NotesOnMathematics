@@ -1072,9 +1072,66 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \end{proof}
 
 \section{多重线性型}
+\begin{definition}[多重线性型]
+	设 $V_0$, $V_1$, \ldots, $V_{p - 1}$, $U$ 是 $\mathbb F$ 上的线性空间. 若映射
+	\begin{equation*}
+		f \colon \prod_{i \in p} V_i  \to U
+	\end{equation*}
+	满足 $\forall i \in p$, 
+	\begin{equation*}
+		\forall (\bv a_j)_{j \in p;\;j \neq i} \in 
+			\prod_{j \in p;\; j \neq i} V_j\,,
+		\quad
+		f_i \colon V_i \to U;\;\bv x \mapsto f(\bv a_0, \cdots, \bv a_{i - 1}, 
+			\bv x, \bv a_{i + 1}, \cdots, \bv a_{p - 1}) \in \mathcal L (V_i, U)\,,
+	\end{equation*}
+	则称 $f$ 是 $V_0$, \ldots, $V_{p - 1}$ 上的\indexbf{多重线性型}, 或 \indexbf{$p$-线性型}. 这些多重线性型的集合记为 $\indexfm[L V 0 dots V p minus 1 U]{%
+		\mathcal L(V_0, \cdots, V_{p - 1};\; U)}$.
+\end{definition}
+
+如 $V_0 = V_1 = \cdots = V_{p - 1}$, 那么我们记 $V^p$ 上的多重线性型的集合为 $\indexfm[L p V U]{%
+	\mathcal L_p(V;\; U)}$. 
+当 $U = \mathbb F$ 时, 我们也可省略 $\mathbb F$ 不写.
+
+\begin{definition}[对称与反对称]
+	若 $V$, $U$ 是 $\mathbb F$ 上的线性空间, $f \in \mathcal L_p(V, U)$. 
+	如果 $\forall \pi \in S_p$, $\forall (\bv x_i)_{i \in p} \in V^p$, 
+	\begin{equation*}
+		f\left( 
+		\bv x_{\pi(i)} 
+	 \right)_{i \in p} = f(\bv x_i)_{i \in p}\,,
+	\end{equation*}
+	那么我们称 $f$ 为\indexbf{对称的}.
+	如 $\forall \pi \in S_p$, $\forall (\bv x_i)_{i \in p} \in V^p$,
+	\begin{equation*}
+		f\left( 
+		\bv x_{\pi(i)} 
+	 	\right)_{i \in p} = \varepsilon_\pi f(\bv x_i)_{i \in p}\,,
+	\end{equation*}
+	那么我们称 $f$ 为\indexbf{反对称的}.
+\end{definition}
+
+我们可以给出行列式的公理化构造, 它在实数上的计算方法我们已经在线性代数课程中非常熟悉了:
+
+\begin{definition}[行列式]
+	设 $\mathbb F$ 是一个域. 多重线性型 $\indexfm[det]{%
+		\det} \in \mathcal L_n(\mathbb F)$ 若满足:
+		\begin{conditionlist}
+			\item $\det$ 是反对称的;
+			\item $\det \bv I = 1$, 其中 $\bv I = (\delta_{ij})_{i, j \in n}$,
+		\end{conditionlist}
+		记方阵 $\bv X := (\bv x_i)_{i \in n}$, 则称 $\det \bv X$ 是 $\bv X$ 的\indexbf{行列式}.
+\end{definition}
+
+
 \chapter{线性算子}
 \section{线性映射}
 	\label{section:线性映射}
+
+\begin{definition}[线性映射]
+	设 $V$, $W$ 是域 $\mathbb F$ 上的线性空间. 
+	如映射 $\mathscr A \in \mathcal L (V, W)$, 即 $\mathscr A$ 是 $V$ 到 $W$ 的一个同态, 那么我们称 $\mathscr A$ 是 $V$ 到 $W$ 的一个\indexbf{线性映射}, 并称其为\indexbf{线性的}.
+\end{definition}
 
 \chapter{内积空间}
 
