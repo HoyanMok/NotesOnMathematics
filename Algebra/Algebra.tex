@@ -136,6 +136,7 @@
 \DeclareMathOperator{\ran}{ran}
 \DeclareMathOperator{\interior}{int}
 \DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\rank}{rank}
 
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Inn}{Inn}
@@ -627,7 +628,7 @@
 		\item $(\alpha + \beta) \bv x = \alpha \bv x + \beta \bv x$, $\forall \alpha, \beta \in \mathbb F$, $\forall \bv x \in V$;
 		\item $\lambda (\bv x + \bv y ) = \lambda \bv x + \lambda \bv y$,
 	\end{conditionlist}
-	那么, 我们称 $V$ 是 $\mathbb F$ 上的一个\indexbf{线性空间}, 或称\indexbf{向量空间}, 其元素称为\indexbf{向量}, 相对而言 $\mathbb F$ 的元素则被称为\indexbf{纯量乘积}.
+	那么, 我们称 $V$ 是 $\mathbb F$ 上的一个\indexbf{线性空间}, 或称\indexbf{向量空间}, 其元素称为\indexbf{向量}, 相对而言 $\mathbb F$ 的元素则被称为\indexbf{纯量}.
 \end{definition}
 
 通常我们称 $(\bv x_i)_{i \in I}$ 为\indexbf{向量组},  $I$ 是指标集.
@@ -709,7 +710,7 @@
 
 因为基底的顺序并不重要, 有时我们也有基底向量的集合 $\{\basis e_i\}_{i \in n}$ 表示它.
 
-\begin{theorem}[唯一分解]\label{唯一分解}
+\begin{theorem}[唯一分解]\label{theorem:唯一分解}
 	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
 	那么 $\forall \bv v \in V$, $\exists ! (v_i)_{i \in n}$ (称为 $\bv v$ 在基底 $(\basis e_i)_{i \in n}$ 下的\indexbf{坐标}), s.t.\ 
 	\begin{equation*}
@@ -763,7 +764,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	即 $t + s = n$, 我们已然得到 $V$ 的一组基底了.
 \end{proof}
 
-设 $\mathbb F$ 上的 $n$ 维线性空间有两组基底 $\hat e = (\basis e_j)_{j \in n}$, $\hat f = (\basis f_i)_{i \in n}$, 考虑定理~\ref{唯一分解}, 我们写出:
+设 $\mathbb F$ 上的 $n$ 维线性空间有两组基底 $\hat e = (\basis e_j)_{j \in n}$, $\hat f = (\basis f_i)_{i \in n}$, 考虑定理~\ref{theorem:唯一分解}, 我们写出:
 \begin{equation}
 	\basis f_i = \sum_{j \in n} a_{ji} \basis e_j\,,
 	\qquad
@@ -1130,8 +1131,64 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 \begin{definition}[线性映射]
 	设 $V$, $W$ 是域 $\mathbb F$ 上的线性空间. 
-	如映射 $\mathscr A \in \mathcal L (V, W)$, 即 $\mathscr A$ 是 $V$ 到 $W$ 的一个同态, 那么我们称 $\mathscr A$ 是 $V$ 到 $W$ 的一个\indexbf{线性映射}, 并称其为\indexbf{线性的}.
+	如映射 $\mathscr A \in \mathcal L (V, W)$, 即 $\mathscr A$ 是 $V$ 到 $W$ 的一个同态, 那么我们称 $\mathscr A$ 是 $V$ 到 $W$ 的一个\indexbf{线性映射}, 并称其为\indexbf{线性的}. 特别地, 如果它还是自同态, 我们称其为\indexbf{线性变换}\footnote{也有将线性映射统称为线性变换的. }.
 \end{definition}
+
+\begin{theorem}
+	设 $\mathscr A \in \mathcal L (V, W)$, 倘若 $(\bv v_i)_{i \in s} \in V^s$, 
+	\begin{equation*}
+		f \left( 
+			\langle \bv v_i \rangle_{i \in s}
+		\right) = \left\langle
+			f(\bv v_i)
+		\right\rangle_{i \in s}\,.
+	\end{equation*} 
+\end{theorem}
+
+\begin{corollary}
+	设 $\mathscr A \in \mathcal L (V, W)$, 而 $U$ 是 $V$ 的有限维子空间, 那么 $\dim f(U) \leq \dim U$.
+\end{corollary}
+
+我们将指出, 我们在这里所说的线性映射在某基底下可表为矩阵. 
+设 $V$, $W$ 分别是 $m$, $n$ 维线性空间, 给定各自的基底 $\hat e$, $\hat f$, 那么我们可以用矩阵
+\begin{equation}\label{equation:线性映射的矩阵表示}
+	\inbasis{\mathscr A}{\hat e,\, \hat f} 
+		:= \bv A = (a_{ij})_{i \in n,\, j \in m}
+		= \left( 
+			\inbasis{f(\basis e_j)}{\hat f}
+		 \right)_{j \in m}
+\end{equation}
+来表示 $\mathscr A \in \mathcal L (V, W)$. 
+
+\begin{theorem}
+	由式~\eqref{equation:线性映射的矩阵表示} 决定的线性映射和 $\mathbb F$ 上的 $m \times n$ 矩阵是一一对应的, 且:
+	\begin{equation}\label{equation:线性映射的复合与矩阵的积}
+		\inbasis{(\mathscr B \circ \mathscr A)}{\hat e,\, \hat g} = \bv B \bv A\,,
+	\end{equation}
+	其中 $\mathscr A \colon V \to U$, $\mathscr B \colon U \to W$, $V$, $U$ 和 $W$ 分别有基底 $\hat e$, $\hat f$ 和 $\hat g$.
+\end{theorem}
+\begin{proof}
+	由线性映射到矩阵的单性由式~\eqref{equation:线性映射的矩阵表示} 易证 (意思是, 只需假定有两个线性映射共用矩阵, 它们将由~\ref{theorem:唯一分解} 得出是同一个映射). 而满性只需验证由 $\inbasis{f(\bv v)}{\hat f} = \bv A \inbasis{\bv v}{\hat e}$ 决定的映射是 $\mathcal L(V, W)$ 的元素.
+
+	同态的复合依然是同态是显然的 (可以进行枯燥的验证, 但没必要). 
+	式~\eqref{equation:线性映射的复合与矩阵的积} 则由下式给出:
+	\begin{equation*}
+		\inbasis{(\mathscr B \circ \mathscr A)(\bv v)}{\hat g} 
+		= \inbasis{\mathscr B \big(
+			\mathscr A(\bv v)\big)}{\hat g}
+		= \bv B \inbasis{\mathscr A(\bv v)}{\hat f}
+		= \bv B \bv A \inbasis{\bv v}{\hat e}\,.
+	\end{equation*}
+\end{proof}
+
+
+\begin{definition}[秩]
+	设 $\mathscr A \in \mathcal L(V, W)$, 记 $\rank \mathscr A := \dim \mathscr A(V)$.
+\end{definition}
+
+\begin{theorem}
+	若 $V$, $W$ 都是有限维向量空间. 任取它们分别的基底 $\hat e$, $\hat f$, 都有 $\rank \mathscr A = \rank \bv A$, 其中 $\bv A = \inbasis{\mathscr A}{\hat e,\, \hat f}$.
+\end{theorem}
 
 \chapter{内积空间}
 
