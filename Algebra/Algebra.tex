@@ -737,9 +737,29 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	设 $V'$ 是 $V$ 的子空间. 如果 $V' \subsetneq V$, 那么 $\dim V' < \dim V$.
 \end{corollary}
 
-\begin{corollary}
+\begin{corollary}\label{corollary:向量组线性表出的向量组秩不多于自身}
 	如果线性无关的向量组 $(\bv e_j)_{j \in n} $ 满足 $\forall j \in n$, $\bv e_j \in  \langle\bv f_i\rangle_{i \in m}$, 那么 $n \leq m$.
 \end{corollary}
+
+我们称一个向量组中, 如果存在 $r$ 个线性无关的向量, 且所有 $r + 1$ 个向量都线性相关, 则我们称 $r$ 为向量组的\indexbf{秩} (rank), 而那 $r$ 个线性无关的向量是\indexbf{最大线性无关组}.
+我们接下来证明这样的最大线性无关组总是存在, 而且其个数等于向量组张出的线性空间之维数:
+
+\begin{theorem}\label{corollary:秩与维数}
+	设 $ (\bv x_j)_{j \in m}$ 是线性空间 $V$ 的向量组.
+	\begin{align*}
+		\dim \langle \bv x_j\rangle_{j \in m} = r
+		\IFF
+		\exists \{\bv x_{j_k}\}_{k \in r} \in 2^{\{\bv x_j\}_{j \in m}} 
+		&\left( 	
+			\text{$(\bv x_{j_k})_{k \in r}$ 是最大线性无关组}
+		\right)\,.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	由维数的定义, $r + 1$ 个线性无关的向量将不可能张出维数为 $r$ 的线性空间.
+	倘若不存在 $r$ 个线性无关向量, 在 $\langle \bv x_j\rangle_{j \in m} $中取出一组基底共 $r$ 个线性无关的向量, 这是违背推论~\ref{corollary:向量组线性表出的向量组秩不多于自身} 的. 
+	因而, 最大线性无关组总是存在, 而且其个数等于向量组张出的线性空间之维数.
+\end{proof}
 
 \begin{theorem}[\indexbf{Steintz 替换}]\label{theorem:Steintz}
 	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
@@ -1051,7 +1071,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	转换矩阵是可逆的, 它的行列式非零.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{theorem:线性相关, 对偶空间基底的阶数}
 	设 $V$ 是 $n$~维线性空间, 而 $\hat f := (f_i)_{i \in n}$ 是对偶空间~$V^*$ 的一组基底.
 	那么 $V$ 的子空间~$\langle \bv x_j\rangle_{j \in m}$ 的维数 $r$ 等于
 	\begin{equation*}
@@ -1070,6 +1090,16 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\begin{equation*}
 		\det(\bar f_i (\bv x_{j_k}))_{i, k \in r} \neq 0\,.
 	\end{equation*}
+\end{proof}
+
+\begin{corollary}\label{corollary:线性相关与坐标阶数}
+	设 $V$ 是 $n$~维线性空间, 有基底 $\hat e$, 向量组 $(\bv x_j)_{j \in m}$ 的维数等于矩阵 $(
+			\inbasis{\bv x_j}{\hat e}
+		)_{j \in m}$ 的最大非零子式的阶数.
+	. 
+\end{corollary}
+\begin{proof}
+	在定理~\ref{theorem:线性相关, 对偶空间基底的阶数} 中令 $\hat f = \hat e^*$ 即可.
 \end{proof}
 
 \section{多重线性型}
@@ -1189,6 +1219,41 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \begin{theorem}
 	若 $V$, $W$ 都是有限维向量空间. 任取它们分别的基底 $\hat e$, $\hat f$, 都有 $\rank \mathscr A = \rank \bv A$, 其中 $\bv A = \inbasis{\mathscr A}{\hat e,\, \hat f}$.
 \end{theorem}
+\begin{proof}
+	由定义式~\eqref{equation:线性映射的矩阵表示}, 矩阵的列向量组将张出 $\mathscr A (V)$.
+	由\ref{corollary:秩与维数}, 这就给出了我们的定理\footnote{%
+	矩阵的秩的最大非零子式定义和列向量组定义等价已由推论~\ref{corollary:线性相关与坐标阶数}保证.}%
+	.
+\end{proof}
+
+\begin{theorem}\label{核和像的维数}
+	设 $V$ 是域 $\mathbb F$ 上的有限维线性空间, $W$ 是域 $\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V, W)$, 那么
+	\begin{equation*}
+		\dim \ker \mathscr A + \dim \mathscr A(V) = \dim V\,. 
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	记 $\dim V = n$, $\dim \mathscr A = r$, $\dim \ker \mathscr A = k$.
+
+	取 $\ker \mathscr A$ 的一组基底 $(\basis e_i)_{i \in k}$ (显然 $k \leq n$), 并将它扩充为 $V$ 的基底 $\hat e$ (我们又用了Steintz替换原则~\ref{theorem:Steintz}).
+	考虑到 $\mathscr A(V) = \langle \mathscr A(\basis e_i) \rangle_{i \in n}$.
+	但 $\langle \mathscr A(\basis e_i) \rangle_{i \in k} = \{\bv 0\}$.
+	利用 $\mathscr A$ 的线性, 我们给出 $\forall (\lambda_i)_{i \in n} \in \mathbb F^n$:
+	\begin{equation*}
+		\sum_{i \in n} \lambda_i \mathscr A(\basis e_i) 
+			= \sum_{i \in n\,\wedge\, i \notin k} \lambda_i \mathscr A(\basis e_i) 
+				+  \mathscr A\left( 
+					\sum_{i \in k} \lambda_i \basis e_i \right)
+			= \sum_{i \in n\,\wedge\, i \notin k} \lambda_i \mathscr A(\basis e_i) .
+	\end{equation*}
+	
+	即是: $\big(\mathscr A(\basis e_i)\big)_{i \in n\,\wedge\, i \notin k}$ 将构成 $\mathscr A(V)$ 的一组基底. 从而:
+	\begin{equation*}
+		r + k = n\,.
+	\end{equation*}
+\end{proof}
+
+\section{线性算子代数}
 
 \chapter{内积空间}
 
