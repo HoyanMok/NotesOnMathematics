@@ -142,6 +142,9 @@
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\characteristic}{char}
 \DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\diag}{diag}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -169,6 +172,14 @@
 \maketitle % 打印标题
 \thispagestyle{empty}
 \frontmatter
+\chapter{笔记说明}
+本笔记是笔者学习线性代数时的教材, 主要参考资料是\cite{代数学引论第二卷}. 
+
+笔记假定读者已经熟悉朴素集合论的术语与符号, 并已经学习了以矩阵和行列式运算为主的初级线性代数. 
+但本笔记力求自足, 将矩阵与行列式运算, 置换和多项式等内容附在附录中, 以资读者在阅读正文时可以随时查阅.
+
+笔记后附有符号列表和索引, 方便读者 (也是方便笔者自己) 查阅.
+
 \phantomsection
 \addcontentsline{toc}{chapter}{目录}
 \tableofcontents
@@ -234,8 +245,7 @@
 因为群未必是Abelian, 我们可以也用弱化的\indexbf{左可逆} $\exists y$ s.t.\ $y * x = 1$或\indexbf{右可逆}的概念.
 
 
-\section{群}
-
+\section{群}\label{section:群}
 可逆幺半群$G$称为群, 即:
 \begin{definition}[群]
 	设有集合$G$. 若:
@@ -307,7 +317,9 @@
 	设$(G, \cdot , 1)$是一个乘法群, $\exists g_0 \in G$, 使得$\forall g \in G$, $\exists n \in \mathbb Z$, $a^n = g$, 那么我们称它是一个\indexbf{循环群}, $g_0$是一个\indexbf{生成元} (generator), 并记作$G = \indexfm[g 0]{\langle g_0 \rangle}$.
 \end{definition}
 
-对于群 $G$ 中任意元素 $g$, 我们称 $\card \langle g \rangle$ 为元 $g$ 的\indexbf{阶数}, 或称 $g$ 为 \indexbf{$n$ 阶元}. 而且它将满足:
+对于群 $G$ 中任意元素 $g$, 我们称 $\card \langle g \rangle$ 为元 $g$ 的\indexbf{阶数}, 或称 $g$ 为 \emphbf{$n$~阶元}%
+	\index{n阶元@$n$~阶元}%
+	. 而且它将满足:
 \begin{theorem}
 	任意群 $G$ 中若有 $q \in \mathbb Z$ 阶元 $g$, 则 $\langle g \rangle = \{e, g, \dots, g^{q-1}\}$, 且:
 	\begin{equation}
@@ -462,7 +474,7 @@
 \begin{definition}[环]
 	集合$R$非空, 其上定义了加法 $+$ 和乘法 $\cdot$, 且满足:
 	\begin{conditionlist}[label=R\arabic*)]
-		\item $(R, +, 0)$ 是阿贝尔群;
+		\item $(R, +, 0)$ 是Abelian群;
 		\item $(R, \cdot)$ 是半群; 
 		\item 乘法对加法有\indexbf{分配律}: 
 		\begin{equation*}
@@ -547,7 +559,9 @@
 
 \section{域}
 
-交换除环 $F$ 称为\indexbf{域} (field). 群 $P^* = U(P)$ 称为域的乘法群. 如果 $y \neq 0$, 那么我们通常记 $x/y = \frac x y := xy^{-1}$. 
+交换除环 $F$ 称为\indexbf{域} (field)\footnote{%
+	作为总结: 域上定义了加法和乘法, 加法是Abelian群, 乘法是Abelian幺半群, 而且零元以外的元素都关于乘法可逆, 最后, 乘法对加法有分配律. }. 
+群 $P^* = U(P)$ 称为域的乘法群. 如果 $y \neq 0$, 那么我们通常记 $x/y = \frac x y := xy^{-1}$. 
 
 我们可类似环, 定义同构和自同构. 同态的意义不大, 因为如果 $F$ 到 $F'$ 的同态 $f$ 的核 $\ker f \neq \{0\}$, 那么 $\ker f = F$. 如果 $F'$ 是域 $F$ 的子环, 而且也是一个域, 则称其为 $F$ 的一个\indexbf{子域}, 反之称 $F$ 为 $F'$ 的一个\indexbf{扩域}.
 
@@ -1116,7 +1130,9 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 		f_i \colon V_i \to U;\;\bv x \mapsto f(\bv a_0, \cdots, \bv a_{i - 1}, 
 			\bv x, \bv a_{i + 1}, \cdots, \bv a_{p - 1}) \in \mathcal L (V_i, U)\,,
 	\end{equation*}
-	则称 $f$ 是 $V_0$, \ldots, $V_{p - 1}$ 上的\indexbf{多重线性型}, 或 \indexbf{$p$-线性型}. 这些多重线性型的集合记为 $\indexfm[L V 0 dots V p minus 1 U]{%
+	则称 $f$ 是 $V_0$, \ldots, $V_{p - 1}$ 上的\indexbf{多重线性型}, 或 \emphbf{$p$-线性型}%
+		\index{p-线性型@$p$-线性型}%
+	. 这些多重线性型的集合记为 $\indexfm[L V 0 dots V p minus 1 U]{%
 		\mathcal L(V_0, \cdots, V_{p - 1};\; U)}$.
 \end{definition}
 
@@ -1161,7 +1177,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 \begin{definition}[线性映射]
 	设 $V$, $W$ 是域 $\mathbb F$ 上的线性空间. 
-	如映射 $\mathscr A \in \mathcal L (V, W)$, 即 $\mathscr A$ 是 $V$ 到 $W$ 的一个同态, 那么我们称 $\mathscr A$ 是 $V$ 到 $W$ 的一个\indexbf{线性映射}, 并称其为\indexbf{线性的}. 特别地, 如果它还是自同态, 我们称其为\indexbf{线性变换}\footnote{也有将线性映射统称为线性变换的. }.
+	如映射 $\mathscr A \in \mathcal L (V, W)$, 即 $\mathscr A$ 是 $V$ 到 $W$ 的一个同态, 那么我们称 $\mathscr A$ 是 $V$ 到 $W$ 的一个\indexbf{线性映射}, 并称其为\indexbf{线性的}. 特别地, 如果它还是自同态, 我们称其为\indexbf{线性变换}\footnote{也有将线性映射统称为线性变换的. }或\indexbf{线性算子}.
 \end{definition}
 
 \begin{theorem}
@@ -1213,7 +1229,8 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 
 \begin{definition}[秩]
-	设 $\mathscr A \in \mathcal L(V, W)$, 记 $\rank \mathscr A := \dim \mathscr A(V)$.
+	设 $\mathscr A \in \mathcal L(V, W)$, 记 $\rank \mathscr A := \dim \mathscr A(V)$ 为线性映射~$\mathscr A$ 的\indexbf{秩}.
+	同时我们称 $\dim \ker \mathscr A$ 为其\indexbf{亏数}或\indexbf{零化度} (nullity).
 \end{definition}
 
 \begin{theorem}
@@ -1226,7 +1243,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	.
 \end{proof}
 
-\begin{theorem}\label{核和像的维数}
+\begin{theorem}\label{theorem:核和像的维数}
 	设 $V$ 是域 $\mathbb F$ 上的有限维线性空间, $W$ 是域 $\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V, W)$, 那么
 	\begin{equation*}
 		\dim \ker \mathscr A + \dim \mathscr A(V) = \dim V\,. 
@@ -1253,7 +1270,55 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\end{equation*}
 \end{proof}
 
+在 $\mathcal L(V, W)$ 上定义加法和数乘, 可以验证它是一个线性空间. 
+
 \section{线性算子代数}
+域~$\mathbb F$ 上的线性空间~$V$ 的自同态 $\mathcal L(V, V)$ 可记作 $\indexfm[L V]{\mathcal L(V)}$ 或 $\indexfm[End]{\End(V)}$. 
+如前已述, 它的元素唤作线性算子. 
+给定 $n$~维线性空间~$V$ 的一组基底~$\hat e$ (同时作为定义域和到达域的基底), $\mathcal L(V)$ 的元素可用 $n$~阶方阵表示. 
+其中恒等变换 $\id_V$ 对应的矩阵通常记作 $\bv I$, 即 $n$~阶单位阵. 零映射记为 $\mathscr O \colon \bv x \mapsto \bv 0$.
+
+习惯上记 $\mathscr A \bv x := \mathscr A(\bv x)$, $\mathscr A \mathscr B := \mathscr A \circ \mathscr B$. 
+
+\begin{definition}[逆算子]
+	设 $\mathscr A, \mathscr B \in \mathcal L (V)$. 
+	若
+	\begin{equation*}
+		\mathscr A \mathscr B = \mathscr B \mathscr A = \id_V\,,
+	\end{equation*}
+	则称它们互为\indexbf{逆算子}, 记 $\mathscr A = \mathscr B^{-1}$ 或 $\mathscr B = \mathscr A^{-1}$.
+\end{definition}
+
+\begin{theorem}
+	设 $V$ 是有限维线性空间, $\mathscr A \in \mathcal L(V)$. 
+	\begin{equation*}
+		\exists \mathscr B \in \mathcal L(V) \,\big(
+				\mathscr A = \mathscr A^{-1}\big) 
+			\IFF
+				\rank \mathscr A = \dim V 
+			\IFF
+				\ker \mathscr A = \{\bv 0\}\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	利用定理~\ref{theorem:核和像的维数} 立刻就能证明.
+\end{proof}
+
+\begin{definition}[代数]
+	如果一个环~$A$ 同时是域~$\mathbb F$ 上的线性空间, 而且数乘满足:
+	\begin{equation*}
+		\forall \lambda \in \mathbb F\,\forall \mathscr A, \mathscr B \in A\;
+			\big(
+				\lambda(\mathscr A \mathscr B) 
+					= (\lambda \mathscr A) \mathscr B
+						= \mathscr A (\lambda \mathscr B)\big)\,,
+	\end{equation*}
+	那么我们称 $A$ 是 $\mathbb F$ 上的一个\indexbf{代数} (algebra)\footnote{实际上这里是结合的, 有单位元的代数. 如何处理术语请容我再思考思考.}.
+	若 $A'$ 同时作为 $A$ 的子环和子空间, 那么 $A'$ 是 $A$ 的一个子代数.
+\end{definition}
+
+在这个意义上, $\mathcal L(V)$ 被称为\indexbf{线性算子代数}.
+
 
 \chapter{内积空间}
 
@@ -1262,12 +1327,175 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 
 \appendix
-\chapter{复数与多项式}
-\section{复数}
+\chapter{置换}
 
-\section{多项式}
+\section{置换群}
+
+置换群~$S_n$ 的定义已在正文的~\ref{section:群} 中给出, 我们在此重复一遍: 
+有限集~$n\in \mathbb N_+$ 上的\indexbf{置换群}~$\indexfm[S n]{S_n}$ 定义为 $n^n$ 中的双射的集合, 乘法定义为函数的复合, 单位元是 $\id_n$. 
+
+不难证明 $\card S_n = \mathrm P^n_n = n!$.
+
+设 $\pi \in S_n$. 
+元素~$i,j \in n$ 如果满足 $\exists k \in \mathbb N$, $\pi^k(i) = j$, 那么我们称 $i$ 和 $j$ 是 \emphbf{$\pi$-等价的}%
+	\index{pi-等价@$\pi$-等价}%
+	.
+不难证明这是等价关系, 而且把 $n$ 分成等价类 $\{n_k\}_{k \in p}$, $p \in \mathbb N_+$.
+每个等价类~$n_k$ 称为置换~$\pi$ 的\indexbf{轨道}, 其元素个数~$\ell_k := \card n_k$ 称为\emphbf{轨道~$n_k$ 的长度}%
+	\index{轨道长度}%
+	.
+
+为方便, 我们定义 $\pi_k$ 为:
+\begin{equation*}
+	\pi_k(i) = 
+	\begin{cases}
+		\pi(i) & i \in n_k \\
+		\id_n & i \notin n_k
+	\end{cases}\,,
+\end{equation*}
+我们得到了 $\pi = \prod_{k \in p} \pi_k$, 这是轨道间不相交的结论.
+
+若置换~$\pi$ 至多只有一个轨道的长度大于 $1$ i.e.\ $
+	\exists k_0 \in p \,\forall k \in p (k \neq k_0 \to \ell_k = 1)
+$,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\ell_{k_0}$ 为这个轮换的\emphbf{长度}%
+	\index{轮换长度}%
+	.
+轮换~$\pi$ 可记为 $(\pi^k (i))_{k \in \ell_{k_0}}$ 其中 $i \in n_k$. 不难验证 $i$ 在 $n_k$ 中的选择无关紧要. 我们记 $\id_n = (0)$. 
+当 $\ell_{k_0} = 2 $ 时, 我们也唤轮换~$\pi$ 为对换.
+
+我们称两个轮换\indexbf{不相交}, 如果它们的长度 $\leq 2$, 且最长轨道不相交.
+
+以上的叙述可以总结为:
+\begin{theorem}
+	置换群~$S_n$ 中的每一个置换, 要么是 $\id_n$, 要么存在唯一的不相交长度~$\leq 2$ 的轮换的集合 $\{\pi_k\}_{k \in p}$, 使得 $\pi = \prod_{k \in p} \pi_k$.
+\end{theorem}
+
+\begin{theorem}
+	置换群~$S_n$ 中的每一个置换~$\pi$ 都可写为对换 $(\sigma_k)_{k \in q}$ 的乘积, 即
+	$\pi = \prod_{k \in q} \sigma_k$%
+		\footnote{注意, 这时不可对调 $\sigma_k$ 间的位置. }%
+		.
+	
+	而且, 倘若存在 $(\sigma'_k)_{k \in q'}$ 也满足 $\pi = \prod_{k \in q'} \sigma'_k$, 那么 $q \equiv q' \pmod 2$.
+\end{theorem}
 
 
+\chapter{矩阵和行列式}
+以下只是一些定义的罗列, 与一些术语的规定, 矩阵与行列式的性质则散见于正文中.
+如果读者感到陌生, 可参阅任意一本初等线性代数教材, 如\cite{kostrikin1982introduction}.
+
+\section{矩阵}
+\begin{definition}[矩阵]
+	设 $\mathbb F$ 是一个域. 
+	将 $\{a_{ij}\}_{i \in m,\, j \in n} \in 2^{\mathbb F}$ ($n, m \in \mathbb N_+$) 
+	排成一个长方形的表: 
+	\begin{equation}\label{equation:矩阵}
+		\bv A := \indexfm[a ij i in m j in n]{(a_{ij})_{i \in m,\, j \in n}} = 
+		\begin{pmatrix}
+			a_{00} & a_{01} & \cdots & a_{0, n-1} \\
+			a_{10} & a_{11} & \cdots & a_{1, n-1} \\
+			\vdots & \vdots & \ddots & \vdots     \\
+			a_{m-1, 0} & a_{m-1, 1} & \cdots & a_{m-1, n-1}
+		\end{pmatrix}\,.
+	\end{equation}
+
+	式~\eqref{equation:矩阵} 定义的 $\bv A$ 被称为 $\mathbb F$ 上的 $m \times n$ 的\indexbf{矩阵}, $m \times n$ 被称为它的尺寸或大小, $\{a_{ij}\}_{i \in m,\, j \in n}$ 是它的\indexbf{元素}. 所有 $\mathbb F$ 上的 $m \times n$~矩阵的集合记为 $\indexfm[M m times n F]{M_{m \times n}(\mathbb F)}$. 
+\end{definition}
+
+元素全为 $0$ 的矩阵记为 $\indexfm[O]{\bv O}$, 有时为了强调它的尺寸, 将之写在右下角 i.e.\ $\indexfm[O m times n]{O_{m \times n}}$.
+ 
+通常, 我们称 $1 \times n$ 或 $n \times 1$ 的矩阵为 $n$~维\indexbf{向量}%
+	\index{n维向量@$n$~维向量}%
+	, 前者是\indexbf{行向量}, 后者是\indexbf{列向量}. 
+列向量的集合也可记为 $\mathbb F^n$, 即认为它是 $\mathbb F$ 的 $n$~次 Cartesian~幂的元素.
+但是, 当上下文明确时, 我们不特意在术语上区分行向量和列向量.
+
+我们也常把矩阵写成列向量组的形式, 即
+\begin{equation}\label{equation:矩阵的列向量组表示}
+	\bv A := \indexfm[x j j in n]{(\bv x_j)_{j \in n}}, \qquad 
+	\forall j \in n \big(
+			\bv x_j \in \mathbb F_n \big)\,. 
+\end{equation}
+
+设矩阵~$\bv A$ 的尺寸为 $n \times n$, 我们称其为 $n$~维\indexbf{方阵}, 其集合记为 $\indexfm[M n F]{M_n(\mathbb F)}$.
+
+\begin{definition}[对角矩阵]
+	若方阵~$\bv A$ 的元素只有对角线上的元素非零 i.e.\ $ a_{ij} \neq 0  \IFF i = j$, 称其为\indexbf{对角矩阵}, 记为 $\indexfm[diag a ii i in n]{\diag(a_{ii})_{i \in n}}$. 特别地 $\indexfm[I]{\bv I} := \diag(1)_{i \in n}$ 称为 $n$~维\indexbf{单位阵}.
+\end{definition}
+
+\begin{definition}[转置]
+	设 $\bv A = (a_{ij})_{i \in m,\, j \in n} \in M_{m \times n}(\mathbb F)$.
+	我们称 $(a_{ji})_{j \in n,\, i \in m} \in M_{n \times n}(\mathbb F)$ 为矩阵~$\bv A$ 的\indexbf{转置}, 记为 $\indexfm[A T]{\bv A^\mathrm T}$.
+\end{definition}
+
+\begin{definition}[和]
+	在 $M_{m \times n}$ 上定义\emphbf{和}%
+		\index{矩阵的和}%
+	:
+	\begin{equation*}
+		\bv A + \bv B 
+			= (a_{ij})_{i \in m,\,j \in n} + (b_{ij})_{i \in m,\,j \in n}
+			= (a_{ij} + b_{ij})_{i \in m,\,j \in n}\,.
+	\end{equation*}
+\end{definition}
+
+不难验证, $(M_{m \times n}, +, \bv O_{m \times n})$ 构成了一个Abelian群.
+
+\begin{definition}[积]
+	在 $M_{m \times \ell}(\mathbb F)$ 和 $M_{\ell \times n}(\mathbb F)$ 间定义\emphbf{积}%
+		\index{矩阵的积}%
+	($\mathord{\cdot} \colon M_{m \times \ell}(\mathbb F) \times M_{\ell \times n}(\mathbb F) \to M_{m \times n}(\mathbb F)$):
+	\begin{equation*}
+		\bv A \bv B = (a_{ij})_{i \in m,\,j \in \ell}  (b_{ij})_{i \in \ell,\,j \in n}
+			= \left( 
+				\sum_{k \in \ell} a_{ik} b_{kj}
+			 \right)_{i \in m,\,j \in n}\,.
+	\end{equation*}
+\end{definition}
+	
+由域的性质, 我们能验证矩阵的乘法运算是结合的, 而且满足对和的分配律.
+
+\begin{definition}[逆]
+	设方阵~$\bv A \in M_n(\mathbb F)$. 
+	若 $\exists \bv B \in M_n(\mathbb F)$, s.t.\ $\bv B \bv A = \bv A \bv B = \bv I$ 则称其为 $\bv A$ 的\indexbf{逆}, 并记为 $\indexfm[A -1]{\bv A^{-1}}$, 同时称 $\bv A$ 是可逆的.
+\end{definition}
+
+\section{行列式}
+
+\chapter{多项式}
+\section{多项式环}
+\begin{definition}[多项式环]
+	设 $R$ 是一个交换环, $\langle X \rangle := \{ X^n \mid n \in \mathbb N\}$ 是 $X$ 生成的幺半群, 记 $I := X^0$. 
+	若形如 $\indexfm[P X]{P(X)} := \sum_{i \in \mathbb N} p_i X^i$ 的形式 (称为\indexbf{多项式}, 其中只有有限个 $p_i$ 非零) 的集合:
+	\begin{equation*}
+		R[X] :=
+		\left\{ 
+			\sum_{i \in \mathbb N} p_i X^i
+			\middle|
+			\forall i \in \mathbb N \big(
+					p_i \in R \big)
+			,\,
+			\exists N \in \mathbb N\,\forall n \in \mathbb N - N \big(
+					p_n = 0\big)
+		\right\}
+	\end{equation*}
+	上定义了加法:
+	\begin{equation*}
+		P(X) + Q(X) 
+			:= \sum_{i \in \mathbb N} p_i X^i + \sum_{i \in \mathbb N} q_i X^i 
+				= \sum_{i \in \mathbb N} (p_i + q_i) X^i
+	\end{equation*}
+	和乘法:
+	\begin{equation*}
+		P(X)Q(X) 
+			:= \left( \sum_{i \in \mathbb N} p_i X^i \right) 
+				\left( \sum_{i \in \mathbb N} q_i X^i \right) 
+				= \sum_{\ell \in \mathbb N} \sum_{i + j = \ell} p_i q_j X^\ell\,,  
+	\end{equation*}
+	那么, 我们称 $\indexfm[R X]{R[X]}$ 是 $R$ 上变元~$X$ 的\indexbf{多项式环}.
+
+\end{definition}
+\section{多项式的根}
 \backmatter
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
 \printbibliography[heading=bibliography, title={参考文献}]
