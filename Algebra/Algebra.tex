@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.1.6
+% v0.1.7
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{ctexbook} 
 % \documentclass{ctexbook} 如果用中文
@@ -28,6 +28,8 @@
 	% \addcontentsline{toc}{chapter}{参考文献}
 	\chapter{#1}% 
 	\markboth{#1}{#1}}
+
+\usepackage[notbib, notindex]{tocbibind}
 
 \usepackage{imakeidx} %索引
 \makeindex[intoc, title={索引}]
@@ -180,8 +182,6 @@
 
 笔记后附有符号列表和索引, 方便读者 (也是方便笔者自己) 查阅.
 
-\phantomsection
-\addcontentsline{toc}{chapter}{目录}
 \tableofcontents
 
 \mainmatter
@@ -1328,7 +1328,6 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 \appendix
 \chapter{置换}
-
 \section{置换群}
 
 置换群~$S_n$ 的定义已在正文的~\ref{section:群} 中给出, 我们在此重复一遍: 
@@ -1366,11 +1365,11 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 我们称两个轮换\indexbf{不相交}, 如果它们的长度 $\leq 2$, 且最长轨道不相交.
 
 以上的叙述可以总结为:
-\begin{theorem}
+\begin{theorem}\label{theorem:置换的轮换分解}
 	置换群~$S_n$ 中的每一个置换, 要么是 $\id_n$, 要么存在唯一的不相交长度~$\leq 2$ 的轮换的集合 $\{\pi_k\}_{k \in p}$, 使得 $\pi = \prod_{k \in p} \pi_k$.
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}\label{theorem:置换的对换分解}
 	置换群~$S_n$ 中的每一个置换~$\pi$ 都可写为对换 $(\sigma_k)_{k \in q}$ 的乘积, 即
 	$\pi = \prod_{k \in q} \sigma_k$%
 		\footnote{注意, 这时不可对调 $\sigma_k$ 间的位置. }%
@@ -1378,7 +1377,82 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	
 	而且, 倘若存在 $(\sigma'_k)_{k \in q'}$ 也满足 $\pi = \prod_{k \in q'} \sigma'_k$, 那么 $q \equiv q' \pmod 2$.
 \end{theorem}
+\begin{proof}
+	因为每个长为 $r$ 的轮换都可写成:
+	\begin{equation*}
+		(\pi^k(i))_{k \in r} = \prod_{k \in r} (i, \pi^{r - k}(i)),\,
+	\end{equation*}
+	则由定理~\ref{theorem:置换的轮换分解}, 每一个置换都可以写成对换的乘积.
 
+	我们先证明, 若 $\id_n = \prod_{k \in q} \sigma_k$, 其中 $\forall k \in q$, $\sigma_k$ 是对换, 那么 $q \equiv 0 \pmod 2$.
+
+	我们用递归的方法证明这点. 
+	设 $\sigma_{q - 1} = (S, T)$, $S, T \in n$. 
+	为方便, 我们记 $p := \max\{ k \mid \sigma_k = (S,t), t\in n\}$.
+	令 $(\sigma'_k)_{k \in q} := (\sigma_k)_{k \in q}$, $\sigma'_p := (S, t)$.
+
+	除非出现以下情况:
+	\begin{conditionlist}[label=\alph*)]
+		\item $p = 0$. \label{item:矛盾}
+		\item $p \neq 0$ 但 $\sigma'_{p - 1} = (S, t)$. \label{item:消去}
+	\end{conditionlist}
+	否则, 不断重复下列过程:
+	\begin{conditionlist}[label=\arabic*)]
+		\item 如果 $\sigma_{p - 1} = (S, r)$, 其中 $r \neq t$:
+			由于
+			\begin{equation*}
+				(S, r)(S, t) = (S, t, r) = (t, r, S) 
+				= (t, S)(t, r) = (S, t)(t, r)\,,
+			\end{equation*}
+			那么重新令
+			\begin{equation*}
+				\sigma'_{p - 1} = (S, t),\; 
+				\sigma'_p = (t, r)\;
+				\text{其他不变,} 
+			\end{equation*}
+			将仍然满足 $\id_n = \prod_{k \in q} \sigma'_k$. 
+			执行~\ref{item:每次循环结束}. 
+		\item 如果 $\sigma_{p - 1} = (t, r)$:
+			由于
+			\begin{equation*}
+				(t, r)(S, t) = (t, S, r) = (r, t, S) 
+				= (r, S)(r, t) = (S, r)(r, t)\,,
+			\end{equation*}
+			那么重新令
+			\begin{equation*}
+				\sigma'_{p - 1} = (S, r),\; 
+				\sigma'_p = (r, t)\;
+				\text{其他不变,} 
+			\end{equation*}
+			将仍然满足 $\id_n = \prod_{k \in q} \sigma'_k$. 
+			执行~\ref{item:每次循环结束}. 
+		\item 如果 $\sigma_{p - 1} = (r, u)$, 其中 $\{r, u\} \cap \{S, t\} = \varnothing$:
+			由于
+			\begin{equation*}
+				(r, u)(S, t) = (S, t)(r, u)\,,
+			\end{equation*}
+			那么重新令
+			\begin{equation*}
+				\sigma'_{p - 1} = (S, t),\; 
+				\sigma'_p = (r, u)\;
+				\text{其他不变,} 
+			\end{equation*}
+			将仍然满足 $\id_n = \prod_{k \in q} \sigma'_k$. 
+			执行~\ref{item:每次循环结束}. 
+		\item 重新令 $p := \max\{ k \mid \sigma'_k = (S,t), t\in n\}$ 以及 $\sigma'_p = (S, t)$. \label{item:每次循环结束}
+	\end{conditionlist}
+	直到满足~\ref{item:矛盾} 或~\ref{item:消去} 为止. 
+	这个循环将总是能在有限次结束, 因为每次 $p$ 都减小了 $1$.
+
+	当过程到结束时, 如果满足~\ref{item:矛盾}, 那么 $\prod_{k \in q} \sigma'_k (S)= (S, t) \prod_{k \in q, \, k \neq 0} \sigma'_k(S) = (S, t)(S) = t \neq S$, 与 $\id_n(S) = S$ 矛盾; 
+	那么, 只可能是满足~\ref{item:消去}, 此时因 $(S, t)(S, t) = \id_n$, 将它们消去, 我们得到了 $\id_n$ 的 $q' = q - 2$ 个对换的分解. 
+	
+	重复这样的过程直到 $q' = 0$ 或 $q' = 1$ 为止, 而后者是不可能的, 因为 $\id_n$ 永远不可能等于对换. 所以: $q \equiv 0 \pmod 2$.
+
+	最后, 我们断言, 任意置换和它的逆分解成的对换数目之和是偶数. 
+	即, 考虑 $\pi$ 的两种分解, $\pi = \prod_{k \in q} \sigma_k = \prod_{k \in q'} \sigma'_k$, 
+	那么 $\id_n = \pi \pi^{-1} = \prod_{k \in q} \sigma^{-1}_k \prod_{k \in q'} \sigma'_k = \prod_{k \in q} \sigma_k \prod_{k \in q'} \sigma'_k$, 由前 $q + q' \equiv 0 \pmod 2$.
+\end{proof}
 
 \chapter{矩阵和行列式}
 以下只是一些定义的罗列, 与一些术语的规定, 矩阵与行列式的性质则散见于正文中.
