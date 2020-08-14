@@ -760,7 +760,7 @@ $\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
 构造集合$M = \{n\in\mathbb N\mid \varphi(n)\}$, 根据它是归纳集, 可知$\mathbb N \subseteq M$, 但$M$是根据Sep从$\mathbb N$中分离出来的, 得知$M=\mathbb N$.
 \end{proof}
 
-在$\mathbb N$上定义偏序关系$\leq = \in \cap =$, 而且可以证明, 这是一个良序.
+在$\mathbb N$上定义偏序关系$\leq = \in \cup =$, 而且可以证明, 这是一个良序.
 
 \begin{theorem} \indexbf{第二归纳原理}
 令$\varphi(n)$是一个性质.
@@ -873,11 +873,11 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 
 \section{势}
 
-\begin{definition}\label{equinumerosity}
+\begin{definition}[等势]\label{definition:equinumerosity}
 两个集合$X$, $Y$\indexbf{等势} (equinumerous) 指的是$\exists f \in Y^X (f\text{是双射 })$, 记为$|X|=|Y|$.
 \end{definition}
 
-\begin{definition}
+\begin{definition}[势]
 若存在$f \in Y^X$ s.t. $f$是单射, 则称$|X|\leq |Y|$. 
 当$|X|\leq |Y|$而$|X|\neq |Y|$时, 我们就称$X$的势小于$Y$的势, 记为$|X| < |Y|$.
 \end{definition}
@@ -892,7 +892,7 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 \end{proof}
 
 下面我们将介绍Cantor-Bernstein-Schr\"oeder 定理, 它的证明当中最重要的一部分是以下引理的证明:
-\begin{lemma}\label{lemma_CBS}
+\begin{lemma}\label{lemma:CBS}
 \begin{align*}
 	A'\subseteq B \subseteq A \wedge |A'|=|A| 
 		\to |B|=|A|.
@@ -962,10 +962,9 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 
 
 
-\begin{theorem}\label{Cantor-Bernstein-Schroeder theorem}
-\indexbf{Cantor-Bernstein-Schr\"oeder 定理}
-
-如果$|X|\leq |Y|$且$|Y|\leq |X|$, 则$|X|=|Y|$.
+\begin{theorem}[\indexbf{Cantor-Bernstein-Schr\"oeder 定理}]
+	\label{thorem:CBS}
+如果$|X| \leq |Y|$且$|Y| \leq |X|$, 则$|X| = |Y|$.
 
 \end{theorem}
 \begin{proof}
@@ -974,12 +973,33 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 	g\big\lbrack f[X]\big\rbrack \subseteq g[Y] \subseteq X, 
 \end{align*}
 和$|g[Y]|=|Y|$, $|g\big\lbrack f[X]\big\rbrack|=|f[X]|=|X|$.
-由引理\ref{lemma_CBS}, 这意味着$|X|=|Y|$.
+由引理\ref{lemma:CBS}, 这意味着$|X|=|Y|$.
 \end{proof}
 
 \textbf{注}: 早先的Cantor-Bernstein-Schr\"oeder 定理利用了$\properclass{AC}$, 但这里的证明避免了它.
 
-这个定理说明了$\leq$拥有传递性, 这意味着$\leq$是一个偏序. 而且, 在$\mathbb N$中, 它和先前定义的自然数的偏序$\leq$是等同的. 这暗示我们可以这样做: 记$|n| = n$, 只要$n\in \mathbb N$.
+这个定理说明了$\leq$拥有传递性, 这意味着$\leq$是一个偏序. 而且, 在$\mathbb N$中, 它和先前定义的自然数的偏序~$\leq$是等同的. 这暗示我们可以这样做: 记$|n| = n$, 只要$n\in \mathbb N$.
+
+\begin{definition}[有穷与无穷]
+	设 $X$ 是一个集合.
+	\begin{conditionlist}[label=(\arabic*)]
+		\item 倘若 $\exists n \in \mathbb N$ s.t.\ $|X| = n$, 则称 $X$ 是\indexbf{有穷的}.
+		\item 倘若 $\forall n \in \mathbb N$, $|X| \neq n$, 则称 $X$ 是\indexbf{无穷的}.
+		\item 倘若 $|X| = |\mathbb N|$, 就称 $X$ 是\indexbf{可数的}或\indexbf{可数无穷的}.
+		\item 有穷或可数的集合称为\indexbf{至多可数的}.
+		\item 不是可数的无穷集合称为\indexbf{不可数的}.
+	\end{conditionlist}
+\end{definition}
+
+\begin{theorem}[\indexbf{抽屉原理}]
+	$\forall n \in \mathbb N$, $\forall X \in \mathscr P(n) - \{n\}$, $|X| \neq |n|$. 
+\end{theorem}
+\begin{proof}
+	首先, $1^0 := \{\varnothing\}^\varnothing$ 是空集, 因而 $\forall X \in \mathscr P(1) - \{1\} = \{\varnothing\}$, $|X| = 0  \neq |1|$ 成立.
+	
+	其次, 假设命题对 $n \in \mathbb N$ 成立, 但对 $n + 1$ 不成立, 那么 $\exists m \in \mathscr P(n + 1)$, 即 $m \leq n + 1$, 使得 $|m| = m = n + 1 = |n|$. 
+	考虑到 Lemma~\ref{lemma:CBS}, 因 $m \subseteq n \subseteq n + 1$, 而 $|m| = |n|$, 所以 $|n| = |m|$, 与假设矛盾.
+\end{proof}
 
 \backmatter
 \nocite{*}
