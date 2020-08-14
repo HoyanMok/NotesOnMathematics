@@ -50,7 +50,7 @@
 \usepackage{mathrsfs} % 花体
 \usepackage{amsthm} %定义、证明、定理等
 	\theoremstyle{plain}
-		\newtheorem{axion}{Axion} %公理
+		\newtheorem{axiom}{Axiom} %公理
 		\newtheorem{theorem}{Theorem}[section] %定理
 		\newtheorem{corollary}{Corollary} %推论
 		\newtheorem{lemma}{Lemma} %引理
@@ -133,6 +133,8 @@
 \author{Hoyan Mok
 	\thanks{E-mail: victoriesmo@hotmail.com}}
 \date{\today}
+\titlepic{\includegraphics[width=10cm]{\PATH Omega-exp-omega-labeled.pdf}}
+
 \begin{document}
 \pagenumbering{Alph}
 \maketitle
@@ -145,6 +147,8 @@
 笔者曾疑惑于逻辑公理和集合论公理的先后关系, 查阅资料后, 初步得出这样的结论: 我们必须选择朴素的集合论或者简单的一阶逻辑作为前置, 而它们是在我们的元语言中得到保证的. 
 
 本笔记尽量做到自足.
+
+你可以在\url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/SetTheory}获得本笔记最新的PDF与\TeX{}源文档. 封面来源: \url{https://commons.wikimedia.org/wiki/File:Omega-exp-omega-labeled.svg}
 
 \tableofcontents
 \mainmatter
@@ -183,19 +187,19 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 
 \section{\texorpdfstring{$\properclass{ZFC}$公理}{ZFC公理}}
 
-\setcounter{axion}{-1}
-\begin{axion}\label{Exi} \indexbf{存在公理} (\indexbf{Exi})
+\setcounter{axiom}{-1}
+\begin{axiom}[\indexbf{存在公理}, \indexbf{Exi}]\label{Exi}
 存在一个集合, i.e.
 \begin{align}
 	\exists x (x = x).
 \end{align}
-\end{axion}
-\begin{axion}\label{Ext} \indexbf{外延公理} (\indexbf{Ext})
+\end{axiom}
+\begin{axiom}[\indexbf{外延公理}, \indexbf{Ext}]\label{Ext}
 两个有相同元素的集合相等, i.e.
 \begin{align}
 	\forall X\forall Y\forall u (u\in X\leftrightarrow u\in Y) \rightarrow X=Y.
 \end{align}
-\end{axion}
+\end{axiom}
 
 而逻辑上有$X=Y\rightarrow \forall X\forall Y\forall u (u\in X\leftrightarrow u\in Y)$, 所以:
 \begin{align}
@@ -204,13 +208,13 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 
 记$\neg(X=Y) =: X\neq Y$.
 
-\begin{axion}\label{Sep} \indexbf{分离公理模式} (\indexbf{Sep})
+\begin{axiom}[\indexbf{分离公理模式}, \indexbf{Sep}]\label{Sep}
 
 令$\varphi(u)$为公式. 对任意集合$X$, 存在一个集合$Y=\{u\in X\mid \varphi(u)\}$, i.e.
 \begin{align}
 	\forall X\exists Y\forall u (u\in Y\leftrightarrow u\in X \wedge \varphi(u)).
 \end{align}	
-\end{axion}
+\end{axiom}
 
 \begin{corollary}\label{Russell set}
 \begin{align}
@@ -221,7 +225,7 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 令$R_X = \{x\in X\mid x\notin x\}$即可.
 \end{proof}
 
-令$\varphi(u)$为一个性质. 倘若$\exists X\forall u(\varphi(u)\to u\in X)$, 则${u\mid \varphi(u)} = {u\mid \varphi(u)}$, 根据Sep (Axion \ref{Sep}), $\exists \varnothing = {u\mid \varphi(u)}$. 分离于不同的集合$X$和$X'$的$\varnothing$是相同的. 考虑到$x\neq x \to x \in X$是重言式, 再根据Exi (Axion \ref{Exi}), 可以得出:
+令$\varphi(u)$为一个性质. 倘若$\exists X\forall u(\varphi(u)\to u\in X)$, 则${u\mid \varphi(u)} = {u\mid \varphi(u)}$, 根据Sep (axiom \ref{Sep}), $\exists \varnothing = {u\mid \varphi(u)}$. 分离于不同的集合$X$和$X'$的$\varnothing$是相同的. 考虑到$x\neq x \to x \in X$是重言式, 再根据Exi (axiom \ref{Exi}), 可以得出:
 
 \begin{definition}
 	$\varnothing=\{x\mid x\neq x\}$是集合, 称为\indexbf{空集}.
@@ -257,18 +261,18 @@ $\varphi(u)$是一个性质. 称$\{u\mid u(u)\}$为一个\indexbf{类} (class). 
 是集合. 
 \end{proof}
 
-\begin{axion} \indexbf{对集公理} (\indexbf{Pai})
+\begin{axiom}[\indexbf{对集公理}, \indexbf{Pai}]
 \begin{align}
 	\forall a\forall b\exists c \forall x ( x\in c\leftrightarrow x=a\vee x=b).
 \end{align}
 这样的$c$可记为$\{a,b\}$. 
-\end{axion}
+\end{axiom}
 
-\begin{axion} \indexbf{并集公理} (\indexbf{Uni})
+\begin{axiom}[\indexbf{并集公理}, \indexbf{Uni}] 
 \begin{align}
 	\forall X\exists Y \forall u (u\in Y\leftrightarrow \exists z\in X(u\in z).
 \end{align}
-\end{axion}
+\end{axiom}
 
 \begin{definition} \indexbf{子集}和\indexbf{真子集}关系定义如下:
 \begin{align}
@@ -283,32 +287,32 @@ $\varphi(u)$是一个性质. 称$\{u\mid u(u)\}$为一个\indexbf{类} (class). 
 $\forall X(\varnothing\subseteq X).$
 \end{corollary}
 
-\begin{axion} \indexbf{幂集公理} (\indexbf{Pow})
+\begin{axiom}[\indexbf{幂集公理}, \indexbf{Pow}]
 \begin{align}
 	\forall X\exists Y\forall u (u\in Y\leftrightarrow u\subseteq X).
 \end{align}
 这样的$Y$称为$X$的\indexbf{幂集}, 记为$\indexfm[P X]{\mathscr{P}(X)}$或$\indexfm[2 X]{2^X}$.
-\end{axion}
+\end{axiom}
 
 \begin{definition}
 对任意集合$x$, $x\cup \{ x\} $称为其\indexbf{后继}, 记为$\indexfm[S x]{S(x)}$或$\indexfm[x plus]{x^+}$.
 \end{definition}
 
-\begin{axion}\label{Inf} \indexbf{无穷公理} (\indexbf{Inf})
+\begin{axiom}[\indexbf{无穷公理}, \indexbf{Inf}]\label{Inf} 
 \begin{align}
 	\exists X \big( 
 		\varnothing \in X\wedge \forall x(
 			x\in X\to S(x)\in X)\big).
 \end{align}
-\end{axion}
+\end{axiom}
 
-\begin{axion}\label{Fnd} \indexbf{基础公理} (\indexbf{Fnd})
+\begin{axiom}[\indexbf{基础公理}, \indexbf{Fnd}]\label{Fnd} 
 \begin{align}
 	\forall x\big( 
 		x\neq \varnothing\rightarrow \exists y\in x (
 			x\cap y=\varnothing )\big).
 \end{align}
-\end{axion}
+\end{axiom}
 
 \begin{theorem}\label{Russell}
 \begin{align}
@@ -335,7 +339,7 @@ $\forall X(\varnothing\subseteq X).$
 \end{align*}
 \end{proof}
 
-\begin{axion}\label{Rep} \indexbf{替换公理模式} (\indexbf{Rep})
+\begin{axiom}[\indexbf{替换公理模式}, \indexbf{Rep}]\label{Rep} 
 对公式$\psi(x,y)$, $\forall x$都存在唯一的$y$ s.t.\ $\psi(x,y)$成立. 那么$\forall A\in \properclass V$, 存在集合:
 \begin{align}\label{range(Rep)}
 	B = \{ 
@@ -346,9 +350,11 @@ i.e.\
 	\forall A\forall x\in A\,\exists! y\,\psi(x,y) \to
 		\exists B\forall x\in A\,\exists y\in B\,\psi(x,y)
 \end{align}
-\end{axion}
+\end{axiom}
 
-\begin{axion}\label{AC} \indexbf{选择公理} ($\indexfm[AC]{\properclass{AC}}$)
+\begin{axiom}[\indexbf{选择公理}, ${\properclass{AC\;II}}$]
+	\index{AC 2@${\properclass{AC\;II}}$}
+	\label{AC} 
 对任意非空集合$X\neq \varnothing$, 若
 \begin{conditionlist}[label = (\arabic*)]
 \item $\varnothing \notin X$,
@@ -364,9 +370,9 @@ i.e.\
 					S\cap x = \{y\})\big).
 \end{aligned}
 \end{align}
-\end{axion}
+\end{axiom}
 
-Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenkel系统}, 记为$\properclass{ZF}$, 加上选择公理则记为$\properclass{ZFC}$.
+Axiom \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenkel系统}, 记为$\properclass{ZF}$, 加上选择公理则记为$\properclass{ZFC}$.
 
 
 \chapter{关系与函数}
@@ -383,7 +389,7 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \begin{proof}
 只证明 "$\rightarrow$":
 \begin{enumerate}[label=(\arabic*)]
-\item $a=b$. $(a,b) = \big\{\{a\}\big\}=(a',b')$, 故$(a',b')=\{\{a\}\}=\big\{\{a'\},\{a',b'\}\big\}$, 由Ext (axion \ref{Ext}), $\{a'\} = \{a',b'\}=\{a\}$, 即$a=b=a'=b'$.
+\item $a=b$. $(a,b) = \big\{\{a\}\big\}=(a',b')$, 故$(a',b')=\{\{a\}\}=\big\{\{a'\},\{a',b'\}\big\}$, 由Ext (axiom \ref{Ext}), $\{a'\} = \{a',b'\}=\{a\}$, 即$a=b=a'=b'$.
 \item $a\neq b$. 假设$\{a,b\}=\{a'\}$, 得$\forall x\in \{a,b\} (x=a')$即$a=b=a'$与$a\neq b$矛盾. 从而只有$\{a,b\}=\{a',b'\}\wedge\{a\}=\{a'\}$, 仍然由Ext易证.
 \end{enumerate}
 \end{proof}
@@ -399,7 +405,7 @@ Axion \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \begin{theorem}对于$\forall X\forall Y$, $X\times Y$是集合.
 \end{theorem}
 \begin{proof}
-令$\varphi(z) = \exists x\in X\exists y\in Y( (x,y)=z)$, 取$Z=\{z\in \mathscr P(X\cup Y)\mid \varphi(z)\}$, 由Ext和Sep (Axion \ref{Sep}) 即可知$X\times Y = Z$.
+令$\varphi(z) = \exists x\in X\exists y\in Y( (x,y)=z)$, 取$Z=\{z\in \mathscr P(X\cup Y)\mid \varphi(z)\}$, 由Ext和Sep (axiom \ref{Sep}) 即可知$X\times Y = Z$.
 \end{proof}
 
 \begin{definition}
@@ -590,8 +596,10 @@ $f$和$g$是函数.以下的命题是等价的:
 	(x,y_1)\in f\cup g\wedge (x,y_2)\in f\cup g\wedge y_1\neq y_2\big)$. 通过对$x$在$\dom f - \dom g$, $\dom g - \dom f$, $\dom g\cap \dom g$讨论, 可以得出要么$f$或$g$不是函数 (从而与题设矛盾), 要么$f$, $g$不相容.
 \end{proof}
 
-\setcounter{axion}{8} %这样下面的axion才会计数为9
-\begin{axion}\label{AC2} \indexbf{选择公理} (第二形式) ($\indexfm[AC 2]{\properclass{AC\;II} }$)
+\setcounter{axiom}{8} %这样下面的axiom才会计数为9
+\begin{axiom}[\indexbf{选择公理} (第二形式), ${\properclass{AC\;II}}$]
+	\index{AC 2@${\properclass{AC\;II}}$}
+	\label{AC2} 
 
 \begin{align*}
 	\forall \mathcal F\Big(
@@ -603,7 +611,7 @@ $f$和$g$是函数.以下的命题是等价的:
 \end{align*}
 
 其中这样的$f$通常被称为\indexbf{选择函数}.
-\end{axion}
+\end{axiom}
 
 对于任意非空$\omega$ (尤其是当$\omega$是无穷集时), $\prod_{i\in \omega X_i} = \varnothing \to \exists i\in \omega ( X_i = \varnothing)$与选择公理等价.\footnote{\href{https://zh.wikipedia.org/wiki/\%E7\%AC\%9B\%E5\%8D\%A1\%E5\%84\%BF\%E7\%A7\%AF\#\%E6\%97\%A0\%E7\%A9\%B7\%E4\%B9\%98\%E7\%A7\%AF
 	}{维基百科页面}}
@@ -720,7 +728,7 @@ $\cup S=X \to
 
 \chapter{实数}
 \section{自然数}
-根据Inf (axion \ref{Inf}), 这样的集合是存在的:
+根据Inf (axiom \ref{Inf}), 这样的集合是存在的:
 \begin{definition}
 如果集合$X$满足:
 \begin{align*}
