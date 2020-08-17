@@ -1163,7 +1163,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 我们可以给出行列式的公理化构造, 它在实数上的计算方法我们已经在线性代数课程中非常熟悉了:
 
-\begin{definition}[行列式]
+\begin{definition}[行列式]\label{definition:行列式的公理化构造}
 	设 $\mathbb F$ 是一个域. 多重线性型 $\indexfm[det]{%
 		\det} \in \mathcal L_n(\mathbb F)$ 若满足:
 		\begin{conditionlist}
@@ -1457,6 +1457,9 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	那么 $\id_n = \pi \pi^{-1} = \prod_{k \in q} \sigma^{-1}_k \prod_{k \in q'} \sigma'_k = \prod_{k \in q} \sigma_k \prod_{k \in q'} \sigma'_k$, 由前 $q + q' \equiv 0 \pmod 2$.
 \end{proof}
 
+据此我们把置换群的元素分为\indexbf{奇置换} (分解得到奇数个对换) 和\indexbf{偶置换} (分解得到偶数个对换), 并引入置换的\indexbf{符号}或\indexbf{奇偶性}~$\indexfm[epsilon pi]{\varepsilon_\pi}$, 其值对于偶置换是 $1$, 奇置换是 $0$.
+
+所有偶置换的集合 $\indexfm[A n]{A_n}$ 是 $S_n$ 的子群.
 \chapter{矩阵和行列式}
 以下只是一些定义的罗列, 与一些术语的规定, 矩阵与行列式的性质则散见于正文中.
 如果读者感到陌生, 可参阅任意一本初等线性代数教材, 如\cite{kostrikin1982introduction}.
@@ -1538,6 +1541,20 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 \end{definition}
 
 \section{行列式}
+行列式的公理化构造我们在定义~\ref{definition:行列式的公理化构造} 中已经给出了. 
+我们这里做出一个递归的定义, 并给出它的一些性质.
+
+\begin{definition}[行列式]
+	方阵 $\bv A \in M_n(\mathbb F)$ 的行列式 $\det \bv A := |a_{ij}|_{i,j \in n}$ 递归地定义如下:
+	\begin{conditionlist}[label=\roman*.]
+		\item 当 $\bv A \in M_1(\mathbb F)$ 时, $\det \bv A = a_{00}$;
+		\item 当 $\bv A \in M_n(\mathbb F)$ 时, 若记 $M_{ij} :=  |a_{k\ell}|_{k,\ell \in n;\; k \neq i,\, \ell \neq j}$ (这称为\indexbf{余子式}), 那么
+		\begin{equation*}
+			\bv A = \sum_{j \in n} (-1)^j a_{0j} M_{0j} \,.
+		\end{equation*}
+	\end{conditionlist}
+\end{definition}
+
 
 \chapter{多项式}
 \section{多项式环}
@@ -1570,8 +1587,54 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 				= \sum_{\ell \in \mathbb N} \sum_{i + j = \ell} p_i q_j X^\ell\,,  
 	\end{equation*}
 	那么, 我们称 $\indexfm[R X]{R[X]}$ 是 $R$ 上变元~$X$ 的\indexbf{多项式环}.
+	在变元是明确的时候, 多项式~$P(X)$ 也简记为 $P$.
 
 \end{definition}
+
+记 $\deg P(X) := \max \{n \mid p_n \neq 0\}$ 为多项式~$P(X)$ 的\indexbf{次数}.
+而 $(p_n)_{n \in \deg P(X) + 1}$ 是多项式的\indexbf{系数}, 其中 $p_0$ 是\indexbf{常数项}, 而 $p_{\deg P(X)}$ 是\indexbf{最高次项系数}或\indexbf{首项系数}.
+
+所有系数都为 $0$ 的多项式被称为\indexbf{零多项式}, 次数为 $1$ 的多项式被称为\indexbf{线性多项式}.
+
+不难验证, $R[X]$ 的单位元和零元分别是 $R$ 的单位元和零元.
+
+以下给出一些不难证明的定理, 如果读者感到困难, 请翻阅参考资料\cite{kostrikin1982introduction}:
+\begin{theorem}
+	$\forall P(X), Q(X) \in A[A]$, 
+	$\deg \big(P(X) + Q(X)\big) \leq \max \{\deg P(X), \deg Q(X)\}$,
+	$\deg \big( P(X) Q(X) \big) \leq \deg P(X) + \deg Q(X)$.
+\end{theorem}
+
+\begin{theorem}
+	如果 $A$ 是整环, $A[X]$ 也是整环%
+		\footnote{考虑到 $A$ 是 $A[X]$ 的子环, 逆命题也成立.}
+	.
+\end{theorem}
+
+\begin{theorem}[多项式环的泛性]
+	设 $R$ 是一个交换环, $A$ 是 $R$ 的子环.
+	$\forall t \in R$, $\exists ! \varPi_t \in \Hom (A[X], R)$, s.t.\ 
+	$\varPi_t (X) = t \wedge\; \forall a \in A \big( \varPi_t(a) = a \big)$.
+\end{theorem}
+\begin{proof}
+	不难验证
+	\begin{equation*}
+		\varPi_t \colon \sum_{n \in \mathbb N} p_n X^n
+			\mapsto \sum_{n \in \mathbb N} p_n t^n  
+	\end{equation*}
+	即所求.
+\end{proof}
+
+我们把这样的 $\varPi_t (P) =: P(t)$ 称为 $P$ 在 $X = t$ 时的取值, 或者说用 $t$ 替换 $X$. 当两个多项式不相等时, 它们的值却可能相等. 
+
+\begin{definition}[代数元和超越元]
+	若 $t \in R$ 满足 $\exists P \in A[X]$ s.t.\ $\exists n \in \mathbb N (p_n \neq 0) \wedge P(t) = 0$, 那么 $t$ 是 $A$ 上的一个\indexbf{代数元}.
+	若 $t \in R$ 满足 $\varPi_t$ 是单的, 那么我们称其为 $A$ 上的一个\indexbf{超越元}.
+\end{definition}
+
+对于 $A = \mathbb Q$, $R = \mathbb C$ 的情况, 代数元和超越元又被称为\indexbf{代数数}和\indexbf{超越数}.
+
+
 \section{多项式的根}
 \backmatter
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
