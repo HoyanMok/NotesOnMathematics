@@ -1316,12 +1316,67 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 					= (\lambda \mathscr A) \mathscr B
 						= \mathscr A (\lambda \mathscr B)\big)\,,
 	\end{equation*}
-	那么我们称 $A$ 是 $\mathbb F$ 上的一个\indexbf{代数} (algebra)\footnote{实际上这里是结合的, 有单位元的代数. 如何处理术语请容我再思考思考.}.
+	那么我们称 $A$ 是 $\mathbb F$ 上的一个\indexbf{代数} (algebra)\footnote{实际上这里是结合的, 有单位元的代数. 出于简单在本部分我们还是径直称其为代数. }.
 	若 $A'$ 同时作为 $A$ 的子环和子空间, 那么 $A'$ 是 $A$ 的一个子代数.
 \end{definition}
 
 在这个意义上, $\mathcal L(V)$ 被称为\indexbf{线性算子代数}.
 
+多项式环 $\mathbb F[X]$ 即是 $\mathbb F$ 上的无穷维代数的例子, 而它在 $X = \mathscr A \in \mathcal L(V)$ 时的取值, 即 $\mathbb F[\mathscr A]$ (我们记 $\mathscr A^0 := \id_V$), 可以验证是 $\mathcal L(V)$ 的子代数.
+
+考虑到 $\mathbb F$ 是交换的, $\mathbb F[\mathscr A]$ 也是交换的. 
+
+\begin{definition}[极小多项式]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $P(X) \in \mathbb F[X]$.
+	如果 $P(\mathscr A) = \mathscr O$, 那么称多项式 $P(X)$ \indexbf{零化}线性算子 $\mathscr A$. 首项系数为 $1$ 的零化 $\mathscr A$ 的多项式称为其\indexbf{极小多项式}, 可记为 $\mu_{\mathscr A}(X)$.
+\end{definition}
+
+\begin{theorem}[极小多项式存在]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间. 
+	$\forall \mathscr A \in \mathcal L(V)$, 都存在极小多项式 $\mu_\mathscr A (X)$, 且 $\deg \mu_{\mathscr A} (X) = \dim \mathbb F[\mathscr A]$.
+\end{theorem}
+\begin{proof}
+	考虑到 $\mathbb F[\mathscr A]$ 是 $\mathcal L(V)$ 的子代数, $\dim \mathbb F[\mathscr A] \leq \dim \mathcal L(V)$. 
+
+	如果次数 $< n^2 + 1$ 的非零多项式 $P(X)$ 都不能零化 $\mathscr A$, 我们即可说: 
+	$\id_V, \mathscr A, \cdots, \mathscr A^{n^2 + 1}$ 的任意非平凡线性组合都不为 $0$, 我们在维数小于 $n^2$ 维的线性空间里找到了 $n^2 + 1$ 个线性无关的向量, 这显然是不可能的.
+\end{proof}
+
+\begin{theorem}[极小多项式唯一]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$. 
+	若 $P(X) = X^n + \sum_{i \in n} p_i X^i$, $Q(X) = X^n + \sum_{i \in n} q_i X^i$ 都是 $\mathscr A$ 的极小多项式, 那么 $(p_i)_{i \in n} = (q_i)_{i \in n}$.
+\end{theorem}
+\begin{proof}
+	因为 $\mathbb F[\mathscr A]$ 是一个代数, $P(\mathscr A) - Q(\mathscr A) = \sum_{i \in n} (p_i - q_i) \mathscr A^i = \mathscr O$. 
+	我们得到了一个能零化 $\mathscr A$ 次数小于 $n$ 的多项式. 
+	如果它不是零多项式, 记 $m = \deg \big( P(X) - Q(X)\big)$, 那么 $\frac{1}{p_m - q_m} \sum_{i \in n} (p_i - q_i) X^i = \mathscr O$ 将是一个首项为 $1$ 的零化 $\mathscr A$ 但其次数小于极小多项式的次数, 这是违背极小多项式的定义的.
+\end{proof}
+
+\begin{theorem}[可逆算子与最小多项式的常数项]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, 其极小多项式是 $\mu_\mathscr A (X)$. 
+	算子~$\mathscr A$ 可逆当且仅当 $\mu_\mathscr A$ 的常数项非零.
+\end{theorem}
+\begin{proof}
+	如果极小多项式常数项为 $0$, 即 $\mu_\mathscr A(X) = \sum_{i \in n - \{0\}} p_i X^i$, 那么由线性空间的分配律与方幂的分解,
+	\begin{equation*}
+		\mathscr A 
+		\left(
+			\sum_{i \in n - \{0\}} p_i \mathscr A^{i - 1}
+		\right) = \mathscr O\,.
+	\end{equation*}
+
+	由极小多项式的定义, $\sum_{i \in n - \{0\}} p_i \mathscr A^{i - 1} \neq \mathscr O$. 
+	那么, $\exists \bv x \in V$, $\sum_{i \in n - \{0\}} p_i \mathscr A^{i - 1} \bv x \in \ker \mathscr A - \{\bv 0\}$, 这表明 $\dim \mathscr A < n$, 即不可逆. 
+
+	如果极小多项式常数项不为 $0$, 
+	\begin{equation*}
+		\mathscr A \frac{1}{- p_0} 
+		\left(
+			\sum_{i \in n - \{0\}} p_i \mathscr A^{i - 1}
+		\right) = \id_V\,,
+	\end{equation*}
+	给出了 $\mathscr A$ 的逆.
+\end{proof}
 
 \chapter{内积空间}
 
@@ -1560,17 +1615,15 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 \section{多项式环}
 \begin{definition}[多项式环]
 	设 $R$ 是一个交换环, $\langle X \rangle := \{ X^n \mid n \in \mathbb N\}$ 是 $X$ 生成的幺半群, 记 $I := X^0$. 
-	若形如 $\indexfm[P X]{P(X)} := \sum_{i \in \mathbb N} p_i X^i$ 的形式 (称为\indexbf{多项式}, 其中只有有限个 $p_i$ 非零) 的集合:
+	若形如 $\indexfm[P X]{P(X)} := \sum_{i \in \mathbb N} p_i X^i$ 的形式 (称为\indexbf{多项式}, 其中只有有限个 $p_i$ 非零) 的集合%
+		\footnote{$R^{< \mathbb N} := \bigcup_{n \in \mathbb N} R^n$}%
+		:
 	\begin{equation*}
 		R[X] :=
 		\left\{ 
 			\sum_{i \in \mathbb N} p_i X^i
 			\middle|
-			\forall i \in \mathbb N \big(
-					p_i \in R \big)
-			,\,
-			\exists N \in \mathbb N\,\forall n \in \mathbb N - N \big(
-					p_n = 0\big)
+			(p_i)_{i \in \mathbb N} \in R^{< \mathbb N}
 		\right\}
 	\end{equation*}
 	上定义了加法:
