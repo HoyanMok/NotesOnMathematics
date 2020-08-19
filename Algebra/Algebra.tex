@@ -1332,7 +1332,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \end{definition}
 
 \begin{theorem}[极小多项式存在]
-	设 $V$ 是域~$\mathbb F$ 上的线性空间. 
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间. 
 	$\forall \mathscr A \in \mathcal L(V)$, 都存在极小多项式 $\mu_\mathscr A (X)$, 且 $\deg \mu_{\mathscr A} (X) = \dim \mathbb F[\mathscr A]$.
 \end{theorem}
 \begin{proof}
@@ -1352,8 +1352,8 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	如果它不是零多项式, 记 $m = \deg \big( P(X) - Q(X)\big)$, 那么 $\frac{1}{p_m - q_m} \sum_{i \in n} (p_i - q_i) X^i = \mathscr O$ 将是一个首项为 $1$ 的零化 $\mathscr A$ 但其次数小于极小多项式的次数, 这是违背极小多项式的定义的.
 \end{proof}
 
-\begin{theorem}[可逆算子与最小多项式的常数项]
-	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, 其极小多项式是 $\mu_\mathscr A (X)$. 
+\begin{theorem}[可逆算子与极小多项式的常数项]
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$, 其极小多项式是 $\mu_\mathscr A (X)$. 
 	算子~$\mathscr A$ 可逆当且仅当 $\mu_\mathscr A$ 的常数项非零.
 \end{theorem}
 \begin{proof}
@@ -1378,6 +1378,26 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	给出了 $\mathscr A$ 的逆.
 \end{proof}
 
+\begin{theorem}[化零算子的多项式是极小多项式的倍式]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间.
+	能零化 $\mathscr A \in \mathcal L (V)$ 的多项式 $P(X) \in \mathbb F[X]$ 一定是 $\mu_\mathscr A (X)$ 的倍式.
+\end{theorem}
+\begin{proof}
+	作带余除法 $P(X) = Q(X) \mu_\mathscr A(X) + R(X)$, 其中 $\deg R(X) < \deg \mu_\mathscr A(X)$. 
+	如果 $R(X) \neq 0$, 那么 $R(\mathscr A) = P(\mathscr A) - Q(\mathscr A) \mu_\mathscr A(X) = \mathscr O$ 说明 $R(X)$ 是次数比 $\mu_\mathscr A(X)$ 还小的能化零 $\mathscr A$ 的多项式, 这与极小多项式的定义是矛盾的.
+\end{proof}
+
+\begin{definition}[幂零算子]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间.
+	线性算子~$\mathscr A \in \mathcal L(V)$ 如果满足 $\exists m \in \mathbb N_+$ 使得 $\mathscr A^m = \mathscr O$, 那么称其是一个\indexbf{幂零算子} (nilpotent operator). 
+	数~$d := \min \{m \in \mathbb N_+ \mid \mathscr A^m = \mathscr O\}$ 则被称为幂零算子的\indexbf{幂零指数}.
+\end{definition}
+
+由域作为零环的性质, 我们很容易验证 (只需要显式设出极小多项式):
+
+\begin{theorem}[幂零算子的极小多项式]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间. 若 $\mathscr A \in \mathcal L(V)$ 的幂零指数为 $d$, 那么其极小多项式就是 $X^d$.
+\end{theorem}
 
 
 \chapter{内积空间}
