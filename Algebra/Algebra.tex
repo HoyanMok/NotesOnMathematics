@@ -1279,7 +1279,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 域~$\mathbb F$ 上的线性空间~$V$ 的自同态 $\mathcal L(V, V)$ 可记作 $\indexfm[L V]{\mathcal L(V)}$ 或 $\indexfm[End]{\End(V)}$. 
 如前已述, 它的元素唤作线性算子. 
 给定 $n$~维线性空间~$V$ 的一组基底~$\hat e$ (同时作为定义域和到达域的基底), $\mathcal L(V)$ 的元素可用 $n$~阶方阵表示. 
-其中恒等变换 $\id_V$ 对应的矩阵通常记作 $\bv I$, 即 $n$~阶单位阵. 零映射记为 $\mathscr O \colon \bv x \mapsto \bv 0$.
+其中恒等变换 $\id_V$ 对应的矩阵通常记作 $\bv I$, 即 $n$~阶单位阵. 零映射记为 $\indexfm[O]{\mathscr O} \colon \bv x \mapsto \bv 0$.
 
 习惯上记 $\mathscr A \bv x := \mathscr A(\bv x)$, $\mathscr A \mathscr B := \mathscr A \circ \mathscr B$. 
 
@@ -1366,7 +1366,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\end{equation*}
 
 	由极小多项式的定义, $\sum_{i \in n - \{0\}} p_i \mathscr A^{i - 1} \neq \mathscr O$. 
-	那么, $\exists \bv x \in V$, $\sum_{i \in n - \{0\}} p_i \mathscr A^{i - 1} \bv x \in \ker \mathscr A - \{\bv 0\}$, 这表明 $\dim \mathscr A < n$, 即不可逆. 
+	那么, $\exists \bv x \in V$, $\sum_{i \in n - \{0\}} p_i \mathscr A^{i - 1} \bv x \in \ker \mathscr A - \{\bv 0\}$, 这表明 $\rank \mathscr A < n$, 即不可逆. 
 
 	如果极小多项式常数项不为 $0$, 
 	\begin{equation*}
@@ -1539,7 +1539,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	式~\eqref{equation:矩阵} 定义的 $\bv A$ 被称为 $\mathbb F$ 上的 $m \times n$ 的\indexbf{矩阵}, $m \times n$ 被称为它的尺寸或大小, $\{a_{ij}\}_{i \in m,\, j \in n}$ 是它的\indexbf{元素}. 所有 $\mathbb F$ 上的 $m \times n$~矩阵的集合记为 $\indexfm[M m times n F]{M_{m \times n}(\mathbb F)}$. 
 \end{definition}
 
-元素全为 $0$ 的矩阵记为 $\indexfm[O]{\bv O}$, 有时为了强调它的尺寸, 将之写在右下角 i.e.\ $\indexfm[O m times n]{O_{m \times n}}$.
+元素全为 $0$ 的矩阵记为 $\indexfm[O]{\bv O}$, 有时为了强调它的尺寸, 将之写在右下角 i.e.\ $\indexfm[O m times n]{\bv O_{m \times n}}$.
  
 通常, 我们称 $1 \times n$ 或 $n \times 1$ 的矩阵为 $n$~维\indexbf{向量}%
 	\index{n维向量@$n$~维向量}%
@@ -1602,7 +1602,8 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 我们这里做出一个递归的定义, 并给出它的一些性质.
 
 \begin{definition}[行列式]
-	方阵 $\bv A \in M_n(\mathbb F)$ 的行列式 $\det \bv A := |a_{ij}|_{i,j \in n}$ 递归地定义如下:
+	方阵 $\bv A \in M_n(\mathbb F)$ 的行列式 $\det \bv A := 
+		\indexfm[a ij i j in n]{ \vert a_{ij} \vert _{i,j \in n} }$ 递归地定义如下:
 	\begin{conditionlist}[label=\roman*.]
 		\item 当 $\bv A \in M_1(\mathbb F)$ 时, $\det \bv A = a_{00}$;
 		\item 当 $\bv A \in M_n(\mathbb F)$ 时, 若记 $M_{ij} :=  |a_{k\ell}|_{k,\ell \in n;\; k \neq i,\, \ell \neq j}$ (这称为\indexbf{余子式}), 那么
@@ -1711,7 +1712,8 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 		\bar F(X) := F(X) - f_0 g_0^{-1} X^{n - m} G(X)\,.
 	\end{equation*}
 
-	因 $\deg \bar F(X) < \deg F(X)$, 如若 $\bar F(X)$ 满足可找到 $\bar Q(X)$ 和 $R(X)$ s.t.\ $\bar F(X) = \bar Q(X) G(X) + R(X)$, 则令 $Q(X) = f_0 g_0^{-1} X^{n - m} + \bar Q(X)$, 这里的 $Q(X)$, $R(X)$ 即所要找的.
+	因 $\deg \bar F(X) < \deg F(X)$, 如若 $\bar F(X)$ 满足可找到 $\bar Q(X)$ 和 $R(X)$ s.t.\ $\bar F(X) = \bar Q(X) G(X) + R(X)$, 则令 $Q(X) = f_0 g_0^{-1} X^{n - m} + \bar Q(X)$. 
+	这里的 $Q(X)$, $R(X)$ 即所要找的.
 
 	综上, $\forall n \in \mathbb N$ 都成立.
 
@@ -1726,7 +1728,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 		\deg \big(R(X) - R'(X)\big) = \deg \big( Q(X) - Q'(X)\big) + \deg G(X)\,.
 	\end{equation*}
 
-	从而我们得到 $\deg R(X) \geq \deg(R(X) - R'(X)) \geq G(X)$, 这和 $\deg R(X) < \deg G(X)$ 矛盾. 从而, 要么 $Q(X) = Q'(X)$, 要么 $R(X) = R'(X)$, 而这两者因式~\ref{equation:商和余式唯一} 能互相推出.
+	从而我们得到 $\max\{\deg R(X), \deg R'(X) \} \geq \deg(R(X) - R'(X)) \geq G(X)$, 这和 $\deg R(X) < \deg G(X)$ 矛盾. 从而, 要么 $Q(X) = Q'(X)$, 要么 $R(X) = R'(X)$, 而这两者因式~\ref{equation:商和余式唯一} 能互相推出.
 \end{proof}
 
 在整的多项式环中, 由首项可逆的 $G(X)$ 和 $F(X)$ 得到 $F(X) = Q(X) G(X) + R(X)$ 的运算称为\indexbf{多项式的带余除法} (polynomial long division). 
