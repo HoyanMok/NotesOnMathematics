@@ -1378,6 +1378,8 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	给出了 $\mathscr A$ 的逆.
 \end{proof}
 
+
+
 \chapter{内积空间}
 
 \chapter{张量}
@@ -1644,7 +1646,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 \end{definition}
 
-记 $\deg P(X) := \max \{n \mid p_n \neq 0\}$ 为多项式~$P(X)$ 的\indexbf{次数}.
+记 $\indexfm[deg P X]{\deg P(X)} := \max \{n \mid p_n \neq 0\}$ 为多项式~$P(X)$ 的\indexbf{次数}.
 而 $(p_n)_{n \in \deg P(X) + 1}$ 是多项式的\indexbf{系数}, 其中 $p_0$ 是\indexbf{常数项}, 而 $p_{\deg P(X)}$ 是\indexbf{最高次项系数}或\indexbf{首项系数}.
 
 所有系数都为 $0$ 的多项式被称为\indexbf{零多项式}, 次数为 $1$ 的多项式被称为\indexbf{线性多项式}.
@@ -1652,7 +1654,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 不难验证, $R[X]$ 的单位元和零元分别是 $R$ 的单位元和零元.
 
 以下给出一些不难证明的定理, 如果读者感到困难, 请翻阅参考资料\cite{kostrikin1982introduction}:
-\begin{theorem}
+\begin{theorem}\label{theorem:多项式的运算与次数}
 	$\forall P(X), Q(X) \in A[A]$, 
 	$\deg \big(P(X) + Q(X)\big) \leq \max \{\deg P(X), \deg Q(X)\}$,
 	$\deg \big( P(X) Q(X) \big) \leq \deg P(X) + \deg Q(X)$.
@@ -1687,6 +1689,50 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 对于 $A = \mathbb Q$, $R = \mathbb C$ 的情况, 代数元和超越元又被称为\indexbf{代数数}和\indexbf{超越数}.
 
+类似于整数的带余除法, 我们可以建立整的多项式环上的带余除法理论.
+
+\begin{theorem}[多项式的带余除法]\label{theorem:多项式的带余除法}
+	设 $A$ 是整环, $F(X) \in A[X]$, 其首项系数在 $A$ 中可逆. 
+	$\forall G(X) \in A[X]$, $\exists! Q(X), R(X) \in A[X]$ s.t.\ 
+	\begin{equation*}
+		F(X) = Q(X) G(X) + R(X)\; \wedge \deg R(X) < \deg G(X)\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	设 $F(X) = \sum_{i \in n^+} f_i X^i$, $G(X) = \sum_{j \in m^+} g_j X^j$, 其中 $n = \deg F(X)$, $m = \deg G(X)$. \footnote{这里排除了零多项式, 事实上, 它的情况是非常简单的, 只需让 $Q(X) = R(X) = 0$ 即可.} 
+
+	我们采取归纳法证明这样的 $Q(X)$, $R(X)$ 的存在性:
+	$n = 0$ 时, 倘 $m > 0$, 则令 $Q(X) = 0$, $R(X) = F(X)$; 
+	倘 $m = 0$, 则令 $R(X) = 0$, $Q(X) = f_0 g_0^{-1}$.
+
+	若 $n > 0$, 倘 $m > n$, 则令 $Q(X) = 0$, $R(X) = F(X)$ 即可;
+	倘 $m \leq n$, 记
+	\begin{equation*}
+		\bar F(X) := F(X) - f_0 g_0^{-1} X^{n - m} G(X)\,.
+	\end{equation*}
+
+	因 $\deg \bar F(X) < \deg F(X)$, 如若 $\bar F(X)$ 满足可找到 $\bar Q(X)$ 和 $R(X)$ s.t.\ $\bar F(X) = \bar Q(X) G(X) + R(X)$, 则令 $Q(X) = f_0 g_0^{-1} X^{n - m} + \bar Q(X)$, 这里的 $Q(X)$, $R(X)$ 即所要找的.
+
+	综上, $\forall n \in \mathbb N$ 都成立.
+
+	现在我们还需要证明唯一性.
+
+	倘若 $F(X) = Q(X) G(X) + R(X) = Q'(X) G(X) + R'(X)$, 那么
+	\begin{equation}\label{equation:商和余式唯一}
+		[Q(X) - Q'(X)] G(X) = R(X) - R'(X)
+	\end{equation}
+	由定理~\ref{theorem:多项式的运算与次数}, 再考虑到 $A$ 是一个整环, 假设 $Q(X) \neq Q'(X)$, $R(X) \neq R'(X)$ 我们能得到
+	\begin{equation*}
+		\deg \big(R(X) - R'(X)\big) = \deg \big( Q(X) - Q'(X)\big) + \deg G(X)\,.
+	\end{equation*}
+
+	从而我们得到 $\deg R(X) \geq \deg(R(X) - R'(X)) \geq G(X)$, 这和 $\deg R(X) < \deg G(X)$ 矛盾. 从而, 要么 $Q(X) = Q'(X)$, 要么 $R(X) = R'(X)$, 而这两者因式~\ref{equation:商和余式唯一} 能互相推出.
+\end{proof}
+
+在整的多项式环中, 由首项可逆的 $G(X)$ 和 $F(X)$ 得到 $F(X) = Q(X) G(X) + R(X)$ 的运算称为\indexbf{多项式的带余除法} (polynomial long division). 
+这里 $F(X)$ 被称为\indexbf{被除式} (dividend), $G(X)$ 称为\indexbf{除式} (divisor); 得到的 $Q(X)$ 称为\indexbf{商} (quotient) 而 $R(X)$ 称为\indexbf{余式} (remainder).
+
+倘若余式 $R(X) = 0$, 则称 $G(X)$ \indexbf{整除} $F(X)$, 或 $F(X)$ 被 $G(X)$ 整除, 此时 $G(X)$ 被称为 $F(X)$ 的一个\indexbf{因式} (factor), 而 $F(X)$ 则是 $G(X)$ 的一个\indexbf{倍式} (multiple).
 
 \section{多项式的根}
 \backmatter
