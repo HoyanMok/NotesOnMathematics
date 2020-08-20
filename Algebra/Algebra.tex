@@ -147,6 +147,7 @@
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -1400,6 +1401,30 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \end{theorem}
 
 
+通过枯燥的运算可以得出:
+\begin{theorem}[线性算子在不同基底下的矩阵]
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间. 若 $\bv A$ 和 $\bv A'$ 分别是 $\mathscr A \in \mathcal L(V)$ 在基底~$\hat e$ 和 $\hat e'$ 下的矩阵, 那么:
+	\begin{equation*}
+		\bv A' = \bv P^{-1} \bv A \bv P,\,
+	\end{equation*}
+	其中 $\bv P$ 是 $\hat e$ 到 $\hat e'$ 的转换矩阵.
+\end{theorem}
+
+也就是说: 相似矩阵是同一线性算子在不同基底下的坐标表示.
+借相似关系, 行列式和迹的性质:
+
+\begin{theorem}[不变量]
+	设 $\bv A, \bv A' \in M_n(\mathbb F)$. 
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间. 若 $\bv A$ 和 $\bv A'$ 分别是 $\mathscr A \in \mathcal L(V)$ 在基底~$\hat e$ 和 $\hat e'$ 下的矩阵, 那么:
+	\begin{equation*}
+		\det \bv A = \det \bv A'\,, \quad
+		\tr \bv A = \tr \bv A'\,.
+	\end{equation*}
+\end{theorem}
+
+如此我们可以径直称 $\det \mathscr A := \det \bv A$ 为线性算子的\indexbf{行列式} (determinent), 而不必指出基底;
+而 $\tr \mathscr A := \tr \bv A$ 为线性算子的\indexbf{迹} (trace).
+
 \chapter{内积空间}
 
 \chapter{张量}
@@ -1616,6 +1641,36 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	设方阵~$\bv A \in M_n(\mathbb F)$. 
 	若 $\exists \bv B \in M_n(\mathbb F)$, s.t.\ $\bv B \bv A = \bv A \bv B = \bv I$ 则称其为 $\bv A$ 的\indexbf{逆}, 并记为 $\indexfm[A -1]{\bv A^{-1}}$, 同时称 $\bv A$ 是可逆的.
 \end{definition}
+
+\begin{definition}[相似]
+	设 $\bv A, \bv A' \in M_n(\mathbb F)$. 
+	如果 $\exists \bv B \in M_n(\mathbb F)$ s.t.\ $\bv B$ 可逆且有 $\bv A' = \bv B^{-1} \bv A \bv B$, 那么我们称 $\bv A$ 和 $\bv A'$ \indexbf{相似}, 记为 $\bv A \sim \bv A'$.
+\end{definition}
+
+不难看出, 相似关系是一个等价关系. 
+
+\begin{definition}[迹]
+	设 $\bv A = (a_{ij})_{i,j \in n} \in M_n(\mathbb F)$. 
+	方阵~$\bv A$ 的迹定义为 $\indexfm[tr]{\tr} \bv A := \sum_{i \in n} a_{ii}$.
+\end{definition}
+
+\begin{theorem}[迹的交换性]
+	设 $\bv A, \bv B \in M_n(\mathbb F)$. $\tr (\bv A \bv B) = \tr (\bv B \bv A)$.
+\end{theorem}
+\begin{proof}
+	\begin{equation*}
+		\bv A \bv B = \left(\sum_{k \in n} a_{ik} b_{kj} \right)\,, \quad 
+		\bv B \bv A = \left(\sum_{k \in n} b_{ik} a_{kj} \right)\,.
+	\end{equation*} 
+	
+	从而
+	\begin{equation*}
+		\tr (\bv A \bv B) 
+		= \sum_{i \in n} \sum_{k \in n} a_{ik} b_{ki} 
+		= \sum_{k \in n} \sum_{i \in n} b_{ki} a_{ik}
+		= \tr (\bv B \bv A)\,.
+	\end{equation*}
+\end{proof}
 
 \section{行列式}
 行列式的公理化构造我们在定义~\ref{definition:行列式的公理化构造} 中已经给出了. 
