@@ -1674,20 +1674,58 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 \section{行列式}
 行列式的公理化构造我们在定义~\ref{definition:行列式的公理化构造} 中已经给出了. 
-我们这里做出一个递归的定义, 并给出它的一些性质.
+我们这里做出一个不加解释的定义%
+	\footnote{几何解释可见于\cite{kostrikin1982introduction}.}%
+, 并给出它的一些性质.
 
 \begin{definition}[行列式]
-	方阵 $\bv A \in M_n(\mathbb F)$ 的行列式 $\det \bv A := 
-		\indexfm[a ij i j in n]{ \vert a_{ij} \vert _{i,j \in n} }$ 递归地定义如下:
-	\begin{conditionlist}[label=\roman*.]
-		\item 当 $\bv A \in M_1(\mathbb F)$ 时, $\det \bv A = a_{00}$;
-		\item 当 $\bv A \in M_n(\mathbb F)$ 时, 若记 $M_{ij} :=  |a_{k\ell}|_{k,\ell \in n;\; k \neq i,\, \ell \neq j}$ (这称为\indexbf{余子式}), 那么
-		\begin{equation*}
-			\bv A = \sum_{j \in n} (-1)^j a_{0j} M_{0j} \,.
-		\end{equation*}
-	\end{conditionlist}
+	方阵 $\bv A \in M_n(\mathbb F)$ 的\indexbf{行列式} $\det \bv A := 
+		\indexfm[a ij i j in n]{ \vert a_{ij} \vert _{i,j \in n} }$ 定义为:
+	\begin{equation*}
+		\det \bv A = \vert a_{ij} \vert _{i,j \in n}
+			= \sum_{\pi \in S_n} \varepsilon_\pi \prod_{i \in n} a_{i, \pi(i)}
+	\end{equation*}
 \end{definition}
 
+\begin{theorem}[行列式的反对称性]
+	设 $\bv A = (\bv a_j)_{j \in n}$, 那么 $\forall \pi \in S_n$, $|\bv a_{\pi(j)}|_{j \in n} = \varepsilon_{\pi} \det \bv A$.
+\end{theorem}
+
+\begin{theorem}
+	$\det \bv A = \det \bv A^{\mathrm T}$.
+\end{theorem}
+
+\begin{theorem}[行列式的线性~1]
+	设 $\bv A = (\bv a_j)_{j \in n}$, $\bv A' = (\bv a'_j)_{j \in n}$, 
+	其中 $j \neq j_0$ 时 $\bv a'_j = \bv a_j$; 
+	但 $\bv a'_{j_0} = \lambda \bv a_{j_0}$, $\lambda \in \mathbb F$. 
+	\begin{equation*}
+		\det \bv A' = \lambda \det \bv A\,.
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[行列式的线性~2]
+	设 $\bv A = (\bv a_j)_{j \in n}$, $\bv A' = (\bv a'_j)_{j \in n}$, 
+	其中 $j \neq j_0$ 时 $\bv a'_j = \bv a_j$.
+	\begin{equation*}
+		\det \bv A + \det \bv A' = |\bv a''_j|_{j \in n}\,,
+	\end{equation*}
+	其中 $j \neq j_0$ 时 $\bv a''_j = \bv a_j$; $\bv a''_{j_0} = \bv a'_{j_0} + \bv a_{j_0}$.
+\end{theorem}
+
+设 $I, J \in \mathscr P(n)$, 而 $|I| = |J|$. 
+记 $\indexfm[M IJ]{M_{IJ}} := |a_{k\ell}|_{k \in n - I;\, \ell \in n - J}$ 为 $\bv A$ 的\indexbf{子式} (minor), 而\indexbf{代数子式} (cofactor) 则是定义为 $\indexfm[A IJ]{A_{IJ}} := (- 1)^{\sum_{i \in I} i + \sum_{j \in J}j} M_{IJ}$.
+如果 $|I| = |J| = 1$, 那么我们称 $\indexfm[M ij]{M_{ij}} := M_{\{i\}\{j\}}$ 为\indexbf{首子式} (first minor), 对应的代数子式也可记为 $\indexfm[A ij]{A_{ij}}$. 
+那么, 以下的定理将给出一种计算行列式的递推方法:
+
+\begin{theorem}[行列式按行 (列) 展开]
+	$\forall k \in n$, 
+	\begin{equation*}
+		\det \bv A = \sum_{i \in n} a_{ik} A_{ik}\,;
+		\quad
+		\det \bv A = \sum_{j \in n} a_{kj} A_{kj}\,.
+	\end{equation*}
+\end{theorem}
 
 \chapter{多项式}
 \section{多项式环}
