@@ -1602,7 +1602,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 设矩阵~$\bv A$ 的尺寸为 $n \times n$, 我们称其为 $n$~维\indexbf{方阵}, 其集合记为 $\indexfm[M n F]{M_n(\mathbb F)}$.
 
 \begin{definition}[对角矩阵]
-	若方阵~$\bv A$ 的元素只有对角线上的元素非零 i.e.\ $ a_{ij} \neq 0  \IFF i = j$, 称其为\indexbf{对角矩阵}, 记为 $\indexfm[diag a ii i in n]{\diag(a_{ii})_{i \in n}}$. 特别地 $\indexfm[I]{\bv I} := \diag(1)_{i \in n}$ 称为 $n$~维\indexbf{单位阵}.
+	若方阵~$\bv A$ 的元素只有对角线上的元素非零 i.e.\ $ a_{ij} \neq 0  \to i = j$, 称其为\indexbf{对角矩阵}, 记为 $\indexfm[diag a ii i in n]{\diag(a_{ii})_{i \in n}}$. 特别地 $\indexfm[I]{\bv I} := \diag(1)_{i \in n}$ 称为 $n$~维\indexbf{单位阵}.
 \end{definition}
 
 \begin{definition}[转置]
@@ -1676,9 +1676,9 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 行列式的公理化构造我们在定义~\ref{definition:行列式的公理化构造} 中已经给出了. 
 我们这里做出一个不加解释的定义%
 	\footnote{几何解释可见于\cite{kostrikin1982introduction}.}%
-, 并给出它的一些性质.
+, 并不加证明地给出它的一些性质.
 
-\begin{definition}[行列式]
+\begin{definition}[行列式]\label{definition:行列式}
 	方阵 $\bv A \in M_n(\mathbb F)$ 的\indexbf{行列式} $\det \bv A := 
 		\indexfm[a ij i j in n]{ \vert a_{ij} \vert _{i,j \in n} }$ 定义为:
 	\begin{equation*}
@@ -1726,6 +1726,25 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 		\det \bv A = \sum_{j \in n} a_{kj} A_{kj}\,.
 	\end{equation*}
 \end{theorem}
+
+以下的定理确保了定义~\ref{definition:行列式的公理化构造} 和定义~\ref{definition:行列式} 的一致性, 并且这是唯一的构造方式.
+
+\begin{theorem}[行列式的唯一性]
+	设 $\mathcal D \in \mathcal L_n(\mathbb F^n; \mathbb F)$ (即 $\mathcal D \colon M_n(\mathbb F) \to \mathbb F$ 而且是 $n$~重线性的). 
+	倘若 $\mathcal D$ 还是反对称的, 即 $\forall \pi \in S_n$, $\mathcal D (\bv x_{\pi(j)})_{j \in n} = \varepsilon_\pi \mathcal D (\bv x_j)_{j \in n}$, 
+	那么 $\forall \bv A \in M_n(\mathbb F)$, $\mathcal D (\bv A) = \mathcal D(\bv I) \det \bv A$.
+\end{theorem}
+
+它的证明需要利用线性和反对称性, 利用行变换将矩阵转换为对角的. 
+取 $\mathcal D(\bv I) = 1$, 我们就得到了 $\mathcal D = \det$.
+
+取 $\mathcal D (\bv I) = \det \bv B$ 推出的一个重要的性质是:
+\begin{theorem}[行列式的积]
+	$\forall \bv A, \bv B \in M_n(\mathbb F)$, 
+	$\det (\bv A \bv B) = \det \bv A \det \bv B$.
+\end{theorem}
+
+
 
 \chapter{多项式}
 \section{多项式环}
