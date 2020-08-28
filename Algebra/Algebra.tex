@@ -859,11 +859,17 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 线性空间的交依然是线性空间, 但是它们的并却不一定. 
 
 \begin{definition}[子空间的和]
-	设 $U, W$ 都是 $V$ 的子空间, 定义\footnote{这里不用 $+$ 表示集合的并.}
+	设 $\forall i \in m$, $U_i$ 都是 $V$ 的子空间, 定义\footnote{这里不用 $+$ 表示集合的并.}
 	\begin{equation*}
-		U + W := \langle U \cup W \rangle = \{\bv u + \bv w \mid \bv u \in U,\,\bv w \in U\} 
+		\sum_{i \in m} U_i := 
+			\left\langle \bigcup_{i \in m} U_i\right\rangle =
+			\left\{
+					\sum_{i \in m} \bv u_i 
+					\middle\vert
+					(\bv u_i)_{i \in m} \in \prod_{i \in m} U_i
+			\right\} 
 	\end{equation*}
-	为 $U$ 和 $W$ 的\indexbf{和}. 若 $U \cap W = \varnothing$, 那么记 $U \oplus W := U + W$, 称为\indexbf{直和}.
+	为 $U$ 和 $W$ 的\indexbf{和}. 若 $\forall i \in m$, $U_i \cap \sum_{j \in m;\, j \neq i} U_i= \{\bv 0\}$, 那么记 $\bigoplus_{i \in m} U_i := \sum_{i \in m} U_i$, 称为\indexbf{直和}.
 \end{definition}
 
 \begin{theorem}[\indexbf{Grassmann 恒等式}]\label{Grassmann}
@@ -898,13 +904,29 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \end{proof}
 
 \begin{corollary}
-	若 $U = \sum_{i \in m} U_i$ 是直和, 当且仅当:
+	$U = \sum_{i \in m} U_i$ 是直和, 当且仅当:
 	\begin{equation*}
 		\dim U = \sum_{i \in m} \dim U_i\,.
 	\end{equation*}
 \end{corollary}
 \begin{proof}
 	利用Grassmann恒等式~\ref{Grassmann} 和数学归纳法易证.
+\end{proof}
+
+\begin{theorem}[向量在直和上分解的唯一性]\label{theorem:向量在直和上分解的唯一性}
+	设 $U = \sum_{i \in m} U_i$. 
+	$U = \sum_{i \in m} U_i$ 还是直和, 当且仅当:
+		\begin{equation*}
+			\forall \bv u \in U
+				\exists! (\bv u_i)_{i \in m} \in \prod_{i \in m} U_i
+					\left( \bv u  = \sum_{i \in m} \bv u_i \right)\,.
+		\end{equation*}
+\end{theorem}
+\begin{proof}
+	$\gets$: 假设 $\exists \bv u \in U$ s.t.\ $\exists i, j \in m
+		\big(i \neq j \,\wedge\, \bv u \in U_i \cap U_j\big)$, 那么 $\bv u_0$ 在其上的分解式不唯一: $\bv u_i$ 和 $\bv u_j$ 可以其中一个取 $\bv u$, 另一个取 $\bv 0$.
+	
+	$\to$: 这相当于证明 $\sum_{i \in m} \bv u_i = \bv 0 \to \forall i \in m \big( \bv u_i = \bv 0\big)$, 其逆否命题的成立, 只需要将非零项移至另一侧并用直和的定义即可验证.
 \end{proof}
 
 \begin{theorem}
@@ -1424,6 +1446,8 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 如此我们可以径直称 $\det \mathscr A := \det \bv A$ 为线性算子的\indexbf{行列式} (determinent), 而不必指出基底;
 而 $\tr \mathscr A := \tr \bv A$ 为线性算子的\indexbf{迹} (trace).
+
+\section{不变子空间与特征向量}
 
 \chapter{内积空间}
 
