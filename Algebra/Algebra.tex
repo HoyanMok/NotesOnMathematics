@@ -1449,6 +1449,54 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 \section{不变子空间与特征向量}
 
+\begin{definition}[正交等方算子组]
+	设 $V$ 是线性空间, $\forall i \in m$, $\mathscr P_i \in \mathcal L(V)$. 
+	倘若 $\{\mathscr P_i\}_{i \in m}$ 满足
+	\begin{equation*}
+		\forall i,j \in m, \quad
+			\mathscr P_i \mathscr P_j = \delta_{ij} \mathscr P_i\,,
+	\end{equation*}
+	则称其为一个\indexbf{正交等方算子组}, 其中每一个算子都称为\indexbf{等方算子}或\indexbf{投影} (projection).
+	它们对应的矩阵组 $\{\bv P_i\}_{i \in m}$ 则称为\indexbf{正交等方矩阵组}. 
+	
+	如果正交等方算子组~$\{\mathscr P_i\}_{i \in m}$ 还满足 $\sum_{i \in m} \mathscr P_i = \id_V$, 那么称它是一个\indexbf{完备正交组}.
+\end{definition}
+
+以下事实很容易得到验证:
+一个正交等方算子组中的算子满足 $\mathscr P_i^2 = \mathscr P_i$, 
+$\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$; 
+而且如果 $i \neq j$, $\mathscr P_j(V) \subseteq \ker \mathscr P_i$.
+
+
+\begin{theorem}[线性空间用正交完备算子组的像直和分解]
+	设 $V$ 是线性空间, $\{\mathscr P_i\}_{i \in m}$ 是正交完备算子组.
+	\begin{equation*}
+		V = \bigoplus_{i \in m} \mathscr P_i(V)\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	$\forall \bv x \in V$, 
+	\begin{equation*}
+		\bv x = \id_V(\bv x) = \sum_{i \in m} \mathscr P_i \bv x\,,
+	\end{equation*}
+	注意到 $\mathscr P_i \bv x \in \mathscr P_i(V)$, 从而 $V = \sum_{i \in m} \mathscr P_i(V)$.
+
+	现在要证它是一个直和. $\forall i \in m\; \forall \bv x \in \mathscr P_i(V) \cap \left( \sum_{j \in m;\; j \neq i} \mathscr P_j(V)\right)$, 
+	\begin{equation*}
+		\exists \bv (x_j)_{j \in m} \in V^m  \;\text{s.t.\ }
+			\bv x = \mathscr P_i \bv x_i = \sum_{j \in m;\; j \neq i} \mathscr P_j \bv x_j\,,
+	\end{equation*}
+	将上式两侧同时作用算子~$\mathscr P_i$ 即有
+	\begin{equation*}
+		\mathscr P_i \bv x = \mathscr P_i^2 \bv x_i = \mathscr P_i \bv x_i = \bv x = 
+		\sum_{j \in m;\; j \neq i} \mathscr P_i \mathscr P_j (\bv x_j) = \bv 0\,.
+	\end{equation*}
+\end{proof}
+
+\begin{definition}[不变子空间]
+	设 $V$ 是线性空间, $U$ 是其子空间, $\mathscr A \in \mathcal L(V)$. 倘若 $\mathscr A(U) \subseteq U$, 我们称 $U$ 是线性算子~$\mathscr A$ 的一个\indexbf{不变子空间}.
+\end{definition}
+
 \chapter{内积空间}
 
 \chapter{张量}
