@@ -1196,6 +1196,53 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 		记方阵 $\bv X := (\bv x_i)_{i \in n}$, 则称 $\det \bv X$ 是 $\bv X$ 的\indexbf{行列式}.
 \end{definition}
 
+多重线性型中我们特别关注\indexbf{双线性型} (bilinear form), 也就是 $2$-线性型在 $V_0 = V_1$ 的特殊情况.
+
+选定 $n$~维线性空间~$V$ 的基底 $\hat e$, 我们能将双线性型~$\mathscr B \in \mathcal L_2(V)$ 表成矩阵的形式:
+\begin{equation*}
+	\mathscr B(\bv x, \bv y) 
+	= \mathscr B \left( 
+		\sum_{i \in n} x_i \basis e_i,\, \sum_{j \in n} y_j \basis e_j
+	 \right)
+	= \sum_{i \in n} x_i \mathscr B \left( 
+		\basis e_i,\, \sum_{j \in n} y_j \basis e_j
+	 \right)
+	= \sum_{i \in n} \sum_{j \in n} x_i \mathscr B (\basis e_i, \basis e_j) y_j\,.
+\end{equation*}
+
+令 $\bv B = \big(\mathscr B(\basis e_i, \basis e_j))_{i, j\in n}$, 得:
+
+\begin{equation}\label{equation:双线性型的矩阵表示}
+	\mathscr B(\bv x, \bv y) = \inbasis{\bv x}{\hat e}^\mathrm T \bv B \inbasis{\bv y}{\hat e}\,.
+\end{equation}
+
+这说明, 只要给出一组基底, 我们就有一个 $\mathcal L_2(V; \mathbb F)$ 到 $M_n(\mathbb F)$ 的同构. 而且我们能看到: 对称双线性型 (其集合记为 $\indexfm[L plus V F]{\mathcal L^+(V; \mathbb F)}$) 将对应对称矩阵, 而反对称双线性型 ($\indexfm[L minus V F]{\mathcal L^-(V; \mathbb F)}$) 对应一个反对称矩阵.
+
+\begin{theorem}[对称与反对称]
+	如果 $\characteristic \mathbb F \neq 2$, 那么
+	\begin{equation*}
+		\mathcal L_2 (V; \mathbb F) = \mathcal L_2^+ (V; \mathbb F) \oplus \mathcal L_2^- (V; \mathbb F)
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	对于任意 $\mathscr B \in \mathcal L_2 (V; \mathbb F)$, 令 $\mathscr B^\mathrm T$ 表示 $\mathscr B^\mathrm T(\bv x, \bv y) = \mathscr B(\bv y, \bv x)$, 那么 $\mathscr B$ 总能写成对称双线性型~$(\mathscr B + \mathscr B^\mathrm T)/2$ 和反对称双线性型~$(\mathscr B - \mathscr B^\mathrm T)/2$ 的和. 
+	也就是说 $\mathcal L_2 (V; \mathbb F) = \mathcal L_2^+ (V; \mathbb F) + \mathcal L_2^- (V; \mathbb F)$.
+
+	设 $\mathscr B \in \mathcal L_2^+ (V; \mathbb F) \cap \mathcal L_2^- (V; \mathbb F)$. $\forall \bv x, \bv y \in V$, $\mathscr B(\bv y, \bv x) = - \mathscr B(\bv x, \bv y) = \mathscr B(\bv x, \bv y)$. 
+	移项得 $2 \mathscr B(\bv x, \bv y) = 0$, 如果 $\characteristic \mathbb F = 2$, 这将对 $\mathscr B(\bv x, \bv y)$ 的任意取值恒成立; 但如果 $\characteristic \mathbb F \neq 2$, 这只能说明 $\mathscr B(\bv x, \bv y) = 0$, 即 $\mathscr B = \mathscr O$. 
+	这里 $\mathscr O$ 表示 $(\bv x, \bv y) \mapsto 0$ 的零双线性型.
+\end{proof}
+
+\begin{theorem}[双线性型的坐标变换]
+	设 $\hat e$, $\hat f$ 是 $n$~维线性空间~$V$ 的两组基底, 它们之间的转换矩阵是 $\bv P$; 双线性型~$\mathscr B \in \mathcal L_2(V)$ 在 $\hat e$, $\hat f$ 下的矩阵分别是 $\bv B$, $\bv B'$, 有:
+	\begin{equation*}
+		\bv B' = \bv P^\mathrm T \bv B \bv P\,.
+	\end{equation*}
+\end{theorem}
+
+这个定理说的是: 双线性型在不同基底下的矩阵是合同的.
+
+\section{二次型}
 
 \chapter{线性算子}
 \section{线性映射}
@@ -1493,10 +1540,13 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 	\end{equation*}
 \end{proof}
 
+设有投影 $\mathscr P \in \mathcal L(V)$
+
 \begin{definition}[不变子空间]
 	设 $V$ 是线性空间, $U$ 是其子空间, $\mathscr A \in \mathcal L(V)$. 倘若 $\mathscr A(U) \subseteq U$, 我们称 $U$ 是线性算子~$\mathscr A$ 的一个\indexbf{不变子空间}.
 \end{definition}
 
+$\mathscr P$
 \chapter{内积空间}
 
 \chapter{张量}
@@ -1677,10 +1727,13 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	若方阵~$\bv A$ 的元素只有对角线上的元素非零 i.e.\ $ a_{ij} \neq 0  \to i = j$, 称其为\indexbf{对角矩阵}, 记为 $\indexfm[diag a ii i in n]{\diag(a_{ii})_{i \in n}}$. 特别地 $\indexfm[I]{\bv I} := \diag(1)_{i \in n}$ 称为 $n$~维\indexbf{单位阵}.
 \end{definition}
 
+
 \begin{definition}[转置]
 	设 $\bv A = (a_{ij})_{i \in m,\, j \in n} \in M_{m \times n}(\mathbb F)$.
 	我们称 $(a_{ji})_{j \in n,\, i \in m} \in M_{n \times n}(\mathbb F)$ 为矩阵~$\bv A$ 的\indexbf{转置}, 记为 $\indexfm[A T]{\bv A^\mathrm T}$.
 \end{definition}
+
+如果 $\mathbb F$ 是复数域~$\mathbb C$, 我们通常更加关注\indexbf{共轭转置} $\indexfm[A dagger]{\bv A^\dagger} := {\overline {\bv A}}^\mathrm T$.
 
 \begin{definition}[和]
 	在 $M_{m \times n}$ 上定义\emphbf{和}%
@@ -1709,17 +1762,49 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	
 由域的性质, 我们能验证矩阵的乘法运算是结合的, 而且满足对和的分配律.
 
+\begin{theorem}[积的转置]\label{theorem:积的转置}
+	设 $\bv A \in M_{m \times \ell}(\mathbb F)$, $\bv B \in M_{\ell \times n}(\mathbb F)$.
+	\begin{equation*}
+		(\bv A \bv B)^\mathrm T = \bv B^\mathrm T \bv A^\mathrm T\,.
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}[积的共轭转置]
+	设 $\bv A \in M_{m \times \ell}(\mathbb C)$, $\bv B \in M_{\ell \times n}(\mathbb C)$.
+	\begin{equation*}
+		(\bv A \bv B)^\dagger = \bv B^\dagger \bv A^\dagger\,.
+	\end{equation*}
+\end{corollary}
+
 \begin{definition}[逆]
 	设方阵~$\bv A \in M_n(\mathbb F)$. 
 	若 $\exists \bv B \in M_n(\mathbb F)$, s.t.\ $\bv B \bv A = \bv A \bv B = \bv I$ 则称其为 $\bv A$ 的\indexbf{逆}, 并记为 $\indexfm[A -1]{\bv A^{-1}}$, 同时称 $\bv A$ 是可逆的.
 \end{definition}
 
+\begin{theorem}[逆的转置]
+	设 $\bv A \in M_n(\mathbb F)$ 且可逆. 
+	其转置~$\bv A^\mathrm T$ 也可逆, 且 $(\bv A^\mathrm T)^{-1} = (\bv A^{-1})^\mathrm T$.
+\end{theorem}
+\begin{proof}
+	写出逆的定义, 两边取转置, 并应用 $\bv I^\mathrm T = \bv I$ 和定理~\ref{theorem:积的转置}.
+\end{proof}
+
+\begin{theorem}[逆的共轭转置]
+	设 $\bv A \in M_n(\mathbb C)$ 且可逆. 
+	其共轭转置~$\bv A^\dagger$ 也可逆, 且 $(\bv A^\dagger)^{-1} = (\bv A^{-1})^\dagger$.
+\end{theorem}
+
 \begin{definition}[相似]
 	设 $\bv A, \bv A' \in M_n(\mathbb F)$. 
-	如果 $\exists \bv B \in M_n(\mathbb F)$ s.t.\ $\bv B$ 可逆且有 $\bv A' = \bv B^{-1} \bv A \bv B$, 那么我们称 $\bv A$ 和 $\bv A'$ \indexbf{相似}, 记为 $\bv A \sim \bv A'$.
+	如果 $\exists \bv B \in M_n(\mathbb F)$ s.t.\ $\bv B$ 可逆且有 $\bv A' = \bv B^{-1} \bv A \bv B$, 那么我们称 $\bv A$ 和 $\bv A'$ \indexbf{相似} (similar), 记为 $\bv A \sim \bv A'$.
 \end{definition}
 
 不难看出, 相似关系是一个等价关系. 
+
+\begin{definition}[合同矩阵]
+	设 $\bv A, \bv A' \in M_n(\mathbb F)$. 
+	如果 $\exists \bv B \in M_n(\mathbb F)$ s.t.\ $\bv B$ 可逆且有 $\bv A' = \bv B^{\mathrm T} \bv A \bv B$, 那么我们称 $\bv A$ 和 $\bv A'$ \indexbf{合同} (congruence).
+\end{definition}
 
 \begin{definition}[迹]
 	设 $\bv A = (a_{ij})_{i,j \in n} \in M_n(\mathbb F)$. 

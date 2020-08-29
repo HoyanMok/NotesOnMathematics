@@ -1,12 +1,13 @@
 % Used TeXplate:
 % TeXplates/Mathematics.tex
-% v0.1.5
+% v0.1.7
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{book} 
 % \documentclass{ctexbook} 如果用中文
 % \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
 % 五号 = 10.5pt，小四=12pt，四号=14pt
 % 其他可选参量如twocolumn, 两行排版
+\newcommand{\PATH}{./}
 
 \usepackage{biblatex} %[style=gb7714-2015]{biblatex} 可以选择样式
 \addbibresource{Analysis.bib} % 把这里改成实际的文件名
@@ -17,6 +18,8 @@
 	\chapter{#1}% 
 	\markboth{#1}{#1}}
 
+\usepackage[notbib, notindex]{tocbibind} % 解决TOC在TOC中的问题
+
 \usepackage{imakeidx} %索引
 	\makeindex[intoc, title={Index}]
 	\makeindex[intoc, name=symbol, title={Symbol List}]
@@ -26,7 +29,6 @@
 
 % 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
 % 使用「/」而不是「\」
-\newcommand{\PATH}{PATH/}
 
 % 对目录项等的修改
 \usepackage{chngcntr}
@@ -46,7 +48,7 @@
 					-\oldstylenums{\arabic{equation}}} % 显示为section数-equation数
 \usepackage{amsthm} %定义、证明、定理等
 	\theoremstyle{plain}
-		\newtheorem{axion}{Axion} %公理
+		\newtheorem{axiom}{Axiom} %公理
 		\newtheorem{theorem}{Theorem}[section] %定理
 		\newtheorem{corollary}{Corollary} %推论
 		\newtheorem{lemma}{Lemma} %引理
@@ -60,7 +62,7 @@
 } % 公式编号不显示`\S`
 \renewcommand{\thedefinition}{%
 	\arabic{section}.\arabic{definition}%
-} % 公式编号不显示`\S`
+} % 定义编号不显示`\S`
 \usepackage{amssymb} % 数学符号
 \usepackage{mathrsfs} % 花体
 \usepackage{esint} % 积分
@@ -77,7 +79,10 @@
 \usepackage[inline]{enumitem} % 编号
 	% 新列表:
 	\newlist{conditionlist}{enumerate}{2}
-	\setlist[conditionlist,1,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt}
+	\setlist[conditionlist,1]{topsep = 0pt, itemsep = 0pt, parsep = 0pt,%
+		label=\arabic*), leftmargin=2\parindent}
+	\setlist[conditionlist,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt,%
+		label=\alph*), leftmargin=3\parindent}
 \usepackage{geometry} % 调整页边距
 % \geometry{left=1.6cm,right=1.6cm}
 \usepackage{xcolor} % 颜色
@@ -118,6 +123,7 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\ran}{ran}
 \DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\card}{card}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -130,164 +136,250 @@
 \pagenumbering{Alph}
 \maketitle % 打印标题
 \frontmatter
-
-\phantomsection
-\addcontentsline{toc}{chapter}{Contents}
+\chapter{preface}
+The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/Analysis} .
 \tableofcontents
 \mainmatter
+\part{Mathematical Analysis}
+
 \chapter{Metric Space and Continuous Map}
+
 \section{Metric Space}
-\begin{definition}\label{metric_def} function
-\begin{align}\label{metric}
-	d:X^2\to\mathbb{R}
-\end{align}
-	$\forall x_1,x_2,x_2\in X$ satisfied: 
+\begin{definition}[Metric]\label{definition: metric} A function
+	\begin{equation*}
+		d \colon X^2 \to \mathbb R
+	\end{equation*}
+	$\forall x, y, z\in X$ satisfying: 
 	\begin{conditionlist}[label=\alph*)]
-	\item	$d(x_1,x_2)=0\Leftrightarrow x_1=x_2$;
-	\item	$d(x_1,x_2)=d(x_2,x_1)$ (symmetry);
-	\item	$d(x_1,x_3)\leqslant d(x_1,x_2)+d(x_2,x_3)$(Triangle inequality),
+	\item	$d(x, y)=0 \IFF x = y$;
+	\item	$d(x, y)=d(y, x)$ (symmetry);
+	\item	$d(x, z) \leq d(x,y)+d(y,z)$ (triangle inequality),
 	\end{conditionlist}
-	is called a \indexbf{metric} or \indexbf{distance} in $X$. Such $X$ is said to be equiped with metric $d$, $(X;d)$ is called a \indexbf{metric space}.
+	is called a \indexbf{metric} or \indexbf{distance} in $X$. 
+	Such $X$ is said to be equiped with a metric $d$, $\indexfm[X d]{(X; d)}$ is called a \indexbf{metric space}. 
+	If the metric defined over $X$ is definite, we just simply call the $X$ the metric space.
 \end{definition}
 
 Some examples:
 \begin{itemize}
-\item $(\mathbb{R}^n;d_p)$, where $d_p(x_1,x_2)=\left(\sum^n_{i=1}\left|x^i_1-x^i_2\right|^p\right)^{1/p}$, while $d_\infty(x_1,x_2)=
-\max\limits_{1\leqslant i\leqslant n}
-\left|x^i_1-x^i_2\right|$.
-\item Similarly we can define metric spaces as $(C[a,b];d_p)$ or $C_p[a,b]$. $d_p(f,g)=\left(
-	\int^b_a\left|f-g\right|^p\,\mathrm{d}x
-\right)^{\frac{1}{p}}$. $C_\infty$ is called a \indexbf{Chebyshev metric}.
-\item On class $\mathfrak{\tilde{R}}[a,b]$ over $\mathfrak{R}[a,b]$ similar metric can be defined. Functions are considered of one same class if they are equivalent expect on a set not larger than null set. 
+	\item 
+	We can define $(\mathbb R^n; d_p)$, where
+	\begin{equation}\label{equation:d_p}
+		d_p (x, y) := \left(
+			\sum_{i \in n}\big|x^i - y^i \big|^p \right)^{1/p}\,,
+	\end{equation}
+	while
+	\begin{equation}\label{equation:d_infty}
+		d_\infty (x, y) :=
+		\max_{i \in n} \big|x^i - y^i\big|\,.
+	\end{equation}
+	\item 
+	Similarly we can define metric spaces as $(C[a, b]; d_p)$ or simplified $C_p[a, b]$. 
+	\begin{equation}
+		d_p(f, g) =
+		\left(
+			\int^b_a \big| f - g \big|^p \dif x
+		\right) ^{1/p}\,.
+	\end{equation}
+	while $C_\infty[a, b]$ is called a \indexbf{Chebyshev metric}, 
+	where the metric is defined as $d_\infty(f, g) := \max_{x \in [a, b]} |f(x) - g(x)|$.
+	\item 
+	On equivalence class $\tilde {\mathfrak R}[a,b]$ over $\mathfrak R[a,b]$ similar metric can be defined. 
+	Functions are considered equicalent if they are equal up to a null set. 
 \end{itemize}
-\begin{lemma}\label{quadruple_inequality}
-If $(X;d)$ is a metric space, then $\forall a,b,u,v $, $\left| d(a,b) - d(u,v) \right| \leq d(a,u)+d(b,v) $.
+
+\begin{lemma}[Quadruple inequality]\label{lemma: quadruple inequality}
+	Let $(X;d)$ be a metric space. 
+	\begin{equation}\label{equation: quadruple inequality}
+		\forall a, b, u, v \in X,\; \big| d(a, b) - d(u, v) \big| \leq d(a, u) + d(b, v) 
+	\end{equation}
 \end{lemma}
 \begin{proof}
-	Without loss of generality, we assume that $d(a,b) > d(u,v)$. According to the triangle inequality (see def. \ref{metric}), $d(a,b) \leq d(a,u)+d(u,v)+d(v,b)$, which is to proof.  
+	Without loss of generality, we assume that $d(a, b) > d(u, v)$. 
+	According to the triangle inequality (see def.~\ref{definition: metric}), $d(a, b) \leq d(a, u) + d(u, v) + d(v,b)$, which is to prove.  
 \end{proof}
-\begin{definition}\label{delta_ball}
-$\delta\in\mathbb{R}_+$, $a\in X$. Set
-\[
-	B(a;\delta)=\{x\in X|d(a,x)<\delta\}
-\]
-is then called a \indexbf{ball} with centre $a\in X$, and a radius of $\delta$, or a \indexbf{ball} of point $a$.
+
+\begin{definition}[$\delta$-ball]\label{definition: delta ball}
+	Let $(X; d)$ be a metric space, and $\delta \in \mathbb R_+$, $a \in X$. 
+	A set
+	\begin{equation*}
+		\indexbf[B a delta]{B(a; \delta)} = \{x \in X \mid d(a, x) < \delta\}
+	\end{equation*}
+	is then called a \indexbf{ball} with a centre at $a \in X$ and a radius of $\delta$, or a \emphbf{ball} of point $a$.
 \end{definition}
-\begin{definition}\label{open_set}
-A \indexbf{open set} $G\subset X$ in metric space $(X;d)$ satisfies: $\forall x\in G$, $\exists B(x;\delta)$, s.t. $B(x;\delta)\subset G$.
+
+\begin{definition}[Open set]\label{definition: open set (metric)}
+	An \indexbf{open set}~$G \in 2^X$ in a metric space~$(X; d)$ is a set that satisfies: 
+	$\forall x\in G$, $\exists \delta \in \mathbb R_+$, s.t.\ $B(x; \delta) \in 2^G$.
 \end{definition}
-\begin{definition}\label{closed_set}
-A \indexbf{closed set} $F$ in metric space $(X;d)$ satisfies: $X-F$ is a open set in $(X;d)$.
+
+\begin{definition}[Closed set]\label{closed_set}
+	A \indexbf{closed set}~$F \in 2^X$ in a metric space~$(X; d)$ is a set that satisfies: 
+	$X - F$ is an open set in $(X; d)$.
 \end{definition}
-$\tilde{B}(x;\delta)=\{x\in X|d(a,x)\leq r\}$ is an example of closed sets in $(X;d)$.
-\begin{proposition}\label{open_sets_metric}
-\begin{enumerate}[label=\alph*)]
-\item An infinite union of open sets is an open set.
-\item A definite intersection of open sets is an open set.
-\item A definite union of closed sets is a closed set.
-\item An infinite intersection of closed sets is a closed set.
-\end{enumerate}
+
+A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(x; \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X; d)$.
+
+\begin{proposition}\label{proposition: open sets (metric)}
+	\begin{conditionlist}[label=\alph*)]
+	\item An infinite union of open sets is an open set.
+	\item A definite intersection of open sets is an open set.
+	\item A definite union of closed sets is a closed set.
+	\item An infinite intersection of closed sets is a closed set.
+	\end{conditionlist}
 \end{proposition}
 \begin{proof}
-\begin{enumerate}[label=\alph*)]
-	\item If open sets $G_\alpha\subset X,\forall\alpha\in A$, $\forall a\in\bigcap\limits_{\alpha\in A}G_\alpha$, $\exists\alpha_0\in A$, $a\in G_{\alpha_0}$, $\exists B(a;\delta)\subset G_{\alpha_0}\subset \bigcap\limits_{\alpha\in A}G_\alpha$.
-	\item Open sets $G_1\cup G_2\subset X$, $a\in G_1\cap G_2$, therefore $\exists\delta_1,\delta_2\in\mathbb{R}_+$, $B(a;\delta_1)\subset G_1,B(a;\delta_2)\subset G_2$, without loss of generality, let $\delta_1\geq\delta_2$, 那么$a\in B(a;\delta_1)\cap B(a;\delta_2)=B(a;\delta_2)\subset G_1\cap G_2$.
-	\item Just consider $\complement_X
-		\left(\bigcap_{\alpha\in A}F_\alpha\right)
-		=\bigcup_{\alpha\in A}\complement_X(F_\alpha)$ and a).
-	\item Similarly, $\complement_X\left(F_1\cup F_2\right)=\complement_X(F_1)\cap\complement_X(F_2)$.
-	
-\end{enumerate}
+	Let $\forall \alpha \in A$, $G_\alpha$ be open sets.
+	\begin{enumerate}[label=\alph*)]
+		\item
+			$\forall x \in \bigcup_{\alpha \in A} G_\alpha$, $\exists \alpha \in A$ s.t.\ $x \in G_\alpha$. 
+			Since $G_\alpha$ is open, $\exists \delta \in \mathbb R_+$ s.t.\ $B(x; \delta) \subset G_\alpha \subset \bigcup_{\alpha \in A} G_\alpha$.
+		\item 
+			Let $G_1$, $G_2$ be open sets in $(X; d)$. 
+			$\forall a \in G_1 \cap G_2$, $\exists \delta_1, \delta_2 \in \mathbb R_+$ s.t.\ $B(a; \delta_1) \subset G_1$, $B(a;\delta_2)\subset G_2$. 
+			Without loss of generality, let $\delta_1 \geq \delta_2$, therefore $a \in B(a; \delta_1)\cap B(a; \delta_2) = B(a; \delta_2) \subset G_1 \cap G_2$.
+		\item 
+			Just consider $\complement_X
+			\left(\bigcap_{\alpha\in A}F_\alpha\right)
+			=\bigcup_{\alpha\in A}\complement_X(F_\alpha)$ and a).
+		\item 
+		Similarly, $\complement_X\left(F_1\cup F_2\right)=\complement_X(F_1)\cap\complement_X(F_2)$.
+	\end{enumerate}
 \end{proof}
-\begin{definition}\label{neighbourhood_metric}
-If $x\in X$ is an element of an open set, then such open set is called a \indexbf{neighbourhood} of point $x$ in $X$, denoted by $U(x)$.
-\end{definition}
-\begin{definition}\label{interior_metric}
-$x\in X$, $E\subset X$.
-\begin{enumerate}[label=\alph*)]
-\item If $\exists U(x)\subset E$, $x$ is called an \indexbf{interior point} of $E$.
-\item If $\exists U(x)\subset X-E$, $x$ is called an \indexbf{exterior point} of $E$.
-\item If $x$ isn't an interior point nor exterior point of $E$, it is called a \indexbf{boundary point} of $E$. The set of boundary points is called \indexbf{boundary}, denoted by $\partial E$.
-\end{enumerate}
-\end{definition}
-\begin{definition}\label{limit_point_metric}
-$a\in X$, $E\subset X$. If $\forall U(a)$, $\left|E\cap U(a)\right|=\infty$, $a$ is called a \indexbf{limit point} of $E$.
-\end{definition}
-\begin{definition}\label{closure_metric}
-The intersections of $E\subset X$ and set of all its limit points is called the \indexbf{closure} of $E$, denoted by $\overline{E}$.
-\end{definition}
-\begin{theorem}\label{closed_closure}
-$F\subset X$ is a closed set in $X\,\Leftrightarrow \overline{F}=F$.
-\end{theorem}
-\begin{proof}
-$\Rightarrow$: $\complement_X(F)$ is open, hence its elements are all its interior points. Therefore $\overline{F}-F=\overline{F}\cup\complement_X(F)=\varnothing$, 又$F\subset\overline{F}\Rightarrow F=\overline{F}$.
 
-$\Leftarrow$: $F=\overline{F}$ means that $\forall x\in \complement_X(F)$, $x$ is not a boundary of $F$, which indicates that $x$ is an interior point of $X-F$. Therefore $F-X$ is open while $F$ is closed.
-\end{proof}
-\begin{theorem}\label{closure_closed}
-$\overline{E} $ is always closed.
-\end{theorem}
-\begin{proof}
-$\forall x \in X - \overline{E}$, since it is not a element of  the set $E$ or its limit points, $\exists U( x) $ s.t. $U( x) \cap \overline{E} \varnothing$, which implies that $x$ is an extorior point of $E$, therefore $\overline{E}$ is closed.
-\end{proof}
-\begin{theorem}\label{closure_closure}
-$\overline{E}=\overline{ \overline{E}}$.
-\end{theorem}
-\begin{proof}
-Since $\overline{E}$ is closed, its complement is open, which implies that its elements are all exterior point of $\overline{E}$, therefore $\overline{E}$ has contained all of its limit points.
-\end{proof}
-\begin{definition}\label{subspace_metric}
-We called $(X';d')$ a \indexbf{subspace} of $(X;d)$ when $X'\subset X$ and $\forall x,y\in X',d'(x,y)=d(x,y)$.
+\begin{definition}[Neighbourhood]\label{definition: neighbourhood (metric)}
+	If $x \in X$ is an element of an open set, then such open set is called a \indexbf{neighbourhood} of point $x$ in $X$, denoted by $\indexbf[U x]{U(x)}$.
 \end{definition}
-\section{Topological Space}
-\begin{definition}\label{topological_space}
-We say $X$ is equiped with a \indexbf{topological space} or epuiped with \indexbf{topology} if we assigned a $\mathscr{T}\subset 2^X$, which has got the following propoties:
-\begin{conditionlist}[label=\alph*)]
-	\item $\varnothing\in\mathscr{T};X\in\mathscr{T}$.
-	\item $\left(\forall\alpha\in A,\mathscr{T}_\alpha\in\mathscr{T}\right)
-	\Rightarrow\bigcup\limits_{\alpha\in A}\mathscr{T}_\alpha\in\mathscr{T}$.
-	\item $\left(\mathscr{T}_1,\mathscr{T}_2\in\mathscr{T}\right)\Rightarrow \mathscr{T}_1\cap\mathscr{T}_2$.
+
+\begin{definition}[Interior point]\label{definition: interior point (metric)}
+	Let $x \in X$, $E \subset X$.
+	\begin{conditionlist}[label=\alph*)]
+	\item If $\exists U(x) \subset E$, $x$ is called an \indexbf{interior point} of $E$.
+	\item If $\exists U(x) \subset X - E$, $x$ is called an \indexbf{exterior point} of $E$.
+	\item If $x$ isn't an interior point nor exterior point of $E$, it is called a \indexbf{boundary point} of $E$. The set of boundary points is called \indexbf{boundary}, denoted by $\indexbf[partial E]{\partial E}$.
 \end{conditionlist}
-Then we call $(X;\mathscr{T})$ a \indexbf{topological space}.
 \end{definition}
 
-These are correspondence of propoties of open sets (See proposition \ref{open_sets_metric}). Topology made of all open sets defined in metric space $(\mathbb{R};d_2)$ is called the \indexbf{standard topology} of $n$-dimension Euclidean space.
+\begin{definition}[Limit point]\label{definition: limit point (metric)}
+	$a \in X$, $E \subset X$. If $\forall U(a)$, $\card\big(E \cap U(a) \big) = \infty$, $a$ is called a \indexbf{limit point} of $E$.
+\end{definition}
 
-\begin{definition}\label{open_set_topology}
-Topology $\mathscr{T}$'s elements are called \indexbf{open set}, and their complements are called \textbf{closed sets}\index{closed set}.
+\begin{definition}[Closure]\label{definition: closure (metric)}
+	The intersections of $E \subset X$ and set of all its limit points is called the \indexbf{closure} of $E$, denoted by $\indexbf[overline]{\overline E}$.
 \end{definition}
-\begin{definition}\label{topological_base}
-$(X;\mathscr{T})$ is a topological space, $\mathfrak{B}\subset 2^X$. If $\forall G \in\mathscr{T}$, $\exists B_\alpha\in\mathfrak{B}$ ($\alpha\in A$) s.t. $\bigcup\limits_{\alpha\in A}B_\alpha = G$, it is called a (topological or open) \indexbf{base}\index{topological base}\index{open base}.
+
+\begin{theorem}\label{theorem: closed sets' closure (metric)}
+	Let $F\in 2^X$.
+	$F$ is a closed set in $X$ $\IFF$ $\overline F = F$.
+\end{theorem}
+\begin{proof}
+	$\to$: 
+	$\complement_X(F)$ is open, hence its elements are all its interior points. 
+	Therefore $\overline F - F = \overline F \cup \complement_X(F) = \varnothing$, also we know that $F \subset \overline F$, hence $F = \overline F$.
+
+	$\gets$: 
+	$F = \overline F$ means that $\forall x \in \complement_X(F)$, $x$ is not a boundary of $F$, which implies that $x$ is an interior point of $X - F$. Therefore $X - F$ is open while $F$ is closed.
+\end{proof}
+
+\begin{theorem}\label{theorem: closure is closed (metric)}
+	$\overline E$ is always closed.
+\end{theorem}
+\begin{proof}
+	$\forall x \in X - \overline E$, since it is not an element of the set $E$ nor its limit points, $\exists U(x) $ s.t.\ $U(x) \cap \overline E =\varnothing$, which implies that $x$ is an extorior point of $E$, therefore $\overline E$ is closed.
+\end{proof}
+
+\begin{theorem}\label{theorem: closure's closure}
+	$\overline E = \overline{ \overline E}$.
+\end{theorem}
+\begin{proof}
+	Since $\overline E$ is closed, its complement is open, which implies that its elements are all exterior points of $\overline E$, therefore $\overline E$ has contained all of its limit points.
+\end{proof}
+
+\begin{definition}(Metric subspace)\label{definition: metric subspace}
+	We called $(X'; d')$ a \indexbf{subspace} of $(X;d)$ when $X' \subset X$ and $\forall x, y \in X'$, $d'(x, y)=d(x, y)$.
 \end{definition}
-\begin{definition}\label{weight}
-The smallest possible cardinity of base is called the \indexbf{weight} of the topological space.
+
+\section{Topological Space}
+
+\begin{definition}[Topology]\label{definition: topology}
+	We say $X$ is epuiped with a \indexbf{topology} if we assigned a $\mathscr T \subset 2^X$, with the following propoties:
+	\begin{conditionlist}[label=\alph*)]
+		\item 
+		$\varnothing \in \mathscr T$; 
+		$X \in \mathscr T$.
+		\item 
+		$\big(\forall \alpha \in A, G_\alpha \in \mathscr T\big)
+			\to \bigcup_{\alpha \in A} G_\alpha \in \mathscr T$.
+		\item $\forall G_1, G_2 \in \mathscr T$, $G_1 \cap G_2 \in \mathscr T$.
+	\end{conditionlist}
+
+	We call $(X; \mathscr{T})$ a \indexbf{topological space}, and sometimes we might simply call $X$ the topological space.
 \end{definition}
-\begin{definition}\label{neighbourhood_topology}
-If $x\in G$ and $G\in\mathscr{T}$, then $G$ is a \indexbf{neighbourhood} of $x$ in topological space $(X;\mathscr{T})$.
+
+These conditions is the intrinsic propoties of the open sets we have defined in the metric space%
+	\footnote{See proposition~\ref{proposition: open sets (metric)}%
+		}. 
+The topology consisting of all the open sets defined in the metric space $(\mathbb{R}; d_2)$ is called the \indexbf{standard topology} of the $n$-dimension Euclidean space.
+
+\begin{definition}[Open set]\label{definition: open set (topology)}
+	Topology $\mathscr{T}$'s elements are called \emphbf{open sets}%
+		\index{open set}%
+	, and their complements are called \emphbf{closed sets}%
+		\index{closed set}%
+	.
 \end{definition}
-For example, we define an equivalence relation $\sim$ in $C(\mathbb{R};\mathbb{R})$. If $f,g\in C(\mathbb{R};\mathbb{R})$, at point $a\in\mathbb{R}$:
-\begin{equation}\label{germ}
-	f\sim_ag\Leftrightarrow
-		\left(
-		\exists U(a)\left(\forall x\in U(a),f(x)=g(x)\right)
-		\right).
+
+\begin{definition}[Base]\label{definition: base}
+	Let $(X; \mathscr T)$ be a topological space, and $\mathfrak B \subset 2^X$. 
+	If $\forall G \in \mathscr T$, $\exists \{B_\alpha\}_{\alpha \in A} \in 2^\mathfrak B$ s.t.\ $\bigcup_{\alpha \in A} B_\alpha = G$, we called $\mathfrak B$ a (topological or open) \indexbf{base}%
+		\index{topological base}\index{open base}%
+		of the topology $\mathscr T$.
+\end{definition}
+
+\begin{definition}[Weight]\label{definition: weight}
+	The smallest possible cardinity of a base of a topology is called the \indexbf{weight} of the topological space.
+\end{definition}
+
+\begin{definition}[Neighbourhood]\label{definition: neighbourhood (topology)}
+	If $x \in G$ and $G \in \mathscr T$, then $G$ is a \indexbf{neighbourhood} of $x$ in topological space $(X; \mathscr T)$.
+\end{definition}
+
+For example, we define an equivalence relation $\sim$ in $C(\mathbb R;\mathbb R)$. If $f, g\in C(\mathbb R; \mathbb R)$, at point $a \in \mathbb R$:
+\begin{equation}\label{equation: germ}
+	f \sim_a g \IFF
+			\exists U(a) \big(\forall x \in U(a),\; f(x) = g(x)\big)\,.
 \end{equation}
-Then we call $f$ and $g$ define a \indexbf{germ} at point $a$, denoted by $f_a$.
-If $f\in C(\mathbb{R};\mathbb{R})$ is defined in $U(a)$, then we can call ${f_x}:=\{f_x|x\in U(a)\}$ a neighbourhood of germ $f_a$. Class of neighbourhoods of each $f_x$ constructs a base of topological space $(C(\mathbb{R};\mathbb{R});\mathscr{T})$, where $\mathscr{T}$ is made of the sets of germs of continuous function in $C(\mathbb{R};\mathbb{R})$. 
-\begin{definition}\label{T_2_space}
-We call a topological space $(X;\mathscr{T})$ a \indexbf{Hausdorff space}, \indexbf{separated space} or \indexbf{$\mathrm{T}_2$ space}, if $\forall x,y\in X$, $\exists U(x),U(y)$ s.t. $U(x)\cap U(y)=\varnothing$ (\indexbf{Hausdorff axiom} or \indexbf{separation axiom}).
+
+By collecting all of the continuous functions that are euivalent to $f$, 
+we call $f$ define a \indexbf{germ} at point $a$, denoted by $f_a$.
+If $f \in C(\mathbb R; \mathbb R)$ is defined in $U(a)$, then we can call $\{f_x \mid x \in U(a)\}$ a neighbourhood of germ $f_a$. 
+Class of neighbourhoods of each $f_x$ constructs a base of topological space $(C(\mathbb R; \mathbb R); \mathscr T)$, where $\mathscr T$ is made of the sets of germs of continuous function in $C(\mathbb{R}; \mathbb{R})$.
+
+\begin{definition}[Hausdorff space]\label{definition: Hausdorff space}
+	We call a topological space $(X; \mathscr{T})$ a \indexbf{Hausdorff space}, \indexbf{separated space} or \indexbf{$\mathrm T_2$ space}, if $\forall x,y \in X$, $\exists U(x), U(y)$ s.t.\ $U(x) \cap U(y) = \varnothing$%
+		\footnote{This definition is also called \indexbf{Hausdorff axiom} or \indexbf{separation axiom}. }%
+	.
 \end{definition}
-\begin{definition}\label{dense_set}
-$E\subset X$ is a \indexbf{dense set} in topological space $(X;\mathscr{T})$, if $\forall x\in X$, $\forall U(x)$, $U(x)\cap E\neq \varnothing$.
+
+\begin{definition}[Dense set]\label{definition: dense set}
+	$E \subset X$ is a \indexbf{dense set} in the topological space $(X; \mathscr{T})$, if $\forall x \in X$, $\forall U(x)$, $U(x) \cap E \neq \varnothing$.
 \end{definition}
-\begin{definition}\label{separable}
-If there is a countable dense set in topological space $(X;\mathscr{T})$, then $(X;\mathscr{T})$ is \indexbf{separable}.
+
+\begin{definition}[Separable]\label{definition: separable}
+	If there is a \emph{countable} dense set in topological space $(X; \mathscr{T})$, then $(X;\mathscr{T})$ is \indexbf{separable}.
 \end{definition}
+
 We can also define interior points, exterior points, boundary points, limit points in topological space as in metric space.
-\begin{definition}\label{subspace_topology}
-Each subset $Y$ of $X$ equiped with topology $\mathscr{T}$ can be given a \indexbf{subspace topology} $\mathscr{T}_Y$ whose elements $G_Y$ are intersections of the subset with an open set $G$ in $(X;\mathscr{T})$ i.e. $\forall G_Y\in \mathscr{T}_Y$, $\exists G\in \mathscr{T}$ s.t. $G_Y=G\cap Y$. Subset equiped with such topology construct a \emph{\textbf{topological subspace}}\index{subspace} $(Y;\mathscr{T}_Y)$. 
+
+\begin{definition}[Topological subspace]\label{subspace (topology)}
+	Each subset $Y$ of $X$ equiped with topology $\mathscr T$ can be given a \indexbf{subspace topology} $\mathscr{T}_Y$ whose elements $G_Y$ are intersections of the subset with an open set $G$ in $(X; \mathscr{T})$ i.e.\ $\forall G_Y \in \mathscr T_Y$, $\exists G \in \mathscr{T}$ s.t.\ $G_Y = G \cap Y$. 
+	Subsets equiped with such topology construct a \emphbf{topological subspace}%
+		\index{subspace}%
+		~$(Y; \mathscr{T}_Y)$. 
 \end{definition}
-If two topology $\mathscr{T}_1,\mathscr{T}_2$ are defined on the same $X$, $\mathscr{T}_1$ is said to be \indexbf{stronger} than $\mathscr{T}_2$ if $\mathscr{T}_1\subsetneqq \mathscr{T}_2$.
+
+If two topology~$\mathscr{T}_1, \mathscr{T}_2$ are defined on the same $X$, $\mathscr{T}_1$ is said to be \indexbf{stronger} than $\mathscr{T}_2$ if $\mathscr{T}_1 \subsetneqq \mathscr{T}_2$.
+
 \section{Compact Set}
 \begin{definition}\label{compact}
 Set $K$ in topological space $(X;\mathscr{T})$ is called a \indexbf{compact set} if each of its \textbf{open covers}\index{open cover} has a finite \indexbf{subcover}. Class $\Omega$ is called a open cover of $K$ if $K\subset \cup{\Omega}$ and for all sets in $\Omega$ are open sets.
