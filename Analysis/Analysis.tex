@@ -156,7 +156,7 @@ The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/mas
 	\item	$d(x, z) \leq d(x,y)+d(y,z)$ (triangle inequality),
 	\end{conditionlist}
 	is called a \indexbf{metric} or \indexbf{distance} in $X$. 
-	Such $X$ is said to be equiped with a metric $d$, $\indexfm[X d]{(X; d)}$ is called a \indexbf{metric space}. 
+	Such $X$ is said to be equiped with a metric $d$, $\indexfm[X d]{(X, d)}$ is called a \indexbf{metric space}. 
 	If the metric defined over $X$ is definite, we just simply call the $X$ the metric space.
 \end{definition}
 
@@ -189,7 +189,7 @@ Some examples:
 \end{itemize}
 
 \begin{lemma}[Quadruple inequality]\label{lemma: quadruple inequality}
-	Let $(X;d)$ be a metric space. 
+	Let $(X,d)$ be a metric space. 
 	\begin{equation}\label{equation: quadruple inequality}
 		\forall a, b, u, v \in X,\; \big| d(a, b) - d(u, v) \big| \leq d(a, u) + d(b, v) 
 	\end{equation}
@@ -200,7 +200,7 @@ Some examples:
 \end{proof}
 
 \begin{definition}[$\delta$-ball]\label{definition: delta ball}
-	Let $(X; d)$ be a metric space, and $\delta \in \mathbb R_+$, $a \in X$. 
+	Let $(X, d)$ be a metric space, and $\delta \in \mathbb R_+$, $a \in X$. 
 	A set
 	\begin{equation*}
 		\indexbf[B a delta]{B(a; \delta)} = \{x \in X \mid d(a, x) < \delta\}
@@ -209,16 +209,16 @@ Some examples:
 \end{definition}
 
 \begin{definition}[Open set]\label{definition: open set (metric)}
-	An \indexbf{open set}~$G \in 2^X$ in a metric space~$(X; d)$ is a set that satisfies: 
-	$\forall x\in G$, $\exists \delta \in \mathbb R_+$, s.t.\ $B(x; \delta) \in 2^G$.
+	An \indexbf{open set}~$G \in 2^X$ in a metric space~$(X, d)$ is a set that satisfies: 
+	$\forall x\in G$, $\exists \delta \in \mathbb R_+$, s.t.\ $B(X, \delta) \in 2^G$.
 \end{definition}
 
 \begin{definition}[Closed set]\label{closed_set}
-	A \indexbf{closed set}~$F \in 2^X$ in a metric space~$(X; d)$ is a set that satisfies: 
-	$X - F$ is an open set in $(X; d)$.
+	A \indexbf{closed set}~$F \in 2^X$ in a metric space~$(X, d)$ is a set that satisfies: 
+	$X - F$ is an open set in $(X, d)$.
 \end{definition}
 
-A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(x; \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X; d)$.
+A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(X, \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X, d)$.
 
 \begin{proposition}\label{proposition: open sets (metric)}
 	\begin{conditionlist}[label=\alph*)]
@@ -233,9 +233,9 @@ A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(x; \delta)} :=
 	\begin{enumerate}[label=\alph*)]
 		\item
 			$\forall x \in \bigcup_{\alpha \in A} G_\alpha$, $\exists \alpha \in A$ s.t.\ $x \in G_\alpha$. 
-			Since $G_\alpha$ is open, $\exists \delta \in \mathbb R_+$ s.t.\ $B(x; \delta) \subset G_\alpha \subset \bigcup_{\alpha \in A} G_\alpha$.
+			Since $G_\alpha$ is open, $\exists \delta \in \mathbb R_+$ s.t.\ $B(X, \delta) \subset G_\alpha \subset \bigcup_{\alpha \in A} G_\alpha$.
 		\item 
-			Let $G_1$, $G_2$ be open sets in $(X; d)$. 
+			Let $G_1$, $G_2$ be open sets in $(X, d)$. 
 			$\forall a \in G_1 \cap G_2$, $\exists \delta_1, \delta_2 \in \mathbb R_+$ s.t.\ $B(a; \delta_1) \subset G_1$, $B(a;\delta_2)\subset G_2$. 
 			Without loss of generality, let $\delta_1 \geq \delta_2$, therefore $a \in B(a; \delta_1)\cap B(a; \delta_2) = B(a; \delta_2) \subset G_1 \cap G_2$.
 		\item 
@@ -249,6 +249,7 @@ A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(x; \delta)} :=
 
 \begin{definition}[Neighbourhood]\label{definition: neighbourhood (metric)}
 	If $x \in X$ is an element of an open set, then such open set is called a \indexbf{neighbourhood} of point $x$ in $X$, denoted by $\indexbf[U x]{U(x)}$.
+	The collection of all neighbourhoods of $x$ can be denoted by $\indexfm[U x]{\mathscr U(x)}$.
 \end{definition}
 
 \begin{definition}[Interior point]\label{definition: interior point (metric)}
@@ -296,7 +297,7 @@ A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(x; \delta)} :=
 \end{proof}
 
 \begin{definition}(Metric subspace)\label{definition: metric subspace}
-	We called $(X'; d')$ a \indexbf{subspace} of $(X;d)$ when $X' \subset X$ and $\forall x, y \in X'$, $d'(x, y)=d(x, y)$.
+	We called $(X'; d')$ a \indexbf{subspace} of $(X,d)$ when $X' \subset X$ and $\forall x, y \in X'$, $d'(x, y)=d(x, y)$.
 \end{definition}
 
 \section{Topological Space}
@@ -313,7 +314,7 @@ A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(x; \delta)} :=
 		\item $\forall G_1, G_2 \in \mathscr T$, $G_1 \cap G_2 \in \mathscr T$.
 	\end{conditionlist}
 
-	We call $(X; \mathscr{T})$ a \indexbf{topological space}, and sometimes we might simply call $X$ the topological space.
+	We call $(X, \mathscr{T})$ a \indexbf{topological space}, and sometimes we might simply call $X$ the topological space.
 \end{definition}
 
 These conditions is the intrinsic propoties of the open sets we have defined in the metric space%
@@ -330,7 +331,7 @@ The topology consisting of all the open sets defined in the metric space $(\math
 \end{definition}
 
 \begin{definition}[Base]\label{definition: base}
-	Let $(X; \mathscr T)$ be a topological space, and $\mathfrak B \subset 2^X$. 
+	Let $(X, \mathscr T)$ be a topological space, and $\mathfrak B \subset 2^X$. 
 	If $\forall G \in \mathscr T$, $\exists \{B_\alpha\}_{\alpha \in A} \in 2^\mathfrak B$ s.t.\ $\bigcup_{\alpha \in A} B_\alpha = G$, we called $\mathfrak B$ a (topological or open) \indexbf{base}%
 		\index{topological base}\index{open base}%
 		of the topology $\mathscr T$.
@@ -341,7 +342,7 @@ The topology consisting of all the open sets defined in the metric space $(\math
 \end{definition}
 
 \begin{definition}[Neighbourhood]\label{definition: neighbourhood (topology)}
-	If $x \in G$ and $G \in \mathscr T$, then $G$ is a \indexbf{neighbourhood} of $x$ in topological space $(X; \mathscr T)$.
+	If $x \in G$ and $G \in \mathscr T$, then $G$ is a \indexbf{neighbourhood} of $x$ in topological space $(X, \mathscr T)$.
 \end{definition}
 
 For example, we define an equivalence relation $\sim$ in $C(\mathbb R;\mathbb R)$. If $f, g\in C(\mathbb R; \mathbb R)$, at point $a \in \mathbb R$:
@@ -356,118 +357,190 @@ If $f \in C(\mathbb R; \mathbb R)$ is defined in $U(a)$, then we can call $\{f_x
 Class of neighbourhoods of each $f_x$ constructs a base of topological space $(C(\mathbb R; \mathbb R); \mathscr T)$, where $\mathscr T$ is made of the sets of germs of continuous function in $C(\mathbb{R}; \mathbb{R})$.
 
 \begin{definition}[Hausdorff space]\label{definition: Hausdorff space}
-	We call a topological space $(X; \mathscr{T})$ a \indexbf{Hausdorff space}, \indexbf{separated space} or \indexbf{$\mathrm T_2$ space}, if $\forall x,y \in X$, $\exists U(x), U(y)$ s.t.\ $U(x) \cap U(y) = \varnothing$%
+	We call a topological space $(X, \mathscr{T})$ a \indexbf{Hausdorff space}, \indexbf{separated space} or \indexbf{$\mathrm T_2$ space}, if $\forall x,y \in X$, $x \neq y \to \big( \exists U(x), U(y)$ s.t.\ $U(x) \cap U(y) = \varnothing \big)$%
 		\footnote{This definition is also called \indexbf{Hausdorff axiom} or \indexbf{separation axiom}. }%
 	.
 \end{definition}
 
 \begin{definition}[Dense set]\label{definition: dense set}
-	$E \subset X$ is a \indexbf{dense set} in the topological space $(X; \mathscr{T})$, if $\forall x \in X$, $\forall U(x)$, $U(x) \cap E \neq \varnothing$.
+	$E \subset X$ is a \indexbf{dense set} in the topological space $(X, \mathscr{T})$, if $\forall x \in X$, $\forall U(x)$, $U(x) \cap E \neq \varnothing$.
 \end{definition}
 
 \begin{definition}[Separable]\label{definition: separable}
-	If there is a \emph{countable} dense set in topological space $(X; \mathscr{T})$, then $(X;\mathscr{T})$ is \indexbf{separable}.
+	If there is a \emph{countable} dense set in topological space $(X, \mathscr{T})$, then $(X,\mathscr{T})$ is \indexbf{separable}.
 \end{definition}
 
 We can also define interior points, exterior points, boundary points, limit points in topological space as in metric space.
 
 \begin{definition}[Topological subspace]\label{subspace (topology)}
-	Each subset $Y$ of $X$ equiped with topology $\mathscr T$ can be given a \indexbf{subspace topology} $\mathscr{T}_Y$ whose elements $G_Y$ are intersections of the subset with an open set $G$ in $(X; \mathscr{T})$ i.e.\ $\forall G_Y \in \mathscr T_Y$, $\exists G \in \mathscr{T}$ s.t.\ $G_Y = G \cap Y$. 
+	Each subset $Y$ of $X$ equiped with topology $\mathscr T$ can be given a \indexbf{subspace topology} $\mathscr T_Y$ whose elements $G_Y$ are intersections of the subset with an open set $G$ in $(X, \mathscr{T})$ i.e.\ $\forall G_Y \in \mathscr T_Y$, $\exists G \in \mathscr{T}$ s.t.\ $G_Y = G \cap Y$. 
 	Subsets equiped with such topology construct a \emphbf{topological subspace}%
 		\index{subspace}%
-		~$(Y; \mathscr{T}_Y)$. 
+		~$(Y, \mathscr{T}_Y)$. 
 \end{definition}
 
 If two topology~$\mathscr{T}_1, \mathscr{T}_2$ are defined on the same $X$, $\mathscr{T}_1$ is said to be \indexbf{stronger} than $\mathscr{T}_2$ if $\mathscr{T}_1 \subsetneqq \mathscr{T}_2$.
 
 \section{Compact Set}
-\begin{definition}\label{compact}
-Set $K$ in topological space $(X;\mathscr{T})$ is called a \indexbf{compact set} if each of its \textbf{open covers}\index{open cover} has a finite \indexbf{subcover}. Class $\Omega$ is called a open cover of $K$ if $K\subset \cup{\Omega}$ and for all sets in $\Omega$ are open sets.
+
+\begin{definition}[Open cover]\label{definition: open cover}
+	Let $(X, \mathscr T)$ be a topological space, $K \in 2^X$ and $\varOmega \in 2^\mathscr T$. We call $\varOmega$ to be an \indexbf{open cover} over $K$, if $K \subset \cup \varOmega$. 
+	If there are two open covers~$\varOmega$, $\varOmega'$ over $K$, and $\varOmega' \subset \varOmega$, we say that $\varOmega'$ is a \indexbf{subcover} of $\varOmega$.
 \end{definition}
+
+\begin{definition}[Compact set]\label{definition: compact set}
+	A set~$K \in 2^X$ in topological space $(X, \mathscr T)$ is called a \indexbf{compact set} if each of its open covers has a \emph{finite} subcover. 
+\end{definition}
+
 Specially, $\varnothing$ is compact.
-\begin{theorem}\label{selfcompact}
-	Set $K\subset X$ is compact in $(X;\mathscr{T})$ \emphbf{iff} $K$ is compact in $(K;\mathscr{T}_K)$ itself. 
+
+\begin{theorem}\label{theorem: compact iff compact in subspace}
+	Set $K \subset X$ is compact in $(X,\mathscr{T})$ \emphbf{iff} $K$ is compact in $(K, \mathscr{T}_K)$ itself. 
 \end{theorem}
-This theorem tells a truth that whether $K$ is compact or not isn't dependent on the topological space it's in, it can be easily proofed: just need to notice that every open set $G_K$ in $(K;\mathscr{T}_K)$ is an intersection of an open set $G$ in $(X;\mathscr{T})$ and $K$. 
-\begin{theorem}\label{compact_Hausdorff_closed}
-	If $K$ is compact in a Hausdorff space $(X;\mathscr{T})$ (See definition~\ref{T_2_space}), then $K$ is a closed set in $(X;\mathscr{T})$.
-\end{theorem}
-\begin{proof}
-	If $x_0$ is a limit point of $K$, which means $\forall U(x_0)$, 
-\[
-	\left|U(x_0)\cap K\right|\notin \mathbb{N}.
-\]
-Assume that $x_0\notin K$. In a Hausdorff space, $\forall x\in K$, $\exists U(x)$ s.t. $U(x)\cap U(x_0)=\varnothing$. Such $U(x)$ construct a open cover $\Omega=\left\{U(x)|x\in K\right\}\subset 2^K$. Since $K$ is compact, $\exists \Omega'\subset\Omega$ s,t. $\left|\Omega\right|\in\mathbb{N}$. 
-\[
-	\left(\cup\Omega'\right)
-	\cap U(x_0)
-	=
-	\left(\bigcup_{k=1}^n{U_k}\right)
-	\cap U(x_0)
-	=
-	\bigcup_{k=1}^n\left(
-		U_k\cap U(x_0)
-	\right)
-	=
-	\varnothing
-\]
-Since $K\subset \cup\Omega'$, $x_0$ is an exterior point of $K$, which leads to a contradiction. Hence $x_0\in K$. $\overline{K}=K$.
-\end{proof}
-\begin{theorem}\label{nested_compact}
-Each decreasing \emph{\textbf{nested sequences}}\index{nested sequence} of non-empty compact sets has a non-empty limit, i.e. $\forall\{K_n\}$ s.t. $\forall n\in\mathbb{N}_+$, $K_n\supset K_{n+1}\wedge K_n\neq\varnothing\wedge (K_n$ is compact), $K_n\downarrow K\neq \varnothing$.
+
+This theorem tells a truth that whether $K$ is compact or not doesn't dependent on the topological space it's in. 
+This fact can be easily proved: we just need to notice that every open set $G_K$ in $(K, \mathscr T_K)$ is an intersection of an open set $G$ in $(X, \mathscr{T})$ and $K$. 
+
+\begin{theorem}[Compact $\to$ closed (Hausdorff)]\label{theorem: compact sets are closed in Hausdorff space}
+	If $K$ is compact in a Hausdorff space $(X, \mathscr{T})$%
+		\footnote{See definition~\ref{definition: Hausdorff space}. }%
+	, then $K$ is a closed set in $(X, \mathscr T)$.
 \end{theorem}
 \begin{proof}
-	Assume that $K=\varnothing$. Compact subsets of $K_1$ are all colsed, while their complements are all open. An open cover $\Omega$ can be constructed as $\{K_1-K_n|n\in\mathbb{N}_+\}$. Since $K_1$ is compact, there would be a finite subcover $\Omega'\subset\Omega$, notice that $\{X-K_n\}$ is also a nested sequence, there must be oone single $X-K_{n_0}\in\Omega'$ that covers $K_1$, which means $K_{n_0}=\varnothing$ contradicting that $\forall n\in\mathbb{N}_+$, $K_n$ is non-empty.
+	Let $x_0$ be a limit point of $K$, which means $\forall U(x_0)$, 
+	\[
+		\card U(x_0)\cap K \notin \mathbb{N}.
+	\]
+
+	Assume that $x_0 \notin K$. 
+	In a Hausdorff space, $\forall x \in K - \{x_0\}$, $\exists U(x)$ s.t. $U(x)\cap U(x_0)=\varnothing$. 
+	Such $U(x)$ construct an open cover $\varOmega=\left\{U(x)|x\in K \right\}\subset 2^K$. 
+	Since $K$ is compact, $\exists \varOmega' \subset \varOmega$ s.t.\ $\card \Omega \in \mathbb{N}$. 
+	\[
+		\left(\cup\Omega'\right)
+		\cap U(x_0)
+		=
+		\left(\bigcup_{k=1}^n{U_k}\right)
+		\cap U(x_0)
+		=
+		\bigcup_{k=1}^n\left(
+			U_k\cap U(x_0)
+		\right)
+		=
+		\varnothing\,.
+	\]
+
+	Since $K\subset \cup \Omega'$, $x_0$ is an exterior point of $K$, which leads to a contradiction. 
+
+	Hence $x_0 \in K$. $\overline K = K$.
 \end{proof}
-\begin{theorem}\label{compact_closed_subset}
-Closed subsets $F$ of a compact set $K$ are also compact.
+
+
+\begin{theorem}\label{theorem: compact nested sequences have non-empty limit}
+	Each decreasing \emph{\textbf{nested sequences}}\index{nested sequence} of non-empty compact sets has a non-empty limit, i.e.\ 
+	$\forall (K_n)_{n \in \mathbb N} \in \mathscr P(X)^\mathbb N$ s.t.\ $\forall n \in \mathbb N_+$, $K_n \supset K_{n+1}\wedge K_n \neq \varnothing$ $\wedge$ ($K_n$ is compact): 
+	$K_n \downarrow K \neq \varnothing$.
 \end{theorem}
 \begin{proof}
-	If $\Omega_F\subset 2^K$ is an open cover of $F$. Notice that $K - F$ is open, $\Omega=\left(\cup\Omega_F\right)\cap\{K-F\}$ constructs an open cover over over $K$. Since $K$ is compact there must be a finite cover $\Omega'\subset\Omega$ which obviously also covers over $F$.
+	Assume that $K = \varnothing$. 
+	Compact subsets of $K_1$ are all colsed, while their complements are all open. An open cover $\varOmega$ can be constructed as $\{K_1 - K_n \mid n \in \mathbb N_+\}$. 
+	Since $K_1$ is compact, there would be a finite subcover $\varOmega' \subset \varOmega$, notice that $(X - K_n)_{n \in \mathbb N}$ is also a nested sequence, there must be one single $X - K_{n_0} \in \varOmega'$ that covers $K_1$, which means $K_{n_0} = \varnothing$ contradicting that $\forall n \in \mathbb N_+$, $K_n$ is non-empty.
 \end{proof}
-The following propoties of compact sets are on the topological space induced from a metric space.
-\begin{definition}\label{e-net}
-	$(X;d)$ is a metric space, $E\subset X$. $E$ is called an \indexbf{$\varepsilon$-net} if $\forall x\in X$,$\exists e\in E$, $d(e,x)<\varepsilon$.
+
+\begin{theorem}\label{theorem: closed subset of compact set}
+	Closed subsets $F$ of a compact set $K$ are also compact.
+\end{theorem}
+\begin{proof}
+	If $\varOmega_F \subset 2^K$ is an open cover of $F$. 
+	Notice that $K - F$ is open, $\varOmega = (\cup \varOmega_F) \cap \{K - F\}$ constructs an open cover over over $K$. 
+	Since $K$ is compact there must be a finite cover $\varOmega' \subset \varOmega$ which obviously also covers over $F$.
+\end{proof}
+
+The following propoties of compact sets are about topological spaces induced from metric spaces.
+
+\begin{definition}[net]\label{defintion: e-net}
+	$(X, d)$ is a metric space, $E \in 2^X$. 
+	$E$ is called an \indexbf{$\varepsilon$-net} if $\forall x \in X$,$\exists e \in E$, $d(e, x) < \varepsilon$.
 \end{definition}
-\begin{theorem}\label{finite_e-net}
-If $(K,d)$ is a compact metric space, then $\forall \varepsilon\in\mathbb{R}_+$, $\exists$ finite $\varepsilon$-net in $(K;d)$. 
+
+\begin{theorem}[Finite $\varepsilon$-net exists]\label{theorem: finite e-net exists (metric, compact)}
+	If $(K, d)$ is a compact metric space, then $\forall \varepsilon \in \mathbb R_+$, $\exists$ \emph{finite} $\varepsilon$-net in $(K, d)$. 
 \end{theorem}
 \begin{proof}
-	For each point $x\in K$, find it a $B(x,\varepsilon)$, of which an infinite cover $\Omega$ over $K$ is made. Since $K$ is compact, there exists a finite cover $\Omega'=\{B(x_1,\varepsilon),\cdots,B(x_n,\varepsilon)\}$ ($n\in\mathbb{N}_+$). Therefore $\{x_1,\cdots,x_n\}$ is a finite $\varepsilon$-net in $K$.
+	For each point $x\in K$, find it a $B(x,\varepsilon)$, of which an infinite cover $\Omega$ over $K$ is made. 
+	Since $K$ is compact, there exists a finite subcover $\varOmega' = \{B(x_i,\varepsilon)\}_{i \in n}$ ($n \in \mathbb N_+$). Therefore $\{x_i\}_{i \in n}$ is a finite $\varepsilon$-net in $K$.
 \end{proof}
-\begin{theorem}\label{sequentially_compact_metric}
-$(K;d)$ is compact \emphbf{iff} it is \indexbf{sequentially compact}, that is, $\forall \{x_n\}$ ($x_n\in K$, $n\in\mathbb{N}_+$), it has convergent subsequence $\{x_{k_n}\}$ whose limit $a\in K$.
+
+\begin{theorem}[Sequentially compact]\label{theorem: sequentially compact iff compact (metric)}
+	A metric space~$(K, d)$ is compact \emphbf{iff} it is \indexbf{sequentially compact}, 
+	that is, $\forall (x_n)_{n \in \mathbb N} \in K^\mathbb N$, it has a convergent subsequence $(x_{k_n})_{n \in \mathbb N}$ 
+		($k_n \in \mathbb N$; $k_{n+1} > k_n$)
+	whose limit $a \in K$.
 \end{theorem}
-To proof it, we need to proof two lemmata first.
-\begin{lemma}\label{sequentially_compact_finite_e-net}
-	If $(K;d)$ is sequentially compact, then $\forall \varepsilon\in\mathbb{R}_+$, $\exists$ finite $\varepsilon$-net in $(K;d)$. 
+
+To prove Theorem~\ref{theorem: sequentially compact iff compact (metric)}, we need to prove two lemmata first.
+
+\begin{lemma}\label{lemma: finite e-net exists (metric, sequentially compact)}
+	If $(K, d)$ is sequentially compact, then $\forall \varepsilon \in \mathbb R_+$, $\exists$ finite $\varepsilon$-net in $(K, d)$. 
 \end{lemma}
 \begin{proof}
-	Assume that there were no finite  $\varepsilon_0$-net in $(K;d)$. Define such sequence : $ \{x_n\}$ s.t. $\forall k,n\in\mathbb{N}_+$ ($1\leq k< n$), $d(x_n,x_k)\geq\varepsilon_0$ (There would always be the next one since there exists no $\varepsilon_0$-net). It has no convergent subsequence for it there were a $\{x_{k_n}\}$ convergent to $a\in K$, $\exists N,M\in\mathbb{N}_+$, $d(x_N,x_M)\leq d(x_N,a)+d(x_M,a)\leq \varepsilon_0$, which lead to a contradictary. 
+	Assume that $\exists \varepsilon_0 \in \mathbb R_+$, there were no finite  $\varepsilon_0$-net in $(K, d)$. 
+	Define such sequence: $ (x_n)_{n \in \mathbb N}$ s.t.\ $\forall n \in \mathbb N \; \forall k \in n$, $d(x_n, x_k) \geq \varepsilon_0$ 
+		(There would always be a next one since there exists no finite $\varepsilon_0$-net or $\{B(x_n; \varepsilon_0)\}_{n \in N}$ gives such). 
+		It has no convergent subsequence: 
+		if there were a $(x_{k_n})_{n \in \mathbb N}$ convergent to $a\in K$, $\exists N,M\in\mathbb{N}_+$, $d(x_N, x_M)\leq d(x_N, a)+d(x_M, a)\leq \varepsilon_0$, which lead to a contradictary. 
 \end{proof}
-\begin{lemma}\label{sequentially_compact_nested_closed}
-If $(K;d)$ is sequentially compact then every nested sequence of closed non-empty sets $\{F_n\}$ in $K$ have a non-empty intersection.
+
+\begin{lemma}\label{lemma: intersection of closed nested sequence (sequentially compact)}
+	If $(K, d)$ is sequentially compact then every nested sequence of closed non-empty sets $\{F_n\}_{n \in \mathbb N}$ in $K$ have a non-empty intersection.
 \end{lemma}
 \begin{proof}
-	Let $\{x_{k_n}\}$ be a convergent subsequence of $\{x_n\}$, Let $a$ be the limit of $\{x_{k_n}\}$ ($\forall n\in\mathbb{N}_+$,$x_n\in F_n$). Assume that $a\notin \bigcap_{n\in\mathbb{N}_+}F_n$, in metric space, $\exists U(a)\cap \left(\bigcap_{n\in\mathbb{N}_+}F_n\right)=\varnothing\Rightarrow $ $U(a)\cap \left(\bigcap_{n\in\mathbb{N}_+}F_{k_n}\right)=\varnothing$. But this conflict the fact that $\exists N\in\mathbb{N}_+$, s.t. $n>N$, $x_{k_n}\in U(a)$ while $x_{k_n}\in F_{k_n}$.
+	Let $(x_{k_n})_{n \in \mathbb N}$ be a convergent subsequence of $(x_n)_{n \in \mathbb N}$, where $\forall n \in \mathbb N$, $x_n \in F_n$. 
+	Let $a$ be the limit of $(x_{k_n})_{n \in \mathbb N}$. 
+
+	Assume that $a \notin \bigcap_{n \in \mathbb N} F_n$, in a metric space, $\exists U(a) \in \mathscr U(a)$ s.t.\ $U(a) \cap \big(\bigcap_{n \in \mathbb N} F_n \big) = \varnothing$, therefore $U(a) \cap \big(\bigcap_{n \in \mathbb N} F_{k_n} \big)=\varnothing$. 
+	But this conflict the fact that $\exists N \in \mathbb N$, s.t.\ $n > N \to x_{k_n}\in U(a)$ while $x_{k_n} \in F_{k_n}$.
 \end{proof}
-Then get back to theorem \ref{sequentially_compact_metric}. 
+
+Then we get back to the Theorem~\ref{theorem: sequentially compact iff compact (metric)}. 
 \begin{proof}
 
-	$\Rightarrow$: If $\left|\{x_n\}\right|\in\mathbb{N}$, it is obvious; if $\left|\{x_n\}\right|=\infty$, make finite $\frac{1}{n}$-net (Theorem \ref{finite_e-net}), $n\in\mathbb{N}_+$. For each $n$, there must be at least one $B(x_n;\frac{1}{n})$ that includes infinite elements in $\{x_n\}$. Select $x_{k_n}\in B(x_n;\frac{1}{n})$, and $\{\tilde{B}(x_n;\frac{1}{n})\}$ is a nested sequence of a closed non-empty sets in sequentially compact $K$, (Lemma \ref{sequentially_compact_nested_closed}) $\lim\limits_{n\to \infty} x_{k_n} \in K$.
+	$\to$: 
+	If $\card \{x_n\}_{n \in \mathbb N} \in \mathbb N$, it is obvious; 
+	Now we let $\card \{x_n\}_{n \in \mathbb N} \notin \mathbb N$. 
+	We can always find finite $1/k$-net~$\{B(a_{k, i}, 1/k)\}_{i \in m}$
+		(Theorem~\ref{theorem: finite e-net exists (metric, compact)}, 
+			$m \in \mathbb N$, $a_i \in K$)%
+	, for all $k \in \mathbb N_+$. 
+	For each $k$, there must be at least one $B(a_{k, i_0}; 1/k)$
+		(for simplication, we denote $a_{k, i_0}$ by $a_k$)
+	that includes infinite elements in $(x_n)_{n \in \mathbb N}$. 
+	$\forall n \in \mathbb N_+$
+		(let $k_0 = 0$), 
+	select $x_{k_n} \in B(a_{n, 0}; 1/n)$, and $\{\overline B(x_n; 1/k)\}$ is a nested sequence of a closed non-empty sets in sequentially compact $K$,
+		(Lemma~\ref{lemma: intersection of closed nested sequence (sequentially compact)})
+	$\lim_{n\to \infty} x_{k_n} \in K$.
 	
-	$\Leftarrow$: Assume that there were a open cover $\Omega$ over $K$ having no finite subcover, $\forall n\in\mathbb{N}_+$, $\exists$ finite $\frac{1}{n}$-net (Lemma \ref{sequentially_compact_nested_closed}), in which there would be at least one $x_n$ whose $\tilde{B}(x_n;\frac{1}{n})$ can't be covered finitely. Then $\tilde{B}(x_n;\frac{1}{n})\downarrow B=\{a\}$ (Theorem \ref{nested_compact}) can't be finitely covered by any subcover of $\Omega$ which means $\Omega$ can't cover the whole $K$, leading to the contradiction.
+	$\gets$: 
+	Assume that there were an open cover $\varOmega$ over $K$ having no finite subcover, $\forall n \in \mathbb N_+$, $\exists$ finite $1/n$-net 
+		(Lemma~\ref{lemma: intersection of closed nested sequence (sequentially compact)})%
+	, in which there would be at least one $x_n$ whose $\overline B(x_n;\frac{1}{n})$ can't be covered finitely. 
+	Then $\overline B(x_n; 1/n) \downarrow B = \{a\}$ 
+		(Theorem~\ref{theorem: compact nested sequences have non-empty limit})
+	can't be finitely covered by any subcover of $\varOmega$, 
+	which means $\varOmega$ can't cover the whole $K$, leading to the contradiction.
 \end{proof}
+
 \section{Connected Set}
 \begin{definition}\label{connected_space}
-Topological space $(X;\mathscr{T})$ is called \indexbf{connected}\index{connected space} if there is no \indexbf{open-closed set} (i.e. both open and closed) besides $\varnothing$ and $X$ itself. 
+Topological space $(X,\mathscr{T})$ is called \indexbf{connected}\index{connected space} if there is no \indexbf{open-closed set} (i.e. both open and closed) besides $\varnothing$ and $X$ itself. 
 \end{definition}
 Notice that if $A\subset X$ is open-closed, its complement $X - A$ is also open-closed, which means a topological space is connected \emphbf{iff} it is not a union of its two open subsets. 
 \begin{definition}\label{connected_set}
-$(X;\mathscr{T})$ is a topological space. Subset $C$ is said to be \indexbf{connected}\index{connected set} if subspace $(C;\mathscr{T}_C)$ is connected. 
+$(X,\mathscr{T})$ is a topological space. Subset $C$ is said to be \indexbf{connected}\index{connected set} if subspace $(C;\mathscr{T}_C)$ is connected. 
 \end{definition}
 \begin{theorem}\label{union_connected}
-$( X; \mathscr{T} )$ is a topological space. $\forall\alpha \in A$, $C_\alpha$ are connected subsets of $X$. If $\bigcap\limits_{ \alpha \in A} C_\alpha \neq \varnothing$, then $\bigcup\limits_{\alpha \in A} C_\alpha$ is also connected. 
+$( X, \mathscr{T} )$ is a topological space. $\forall\alpha \in A$, $C_\alpha$ are connected subsets of $X$. If $\bigcap\limits_{ \alpha \in A} C_\alpha \neq \varnothing$, then $\bigcup\limits_{\alpha \in A} C_\alpha$ is also connected. 
 \end{theorem}
 \begin{proof}
 If $C = \bigcup\limits_{\alpha \in A} C_\alpha$ were not connected, $\exists E \subset C$ s.t. $E\neq \varnothing \wedge E \neq C \wedge E, C - E \in \mathscr{T}_C$. For $E$ is not empty there exists a $\beta \in A$ s.t. $E \cap C_\beta \neq \varnothing$. It can be proofed that $C_\beta \subset  E$.
@@ -495,20 +568,20 @@ $E\subset\mathbb{R}$ is connected \emphbf{iff} that if $\forall x,z\in E$, $y\in
 	$\Leftarrow$: It can be proofed that $(\inf C,\sup C)\subset C$. Assume that there were an open-closed proper subset $E\neq\varnothing$ contained in $C$. Find two points $x\in E$, $z\in C - E$. Without loss of generality, let $x<z$. Since $E$ and $C-E$ are closed, $c_1=\inf \{E\cap \left[a,b\right]\}\in E$ while $c_2=\inf \{(C-E)\cap [a,b]\}\in C-E$. However $E\cap(C-E)=\varnothing\Rightarrow c_1<c_2$, which means $(c_1,c_2)\cap E=\varnothing$. Here's the contradiction.
 \end{proof}
 \begin{definition}\label{locally_connected}
-A topological space $( X; \mathscr{T})$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\exists U( x) $ s.t. $U( x)$ is connected.
+A topological space $( X, \mathscr{T})$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\exists U( x) $ s.t. $U( x)$ is connected.
 \end{definition}
 \section{Complete Metric Spaces}
 We now take a closer look at one of the most important sorts of metric spaces: complete spaces.
 \begin{definition}\label{Cauchy_sequence}
-A sequence $\{x_n\mid n\in \mathbb{N}\}$ of points of a metric space $(X;d)$ is called a \indexbf{fundamental}\index{fundamental sequence} or \indexbf{Cauchy sequence} if $\forall \varepsilon \in\mathbb{R}_+$, $\exists N\in\mathbb{N}$ s.t. as long as $m,n> N$, $d(x_n,x_m) < \varepsilon$.
+A sequence $\{x_n\mid n\in \mathbb{N}\}$ of points of a metric space $(X,d)$ is called a \indexbf{fundamental}\index{fundamental sequence} or \indexbf{Cauchy sequence} if $\forall \varepsilon \in\mathbb{R}_+$, $\exists N\in\mathbb{N}$ s.t. as long as $m,n> N$, $d(x_n,x_m) < \varepsilon$.
 \end{definition}
 \begin{definition}\label{complete_space}
-A metric space $(X;d)$ is \indexbf{complete} if every Cauchy sequence of its points is convergent.
+A metric space $(X,d)$ is \indexbf{complete} if every Cauchy sequence of its points is convergent.
 \end{definition}
 For example, metric space $C_\infty[a,b]$ is complete while $C_1[a,b]$ isn't. Proof see p22, Zorich.
 Consider incomplete space $\mathbb{Q}_1$, which is a subspace of the complete space $\mathbb{R}_1$. If $\mathbb{R}_1$ is the smallest complete space containing $\mathbb{Q}_1$, we can say that we have achieved a \textbf{completion} of $\mathbb{Q}_1$. However, the definition of ``completion'' hasn't been defined yet. 
 \begin{definition}\label{completion}
-If a metric space $(X;d)$ is a subspace of a complete metric space $(Y;d)$ and everywhere dense in it, we call the latter one the \indexbf{completion} of $(X;d)$. 
+If a metric space $(X,d)$ is a subspace of a complete metric space $(Y,d)$ and everywhere dense in it, we call the latter one the \indexbf{completion} of $(X,d)$. 
 \end{definition}
 We need to confirm that such completion is the smallest and unique. So we introduce:
 \begin{definition}\label{isometric}
@@ -516,7 +589,7 @@ If there exists a \indexbf{isometry} $f:X_1\to X_2$ when $(X_1;d_1)$ and $(X_2;d
 \end{definition}
 This relation is reflexive ($e$), symmetric ($f ^{-1}$), and transitive ($f\circ g$), so it is a equivalence relation, noted by $\sim$. We shall consider isometric spaces are identical.
 \begin{theorem}\label{completion_unique}
-If metirc spaces $(Y_1;d_1)$ and $(Y_2;d_2)$ are both completions of $(X;d)$, then they are isometric.
+If metirc spaces $(Y_1;d_1)$ and $(Y_2;d_2)$ are both completions of $(X,d)$, then they are isometric.
 \end{theorem}
 \begin{proof}
 Such isometry $f:Y_1\to Y_2$ can be defined: if $x_1,x_2\in X$, 
@@ -538,7 +611,7 @@ while $\{x'_n\}$ and $\{x''_n\}$ are both Cauchy sequence. This equality also pr
 There always exists a completion for every metric space.
 \end{theorem}
 \begin{proof}
-	A isometric space $(S_X;d)$ to the metric space $(X;d_X)$ can be constructed, which consists of constant sequence of points in $X$. Its completion $(S;d)$ can be defined as Cauchy sequences whose mutual distances' limits are not $0$.
+	A isometric space $(S_X, d)$ to the metric space $(X, d_X)$ can be constructed, which consists of constant sequence of points in $X$. Its completion $(S, d)$ can be defined as Cauchy sequences whose mutual distances' limits are not $0$.
 \end{proof}
 \section{Continuous Mapping}
 Let's recall the definition of the limitation.
@@ -569,7 +642,7 @@ The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X,Y)$ or $
 	\index{criterion for continuity}\label{criterion_continuity}
 
 \noindent 
-$(X;\mathscr{T}_X)$ and $(Y;\mathscr{T}_Y)$ are both topological spaces. A mapping $f: X\to Y$ is continuous \emphbf{iff} $\forall G_Y\in \mathscr{T}_Y$, $f ^{-1} ( G_Y ) \in \mathscr{T}_X$.
+$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. A mapping $f: X\to Y$ is continuous \emphbf{iff} $\forall G_Y\in \mathscr{T}_Y$, $f ^{-1} ( G_Y ) \in \mathscr{T}_X$.
 \end{theorem}
 \begin{proof}
 $\Rightarrow$: It is obvious if $f  ^{-1}(G_Y) = \varnothing$. If $f  ^{-1}(G_Y) \neq \varnothing$ and $x_0 \in X$, since $f \in C(X,Y)$, for $G_Y$, $\exists U( x_0) $ s.t $f ( U( x_0)) \subset G_Y$. Also notice that $f ( U( x_0)) \subset G_Y \Rightarrow U( x_0) \subset f  ^{-1}(G_Y)$, therefore $f  ^{-1}(G_Y) $ is open.
@@ -577,14 +650,14 @@ $\Rightarrow$: It is obvious if $f  ^{-1}(G_Y) = \varnothing$. If $f  ^{-1}(G_Y)
 $\Leftarrow$: $\forall x_0 \in X$, let $y_0 = f ( x_0)$, $f ^{-1} ( U( y_0)) \in \mathscr{T}_X$. Notice that $x_0 \in f ^{-1} ( U( y_0))$, therefore $f \in C( X, Y) $.
 \end{proof}
 \begin{definition}\label{homeomorphism}
-$(X;\mathscr{T}_X)$ and $(Y;\mathscr{T}_Y)$ are both topological spaces. A bijective mapping $f: X\to Y$ is a \indexbf{homeomorphism} if $f \in C( X, Y) \wedge f ^{ -1} \in C( Y, X)$. 
+$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. A bijective mapping $f: X\to Y$ is a \indexbf{homeomorphism} if $f \in C( X, Y) \wedge f ^{ -1} \in C( Y, X)$. 
 \end{definition}
 \begin{definition}\label{homeomorphic}
-Two topological spaces $(X;\mathscr{T}_X)$ and $(Y;\mathscr{T}_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f: X\to Y$.
+Two topological spaces $(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f: X\to Y$.
 \end{definition}
 Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other.
 \begin{theorem}\label{compact_continuous}
-$(X;\mathscr{T}_X)$ and $(Y;\mathscr{T}_Y)$ are both topological spaces. $K\subset X$ is a compact set. If $f: X\to Y \in C( X, Y)$, then $f( K)$ is compact.
+$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. $K\subset X$ is a compact set. If $f: X\to Y \in C( X, Y)$, then $f( K)$ is compact.
 \end{theorem}
 \begin{proof}
 For each open cover $\Omega_Y = \{ G_Y \in \mathscr{T}_Y\} \subset \mathscr{T}_Y$ over $f( K)$, $f ^{-1} ( G_Y) \in \mathscr{T}_X$ (Therem~\ref{criterion_continuity}). $f( K) \subset \cup\,\Omega_Y \Rightarrow K \subset f ^{-1} \left(  \cup\,\Omega_Y \right) = \cup\,\Omega_X $, where $\Omega_X = \{ f ^{-1} ( G_Y) \mid G_Y \in \Omega_Y\} $ is an open cover over $K$. Since $K$ is compact,
@@ -594,14 +667,14 @@ $\exists \Omega'_X \subset \Omega_X\left(
 \right)$, $f( K) \subset f ( \cup\,\Omega'_X) $. $f ( G'_X) \in \Omega_Y$, hence $\Omega'_Y = \{ f ( G'_X) \mid G'_X \in \Omega'_X\}$ is a finite subcover over $f( K)$.
 \end{proof}
 \begin{theorem}\label{compact_Hausdorff_continuous_homeomorphism}
-$(K;\mathscr{T}_K)$ is a compact space and $(Y;\mathscr{T}_Y)$ is a Hausdorff space. If a bijective $f: K\to Y \in C( K, Y)$, then it is a homeomorphism.
+$(K;\mathscr{T}_K)$ is a compact space and $(Y,\mathscr{T}_Y)$ is a Hausdorff space. If a bijective $f: K\to Y \in C( K, Y)$, then it is a homeomorphism.
 \end{theorem}
 \begin{proof}
 $\forall F = K - G$ s.t. $G \in \mathscr{T}_K$ is compact (Theorem~\ref{compact_closed_subset}). Hence $f ( F) $ is compact (Theorem~\ref{compact_continuous}), then it is also closed
 (Theorem~\ref{compact_Hausdorff_closed}). This fact shows that $f ^{-1}$ is continuous (Theorem~\ref{criterion_continuity}).
 \end{proof}
 \begin{theorem}\label{connected_continuous}
-$(X;\mathscr{T}_X)$ and $(Y;\mathscr{T}_Y)$ are both topological spaces. $E\subset X$ is a connected set. If $f: X\to Y \in C( X, Y)$, then $f( E)$ is also connected.
+$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. $E\subset X$ is a connected set. If $f: X\to Y \in C( X, Y)$, then $f( E)$ is also connected.
 \end{theorem}
 \begin{proof}
 Only to notice that the open-closed sets in $( f( E) ; \mathscr{T}_{ f( E)})$ have concurrently open-closed pre-images in $( E; \mathscr{T}_E)$.
