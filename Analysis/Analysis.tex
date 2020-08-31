@@ -218,7 +218,7 @@ Some examples:
 	$X - F$ is an open set in $(X, d)$.
 \end{definition}
 
-A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(X, \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X, d)$.
+A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X, d)$.
 
 \begin{proposition}\label{proposition: open sets (metric)}
 	\begin{conditionlist}[label=\alph*)]
@@ -266,7 +266,7 @@ A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(X, \delta)} :=
 \end{definition}
 
 \begin{definition}[Closure]\label{definition: closure (metric)}
-	The intersections of $E \subset X$ and set of all its limit points is called the \indexbf{closure} of $E$, denoted by $\indexbf[overline]{\overline E}$.
+	The intersections of $E \subset X$ and set of all its limit points is called the \indexbf{closure} of $E$, denoted by $\indexfm[overline]{\overline E}$.
 \end{definition}
 
 \begin{theorem}\label{theorem: closed sets' closure (metric)}
@@ -314,16 +314,16 @@ A \indexbf{closed ball}~$\indexbf[overline B x delta]{\overline B(X, \delta)} :=
 		\item $\forall G_1, G_2 \in \mathscr T$, $G_1 \cap G_2 \in \mathscr T$.
 	\end{conditionlist}
 
-	We call $(X, \mathscr{T})$ a \indexbf{topological space}, and sometimes we might simply call $X$ the topological space.
+	We call $\indexfm[X T]{(X, \mathscr T)}$ a \indexbf{topological space}, and sometimes we might simply call $X$ the topological space.
 \end{definition}
 
 These conditions is the intrinsic propoties of the open sets we have defined in the metric space%
 	\footnote{See proposition~\ref{proposition: open sets (metric)}%
 		}. 
-The topology consisting of all the open sets defined in the metric space $(\mathbb{R}; d_2)$ is called the \indexbf{standard topology} of the $n$-dimension Euclidean space.
+The topology consisting of all the open sets defined in the metric space $(\mathbb R; d_2)$ is called the \indexbf{standard topology} of the $n$-dimension Euclidean space.
 
 \begin{definition}[Open set]\label{definition: open set (topology)}
-	Topology $\mathscr{T}$'s elements are called \emphbf{open sets}%
+	Topology $\mathscr T$'s elements are called \emphbf{open sets}%
 		\index{open set}%
 	, and their complements are called \emphbf{closed sets}%
 		\index{closed set}%
@@ -333,7 +333,7 @@ The topology consisting of all the open sets defined in the metric space $(\math
 \begin{definition}[Base]\label{definition: base}
 	Let $(X, \mathscr T)$ be a topological space, and $\mathfrak B \subset 2^X$. 
 	If $\forall G \in \mathscr T$, $\exists \{B_\alpha\}_{\alpha \in A} \in 2^\mathfrak B$ s.t.\ $\bigcup_{\alpha \in A} B_\alpha = G$, we called $\mathfrak B$ a (topological or open) \indexbf{base}%
-		\index{topological base}\index{open base}%
+		\index{topological base}\index{open base} 
 		of the topology $\mathscr T$.
 \end{definition}
 
@@ -354,32 +354,32 @@ For example, we define an equivalence relation $\sim$ in $C(\mathbb R;\mathbb R)
 By collecting all of the continuous functions that are euivalent to $f$, 
 we call $f$ define a \indexbf{germ} at point $a$, denoted by $f_a$.
 If $f \in C(\mathbb R; \mathbb R)$ is defined in $U(a)$, then we can call $\{f_x \mid x \in U(a)\}$ a neighbourhood of germ $f_a$. 
-Class of neighbourhoods of each $f_x$ constructs a base of topological space $(C(\mathbb R; \mathbb R); \mathscr T)$, where $\mathscr T$ is made of the sets of germs of continuous function in $C(\mathbb{R}; \mathbb{R})$.
+Class of neighbourhoods of each $f_x$ constructs a base of topological space $(C(\mathbb R; \mathbb R); \mathscr T)$, where $\mathscr T$ is made of the sets of germs of continuous function in $C(\mathbb R; \mathbb R)$.
 
 \begin{definition}[Hausdorff space]\label{definition: Hausdorff space}
-	We call a topological space $(X, \mathscr{T})$ a \indexbf{Hausdorff space}, \indexbf{separated space} or \indexbf{$\mathrm T_2$ space}, if $\forall x,y \in X$, $x \neq y \to \big( \exists U(x), U(y)$ s.t.\ $U(x) \cap U(y) = \varnothing \big)$%
+	We call a topological space $(X, \mathscr T)$ a \indexbf{Hausdorff space}, \indexbf{separated space} or \indexbf{$\mathrm T_2$ space}, if $\forall x,y \in X$, $x \neq y \to \big( \exists U(x), U(y)$ s.t.\ $U(x) \cap U(y) = \varnothing \big)$%
 		\footnote{This definition is also called \indexbf{Hausdorff axiom} or \indexbf{separation axiom}. }%
 	.
 \end{definition}
 
 \begin{definition}[Dense set]\label{definition: dense set}
-	$E \subset X$ is a \indexbf{dense set} in the topological space $(X, \mathscr{T})$, if $\forall x \in X$, $\forall U(x)$, $U(x) \cap E \neq \varnothing$.
+	$E \subset X$ is a \indexbf{dense set} in the topological space $(X, \mathscr T)$, if $\forall x \in X$, $\forall U(x)$, $U(x) \cap E \neq \varnothing$.
 \end{definition}
 
 \begin{definition}[Separable]\label{definition: separable}
-	If there is a \emph{countable} dense set in topological space $(X, \mathscr{T})$, then $(X,\mathscr{T})$ is \indexbf{separable}.
+	If there is a \emph{countable} dense set in topological space $(X, \mathscr T)$, then $(X,\mathscr T)$ is \indexbf{separable}.
 \end{definition}
 
 We can also define interior points, exterior points, boundary points, limit points in topological space as in metric space.
 
 \begin{definition}[Topological subspace]\label{subspace (topology)}
-	Each subset $Y$ of $X$ equiped with topology $\mathscr T$ can be given a \indexbf{subspace topology} $\mathscr T_Y$ whose elements $G_Y$ are intersections of the subset with an open set $G$ in $(X, \mathscr{T})$ i.e.\ $\forall G_Y \in \mathscr T_Y$, $\exists G \in \mathscr{T}$ s.t.\ $G_Y = G \cap Y$. 
+	Each subset $Y$ of $X$ equiped with topology $\mathscr T$ can be given a \indexbf{subspace topology} $\mathscr T_Y$ whose elements $G_Y$ are intersections of the subset with an open set $G$ in $(X, \mathscr T)$ i.e.\ $\forall G_Y \in \mathscr T_Y$, $\exists G \in \mathscr T$ s.t.\ $G_Y = G \cap Y$. 
 	Subsets equiped with such topology construct a \emphbf{topological subspace}%
 		\index{subspace}%
-		~$(Y, \mathscr{T}_Y)$. 
+		~$(Y, \mathscr T_Y)$. 
 \end{definition}
 
-If two topology~$\mathscr{T}_1, \mathscr{T}_2$ are defined on the same $X$, $\mathscr{T}_1$ is said to be \indexbf{stronger} than $\mathscr{T}_2$ if $\mathscr{T}_1 \subsetneqq \mathscr{T}_2$.
+If two topology~$\mathscr T_1, \mathscr T_2$ are defined on the same $X$, $\mathscr T_1$ is said to be \indexbf{stronger} than $\mathscr T_2$ if $\mathscr T_1 \subsetneqq \mathscr T_2$.
 
 \section{Compact Set}
 
@@ -395,14 +395,14 @@ If two topology~$\mathscr{T}_1, \mathscr{T}_2$ are defined on the same $X$, $\ma
 Specially, $\varnothing$ is compact.
 
 \begin{theorem}\label{theorem: compact iff compact in subspace}
-	Set $K \subset X$ is compact in $(X,\mathscr{T})$ \emphbf{iff} $K$ is compact in $(K, \mathscr{T}_K)$ itself. 
+	A set $K \subset X$ is compact in $(X,\mathscr T)$ \emphbf{iff} $K$ is compact in $(K, \mathscr T_K)$ itself. 
 \end{theorem}
 
 This theorem tells a truth that whether $K$ is compact or not doesn't dependent on the topological space it's in. 
-This fact can be easily proved: we just need to notice that every open set $G_K$ in $(K, \mathscr T_K)$ is an intersection of an open set $G$ in $(X, \mathscr{T})$ and $K$. 
+This fact can be easily proved: we just need to notice that every open set $G_K$ in $(K, \mathscr T_K)$ is an intersection of an open set $G$ in $(X, \mathscr T)$ and $K$. 
 
 \begin{theorem}[Compact $\to$ closed (Hausdorff)]\label{theorem: compact sets are closed in Hausdorff space}
-	If $K$ is compact in a Hausdorff space $(X, \mathscr{T})$%
+	If $K$ is compact in a Hausdorff space $(X, \mathscr T)$%
 		\footnote{See definition~\ref{definition: Hausdorff space}. }%
 	, then $K$ is a closed set in $(X, \mathscr T)$.
 \end{theorem}
@@ -448,7 +448,7 @@ This fact can be easily proved: we just need to notice that every open set $G_K$
 \end{proof}
 
 \begin{theorem}\label{theorem: closed subset of compact set}
-	Closed subsets $F$ of a compact set $K$ are also compact.
+	A Closed subset $F$ of a compact set $K$ is also compact.
 \end{theorem}
 \begin{proof}
 	If $\varOmega_F \subset 2^K$ is an open cover of $F$. 
@@ -532,54 +532,83 @@ Then we get back to the Theorem~\ref{theorem: sequentially compact iff compact (
 \end{proof}
 
 \section{Connected Set}
-\begin{definition}\label{connected_space}
-Topological space $(X,\mathscr{T})$ is called \indexbf{connected}\index{connected space} if there is no \indexbf{open-closed set} (i.e. both open and closed) besides $\varnothing$ and $X$ itself. 
+
+\begin{definition}[Connected space]\label{definition: connected space}
+	Topological space $(X, \mathscr T)$ is called \indexbf{connected}%
+		\index{connected space}
+	if there is no \indexbf{open-closed set} (i.e.\ both open and closed) besides $\varnothing$ and $X$ itself. 
 \end{definition}
-Notice that if $A\subset X$ is open-closed, its complement $X - A$ is also open-closed, which means a topological space is connected \emphbf{iff} it is not a union of its two open subsets. 
-\begin{definition}\label{connected_set}
-$(X,\mathscr{T})$ is a topological space. Subset $C$ is said to be \indexbf{connected}\index{connected set} if subspace $(C;\mathscr{T}_C)$ is connected. 
+
+Notice that if $A \in 2^X$ is open-closed, its complement $X - A$ is also open-closed, which means a topological space is connected \emphbf{iff} it is not a union of its two open subsets. 
+
+\begin{definition}[Connected set]\label{definition: connected set}
+	Let $(X, \mathscr T)$ be a topological space. 
+	Subset $C$ is said to be \indexbf{connected}%
+		\index{connected set}
+	if subspace $(C, \mathscr T_C)$ is connected. 
 \end{definition}
-\begin{theorem}\label{union_connected}
-$( X, \mathscr{T} )$ is a topological space. $\forall\alpha \in A$, $C_\alpha$ are connected subsets of $X$. If $\bigcap\limits_{ \alpha \in A} C_\alpha \neq \varnothing$, then $\bigcup\limits_{\alpha \in A} C_\alpha$ is also connected. 
+
+\begin{theorem}\label{theorem: union of connected sets}
+	Let $(X, \mathscr T)$ be a topological space, and $\{C_\alpha\}_{\alpha \in A}$ be connected subsets of $X$. 
+	If $\bigcap_{ \alpha \in A} C_\alpha \neq \varnothing$, then $\bigcup\limits_{\alpha \in A} C_\alpha$ is also connected. 
 \end{theorem}
 \begin{proof}
-If $C = \bigcup\limits_{\alpha \in A} C_\alpha$ were not connected, $\exists E \subset C$ s.t. $E\neq \varnothing \wedge E \neq C \wedge E, C - E \in \mathscr{T}_C$. For $E$ is not empty there exists a $\beta \in A$ s.t. $E \cap C_\beta \neq \varnothing$. It can be proofed that $C_\beta \subset  E$.
-
-Suppose that $C_\beta \nsubseteq  E$, which implies that $( C - E) \cap C_\beta \neq \varnothing$. 
-$E, C - E, C_\beta \in \mathscr{T}_C
-	 \Rightarrow
-	  	E\cap C_\beta, ( C - E) \cap C_\beta \in \mathscr{T}_C$. 
-This conflicts to the fact that $C_\beta$ is connected. Therefore $C_\beta \subset  E$. 
-
-Hence there exists a $B \subsetneqq A$, $\bigcup\limits_{ \beta \in B} C_\beta = A$. Since $C_\gamma$, $\gamma \in A - B$ would have a empty intersection with $E$, which contradicts $\bigcap\limits_{ \alpha \in A} C_\alpha \neq \varnothing$.
-\end{proof}
-\begin{theorem}\label{closure_connected}
-Connected sets have connected closure.
-\end{theorem}
-\begin{proof}
-
-\end{proof}
-\begin{theorem}\label{R_connected}
-$E\subset\mathbb{R}$ is connected \emphbf{iff} that if $\forall x,z\in E$, $y\in\mathbb{R}$ s.t. $x<y<z$, then $y\in C$.
-\end{theorem}
-\begin{proof}
-	$\Rightarrow$: Assume that there were such $y\in\mathbb{R}$ that $\exists x,z\in C$, $x<y<z$ but $y\notin C$. $\{x\in C|x<y\}$ and $\{x\in C|x>y\}$ are open in $C$for they are intersection of open sets in $\mathbb{R}$ and $C$. Since they're each other's complement, they are both open-closed, which conflict to the definition of connected set.
+	Assume that $C = \bigcup_{\alpha \in A} C_\alpha$ were not connected, $\exists E \in 2^C$ s.t.\ $E \neq \varnothing$, $E \neq C$ and $E, C - E \in \mathscr T_C$. 
+	For $E$ is not empty there exists a $\beta \in A$ s.t.\ $E \cap C_\beta \neq \varnothing$. 
 	
-	$\Leftarrow$: It can be proofed that $(\inf C,\sup C)\subset C$. Assume that there were an open-closed proper subset $E\neq\varnothing$ contained in $C$. Find two points $x\in E$, $z\in C - E$. Without loss of generality, let $x<z$. Since $E$ and $C-E$ are closed, $c_1=\inf \{E\cap \left[a,b\right]\}\in E$ while $c_2=\inf \{(C-E)\cap [a,b]\}\in C-E$. However $E\cap(C-E)=\varnothing\Rightarrow c_1<c_2$, which means $(c_1,c_2)\cap E=\varnothing$. Here's the contradiction.
+	Now we show that $C_\beta \subset  E$.
+	Suppose that $C_\beta \nsubseteq  E$, which implies that $(C - E) \cap C_\beta \neq \varnothing$. 
+	$E, C - E, C_\beta \in \mathscr T_C$, by the definition of the topology, 
+	$E \cap C_\beta, (C - E) \cap C_\beta \in \mathscr T_C$. 
+	This conflicts to the fact that $C_\beta$ is connected. 
+	Therefore $C_\beta \subset  E$. 
+
+	Hence, there exists a $B \subsetneqq A$, $\bigcup_{ \beta \in B} C_\beta = A$. 
+	Since $C_\gamma$, $\gamma \in A - B$ would have a empty intersection with $E$, which contradicts $\bigcap_{ \alpha \in A} C_\alpha \neq \varnothing$.
 \end{proof}
-\begin{definition}\label{locally_connected}
-A topological space $( X, \mathscr{T})$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\exists U( x) $ s.t. $U( x)$ is connected.
+
+\begin{theorem}\label{theorem: closure of connected set}
+	Connected sets have connected closure.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+
+\begin{theorem}\label{theorem: real connected sets}
+	$C \subset \mathbb R$ is connected \emphbf{iff}  $\forall x, z \in C \forall y \in \mathbb R (x < y < z)$  $\to $ $y \in C$.
+\end{theorem}
+\begin{proof}
+	$\to$:
+	Assume that there were such $y \in \mathbb R$ that $\exists x, z \in C$, $x < y < z$ but $y \notin C$. 
+	$\{x \in C \mid x < y\}$ and $\{x \in C \mid x > y\}$ are open in $C$ for they are intersection of open sets in $\mathbb R$ and $C$. 
+	Since they're each other's complement, they are both open-closed, which conflicts to the definition of a connected set.
+	
+	$\gets$: 
+	It can be proved that $(\inf C, \sup C) \subset C$. 
+	Assume that there were an open-closed proper subset $E \neq \varnothing$ contained in $C$. 
+	Find two points $x \in E$, $z \in C - E$. 
+	Without loss of generality, let $x < z$. 
+	Since $E$ and $C - E$ are closed, $c_1 = \inf \big( E \cap [a,b] \big) \in E$ while $c_2 = \inf \big((C - E) \cap [a, b]\big) \in C - E$. 
+	However $E \cap (C - E) = \varnothing$, hence $c_1 < c_2$, which means $(c_1, c_2) \cap E = \varnothing$. 
+	Here's the contradiction.
+\end{proof}
+
+\begin{definition}[Locally connected]\label{definition: locally connected}
+	A topological space $(X, \mathscr T)$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\exists U(x) $ s.t.\ $U(x)$ is connected.
 \end{definition}
+
 \section{Complete Metric Spaces}
 We now take a closer look at one of the most important sorts of metric spaces: complete spaces.
+
 \begin{definition}\label{Cauchy_sequence}
-A sequence $\{x_n\mid n\in \mathbb{N}\}$ of points of a metric space $(X,d)$ is called a \indexbf{fundamental}\index{fundamental sequence} or \indexbf{Cauchy sequence} if $\forall \varepsilon \in\mathbb{R}_+$, $\exists N\in\mathbb{N}$ s.t. as long as $m,n> N$, $d(x_n,x_m) < \varepsilon$.
+A sequence $\{x_n\mid n\in \mathbb{N}\}$ of points of a metric space $(X,d)$ is called a \indexbf{fundamental}\index{fundamental sequence} or \indexbf{Cauchy sequence} if $\forall \varepsilon \in\mathbb R_+$, $\exists N\in\mathbb{N}$ s.t. as long as $m,n> N$, $d(x_n,x_m) < \varepsilon$.
 \end{definition}
 \begin{definition}\label{complete_space}
 A metric space $(X,d)$ is \indexbf{complete} if every Cauchy sequence of its points is convergent.
 \end{definition}
 For example, metric space $C_\infty[a,b]$ is complete while $C_1[a,b]$ isn't. Proof see p22, Zorich.
-Consider incomplete space $\mathbb{Q}_1$, which is a subspace of the complete space $\mathbb{R}_1$. If $\mathbb{R}_1$ is the smallest complete space containing $\mathbb{Q}_1$, we can say that we have achieved a \textbf{completion} of $\mathbb{Q}_1$. However, the definition of ``completion'' hasn't been defined yet. 
+Consider incomplete space $\mathbb{Q}_1$, which is a subspace of the complete space $\mathbb R_1$. If $\mathbb R_1$ is the smallest complete space containing $\mathbb{Q}_1$, we can say that we have achieved a \textbf{completion} of $\mathbb{Q}_1$. However, the definition of ``completion'' hasn't been defined yet. 
 \begin{definition}\label{completion}
 If a metric space $(X,d)$ is a subspace of a complete metric space $(Y,d)$ and everywhere dense in it, we call the latter one the \indexbf{completion} of $(X,d)$. 
 \end{definition}
@@ -624,7 +653,7 @@ A set $\mathscr{B}\subset 2^X$ is called a \textbf{(filter) base}\index{filter b
 \end{definition}
 Introduction of the limits in a topological space is as follows.
 \begin{definition}\label{limit}
-Let $a\in Y$ be the \indexbf{limit} over the base $\mathscr{B}\subset 2^{\mathscr{D}(f)}$ of a mapping $f:\mathscr{D}( f )\to Y$, in which $Y$ is epuiped with a topology $\mathscr{T}$. 
+Let $a\in Y$ be the \indexbf{limit} over the base $\mathscr{B}\subset 2^{\mathscr{D}(f)}$ of a mapping $f:\mathscr{D}( f )\to Y$, in which $Y$ is epuiped with a topology $\mathscr T$. 
 \[
 	\lim_\mathscr{B} f = a 
 	\quad:=\quad
@@ -635,56 +664,56 @@ Let $a\in Y$ be the \indexbf{limit} over the base $\mathscr{B}\subset 2^{\mathsc
 
 Such definition is parallel to the definition we have introduced on the limits of real number, hence it basically holds the same propoties. 
 \begin{definition}\label{continuous}
-A mapping $f:X\to Y$, where $X$,$Y$ is respectively equiped with topology $\mathscr{T}_X$,$\mathscr{T}_Y$, is said to be \indexbf{continuous} at $x_0\in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. It is \indexbf{continuous} in $X$ if it is continuous at each point $x\in X$. 
+A mapping $f:X\to Y$, where $X$,$Y$ is respectively equiped with topology $\mathscr T_X$,$\mathscr T_Y$, is said to be \indexbf{continuous} at $x_0\in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. It is \indexbf{continuous} in $X$ if it is continuous at each point $x\in X$. 
 \end{definition}
 The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X,Y)$ or $C(X)$ when $Y$ is clear. 
 \begin{theorem}[\textbf{Criterion for continuity}]
 	\index{criterion for continuity}\label{criterion_continuity}
 
 \noindent 
-$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. A mapping $f: X\to Y$ is continuous \emphbf{iff} $\forall G_Y\in \mathscr{T}_Y$, $f ^{-1} ( G_Y ) \in \mathscr{T}_X$.
+$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. A mapping $f: X\to Y$ is continuous \emphbf{iff} $\forall G_Y\in \mathscr T_Y$, $f ^{-1} ( G_Y ) \in \mathscr T_X$.
 \end{theorem}
 \begin{proof}
 $\Rightarrow$: It is obvious if $f  ^{-1}(G_Y) = \varnothing$. If $f  ^{-1}(G_Y) \neq \varnothing$ and $x_0 \in X$, since $f \in C(X,Y)$, for $G_Y$, $\exists U( x_0) $ s.t $f ( U( x_0)) \subset G_Y$. Also notice that $f ( U( x_0)) \subset G_Y \Rightarrow U( x_0) \subset f  ^{-1}(G_Y)$, therefore $f  ^{-1}(G_Y) $ is open.
 
-$\Leftarrow$: $\forall x_0 \in X$, let $y_0 = f ( x_0)$, $f ^{-1} ( U( y_0)) \in \mathscr{T}_X$. Notice that $x_0 \in f ^{-1} ( U( y_0))$, therefore $f \in C( X, Y) $.
+$\Leftarrow$: $\forall x_0 \in X$, let $y_0 = f ( x_0)$, $f ^{-1} ( U( y_0)) \in \mathscr T_X$. Notice that $x_0 \in f ^{-1} ( U( y_0))$, therefore $f \in C( X, Y) $.
 \end{proof}
 \begin{definition}\label{homeomorphism}
-$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. A bijective mapping $f: X\to Y$ is a \indexbf{homeomorphism} if $f \in C( X, Y) \wedge f ^{ -1} \in C( Y, X)$. 
+$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. A bijective mapping $f: X\to Y$ is a \indexbf{homeomorphism} if $f \in C( X, Y) \wedge f ^{ -1} \in C( Y, X)$. 
 \end{definition}
 \begin{definition}\label{homeomorphic}
-Two topological spaces $(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f: X\to Y$.
+Two topological spaces $(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f: X\to Y$.
 \end{definition}
 Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other.
 \begin{theorem}\label{compact_continuous}
-$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. $K\subset X$ is a compact set. If $f: X\to Y \in C( X, Y)$, then $f( K)$ is compact.
+$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. $K\subset X$ is a compact set. If $f: X\to Y \in C( X, Y)$, then $f( K)$ is compact.
 \end{theorem}
 \begin{proof}
-For each open cover $\Omega_Y = \{ G_Y \in \mathscr{T}_Y\} \subset \mathscr{T}_Y$ over $f( K)$, $f ^{-1} ( G_Y) \in \mathscr{T}_X$ (Therem~\ref{criterion_continuity}). $f( K) \subset \cup\,\Omega_Y \Rightarrow K \subset f ^{-1} \left(  \cup\,\Omega_Y \right) = \cup\,\Omega_X $, where $\Omega_X = \{ f ^{-1} ( G_Y) \mid G_Y \in \Omega_Y\} $ is an open cover over $K$. Since $K$ is compact,
+For each open cover $\Omega_Y = \{ G_Y \in \mathscr T_Y\} \subset \mathscr T_Y$ over $f( K)$, $f ^{-1} ( G_Y) \in \mathscr T_X$ (Therem~\ref{criterion_continuity}). $f( K) \subset \cup\,\Omega_Y \Rightarrow K \subset f ^{-1} \left(  \cup\,\Omega_Y \right) = \cup\,\Omega_X $, where $\Omega_X = \{ f ^{-1} ( G_Y) \mid G_Y \in \Omega_Y\} $ is an open cover over $K$. Since $K$ is compact,
 $\exists \Omega'_X \subset \Omega_X\left( 
 \lvert \Omega'_X \rvert \in \mathbb{N}_+ 
 \;\wedge\;K\subset \cup\,\Omega'_X
 \right)$, $f( K) \subset f ( \cup\,\Omega'_X) $. $f ( G'_X) \in \Omega_Y$, hence $\Omega'_Y = \{ f ( G'_X) \mid G'_X \in \Omega'_X\}$ is a finite subcover over $f( K)$.
 \end{proof}
 \begin{theorem}\label{compact_Hausdorff_continuous_homeomorphism}
-$(K;\mathscr{T}_K)$ is a compact space and $(Y,\mathscr{T}_Y)$ is a Hausdorff space. If a bijective $f: K\to Y \in C( K, Y)$, then it is a homeomorphism.
+$(K;\mathscr T_K)$ is a compact space and $(Y,\mathscr T_Y)$ is a Hausdorff space. If a bijective $f: K\to Y \in C( K, Y)$, then it is a homeomorphism.
 \end{theorem}
 \begin{proof}
-$\forall F = K - G$ s.t. $G \in \mathscr{T}_K$ is compact (Theorem~\ref{compact_closed_subset}). Hence $f ( F) $ is compact (Theorem~\ref{compact_continuous}), then it is also closed
+$\forall F = K - G$ s.t. $G \in \mathscr T_K$ is compact (Theorem~\ref{compact_closed_subset}). Hence $f ( F) $ is compact (Theorem~\ref{compact_continuous}), then it is also closed
 (Theorem~\ref{compact_Hausdorff_closed}). This fact shows that $f ^{-1}$ is continuous (Theorem~\ref{criterion_continuity}).
 \end{proof}
 \begin{theorem}\label{connected_continuous}
-$(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. $E\subset X$ is a connected set. If $f: X\to Y \in C( X, Y)$, then $f( E)$ is also connected.
+$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. $E\subset X$ is a connected set. If $f: X\to Y \in C( X, Y)$, then $f( E)$ is also connected.
 \end{theorem}
 \begin{proof}
-Only to notice that the open-closed sets in $( f( E) ; \mathscr{T}_{ f( E)})$ have concurrently open-closed pre-images in $( E; \mathscr{T}_E)$.
+Only to notice that the open-closed sets in $( f( E) ; \mathscr T_{ f( E)})$ have concurrently open-closed pre-images in $( E; \mathscr T_E)$.
 \end{proof}
 \section{Contraction}
 \begin{definition}\label{fixed_point}
 A point $a\in X$ is a \indexbf{fixed point} of a mapping $f: X\to X$ if $f( a) = a$.
 \end{definition}
 \begin{definition}\label{contraction}
-Let~$(X;d)$ be a metric space. A mapping~$f: X\to X$ is called a \indexbf{contraction} if~$\exists q \in ( 0, 1) \subset \mathbb{R}$ s.t. $\forall x_1,x_2\in X$, 
+Let~$(X;d)$ be a metric space. A mapping~$f: X\to X$ is called a \indexbf{contraction} if~$\exists q \in ( 0, 1) \subset \mathbb R$ s.t. $\forall x_1,x_2\in X$, 
 \begin{align}\label{inequality_contraction}
 	d ( f ( x_1), f (x_2)) \leq q d( x_1, x_2).
 \end{align}
@@ -693,7 +722,7 @@ Let~$(X;d)$ be a metric space. A mapping~$f: X\to X$ is called a \indexbf{contra
 A contraction $f: X\to X$ is always continuous.
 \end{lemma}
 \begin{proof}
-$\forall x\in X$, $\forall \varepsilon \in \mathbb{R}_+ $, $\exists \delta < \varepsilon / q$, according to inequality~\ref{inequality_contraction}:
+$\forall x\in X$, $\forall \varepsilon \in \mathbb R_+ $, $\exists \delta < \varepsilon / q$, according to inequality~\ref{inequality_contraction}:
 \[
 f \left( B( x;\delta )\right) 
 \subset 
@@ -746,7 +775,7 @@ By passing to the limit as $k \to \infty$ in the inequality~\ref{inequality_Cauc
 \chapter{Normed Linear Space and Differential Calculus}
 \section{Normed Linear Space}
 \begin{definition}
-Let $V$ be a linear space over $\mathbb{R}$ or $\mathbb{C}$. A function $\|\;\|: X\to \mathbb{R}$ assigning to each vector $\boldsymbol{x}\in X$ a real number $\|x\|$ is called a \indexbf{norm} in the linear space $X$ if:
+Let $V$ be a linear space over $\mathbb R$ or $\mathbb{C}$. A function $\|\;\|: X\to \mathbb R$ assigning to each vector $\boldsymbol{x}\in X$ a real number $\|x\|$ is called a \indexbf{norm} in the linear space $X$ if:
 \begin{conditionlist}[label=\alph*)]
 	\item 
 	$\|\boldsymbol{x}\|=0\Leftrightarrow \boldsymbol{x}=\boldsymbol{0}$ (nondegeneracy);
