@@ -1244,6 +1244,57 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 \section{二次型}
 
+\begin{definition}[二次型]
+	令 $V$ 为域~$\mathbb F$ 上的线性空间, $q \in \mathbb F^V$. 如果 $q$ 满足:
+	\begin{conditionlist}[label=\roman*)]
+		\item $\forall \bv x \in V$, $q(- \bv x) = - q(\bv x)$;
+		\item $\mathscr B \colon (\bv x, \bv y) \mapsto \big(q(\bv x + \bv y) - q(\bv x) - q(\bv y)\big)/2$ 是 $V$ 上的双线性型,
+	\end{conditionlist}
+	那么, 我们称 $q$ 是 $V$ 上的\indexbf{二次型}, 其得到的双线性型~$\mathscr B$ 是\indexbf{极化的}或说是与二次型~$q$ \indexbf{配极}的双线性型.
+\end{definition}
+
+倘若 $\mathscr B \in L^+_2(V; \mathbb F)$, 我们记 $q_\mathscr B \colon \bv x \mapsto \mathscr B(\bv x, \bv x)$. 
+显然 $q_\mathscr B$ 是一个二次型. 
+而且 $q_\mathscr B$ 将和 $\mathscr B$ 配极.
+
+通过这种二次型和对称双线性型的关系, 我们可以称有限维线性空间中的对称双线性型的矩阵就是与之配极的二次型的矩阵. 
+之后我们会混用对称双线性型和二次型的术语.
+
+\begin{definition}[规范型]
+	我们称 $n$~维线性空间的二次型~$q$ 在基底~$\hat e$ 下具有\indexbf{标准型}, 意思是其对应的矩阵就是一个对角矩阵 $\bv B = \diag(\lambda_i)_{i \in n}$.
+	与此同时, 我们也称 $\hat e$ 为 $q$ 的一组\indexbf{规范基底}.
+\end{definition}
+
+\begin{theorem}[二次型的规范型存在]
+	$\forall \mathscr B \in \mathcal L^+_2(V; \mathbb F)$, $\exists$ 基底~$\hat e$ s.t.\ $\mathscr B$ 在该基底下的矩阵是对角的 i.e.\ $\bv B = \diag(\lambda_i)_{i \in n}$.
+\end{theorem}
+\begin{proof}
+	定理对 $\dim V = 1$, $\mathscr B = \mathscr O$ 都显然成立. 
+
+	假设 $\forall k \in n + 1$, $\dim V = k$ 的情况定理都成立. 
+	在 $\mathscr B \neq \mathscr O$ 的情况, 必然有一个 $\basis e_n \in V$ 使得与 $\mathscr B$ 配极的 $q(\basis e_n) \neq 0$ 
+		(否则, $\mathscr B$ 将与零二次型配极).
+	设 $\ell \colon \bv x \mapsto \mathscr B(\bv x, \basis e_n)$, 显然 $\ell$ 是一个非零的线性型. 
+	从而 $\ker \ell$ 是 $V$ 的真子空间, 亦即 $\dim \ker \ell \leq n $.
+
+	设 $(\basis e_i)_{i \in n}$ 是 $\inbasis{\mathscr B}{\ker \ell}$ 的一组规范基底. 
+	因为 $\forall i \in n$, $\basis e_i \in \ker \ell$, 我们有 $\ell(\basis e_i) = \mathscr B(\basis e_i, \basis e_n) = 0$. 
+	结论要呼之欲出了: 如此得到的 $\big(\mathscr B(\basis e_i, \basis e_j)\big)_{i, j \in n + 1}$ 确实是一个对角矩阵.
+
+	可是我们还没有确定 $(\basis e_i)_{i \in n + 1}$ 是线性无关的. 
+	设有线性组合 $\sum_{i \in n + 1} \alpha_i \basis e_i = \bv 0$, 作用 $\ell$, 得:
+	\begin{equation*}
+		\ell\left( 
+			\sum_{i \in n + 1} \alpha_i \basis e_i
+		 \right)
+		= \alpha_n \ell(\basis e_n)
+		= \alpha_n q(\basis e_n)\,,
+	\end{equation*}
+	因 $q(\basis e_n) \neq 0$, 我们得到了 $\alpha_n = 0$; 
+	又 $(\basis e_i)_{i \in n}$ 是线性无关的, $\sum_{i \in n} \alpha_i \basis e_i + 0\basis e_n = \sum_{i \in n} \alpha_i \basis e_i = \bv 0$ 只能给出 $\forall i \in n$, $\alpha_i = 0$. 这就是 $(\basis e_i)_{i \in n + 1}$ 线性无关的证据.
+
+\end{proof}
+
 \chapter{线性算子}
 \section{线性映射}
 	\label{section:线性映射}
@@ -1540,13 +1591,49 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 	\end{equation*}
 \end{proof}
 
-设有投影 $\mathscr P \in \mathcal L(V)$
-
 \begin{definition}[不变子空间]
-	设 $V$ 是线性空间, $U$ 是其子空间, $\mathscr A \in \mathcal L(V)$. 倘若 $\mathscr A(U) \subseteq U$, 我们称 $U$ 是线性算子~$\mathscr A$ 的一个\indexbf{不变子空间}.
+	设 $V$ 是线性空间, $U$ 是其子空间, $\mathscr A \in \mathcal L(V)$. 倘若 $\mathscr A(U) \subseteq U$, 我们称 $U$ 是线性算子~$\mathscr A$ 的一个\indexbf{不变子空间} (invariant subspace).
 \end{definition}
 
-$\mathscr P$
+\begin{definition}[特征向量]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $U$ 是 $\mathscr A$ 的一个一维不变子空间 (uni-dimensional invariant subspace) i.e.\ $\dim U = 1$, 那么我们称 $\forall \bv x \in U - \{\bv 0\}$ 是一个 $\mathscr A$ 的\indexbf{特征向量} (eigenvector, or characteristic vector).
+\end{definition}
+
+根据定义, 特征向量满足 $\mathscr A \bv x = \lambda \bv x$, $\lambda \in \mathbb F$.
+
+\begin{definition}[特征值]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $\bv x$ 是 $\mathscr A$ 的一个特征向量, 且有 $\mathscr A \bv x = \lambda \bv x$.
+	那么我们称 $\lambda \in \mathbb F$ 是 $\mathscr A$ 的一个 ($\bv x$ 对应的) \indexbf{特征值} (eigenvalue).
+\end{definition}
+
+由 $\bv A' \bv x' = \bv P^{-1} \bv A \bv P \bv P^{-1} \bv x = \bv P^{-1} \bv A \bv x = \lambda \bv P^{-1} \bv x = \lambda \bv x'$ 可以验证, 特征值是坐标无关的.
+
+\begin{definition}[几何重数]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \mathbb F$ 是 $\mathscr A$ 的一个特征值.
+	与特征值~$\lambda$ 相伴的\indexbf{特征空间} (eigenspace) $\indexfm[E A lambda]{E_\mathscr A(\lambda)} := \{\bv x \in V \mid \mathscr A \bv x = \lambda \bv x\}$ 的维数 $\indexfm[gamma A lambda]{\gamma_\mathscr A(\lambda)} := \dim E_\mathscr A(\lambda)$ 则被称为特征值~$\lambda$ 的\indexbf{几何重数} (geometirc multiplicity).
+\end{definition}
+
+我们说 $\bv x$ 是对应特征值~$\lambda$ 的特征向量, 也可以说是 $\bv x \in \ker (\mathscr A - \lambda \id_V)$. 
+从而 $\det (\mathscr A - \lambda \id_V) = 0$. 
+考虑到行列式和坐标无关, 且对非退化方阵 $\bv P$:
+\begin{equation*}
+	\det (\bv A' - \lambda \bv I) 
+	= \det (\bv P^{-1} \bv A \bv P - \lambda \bv P^{-1} \bv P) 
+	= \det \bv P^{-1} \det (\bv A - \lambda \bv I) \det \bv P
+	= \det (\bv A - \lambda \bv I)\,,
+\end{equation*}
+我们可以定义与坐标无关的特征多项式:
+
+\begin{definition}[特征多项式]
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$. 
+	$\indexfm[chi A X]{\chi_\mathscr A(X)} := \det (\mathscr A - X \id_V) \in \mathbb F[X]$ 被称为算子~$\mathscr A$ 的\indexbf{特征多项式} (characteristic polynomial).
+	方程 $\chi_\mathscr A(X) = 0$ 被称为\indexbf{特征方程}或\indexbf{久期方程}.
+\end{definition}
+
+
+
+
+
 \chapter{内积空间}
 
 \chapter{张量}
