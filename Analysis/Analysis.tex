@@ -163,25 +163,25 @@ The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/mas
 Some examples:
 \begin{itemize}
 	\item 
-	We can define $(\mathbb R^n; d_p)$, where
+	We can define $\indexfm[R n p]{\mathbb R^n_p} := (\mathbb R^n, \indexfm[d p]{d_p})$, where
 	\begin{equation}\label{equation:d_p}
 		d_p (x, y) := \left(
 			\sum_{i \in n}\big|x^i - y^i \big|^p \right)^{1/p}\,,
 	\end{equation}
 	while
 	\begin{equation}\label{equation:d_infty}
-		d_\infty (x, y) :=
+		\indexfm[d infty]{d_\infty} (x, y) :=
 		\max_{i \in n} \big|x^i - y^i\big|\,.
 	\end{equation}
 	\item 
-	Similarly we can define metric spaces as $(C[a, b]; d_p)$ or simplified $C_p[a, b]$. 
+	Similarly we can define metric spaces as $(C[a, b], d_p)$ or simplified $\indexfm[C p a b]{C_p[a, b]}$. 
 	\begin{equation}
 		d_p(f, g) =
 		\left(
 			\int^b_a \big| f - g \big|^p \dif x
 		\right) ^{1/p}\,.
 	\end{equation}
-	while $C_\infty[a, b]$ is called a \indexbf{Chebyshev metric}, 
+	while $\indexfm[C infty a b]{C_\infty [a, b]}$ is called a \indexbf{Chebyshev metric}, 
 	where the metric is defined as $d_\infty(f, g) := \max_{x \in [a, b]} |f(x) - g(x)|$.
 	\item 
 	On equivalence class $\tilde {\mathfrak R}[a,b]$ over $\mathfrak R[a,b]$ similar metric can be defined. 
@@ -189,7 +189,7 @@ Some examples:
 \end{itemize}
 
 \begin{lemma}[Quadruple inequality]\label{lemma: quadruple inequality}
-	Let $(X,d)$ be a metric space. 
+	Let $(X, d)$ be a metric space. 
 	\begin{equation}\label{equation: quadruple inequality}
 		\forall a, b, u, v \in X,\; \big| d(a, b) - d(u, v) \big| \leq d(a, u) + d(b, v) 
 	\end{equation}
@@ -203,7 +203,7 @@ Some examples:
 	Let $(X, d)$ be a metric space, and $\delta \in \mathbb R_+$, $a \in X$. 
 	A set
 	\begin{equation*}
-		\indexbf[B a delta]{B(a; \delta)} = \{x \in X \mid d(a, x) < \delta\}
+		\indexfm[B a delta]{B(a; \delta)} = \{x \in X \mid d(a, x) < \delta\}
 	\end{equation*}
 	is then called a \indexbf{ball} with a centre at $a \in X$ and a radius of $\delta$, or a \emphbf{ball} of point $a$.
 \end{definition}
@@ -297,7 +297,7 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 \end{proof}
 
 \begin{definition}(Metric subspace)\label{definition: metric subspace}
-	We called $(X'; d')$ a \indexbf{subspace} of $(X,d)$ when $X' \subset X$ and $\forall x, y \in X'$, $d'(x, y)=d(x, y)$.
+	We called $(X'; d')$ a \indexbf{subspace} of $(X, d)$ when $X' \subset X$ and $\forall x, y \in X'$, $d'(x, y)=d(x, y)$.
 \end{definition}
 
 \section{Topological Space}
@@ -599,49 +599,127 @@ Notice that if $A \in 2^X$ is open-closed, its complement $X - A$ is also open-c
 \end{definition}
 
 \section{Complete Metric Spaces}
-We now take a closer look at one of the most important sorts of metric spaces: complete spaces.
+We now take a closer look at one of the most important examples of metric spaces: complete spaces.
 
-\begin{definition}\label{Cauchy_sequence}
-A sequence $\{x_n\mid n\in \mathbb{N}\}$ of points of a metric space $(X,d)$ is called a \indexbf{fundamental}\index{fundamental sequence} or \indexbf{Cauchy sequence} if $\forall \varepsilon \in\mathbb R_+$, $\exists N\in\mathbb{N}$ s.t. as long as $m,n> N$, $d(x_n,x_m) < \varepsilon$.
+\begin{definition}[Cauchy sequence]\label{definition: Cauchy sequence}
+	A sequence~$(x_n)_{n \in \mathbb N}$ of points in a metric space $(X, d)$ is called a \indexbf{fundamental sequence} or \indexbf{Cauchy sequence} if $\forall \varepsilon \in \mathbb R_+$, $\exists N \in \mathbb N$ s.t.\ as long as $m, n > N$, $d(x_n, x_m) < \varepsilon$.
 \end{definition}
-\begin{definition}\label{complete_space}
-A metric space $(X,d)$ is \indexbf{complete} if every Cauchy sequence of its points is convergent.
+
+\begin{definition}[complete space]\label{definition: complete space}
+	A metric space $(X, d)$ is \indexbf{complete} if any Cauchy sequence of its points is convergent.
 \end{definition}
-For example, metric space $C_\infty[a,b]$ is complete while $C_1[a,b]$ isn't. Proof see p22, Zorich.
-Consider incomplete space $\mathbb{Q}_1$, which is a subspace of the complete space $\mathbb R_1$. If $\mathbb R_1$ is the smallest complete space containing $\mathbb{Q}_1$, we can say that we have achieved a \textbf{completion} of $\mathbb{Q}_1$. However, the definition of ``completion'' hasn't been defined yet. 
-\begin{definition}\label{completion}
-If a metric space $(X,d)$ is a subspace of a complete metric space $(Y,d)$ and everywhere dense in it, we call the latter one the \indexbf{completion} of $(X,d)$. 
+
+For example, a metric space~$C_\infty[a,b]$ is complete while $C_1[a,b]$ isn't. The proof see \cite[p.~22]{Zorich:2137923}.
+
+Let us consider an incomplete space~$\mathbb Q_1$, which is a subspace of the complete space $\mathbb R_1$. 
+If $\mathbb R_1$ is the smallest complete space containing $\mathbb Q_1$, we can say that we have achieved a \emphbf{completion} of $\mathbb Q_1$. 
+However, the term ``smallest'' hasn't been properly defined yet.
+
+\begin{definition}[completion]\label{definition: completion}
+	If a metric space $(X, d)$ is a subspace of a complete metric space $(Y, d)$ and everywhere dense in it, we call the latter one the \indexbf{completion} of $(X, d)$. 
 \end{definition}
+
 We need to confirm that such completion is the smallest and unique. So we introduce:
-\begin{definition}\label{isometric}
-If there exists a \indexbf{isometry} $f:X_1\to X_2$ when $(X_1;d_1)$ and $(X_2;d_2)$ are both metric space, i.e. $f$ is a bijective and for each $a,b\in X_1$, $d_2\left(f(a),f(b)\right)=d_1\left(a,b\right)$, then these two metric space is \indexbf{isometric}.
+
+\begin{definition}[isometry]\label{definition: isometric}
+	If there exists a \indexbf{isometry} $f \colon X_1 \to X_2$ when $(X_1, d_1)$ and $(X_2, d_2)$ are both metric space, i.e.\ 
+		$f$ is a bijective and $\forall a, b \in X_1$, $d_2 \big(f(a), f(b)\big)=d_1 (a, b)$, then these two metric spaces are \indexbf{isometric}.
 \end{definition}
-This relation is reflexive ($e$), symmetric ($f ^{-1}$), and transitive ($f\circ g$), so it is a equivalence relation, noted by $\sim$. We shall consider isometric spaces are identical.
-\begin{theorem}\label{completion_unique}
-If metirc spaces $(Y_1;d_1)$ and $(Y_2;d_2)$ are both completions of $(X,d)$, then they are isometric.
+
+This relation is reflexive ($\id_X$), symmetric ($f^{-1}$), and transitive ($f \circ g$), so it is a equivalence relation, denoted by $\sim$. 
+We shall consider isometric spaces as identical, when only discussing within metric topological topics.
+
+\begin{theorem}\label{theorem: completion is unique}
+	If metirc spaces $(Y_1, d_1)$ and $(Y_2, d_2)$ are both completions of $(X, d)$, then they are isometric.
 \end{theorem}
 \begin{proof}
-Such isometry $f:Y_1\to Y_2$ can be defined: if $x_1,x_2\in X$, 
-\[
-	d_2( f(x_1) , f(x_2) )=d(f(x_1), f(x_2)) = d(x_1 , x_2)=d_1(x_1, x_2).
-\]
+	Between two completions such isometry $f \colon Y_1 \to Y_2$ can be defined: if $x_1, x_2 \in X$, 
+	\[
+		d_2 \big(f(x_1), f(x_2) \big)
+		= d \big(f(x_1), f(x_2) \big) 
+		= d(x_1, x_2)
+		= d_1 (x_1, x_2).
+	\]
 
-For each $y_1\in Y_1 - X_1$, a Cauchy sequence $\{x_n\}$ can be found in the nested sequence of balls centered in $y_1$. It is obvious that $\{x_n\}$ is also fundamental in $Y_2$, limitting to $y_2\in Y_2$. Different sequences of points $\{x'_n\}$ selected won't result in a diffrent $y'_2$, or $d(x_n,x'_n)$ wouldn't converge to $0$, which violate the fact that the radii of balls converge to $0$. Let $f(y_1)=y_2$. 
+	For each $y_1 \in Y_1 - X_1$, a Cauchy sequence $(x_n)_{n \in \mathbb N}$ can be found in the nested sequence of balls centered in $y_1$. 
+	It is obvious that $(x_n)_{n \in \mathbb N}$ is also fundamental in $Y_2$, limitting to $y_2\in Y_2$. 
+	
+	Differently selected sequences of points $(x'_n)_{n \in \mathbb N}$ won't limit to a different $y'_2$, namely $d(x_n, x'_n)$ shall converge to $0$, or the fact that the radii of balls converge to $0$ would be violated. 
+	
+	Let $f(y_1) = y_2$. 
 
-a) For each $y_2\in Y_2 - X$, there always exists a Cauchy sequence converging to it, which implies that $f$ is a surjection.
-
-b) Also notice that $\forall y'_1,y''_1\in Y_1 - X$,
-\[
-	d_1(y'_1,y''_1)= \lim_{n\to\infty} d(x'_n,x''_n)=d_2(y'_2,y''_2)
-\]
-while $\{x'_n\}$ and $\{x''_n\}$ are both Cauchy sequence. This equality also proofed that $f$ is a injection.
+	\begin{conditionlist}[label=\alph*)]
+		\item
+		For each $y_2 \in Y_2 - X$, there always exists a Cauchy sequence converging to it, which implies that $f$ is a surjection.
+		\item
+		On the other hand, we shall notice that $\forall y'_1, y''_1 \in Y_1 - X$,
+		\[
+			d_1(y'_1, y''_1)= \lim_{n \to \infty} d(x'_n, x''_n)=d_2(y'_2, y''_2)
+		\]
+		while $(x'_n)_{n \in \mathbb N}$ and $(x''_n)_{n \in \mathbb N}$ are both Cauchy sequence. 
+		This equality proved that $f$ is a injection.
+	\end{conditionlist}
 \end{proof}
-\begin{theorem}\label{completion_exists}
-There always exists a completion for every metric space.
+
+\begin{theorem}\label{theorem: completion exists}
+	There always exists a completion for every metric space.
 \end{theorem}
 \begin{proof}
-	A isometric space $(S_X, d)$ to the metric space $(X, d_X)$ can be constructed, which consists of constant sequence of points in $X$. Its completion $(S, d)$ can be defined as Cauchy sequences whose mutual distances' limits are not $0$.
+	Let $C_X := \{(x_n)_{n \in \mathbb N} \in X^\mathbb N \mid \forall \varepsilon \in \mathbb R_+,\, \exists N \in \mathbb N \text{ s.t. } \forall n, m \in \mathbb N (n > N \wedge m > N \to d_X(x_n, x_m) < \varepsilon)\}$, namely the collections of Cauchy sequences in $X$. 
+
+	We say two Cauchy sequences $(x_n)_{n \in \mathbb N}$, $(x'_n)_{n \in \mathbb N}$ are equivalent (or, we shall say in a complete space, that they have a same limit) if $\lim_{n \to \infty} d(x_n, x'_n) = 0$. 
+
+	It can be easily proved that such relation is a equivalence relation, and it divides $C_X$ into equivalence classes~$S$. 
+
+	$\forall (x_n)_{n \in \mathbb N}, (x'_n)_{n \in \mathbb N} \in C_X$, $\forall \varepsilon \in \mathbb R_+$, $\exists N \in \mathbb N$ s.t.\ $\forall n, m \in \mathbb N$, as long as $n > N$ and $m > N$ (by Lemma~\ref{lemma: quadruple inequality}):
+	\begin{equation*}
+		|d_X(x_n, x'_n) - d_X(x_m, x'_m)| \leq  d_X(x_n, x_m) + d_X(x'_n, x'_m) 
+			< 2 \varepsilon\,.
+	\end{equation*}
+	Hence, $(d(x_n, x'_n))_{n \in \mathbb N}$ is a Cauchy sequence in $\mathbb R_1$. Since $\mathbb R_1$ is a complete space, $\lim_{n \to \infty} d(x_n, x'_n)$ always exists. This fact allows us to introduce%
+		\footnote{We implicitly use the (countable) axiom of choice: we must find a Cauchy sequence for each equivalence class. }%
+	:
+	\begin{equation*}
+		d \colon S^2 \to \mathbb R; \;
+			\big([(x_n)_{n \in \mathbb N}], [(x'_n)_{n \in \mathbb N}]\big)
+				\mapsto \lim_{n \to \infty} d(x_n, x'_n) 
+	\end{equation*}
+
+	A metric space~$(S_X, d)$ isometric to any given metric space~$(X, d_X)$ can be constructed, where $S_X := \{[(x)_{n \in \mathbb N}] \mid x \in X\}$.
+
+	Then we shall show that $S$ is the completion of $S_X$. 
+
+	Let $\big([(x^i_n)_{n \in \mathbb N}]\big)_{i \in \mathbb N}$ be a Cauchy sequence in $S$. 
+	By definition, for any $i \in \mathbb N_+$, there exists a $N$ that is large enough such that as long as $j> N$, $k > N$, $d_X(x^i_j, x^i_k) < 1/i$. 
+	Choose $a^i := x^i_k$ for such $k > N$, so that $d \big([(a^i)_{n \in \mathbb N}], [(x^i_n)_{n \in \mathbb N}]\big) < 1/i$. 
+	
+	$\forall \varepsilon \in \mathbb R_+$, $\exists N \in \mathbb N$ 
+		(e.g.\ we can choose $N = \lfloor 4/\varepsilon\rfloor$) 
+	s.t.\ $\forall n, m \in \mathbb N$, $p > N \wedge q > N \;\to$
+	\begin{equation*}
+		d\big([(x^p_n)_{n \in \mathbb N}], [(x^q_n)_{n \in \mathbb N}]\big) < \frac \varepsilon 2
+		\,\wedge\,
+		d\big([(x^p_n)_{n \in \mathbb N}], [(a^p)_{n \in \mathbb N}]\big) < \frac 1 p
+		\,\wedge\,
+		d\big([(x^q_n)_{n \in \mathbb N}], [(a^q)_{n \in \mathbb N}]\big) < \frac 1 q
+		\,,
+	\end{equation*}
+	therefore when $p, q$ are great enough, (by the triangle inequality)
+	\begin{equation*}
+		d\big([(a^p)_{n \in \mathbb N}], [(a^q)_{n \in \mathbb N}]\big) 
+		\leq \frac \varepsilon 2 + \frac 1 p + \frac 1 q 
+		< \varepsilon\,.
+	\end{equation*}
+	So, $[(a^n)_{n \in \mathbb N}]$ is a Cauchy sequence, therefore it is an element of $S$. 
+	
+	By $\lim_{i \to \infty} d\big([(x^i_n)_{n \in \mathbb N}], [(a^n)_{n \in \mathbb N}]\big) = 0$, we found a limit for the arbitary Cauchy sequence $\big([(x^i_n)_{n \in \mathbb N}]\big)_{i \in \mathbb N}$ in $S$.
+
+	Finally, we have to check that $S_X$ is everywhere dense in $S$. For any aribitary $[(x_n)_{n \in \mathbb N}] \in S$, $\forall \varepsilon$, we can always choose a $N \in \mathbb N$ great enough so that $[(x_N)_{n \in \mathbb N}] \in S_X \cap B\big([(x_n)_{n \in \mathbb N}], \varepsilon\big)$. 
+	Since every neighbourhood of $[(x_n)_{n \in \mathbb N}]$ contains a ball centred at it, we have proved that $\forall U \in \mathscr U([(x_n)_{n \in \mathbb N}]) \big( U \cap S_X \neq \varnothing \big)$.
 \end{proof}
+
+\textbf{Note}: We have already seem such technique when we construct the real numbers from the sequences of rational numbers.
+
 \section{Continuous Mapping}
 Let's recall the definition of the limitation.
 \begin{definition}\label{filter_base}
