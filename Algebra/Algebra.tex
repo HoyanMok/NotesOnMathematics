@@ -148,6 +148,7 @@
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Spec}{Spec}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -1400,7 +1401,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 域~$\mathbb F$ 上的线性空间~$V$ 的自同态 $\mathcal L(V, V)$ 可记作 $\indexfm[L V]{\mathcal L(V)}$ 或 $\indexfm[End]{\End(V)}$. 
 如前已述, 它的元素唤作线性算子. 
 给定 $n$~维线性空间~$V$ 的一组基底~$\hat e$ (同时作为定义域和到达域的基底), $\mathcal L(V)$ 的元素可用 $n$~阶方阵表示. 
-其中恒等变换 $\id_V$ 对应的矩阵通常记作 $\bv I$, 即 $n$~阶单位阵. 零映射记为 $\indexfm[O]{\mathscr O} \colon \bv x \mapsto \bv 0$.
+其中恒等变换 $\indexfm[I]{\mathscr I} := \id_V$ 对应的矩阵通常记作 $\bv I$, 即 $n$~阶单位阵. 零映射记为 $\indexfm[O]{\mathscr O} \colon \bv x \mapsto \bv 0$.
 
 习惯上记 $\mathscr A \bv x := \mathscr A(\bv x)$, $\mathscr A \mathscr B := \mathscr A \circ \mathscr B$. 
 
@@ -1608,9 +1609,18 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 
 由 $\bv A' \bv x' = \bv P^{-1} \bv A \bv P \bv P^{-1} \bv x = \bv P^{-1} \bv A \bv x = \lambda \bv P^{-1} \bv x = \lambda \bv x'$ 可以验证, 特征值是坐标无关的.
 
+\begin{definition}[谱]
+	算子~$\mathscr A$ 的特征值的集合 $\indexfm[Spec A]{\Spec \mathscr A}$ 称为 $\mathscr A$ 的 \indexbf{谱} (spectrum).
+\end{definition}
+
 \begin{definition}[几何重数]
-	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \mathbb F$ 是 $\mathscr A$ 的一个特征值.
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \Spec \mathscr A$.
 	与特征值~$\lambda$ 相伴的\indexbf{特征空间} (eigenspace) $\indexfm[E A lambda]{E_\mathscr A(\lambda)} := \{\bv x \in V \mid \mathscr A \bv x = \lambda \bv x\}$ 的维数 $\indexfm[gamma A lambda]{\gamma_\mathscr A(\lambda)} := \dim E_\mathscr A(\lambda)$ 则被称为特征值~$\lambda$ 的\indexbf{几何重数} (geometirc multiplicity).
+\end{definition}
+
+\begin{definition}[单谱]
+	我们称 $\mathscr A$ 的某个特征值~$\lambda$ (或叫\indexbf{谱点}) 是\indexbf{单的}, 意思是说 $\gamma_\mathscr A(\lambda) = 1$. 
+	如果 $\forall \lambda \in \Spec \mathscr A(\gamma_\mathscr A = 1)$, 则我们称 $\mathscr A$ 的谱~$\Spec \mathscr A$ 是\indexbf{单的}, 或	 $\mathscr A$ 有\indexbf{单谱}~$\Spec \mathscr A$.
 \end{definition}
 
 我们说 $\bv x$ 是对应特征值~$\lambda$ 的特征向量, 也可以说是 $\bv x \in \ker (\mathscr A - \lambda \id_V)$. 
@@ -1625,14 +1635,96 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 我们可以定义与坐标无关的特征多项式:
 
 \begin{definition}[特征多项式]
-	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$. 
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~线性空间, $\mathscr A \in \mathcal L(V)$. 
 	$\indexfm[chi A X]{\chi_\mathscr A(X)} := \det (\mathscr A - X \id_V) \in \mathbb F[X]$ 被称为算子~$\mathscr A$ 的\indexbf{特征多项式} (characteristic polynomial).
 	方程 $\chi_\mathscr A(X) = 0$ 被称为\indexbf{特征方程}或\indexbf{久期方程}.
 \end{definition}
 
+\begin{definition}[代数重数]
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \Spec \mathscr A$. 我们称 $\lambda$ 作为 $\chi_\mathscr A(X)$ 的根的重数为线性算子~$\mathscr A$ 的特征值~$\lambda$ 的\indexbf{代数重数} (algebraic multiplicity), 记为 $\indexfm[mu A lambda]{\mu_\mathscr A (\lambda)}$.
+\end{definition}
 
+\begin{lemma}\label{lemma:不同特征值特征向量线性无关}
+	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $\forall i \in m$  ($m \in \mathbb N_+$), $\lambda_i \in \Spec \mathscr A$, 且 $\lambda_i = \lambda_j \to i = j$.
+	若 $(\bv x_i)_{i \in m}$ 满足 $\bv x_i \in E_\mathscr A(\lambda_i) \wedge \bv x_i \neq \bv 0$, 则 $(\bv x_i)_{i \in m}$ 线性无关. 
+\end{lemma}
+\begin{proof}
+	显然若 $m = 1$ 时命题是成立的. 假设 $m = k - 1$ 时命题成立, 并在式子
+	\begin{equation}\label{equation:不同特征值特征向量线性无关-1}
+		\sum_{i \in k} \alpha_i \bv x_i = \bv 0
+	\end{equation}
+	的两侧左乘 $\mathscr A$ (其中 $\alpha_i \in \mathbb F$), 得:
+	\begin{equation}\label{equation:不同特征值特征向量线性无关-2}
+		\mathscr A \sum_{i \in k} \alpha_i \bv x_i 
+		= \sum_{i \in k} \alpha_i \mathscr A \bv x_i 
+		= \sum_{i \in k} \alpha_i \lambda_i \bv x_i = \bv 0
+	\end{equation}
+	$\lambda_{k - 1} \eqref{equation:不同特征值特征向量线性无关-1} - \eqref{equation:不同特征值特征向量线性无关-2}$, 得:
+\begin{equation*}
+	\sum_{i \in k - 1} \alpha_i (\lambda_{k - 1} - \lambda_i) \bv x_i = \bv 0\,,
+\end{equation*}
+根据假设, $\forall i \in k - 1$, $\alpha_i (\lambda_{k - 1} - \lambda_i) = 0$, 又 $\lambda_i \neq \lambda_{k - 1}$, 因为 $i \neq k - 1$, 则 $\alpha_i = 0$. 
+回到式~\eqref{equation:不同特征值特征向量线性无关-1}, 这意味着 $\alpha_{k - 1} \bv x_{k - 1} = \bv 0$, 这只能是 $\alpha_{k - 1} = 0$.
+\end{proof}
 
+\begin{lemma}\label{lemma:特征子空间之和是直和}
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$. $\sum_{\lambda \in \Spec \mathscr A} E_\mathscr A(\lambda)$ 是直和.
+\end{lemma}
+\begin{proof}
+	由引理~\ref{lemma:不同特征值特征向量线性无关} 易证% 
+		\footnote{因为我们没有定义无穷个向量的线性组合, 所以这个证明只能对有限个特征向量的情况有效, 出于保守我们只研究有限维线性空间.}. 
+\end{proof}
 
+\begin{theorem}[几何重数不超过代数重数]\label{theorem:几何重数不超过代数重数}
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$,  $\lambda \in \Spec \mathscr A$. $\gamma_\mathscr A(\lambda) \leq \mu_\mathscr A (\lambda)$.
+\end{theorem}
+\begin{proof}
+	设 $\gamma_\mathscr A(\lambda) = m$. 设 $\mathscr A'$ 表示 $\mathscr A$ 在 $E_\mathscr A(\lambda)$ 上的限制. 
+	因为 $\forall \bv x \in E_\mathscr A(\lambda)$, $\mathscr A' \bv x = \lambda \bv x$, 所以对于 $E_\mathscr A(\lambda)$ 的任意基底~$\hat e'$, $\inbasis{\mathscr A'}{\hat e'} = \diag(\lambda)_{i \in m}$.
+	所以, 
+	\begin{equation*}
+		\det \big(  \mathscr A' - X\id_{E_\mathscr A(\lambda)}) \big)
+			= \det \big( \diag(\lambda)_{i \in m} - X \bv I_m\big)
+			= (\lambda - X)^m \,.
+	\end{equation*}
+
+	我们把 $\hat e'$ 扩展到 $V$ 的基底 $\hat e$, 我们容易验证, $\inbasis{\mathscr A}{\hat e}$ 有如下形式:
+	\begin{equation*}
+		\inbasis{\mathscr A}{\hat e} = 
+		\begin{pmatrix}
+			\lambda \bv I_m & \bv B_{m \times (n - m)} \\
+			\bv O_{n - m} & \bv C_{n - m}
+		\end{pmatrix}\,, 
+	\end{equation*}
+	从而 $\chi_\mathscr A(X)$ 有形式 $(\lambda - X)^m \det (\bv C_{n - m} - X \bv I_{n - m})$. 
+	若 $\lambda$ 是 $\det (\bv C_{n - m} - X \bv I_{n - m})$ 的 $k$ 重根 (或者不是根时令 $k = 0$), 那么 $\mu_\mathscr A(\lambda) = m + k \geq m$.
+\end{proof}
+
+\begin{definition}[可对角化]
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$.
+	倘若存在一组基底 $\hat e$, 使得在这组基底下 $\mathscr A$ 的矩阵是对角的, i.e.\ 
+	\begin{equation*}
+		\inbasis{\mathscr A}{\hat e} = \diag (\lambda_i)_{i \in n} \,,
+	\end{equation*}
+	那么我们称算子~$\mathscr A$ 是\indexbf{可对角化的}.
+\end{definition}
+
+%\begin{theorem}
+%	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$.
+%	倘若 $\mathscr A$ 具有 $n$ 个单谱点, 则 $\mathscr A$ 是可对角化的.
+%\end{theorem}
+%\begin{proof}
+%	谱是单的, 意味着
+%\end{proof}
+
+\begin{theorem}
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$.
+	当且仅当 \begin{enumerate*}
+		\item $\chi_\mathscr A(X)$ 的所有根都在 $\mathbb F$ 中;
+		\item $\forall \lambda \in \Spec \mathscr A$, $\mu_\mathscr A(\lambda) = \gamma_\mathscr A(\lambda)$,
+	\end{enumerate*}
+	线性算子~$\mathscr A$ 可对角化.
+\end{theorem}
 
 \chapter{内积空间}
 
