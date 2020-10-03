@@ -560,7 +560,105 @@
 	即 $xy$ 可逆.
 \end{proof}
 
-如果 $U(R) = R - \{0\}$, 那么我们称 $R$ 是一个\indexbf{除环} (division ring), 也称\indexbf{斜域}或\indexbf{反对称域} (skew field). 除环没有零因子.
+\begin{definition}[除环]
+	设 $R$ 是一个环.
+	如果 $U(R) = R - \{0\}$, 那么我们称 $R$ 是一个\indexbf{除环} (division ring), 也称\indexbf{斜域}或\indexbf{反对称域} (skew field). 除环没有零因子.
+\end{definition}
+
+接下来我们研究整环的性质, 我们特别关心的是由整数的整除问题抽象而来的整环的整除问题.
+
+\begin{definition}[正则元]
+	整环~$R$ 的可逆元 ($U(R)$ 之元素) 被称为\indexbf{正则元} (unit%
+		\footnote{为避免混淆, 通常称单位元~$1$ 为 identity}%
+	). 
+\end{definition}
+
+对于整数环~$\mathbb Z$, 正则元只有单位元~$1$ 和它的相反数 $-1$.
+
+\begin{definition}[整除]
+	设 $R$ 是一个整环, $a, b \in R$. 
+	如果 $\exists c \in R$, $ac = b$, 那么我们称 $a$ \indexbf{整除} (divides) $b$, 或 $b$ 被 $a$ \textbf{整除} 或 $a$ 是 $b$ 的一个\indexbf{因子} (divisor), 记为 $\indexfm[a vert b]{a \vert b}$.
+\end{definition}
+
+这个定义与我们熟悉的整数环~$\mathbb Z$ 上的整除关系是一致的.
+
+\begin{definition}[相伴元]
+	设 $R$ 是一个整环, $a, b \in R$.
+	若 $a | b$ 且 $b | a$, 那么我们称 $a$, $b$ 互为\indexbf{相伴元} (assosiated elements, or assosiates).
+\end{definition}
+
+\begin{theorem}
+	设 $R$ 是一个整环, $a, b \in R - \{0\}$.
+	若 $a$ 与 $b$ 相伴, 则它们相差一个可逆元 i.e.\ 
+	$\exists u \in U(R)$, $au = b$.
+\end{theorem}
+\begin{proof}
+	由它们相伴我们知道 $\exists c, c' \in R$, 
+	\begin{equation*}
+		ac = b, \quad bc' = a \,,
+	\end{equation*}
+	在第一式两侧乘 $c'$, 又由第二式得: $acc' = bc' = a$. 
+	由整环的消去律~\ref{theorem:消去律}, 我们知道 $cc' = 1$. 
+	因为整环是一个交换环, 我们已然确证了 $c' = c^{-1}$, $c \in U(R)$.
+\end{proof}
+
+对于整数环~$\mathbb Z$ 而言, $a$ 和 $b$ 相伴意味着 $a = \pm b$.
+
+\begin{definition}[素元]
+	设 $R$ 是一个整环, $p \in R - \{0\}$. 如果 $p$ 不是正则元 ($p \notin U(R)$), 而且 $\forall a,b \in R - U(R)$, $ab \neq p$, 那么 $p$ 是 $R$ 中的一个\indexbf{素元} (prime element) 或称\indexbf{既约元} (irreducible element).
+\end{definition}
+
+不难验证, 素元的相伴元也是素的.
+
+除环没有素元, 因为除环所有的非零元都是可逆的. 整数环~$\mathbb Z$ 的素元是素数和它们的相反数 ($\pm 2$, $\pm 3$, \ldots). 
+
+\begin{theorem}[整除的性质]
+	设 $R$ 是一个整环, $a, b, c \in R$.
+	\begin{conditionlist}
+		\item $a | b \wedge b | c \to a | c$ i.e.\ 整除关系是传递的.
+		\item $a | b \wedge a | c \to a | (b \pm c)$.
+		\item $a | b \to a | bc$.
+	\end{conditionlist}
+\end{theorem}
+
+\begin{definition}[唯一分解整环]
+	设 $R$ 是一个整环.
+	如果 $\forall a \in R - \{0\}$, $\exists u \in U(R)$, $\exists (p_i)_{i \in r} \in \{p \in R \mid \text{$p$ 是素元}\}^{< \infty}$ (i.e.\ 存在 $r$ 个素元) s.t.\ $a = u \prod_{i \in r} p_i$ (这个叫做 $a$ 的一个\indexbf{素分解}, factorization);
+	而且如果还 $\exists u' \in U(R)$, $\exists (p'_i)_{i \in r'} \in \{p \in R \mid \text{$p$ 是素元}\}^{< \infty}$ s.t.\ $a = u' \prod_{i \in r'} p'_i$, 
+	那么 $r = r'$ 且 $\exists \pi \in S_r$, $\exists (u_i)_{i \in r} \in (U(R))^r$, $p_i = u_i p'_{\pi(i)}$ (也就是说, 只要不考虑相伴和分解的顺序, 分解是唯一的), 
+	那么, 我们称 $R$ 是一个\indexbf{唯一分解整环} (unique factorization domain, UFD).
+\end{definition}
+
+这里我们没有排斥 $r = 0$ 的情况, 也就是: 正则元也有 (平凡的) 素因子分解.
+
+下面的定理给出了一种避开繁琐的 ``唯一性'' 的描述而定义唯一分解整环的方法:
+
+\begin{theorem}
+	设 $R$ 是一个整环, $\forall a \in R - \{0\}$, $a$ 都有素分解, i.e.\ $\exists u \in U(R)$, $\exists (p_i)_{i \in r} \in \{p \in R \mid \text{$p$ 是素元}\}^{< \infty}$ s.t.\ $a = u \prod_{i \in r} p_i$.
+
+	整环~$R$ 是唯一分解整环 $\IFF$ $\forall a, b, p \in R$, 
+	$\big( \text{$p$ 是素元} \wedge p | ab \big) \to \big( p | a \vee p | b\big)$.
+\end{theorem}
+\begin{proof}
+	若 $R$ 是唯一分解整环, $ab = pc$, 那么对 $a$, $b$ 和 $c$ 分别进行素分解得: 
+	\begin{equation*}
+		ab = u_{ab}\prod_{i \in r_a} a_i \prod_{j \in r_b} b_j = u_c p \prod_{k \in r_c} c_k \,,
+	\end{equation*}
+	其中 $u_{ab}, u_c \in U(R)$, $a_i, b_j, c_k$ 都是素元. 
+	由唯一分解整环的定义, $\exists p' \in \{a_i\}_{i \in r_a} \cup \{b_j\}_{j \in r_b}$ s.t.\ $p'$ 与 $p$ 相伴, 那么 $p' = u_p p$, 从而 $a$ 或 $b$ 必能表成 $p$ 的倍(将与 $p$ 相伴的素因子换成 $u_p$ 即可).
+
+	若 $\forall a, b, p \in R$, 
+	$\big( \text{$p$ 是素元} \wedge p | ab \big) \to \big( p | a \vee p | b\big)$, 我们来证明分解是唯一的. 
+	设存在两种分解 $d = u\prod_{i \in r} p_i = u' \prod_{j \in r'} p'_j$.
+	
+	假设 $r \neq r'$, 不失一般性我们设 $r < r'$, 那么 $\forall j \in r'$, $p'_j$ 都将能整除 $\{p_i\}_{i \in r}$ 之一. 
+	由消去律~\ref{theorem:消去律}, 我们将 $p'_j$ 消去, 直到所有的 $\{p_i\}_{i \in r}$ 都消去了 (因为每次消去两边的素因子个数都减少一个, 这总是能实现的). 
+	假设我们是从 $j = r' - 1$ 开始的, 如此我们将得到 $\prod_{j \in r' - r} p'_j \in U(R)$, 这是荒谬的, 因为这说明 $p'_{j_0}$ 有逆 $v \prod_{j \in r' - r;\, j \neq j_0} p'_j$, $v \in U(R)$, 这违背了素元没有逆的定义. 所以: $r = r'$.
+
+	我们使用递归法来寻找 $\pi \in S_r$ 满足 $p_i = u_{\pi(i)} p'_{\pi(i)}$: 
+	$r = 1$ 的情况是简单的, 而假设 $r = n$ 时我们总是可以找到这样的置换, $r = n + 1$ 时, 令 $\pi(n) = \min \{j \in r \mid p_i | p_j\}$ (这不可能是空的), 根据消去律~\ref{theorem:消去律}, 我们得到了 $d = u u_{\pi(n)}\prod_{i \in r - \{\pi(n)\}} p_i = u' \prod_{j \in r' - 1} p'_j$, 这根据假设已经能够给出所有的 $\pi(j)$, $j \in n$ 了.
+\end{proof}
+
 
 \section{域}
 
@@ -2203,6 +2301,8 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 这里 $F(X)$ 被称为\indexbf{被除式} (dividend), $G(X)$ 称为\indexbf{除式} (divisor); 得到的 $Q(X)$ 称为\indexbf{商} (quotient) 而 $R(X)$ 称为\indexbf{余式} (remainder).
 
 倘若余式 $R(X) = 0$, 则称 $G(X)$ \indexbf{整除} $F(X)$, 或 $F(X)$ 被 $G(X)$ 整除, 此时 $G(X)$ 被称为 $F(X)$ 的一个\indexbf{因式} (factor), 而 $F(X)$ 则是 $G(X)$ 的一个\indexbf{倍式} (multiple).
+
+
 
 \section{多项式的根}
 \backmatter
