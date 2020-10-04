@@ -139,6 +139,8 @@
 \DeclareMathOperator{\interior}{int}
 \DeclareMathOperator{\card}{card}
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\pp}{pp}
 
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Inn}{Inn}
@@ -292,7 +294,7 @@
 \end{proof}
 
 这里将不加证明地给出:
-\begin{lemma}\label{theorem:子群族的交}
+\begin{lemma}\label{theorem: 子群族的交}
 	群 $G$ 的子群族 $\mathscr H = \{H \mid \text{$H$ 是 $G$ 的子群}\}$ 的交 $\cap \mathscr H$ 也是 $G$ 的子群.
 \end{lemma}
 
@@ -335,7 +337,7 @@
 
 \begin{definition}[同构]
 	两个群 $(G, *)$, $(G', \circ)$ 如若满足: $\exists f\colon G \to G'$ s.t.\ \begin{conditionlist}[label=\roman*)]
-		\item $\forall a, b \in G$, $f(a * b) = f(a) \circ f(b)$; \label{item:保结构}
+		\item $\forall a, b \in G$, $f(a * b) = f(a) \circ f(b)$; \label{item: 保结构}
 		\item $f$是双射,
 	\end{conditionlist}
 	则称 $f$ 是一个\indexbf{同构映射}或\indexbf{同构} (isomorphism), 并认为两个群是互相\indexbf{同构}的 (isomorphic), 记为$\indexfm[G simeq G prime]{G \simeq G'}$.
@@ -445,7 +447,7 @@
 \begin{equation*}
 	f \colon G \to \Inn(G);\, g \mapsto I_g
 \end{equation*}
-满足同构的条件~\ref{item:保结构}, 因$f(a) \circ f(b) = I_{ab} = f(ab)$; 但它不一定是双射, 因而是一个同态.
+满足同构的条件~\ref{item: 保结构}, 因$f(a) \circ f(b) = I_{ab} = f(ab)$; 但它不一定是双射, 因而是一个同态.
 
 \begin{definition}[陪集]
 	设 $(G, *, e)$ 是一个群, $S$ 是其子群, $g \in G$, 那么我们称 $\indexfm[g ast S]{g * S} := \{ g * s \mid s \in S\}$ 为 $S$ 在 $G$ 内的\indexbf{左陪集} (left coset); 
@@ -537,7 +539,7 @@
 
 也有将无非平凡左零因子的带单位的非平凡环称为 \indexbf{domain} 的.
 
-\begin{theorem}[消去律] \label{theorem:消去律}
+\begin{theorem}[消去律] \label{theorem: 消去律}
 	设 $R$ 是带单位元 $1 \neq 0$ 的交换环.
 	环 $R$ 是整环 $\IFF$ $\forall x,y,c \in R$, $cx = cy \wedge c\neq 0  \;\to\; x = y$.
 \end{theorem}
@@ -584,7 +586,7 @@
 
 \begin{definition}[相伴元]
 	设 $R$ 是一个整环, $a, b \in R$.
-	若 $a | b$ 且 $b | a$, 那么我们称 $a$, $b$ 互为\indexbf{相伴元} (assosiated elements, or assosiates).
+	若 $a | b$ 且 $b | a$, 那么我们称 $a$, $b$ 互为\indexbf{相伴元} (assosiated elements \emph{or} assosiates).
 \end{definition}
 
 \begin{theorem}
@@ -598,7 +600,7 @@
 		ac = b, \quad bc' = a \,,
 	\end{equation*}
 	在第一式两侧乘 $c'$, 又由第二式得: $acc' = bc' = a$. 
-	由整环的消去律~\ref{theorem:消去律}, 我们知道 $cc' = 1$. 
+	由整环的消去律~\ref{theorem: 消去律}, 我们知道 $cc' = 1$. 
 	因为整环是一个交换环, 我们已然确证了 $c' = c^{-1}$, $c \in U(R)$.
 \end{proof}
 
@@ -633,7 +635,7 @@
 
 下面的定理给出了一种避开繁琐的 ``唯一性'' 的描述而定义唯一分解整环的方法:
 
-\begin{theorem}
+\begin{theorem}\label{theorem: 唯一分解整环的等价定义}
 	设 $R$ 是一个整环, $\forall a \in R - \{0\}$, $a$ 都有素分解, i.e.\ $\exists u \in U(R)$, $\exists (p_i)_{i \in r} \in \{p \in R \mid \text{$p$ 是素元}\}^{< \infty}$ s.t.\ $a = u \prod_{i \in r} p_i$.
 
 	整环~$R$ 是唯一分解整环 $\IFF$ $\forall a, b, p \in R$, 
@@ -652,13 +654,91 @@
 	设存在两种分解 $d = u\prod_{i \in r} p_i = u' \prod_{j \in r'} p'_j$.
 	
 	假设 $r \neq r'$, 不失一般性我们设 $r < r'$, 那么 $\forall j \in r'$, $p'_j$ 都将能整除 $\{p_i\}_{i \in r}$ 之一. 
-	由消去律~\ref{theorem:消去律}, 我们将 $p'_j$ 消去, 直到所有的 $\{p_i\}_{i \in r}$ 都消去了 (因为每次消去两边的素因子个数都减少一个, 这总是能实现的). 
+	由消去律~\ref{theorem: 消去律}, 我们将 $p'_j$ 消去, 直到所有的 $\{p_i\}_{i \in r}$ 都消去了 (因为每次消去两边的素因子个数都减少一个, 这总是能实现的). 
 	假设我们是从 $j = r' - 1$ 开始的, 如此我们将得到 $\prod_{j \in r' - r} p'_j \in U(R)$, 这是荒谬的, 因为这说明 $p'_{j_0}$ 有逆 $v \prod_{j \in r' - r;\, j \neq j_0} p'_j$, $v \in U(R)$, 这违背了素元没有逆的定义. 所以: $r = r'$.
 
 	我们使用递归法来寻找 $\pi \in S_r$ 满足 $p_i = u_{\pi(i)} p'_{\pi(i)}$: 
-	$r = 1$ 的情况是简单的, 而假设 $r = n$ 时我们总是可以找到这样的置换, $r = n + 1$ 时, 令 $\pi(n) = \min \{j \in r \mid p_i | p_j\}$ (这不可能是空的), 根据消去律~\ref{theorem:消去律}, 我们得到了 $d = u u_{\pi(n)}\prod_{i \in r - \{\pi(n)\}} p_i = u' \prod_{j \in r' - 1} p'_j$, 这根据假设已经能够给出所有的 $\pi(j)$, $j \in n$ 了.
+	$r = 1$ 的情况是简单的, 而假设 $r = n$ 时我们总是可以找到这样的置换, $r = n + 1$ 时, 令 $\pi(n) = \min \{j \in r \mid p_i | p_j\}$ (这不可能是空的), 根据消去律~\ref{theorem: 消去律}, 我们得到了 $d = u u_{\pi(n)}\prod_{i \in r - \{\pi(n)\}} p_i = u' \prod_{j \in r' - 1} p'_j$, 这根据假设已经能够给出所有的 $\pi(j)$, $j \in n$ 了.
 \end{proof}
 
+\begin{definition}[最大因]
+	设 $R$ 是一个整环, $a, b \in R$.
+	若 $d \in R$ 满足 \begin{enumerate*}
+		\item $d | a$, $d | b$;
+		\item $\forall c \in R$ $\big( c | a \wedge c | b \to c | d\big)$,
+	\end{enumerate*} 
+	则 $d$ 被称为 $a$, $b$ 的一个\indexbf{最大因} (greatest common divisor \emph{or} highest common factor), 记为 $\indexfm[gcd a b]{\gcd (a, b)}$. 
+\end{definition}
+
+因为与 $d$ 相伴的数也都是最大因, 因而 $\gcd(a, b)$ 并不是一个确定的表述. 
+在上下文不区分相伴的元素时, 我们将使用这个符号表示任意的最大因. 
+
+\begin{definition}[最小倍]
+	设 $R$ 是一个整环, $a, b \in R$.
+	若 $m \in R$ 满足 \begin{enumerate*}
+		\item $a | m$, $b | m$;
+		\item $\forall c \in R \big( a | c \wedge b | m \to m | c\big)$,
+	\end{enumerate*} 
+	则 $d$ 被称为 $a$, $b$ 的一个\indexbf{最小倍} (least common multiple), 记为 $\indexfm[lcm a b]{\lcm (a, b)}$. 
+\end{definition}
+
+\begin{definition}[Euclidean 整环]\label{definition: Euclidean 整环}
+	设 $R$ 是一个整环, $R^* := R - \{0\}$. 
+	如果 $\exists \delta \colon R^* \to \mathbb N$ s.t.\ 
+	\begin{conditionlist}[label = E\arabic*)]
+		\item $\forall a, b \in R^*$, $\delta(ab) \geq \delta(a)$; \label{item: Euclidean 函数}
+		\item $\forall a \in R$, $\forall b \in R^*$, $\exists q,r \in R$ s.t.\ 
+		\begin{equation}\label{equation: 带余除法}
+			a = qb + r 
+			\quad \wedge \quad  
+			\big( \delta(r) < \delta(b) \vee r = 0 \big)\,, 
+		\end{equation} \label{item: 带余除法}
+	\end{conditionlist}
+	那么我们称 $R$ 是一个 \indexbf{Euclidean~整环} (Euclidean domain), 这样的函数~$\delta$ 被称为 \indexbf{Euclidean~函数}. 
+	以上的式~\eqref{equation: 带余除法} 中, $a$ 被称为\indexbf{被除元} (dividend), $b$ 是\indexbf{除元} (divisor), $q$ 是\indexbf{商元}或\indexbf{商} (quotient) 而 $r$ 是\indexbf{余元} (remiander).
+\end{definition}
+
+在 Euclidean~整环上, 我们总是可以作辗转相除法找到两个元的最大因. 而且作为其产物我们可以证明%
+	\footnote{详见\cite{kostrikin1982introduction}}%
+: 
+\begin{theorem}[Euclidean 整环上的 B\'ezout~定理]
+	设 $R$ 是 Euclidean~整环. 
+	$\forall a,b \in R$, 总是存在最大因~$\gcd(a,b)$ 和最小倍~$\lcm(a,b)$, 而且 $\exists u,v \in R$ s.t.\ $\gcd(a,b) = au + bv$.
+\end{theorem}
+
+\begin{corollary}\label{corollary: Euclidean 整环上的 Bezout 定理互素时}
+	设 $R$ 是 Euclidean~整环. $\gcd(a, b) \in U(R) \IFF \exists u,v \in R \big( au + bv = 1 \big)$. 
+\end{corollary}
+
+
+\begin{theorem}\label{theorem: Euclidean 整环是唯一分解的}
+	所有 Euclidean~整环都是唯一分解整环.
+\end{theorem}
+\begin{proof}
+	设 $R$ 是一个 Euclidean~整环. 我们先证明 $\forall a \in R^*$ 都有素分解. 
+	
+	首先, 素元和正则元自身就是一个素分解. 
+	所以现在我们设 $a = bc$, $b, c \notin U(R)$. 
+	由 \ref{item: Euclidean 函数}, $\delta(b) \leq \delta(a) $. 
+	假设 $\delta(b) = \delta(a)$, 那么由 \ref{item: 带余除法}, 我们作带余除法 $b = qa + r$: 而 $r = 0$ 的情况将意味着 $c \in U(R)$, 因此我们研究 $r \neq 0$ 且 $\delta(r) < \delta(a)$ 的情况. 考虑 $b - qa = b(1 - qc)$, 由 \ref{item: Euclidean 函数}, $\delta(r) = \delta(b - qa) \geq \delta(b) = \delta(a)$, 这与 $\delta(r) < \delta(a)$ 矛盾. 
+	所以: $\delta(b) < \delta(a)$.
+
+	接着我们研究 $A := \{(a_i)_{i \in n} \in (R - U(R))^{< \infty} \mid a = \prod_{i \in n} a_i\}$. 
+	首先我们需要证明 $\forall (a_i)_{i \in n} \in A$, $\exists N \in \mathbb N$, $n \leq N$. 
+	$\delta \big(\prod_{i \in m} a_i) > \delta\big(\prod_{i \in m - 1} a_i) > \cdots > \delta(1)$, 从而 $\delta(\prod_{i \in m} a_i) \geq m$, 从而 $\delta(a) \geq n$, 即 $A \subset (R - R(R))^{\delta(a)}$. 
+	
+	这意味着 $N := \max\{n \mid (a_i)_{i \in n} \in A\}$ 是存在的 ($\mathbb N$ 的有界子集必有最大值), 我们将说明, 这样的 $(a_i)_{i \in N}$ 就是一个素分解. 
+	假设 $\exists i \in N$, $a_i$ 不是素元, 那么它将可以写成两个非正则元~$a'$, $a''$ 的乘积, 从而 $a = a' a''\prod_{i \in N - \{i_0\}} a_i$ 意味着 $a$ 可以分解成 $N + 1$ 非正则元的乘积, 这与 $N$ 的定义不合.
+
+	接着我们利用定理~\ref{theorem: 唯一分解整环的等价定义}. 
+	设 $p \in R$ 是一个素元, $p | bc$ ($b, c \in R$). 因 $\gcd(p, b) | p$, 它有两种可能性: 
+	\begin{conditionlist}[label = \roman*)]
+		\item 如果 $\gcd(p, b) = up$, $u \in U(R)$, 从而我们晓得 $up | b$, 不难证明 $p |b$; 
+		\item 如果 $\gcd(p, b) = 1$, 那么 $\exists x, y \in R$, $xp + yb = 1$ 
+			(推论~\ref{corollary: Euclidean 整环上的 Bezout 定理互素时})%
+		, 从而 $a = axp + yab$, $p | axp$, $p | yab$ (因 $p | ab$) 从而 $p | (axp + yab)$ i.e.\ $p | a$. 
+	\end{conditionlist}
+\end{proof}
 
 \section{域}
 
@@ -670,7 +750,7 @@
 
 类似群的生成, 包含 $F \cup\{a\}$ 的最小 $F$ 的扩域, 记为 $F(a)$. 如有理数域 $\mathbb Q$ 的扩域 $\mathbb Q(\sqrt 2)$.
 
-\begin{theorem}\label{theorem:素剩余类环}
+\begin{theorem}\label{theorem: 素剩余类环}
 	有限剩余类环 $\mathbb Z_p$ 是域, 当且仅当 $p$ 是素数.
 \end{theorem}
 \begin{proof}
@@ -693,12 +773,12 @@
 	\end{equation*}
 \end{corollary}
 \begin{proof}
-	当 $[k] \in \mathbb Z_p^*$ 时, $I_{[k]} \colon \mathbb Z_p^* \to \mathbb Z_p^*;\, [n] \mapsto [kn]$ 如定理~\ref{theorem:素剩余类环} 是 $S(\mathbb Z_p^*)$ 的元素.
+	当 $[k] \in \mathbb Z_p^*$ 时, $I_{[k]} \colon \mathbb Z_p^* \to \mathbb Z_p^*;\, [n] \mapsto [kn]$ 如定理~\ref{theorem: 素剩余类环} 是 $S(\mathbb Z_p^*)$ 的元素.
 	从而:
 	\begin{equation*}
 		\left( \prod_{k=1}^{p-1} [k] \right) [a]^{p-1} = \prod_{k=1}^{p-1} [k]\,.  
 	\end{equation*}
-	因为域都是整环, 满足消去律~\ref{theorem:消去律}, 从而 $[a]^{p-1} = [1]$.
+	因为域都是整环, 满足消去律~\ref{theorem: 消去律}, 从而 $[a]^{p-1} = [1]$.
 \end{proof}
 
 \begin{definition}[素域]
@@ -725,7 +805,7 @@
 	如果 $m = 0$, 那么 $ne \neq o$, 其中 $o$ 是 $F$ 的零元, 只要 $n \neq 0$. 考虑 $f$ 在 $\mathbb Q$ 上的扩张, 可以证明 $P := f(\mathbb Q) = \{ne \mid n \in \mathbb Z\}$ 即构成了与 $\mathbb Q$ 同构的素子域.
 
 	如果 $m \neq 0$, 那么 $m =p$ 是素数. 
-	如果 $m$ 不是素数, 假设它有两个 ($m$ 和 $1$ 以外的) 因数 $a, b$, $ab e = o$ 意味着 $a e = o$ 或 $b e = o$ (定理~\ref{theorem:消去律}), 将与 $\ker f = m\mathbb Z$ 矛盾.
+	如果 $m$ 不是素数, 假设它有两个 ($m$ 和 $1$ 以外的) 因数 $a, b$, $ab e = o$ 意味着 $a e = o$ 或 $b e = o$ (定理~\ref{theorem: 消去律}), 将与 $\ker f = m\mathbb Z$ 矛盾.
 	考虑 $f$ 在 $p$ (作为 $\mathbb Z_p$ 的导出集) 上的限制, $P := \{o, e, 2e, \cdots, (p-1)e\}$ 即构成了与 $\mathbb Z_p$ 同构的素子域.
 \end{proof}
 
@@ -733,6 +813,29 @@
 \begin{definition}[特征]
 	设域 $F$ 的单位元和零元分别是$e$, $o$. 若存在$p \in \mathbb N$ 使得 $pe = o$, 则称 $p$ 为域的\indexbf{特征} (characteristic), 记为$\indexfm[char F]{\characteristic(F)} = p$; 特别地, 定义$\characteristic(F) = 0$, 如果不存在这样的 $p$.
 \end{definition}
+
+\begin{definition}[整环的分式域]
+	设 $A$ 是一个整环. 
+	记 $\sim$ 为 $A \times A^*$ 上这样的等价关系: $(a, b) \sim (c, d) \IFF ad = bc$.
+	从而在 $\indexfm[Q A]{Q(A)} := A \times A^*/\sim $ 上我们定义加法~$+$ 和乘法~$\cdot$:
+	\begin{equation*}
+		[(a, b)] + [(c, d)] = [(ad + bc, bc)]\,, \quad
+		[(a, b)][(c, d)] = [(ac, bd)] \,.
+	\end{equation*} 
+	如此, $Q(A)$ 被称为整环~$A$ 上的一个\indexbf{分式域} (field of fractions \emph{or} fraction field).
+\end{definition}
+
+经过枯燥的验证我们能得到:
+
+\begin{theorem}
+	分式域是域.
+\end{theorem}
+
+由于 $Q(A)$ 的子环 $[a, 1]$ 与 $A$ 同构, 我们通常也直接说 $A \subset Q(A)$. 同时, 习惯上我们记 $[a, b] = \indexfm[a / b]{a / b}$, 甚至 $1/a^n =: a^{-n}$. 注意, $a^{-n} \in Q(A)$ 而不一定在 $A$ 中 (除非 $a \in U(A)$).
+
+
+
+
 
 \chapter{线性空间}
 \section{线性空间}
@@ -798,7 +901,7 @@
 	反之则称它们\indexbf{线性无关}或\indexbf{线性独立}.
 \end{definition}
 
-\begin{theorem}\label{theorem:线性相关IFF线性组合}
+\begin{theorem}\label{theorem: 线性相关IFF线性组合}
 	向量组 $(\bv x_i)_{i \in n}$ 是线性相关的, 当且仅当 $\exists i \in n$ s.t.\ 
 	\begin{equation*}
 		\exists (\beta_j)_{j \in n - \{i\}} \in 2^\mathbb F 
@@ -827,7 +930,7 @@
 
 因为基底的顺序并不重要, 有时我们也有基底向量的集合 $\{\basis e_i\}_{i \in n}$ 表示它.
 
-\begin{theorem}[唯一分解]\label{theorem:唯一分解}
+\begin{theorem}[唯一分解]\label{theorem: 唯一分解}
 	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
 	那么 $\forall \bv v \in V$, $\exists ! (v_i)_{i \in n}$ (称为 $\bv v$ 在基底 $(\basis e_i)_{i \in n}$ 下的\indexbf{坐标}), s.t.\ 
 	\begin{equation*}
@@ -878,7 +981,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	因而, 最大线性无关组总是存在, 而且其个数等于向量组张出的线性空间之维数.
 \end{proof}
 
-\begin{theorem}[\indexbf{Steintz 替换}]\label{theorem:Steintz}
+\begin{theorem}[\indexbf{Steintz 替换}]\label{theorem: Steintz}
 	设 $V$ 是 $\mathbb F$ 上的 $n$ 线性空间, $(\basis e_i)_{i \in n}$ 是其一组基底.
 	任意线性无关组 $(\basis f_i)_{i \in s}$, 都可从基底中取出 $(\basis e_{i_k})_{i_k \in n,\, k \in t}$ 使得
 	\begin{equation*}
@@ -901,14 +1004,14 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	即 $t + s = n$, 我们已然得到 $V$ 的一组基底了.
 \end{proof}
 
-设 $\mathbb F$ 上的 $n$ 维线性空间有两组基底 $\hat e = (\basis e_j)_{j \in n}$, $\hat f = (\basis f_i)_{i \in n}$, 考虑定理~\ref{theorem:唯一分解}, 我们写出:
+设 $\mathbb F$ 上的 $n$ 维线性空间有两组基底 $\hat e = (\basis e_j)_{j \in n}$, $\hat f = (\basis f_i)_{i \in n}$, 考虑定理~\ref{theorem: 唯一分解}, 我们写出:
 \begin{equation}
 	\basis f_i = \sum_{j \in n} a_{ji} \basis e_j\,,
 	\qquad
 	\forall i \in n\,.
 \end{equation}
 这里的 $a_{ji}$ 决定了矩阵
-\begin{equation}\label{equation:转换矩阵}
+\begin{equation}\label{equation: 转换矩阵}
 	\bv A = (a_{ij})_{i,j \in n} =
 	\begin{pmatrix}
 		a_{00} & a_{01} & \cdots & a_{0, n-1} \\
@@ -917,7 +1020,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 		a_{n-1, 0} & a_{n-1, 1} & \cdots & a_{n-1, n-1}
 	\end{pmatrix}\,.
 \end{equation}
-矩阵~\eqref{equation:转换矩阵} 被称为 $\hat e$ 到 $\hat f$ 的一个\indexbf{转换矩阵}. 值得注意的是下标的位置 (这与有限维向量空间的线性映射的矩阵差了一个转置, 见~\ref{section:线性映射}). 让我们引入矩阵和与积的概念%
+矩阵~\eqref{equation: 转换矩阵} 被称为 $\hat e$ 到 $\hat f$ 的一个\indexbf{转换矩阵}. 值得注意的是下标的位置 (这与有限维向量空间的线性映射的矩阵差了一个转置, 见~\ref{section:线性映射}). 让我们引入矩阵和与积的概念%
 \footnote{本笔记不想再重复了, 请参见任意一本初等线性代数教材, 或\cite{kostrikin1982introduction}. },
 用 $\hat f$ 把 $\hat e$ 表出, 就可以得到转换矩阵的逆 $\bv A^{-1}$. 
 这两个矩阵之间的关系是 $\bv A \bv A^{-1} = \bv A^{-1} \bv A = \bv I$.
@@ -1012,7 +1115,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	利用Grassmann恒等式~\ref{Grassmann} 和数学归纳法易证.
 \end{proof}
 
-\begin{theorem}[向量在直和上分解的唯一性]\label{theorem:向量在直和上分解的唯一性}
+\begin{theorem}[向量在直和上分解的唯一性]\label{theorem: 向量在直和上分解的唯一性}
 	设 $U = \sum_{i \in m} U_i$. 
 	$U = \sum_{i \in m} U_i$ 还是直和, 当且仅当:
 		\begin{equation*}
@@ -1032,7 +1135,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	域 $\mathbb F$ 上的 $n$ 维线性空间 $V$ 的任意 $m$ 维线性子空间 $U$, 都能找到 $V$ 的线性子空间 $W$ 使得 $V = U \oplus W$ (称 $V$ 和 $W$ 是\indexbf{互补}的子空间). 
 \end{theorem}
 \begin{proof}
-	证明用Steintz替换~\ref{theorem:Steintz} 即可.
+	证明用Steintz替换~\ref{theorem: Steintz} 即可.
 \end{proof}
 
 记 $\codim U = \dim V - \dim U$.
@@ -1153,7 +1256,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 这个同构被称为\indexbf{自然同构}, 这样得到的 $\hat e^* = (e^*_i)_{i \in n}$ 被称为 $\hat e$ 的\indexbf{对偶基底}.
 
-\begin{lemma}\label{lemma:子空间的对偶}
+\begin{lemma}\label{lemma: 子空间的对偶}
 	设 $L$ 是 $n$~维线性空间~$V$ 的子空间, $\hat f := (f_i)_{i \in n}$ 是对偶空间~$V^*$ 的一组基底. 
 	倘若 $(\left. f_i \right|_L)_{i \in n}$ 表示基底各自在 $L$ 上的限制,
 	那么 $L^* = \langle \left. f_i \right|_L \rangle_{i \in n}$.
@@ -1161,14 +1264,14 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \begin{proof}
 	首先, 显然 $\langle \left. f_i \right|_L \rangle_{i \in n} \subseteq L^*$.
 	设 $r := \dim L$, $\hat e := (\basis e_i)_{i \in r}$ 是 $L$ 的基底. 
-	由定理~\ref{theorem:Steintz}, 将其扩充至 $V$ 的基底 $(\basis e_i)_{i \in n}$.
+	由定理~\ref{theorem: Steintz}, 将其扩充至 $V$ 的基底 $(\basis e_i)_{i \in n}$.
 
 	$\forall f \in L^*$, 取线性型 $\tilde f := \sum_{i \in n} \beta_i f_i \in V^*$ 满足 $\forall i' \leq r$, $\tilde f(\basis e_{i'}) = 0$. 
 	显然 $f = \left. \tilde f \right|_L = \sum_{i \in n} \beta_i \left. f_i \right|_L$.
 \end{proof}
 
 
-\begin{lemma}\label{lemma:线性相关则行列式为0}
+\begin{lemma}\label{lemma: 线性相关则行列式为0}
 	设线性空间~$V$ 中有线性相关的向量组~$(\bv x_j)_{j\in m}$, 而 $\forall i \in m$, $f_i \in V^*$. 那么:
 	\begin{equation*}
 		\det\left( 
@@ -1177,7 +1280,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\end{equation*}
 \end{lemma}
 \begin{proof}
-	根据定理~\ref{theorem:线性相关IFF线性组合}, $\exists j_0 \in m$ 使得 $\bv x_{j_0}$ 是其他 $(\bv x_j)_{j\in m;\; j \neq j_0}$ 的线性组合. 
+	根据定理~\ref{theorem: 线性相关IFF线性组合}, $\exists j_0 \in m$ 使得 $\bv x_{j_0}$ 是其他 $(\bv x_j)_{j\in m;\; j \neq j_0}$ 的线性组合. 
 	根据行列式的性质, 将$j_0$ 列减去其他各列 ($j \neq j_0$) 乘上线性组合的系数~$\lambda_j$, 不改变行列式的值, 但该列变成了
 	\begin{equation*}
 		f_i(\bv x_{j_0}) 
@@ -1196,7 +1299,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	$ 的证明.
 \end{proof}
 
-\begin{lemma}\label{lemma:线性无关IFF行列式非零}
+\begin{lemma}\label{lemma: 线性无关IFF行列式非零}
 	设 $V$ 是 $n$~维线性空间, 而 $\hat f := (f_i)_{i \in n}$ 是对偶空间~$V^*$ 的一组基底.
 	向量组~$(\bv x_j)_{j \in n}$ 线性无关当且仅当
 	\begin{equation*}
@@ -1204,13 +1307,13 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\end{equation*}
 \end{lemma}
 \begin{proof}
-	由引理~\ref{lemma:线性相关则行列式为0}, 我们已经证明了行列式非零则线性无关. 
+	由引理~\ref{lemma: 线性相关则行列式为0}, 我们已经证明了行列式非零则线性无关. 
 	反过来, 若线性无关, 取 $\hat e = \hat f^*$ 即 $\hat f$ 的对偶基底. 
 	考虑到 $\hat x = (\bv x_j)_{j \in n}$ 也是一组基底, 那么存在转换矩阵 $\bv P$, 而且它的行列式恰是 $\det(f_i(\bv x_j))_{i,j \in n}$. 
 	转换矩阵是可逆的, 它的行列式非零.
 \end{proof}
 
-\begin{theorem}\label{theorem:线性相关, 对偶空间基底的阶数}
+\begin{theorem}\label{theorem: 线性相关, 对偶空间基底的阶数}
 	设 $V$ 是 $n$~维线性空间, 而 $\hat f := (f_i)_{i \in n}$ 是对偶空间~$V^*$ 的一组基底.
 	那么 $V$ 的子空间~$\langle \bv x_j\rangle_{j \in m}$ 的维数 $r$ 等于
 	\begin{equation*}
@@ -1219,13 +1322,13 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	的最大非零子式的阶数.
 \end{theorem}
 \begin{proof}
-	由引理~\ref{lemma:线性相关则行列式为0}, 阶数比 $r$ 大的子式必为 $0$, 我们只需证明有 $r$~阶非零子式.
+	由引理~\ref{lemma: 线性相关则行列式为0}, 阶数比 $r$ 大的子式必为 $0$, 我们只需证明有 $r$~阶非零子式.
 
 	取 $(\bv x_j)_{j \in m}$ 中的一组线性无关组~$(\bv x_{j_k})_{k \in r}$, 再在 $\left. \hat f \right|_{\langle \bv x_j\rangle_{j \in m}}$ 中取出线性无关组~$(\bar f_{k})_{k \in r}
 	:=
 	\left(  
 		\left. f_{i_k} \right|_{\langle \bv x_j\rangle_{j \in m}}
-	\right)_{k \in r}$ (引理~\ref{lemma:子空间的对偶}), 引理~\ref{lemma:线性无关IFF行列式非零} 告诉我们
+	\right)_{k \in r}$ (引理~\ref{lemma: 子空间的对偶}), 引理~\ref{lemma: 线性无关IFF行列式非零} 告诉我们
 	\begin{equation*}
 		\det(\bar f_i (\bv x_{j_k}))_{i, k \in r} \neq 0\,.
 	\end{equation*}
@@ -1238,7 +1341,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	. 
 \end{corollary}
 \begin{proof}
-	在定理~\ref{theorem:线性相关, 对偶空间基底的阶数} 中令 $\hat f = \hat e^*$ 即可.
+	在定理~\ref{theorem: 线性相关, 对偶空间基底的阶数} 中令 $\hat f = \hat e^*$ 即可.
 \end{proof}
 
 \section{多重线性型}
@@ -1311,7 +1414,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 令 $\bv B = \big(\mathscr B(\basis e_i, \basis e_j))_{i, j\in n}$, 得:
 
-\begin{equation}\label{equation:双线性型的矩阵表示}
+\begin{equation}\label{equation: 双线性型的矩阵表示}
 	\mathscr B(\bv x, \bv y) = \inbasis{\bv x}{\hat e}^\mathrm T \bv B \inbasis{\bv y}{\hat e}\,.
 \end{equation}
 
@@ -1420,7 +1523,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 我们将指出, 我们在这里所说的线性映射在某基底下可表为矩阵. 
 设 $V$, $W$ 分别是 $m$, $n$ 维线性空间, 给定各自的基底 $\hat e$, $\hat f$, 那么我们可以用矩阵
-\begin{equation}\label{equation:线性映射的矩阵表示}
+\begin{equation}\label{equation: 线性映射的矩阵表示}
 	\inbasis{\mathscr A}{\hat e,\, \hat f} 
 		:= \bv A = (a_{ij})_{i \in n,\, j \in m}
 		= \left( 
@@ -1430,17 +1533,17 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 来表示 $\mathscr A \in \mathcal L (V, W)$. 
 
 \begin{theorem}
-	由式~\eqref{equation:线性映射的矩阵表示} 决定的线性映射和 $\mathbb F$ 上的 $m \times n$ 矩阵是一一对应的, 且:
-	\begin{equation}\label{equation:线性映射的复合与矩阵的积}
+	由式~\eqref{equation: 线性映射的矩阵表示} 决定的线性映射和 $\mathbb F$ 上的 $m \times n$ 矩阵是一一对应的, 且:
+	\begin{equation}\label{equation: 线性映射的复合与矩阵的积}
 		\inbasis{(\mathscr B \circ \mathscr A)}{\hat e,\, \hat g} = \bv B \bv A\,,
 	\end{equation}
 	其中 $\mathscr A \colon V \to U$, $\mathscr B \colon U \to W$, $V$, $U$ 和 $W$ 分别有基底 $\hat e$, $\hat f$ 和 $\hat g$.
 \end{theorem}
 \begin{proof}
-	由线性映射到矩阵的单性由式~\eqref{equation:线性映射的矩阵表示} 易证 (意思是, 只需假定有两个线性映射共用矩阵, 它们将由~\ref{theorem:唯一分解} 得出是同一个映射). 而满性只需验证由 $\inbasis{f(\bv v)}{\hat f} = \bv A \inbasis{\bv v}{\hat e}$ 决定的映射是 $\mathcal L(V, W)$ 的元素.
+	由线性映射到矩阵的单性由式~\eqref{equation: 线性映射的矩阵表示} 易证 (意思是, 只需假定有两个线性映射共用矩阵, 它们将由~\ref{theorem: 唯一分解} 得出是同一个映射). 而满性只需验证由 $\inbasis{f(\bv v)}{\hat f} = \bv A \inbasis{\bv v}{\hat e}$ 决定的映射是 $\mathcal L(V, W)$ 的元素.
 
 	同态的复合依然是同态是显然的 (可以进行枯燥的验证, 但没必要). 
-	式~\eqref{equation:线性映射的复合与矩阵的积} 则由下式给出:
+	式~\eqref{equation: 线性映射的复合与矩阵的积} 则由下式给出:
 	\begin{equation*}
 		\inbasis{(\mathscr B \circ \mathscr A)(\bv v)}{\hat g} 
 		= \inbasis{\mathscr B \big(
@@ -1460,13 +1563,13 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	若 $V$, $W$ 都是有限维向量空间. 任取它们分别的基底 $\hat e$, $\hat f$, 都有 $\rank \mathscr A = \rank \bv A$, 其中 $\bv A = \inbasis{\mathscr A}{\hat e,\, \hat f}$.
 \end{theorem}
 \begin{proof}
-	由定义式~\eqref{equation:线性映射的矩阵表示}, 矩阵的列向量组将张出 $\mathscr A (V)$.
+	由定义式~\eqref{equation: 线性映射的矩阵表示}, 矩阵的列向量组将张出 $\mathscr A (V)$.
 	由\ref{corollary:秩与维数}, 这就给出了我们的定理\footnote{%
 	矩阵的秩的最大非零子式定义和列向量组定义等价已由推论~\ref{corollary:线性相关与坐标阶数}保证.}%
 	.
 \end{proof}
 
-\begin{theorem}\label{theorem:核和像的维数}
+\begin{theorem}\label{theorem: 核和像的维数}
 	设 $V$ 是域 $\mathbb F$ 上的有限维线性空间, $W$ 是域 $\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V, W)$, 那么
 	\begin{equation*}
 		\dim \ker \mathscr A + \dim \mathscr A(V) = \dim V\,. 
@@ -1475,7 +1578,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \begin{proof}
 	记 $\dim V = n$, $\dim \mathscr A = r$, $\dim \ker \mathscr A = k$.
 
-	取 $\ker \mathscr A$ 的一组基底 $(\basis e_i)_{i \in k}$ (显然 $k \leq n$), 并将它扩充为 $V$ 的基底 $\hat e$ (我们又用了Steintz替换原则~\ref{theorem:Steintz}).
+	取 $\ker \mathscr A$ 的一组基底 $(\basis e_i)_{i \in k}$ (显然 $k \leq n$), 并将它扩充为 $V$ 的基底 $\hat e$ (我们又用了Steintz替换原则~\ref{theorem: Steintz}).
 	考虑到 $\mathscr A(V) = \langle \mathscr A(\basis e_i) \rangle_{i \in n}$.
 	但 $\langle \mathscr A(\basis e_i) \rangle_{i \in k} = \{\bv 0\}$.
 	利用 $\mathscr A$ 的线性, 我们给出 $\forall (\lambda_i)_{i \in n} \in \mathbb F^n$:
@@ -1524,7 +1627,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\end{equation*}
 \end{theorem}
 \begin{proof}
-	利用定理~\ref{theorem:核和像的维数} 立刻就能证明.
+	利用定理~\ref{theorem: 核和像的维数} 立刻就能证明.
 \end{proof}
 
 \begin{definition}[代数]
@@ -1742,38 +1845,38 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \Spec \mathscr A$. 我们称 $\lambda$ 作为 $\chi_\mathscr A(X)$ 的根的重数为线性算子~$\mathscr A$ 的特征值~$\lambda$ 的\indexbf{代数重数} (algebraic multiplicity), 记为 $\indexfm[mu A lambda]{\mu_\mathscr A (\lambda)}$.
 \end{definition}
 
-\begin{lemma}\label{lemma:不同特征值特征向量线性无关}
+\begin{lemma}\label{lemma: 不同特征值特征向量线性无关}
 	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $\forall i \in m$  ($m \in \mathbb N_+$), $\lambda_i \in \Spec \mathscr A$, 且 $\lambda_i = \lambda_j \to i = j$.
 	若 $(\bv x_i)_{i \in m}$ 满足 $\bv x_i \in E_\mathscr A(\lambda_i) \wedge \bv x_i \neq \bv 0$, 则 $(\bv x_i)_{i \in m}$ 线性无关. 
 \end{lemma}
 \begin{proof}
 	显然若 $m = 1$ 时命题是成立的. 假设 $m = k - 1$ 时命题成立, 并在式子
-	\begin{equation}\label{equation:不同特征值特征向量线性无关-1}
+	\begin{equation}\label{equation: 不同特征值特征向量线性无关-1}
 		\sum_{i \in k} \alpha_i \bv x_i = \bv 0
 	\end{equation}
 	的两侧左乘 $\mathscr A$ (其中 $\alpha_i \in \mathbb F$), 得:
-	\begin{equation}\label{equation:不同特征值特征向量线性无关-2}
+	\begin{equation}\label{equation: 不同特征值特征向量线性无关-2}
 		\mathscr A \sum_{i \in k} \alpha_i \bv x_i 
 		= \sum_{i \in k} \alpha_i \mathscr A \bv x_i 
 		= \sum_{i \in k} \alpha_i \lambda_i \bv x_i = \bv 0
 	\end{equation}
-	$\lambda_{k - 1} \eqref{equation:不同特征值特征向量线性无关-1} - \eqref{equation:不同特征值特征向量线性无关-2}$, 得:
+	$\lambda_{k - 1} \eqref{equation: 不同特征值特征向量线性无关-1} - \eqref{equation: 不同特征值特征向量线性无关-2}$, 得:
 \begin{equation*}
 	\sum_{i \in k - 1} \alpha_i (\lambda_{k - 1} - \lambda_i) \bv x_i = \bv 0\,,
 \end{equation*}
 根据假设, $\forall i \in k - 1$, $\alpha_i (\lambda_{k - 1} - \lambda_i) = 0$, 又 $\lambda_i \neq \lambda_{k - 1}$, 因为 $i \neq k - 1$, 则 $\alpha_i = 0$. 
-回到式~\eqref{equation:不同特征值特征向量线性无关-1}, 这意味着 $\alpha_{k - 1} \bv x_{k - 1} = \bv 0$, 这只能是 $\alpha_{k - 1} = 0$.
+回到式~\eqref{equation: 不同特征值特征向量线性无关-1}, 这意味着 $\alpha_{k - 1} \bv x_{k - 1} = \bv 0$, 这只能是 $\alpha_{k - 1} = 0$.
 \end{proof}
 
-\begin{lemma}\label{lemma:特征子空间之和是直和}
+\begin{lemma}\label{lemma: 特征子空间之和是直和}
 	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$. $\sum_{\lambda \in \Spec \mathscr A} E_\mathscr A(\lambda)$ 是直和.
 \end{lemma}
 \begin{proof}
-	由引理~\ref{lemma:不同特征值特征向量线性无关} 易证% 
+	由引理~\ref{lemma: 不同特征值特征向量线性无关} 易证% 
 		\footnote{因为我们没有定义无穷个向量的线性组合, 所以这个证明只能对有限个特征向量的情况有效, 出于保守我们只研究有限维线性空间.}. 
 \end{proof}
 
-\begin{theorem}[几何重数不超过代数重数]\label{theorem:几何重数不超过代数重数}
+\begin{theorem}[几何重数不超过代数重数]\label{theorem: 几何重数不超过代数重数}
 	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$,  $\lambda \in \Spec \mathscr A$. $\gamma_\mathscr A(\lambda) \leq \mu_\mathscr A (\lambda)$.
 \end{theorem}
 \begin{proof}
@@ -1869,11 +1972,11 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 我们称两个轮换\indexbf{不相交}, 如果它们的长度 $\leq 2$, 且最长轨道不相交.
 
 以上的叙述可以总结为:
-\begin{theorem}\label{theorem:置换的轮换分解}
+\begin{theorem}\label{theorem: 置换的轮换分解}
 	置换群~$S_n$ 中的每一个置换, 要么是 $\id_n$, 要么存在唯一的不相交长度~$\leq 2$ 的轮换的集合 $\{\pi_k\}_{k \in p}$, 使得 $\pi = \prod_{k \in p} \pi_k$.
 \end{theorem}
 
-\begin{theorem}\label{theorem:置换的对换分解}
+\begin{theorem}\label{theorem: 置换的对换分解}
 	置换群~$S_n$ 中的每一个置换~$\pi$ 都可写为对换 $(\sigma_k)_{k \in q}$ 的乘积, 即
 	$\pi = \prod_{k \in q} \sigma_k$%
 		\footnote{注意, 这时不可对调 $\sigma_k$ 间的位置. }%
@@ -1886,7 +1989,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	\begin{equation*}
 		(\pi^k(i))_{k \in r} = \prod_{k \in r} (i, \pi^{r - k}(i)),\,
 	\end{equation*}
-	则由定理~\ref{theorem:置换的轮换分解}, 每一个置换都可以写成对换的乘积.
+	则由定理~\ref{theorem: 置换的轮换分解}, 每一个置换都可以写成对换的乘积.
 
 	我们先证明, 若 $\id_n = \prod_{k \in q} \sigma_k$, 其中 $\forall k \in q$, $\sigma_k$ 是对换, 那么 $q \equiv 0 \pmod 2$.
 
@@ -1897,8 +2000,8 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 	除非出现以下情况:
 	\begin{conditionlist}[label=\alph*)]
-		\item $p = 0$. \label{item:矛盾}
-		\item $p \neq 0$ 但 $\sigma'_{p - 1} = (S, t)$. \label{item:消去}
+		\item $p = 0$. \label{item: 矛盾}
+		\item $p \neq 0$ 但 $\sigma'_{p - 1} = (S, t)$. \label{item: 消去}
 	\end{conditionlist}
 	否则, 不断重复下列过程:
 	\begin{conditionlist}[label=\arabic*)]
@@ -1915,7 +2018,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 				\text{其他不变,} 
 			\end{equation*}
 			将仍然满足 $\id_n = \prod_{k \in q} \sigma'_k$. 
-			执行~\ref{item:每次循环结束}. 
+			执行~\ref{item: 每次循环结束}. 
 		\item 如果 $\sigma_{p - 1} = (t, r)$:
 			由于
 			\begin{equation*}
@@ -1929,7 +2032,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 				\text{其他不变,} 
 			\end{equation*}
 			将仍然满足 $\id_n = \prod_{k \in q} \sigma'_k$. 
-			执行~\ref{item:每次循环结束}. 
+			执行~\ref{item: 每次循环结束}. 
 		\item 如果 $\sigma_{p - 1} = (r, u)$, 其中 $\{r, u\} \cap \{S, t\} = \varnothing$:
 			由于
 			\begin{equation*}
@@ -1942,14 +2045,14 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 				\text{其他不变,} 
 			\end{equation*}
 			将仍然满足 $\id_n = \prod_{k \in q} \sigma'_k$. 
-			执行~\ref{item:每次循环结束}. 
-		\item 重新令 $p := \max\{ k \mid \sigma'_k = (S,t), t\in n\}$ 以及 $\sigma'_p = (S, t)$. \label{item:每次循环结束}
+			执行~\ref{item: 每次循环结束}. 
+		\item 重新令 $p := \max\{ k \mid \sigma'_k = (S,t), t\in n\}$ 以及 $\sigma'_p = (S, t)$. \label{item: 每次循环结束}
 	\end{conditionlist}
-	直到满足~\ref{item:矛盾} 或~\ref{item:消去} 为止. 
+	直到满足~\ref{item: 矛盾} 或~\ref{item: 消去} 为止. 
 	这个循环将总是能在有限次结束, 因为每次 $p$ 都减小了 $1$.
 
-	当过程到结束时, 如果满足~\ref{item:矛盾}, 那么 $\prod_{k \in q} \sigma'_k (S)= (S, t) \prod_{k \in q, \, k \neq 0} \sigma'_k(S) = (S, t)(S) = t \neq S$, 与 $\id_n(S) = S$ 矛盾; 
-	那么, 只可能是满足~\ref{item:消去}, 此时因 $(S, t)(S, t) = \id_n$, 将它们消去, 我们得到了 $\id_n$ 的 $q' = q - 2$ 个对换的分解. 
+	当过程到结束时, 如果满足~\ref{item: 矛盾}, 那么 $\prod_{k \in q} \sigma'_k (S)= (S, t) \prod_{k \in q, \, k \neq 0} \sigma'_k(S) = (S, t)(S) = t \neq S$, 与 $\id_n(S) = S$ 矛盾; 
+	那么, 只可能是满足~\ref{item: 消去}, 此时因 $(S, t)(S, t) = \id_n$, 将它们消去, 我们得到了 $\id_n$ 的 $q' = q - 2$ 个对换的分解. 
 	
 	重复这样的过程直到 $q' = 0$ 或 $q' = 1$ 为止, 而后者是不可能的, 因为 $\id_n$ 永远不可能等于对换. 所以: $q \equiv 0 \pmod 2$.
 
@@ -1970,7 +2073,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	设 $\mathbb F$ 是一个域. 
 	将 $\{a_{ij}\}_{i \in m,\, j \in n} \in 2^{\mathbb F}$ ($n, m \in \mathbb N_+$) 
 	排成一个长方形的表: 
-	\begin{equation}\label{equation:矩阵}
+	\begin{equation}\label{equation: 矩阵}
 		\bv A := \indexfm[a ij i in m j in n]{(a_{ij})_{i \in m,\, j \in n}} = 
 		\begin{pmatrix}
 			a_{00} & a_{01} & \cdots & a_{0, n-1} \\
@@ -1980,7 +2083,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 		\end{pmatrix}\,.
 	\end{equation}
 
-	式~\eqref{equation:矩阵} 定义的 $\bv A$ 被称为 $\mathbb F$ 上的 $m \times n$ 的\indexbf{矩阵}, $m \times n$ 被称为它的尺寸或大小, $\{a_{ij}\}_{i \in m,\, j \in n}$ 是它的\indexbf{元素}. 所有 $\mathbb F$ 上的 $m \times n$~矩阵的集合记为 $\indexfm[M m times n F]{M_{m \times n}(\mathbb F)}$. 
+	式~\eqref{equation: 矩阵} 定义的 $\bv A$ 被称为 $\mathbb F$ 上的 $m \times n$ 的\indexbf{矩阵}, $m \times n$ 被称为它的尺寸或大小, $\{a_{ij}\}_{i \in m,\, j \in n}$ 是它的\indexbf{元素}. 所有 $\mathbb F$ 上的 $m \times n$~矩阵的集合记为 $\indexfm[M m times n F]{M_{m \times n}(\mathbb F)}$. 
 \end{definition}
 
 元素全为 $0$ 的矩阵记为 $\indexfm[O]{\bv O}$, 有时为了强调它的尺寸, 将之写在右下角 i.e.\ $\indexfm[O m times n]{\bv O_{m \times n}}$.
@@ -1992,7 +2095,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 但是, 当上下文明确时, 我们不特意在术语上区分行向量和列向量.
 
 我们也常把矩阵写成列向量组的形式, 即
-\begin{equation}\label{equation:矩阵的列向量组表示}
+\begin{equation}\label{equation: 矩阵的列向量组表示}
 	\bv A := \indexfm[x j j in n]{(\bv x_j)_{j \in n}}, \qquad 
 	\forall j \in n \big(
 			\bv x_j \in \mathbb F_n \big)\,. 
@@ -2039,7 +2142,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	
 由域的性质, 我们能验证矩阵的乘法运算是结合的, 而且满足对和的分配律.
 
-\begin{theorem}[积的转置]\label{theorem:积的转置}
+\begin{theorem}[积的转置]\label{theorem: 积的转置}
 	设 $\bv A \in M_{m \times \ell}(\mathbb F)$, $\bv B \in M_{\ell \times n}(\mathbb F)$.
 	\begin{equation*}
 		(\bv A \bv B)^\mathrm T = \bv B^\mathrm T \bv A^\mathrm T\,.
@@ -2063,7 +2166,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	其转置~$\bv A^\mathrm T$ 也可逆, 且 $(\bv A^\mathrm T)^{-1} = (\bv A^{-1})^\mathrm T$.
 \end{theorem}
 \begin{proof}
-	写出逆的定义, 两边取转置, 并应用 $\bv I^\mathrm T = \bv I$ 和定理~\ref{theorem:积的转置}.
+	写出逆的定义, 两边取转置, 并应用 $\bv I^\mathrm T = \bv I$ 和定理~\ref{theorem: 积的转置}.
 \end{proof}
 
 \begin{theorem}[逆的共轭转置]
@@ -2216,21 +2319,15 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 记 $\indexfm[deg P X]{\deg P(X)} := \max \{n \mid p_n \neq 0\}$ 为多项式~$P(X)$ 的\indexbf{次数}.
 而 $(p_n)_{n \in \deg P(X) + 1}$ 是多项式的\indexbf{系数}, 其中 $p_0$ 是\indexbf{常数项}, 而 $p_{\deg P(X)}$ 是\indexbf{最高次项系数}或\indexbf{首项系数}.
 
-所有系数都为 $0$ 的多项式被称为\indexbf{零多项式}, 次数为 $1$ 的多项式被称为\indexbf{线性多项式}.
+所有系数都为 $0$ 的多项式被称为\indexbf{零多项式}, 次数为 $1$ 的多项式被称为\indexbf{线性多项式}. 
 
 不难验证, $R[X]$ 的单位元和零元分别是 $R$ 的单位元和零元.
 
 以下给出一些不难证明的定理, 如果读者感到困难, 请翻阅参考资料\cite{kostrikin1982introduction}:
-\begin{theorem}\label{theorem:多项式的运算与次数}
+\begin{theorem}\label{theorem: 多项式的运算与次数}
 	$\forall P(X), Q(X) \in A[A]$, 
 	$\deg \big(P(X) + Q(X)\big) \leq \max \{\deg P(X), \deg Q(X)\}$,
 	$\deg \big( P(X) Q(X) \big) \leq \deg P(X) + \deg Q(X)$.
-\end{theorem}
-
-\begin{theorem}
-	如果 $A$ 是整环, $A[X]$ 也是整环%
-		\footnote{考虑到 $A$ 是 $A[X]$ 的子环, 逆命题也成立.}
-	.
 \end{theorem}
 
 \begin{theorem}[多项式环的泛性]
@@ -2256,10 +2353,21 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 对于 $A = \mathbb Q$, $R = \mathbb C$ 的情况, 代数元和超越元又被称为\indexbf{代数数}和\indexbf{超越数}.
 
-类似于整数的带余除法, 我们可以建立整的多项式环上的带余除法理论.
+\section{整多项式环}
 
-\begin{theorem}[多项式的带余除法]\label{theorem:多项式的带余除法}
-	设 $A$ 是整环, $F(X) \in A[X]$, 其首项系数在 $A$ 中可逆. 
+\begin{theorem}[整性的继承]
+	如果 $A$ 是整环, $A[X]$ 也是整环%
+		\footnote{考虑到 $A$ 是 $A[X]$ 的子环, 逆命题也成立.}
+	.
+\end{theorem}
+\begin{proof}
+	如果两个多项式都不是零多项式, 那么它们的最高次系数相乘不是零 (因为整环~$A$ 没有零因子), 从而它们的乘积一定不是零多项式.
+\end{proof}
+
+类似于整数的带余除法, 我们可以建立整多项式环上的带余除法理论.
+
+\begin{theorem}[多项式的带余除法]\label{theorem: 多项式的带余除法}
+	设 $A$ 是整环, $F(X) \in A[X]$, 其首项系数是 $A$ 中的正则元 (i.e.\ 可逆). 
 	$\forall G(X) \in A[X]$, $\exists! Q(X), R(X) \in A[X]$ s.t.\ 
 	\begin{equation*}
 		F(X) = Q(X) G(X) + R(X)\; \wedge \deg R(X) < \deg G(X)\,.
@@ -2286,25 +2394,41 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	现在我们还需要证明唯一性.
 
 	倘若 $F(X) = Q(X) G(X) + R(X) = Q'(X) G(X) + R'(X)$, 那么
-	\begin{equation}\label{equation:商和余式唯一}
+	\begin{equation}\label{equation: 商和余式唯一}
 		[Q(X) - Q'(X)] G(X) = R(X) - R'(X)
 	\end{equation}
-	由定理~\ref{theorem:多项式的运算与次数}, 再考虑到 $A$ 是一个整环, 假设 $Q(X) \neq Q'(X)$, $R(X) \neq R'(X)$ 我们能得到
+	由定理~\ref{theorem: 多项式的运算与次数}, 再考虑到 $A$ 是一个整环, 假设 $Q(X) \neq Q'(X)$, $R(X) \neq R'(X)$ 我们能得到
 	\begin{equation*}
 		\deg \big(R(X) - R'(X)\big) = \deg \big( Q(X) - Q'(X)\big) + \deg G(X)\,.
 	\end{equation*}
 
-	从而我们得到 $\max\{\deg R(X), \deg R'(X) \} \geq \deg(R(X) - R'(X)) \geq G(X)$, 这和 $\deg R(X) < \deg G(X)$ 矛盾. 从而, 要么 $Q(X) = Q'(X)$, 要么 $R(X) = R'(X)$, 而这两者因式~\ref{equation:商和余式唯一} 能互相推出.
+	从而我们得到 $\max\{\deg R(X), \deg R'(X) \} \geq \deg(R(X) - R'(X)) \geq G(X)$, 这和 $\deg R(X) < \deg G(X)$ 矛盾. 从而, 要么 $Q(X) = Q'(X)$, 要么 $R(X) = R'(X)$, 而这两者因式~\ref{equation: 商和余式唯一} 能互相推出.
 \end{proof}
 
 在整的多项式环中, 由首项可逆的 $G(X)$ 和 $F(X)$ 得到 $F(X) = Q(X) G(X) + R(X)$ 的运算称为\indexbf{多项式的带余除法} (polynomial long division). 
 这里 $F(X)$ 被称为\indexbf{被除式} (dividend), $G(X)$ 称为\indexbf{除式} (divisor); 得到的 $Q(X)$ 称为\indexbf{商} (quotient) 而 $R(X)$ 称为\indexbf{余式} (remainder).
 
-倘若余式 $R(X) = 0$, 则称 $G(X)$ \indexbf{整除} $F(X)$, 或 $F(X)$ 被 $G(X)$ 整除, 此时 $G(X)$ 被称为 $F(X)$ 的一个\indexbf{因式} (factor), 而 $F(X)$ 则是 $G(X)$ 的一个\indexbf{倍式} (multiple).
+倘若余式 $R(X) = 0$, 则称 $G(X)$ \indexbf{整除} $F(X)$, 或 $F(X)$ 被 $G(X)$ 整除, 此时 $G(X)$ 被称为 $F(X)$ 的一个\indexbf{因式} (factor or divisor), 而 $F(X)$ 则是 $G(X)$ 的一个\indexbf{倍式} (multiple).
+
+带余除法和 $\delta(P(X)) := \deg P(X)$, 告诉我们, 如果 $\mathbb F$ 是一个域 (从而任意非零多项式的首项都可逆了), 多项式环~$\mathbb F[X]$ 是一个 Euclidean~整环 (定义~\ref{definition: Euclidean 整环}), 从而也是唯一分解整环 (定理~\ref{theorem: Euclidean 整环是唯一分解的}). 
+但是, 我们必须指出, 多项式环未必是 Euclidean 的, 而且即使不是 Euclidean 的, 也可能是唯一分解的. 例如, 当 $R$ 是唯一分解整环时, $R[X]$ 也是一个唯一分解整环.
+
+多项式环~$A[X]$ 上的素元叫做\indexbf{既约多项式}.
+
+\begin{definition}[本原多项式]
+	设 $R$ 是一个整环, $P(X) \in R[X]$. 
+	多项式~$P(X)$ 的所有系数的最大因%
+		\footnote{最大因的定义可以递归地推广到任意有限多个元上}%
+	~$\indexfm[c P]{c(P)}$ 叫做多项式的\indexbf{容度} (content). 
+	如果 $c(P) \in U(R)$, 那么 $P(X)$ 被称为一个\indexbf{本原多项式} (primitive polynomial). 
+	一个非零多项式 $P(X)$ 所有系数对 $c(P)$ (由最大因的定义, 它们都是容度的倍数) 的商为系数的多项式 $\indexfm[pp P X]{\pp P(X)}$ 称为该多项式的\indexbf{本原部分} (primitive part).
+\end{definition}
 
 
 
 \section{多项式的根}
+
+
 \backmatter
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
 \printbibliography[heading=bibliography, title={参考文献}]
