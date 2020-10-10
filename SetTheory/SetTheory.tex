@@ -775,13 +775,13 @@ $\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
 接下来我们要定义一些二元函数, 即我们熟悉的自然数集上的运算. 
 我们可以递归地给出它们的定义, 但这种定义的合理性需要递归定理的辩护. 
 
-\begin{definition}
-以$n\in \mathbb N$或$\mathbb N$为定义域的函数称为\indexbf{序列}, 其中前者称为长度为$n$的\indexbf{有穷序列}, 后者称为\indexbf{无穷序列}, 通常分别记为$\langle a_k\mid k<n \rangle$或$\langle a_k \mid k\in \mathbb N\rangle$, 或简记为$\langle a_k\rangle_{k<n}$或$\langle a_k\rangle_{k\in \mathbb N}$.
-值域通常记为$\{x_k\mid k<n\}$或$\{x_k\mid k\in \mathbb N\}$, 或简记为$\{ a_k\}_{k<n}$或$\{ a_k\}_{k\in \mathbb N}$.
-特别地, 长度为$0$的序列称为\indexbf{空序列}.
+\begin{definition}[序列]
+以 $n\in \mathbb N$ 或 $\mathbb N$ 为定义域的函数称为\indexbf{序列}, 其中前者称为长度为$n$的\indexbf{有穷序列}, 后者称为\indexbf{无穷序列}, 通常分别记为 $\langle a_k\mid k \in n \rangle$ 或 $\langle a_k \mid k \in \mathbb N\rangle$, 或简记为 $\langle a_k\rangle_{k \in n}$ 或 $\langle a_k\rangle_{k\in \mathbb N}$.
+值域通常记为 $\{x_k\mid k<n\}$ 或 $\{x_k\mid k\in \mathbb N\}$, 或简记为 $\{ a_k\}_{k<n}$ 或 $\{ a_k\}_{k\in \mathbb N}$.
+特别地, 长度为 $0$ 的序列称为\indexbf{空序列}.
 
-若序列的到达域是$Y$, 则通常称为$Y$内的序列. 
-$Y$内所有有穷序列的集合可记为$A^{<\mathbb N} := \bigcup_{n\in \mathbb N} A^n$.
+若序列的到达域是 $A$, 则通常称为 $A$ 内的序列. 
+集合~$A$ 内所有有穷序列的集合可记为 $A^{<\mathbb N} := \bigcup_{n\in \mathbb N} A^n$.
 \end{definition}
 
 \begin{theorem} \indexbf{递归定理}
@@ -824,19 +824,20 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 
 这样的$f$只能是一元函数, 定义运算需要带参数的版本:
 
-\begin{theorem} \indexbf{带参数的递归定理}
+\begin{theorem}[带参数的递归定理] \index{带参数的递归定理}
 \begin{align*}
 &
-	\forall A\forall P\forall a\in A^P
-	\forall g \in A^{P\times A\times \mathbb N}
-	\exists ! f\in A^{P\times \mathbb N}\big(
+	\forall A \forall P \forall a \in A^P
+	\forall g \in A^{P \times A \times \mathbb N}
+	\exists ! f\in A^{P \times \mathbb N}\big(
 \\ &\qquad
-		\forall p\in P\,f(p,0)=a(p) \wedge \forall n\in \mathbb N\forall p\in P(
-			f(p,n^+) = g(p,f(n),n))\big).
+		\forall p \in P\,
+			f(p, 0) = a(p) \wedge \forall n \in \mathbb N \forall p \in P(
+			f(p, n^+) = g(p, f(n, p), n))\big).
 \end{align*}
 
 \end{theorem}
-\textbf{注}: 如果固定$p$, 这个定理与递归定理几乎一致, 从而我们需要考虑以$p$为变元的函数作为递归定理中的到达域.
+\textbf{注}: 如果固定 $p$, 这个定理与递归定理几乎一致, 从而我们需要考虑以$p$为变元的函数作为递归定理中的到达域.
 \begin{proof}
 令$G\colon A^P\times \mathbb N \to A^P$; $(t,n) \mapsto h$, 其中$h$满足$\forall p\in P \big(
 	h(p) = g(p,t(p),n)\big)$. 
