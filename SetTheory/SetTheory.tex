@@ -439,7 +439,7 @@ $n$元Cartesian积$X_1\times X_2\times \cdots \times X_n$是空集, 则存在$X_
 
 \section{函数}
 
-\begin{definition}\label{function}
+\begin{definition}[函数]\label{definition: 函数}
 二元关系$f$倘满足: 
 \begin{align*}
 	\forall x\big(
@@ -448,12 +448,12 @@ $n$元Cartesian积$X_1\times X_2\times \cdots \times X_n$是空集, 则存在$X_
 则称$f$是\indexbf{函数}, $y$是$f$在$x$处的\indexbf{值}, 记为$f(x) = y$, 或$f\colon x\mapsto y$. 倘若$\dom f = X$, $\ran f \subseteq Y$, 则称$f$是$X$到$Y$的函数, 记为$f\colon X\to Y$. 
 \end{definition}
 
-对任意集合$X$定义$\id _X \colon X\to X$为$\forall x\in X(\id _X(x)=x)$, 称为\indexbf{等同函数}.
+对任意集合~$X$ 定义 $\id _X \colon X\to X$ 为 $\forall x\in X(\id _X(x)=x)$, 称为\indexbf{等同函数}.
 
-\begin{theorem}\label{equality_function}
+\begin{theorem}\label{theorem: 函数相等}
 令$f$, $g$都是函数.
 \begin{align*}
-	f=g\leftrightarrow 
+	f=g \IFF
 		\dom f=\dom g \wedge \forall x\in \dom f \big(
 			f(x)=g(x)\big). 
 \end{align*}
@@ -476,10 +476,11 @@ $n$元Cartesian积$X_1\times X_2\times \cdots \times X_n$是空集, 则存在$X_
 	y=f(x)\leftrightarrow y=g(x)\big)$. 由Ext, $f=g$.
 \end{proof}
 
-通常以集合为值的函数$i\mapsto X_i$, 其中$i\in I$, 可视为\indexbf{指标系统}, $I$是\indexbf{指标集}. 记为$X=\{X_i\mid i\in I\}$或$\{X_i\}_{i\in I}$. 
+通常以集合为值的函数 $i \mapsto X_i$, 其中 $i \in I$, 可视为\indexbf{指标系统}, $I$ 是\indexbf{指标集}. 记为 $X=\{X_i\mid i\in I\}$ 或 $\{X_i\}_{i\in I}$. 
 
 \begin{theorem}
-$\psi (i,x)$是公式. $\forall I\forall X$, 
+设 $\psi (i, x)$ 是公式. 
+$\forall I \forall X$, 
 \begin{align*}
 	\bigcup_{i\in I}\{x\in X\mid \psi(i,x)\} &=
 		\{x\in X\mid \exists i\in I\big(
@@ -490,43 +491,48 @@ $\psi (i,x)$是公式. $\forall I\forall X$,
 \end{align*}
 \end{theorem}
 
-\begin{definition}
-令$X=\{X_i\mid i\in I\}$是一个指标系统. $X$的\indexbf{一般Cartesian积}为:
+\begin{definition}[一般 Cartesian 积]
+令 $X=\{X_i\mid i\in I\}$ 是一个指标系统. 
+我们定义 $X$ 的\indexbf{一般 Cartesian 积}为:
 \begin{align*}
-	\prod_{i\in I}X_i := \{ f\mid f\colon I\to X_i\}.
+	\prod_{i\in I}X_i := \{ f \mid f \colon I \to X_i\}.
 \end{align*}
-另, $p_i\colon \prod_{i\in I}X_i\to X_i$称为\indexbf{指标函数}.
+另, $p_i \colon \prod_{i\in I}X_i\to X_i$ 称为\indexbf{指标函数}.
 \end{definition}
 
 \textbf{注}: 虽然这样的定义和Cartesian积不同, 但接下来的概念确保了, 两者之间可以一一对应, 从而是等同的.
 
-\begin{definition}
-令$f\colon X\to Y$是函数. 若$f(x_1) = f(x_2) \leftrightarrow x_1=x_2$则称$f$为\indexbf{单射} (injection). 若$\ran f = Y$则称其为\indexbf{满射} (surjection). 既单又满的函数称为\indexbf{双射} (bijection). 如果函数的逆$f^{-1}$也是函数, 则函数$f$称为\indexbf{可逆}的.
+\begin{definition}[单射, 满射, 双射和逆]
+令 $f\colon X \to Y$ 是函数. 
+若$f(x_1) = f(x_2) \leftrightarrow x_1=x_2$则称$f$为\indexbf{单射} (injection). 
+若 $\ran f = Y$ 则称其为\indexbf{满射} (surjection). 既单又满的函数称为\indexbf{双射} (bijection). 
+如果函数的逆 $f^{-1}$ 也是函数, 则函数 $f$ 称为\indexbf{可逆}的.
 \end{definition}
 
-作为例子, 若空映射$\ran f=\dom f=\varnothing$, $f=\varnothing$总是单的, $f^{-1} = \{(y,x)\mid y=f(x)\} = \varnothing$也是空映射. 
+作为例子, 若空映射 $\ran f=\dom f=\varnothing$, $f=\varnothing$ 总是单的, $f^{-1} = \{(y,x)\mid y=f(x)\} = \varnothing$ 也是空映射. 
 
-\textbf{注}: 这里函数的逆的定义与通常不同, 因$\dom f^{-1} = \ran f$而非$Y$. 因而下面的定理在这样的定义下是成立的 (否则还要加上满射的条件):
+\textbf{注}: 这里函数的逆的定义与通常不同, 因 $\dom f^{-1} = \ran f$ 而非 $Y$. 
+因而下面的定理在这样的定义下是成立的 (否则还要加上满射的条件):
 
-记$\indexfm[Y X]{Y^X} := \{ f \mid f\colon X\to Y\}$. $\forall Y\big(Y^\varnothing = \{\varnothing_Y\}\big)$, 而若$X\neq \varnothing$, $\varnothing^X=\varnothing$.
-\begin{theorem}
-函数$f$可逆 \emph{iff} $f$是单射. 
+记 $\indexfm[Y X]{Y^X} := \{ f \mid f\colon X\to Y\}$. 
+$\forall Y \big(Y^\varnothing = \{\varnothing_Y\} \big)$, 而若 $X\neq \varnothing$, $\varnothing^X=\varnothing$.
+
+\begin{theorem}[函数可逆的条件]
+	函数 $f$ 可逆 \emph{iff} $f$是单射. 
 \end{theorem}
 \begin{proof}
 可逆意味着$(y,x_1)\in f^{-1}\wedge (y, x_2) \in f^{-1} \leftrightarrow x_1=x_2$, 又由逆的定义, $y=f(x_1)\wedge y=f(x_2)\leftrightarrow x_1=x_2$, 这即是单射的定义.
 \end{proof}
 
-\begin{theorem}
-函数$f$若可逆, 则$f^{-1}$可逆, 且$(f^{-1})^{-1} = f$.
+\begin{theorem}[函数的逆也可逆]
+函数 $f$ 若可逆, 则 $f^{-1}$ 可逆, 且 $(f^{-1})^{-1} = f$.
 \end{theorem}
 证明从略.
 
 
-\begin{theorem}\label{composition_functions}
-如果$f$和$g$是函数, 它们的复合$h=g\circ f$也是函数. 
-而且$
-\dom h=  f^{-1}\big(
-	\dom g\big)$.
+\begin{theorem}\label{theorem: 函数的复合}
+	如果$f$和$g$是函数, 它们的复合$h=g\circ f$也是函数. 
+	而且$\dom h =  f^{-1} \big( \dom g \big)$.
 \end{theorem}
 \textbf{注}: 这里的复合和通常的定义有细微不同, 但保持了与二元关系的统一. 
 \begin{proof}
@@ -558,11 +564,13 @@ h=g\circ f \leftrightarrow
 \end{proof}
 
 
-\begin{definition}
-令$f$是任意函数, $A$是任意集合. 函数$f\upharpoonright A = \{ (x,y) \in f\mid x\in A\}$是$f$在$A$上的\indexbf{限制}. 若$g=f\upharpoonright A$, 则称$f$是$g$在$\dom f$的\indexbf{扩张}.
+\begin{definition}[限制和扩张]
+令 $f$ 是任意函数, $A$ 是任意集合. 
+函数$\indexfm[f upharpoonright A]{f \upharpoonright A} = \{ (x,y) \in f \mid x \in A\}$ 是 $f$ 在 $A$ 上的\indexbf{限制}. 
+若 $g = f \upharpoonright A$, 则称 $f$ 是 $g$ 在 $\dom f$ 的\indexbf{扩张}.
 \end{definition}
 
-\begin{definition}
+\begin{definition}[相容]
 函数$f$, $g$被认为是\indexbf{相容}的, 如果:
 \begin{align*}
 	\forall x\in \dom f\cap \dom g\big(
@@ -575,28 +583,29 @@ h=g\circ f \leftrightarrow
 \end{align*}
 \end{definition}
 
-\begin{theorem}\label{compatibility}
+\begin{theorem}\label{theorem: 相容}
 $f$和$g$是函数.以下的命题是等价的:
-\begin{enumerate}[label=(\arabic*)]
+\begin{conditionlist}[label=(\arabic*)]
 \item $f$与$g$相容;
 \item $f\cup g$是函数;
 \item $f\upharpoonright \big(
 	\dom f\cap \dom g\big) =
 	g\upharpoonright \big(
 	\dom f\cap \dom g\big)$.
-\end{enumerate}
+\end{conditionlist}
 
 \end{theorem}
 \begin{proof}
-(1)$\leftrightarrow$(3): 注意到$\dom \Big(
+(1)$\leftrightarrow$(3): 注意到 $\dom \Big(
 	{f\upharpoonright \big(
-		\dom f\cap \dom g\big)}\Big) = \dom f\cap \dom g$. 由相容的定义和定理\ref{equality_function}可得证.
+		\dom f\cap \dom g\big)}\Big) = \dom f\cap \dom g$. 
+		由相容的定义和定理~\ref{theorem: 函数相等} 可得证.
 
 (2)$\leftrightarrow$(1): 假设$f$与$g$不相容, 即$\exists x\in \dom f\cap \dom g\subseteq \dom{f\cup g}$ s.t.\ $f(x)\neq g(x)$, 这与函数$f\cup g$的定义不相符. 若$f\cup g$不是函数, 它至少是$\dom f\cup \dom g \times \ran f\cup \ran g$上的二元关系, 由函数的定义, $\exists x\in \dom{f\cup g}$ s.t.\ $\exists y_1\exists y_2\big(
 	(x,y_1)\in f\cup g\wedge (x,y_2)\in f\cup g\wedge y_1\neq y_2\big)$. 通过对$x$在$\dom f - \dom g$, $\dom g - \dom f$, $\dom g\cap \dom g$讨论, 可以得出要么$f$或$g$不是函数 (从而与题设矛盾), 要么$f$, $g$不相容.
 \end{proof}
 
-\setcounter{axiom}{8} %这样下面的axiom才会计数为9
+\setcounter{axiom}{8} % 这样下面的axiom才会计数为9
 \begin{axiom}[\indexbf{选择公理} (第二形式), ${\properclass{AC\;II}}$]
 	\index{AC 2@${\properclass{AC\;II}}$}
 	\label{AC2} 
@@ -772,6 +781,7 @@ $\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
 \end{theorem}
 
 \section{递归定理}
+
 接下来我们要定义一些二元函数, 即我们熟悉的自然数集上的运算. 
 我们可以递归地给出它们的定义, 但这种定义的合理性需要递归定理的辩护. 
 
@@ -806,7 +816,7 @@ $\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
 f = \cup \mathcal F$. 接下来我们证明这个$f$是所寻找的函数.
 
 首先证明它是函数. 
-由theorem \ref{compatibility}, 知这当且仅当$\mathcal F$相容. 
+由theorem \ref{theorem: 相容}, 知这当且仅当$\mathcal F$相容. 
 令$t,u\in F$. 记$m=\dom t$, $n=\dom u$. 不妨设$m\leq n$.
 $t,u$相容\emph{iff} $\forall k\in m (t_k = u_k)$. 
 这由1) $t_0=u_0=a$; 2) $t_k =u_k \to t_{k^+} = g( t_k,k) = g(u_k,k) = u_{k^+}$ 的成立和归纳原理保证.
@@ -854,15 +864,15 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 
 有了带参数的递归定理, 自然数上的运算可以看作以下存在而且唯一的二元函数:
 
-\begin{definition}
-\indexbf{加法}$+\colon \mathbb N\times \mathbb N \to \mathbb N$, 满足
+\begin{definition}[加法]
+\indexbf{加法}$+ \colon \mathbb N\times \mathbb N \to \mathbb N$, 满足
 1) $\forall m\in \mathbb N \big( 
 	+(m,0)=m\big)$;
 2) $\forall m\in\mathbb N\forall n\in \mathbb N \big(
 	+(m,n^+)=(+(m,n))^+\big)$. 通常记$+(m,n) =: m+n$.
 \end{definition}
 
-\begin{definition}
+\begin{definition}[乘法]
 \indexbf{乘法}$\cdot \colon \mathbb N\times \mathbb N \to \mathbb N$, 满足
 1) $\forall m\in \mathbb N \big( 
 	\cdot(m,0)=m\big)$;
@@ -878,14 +888,15 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 两个集合$X$, $Y$\indexbf{等势} (equinumerous) 指的是$\exists f \in Y^X (f\text{是双射 })$, 记为$|X|=|Y|$.
 \end{definition}
 
-\begin{definition}[势]
+\begin{definition}[势]\label{definition: 势}
 若存在$f \in Y^X$ s.t. $f$是单射, 则称$|X|\leq |Y|$. 
 当$|X|\leq |Y|$而$|X|\neq |Y|$时, 我们就称$X$的势小于$Y$的势, 记为$|X| < |Y|$.
 \end{definition}
 
 \begin{theorem}
 \begin{align*}
-|X| \leq |Y| \leftrightarrow \exists Y_0\in \mathscr P(Y) \big(|X| = |Y_0| \big).
+	|X| \leq |Y| 
+		\IFF \exists Y_0\in \mathscr P(Y) \big(|X| = |Y_0| \big).
 \end{align*}
 \end{theorem}
 \begin{proof}
@@ -893,18 +904,18 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 \end{proof}
 
 下面我们将介绍Cantor-Bernstein-Schr\"oeder 定理, 它的证明当中最重要的一部分是以下引理的证明:
-\begin{lemma}\label{lemma:CBS}
+\begin{lemma}\label{lemma: CBS}
 \begin{align*}
 	A'\subseteq B \subseteq A \wedge |A'|=|A| 
 		\to |B|=|A|.
 \end{align*}
 \end{lemma}
-\textbf{注}: 我们已经知道有$A$到$B$的单射了, 怎么找到一个同时是满的呢? 
-这要求这个双射$h$要把$A-B$和$B$映射到$B$的分划上, 可$h[A-B]$在$B$之中, 它在$h$下必须映射到$h[B]$里; 
-同理$h\big\lbrack h[A-B]\big\rbrack$必须映射到$h[B]-h\big\lbrack h[A-B]\big\rbrack$中\ldots
+\textbf{注}: 我们已经知道有 $A$ 到 $B$ 的单射了, 怎么找到一个同时是满的呢? 
+这要求这个双射 $h$ 要把 $A-B$ 和 $B$ 映射到 $B$ 的分划上, 可 $h[A-B]$ 在 $B$ 之中, 它在 $h$ 下必须映射到$h[B]$ 里; 
+同理 $h\big\lbrack h[A-B] \big\rbrack$ 必须映射到 $h[B] - h \big\lbrack h[A-B]\big\rbrack$中\ldots
 
-也就是说: $A$和$A-B$在$h^n$即$h$的任意个复合中, 总是映射到一对不相交的集合$h^n[A]$, $h^n[A-B]$中 (否则不可能是单的), 而且$h^n[A-B]$在$h$的映射下, 又只能落到$h^n[B]$中. 
-从而: $h^n[B]$不断在缩小, 给$h^n[A-B]$腾出空间. 
+也就是说: $A$ 和 $A-B$ 在 $h^n$ 即 $h$ 的任意个复合中, 总是映射到一对不相交的集合 $h^n [A]$, $h^n [A-B]$ 中 (否则不可能是单的), 而且 $h^n[A-B]$ 在 $h$ 的映射下, 又只能落到 $h^n[B]$中. 
+从而: $h^n[B]$ 不断在缩小, 给 $h^n[A-B]$ 腾出空间. 
 这是以下证明的重要思路.
 \begin{proof}
 令$h$见证了$A'$和$A$的等势, 即$h\in A'^A$且$h$是双射.
@@ -963,9 +974,9 @@ $0$-近似由$\{(0,a)\}$给出; $k$-近似$t$存在时, 只需为之并上$\{(k^
 
 
 
-\begin{theorem}[\indexbf{Cantor-Bernstein-Schr\"oeder 定理}]
+\begin{theorem}[\indexbf{Cantor-Bernstein-Schr\"oeder 定理}]\label{theorem: CBS}
 	\label{thorem:CBS}
-如果$|X| \leq |Y|$且$|Y| \leq |X|$, 则$|X| = |Y|$.
+	如果$|X| \leq |Y|$且$|Y| \leq |X|$, 则$|X| = |Y|$.
 
 \end{theorem}
 \begin{proof}
@@ -974,22 +985,19 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 	g\big\lbrack f[X]\big\rbrack \subseteq g[Y] \subseteq X, 
 \end{align*}
 和$|g[Y]|=|Y|$, $|g\big\lbrack f[X]\big\rbrack|=|f[X]|=|X|$.
-由引理\ref{lemma:CBS}, 这意味着$|X|=|Y|$.
+由引理\ref{lemma: CBS}, 这意味着$|X|=|Y|$.
 \end{proof}
 
-\textbf{注}: 早先的Cantor-Bernstein-Schr\"oeder 定理利用了$\properclass{AC}$, 但这里的证明避免了它.
+\textbf{注}: 早先的Cantor-Bernstein-Schr\"oeder 定理利用了 $\properclass{AC}$, 但这里的证明避免了它.
 
-这个定理说明了$\leq$拥有传递性, 这意味着$\leq$是一个偏序. 而且, 在$\mathbb N$中, 它和先前定义的自然数的偏序~$\leq$是等同的. 这暗示我们可以这样做: 记$|n| = n$, 只要$n\in \mathbb N$.
+这个定理说明了 $\leq$ 拥有传递性, 这意味着 $\leq$ 是一个偏序. 而且, 在 $\mathbb N$ 中, 它和先前定义的自然数的偏序~$\leq$ 是等同的. 这暗示我们可以这样做: 记 $|n| = n$, 只要 $n \in \mathbb N$.
 
 \begin{definition}[有穷与无穷]
-	设 $X$ 是一个集合.
-	\begin{conditionlist}[label=(\arabic*)]
-		\item 倘若 $\exists n \in \mathbb N$ s.t.\ $|X| = n$, 则称 $X$ 是\indexbf{有穷的}.
-		\item 倘若 $\forall n \in \mathbb N$, $|X| \neq n$, 则称 $X$ 是\indexbf{无穷的}.
-		\item 倘若 $|X| = |\mathbb N|$, 就称 $X$ 是\indexbf{可数的}或\indexbf{可数无穷的}.
-		\item 有穷或可数的集合称为\indexbf{至多可数的}.
-		\item 不是可数的无穷集合称为\indexbf{不可数的}.
-	\end{conditionlist}
+设 $X$ 是一个集合. 倘若 $\exists n \in \mathbb N$ s.t.\ $|X| = n$, 则称 $X$ 是\indexbf{有穷的}. 反之, 不是有穷的集合就是\indexbf{无穷的} i.e.\ $\forall n \in \mathbb N$, $|X| \neq n$.
+
+我们把与 $\mathbb N$ 等势的集合称为\indexbf{可数的}或\indexbf{可数无穷的}, 并合称有穷或可数的集合为\indexbf{至多可数的}. 
+
+最后, 不是可数的无穷集合称为\indexbf{不可数的}.
 \end{definition}
 
 \begin{theorem}[\indexbf{抽屉原理}]
@@ -998,8 +1006,84 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 \begin{proof}
 	首先, $1^0 := \{\varnothing\}^\varnothing$ 是空集, 因而 $\forall X \in \mathscr P(1) - \{1\} = \{\varnothing\}$, $|X| = 0  \neq |1|$ 成立.
 	
-	其次, 假设命题对 $n \in \mathbb N$ 成立, 但对 $n + 1$ 不成立, 那么 $\exists m \in \mathscr P(n + 1)$, 即 $m \leq n + 1$, 使得 $|m| = m = n + 1 = |n|$. 
-	考虑到 Lemma~\ref{lemma:CBS}, 因 $m \subseteq n \subseteq n + 1$, 而 $|m| = |n|$, 所以 $|n| = |m|$, 与假设矛盾.
+	其次, 假设命题对 $n \in \mathbb N$ 成立, 但对 $n^+$ 不成立, 那么 $\exists m \in \mathscr P(n^+) - \{n^+\}$, $|m| = |n^+|$. 
+	我们设有这么一个双射 $f \colon n^+ \to m$. 
+	假设 $n \notin m$, $f \upharpoonright n$ 就是 $n$ 到其真子集 $m - \{f(n)\}$ 的一个双射 (真子集的事实可由 $m - \{f(n)\} \subseteq n - \{f(n)\}$ 确认). 这和我们假设命题对 $n$ 成立矛盾.
+
+	设 $n \in m$, 因为 $n^+ - m \neq \varnothing$, $\exists k \in m$, 那么对换 $\sigma := (k, n) \in S_{n^+}$%
+		\footnote{这是指 $n^+$ 阶置换群 i.e.\ $n^+$ 到自身的双射, 对换意味着 $\sigma(k) = n$, $\sigma(n) = k$, $\sigma(i) = i$ 对于 $i \in n^+ - \{n, k\}$}
+	和 $f$ 的复合 $\sigma \circ f $ 将是一个双射, 而且作为双射的限制 $\sigma \circ f \upharpoonright n$ 的值域 $\ran (\sigma \circ f \upharpoonright n) $ 将是 $n$ 的真子集. 这和我们假设命题对 $n$ 成立矛盾.
+\end{proof}
+
+\begin{theorem}[最小的无穷集]
+	每一个无穷集合都有一个可数子集.
+\end{theorem}
+\begin{proof}
+	令 $A$ 是一个无穷集合. 由$\properclass{AC II}$~\ref{AC2}, 存在选择函数~$f \colon \mathscr P(A) \to A$.
+	我们递归地定义: $a_0 = f(A)$, $a_n = f(A - \{a_i\}_{i \in n})$, 将得到 $A$ 的可数子集 $\{a_n\}_{n \in \mathbb N}$.
+\end{proof}
+
+\begin{theorem}[可数集的并]
+	设 $A$, $B$ 是两个可数集, 那么它们的并 $A \cup B$ 也是可数的.
+\end{theorem}
+\begin{proof}
+	将 $A$ 和 $B$ 分别编号为 $\langle a_n \rangle_{n \in \mathbb N}$ 和 $\langle b_n \rangle_{n \in \mathbb N}$. 
+	$\langle c_n \rangle_{n \in \mathbb N}$ 可定义为 $c_{2k} = a_k$, $c_{2k + 1} = b_k$, $k \in \mathbb N$. 而 $\{c_n\}_{n \in \mathbb N} = A \cup B$. 
+\end{proof}
+
+\begin{corollary}[可数集的有限并]
+	设 $n \in \mathbb N$. 
+	如果 $\forall i \in n$, $A_i$ 都是可数的, 那么 $\bigcup_{i \in n} A_i$ 也是可数的.
+\end{corollary}
+
+\begin{theorem}[可数集的 Cartesian 积]\label{theorem: 可数集的 Cartesian 积}
+	如果 $A$ 和 $B$ 是可数集, 它们的 Cartesian 积~$A \times B$ 也是可数的.
+\end{theorem}
+\begin{proof}
+	我们考虑这样的序列 $(0, 0)$, $(0, 1)$, $(1, 0)$, $(0, 2)$, $(1, 1)$, $(2, 0)$, \ldots, 也就是先按照 $(m, n)$ 的和从小到大排列, 再根据 $m$ 从小到大排列. 这个序列可以严格地定义为: 
+
+	设 $k \in \mathbb N$. 
+	令
+	\begin{equation*}
+		\ell(k) := \max \{ \ell' \in \mathbb N \mid \sum_{i = 0}^{\ell'} i \leq k\}\,.
+	\end{equation*}
+	
+	双射 $f \colon \mathbb N \to \mathbb N^2$ 定义为 $f(k) = (m_k, n_k)$, 其中 $m_k = k - \sum_{i = 0}^{\ell(k)} i  $, $n_k = \ell(k) - m_k = \ell - k + \sum_{i = 0}^{\ell(k)} i$.
+\end{proof}
+
+\begin{corollary}[有限个可数集的 Cartesian 积]\label{corollary: 有限个可数集的 Cartesian 积}
+	若 $\forall n \in \mathbb N$, $A_n$ 都可数, 那么 $\prod_{n \in \mathbb N} A_n$ 也可数. 
+\end{corollary}
+
+\begin{corollary}[可数集的可数并]\label{corollary: 可数集的可数并}
+	若 $\forall n \in \mathbb N$, $A_n$ 都可数, 那么 $\bigcup_{n \in \mathbb N} A_n$ 也可数. 
+\end{corollary}
+\begin{proof}
+	对所有的 $A_i$ 的元素进行编号得到 $(a_{ij})_{j \in \mathbb N}$, 根据定理~\ref{theorem: 可数集的 Cartesian 积}, 我们能找到双射 $k \mapsto (i,j)$, 从而 $c_k := a_{ij}$ 将是 $\bigcup_{n \in \mathbb N} A_n$ 中的序列. 
+	
+	考虑到 $\forall c \in \bigcup_{n \in \mathbb N} A_n$, 取最小的 $i \in \mathbb N$, $a_{ij} = c$, 我们找到了一个 $c \mapsto (i,j) \mapsto k$ 的映射, 不难验证这个映射是单射, 只需要考虑 $c \mapsto (i,j)$ 是单的即可.
+
+	由势的定义~\ref{definition: 势}, $|\bigcup_{n \in \mathbb N} A_n| \leq |\mathbb N|$, 又显然 $|\bigcup_{n \in \mathbb N} A_n| \geq |\mathbb N|$, 根据~\ref{theorem: CBS} 我们知道了 $|\bigcup_{n \in \mathbb N} A_n| = |\mathbb N|$.
+\end{proof}
+
+\begin{corollary}[可数集中的有限序列可数]
+	若 $A$ 可数, 那么 $A^{< \mathbb N}$ 也可数.
+\end{corollary}
+\begin{proof}
+	注意 $A^{< \mathbb N} = \bigcup_{n \in \mathbb N} A^n$, 而 $A^n$ 由推论~\ref{corollary: 有限个可数集的 Cartesian 积} 是可数的, 它们的可数并由推论~\ref{corollary: 可数集的可数并} 也是可数的.
+\end{proof}
+
+\begin{corollary}[可数集的有穷子集可数]
+	若 $A$ 可数, $X := \{x \in \mathscr P(A) \mid \exists n \in \mathrm N \,(|x| = n)\}$ 也可数.
+\end{corollary}
+\begin{proof}
+	记 $X_n = \{x \in \mathscr P(A) \mid |x| = n\}$, 我们能注意到单射 $X_n \to A^n;\; x = \{x_i\}_{i \in n} \mapsto (x_i)_{i \in n}$, 也就是 $|X_n| \leq A^n = |\mathbb N|$. 通过反证法可以验证 $X_n$ 是无穷的, 从而是可数无穷的, 除非 $n = 0$.
+
+	所以, 根据推论~\ref{corollary: 可数集的可数并}, 
+	\begin{equation*}
+		X = X_0 \cup \bigcup_{n \in \mathbb N^*} X_n
+			= \{\varnothing\} \cup \bigcup_{n \in \mathbb N^*} X_n = |\mathbb N|\,.
+	\end{equation*}
 \end{proof}
 
 \backmatter
