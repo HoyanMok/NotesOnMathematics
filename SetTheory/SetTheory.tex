@@ -1015,7 +1015,7 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 	和 $f$ 的复合 $\sigma \circ f $ 将是一个双射, 而且作为双射的限制 $\sigma \circ f \upharpoonright n$ 的值域 $\ran (\sigma \circ f \upharpoonright n) $ 将是 $n$ 的真子集. 这和我们假设命题对 $n$ 成立矛盾.
 \end{proof}
 
-\begin{theorem}[最小的无穷集]
+\begin{theorem}[最小的无穷集]\label{theorem: 最小的无穷集}
 	每一个无穷集合都有一个可数子集.
 \end{theorem}
 \begin{proof}
@@ -1085,6 +1085,54 @@ $|X|\leq |Y|$和$|Y|\leq |X|$分别蕴含了单射$f\in Y^X$和$g\in X^Y$的存�
 			= \{\varnothing\} \cup \bigcup_{n \in \mathbb N^*} X_n = |\mathbb N|\,.
 	\end{equation*}
 \end{proof}
+
+接下来给出一些有穷的等价条件.
+
+\begin{theorem}[有穷当且仅当存在有最元的线序]\label{theorem: 有穷 IFF 存在有最元的线序}
+	集合~$X$ 是有穷的 iff 存在线序 $\mathord{\leq}_X \in \mathscr P(X^2)$ s.t.\ $\forall A \in \mathscr P(X) - \{\varnothing\}$, $\exists a, b \in A (a = \max A \wedge b = \min A)$.
+\end{theorem}
+\begin{proof}
+	$\to$: 令 $f \colon X \to n$ 见证了 $X$ 和 $n$ 的等势, 那么 $\mathord{\leq}_X = \{(x, y) \in X^2 \mid f(x) \leq f(y)\}$ 即是我们要找的有最大, 最小元的线序.
+
+	$\gets$: 
+	假设我们得到了一个 $X$ 中的严格单调无穷序列~$(x_n)_{n \in \mathbb N}$ (即 $x_{n^+} > x_n$ 对 $\forall n \in \mathbb N$ 都成立),  $\{x_n\}_{n \in \mathbb N}$ 应当有最大元, 也就是应当 $\exists N \in \mathbb N$ s.t.\ $x_N = \max \{x_n\}_{n \in \mathbb N}$, 可是按照定义 $x_{N^+} > x_N$ 矛盾, 我们得到结论: 这样的单调无穷序列是不存在的.
+
+	我们令 $x_0 = \min X$, 并令 $x_{n^+} = \min (X - \{x_i\}_{i \in n})$ 如果 $X - \{x_i\}_{i \in n}$ 不是一个空集. 不难验证这是一个单调的序列, 而且前已证明不可能是无穷的, 也就是说 $\exists N \in \mathbb N$, $X - \{x_n\}_{n \in N} = \varnothing$, 于是乎 $|X| = N$.
+\end{proof}
+
+\begin{theorem}[有穷当且仅当非空子集族有极大元]\label{theorem: 有穷 IFF 非空子集族有极大元}
+	$X$ 是有穷的 iff $\forall \mathscr X \in \mathscr P(X) - \{\varnothing\}$, $\mathscr X$ 都有 $\subseteq$ 下的极大元.
+\end{theorem}
+\begin{proof}
+	$\to$: $X$ 是有穷的那么 $\mathscr P(X)$ 也是有穷的, 那么根据定理~\ref{theorem: 有穷 IFF 存在有最元的线序} $\mathscr X$ 肯定有最大元, 最大元当然也是极大元. 
+	
+	$\gets$: 令 $\mathscr X := \{Y \in \mathscr P(X) - \{\varnothing\} \mid \text{$Y$ 是有穷的}\}$, 那么它有极大元 $M$, 也就是说 $\forall Y \in \mathscr X$, $\neg(M \subsetneqq Y)$. 
+	假设 $X \notin \mathscr X$ 即 $X$ 是无穷的, 那么 $X - M$ 依然是无穷集, 那么 $\exists x \in X - M$. 显然 $\{x\} \cup M$ 依然是有穷的, 但是 $M \subseteqq \{x\} \cup M$, 这和极大元的定义相违背. 结论: $X$ 是有穷的.
+\end{proof}
+
+\begin{definition}[Dedekind~无穷]
+	若 $\exists Y \in \mathscr P(X) - \{X\}$, $|Y| = |X|$, 我们称 $X$ 是 \indexbf{Dedekind~无穷}的. 若 $X$ 不是 Dedekind~无穷的, 那么 $X$ 被称为 \indexbf{Dedekind~有穷的}.
+\end{definition}
+
+\begin{theorem}[有穷当且仅当 Dedekind~有穷]
+	集合~$X$ 是有穷的 iff $X$ 是 Dedekind~有穷的.
+\end{theorem}
+\begin{proof}
+	$\to$: 若 $|X| = n \in \mathbb N$, 令 $f \colon n \to X$ 见证了这个等势, 那么 $\forall Y \subsetneqq X$, $f^{-1}(Y) \subsetneqq n$ 从而 $|Y| = m \in n$.
+	
+	$\gets$: 若 $X$ 无穷, 那么根据定理~\ref{theorem: 最小的无穷集} (注意, 这个定理依赖 $\properclass{AC}$), 我们将能找到 $X$ 的一个可数无穷的子集 $Y := \{x_n\}_{n \in \mathbb N}$. 
+	注意到 $g(x_n) = x_{n+}$ 是 $Y$ 到 $Y - \{x_0\}$ 的双射. 
+	我们定义 $X$ 到 $X - \{x_0\}$双射:
+	\begin{equation*}
+		f(x) = \begin{cases}
+			x, & x \in X - Y, \\
+			g(x), & x \in Y.
+		\end{cases}
+	\end{equation*}
+
+	这个双射就是 $X$ 是Dedekind~无穷的证据.
+\end{proof}
+
 
 \backmatter
 \nocite{*}
