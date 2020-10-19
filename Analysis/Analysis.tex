@@ -142,7 +142,7 @@ The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/mas
 \mainmatter
 \part{Mathematical Analysis}
 
-\chapter{Metric Space and Continuous Map}
+\chapter{Metric Space and Continuous Mapping}
 
 \section{Metric Space}
 \begin{definition}[Metric]\label{definition: metric} A function
@@ -179,7 +179,7 @@ Some examples:
 		d_p(f, g) =
 		\left(
 			\int^b_a \big| f - g \big|^p \dif x
-		\right) ^{1/p}\,.
+		\right)^{1/p}\,.
 	\end{equation}
 	while $\indexfm[C infty a b]{C_\infty [a, b]}$ is called a \indexbf{Chebyshev metric}, 
 	where the metric is defined as $d_\infty(f, g) := \max_{x \in [a, b]} |f(x) - g(x)|$.
@@ -248,7 +248,7 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 \end{proof}
 
 \begin{definition}[Neighbourhood]\label{definition: neighbourhood (metric)}
-	If $x \in X$ is an element of an open set, then such open set is called a \indexbf{neighbourhood} of point $x$ in $X$, denoted by $\indexbf[U x]{U(x)}$.
+	If $x \in X$ is an element of an open set, then such open set is called a \indexbf{neighbourhood} of point $x$ in $X$, denoted by $\indexfm[U x]{U(x)}$.
 	The collection of all neighbourhoods of $x$ can be denoted by $\indexfm[U x]{\mathscr U(x)}$.
 \end{definition}
 
@@ -722,149 +722,197 @@ We shall consider isometric spaces as identical, when only discussing within met
 
 \section{Continuous Mapping}
 Let's recall the definition of the limitation.
-\begin{definition}\label{filter_base}
-A set $\mathscr{B}\subset 2^X$ is called a \textbf{(filter) base}\index{filter base}\index{base} in $X$ if the following conditions hold:
-\begin{conditionlist}[label=\alph*)]
-\item $\varnothing \notin \mathscr{B}$.
-\item $\forall B_1,B_2\in \mathscr{B}$, $\exists B\in \mathscr{B}$ s.t. $B\subset B_1\cap B_2\subset B_2$. 
-\end{conditionlist}
+
+\begin{definition}[Filter base]\label{definition: filter base}
+	A set~$\mathscr{B} \subset 2^X$ is called a \textbf{(filter) base}\index{filter base}\index{base} in $X$ if the following conditions hold:
+	\begin{conditionlist}[label=\alph*)]
+		\item $\varnothing \notin \mathscr{B}$.
+		\item $\forall B_1, B_2 \in \mathscr{B}$, $\exists B \in \mathscr{B}$ s.t.\ $B \subset B_1 \cap B_2 \subset B_2$. 
+	\end{conditionlist}
 \end{definition}
+
 Introduction of the limits in a topological space is as follows.
-\begin{definition}\label{limit}
-Let $a\in Y$ be the \indexbf{limit} over the base $\mathscr{B}\subset 2^{\mathscr{D}(f)}$ of a mapping $f:\mathscr{D}( f )\to Y$, in which $Y$ is epuiped with a topology $\mathscr T$. 
-\[
-	\lim_\mathscr{B} f = a 
-	\quad:=\quad
-	\forall U(a)\subset Y\;
-	\exists B\in \mathscr{B}(f(B)\subset U(a)).
-\]
+
+\begin{definition}[Limit]\label{definition: limit}
+	Let $a \in Y$ be the \indexbf{limit} over the base $\mathscr{B} \subset 2^{\mathscr{D}(f)}$ of a mapping $f \colon \mathscr{D}(f) \to Y$, in which $Y$ is epuiped with a topology $\mathscr T$. 
+	\[
+		\lim_\mathscr{B} f = a 
+		\quad := \quad
+		\forall U(a)\subset Y\;
+		\exists B\in \mathscr{B}(f(B)\subset U(a)).
+	\]
 \end{definition}
 
 Such definition is parallel to the definition we have introduced on the limits of real number, hence it basically holds the same propoties. 
-\begin{definition}\label{continuous}
-A mapping $f:X\to Y$, where $X$,$Y$ is respectively equiped with topology $\mathscr T_X$,$\mathscr T_Y$, is said to be \indexbf{continuous} at $x_0\in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. It is \indexbf{continuous} in $X$ if it is continuous at each point $x\in X$. 
+
+\begin{definition}\label{definition: continuous}
+	A mapping $f \colon X \to Y$, where $X$, $Y$ is equiped with topology $\mathscr T_X$, $\mathscr T_Y$, respectively, is said to be \indexbf{continuous} at $x_0 \in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. 
+	It is \indexbf{continuous} in $X$ if it is continuous at each point $x \in X$. 
 \end{definition}
-The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X,Y)$ or $C(X)$ when $Y$ is clear. 
+
+The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X, Y)$ or $C(X)$ when $Y$ is clear. 
+
 \begin{theorem}[\textbf{Criterion for continuity}]
-	\index{criterion for continuity}\label{criterion_continuity}
+	\index{criterion for continuity}\label{theorem: criterion of continuity}
+	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces, $f \in Y^X$. 
+	The function~$f$ is continuous \emphbf{iff} $\forall G_Y \in \mathscr T_Y$, $f^{-1} (G_Y) \in \mathscr T_X$.
+\end{theorem}
+\begin{proof}
+	$\to$: 
+	It is obvious if $f^{-1}(G_Y) = \varnothing$. 
+	Hence we assume that $f^{-1}(G_Y) \neq \varnothing$. 
+	Let $x_0 \in X$. 
+	Since $f \in C(X, Y)$, for $G_Y$, $\exists U( x_0) $ s.t.\ $f\big(U(x_0) \big) \subset G_Y$. 
+	Also notice that $f\big(U(x_0) \big) \subset G_Y \Rightarrow  U(x_0) \subset f^{-1}(G_Y)$, therefore $f^{-1}(G_Y)$ is open.
 
-\noindent 
-$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. A mapping $f: X\to Y$ is continuous \emphbf{iff} $\forall G_Y\in \mathscr T_Y$, $f ^{-1} ( G_Y ) \in \mathscr T_X$.
-\end{theorem}
-\begin{proof}
-$\Rightarrow$: It is obvious if $f  ^{-1}(G_Y) = \varnothing$. If $f  ^{-1}(G_Y) \neq \varnothing$ and $x_0 \in X$, since $f \in C(X,Y)$, for $G_Y$, $\exists U( x_0) $ s.t $f ( U( x_0)) \subset G_Y$. Also notice that $f ( U( x_0)) \subset G_Y \Rightarrow U( x_0) \subset f  ^{-1}(G_Y)$, therefore $f  ^{-1}(G_Y) $ is open.
+	$gets$: 
+	$\forall x_0 \in X$, let $y_0 = f(x_0)$, $f^{-1} (U( y_0)) \in \mathscr T_X$. 
+	Notice that $x_0 \in f^{-1}(U( y_0))$, therefore $f \in C(X, Y) $.
+\end{proof}
 
-$\Leftarrow$: $\forall x_0 \in X$, let $y_0 = f ( x_0)$, $f ^{-1} ( U( y_0)) \in \mathscr T_X$. Notice that $x_0 \in f ^{-1} ( U( y_0))$, therefore $f \in C( X, Y) $.
-\end{proof}
-\begin{definition}\label{homeomorphism}
-$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. A bijective mapping $f: X\to Y$ is a \indexbf{homeomorphism} if $f \in C( X, Y) \wedge f ^{ -1} \in C( Y, X)$. 
+\begin{definition}[Homeomorphism]\label{definition: homeomorphism}
+	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces. 
+	A bijective mapping $f \colon X \to Y$ is a \indexbf{homeomorphism} if $f \in C(X, Y) \wedge f^{-1} \in C(Y, X)$. 
 \end{definition}
-\begin{definition}\label{homeomorphic}
-Two topological spaces $(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f: X\to Y$.
+
+\begin{definition}[Homeomorphic spaces]\label{definition: homeomorphic}
+	Two topological spaces $(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f \colon X \to Y$.
 \end{definition}
-Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other.
-\begin{theorem}\label{compact_continuous}
-$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. $K\subset X$ is a compact set. If $f: X\to Y \in C( X, Y)$, then $f( K)$ is compact.
+
+Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{theorem: criterion of continuity} has shown that their open sets correspond to each other.
+
+\begin{theorem}\label{theorem: compact image of continuous mapping}
+	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces. 
+	Let $K \subset X$ be a compact set. 
+	If $f \colon X \to Y \in C(X, Y)$, then $f(K)$ is compact.
 \end{theorem}
 \begin{proof}
-For each open cover $\Omega_Y = \{ G_Y \in \mathscr T_Y\} \subset \mathscr T_Y$ over $f( K)$, $f ^{-1} ( G_Y) \in \mathscr T_X$ (Therem~\ref{criterion_continuity}). $f( K) \subset \cup\,\Omega_Y \Rightarrow K \subset f ^{-1} \left(  \cup\,\Omega_Y \right) = \cup\,\Omega_X $, where $\Omega_X = \{ f ^{-1} ( G_Y) \mid G_Y \in \Omega_Y\} $ is an open cover over $K$. Since $K$ is compact,
-$\exists \Omega'_X \subset \Omega_X\left( 
-\lvert \Omega'_X \rvert \in \mathbb{N}_+ 
-\;\wedge\;K\subset \cup\,\Omega'_X
-\right)$, $f( K) \subset f ( \cup\,\Omega'_X) $. $f ( G'_X) \in \Omega_Y$, hence $\Omega'_Y = \{ f ( G'_X) \mid G'_X \in \Omega'_X\}$ is a finite subcover over $f( K)$.
+	For each open cover $\Omega_Y = \{ G_Y \in \mathscr T_Y\} \subset \mathscr T_Y$ over $f( K)$, $f^{-1} ( G_Y) \in \mathscr T_X$ (Therem~\ref{theorem: criterion of continuity}). $f( K) \subset \cup\,\Omega_Y \Rightarrow K \subset f^{-1} \left(  \cup\,\Omega_Y \right) = \cup\,\Omega_X $, where $\Omega_X = \{ f^{-1} ( G_Y) \mid G_Y \in \Omega_Y\} $ is an open cover over $K$. Since $K$ is compact,
+	$\exists \Omega'_X \subset \Omega_X\left( 
+	\lvert \Omega'_X \rvert \in \mathbb{N}_+ 
+	\;\wedge\;K\subset \cup\,\Omega'_X
+	\right)$, $f( K) \subset f ( \cup\,\Omega'_X) $. $f ( G'_X) \in \Omega_Y$, hence $\Omega'_Y = \{ f ( G'_X) \mid G'_X \in \Omega'_X\}$ is a finite subcover over $f( K)$.
 \end{proof}
-\begin{theorem}\label{compact_Hausdorff_continuous_homeomorphism}
-$(K;\mathscr T_K)$ is a compact space and $(Y,\mathscr T_Y)$ is a Hausdorff space. If a bijective $f: K\to Y \in C( K, Y)$, then it is a homeomorphism.
+
+\begin{theorem}\label{theorem: homeomorphism from compact space to Hausdorff space}
+	Let $(K, \mathscr T_K)$ be a compact space and $(Y, \mathscr T_Y)$ be a Hausdorff space. 
+	Let $f \in Y^K$ be a bijective.
+	If $f \in C(K, Y)$, then $f$ is a homeomorphism.
 \end{theorem}
 \begin{proof}
-$\forall F = K - G$ s.t. $G \in \mathscr T_K$ is compact (Theorem~\ref{compact_closed_subset}). Hence $f ( F) $ is compact (Theorem~\ref{compact_continuous}), then it is also closed
-(Theorem~\ref{compact_Hausdorff_closed}). This fact shows that $f ^{-1}$ is continuous (Theorem~\ref{criterion_continuity}).
+	$\forall F = K - G$ s.t.\ $G \in \mathscr T_K$ is compact (Theorem~\ref{theorem: closed subset of compact set}). 
+	Hence $f(F)$ is compact (Theorem~\ref{theorem: compact image of continuous mapping}), then it is also closed
+	(Theorem~\ref{theorem: compact sets are closed in Hausdorff space}). 
+	This fact shows that $f^{-1}$ is continuous (Theorem~\ref{theorem: criterion of continuity}).
 \end{proof}
-\begin{theorem}\label{connected_continuous}
-$(X,\mathscr T_X)$ and $(Y,\mathscr T_Y)$ are both topological spaces. $E\subset X$ is a connected set. If $f: X\to Y \in C( X, Y)$, then $f( E)$ is also connected.
+
+\begin{theorem}\label{theorem: connected image of continuous mapping}
+	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces, and $E \subset X$ be a connected set. 
+	If $f \in C(X, Y)$, then $f(E)$ is also connected.
 \end{theorem}
 \begin{proof}
-Only to notice that the open-closed sets in $( f( E) ; \mathscr T_{ f( E)})$ have concurrently open-closed pre-images in $( E; \mathscr T_E)$.
+	Only to notice that the open-closed sets in $(f(E), \mathscr T_{ f(E)})$ have concurrently open-closed pre-images in $(E, \mathscr T_E)$.
 \end{proof}
+
 \section{Contraction}
-\begin{definition}\label{fixed_point}
-A point $a\in X$ is a \indexbf{fixed point} of a mapping $f: X\to X$ if $f( a) = a$.
+
+\begin{definition}[Fixed point]\label{definition: fixed_point}
+	A point $a\in X$ is a \indexbf{fixed point} of a mapping $f \colon X \to X$ if $f( a) = a$.
 \end{definition}
-\begin{definition}\label{contraction}
-Let~$(X;d)$ be a metric space. A mapping~$f: X\to X$ is called a \indexbf{contraction} if~$\exists q \in ( 0, 1) \subset \mathbb R$ s.t. $\forall x_1,x_2\in X$, 
-\begin{align}\label{inequality_contraction}
-	d ( f ( x_1), f (x_2)) \leq q d( x_1, x_2).
-\end{align}
+
+\begin{definition}[Contraction]\label{definition: contraction}
+	Let~$(X, d)$ be a metric space. 
+	A mapping~$f \colon X \to X$ is called a \indexbf{contraction} if~$\exists q \in (0, 1) \subset \mathbb R$ s.t. $\forall x_1,x_2 \in X$, 
+	\begin{equation}\label{equation: contraction inequality}
+		d(f(x_1), f (x_2)) \leq q d(x_1, x_2).
+	\end{equation}
 \end{definition}
-\begin{lemma}\label{contraction_continuous}
-A contraction $f: X\to X$ is always continuous.
+
+\begin{lemma}\label{lemma: contraction is continuous}
+	A contraction $f \colon X \to X$ is always continuous.
 \end{lemma}
 \begin{proof}
-$\forall x\in X$, $\forall \varepsilon \in \mathbb R_+ $, $\exists \delta < \varepsilon / q$, according to inequality~\ref{inequality_contraction}:
-\[
-f \left( B( x;\delta )\right) 
-\subset 
-B\left( f( x); \varepsilon \right).
-\]
+	$\forall x \in X$, $\forall \varepsilon \in \mathbb R_+ $, $\exists \delta < \varepsilon / q$, according to inequality~\ref{equation: contraction inequality}:
+	\[
+	f\big( B(x; \delta ) \big) 
+	\subset 
+	B\big( f(x); \varepsilon \big).
+	\]
 \end{proof}
-\begin{theorem}[%
-	\textbf{Picard-Banach fixed-point principle} or \textbf{contraction mapping principle}%
-]\label{contraction_mapping_principle}
-\index{Picard-Banach fixed-point principle}\index{contraction mapping principle}
 
-Let $( X; d)$ be a complete metric space. Each contraction $f: X\to X$ has a unique fixed point $a$. 
-Also, $\forall \{x_n\} \subset X$ s.t.
-$\forall n \in \mathbb{N}
-\left(f ( x_n) = x_{n+1} \right)$ then $\lim\limits_{n\to \infty} x_n = a$, and
-\begin{align}\label{inequality_fixed-point_principle}
-	d( x_n, a) \leq \frac{q^n}{1-q} d( x_1, x_0).
-\end{align}
+\begin{theorem}[\textbf{Picard-Banach fixed-point principle} or \textbf{contraction mapping principle}]
+		\label{contraction_mapping_principle}%
+		\index{Picard-Banach fixed-point principle}\index{contraction mapping principle}%
+	Let $(X, d)$ be a complete metric space. 
+	Each contraction $f \colon X \to X$ has a unique fixed point $a$. 
+	Also, $\forall \{x_n\} \subset X$ s.t.\ 
+	$\forall n \in \mathbb{N} \big(f (x_n) = x_{n+1} \big)$ then $\lim_{n\to \infty} x_n = a$, and
+	\begin{equation}\label{equation: fixed-point principle}
+		d(x_n, a) \leq \frac{q^n}{1 - q} d(x_1, x_0).
+\end{equation}
 \end{theorem}
 \begin{proof}
-By the inequality~\ref{inequality_contraction}:
-\[
-d ( x_{n+1}, x_n) \leq q d( x_n, x_{n-1})
-\leq \cdots 
-\leq q^n d( x_1, x_0)
-\]
-Therefore, $\forall n, k \in \mathbb{N}$, 
-\begin{align}\label{inequality_Cauchy_contraction}
-	d ( x_{n+k}, x_n) \leq 
-	\sum^{k-1}_{i=0} d( x_{n+i+1}, x_{n+i}) \leq
-	\sum^{k-1}_{i=0} q^{n+i} d( x_1, x_0) \leq
-	\frac{q^n}{1-q} d( x_1, x_0),
-\end{align}
-which implies that ${ x_n}$ is a Cauchy sequence in a complete space $(X;d)$, hence it converges to a point $a \in X$.
+	By the inequality~\ref{equation: contraction inequality}:
+	\[
+		d(x_{n+1}, x_n) \leq q d(x_n, x_{n-1})
+		\leq \cdots 
+		\leq q^n d(x_1, x_0)
+	\]
 
-To proof that $a$ is a fixed point of $f$, since $f$ is continuous (Lemma~\ref{contraction_continuous}), just notice that 
-\[
-	a = \lim_{n\to \infty} f(x_n) = 
-	f( \lim_{n\to \infty} x_n) = f( x_n).
-\]
-If there were a second fixed point $a'\in X$ of $f$, then:
-\[
-	0 \leq d( a, a')  = d( f(a), f(a') ) \leq q d( a, a')
-\]
-which can't be true unless $a = a'$. 
+	Therefore, $\forall n, k \in \mathbb{N}$, 
+	\begin{equation}\label{equation: contraction Cauchy sequence}
+		d(x_{n+k}, x_n) \leq 
+			\sum^{k-1}_{i=0} d(x_{n+i+1}, x_{n+i}) \leq
+			\sum^{k-1}_{i=0} q^{n+i} d(x_1, x_0) \leq
+			\frac{q^n}{1 - q} d(x_1, x_0) \,,
+	\end{equation}
+	which implies that $\langle x_n \rangle_{n \in \mathbb N}$ is a Cauchy sequence in a complete space $(X, d)$, hence it converges to a point $a \in X$.
 
-By passing to the limit as $k \to \infty$ in the inequality~\ref{inequality_Cauchy_contraction}, we have the inequality~\ref{inequality_fixed-point_principle}.
+	To proof that $a$ is a fixed point of $f$, since $f$ is continuous (Lemma~\ref{lemma: contraction is continuous}), just notice that 
+	\[
+		a = \lim_{n \to \infty} f(x_n) 
+			= f(\lim_{n\to \infty} x_n) = f(x_n).
+	\]
+
+	If there were another fixed point~$a' \in X$ of $f$, then:
+	\[
+		0 \leq d(a, a')  = d(f(a), f(a')) \leq q d(a, a')
+	\]
+	which can't be true unless $a = a'$. 
+
+	By passing to the limit as $k \to \infty$ in the inequality~\ref{equation: contraction Cauchy sequence}, we have the inequality~\ref{equation: fixed-point principle}.
 \end{proof}
 
 \chapter{Normed Linear Space and Differential Calculus}
-\section{Normed Linear Space}
-\begin{definition}
-Let $V$ be a linear space over $\mathbb R$ or $\mathbb{C}$. A function $\|\;\|: X\to \mathbb R$ assigning to each vector $\boldsymbol{x}\in X$ a real number $\|x\|$ is called a \indexbf{norm} in the linear space $X$ if:
-\begin{conditionlist}[label=\alph*)]
-	\item 
-	$\|\boldsymbol{x}\|=0\Leftrightarrow \boldsymbol{x}=\boldsymbol{0}$ (nondegeneracy);
-	\item
-	$\|\lambda \boldsymbol{x}\| = |\lambda|\|\boldsymbol{x}\|$ (homogeneity);
-	\item
-	$\|\boldsymbol{x}_1+\boldsymbol{x}_2\|\leq 
-	\|\boldsymbol{x}_1\|+\|\boldsymbol{x}_2\|$ (the triangle inequality).
-\end{conditionlist}	
-A linear space with a norm defined on it is called \indexbf{normed}.
+\section{Normed Linear Space} \
+
+\begin{definition}[Norm]
+	Let $V$ be a linear space over $\mathbb R$ or $\mathbb{C}$. 
+	A function $\|\;\| \colon X \to \mathbb R$ assigning to each vector $\bv{x}\in X$ a real number $\|\bv x\|$ is called a \indexbf{norm} in the linear space $X$ if:
+	\begin{conditionlist}[label=\alph*)]
+		\item 
+		$\|\bv x\| = 0 \IFF \bv x = \boldsymbol{0}$ (nondegeneracy);
+		\item
+		$\|\lambda \bv x\| = |\lambda| \|\bv x\|$ (homogeneity);
+		\item
+		$\|\bv x_1 + \bv x_2\| \leq \|\bv x_1\| + \|\bv x_2\|$ (the triangle inequality).
+	\end{conditionlist}	
+
+	A linear space with a norm defined on it is said to be \indexbf{normed}.
 \end{definition}
+
+Over every normed space a distance can be defined as:
+\begin{equation}\label{equation: distance of normed space}
+	d(\bv x_1, \bv x_2) = \|\bv x_1 - \bv x_2\|
+\end{equation} 
+
+\begin{definition}[Banach space]
+	Let $V$ be a normed space.
+	If $(V, d)$ is a complete space, where the distance~$d$ is defined as Eq.~\eqref{equation: distance of normed space}, then we call $V$ a \indexbf{complete normed space} or \indexbf{Banach space}. 
+\end{definition}
+
+
+
 %\appendix
 
 \backmatter
