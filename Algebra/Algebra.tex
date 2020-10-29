@@ -835,8 +835,6 @@
 
 
 
-
-
 \chapter{线性空间}
 \section{线性空间}
 \begin{definition}[线性空间]
@@ -2330,7 +2328,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	$\deg \big( P(X) Q(X) \big) \leq \deg P(X) + \deg Q(X)$.
 \end{theorem}
 
-\begin{theorem}[多项式环的泛性]
+\begin{theorem}[多项式环的泛性]\label{theorem: 多项式环的泛性}
 	设 $R$ 是一个交换环, $A$ 是 $R$ 的子环.
 	$\forall t \in R$, $\exists ! \varPi_t \in \Hom (A[X], R)$, s.t.\ 
 	$\varPi_t (X) = t \wedge\; \forall a \in A \big( \varPi_t(a) = a \big)$.
@@ -2424,10 +2422,150 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	一个非零多项式 $P(X)$ 所有系数对 $c(P)$ (由最大因的定义, 它们都是容度的倍数) 的商为系数的多项式 $\indexfm[pp P X]{\pp P(X)}$ 称为该多项式的\indexbf{本原部分} (primitive part).
 \end{definition}
 
-我们通常称域~$\mathbb F$ 上的多项式环~$\mathbb F[X]$ 的分式域~$Q(\mathbb F[X])$ 为\indexbf{有理函数域}.
+\begin{definition}
+	我们通常称域~$\mathbb F$ 上的多项式环~$\mathbb F[X]$ 的分式域~$Q(\mathbb F[X])$ 为\indexbf{有理函数域}, 记为 $\indexfm[F X]{\mathbb F(X)}$. 
+\end{definition}
+
+将有理函数域定义在域上是习惯, 以下的定理说明了我们同样可以在整环上定义有理函数域:
+
+\begin{theorem}
+	设 $A$ 是一个整环. $Q(A)(X) \cong Q(A[X])$.
+\end{theorem}
+\begin{proof}
+	不难发现 $Q(A[X]) \subseteq Q(A)[X]$ (在同构的意义上 i.e.\ 存在 $Q(A)[X]$ 的子域与 $Q(A[X])$ 同构). 
+	对于任意 $Q(A)(X)$ 的元素, 我们总能找到与它等价的在 $Q(A[X])$ 的元素, 只需要去分母, 即分子分母同乘各自系数的分母的积即可, 也就是:
+	\begin{equation*}
+		\frac{\sum_{i \in n} (a_i / b_i) X^i}{\sum_{j \in m} (c_j / d_j) X^j} = 
+		\frac{\prod_{i \in n} b_i \prod_{j \in m} d_j \sum_{i \in n} (a_i / b_i) X^i}{\prod_{i \in n} b_i \prod_{j \in m} d_j \sum_{j \in m} (c_j / d_j) X^j} \in Q(A[X]) \,.
+	\end{equation*}
+\end{proof}
+
+在 $\mathbb F[X] \ni F(X) \neq O(X)$ 时, 我们令 $\deg (F/G) = \deg F - \deg G \in \mathbb Z$. 如果 $\deg (F/G) < 0$, 我们称 $F/G$ 是一个\indexbf{真分式}, 我们也把 $0$ 称为真分式. $\mathbb F(X)$ 中真分式的集合记为 $\mathbb F_0(X)$.
+
+如果 $F$ 和 $G$ 互素, 则 $F/G$ 是一个\indexbf{既约分式}. 如果 $P(X)$ 是素式, 我们把 $F/P^n$ 称为\indexbf{准素分式}.
+
+\begin{theorem}
+	$\forall F/G \in \mathbb F(X)$, $\exists! (Q, R) \in \mathbb F[X]$, s.t.\ $F/G = Q + R/G$. 
+\end{theorem}
+\begin{proof}
+	因为域上的多项式环是 Euclidean~环, 带余除法即可得到 $F/G = Q + R/G$.
+
+	现在若有 $F/G = Q' + R'/G$, 其中 $\deg R' < \deg G$, 那么:
+	\begin{equation*}
+		Q - Q' = - \frac{R}{G} + \frac{R'}{G}
+			= \frac{R' - R}{G}\,,
+	\end{equation*}
+	且若 $Q \neq Q'$ 和 $R \neq R'$, 
+	\begin{equation*}
+		\deg (Q - Q') = \deg \frac{R' - R}{G} 
+			= \deg (R' - R) - \deg G \leq \max\{\deg R, \deg R'\} - \deg G
+			< 0\,,
+	\end{equation*}
+	这意味着多项式 $Q - Q'$ 有负的度数, 这是不可能的. 而 $Q = Q'$ 将能与 $R = R'$ 互相推出. 
+\end{proof}
+
+\begin{theorem}[真分式是环]
+	$\mathbb F_0(X)$ 是 $\mathbb F(X)$ 的一个无单位元的子环.
+\end{theorem}
+\begin{proof}
+	我们只需要考虑 $\mathbb F_0(X)$ 是否对乘法和加法封闭.
+	设 $R/Q, R'/Q' \in \mathbb F_0(X)$, 且 $R \neq 0$, $R' \neq 0$ (等于 $0$ 的情况是显然的). 
+	
+	由 $\deg R < \deg Q$ 我们知道 $\deg (RQ') < \deg (QQ')$\footnote{因为域是无零因子的, 因此相乘讲意味着次数相加}, 同理 $\deg(R'Q) < \deg (QQ')$, 从而 $\deg(RQ' + R'Q) < \deg(QQ')$. 所以 $R/Q + R'/Q' \in \mathbb F_0(X)$.
+
+	而 $\deg(RR') = \deg R + \deg R' < \deg(Q) + \deg(Q') = \deg(QQ')$, 即 $(R/Q)(R'/Q') \in \mathbb F_0(X)$. 
+
+	最后 $1 \notin \mathbb F_0(X)$.
+\end{proof}
+
+\begin{definition}[最简分式]
+	我们把 $R/Q \in \mathbb F_0(X)$ 称为\indexbf{最简分式}, 存在既约多项式 $P(X)$ 使得 $P^n = Q$, $n \in \mathbb N_+$, 而且 $\deg R < \deg Q$.
+\end{definition}
+
+\begin{theorem}[真分式的最简分式分解]
+	$\forall R/Q \in \mathbb F_0(X)$, $\exists! \mathscr F:=\{R_i/Q_i\}_{i \in n} \in \mathscr P(\mathbb F_0(X))$ s.t.\ $\forall i \in n$, $R_i/Q_i$ 是最简的, 且 $\sum_{i \in n} R_i/Q_i = R/Q$.
+\end{theorem}
+\begin{proof}
+	考虑到证明些繁琐, 又不是该笔记的重点, 这里只给出证明的思路. 
+	
+	首先我们证明当分母可以被分解为互素的因式相乘时 ($F / Q_1 Q_2$), 可以唯一地拆成两个真分式, 分母分别为 $Q_1$ 和 $Q_2$. 
+	这里要运用 Bez\'out~定理的推论~\ref{corollary: Euclidean 整环上的 Bezout 定理互素时}, 
+	分解得到 $1 = A_1 Q_1 + A_2 Q_2$. 
+	在两边乘 $F$, 得到 $F = F A_1 Q_1 + F A_2 Q_2$. 
+	利用反证法可以证明, $F = F_2 Q_1 + F_1 Q_2$, 其中 $F_1, F_2$ 分别是用 $Q_2, Q_1$ 去除 $F A_1$, $F A_2$ 的余数. (若有多出来的含 $Q_1Q_2$ 的项, $F$ 的次数将比 $Q_1 Q_2$ 大.) 这个结论可以用归纳法推广到分母有 $n$~个互素的因式的情况.
+	
+	接着我们将分母因式分解\footnote{注意, 域上的多项式是 Euclidean~整环}, 根据前文我们将它们分解为真准素分式的和.
+
+	最后我们把形如 $F_i/P_i^{n_i}$ 的真准素分式分解为最简分式的和. 将 $F_i$ 不断用 $P_i^{n_i}$ 去除, 可以得到
+	\begin{equation*}
+		F_i = \sum_{k \in n_i} Q_k P_i^k\,.
+	\end{equation*}
+\end{proof}
 
 \section{多项式的根}
 
+接下来将考虑多项式环的泛性 (回忆定理~\ref{theorem: 多项式环的泛性}), 将有单位元的交换环~$A$ 上的多项式嵌入整环~$R$ 中, 其中 $A \subseteq R$. 
+
+\begin{definition}[多项式的根]
+	设 $R$ 是整环, $A$ 是 $R$ 的一个带单位元的子环, $F(X) \in A[X]$, $c \in R$.
+	若 $F(c) = 0$, 那么我们称 $c$ 是 $F(X)$ 的一个\indexbf{根} (root) 或\indexbf{零点} (zero).
+\end{definition}
+
+\begin{theorem}[B\'ezout]\label{theorem: Bezout}
+	设 $A$ 是一个整环, $F(X) \in A[X]$, $c \in A$.
+	$X - c \vert F(X) \IFF F(c) = 0$. 
+\end{theorem}
+\begin{proof}
+	用 $X - c$ 去除 $F(X)$, 得到:
+	\begin{equation*}
+		F(X) = (X - c) Q(X) + R(X)\,,
+	\end{equation*}
+	其中 $\deg R < \deg(X - c) = 1$ 或 $R(X) = 0$, 所以 $F(X) = (X - c) Q(X) + r$, $r \in A$.
+
+	如果 $X - c \vert F(X)$, 那么 $r = 0$, 从而 $F(c) = (c - c) Q(c) = 0$; 如果 $F(c) = 0$, 那么 $(c - c)Q(c) + r = r = 0$, 即 $R(X) = 0$, 从而 $X - c \vert F(X)$.
+\end{proof}
+
+\begin{definition}[重根]
+	设 $A$ 是一个整环, $F(X) \in A[X]$, $c \in A$.
+	如果 $(X - c)^k | F(X)$ 但 $(X - c)^{k + 1} \nmid F(X)$, 我们就把 $c$ 称为 $F(X)$ 的一个 $k$~\indexbf{重根} ($k$-multiple root). 
+	一重根又名\indexbf{单根} (simple root).
+\end{definition}
+
+\begin{theorem}
+	设 $A$ 是一个整环, $F(X) \in A[X] - \{0\}$, $\langle c_i \rangle_{i \in m}$ 分别是 $F(X)$ 的 $\langle k_i\rangle_{i \in m}$~重根 ($c_i = c_j \to i = j$). 
+	$\exists G(X) \in A[X]$ s.t.\ $\forall i \in m$, $G(c_i) \neq 0$, 而且
+	\begin{equation*}
+		F(X) = G(X) \prod_{i \in m} (X - c_i)^{k_i} \,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	这里只给出证明的思路. 对 $m$ 用递归法证明 $\prod_{i \in m} (X - c_i)^{k_i} \mid F(X)$ 时, 需要注意到 $A[X]$ 的整性, 利用消去律~\ref{theorem: 消去律}.
+\end{proof}
+
+\begin{corollary}[重数之和不大于多项式度数]\label{corollary: 重数之和不大于多项式度数}
+	设 $A$ 是一个整环, $F(X) \in A[X] - \{0\}$, $\langle c_i \rangle_{i \in m}$ 分别是 $F(X)$ 的 $\langle k_i\rangle_{i \in m}$~重根 ($c_i = c_j \to i = j$). 
+	\begin{equation*}
+		\sum_{i \in m} k_i \leq \deg F(X)\,.
+	\end{equation*}
+\end{corollary}
+
+\begin{corollary}
+	设 $A$ 是一个整环, $F(X), G(X) \in A[X] - \{0\}$, $\deg F \leq n$, $\deg G \leq n$. 
+	如果 $\exists P \in \mathscr P(A)$ s.t.\ $\card P = n + 1$ 且 $\forall p \in P$, $F(p) = G(p)$, 那么 $F(X) = G(X)$.
+\end{corollary}
+\begin{proof}
+	作 $H(X) = F(X) - G(X)$, 注意到 $P$ 中的数都是 $H(X)$ 的零点, 倘若 $H$ 不是零, $\deg H \leq n$ 但是 $H(X)$ 有了 $n + 1$ 个零点, 与推论~\ref{corollary: 重数之和不大于多项式度数} 矛盾.
+\end{proof}
+
+我们把取值函数~$\varPi_t$ (定义如定理~\ref{theorem: 多项式环的泛性}) 的像记为 $\indexfm[A pol]{A_\text{pol}}$, 称为 $A$ 上的\indexbf{多项式函数环}.
+
+\begin{theorem}
+	设 $A$ 是一个整环, 而且 $\card A = \infty$. 
+	同态 $F(X) \mapsto (F \colon t \mapsto F(t))$ 是一个环同构.
+\end{theorem}
+\begin{proof}
+	这个环同构的单性由推论~\ref{corollary: 重数之和不大于多项式度数} 保证, 若其核不是平凡的, 那么存在一个非零多项式有无穷多个根.
+\end{proof}
 
 \backmatter
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
