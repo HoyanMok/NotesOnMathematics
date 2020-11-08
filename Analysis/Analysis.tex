@@ -257,7 +257,7 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 	\begin{conditionlist}[label=\alph*)]
 	\item If $\exists U(x) \subset E$, $x$ is called an \indexbf{interior point} of $E$.
 	\item If $\exists U(x) \subset X - E$, $x$ is called an \indexbf{exterior point} of $E$.
-	\item If $x$ isn't an interior point nor exterior point of $E$, it is called a \indexbf{boundary point} of $E$. The set of boundary points is called \indexbf{boundary}, denoted by $\indexbf[partial E]{\partial E}$.
+	\item If $x$ isn't an interior point nor exterior point of $E$, it is called a \indexbf{boundary point} of $E$. The set of boundary points is called \indexbf{boundary}, denoted by $\indexfm[partial E]{\partial E}$.
 \end{conditionlist}
 \end{definition}
 
@@ -911,7 +911,109 @@ Over every normed space a distance can be defined as:
 	If $(V, d)$ is a complete space, where the distance~$d$ is defined as Eq.~\eqref{equation: distance of normed space}, then we call $V$ a \indexbf{complete normed space} or \indexbf{Banach space}. 
 \end{definition}
 
+\begin{definition}[Hermitian form]
+	A linear space~$X$ on the complex field~$\mathbb C$ is said to be given a \indexbf{Hermitian space} if there is a mapping~$\indexfm[langle rangle]{\langle, \rangle} \colon X^2 \to \mathbb C$ defined, s.t.\ $\forall \bv x_1, \bv x_2, \bv x_3 \in X$, $\forall \lambda \in \mathbb C$.
+	\begin{conditionlist}[label=\alph*)]
+		\item $\langle \bv x_1, \bv x_2 \rangle = \overline{\langle \bv x_2, \bv x_1 \rangle}$;
+		\item $\langle \lambda \bv x_1, \bv x_2\rangle = \lambda \langle \bv x_1, \bv x_2 \rangle$;
+		\item $\langle \bv x_1 + \bv x_2, \bv x_3\rangle = \langle \bv x_1, \bv x_3 \rangle + \langle \bv x_2, \bv x_3 \rangle$.
+	\end{conditionlist}
+\end{definition}
 
+A Hermitian form is said to be \emphbf{positive semi-definite}, if $\forall \bv x \in X$, $\langle \bv x, \bv x \rangle \geq 0$\footnote{%
+	$\langle \bv x, \bv x\rangle = \overline{\langle \bv x, \bv x\rangle}$, hence $\langle \bv x, \bv x\rangle \in \mathbb R$.%
+}.
+A Hermitian form is said to be \emphbf{degenerate}, if $\exists \bv x \in X - \{\bv 0\}$ s.t.\ $\langle \bv x, \bv x \rangle = 0$. 
+A Hermitian form that is not degenerate is said to be \emphbf{non-degenerate}.
+
+\begin{definition}[Inner product]
+	A non-degenerate positive semi-definite Hermitian form%
+		\footnote{Equivalently, a positive definite Hermitian form.}%
+	is said to be an \indexbf{inner product}. 
+	A space equiped with an inner product is said to be a \indexbf{inner product space}.
+\end{definition}
+
+\begin{theorem}[Cauchy-Bunyakovskii's inequality]\label{theorem: Cauchy-Bunyakovskii}%
+	\index{Cauchy-Bunyakovskii's inequality}%
+	A linear space~$X$ on the complex field~$\mathbb C$ is equiped with an inner product $\langle , \rangle$. $\forall \bv x, \bv y \in X$, 
+	\begin{equation}
+		|\langle \bv x, \bv y \rangle|^2 
+			\leq \langle \bv x, \bv x \rangle \langle \bv y, \bv y \rangle\,.
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	The theorem is trivial as $\bv y = \bv 0$. Let us assume that $\bv y \neq \bv 0$, therefore $\langle \bv y, \bv y\rangle > 0$.
+
+	$\forall \lambda \in \mathbb C$, 
+	\begin{equation*}
+		0 \leq \langle \bv x + \lambda \bv y, \bv x + \lambda \bv y \rangle
+			= \langle \bv x, \bv x \rangle + \lambda \overline{\langle \bv x, \bv y \rangle} + \overline \lambda \langle \bv x, \bv y \rangle + |\lambda|^2\langle \bv y, \bv y \rangle 
+	\end{equation*}
+
+	Let $\lambda = - \langle \bv x, \bv y \rangle / \langle \bv y, \bv y\rangle$, we have:
+	\begin{equation*}
+		0 \leq \langle \bv x, \bv x \rangle 
+			- \frac{ |\langle \bv x, \bv y \rangle|^2}{\langle \bv y, \bv y \rangle}
+			\,. 
+	\end{equation*}
+\end{proof}
+
+By the theorem~\ref{theorem: Cauchy-Bunyakovskii} we can claim that a linear space on complex number with an inner product $\langle, \rangle$ induces a norm
+\begin{equation}
+	\|\bv x\| := \sqrt{\langle \bv x, \bv x \rangle}\,,
+\end{equation} 
+and a metric
+\begin{equation}
+	d(\bv x, \bv y) = \|\bv x - \bv y\|\,.
+\end{equation}
+
+\begin{definition}[Hilber space]
+	If a linear space is equiped with an inner poduct, and together with its induced metric constructs a complete metric space, we call it a \indexbf{Hilbert space}. If the induced metric space is not complete, we shall call it a \indexbf{pre-Hilbert space}.
+\end{definition}
+
+\section{Linear Operators}
+
+\begin{definition}[Norm]
+	Let $\mathscr A$ be a $n$-multilinear operator space over normed space $(\bv X_i)_{i \in n}$ to a normed space $Y$ i.e.\ $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$. 
+	We define the norm $\indexfm[vert vert]{ \Vert \mathscr A \Vert }$ as:
+	\begin{equation}
+		\|\mathscr A\| := \sup 
+		\left\{
+			\frac{\|\mathscr A(\bv x_i)_{i \in n}\|_Y}
+				{\prod_{i \in n} \|\bv x_i\|_{X_i}}
+		\middle|
+			\forall i \in n,\;\bv x_i \in X_i - \{\bv 0\}
+		\right\}\,,
+	\end{equation}
+	where the subscripts denote which spaces the norms are defined in.
+\end{definition}
+
+The following theorem gives an equivalent definition:
+
+\begin{theorem}
+	Let $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$.
+	\begin{equation}
+		\|\mathscr A\| = 
+		\{ 
+			\|\mathscr A(\bv e_i)_{i \in n}\|_Y
+		\mid
+			\forall i \in n,\; \bv e_i \in X_i \wedge \|\bv e_i\|_{X_i} = 1
+		\} \,.
+	\end{equation}
+\end{theorem}
+
+\begin{theorem}
+	Let $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$, and let $\|\mathscr A\| < \infty$.
+	\begin{equation}
+		\|\mathscr A(\bv x_i)_{i \in n}\|_Y 
+			\leq \|\mathscr A\| \prod_{i \in n} \|\bv x_i\|_{X_i}\,.
+	\end{equation}
+\end{theorem}
+
+\begin{definition}[Bounded linear operators]
+	Let $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$. 
+	If $\|\mathscr A\| < \infty$, then $\mathscr A$ is said to be \indexbf{bounded}.
+\end{definition}
 
 %\appendix
 
