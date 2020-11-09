@@ -381,6 +381,11 @@ We can also define interior points, exterior points, boundary points, limit poin
 
 If two topology~$\mathscr T_1, \mathscr T_2$ are defined on the same $X$, $\mathscr T_1$ is said to be \indexbf{stronger} than $\mathscr T_2$ if $\mathscr T_1 \subsetneqq \mathscr T_2$.
 
+\begin{definition}[Direct product]\label{definition: direct product}
+	Let $(X_1, \mathscr T_1)$ and $(X_2, \mathscr T_2)$ be two topological spaces. 
+	Their \indexbf{direct product} is defined as $(X_1 \times X_2, \mathscr T)$, where $\mathscr T$ has a basis $\mathscr B := \{ G_1 \times G_2 \mid G_1 \in \mathscr T_1 \wedge G_2 \in \mathscr T_2\}$.
+\end{definition}
+
 \section{Compact Set}
 
 \begin{definition}[Open cover]\label{definition: open cover}
@@ -976,7 +981,7 @@ and a metric
 \begin{definition}[Norm]
 	Let $\mathscr A$ be a $n$-multilinear operator space over normed space $(\bv X_i)_{i \in n}$ to a normed space $Y$ i.e.\ $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$. 
 	We define the norm $\indexfm[vert vert]{ \Vert \mathscr A \Vert }$ as:
-	\begin{equation}
+	\begin{equation}\label{equation: norm of operator}
 		\|\mathscr A\| := \sup 
 		\left\{
 			\frac{\|\mathscr A(\bv x_i)_{i \in n}\|_Y}
@@ -1014,6 +1019,104 @@ The following theorem gives an equivalent definition:
 	Let $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$. 
 	If $\|\mathscr A\| < \infty$, then $\mathscr A$ is said to be \indexbf{bounded}.
 \end{definition}
+
+\begin{theorem}[Continuous at zero iff bounded]\label{theorem: continuous at zero iff bounded}
+	Let $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$.
+	Denote $\prod_{i \in n} X_i$ by $X$.
+	The operator~$\mathscr A$ is continuous at $\bv 0 \in X$\footnote{Be reminiscent of the Defintion~\ref{definition: direct product}} \emphbf{iff} it is bounded.
+\end{theorem}
+\begin{proof}
+	First assume that $\mathscr A$ is bounded. 
+
+	When $\|\mathscr A\| = 0$ it is trivial. 
+	Hence we assume that $\|\mathscr A\| > 0$.
+	
+	$\forall \varepsilon \in \mathbb R_+$, if $\Delta \bv x := (\Delta \bv x_i)_{i \in n} \in X$ meets the condition that $\forall i \in n$, $\|\Delta \bv x_i\|_{X_i} < \sqrt[n]{\varepsilon / \|\mathscr A\|}$ then
+	\begin{align*}
+		d_Y(&\mathscr A(\bv 0 + \Delta \bv x), \mathscr A(\bv 0))
+		= d_Y(\mathscr A(\Delta \bv x), \bv 0)
+		= \|\mathscr A(\Delta \bv x)\|_Y
+		\\
+		&\leq \|\mathscr A\| \prod_{i \in n} \|\Delta \bv x_i\|_{X_i}
+		< \varepsilon \,.
+	\end{align*}
+
+	Then we assume that $\mathscr A$ is continuous at $\bv 0$.
+
+	Set any positive $\varepsilon \in \mathbb R_+$, $\exists \delta \in \mathbb R_+$, when $\forall i \in n$, $\bv x_i \in X_i - \{\bv 0\}$ and $\|\bv x_i\|_{X_i} \leq \delta$, $\|\mathscr A(\bv x)\| \leq \varepsilon$. 
+
+	Since every unit vector $\bv e_i$ can be written as $\delta \bv e_i / \delta$, where $\delta \bv e_i \in X_i - \{\bv 0\}$ and $\|\delta \bv e_i\|_{X_i} = \delta$, then
+	\begin{equation*}
+		\|\mathscr A(\bv e_i)_{i \in n}\|_Y 
+		= \frac 1 {\delta^n} \|\mathscr A(\delta e_i)_{i \in n}\|_Y
+		\leq \frac \varepsilon {\delta^n}\,,
+	\end{equation*}
+	which implies that the operator~$\mathscr A$ is bounded.
+\end{proof}
+
+\begin{theorem}[Continuous at zero then at everywhere]\label{theorem: Continuous at zero then at everywhere}
+	Let $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$.
+	Denote $\prod_{i \in n} X_i$ by $X$.
+	If the operator is continuous at $\bv 0 \in X$, then it is continuous in $X$.
+\end{theorem}
+\begin{proof}
+	By theorem~\ref{theorem: continuous at zero iff bounded}, we have learned that an operator continuous at $\bv 0$ is bounded.
+
+	$\forall \bv x, \Delta \bv x \in X$, 
+	\begin{align*}
+		d_Y(&\mathscr A(\bv x + \Delta \bv x), \mathscr A(\bv x))
+		= \|\mathscr A(\bv x + \Delta \bv x) - \mathscr A(\bv x)\|_Y 
+		\\
+		&= \Big\|\mathscr A(\Delta \bv x_0, \bv x_1, \cdots, \bv x_{n-1})
+			+ \mathscr A(\bv x_1, \Delta \bv x_1, \cdots, \bv x_{n-1})
+			+ \cdots
+			+ \mathscr A(\bv x_0, \bv x_1, \cdots, \Delta \bv x_{n-1}) 
+		\\&\qquad
+			+ \mathscr A(\Delta \bv x_0, \Delta \bv x_1, \cdots, \bv x_{n-1})
+			+ \cdots 
+			+ \mathscr A(\bv x_0, \cdots, \Delta \bv x_{n-2}, \Delta \bv x_{n-1})
+			+ \cdots 
+			+ \mathscr A(\Delta \bv x)
+		\Big\|_Y
+		\\
+		&\leq
+			\|\mathscr A(\Delta \bv x_0, \bv x_1, \cdots, \bv x_{n-1})\|_Y
+			+ \cdots
+			+ \|\mathscr A(\bv x_0, \bv x_1, \cdots, \Delta \bv x_{n-1})\|_Y
+		\\&\qquad
+			+ \cdots 
+			+ \|\mathscr A(\Delta \bv x)\|_Y
+		\\
+		&\leq
+			\|\mathscr A\|  \sum_{S \in \mathscr P(n) - \{\varnothing\}} 
+			\prod_{i \in n - S}\|\bv x_i\|_{X_i}
+			\prod_{j \in S} \|\Delta\bv x_j\|_{X_j}\,.
+	\end{align*}
+
+	By setting $\max\{\|x_i\|_{X_i} \mid i \in n\} < \varepsilon \max \Big\{ \sqrt[n]{\prod_{i \in n - S}\|\bv x_i\|_{X_i}} \mid S \in \mathscr P(n) - \{\varnothing\} \Big\} / (2^n - 1)\|\mathscr A\|$ we have $d_Y(\mathscr A(\bv x + \Delta \bv x), \mathscr A(\bv x)) < \varepsilon$ for any $\varepsilon \in \mathbb R_+$.
+\end{proof}
+
+We shall denote the space of all the bounded $n$-multilinear operators from $X_0$, $\cdots$, $X_{n-1}$ to $Y$ by $\indexfm[B Xi Y]{\mathcal B(X_0, \cdots, X_{n-1}; Y)}$. 
+
+\begin{theorem}[Space of bounded linear operators is normed linear space]\label{theorem: space of bounded linear operators is normed linear space}
+	$\mathcal B(X_0, \cdots, X_{n-1}; Y)$ is a normed linear space, the norm is defined as in Eq.~\eqref{equation: norm of operator}.
+\end{theorem}
+
+\begin{theorem}[Norm of operator composition]
+	Let $X, Y, Z$ be three normed spaces, and $\mathscr A \in \mathcal B(X; Y)$, $\mathscr B \in \mathcal B(Y; Z)$.
+	\begin{equation*}
+		\|\mathscr B \mathscr A\| \leq \|\mathscr B\| \|\mathscr A\|\,.
+		\footnote{By convention, we denote $\mathscr B \circ \mathscr A$ by $\mathscr B \mathscr A$, and $(\mathscr B \mathscr A)(\bv x)$ by $\mathscr B \mathscr A \bv x$ (since the compositions of the operator is associative).}
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		\|\mathscr B \mathscr A\| 
+		&= \sup\big\{ \|\mathscr B \mathscr A\bv x\|_Z / \|\bv x\|_X \mid \bv x \in X - \{\bv 0\}\big\} \\
+		&\leq \|\mathscr B\| \sup\big\{ \|\mathscr A\bv x\|_Y / \|\bv x\|_X \mid \bv x \in X - \{\bv 0\}\big\}
+		= \|\mathscr B\| \|\mathscr A\|\,.
+	\end{align*}
+\end{proof}
 
 %\appendix
 
