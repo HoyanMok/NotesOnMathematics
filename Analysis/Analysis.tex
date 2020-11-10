@@ -1096,7 +1096,34 @@ The following theorem gives an equivalent definition:
 	By setting $\max\{\|x_i\|_{X_i} \mid i \in n\} < \varepsilon \max \Big\{ \sqrt[n]{\prod_{i \in n - S}\|\bv x_i\|_{X_i}} \mid S \in \mathscr P(n) - \{\varnothing\} \Big\} / (2^n - 1)\|\mathscr A\|$ we have $d_Y(\mathscr A(\bv x + \Delta \bv x), \mathscr A(\bv x)) < \varepsilon$ for any $\varepsilon \in \mathbb R_+$.
 \end{proof}
 
+Theorem~\ref{theorem: continuous at zero iff bounded} and Theorem~\ref{theorem: Continuous at zero then at everywhere} show the equivalence for linear operators of being bounded and being continuous.
 We shall denote the space of all the bounded $n$-multilinear operators from $X_0$, $\cdots$, $X_{n-1}$ to $Y$ by $\indexfm[B Xi Y]{\mathcal B(X_0, \cdots, X_{n-1}; Y)}$. 
+
+\begin{corollary}[Linear operators from finite dimensional space are continuous]
+	\label{corollary: linear operators from finite dimensional space are continuous}
+	If $\forall i \in n$, $\dim X_i < \infty$, then
+	\begin{equation*}
+		\mathcal L(X_0, \cdots, X_{n-1}; Y) = \mathcal B(X_0, \cdots, X_{n-1}; Y)
+		\,.
+	\end{equation*}
+\end{corollary}
+
+\begin{corollary}[Continuous at a point then at everywhere]\label{theorem: Continuous at a point then at everywhere}
+	Let $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$.
+	Denote $\prod_{i \in n} X_i$ by $X$, and Let $\bv x = (\bv x_i)_{i \in n} \in X$.
+	If the operator is continuous at $\bv x$, then it is continuous in $X$.
+\end{corollary}
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}[Isomorphism]
+	Two normed space are \indexbf{isomorphic} if their exists an \indexbf{isomorphism} $f$ between them, s.t.\ $f$ is a isomorphsm between two linear space, and $f$ and $f^-1$ are continuous.
+\end{definition}
+
+\begin{theorem}
+	If two normed spaces have the same finite dimension, they are isomorphic.
+\end{theorem}
 
 \begin{theorem}[Space of bounded linear operators is normed linear space]\label{theorem: space of bounded linear operators is normed linear space}
 	$\mathcal B(X_0, \cdots, X_{n-1}; Y)$ is a normed linear space, the norm is defined as in Eq.~\eqref{equation: norm of operator}.
@@ -1117,6 +1144,85 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 		= \|\mathscr B\| \|\mathscr A\|\,.
 	\end{align*}
 \end{proof}
+
+\begin{theorem}[completeness]
+	If $Y$ is a Banach space, so is $\mathcal B(X_0, \cdots, X_{n-1}; Y)$.
+\end{theorem}
+\begin{proof}
+	Let $(\mathscr A_i)_{i \in \mathbb N} \in \mathcal B(X_0, \cdots, X_{n-1}; Y)^{\mathbb N}$ be a Cauchy sequence. 
+	$\forall \bv x := (\bv x_i)_{i \in n} \in X := \prod_{i \in n} X_i$, 
+	\begin{equation*}
+		\|\mathscr A_\ell \bv x - \mathscr A_m \bv x\|_Y
+		= \|(\mathscr A_\ell - \mathscr A_m) \bv x\|_Y
+		\leq \|\mathscr A_\ell - \mathscr A_m\| \prod_{i \in n} \|\bv x_i\|_{X_i}
+		\,,
+	\end{equation*}
+	therefore $(\mathscr A_i \bv x)_{i \in \mathbb N} \in Y^\mathbb N$ is also a Cauchy sequence.
+
+	Since $Y$ is a Banach space, we denote the limit of the Cauchy sequence $(\mathscr A_i \bv x)_{i \in n}$ by $\mathscr A \bv x$. 
+	We need to prove that $\mathscr A \in \mathcal B(X_0, \cdots, X_{n-1}; Y)$.
+
+	It is obvious that $\mathscr A \in \mathcal L(X_0, \cdots, X_{n-1}; Y)$, therefore we only need to show that $\|\mathscr A\| < \infty$.
+
+	Let $\bv e := (\bv e_i)_{i \in n} \in X$, where $\forall i \in n$, $\|\bv e_i\|_{X_i} = 1$. 
+	$\forall \varepsilon \in \mathbb R_+$, $\exists N \in \mathbb N$, if $\ell > N$, then
+	\begin{equation*}
+		0 \leq \|\mathscr A \bv e\|_Y
+			\leq \|\mathscr A_\ell \bv e\|_Y + \varepsilon
+			\leq \|\mathscr A_\ell\| + \varepsilon\,, 
+	\end{equation*} 
+
+	Since $\{\|\mathscr A_i\| \mid i \in \mathbb N\}$ is bounded, we claim that $\big\{\|\mathscr A \bv e\| \mid \bv e = (\bv e_i)_{i \in n} \in X \wedge \forall i \in n \big( \|\bv e_i\|_{X_i} = 1\big)\big\}$ is also bounded.
+\end{proof}
+
+\begin{theorem}
+	$\forall m \in n$, 
+	\begin{equation*}
+		\exists f \in \mathcal B(X_0, \cdots, X_{n-1}; Y)^{\mathcal B (X_0, \cdots, X_{m-1}; B(X_m, \cdots, X_{n-1}; Y))}
+	\end{equation*}
+	s.t.\ $f$ is a isomorphism between two linear spaces and it conserves the norm structure i.e.\ 
+	\begin{equation*}
+		\|f(\mathscr B)\| = \|\mathscr B\|\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	$\forall \mathscr B \in \mathcal B \big(X_0, \cdots, X_{m-1}; B(X_m, \cdots, X_{n-1}; Y)\big)$, $\forall \bv x := (\bv x_i)_{i \in n} \in X := \prod_{i \in n} X_i$, $f(\mathscr B) \bv x := \mathscr B(\bv x_i)_{i \in n} (\bv x_j)_{j \in n \backslash m}$.
+
+	Obviously $f \in \mathcal L\big(\mathcal B (X_0, \cdots, X_{m-1}; B(X_m, \cdots, X_{n-1}; Y)); \mathcal B(X_0, \cdots, X_{n-1}; Y)\big)$. 
+	If $f(\mathscr B) = \mathscr O_X$, $\mathscr B = \mathscr O_{\prod_{i \in m} X_m}$, therefore $\ker f = \{\mathscr O_{\prod_{i \in m} X_m}\}$, which implies that $f$ is a isomorphism between two linear spaces.
+
+	\begin{align*}
+		\|\mathscr B\| &= \sup 
+		\left\{ 
+			\frac{\|\mathscr B(\bv x_i)_{i \in m}\|}{\prod_{i \in m} \|\bv x_i\|_{X_i}}
+		\middle|
+			\forall i \in m,\; \bv x_i \in X_i \wedge \bv x_i \neq \bv 0
+		\right\}
+		\\
+		&= \sup 
+		\left\{ 
+			\frac{\sup \left\{ 
+				\frac{\|f(\mathscr B)(\bv x)\|_Y}{\prod_{i \in n \backslash m} \|\bv x_i\|_{X_i}}
+			\middle|
+				\forall i \in n \backslash m,\; \bv x_i \in X_i \wedge \bv x_i \neq \bv 0
+			\right\}}{\prod_{i \in m} \|\bv x_i\|_{X_i}}
+		\middle|
+			\forall i \in m,\; \bv x_i \in X_i \wedge \bv x_i \neq \bv 0
+		\right\}
+		\\
+		&=
+		\sup \left\{ 
+				\frac{\|f(\mathscr B)(\bv x)\|_Y}{\prod_{i \in n} \|\bv x_i\|_{X_i}}
+				\middle|
+				\forall i \in n,\; \bv x_i \in X_i \wedge \bv x_i \neq \bv 0
+			\right\}
+		= \|f(\mathscr B)\|
+	\end{align*}
+\end{proof}
+
+\begin{corollary}
+	$\mathcal B(X_0; \mathcal B(X_1; \cdots; \mathcal B(X_{n-1}; Y) \cdots ))$  and $\mathcal B(X_0, \cdots, X_{n-1}; Y)$ are isomorphic.
+\end{corollary}
 
 %\appendix
 
