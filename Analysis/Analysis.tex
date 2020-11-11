@@ -750,6 +750,21 @@ Introduction of the limits in a topological space is as follows.
 
 Such definition is parallel to the definition we have introduced on the limits of real number, hence it basically holds the same propoties. 
 
+\begin{definition}[Oscillation]
+	Let $X$, $Y$ be two topological spaces, $f \in Y^X$, $E \in \mathscr P(X)$.
+	\begin{equation*}
+		\indexfm[omega f E]{\omega(f; E)} 
+			:= \sup \{d_Y(f(x_1), f(x_2)) \mid x_1, x_2 \in E\}
+	\end{equation*}
+	is called the \indexbf{oscillation} of the function~$f$ in set~$E$.
+	We can also define the \indexbf{oscillation} of $f$ at a point $x \in X$ as
+	\begin{equation*}
+		\indexfm[omega f x]{\omega(f; x)} 
+			:= \inf \{\omega(f; B) \mid B \in \mathscr B\}\,,
+	\end{equation*}
+	where $\mathscr B$ is a filter base that $\cap \mathscr B = \{x\}$.
+\end{definition}
+
 \begin{definition}\label{definition: continuous}
 	A mapping $f \colon X \to Y$, where $X$, $Y$ is equiped with topology $\mathscr T_X$, $\mathscr T_Y$, respectively, is said to be \indexbf{continuous} at $x_0 \in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. 
 	It is \indexbf{continuous} in $X$ if it is continuous at each point $x \in X$. 
@@ -786,6 +801,16 @@ The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X, Y)$ or 
 
 Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{theorem: criterion of continuity} has shown that their open sets correspond to each other.
 
+\begin{theorem}
+	Let $X$, $Y$, $Z$ be three topological spaces, $E \in \mathscr P(X)$. 
+	$f \in C(E, Y)$, $g \in C(f(E), Z)$, then $g \circ f \in C(E, Z)$.
+\end{theorem}
+
+\begin{theorem}\label{theorem: continuous iff oscillation is zero}
+	Let $X$ be a topological space and $Y$ be a metric space, $f \in Y^X$, $x \in X$. 
+	The function~$f$ is continuous at $x$ \emphbf{iff} $\omega(f; x) = 0$. 	
+\end{theorem}
+
 \begin{theorem}\label{theorem: compact image of continuous mapping}
 	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces. 
 	Let $K \subset X$ be a compact set. 
@@ -818,6 +843,7 @@ Homeomorphic topological spaces are identical with respect to their topological 
 \begin{proof}
 	Only to notice that the open-closed sets in $(f(E), \mathscr T_{ f(E)})$ have concurrently open-closed pre-images in $(E, \mathscr T_E)$.
 \end{proof}
+
 
 \section{Contraction}
 
@@ -1223,6 +1249,55 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 \begin{corollary}
 	$\mathcal B(X_0; \mathcal B(X_1; \cdots; \mathcal B(X_{n-1}; Y) \cdots ))$  and $\mathcal B(X_0, \cdots, X_{n-1}; Y)$ are isomorphic.
 \end{corollary}
+
+\section{Differentiation}
+
+\begin{definition}[Differentiation]
+	Let $X$, $Y$ be two normed spaces. A mapping~$f$ from $D \in \mathscr P(X)$ to $Y$ is said to be \indexbf{differentiable} at an interior point $\bv x \in D$ if $\exists \mathscr L(\bv x) \in \mathcal B(X; Y)$\footnote{$\bv x$ here is an argument.} s.t.\ $\forall \Delta \bv x \in X\, \big(\bv x + \Delta \bv x \in D\big)$,
+	\begin{equation}\label{equation: differential}
+		f(\bv x + \Delta \bv x) - f(\bv x) 
+			= \mathscr L(\bv x) \Delta \bv x + \alpha(\bv x; \Delta \bv x)\,,
+	\end{equation}
+	where $\alpha(\bv x; \Delta \bv x) = o(\Delta \bv x)$ as $\Delta \bv x \to 0$, i.e.\ $\lim_{\Delta \bv x \to \bv 0} \|\alpha(\bv x; \Delta \bv x)\|_Y / \|\Delta \bv x\|_X = 0$.
+
+	Such $\mathscr L(\bv x)$ is called the \indexbf{diffrential} of $f$ at $\bv x$\footnote{Alternatively, \indexbf{tangent mapping} or \indexbf{dirivative}.}, denoted by $\indexfm[df x]{\dif f (\bv x)}$ or $\indexfm[f prime x]{f'(\bv x)}$.
+\end{definition}
+
+\begin{theorem}[Uniqueness]
+	Let $X$ and $Y$ be two normed spaces. 
+	If a mapping~$f \in Y^D$ where $D \in \mathscr P(X)$ is diffentiable at $\bv x$ which is an interior point of $D$, then the differential of $f$ at $\bv x$ is unique.
+\end{theorem}
+\begin{proof}
+	Let their be two differentials $\mathscr L_1(\bv x)$, $\mathscr L_2(\bv x)$, by the definition~\eqref{equation: differential}, we have:
+	\begin{equation*}
+		\big(\mathscr L_1(\bv x) - \mathscr L_2(\bv x)\big) \Delta \bv x= o(\Delta \bv x)\,,
+	\end{equation*}
+	hence $\|(\mathscr L_1(\bv x) - \mathscr L_2(\bv x)) \Delta \bv x\|_Y = o(\|\Delta \bv x\|_X)$, therefore
+	\begin{equation*}
+		\lim_{\|\Delta \bv x\|_X \to 0} 
+		\left\|
+			(\mathscr L_1(\bv x) - \mathscr L_2(\bv x))	
+				\frac{\Delta \bv x}{\|\Delta \bv x\|_X}	
+		\right\|_Y = 0\,,
+	\end{equation*}
+
+	This means that whatever the direction of unit vector $\Delta \bv x / \|\Delta \bv x\|_X$ is, the norm of $\big\|(\mathscr L_1(\bv x) - \mathscr L_2(\bv x)) \Delta \bv x / \|\Delta \bv x\|_X \big\|_Y$ is always zero, therefore $\|\mathscr L_1(\bv x) - \mathscr L_2(\bv x)\|$. By the definition of norms, this means that $\mathscr L_1(\bv x) - \mathscr L_2(\bv x) = \mathscr O$, or $\mathscr L_1(\bv x) = \mathscr L_2(\bv x)$.
+\end{proof}
+
+\begin{theorem}
+	Let $X$ and $Y$ be two normed spaces. 
+	If a mapping~$f \in Y^D$ where $D \in \mathscr P(X)$ is differentiable at $\bv x$ which is an interior point of $D$, then $f$ is continuous at $\bv x$.
+\end{theorem}
+\begin{proof}
+	as $\|\Delta \bv x\| \to 0$
+	\begin{equation*}
+		\|f(\bv x + \Delta \bv x) - f(\bv x) \|_Y 
+			\leq \|\mathscr L(\bv x) \Delta \bv x\|_Y
+				 + \|\alpha(\bv x; \Delta \bv x)\|_Y 
+			\leq \|\mathscr L(\bv x)\| \|\Delta \bv x\|_X 
+				+ \|\alpha(\bv x; \Delta \bv x)\|_Y \to 0\,.
+	\end{equation*}
+\end{proof}
 
 %\appendix
 
