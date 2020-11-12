@@ -342,7 +342,11 @@ The topology consisting of all the open sets defined in the metric space $(\math
 \end{definition}
 
 \begin{definition}[Neighbourhood]\label{definition: neighbourhood (topology)}
-	If $x \in G$ and $G \in \mathscr T$, then $G$ is a \indexbf{neighbourhood} of $x$ in topological space $(X, \mathscr T)$.
+	If $x \in U(x)$ and $U(x) \in \mathscr T$, then $\indexfm[U x]{U(x)}$ is a \indexbf{neighbourhood} of $x$ in topological space $(X, \mathscr T)$. 
+	All neighbourhoods of a point $x$ is denoted by $\indexfm[U x]{\mathscr U(x)}$.
+
+	If $\indexfm[U x]{\mathring U(x)} := U(x) - \{x\} \neq \varnothing$, then it is a \indexbf{deleted neighbourhood}. 
+	The collection of deleted neighbourhoods of $x$ is denoted as $\mathring{\mathscr U} (x)$.
 \end{definition}
 
 For example, we define an equivalence relation $\sim$ in $C(\mathbb R;\mathbb R)$. If $f, g\in C(\mathbb R; \mathbb R)$, at point $a \in \mathbb R$:
@@ -736,6 +740,15 @@ Let's recall the definition of the limitation.
 	\end{conditionlist}
 \end{definition}
 
+Here is a list of some importants filter bases:
+
+\begin{enumerate}[label=(\arabic*)]
+	\item $x \to a$, where $a \in X$, means $\mathring{\mathscr U}(a)$;
+	\item $x \to \infty$, means $\{V \mid X - V \in \mathscr U(a) - \{X\}\}$;
+	\item $E \ni x \to a$, means $\{\mathring U(a) \cap E \mid \mathring U(a) \in \mathring{\mathscr U}(a)\}$;
+	\item $E \ni x \to \infty$, means $\{E \cap V \mid X - V \in \mathscr U(a) - \{X\}\}$.
+\end{enumerate}
+
 Introduction of the limits in a topological space is as follows.
 
 \begin{definition}[Limit]\label{definition: limit}
@@ -743,12 +756,16 @@ Introduction of the limits in a topological space is as follows.
 	\[
 		\lim_\mathscr{B} f = a 
 		\quad := \quad
-		\forall U(a)\subset Y\;
-		\exists B\in \mathscr{B}(f(B)\subset U(a)).
+		\forall U(a) \in \mathscr U(a)\;
+		\exists B\in \mathscr B (f(B) \subset U(a)).
 	\]
 \end{definition}
 
-Such definition is parallel to the definition we have introduced on the limits of real number, hence it basically holds the same propoties. 
+Such definition is parallel to the definition we have introduced on the limits of real number, hence it basically holds the same propoties, except for:
+
+\begin{theorem}[Uniqueness of limit in Hausdorff space]
+	Let $Y$ be a Hausdorff space, $\mathscr B$ be a filter base in $X$, $f \in Y^X$. The limit of $f$ over $\mathscr B$ is unique.
+\end{theorem}
 
 \begin{definition}[Oscillation]
 	Let $X$, $Y$ be two topological spaces, $f \in Y^X$, $E \in \mathscr P(X)$.
@@ -765,7 +782,40 @@ Such definition is parallel to the definition we have introduced on the limits o
 	where $\mathscr B$ is a filter base that $\cap \mathscr B = \{x\}$.
 \end{definition}
 
-\begin{definition}\label{definition: continuous}
+\begin{theorem}[Cauchy criterion for existance of limit]
+	\label{theorem: Cauchy criterion of existance of limit}
+	Let $\mathscr B$ be a filter base in $X$, $(Y, d)$ be a complete metric space, and $f \in Y^X$.
+	The mapping~$f$ has a limit over base $\mathscr B$ \emphbf{iff}
+	$\forall \varepsilon \in \mathbb R_+$, $\exists B \in \mathscr B$ s.t.\ $\omega(f; B) < \varepsilon$.
+\end{theorem}
+\begin{proof}
+	$\to$:
+	Denote $a := \lim_{\mathscr B} f$.
+	$\forall \varepsilon$, $\exists B \in \mathscr B$ s.t.\ $f(B) \subseteq B(a; \varepsilon/2)$
+	\begin{equation*}
+		\forall x, x' \in B,\quad
+		d(f(x), f(x')) \leq d(f(x), a) + d(f(x'), a) < \varepsilon\,.
+	\end{equation*}
+
+	$\gets$:
+	$\forall n \in \mathbb N_+$, $\exists B_n \in \mathscr B$ s.t.\ $\omega(f; B_n) < 1/n$. 
+	Since $B_n \neq \varnothing$ (the definition of filter base), we can choose\footnote{I don't know any proof that can avoid using axiom of choices} $x_n \in B_n$ for any $n$, so that we get a sequence $\langle f(x_n) \rangle_{n \in \mathbb N} \in Y^\mathbb N$. Let $x \in B_n \cap B_m$ for any $m$, $n$ that $m > 1/\varepsilon$, $n > 1/ 2\varepsilon$ for any $\varepsilon$
+	\begin{equation*}
+		d(f(x_n), f(x_m)) \leq d(f(x_n), f(x)) + d(f(x_m), f(x)) < \varepsilon\,,
+	\end{equation*}
+	hence $\langle f(x_n) \rangle_{n \in \mathbb N}$ is a Cauchy sequence, by the completeness of $Y$ we can find a limit~$a$ for it.
+
+	Let $m \to \infty$ we get $d(f(x_n), a) \leq \varepsilon$. This inequality holds for any $\varepsilon$ and $n$ great enough.
+	$\forall x' \in B_n$,
+	\begin{equation*}
+		d(f(x'), a) \leq d(f(x'), f(x_n)) + d(f(x_n), a)
+		< \frac 1 n + \varepsilon\,,
+	\end{equation*}
+	the right-hand side can be arbitary small, if $n$ is even greater.
+\end{proof}
+
+\begin{definition}[Continuity]
+		\label{definition: continuous}
 	A mapping $f \colon X \to Y$, where $X$, $Y$ is equiped with topology $\mathscr T_X$, $\mathscr T_Y$, respectively, is said to be \indexbf{continuous} at $x_0 \in X$ (let $y_0 = f( x_0 ) \in Y$), if $\forall U( y_0 )$, $\exists U( x_0 )$ s.t. $f( U(x_0) )\subset U( y_0 )$. 
 	It is \indexbf{continuous} in $X$ if it is continuous at each point $x \in X$. 
 \end{definition}
@@ -785,7 +835,7 @@ The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X, Y)$ or 
 	Since $f \in C(X, Y)$, for $G_Y$, $\exists U( x_0) $ s.t.\ $f\big(U(x_0) \big) \subset G_Y$. 
 	Also notice that $f\big(U(x_0) \big) \subset G_Y \Rightarrow  U(x_0) \subset f^{-1}(G_Y)$, therefore $f^{-1}(G_Y)$ is open.
 
-	$gets$: 
+	$\gets$: 
 	$\forall x_0 \in X$, let $y_0 = f(x_0)$, $f^{-1} (U( y_0)) \in \mathscr T_X$. 
 	Notice that $x_0 \in f^{-1}(U( y_0))$, therefore $f \in C(X, Y) $.
 \end{proof}
@@ -801,17 +851,29 @@ The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X, Y)$ or 
 
 Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{theorem: criterion of continuity} has shown that their open sets correspond to each other.
 
-\begin{theorem}
+\begin{theorem}[Continuity of compositions of functions]
 	Let $X$, $Y$, $Z$ be three topological spaces, $E \in \mathscr P(X)$. 
-	$f \in C(E, Y)$, $g \in C(f(E), Z)$, then $g \circ f \in C(E, Z)$.
+	$f \in C(E, Y)$, $g \in C(f(E), Z)$, then
+	\begin{equation*}
+		g \circ f \in C(E, Z) \,.
+	\end{equation*}
 \end{theorem}
 
-\begin{theorem}\label{theorem: continuous iff oscillation is zero}
+\begin{theorem}[Continuous then locally bounded]
+	Let $(X, \mathscr T)$ be a topological space and $(Y, d)$ be a metric space, $f \in Y^X$, $x \in X$. 
+	If $f$ is continuous at $x$, then $\exists U(x) \in \mathscr U(x)$ s.t.\ $U(x)$ is bounded.
+\end{theorem}
+
+\begin{theorem}[Continuous iff oscillation is zero]
+		\label{theorem: continuous iff oscillation is zero}
 	Let $X$ be a topological space and $Y$ be a metric space, $f \in Y^X$, $x \in X$. 
 	The function~$f$ is continuous at $x$ \emphbf{iff} $\omega(f; x) = 0$. 	
 \end{theorem}
 
-\begin{theorem}\label{theorem: compact image of continuous mapping}
+Then we shall introduce some global properties of continuous mappings.
+
+\begin{theorem}[Conservation of compactness]
+		\label{theorem: conservation of compactness}
 	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces. 
 	Let $K \subset X$ be a compact set. 
 	If $f \colon X \to Y \in C(X, Y)$, then $f(K)$ is compact.
@@ -824,7 +886,19 @@ Homeomorphic topological spaces are identical with respect to their topological 
 	\right)$, $f( K) \subset f ( \cup\,\Omega'_X) $. $f ( G'_X) \in \Omega_Y$, hence $\Omega'_Y = \{ f ( G'_X) \mid G'_X \in \Omega'_X\}$ is a finite subcover over $f( K)$.
 \end{proof}
 
-\begin{theorem}\label{theorem: homeomorphism from compact space to Hausdorff space}
+
+\begin{theorem}[Weierstrass maximum-value theorem]
+	\label{theorem: Weierstrass maximum-value}
+	Let $K$ be a compact topological space, and $f \in C (K, \mathbb R)$.
+	$\exists x_m, x_M \in K$, s.t.\ $f(x_m) = m := \inf f(K)$, $f(x_M) = M := \sup f(K)$.
+\end{theorem}
+\begin{proof}
+	By Theorem~\ref{theorem: conservation of compactness}, $f(K)$ is also compact, and therefore closed (Theorem~\ref{theorem: closed subset of compact set}). 
+	If $M \notin f(K)$, then open covers $\{ B(M; (M-m)/n) - \tilde B(M; (M-m)/(n + 1)) \mid  n \in \mathbb N_+\} $ would not have a finite subcover, which is a contradiction to the compactness of $f(K)$.
+\end{proof}
+
+\begin{theorem}[Bijective from compact space to Hausdorff space is homeomorphism]
+		\label{theorem: bijective from compact space to Hausdorff space is homeomorphism}
 	Let $(K, \mathscr T_K)$ be a compact space and $(Y, \mathscr T_Y)$ be a Hausdorff space. 
 	Let $f \in Y^K$ be a bijective.
 	If $f \in C(K, Y)$, then $f$ is a homeomorphism.
@@ -836,7 +910,38 @@ Homeomorphic topological spaces are identical with respect to their topological 
 	This fact shows that $f^{-1}$ is continuous (Theorem~\ref{theorem: criterion of continuity}).
 \end{proof}
 
-\begin{theorem}\label{theorem: connected image of continuous mapping}
+\begin{definition}[Uniformly continuous]
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces, $f \in Y^X$.
+	If $\forall \varepsilon \in \mathbb R_+$, $\exists \delta \in \mathbb R$, $\forall x \in X$ s.t.\ $\forall E \in \mathscr P(X)$, 
+	\begin{equation*}
+		d_X E < \delta 
+		\quad \to \quad
+		\omega(f; E) < \varepsilon\,,
+	\end{equation*}
+	then $f$ is said to be a \indexbf{uniformly continuous} mapping.
+\end{definition}
+
+\begin{theorem}[Heine-Cantor theorem]
+	\label{theorem: Heine-Cantor}
+	Let $(K, d_K)$ be a compact metric space, and $(Y, d_Y)$ be a metric space.
+	$\forall f \in C(K, Y)$, $f$ is uniformly continuous.
+\end{theorem}
+\begin{proof}
+	$\forall \varepsilon \in \mathbb R_+$, we can find it a collections of open balls
+	\begin{equation*}
+		\varOmega = \big\{B(x; \delta(x)/2) \mid
+			 x \in X,\, \omega\big(f; B(x; \delta(x))\big) < \varepsilon \big\}\,,
+	\end{equation*}
+	that covers the compact set~$K$, then there exists a finite subcover $\varOmega' = \big\{B(x_i; \delta(x_i)/2)\big\}_{i \in n}$. Let $\delta := \min \{\delta(x_i)\}_{i \in n}$.
+	
+	$\forall x', x'' \in K$, $\exists i \in n$, $x' \in B(x_i; \delta(x_i)/2)$, if $d(x', x'') < \delta$, 
+	\begin{equation*}
+		\delta(x'', x_i) \leq \delta(x', x'') + \delta(x', x'') < \delta + \delta(x_i) \leq \delta(x_i)\,,
+	\end{equation*}
+	therefore $x', x'' \in B(x_i; \delta(x_i))$, we have assume that $\omega(f; B(x_i; \delta(x_i)))$.
+\end{proof}
+
+\begin{theorem}[Conservation of connectedness]\label{theorem: conservation of connectedness}
 	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces, and $E \subset X$ be a connected set. 
 	If $f \in C(X, Y)$, then $f(E)$ is also connected.
 \end{theorem}
@@ -844,6 +949,14 @@ Homeomorphic topological spaces are identical with respect to their topological 
 	Only to notice that the open-closed sets in $(f(E), \mathscr T_{ f(E)})$ have concurrently open-closed pre-images in $(E, \mathscr T_E)$.
 \end{proof}
 
+\begin{theorem}[Intermediate-value theorem]
+	\label{theorem: intermediate-value}
+	Let $(X, \mathscr T)$ be a connected topological space, and $f \in C(X, \mathbb R)$, $f(a) = A$, $f(b) = B$, $A < B$.
+	$\forall C \in [A, B]$, $\exists c \in X$, $f(c) = C$.
+\end{theorem}
+\begin{proof}
+	by Theorem~\ref{theorem: conservation of connectedness}, $f(X)$ must be a connected set. Hence by Theorem~\ref{theorem: real connected sets}, we know that $\forall C \in [A, B]$, $C \in f(X)$.
+\end{proof}
 
 \section{Contraction}
 
@@ -1260,10 +1373,12 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 	\end{equation}
 	where $\alpha(\bv x; \Delta \bv x) = o(\Delta \bv x)$ as $\Delta \bv x \to 0$, i.e.\ $\lim_{\Delta \bv x \to \bv 0} \|\alpha(\bv x; \Delta \bv x)\|_Y / \|\Delta \bv x\|_X = 0$.
 
-	Such $\mathscr L(\bv x)$ is called the \indexbf{diffrential} of $f$ at $\bv x$\footnote{Alternatively, \indexbf{tangent mapping} or \indexbf{dirivative}.}, denoted by $\indexfm[df x]{\dif f (\bv x)}$ or $\indexfm[f prime x]{f'(\bv x)}$.
+	Such $\left.\mathscr L\right\vert_{\bv x}$ is called the \indexbf{differential} of $f$ at $\bv x$\footnote{Alternatively, \indexbf{tangent mapping} or \indexbf{derivative}.}, denoted by $\indexfm[df x]{\dif f(\bv x)}$ or $\indexfm[f prime x]{f'(\bv x)}$. 
 \end{definition}
 
+
 \begin{theorem}[Uniqueness]
+	\label{theorem: uniqueness (differential)}
 	Let $X$ and $Y$ be two normed spaces. 
 	If a mapping~$f \in Y^D$ where $D \in \mathscr P(X)$ is diffentiable at $\bv x$ which is an interior point of $D$, then the differential of $f$ at $\bv x$ is unique.
 \end{theorem}
@@ -1284,7 +1399,23 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 	This means that whatever the direction of unit vector $\Delta \bv x / \|\Delta \bv x\|_X$ is, the norm of $\big\|(\mathscr L_1(\bv x) - \mathscr L_2(\bv x)) \Delta \bv x / \|\Delta \bv x\|_X \big\|_Y$ is always zero, therefore $\|\mathscr L_1(\bv x) - \mathscr L_2(\bv x)\|$. By the definition of norms, this means that $\mathscr L_1(\bv x) - \mathscr L_2(\bv x) = \mathscr O$, or $\mathscr L_1(\bv x) = \mathscr L_2(\bv x)$.
 \end{proof}
 
-\begin{theorem}
+Theorem~\ref{theorem: uniqueness (differential)} gives us the right to define:
+
+\begin{definition}[Derivative mapping]
+	Let $X$, $Y$ be two normed spaces, $D \in \mathscr P(X)$, $f \in Y^D$, $\indexfm[Delta f]{\Delta(f)} := \{\bv x \in X \mid \text{$f$ is differentiable at $\bv x$}\}$.
+	\begin{equation*}
+		f' \colon \Delta(f) \to \mathscr B(X, Y);\;
+			\bv x \mapsto \dif f(\bv x)
+	\end{equation*}
+	is called the \indexbf{derivative mapping} of $f$.
+\end{definition}
+
+\emphbf{Warning}: We use $f'(\bv x)$ to denote the linear operator on $X$ instead of a point in $Y$ (when $X = Y = \mathbb R$, they are the isomorphic). It is obvious that $\forall \mathscr A \in \mathcal B(X; Y)$, $\forall \bv x \in X$, $\dif \mathscr A(\bv x) = \mathscr A$, which is different from the usual notations that writes $f(x) = \me^x \to f'(x) = \me^x = f(x)$ and $f(x) = ax \to f'(x) = a$.
+
+To make it clear, we must remember: $f \in Y^X$, $f' \in \mathscr B(X; Y)^X$, $f'(\bv x) \in \mathscr B(X; Y)$, $f'(\bv x) \Delta \bv x \in Y$.
+
+\begin{theorem}[Differentiable then continuous]
+	\label{theorem: differentiable then continuous}
 	Let $X$ and $Y$ be two normed spaces. 
 	If a mapping~$f \in Y^D$ where $D \in \mathscr P(X)$ is differentiable at $\bv x$ which is an interior point of $D$, then $f$ is continuous at $\bv x$.
 \end{theorem}
@@ -1298,6 +1429,28 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 				+ \|\alpha(\bv x; \Delta \bv x)\|_Y \to 0\,.
 	\end{equation*}
 \end{proof}
+
+We can denote all differentiable functions on $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
+
+\begin{theorem}[Linearity of differentiation]
+	\label{theorem: linearity (differential)}
+	Let $X$, $Y$ be two normed space on $\mathbb F$ ($\mathbb C$ or $\mathbb R$), $C^{(1)}(X, Y)$ is also a linear space on $\mathbb F$.
+\end{theorem}
+
+\begin{theorem}[Chain rule]
+	Let $X$, $Y$, $Z$ be three normed spaces, $D \in \mathscr P(X)$, $f \in Y^D$, $g \in Z^{f(D)}$, and $f$ be differentiable at $\bv x \in D$, $g$ be differentiable at $\bv y := f(\bv x) \in f(D)$.
+	\begin{equation*}
+		(g \circ f)'(\bv x) = g'(\bv y) f'(\bv x)\footnote{Remember, we write the composition of two linear operators omitting the ``$\circ$'' in the middle.}\,.
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Differentiation of inverse mappings]
+	Let $X$, $Y$ be two normed spaces, $D \in \mathscr P(X)$, bijective~$f \in X^D$, and $f$ be differentiable at $\bv x \in D$, and there be an inverse~$[f'(\bv x)]^{-1}$ for $f'(\bv x)$.
+	Then, $f^{-1}$ is also differentiable at $\bv y := f(\bv x)$, and
+	\begin{equation*}
+		(f^{-1})'(\bv y) = [f'(\bv x)]^{-1}\,.
+	\end{equation*}
+\end{theorem}
 
 %\appendix
 
