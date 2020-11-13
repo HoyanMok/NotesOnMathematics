@@ -1380,7 +1380,7 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 \begin{theorem}[Uniqueness]
 	\label{theorem: uniqueness (differential)}
 	Let $X$ and $Y$ be two normed spaces. 
-	If a mapping~$f \in Y^D$ where $D \in \mathscr P(X)$ is diffentiable at $\bv x$ which is an interior point of $D$, then the differential of $f$ at $\bv x$ is unique.
+	If a mapping~$f \in Y^D$ where $D \in \mathscr P(X)$ is differentiable at $\bv x$ which is an interior point of $D$, then the differential of $f$ at $\bv x$ is unique.
 \end{theorem}
 \begin{proof}
 	Let their be two differentials $\mathscr L_1(\bv x)$, $\mathscr L_2(\bv x)$, by the definition~\eqref{equation: differential}, we have:
@@ -1414,6 +1414,22 @@ Theorem~\ref{theorem: uniqueness (differential)} gives us the right to define:
 
 To make it clear, we must remember: $f \in Y^X$, $f' \in \mathscr B(X; Y)^X$, $f'(\bv x) \in \mathscr B(X; Y)$, $f'(\bv x) \Delta \bv x \in Y$.
 
+It is always convenient to define such notation:
+\begin{definition}
+	Let $X_i$, $i \in n$ be normed spaces, and $X := \prod_{i \in n} X_i$. 
+	We define $\indexfm[d x]{\dif \bv x}_i$ as:
+	\begin{equation*}
+		\dif \bv x_i \Delta \bv x = \Delta \bv x_i\,,
+	\end{equation*}
+	for any $\Delta \bv x := (\Delta \bv x_i)_{i \in n} \in X$.
+\end{definition}
+
+Actually, $\dif \bv x_i$ can be conceive as the differential of the projective operator $X \to X_i$. If $n = 1$, $\dif \bv x = \id_X$, therefore we can write:
+\begin{equation*}
+	\dif f(\bv x)= f'(\bv x) \dif \bv x\,,
+\end{equation*}
+which is the notation we have been very familiar with.
+
 \begin{theorem}[Differentiable then continuous]
 	\label{theorem: differentiable then continuous}
 	Let $X$ and $Y$ be two normed spaces. 
@@ -1444,6 +1460,8 @@ We can denote all differentiable functions on $X$ to $Y$ by $\indexfm[C 1 X Y]{C
 	\end{equation*}
 \end{theorem}
 
+For example, $(\mathscr A \circ f)'(\bv x) = \mathscr A f'(\bv x)$, since $\mathscr A'(\bv y) = \mathscr A$.
+
 \begin{theorem}[Differentiation of inverse mappings]
 	Let $X$, $Y$ be two normed spaces, $D \in \mathscr P(X)$, bijective~$f \in X^D$, and $f$ be differentiable at $\bv x \in D$, and there be an inverse~$[f'(\bv x)]^{-1}$ for $f'(\bv x)$.
 	Then, $f^{-1}$ is also differentiable at $\bv y := f(\bv x)$, and
@@ -1451,6 +1469,86 @@ We can denote all differentiable functions on $X$ to $Y$ by $\indexfm[C 1 X Y]{C
 		(f^{-1})'(\bv y) = [f'(\bv x)]^{-1}\,.
 	\end{equation*}
 \end{theorem}
+
+Consider a mappings~$f \colon X \to Y $, where $Y := \prod_{i \in n} Y_i$, normed with $\|\bv y\|_Y := \sqrt[p]{\sum_{i \in n}\|\bv y_i\|_{Y_i}^p}$. 
+
+By writing $f$ as $(f_i)_{i \in n}$ such that $f(\bv x) = (f_i(\bv x))_{i \in n}$, and 
+\begin{equation*}
+	f'(\bv x)\Delta \bv x = (f'_i(\bv x)\Delta \bv x)_{i \in n}\,,
+\end{equation*}
+we can conclude that $f$ is differentiable at $\bv x \in X$ \emphbf{iff} for each $f_i \colon X \to Y_i$, $i \in n$, is differentiable at $\bv x$.
+
+\begin{theorem}[Differentiation of multilinear operators]
+	Let $X_0, \cdots, X_{n - 1}$, $Y$ be normed spaces, $\mathscr A \in \mathcal B(X_0, \cdots, X_{n - 1}; Y)$. 
+	Let $X := \prod_{i \in n} X_i$ be normed space with a norm defined as:
+	\begin{equation}\label{equation: norm of product space}
+		\forall \bv x := (\bv x_i)_{i \in n} \in X, \quad
+		\|\bv x\|_X := \Big( \sum_{i \in n} \|\bv x_i\|_{X_i}^p \Big)^{1/p}\,.
+	\end{equation}
+
+	Then, 
+	\begin{equation*}
+		\mathscr A \in C^{(1)}(X; Y),\quad
+		\dif \mathscr A (\bv x) = \mathscr A(\dif \bv x_0, \bv x_1, \cdots, \bv x_{n - 1}) + \cdots + \mathscr A(\bv x_0, \cdots, \bv x_{n-2}, \dif \bv x_{n-1})\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	By Eq.~\eqref{equation: norm of product space}, we have $\forall i \in n$,
+	\begin{equation*}
+		\|\bv x_i\|_{X_i} \leq \|\bv x\|_X 
+			\leq \sum_{j \in n} \|\bv x_j\|_{X_j}\,.
+	\end{equation*}
+
+	Therefore $\forall i, j \in n$,
+	\begin{equation*}
+		\frac{\|\Delta \bv x_i\|_{X_i} \|\Delta \bv x_j\|_{X_j}}{\|\Delta \bv x\|_X} 
+		\leq \frac{\|\Delta \bv x_i\|_{X_i} \|\Delta \bv x_j\|_{X_j}}{\|\Delta \bv x_i\|_{X_i}} 
+			= \|\Delta \bv x_j\|_{X_j} 
+		\leq \|\Delta \bv x\|_X\,,
+	\end{equation*}
+	or $\|\Delta \bv x_i\|_{X_i} \|\Delta \bv x_j\|_{X_j} = o(\bv x; \Delta \bv x)$.
+
+	\begin{align*}
+		\mathscr A(\bv x + \Delta &\bv x) - \mathscr A(\bv x) 
+		\\ & =
+		\mathscr A(\Delta \bv x_0, \bv x_1, \cdots, \bv x_{n-1})
+			+ \mathscr A(\bv x_1, \Delta \bv x_1, \cdots, \bv x_{n-1})
+			+ \cdots
+			+ \mathscr A(\bv x_0, \bv x_1, \cdots, \Delta \bv x_{n-1}) 
+		\\ & \qquad
+			+ \mathscr A(\Delta \bv x_0, \Delta \bv x_1, \cdots, \bv x_{n-1})
+			+ \cdots 
+			+ \mathscr A(\bv x_0, \cdots, \Delta \bv x_{n-2}, \Delta \bv x_{n-1})
+			+ \cdots 
+			+ \mathscr A(\Delta \bv x)
+		\\ & = 
+		\mathscr A(\Delta \bv x_0, \bv x_1, \cdots, \bv x_{n-1})
+			+ \cdots
+			+ \mathscr A(\bv x_0, \cdots, \bv x_{n - 2}, \Delta \bv x_{n-1}) 
+			+ o(\bv x; \Delta \bv x)\,,
+	\end{align*}
+	where we utilize the fact that
+	\begin{equation*}
+		\|\mathscr A(\Delta \bv x_0, \Delta \bv x_1, \cdots, \bv x_{n-1})\|_Y
+			\leq \|\mathscr A\| \|\Delta \bv x_0\|_{X_0} \|\Delta \bv x_1\|_{X_1}
+				\prod_{i \in n \backslash 2} \|\bv x_i\|_{X_i} = o(\bv x; \Delta \bv x)\,,\; \cdots
+	\end{equation*}
+
+	Therefore
+	\begin{equation*}
+		\dif \mathscr A(\bv x)\Delta \bv x
+			= \mathscr A(\Delta \bv x_0, \bv x_1, \cdots, \bv x_{n-1})
+				+ \cdots
+				+ \mathscr A(\bv x_0, \cdots, \bv x_{n - 2}, \Delta \bv x_{n-1}) 
+	\end{equation*}
+	or 
+	\begin{equation*}
+		\dif \mathscr A (\bv x) 
+			= \mathscr A(\dif \bv x_0, \bv x_1, \cdots, \bv x_{n - 1}) + \cdots + \mathscr A(\bv x_0, \cdots, \bv x_{n-2}, \dif \bv x_{n-1})\,.
+	\end{equation*}
+
+\end{proof}
+
 
 %\appendix
 
