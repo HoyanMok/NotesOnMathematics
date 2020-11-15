@@ -1269,6 +1269,7 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 \end{theorem}
 
 \begin{theorem}[Norm of operator composition]
+	\label{theorem: norm of operator composition}
 	Let $X, Y, Z$ be three normed spaces, and $\mathscr A \in \mathcal B(X; Y)$, $\mathscr B \in \mathcal B(Y; Z)$.
 	\begin{equation*}
 		\|\mathscr B \mathscr A\| \leq \|\mathscr B\| \|\mathscr A\|\,.
@@ -1285,6 +1286,7 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 \end{proof}
 
 \begin{theorem}[completeness]
+	\label{theorem: Y is complete so is the space of linear operators onto it}
 	If $Y$ is a Banach space, so is $\mathcal B(X_0, \cdots, X_{n-1}; Y)$.
 \end{theorem}
 \begin{proof}
@@ -1446,11 +1448,12 @@ which is the notation we have been very familiar with.
 	\end{equation*}
 \end{proof}
 
-We can denote all differentiable functions on $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
+
 
 \begin{theorem}[Linearity of differentiation]
 	\label{theorem: linearity (differential)}
-	Let $X$, $Y$ be two normed space on $\mathbb F$ ($\mathbb C$ or $\mathbb R$), $C^{(1)}(X, Y)$ is also a linear space on $\mathbb F$.
+	Let $X$, $Y$ be two normed space on $\mathbb F$ ($\mathbb C$ or $\mathbb R$), $\bv x \in X$ is an interior point. 
+	The space of all mappings differentiable at $\bv x$ is also a linear space on $\mathbb F$.
 \end{theorem}
 
 \begin{theorem}[Chain rule]
@@ -1486,9 +1489,8 @@ we can conclude that $f$ is differentiable at $\bv x \in X$ \emphbf{iff} for eac
 		\|\bv x\|_X := \Big( \sum_{i \in n} \|\bv x_i\|_{X_i}^p \Big)^{1/p}\,.
 	\end{equation}
 
-	Then, 
+	Then, $\mathscr A$ is differentiable at all interior point $\bv x \in X$, and
 	\begin{equation*}
-		\mathscr A \in C^{(1)}(X; Y),\quad
 		\dif \mathscr A (\bv x) = \mathscr A(\dif \bv x_0, \bv x_1, \cdots, \bv x_{n - 1}) + \cdots + \mathscr A(\bv x_0, \cdots, \bv x_{n-2}, \dif \bv x_{n-1})\,.
 	\end{equation*}
 \end{theorem}
@@ -1549,6 +1551,82 @@ we can conclude that $f$ is differentiable at $\bv x \in X$ \emphbf{iff} for eac
 
 \end{proof}
 
+Let $\mathcal U(X; Y)$ be the set of \indexbf{reversible operators} in $\mathcal B(X; Y)$ i.e.\ $\forall \mathscr A \in \mathscr U(X; Y)$, $\exists \mathscr A^{-1} \in \mathscr B(Y; X)$ s.t.\ 
+\begin{equation*}
+	\mathscr A \mathscr A^{-1} = \id_Y; 
+	\quad
+	\mathscr A^{-1} \mathscr A = \id_X.
+\end{equation*}
+
+\begin{theorem}[Differential of reversion]
+	Let $X$ be a complete normed space, and $Y$ be a normed space. $\mathscr A \in \mathcal U(X; Y)$, $\delta \mathscr A \in \mathcal B(X; Y)$.
+	If $\|\delta \mathscr A\| < \|\mathscr A^{-1}\|^{-1}$, then $\mathscr A + \delta \mathscr A \in \mathcal U(X; Y)$,
+	\begin{equation*}
+		(\mathscr A + \delta \mathscr A)^{-1} = \mathscr A^{-1} - \mathscr A^{-1}\delta \mathscr A \mathscr A^{-1} + o(\delta \mathscr A)\,,
+	\end{equation*}
+	as $\delta \mathscr A \to \mathscr O$.
+\end{theorem}
+\begin{proof}
+	Since $X$ is complte, by Theorem~\ref{theorem: Y is complete so is the space of linear operators onto it}, we know $\mathcal B(X; X)$ is complete.
+	Notice $ - \mathscr A^{-1} \delta \mathscr A \in \mathcal B(X; X)$, and by Theorem~\ref{theorem: norm of operator composition},
+	\begin{equation*}
+		\| -\mathscr A^{-1} \delta \mathscr A\| 
+		\leq \|\mathscr A^{-1}\| \|\delta \mathscr A\| 
+		< \|\mathscr A^{-1}\| \|\mathscr A^{-1}\|^{-1} = 1\,,
+	\end{equation*} 
+	$\forall \varepsilon \in \mathbb R_+$, let
+	\begin{equation*}
+		N > \log_{\|\mathscr A^{-1} \delta \mathscr A\|} 
+		\frac{\varepsilon (1 - \|\mathscr A^{-1} \delta \mathscr A\|)}{\|\mathscr A^{-1} \delta \mathscr A\|}
+	\end{equation*}
+	(we assume that $\mathscr A^{-1} \delta \mathscr A \neq \mathscr O$, or the inequality is trivial), $m > n > N$, then
+	\begin{align*}
+		\left\|
+			\sum_{k = n + 1}^{m}(-\mathscr A^{-1} \delta \mathscr A )^k
+		\right\| 
+			&\leq \sum_{k = n + 1}^{m} \|\mathscr A^{-1} \delta \mathscr A \|^k
+			= \frac{1 - \|\mathscr A^{-1} \delta \mathscr A\|^{m - n}}{1 - \|\mathscr A^{-1} \delta \mathscr A\|} \|\mathscr A^{-1} \delta \mathscr A\|^{n + 1}
+			\\
+			&\leq \frac{\|\mathscr A^{-1} \delta \mathscr A\|^{n + 1}}{1 - \|\mathscr A^{-1} \delta \mathscr A\|} < \varepsilon\,,
+	\end{align*}
+	hence $\sum_{k \in n} (- \mathscr A^{-1} \delta \mathscr A)^k$ is a Cauchy sequence, therefore convergent i.e. $\sum_{k \in \mathbb N} (- \mathscr A^{-1} \delta \mathscr A)^k$.
+
+	We can verify $\sum_{k \in \mathbb N} (- \mathscr A^{-1} \delta \mathscr A)^k = (\id_X + \mathscr A^{-1} \delta \mathscr A)^{-1}$.
+
+	Since $\mathscr A + \delta \mathscr A = \mathscr A (\id_X + \mathscr A^{-1} \delta \mathscr A)$, we conclude
+	\begin{equation*}
+		(\mathscr A + \delta \mathscr A)^{-1} 
+		= \sum_{k \in \mathbb N} (- \mathscr A^{-1} \delta \mathscr A)^k \mathscr A^{-1}\,,
+	\end{equation*}
+	and
+	\begin{align*}
+		\|(\mathscr A + \delta \mathscr A)^{-1} -& \mathscr A^{-1} + \mathscr A^{-1} \delta \mathscr A \mathscr A^{-1}\| 
+		= \left\|
+			\sum_{k = 2}^{\infty} (- \mathscr A^{-1} \delta \mathscr A)^k \mathscr A^{-1}
+		\right\| 
+		\\
+		&\leq
+		\sum_{k = 2}^{\infty} \|\mathscr A^{-1} \delta \mathscr A\|^k \|\mathscr A^{-1}\| 
+		= \frac{\|\mathscr A^{-1}\| \|\mathscr A^{-1} \delta \mathscr A\|^2}{1 - \|\mathscr A^{-1} \delta \mathscr A\|}
+		= o(\|\delta \mathscr A\|)\,.
+	\end{align*}
+\end{proof}
+
+Let $f \in Y^X$ where $X := \prod_{i \in n} X_i$. 
+We define a mapping
+\begin{equation}\label{equation: local mapping}
+	\varphi_i \colon X_i \to X;\;
+	 \bv x_i \mapsto (\bv a_0, \bv a_1, \cdots, \bv a_{i-1}, \bv x_i, \bv a_{i + 1}, \cdots, \bv a_{n-1})\,,
+\end{equation}
+so that $f \circ \varphi_i$ means the mapping of alone $\bv x_i$, leaving other variables unchanged.
+
+\begin{definition}[Partial derivative]
+	Let $f \in Y^X$ where $X := \prod_{i \in n} X_i$ be the product of normed spaces, $Y$ be a normed space. 
+	$\forall i \in n$, $\varphi_i$ is defined as Eq.~\eqref{equation: local mapping}.
+	If $f \circ \varphi_i$ is differentiable at an interior point $\bv a_i \in X_i$, we call its derivative at this point the \indexbf{partial derivative} of $f$ with respect to $\bv x_i$ at $\bv a := (\bv a_i)_{i \in n}$, denoted by $\indexfm[partial i f]{\partial_i f}(\bv a)$ or $\indexfm[pdiff f x i]{\pdiff{f}{\bv x_i}(\bv a)}$.
+\end{definition}
+
+% We can denote all differentiable mappings on $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
 
 %\appendix
 
