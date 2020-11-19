@@ -1028,7 +1028,7 @@ Then we shall introduce some global properties of continuous mappings.
 \end{proof}
 
 \chapter{Normed Linear Space and Differential Calculus}
-\section{Normed Linear Space} \
+\section{Normed Linear Space}
 
 \begin{definition}[Norm]
 	Let $V$ be a linear space over $\mathbb R$ or $\mathbb{C}$. 
@@ -1111,7 +1111,20 @@ and a metric
 	d(\bv x, \bv y) = \|\bv x - \bv y\|\,.
 \end{equation}
 
-\begin{definition}[Hilber space]
+\begin{theorem}[Continuity of norm]
+	\label{theorem: continuity of norm}
+	Let $X$ be a normed space with a norm $\|*\|$.
+	The mapping $\|*\| \in \mathbb R^X$ is continuous in $X$. 
+\end{theorem}
+\begin{proof}
+	$\forall \bv x \in X$, $\forall \varepsilon \in \mathbb R_+$, if $\|\Delta \bv x\| < \varepsilon$, then
+	\begin{equation*}
+		\|\bv x + \Delta \bv x\| \leq \| \bv x\| + \|\Delta \bv x\| 
+			< \|\bv x\| + \varepsilon \,.
+	\end{equation*}
+\end{proof}
+
+\begin{definition}[Hilbert space]
 	If a linear space is equiped with an inner poduct, and together with its induced metric constructs a complete metric space, we call it a \indexbf{Hilbert space}. If the induced metric space is not complete, we shall call it a \indexbf{pre-Hilbert space}.
 \end{definition}
 
@@ -1626,7 +1639,100 @@ so that $f \circ \varphi_i$ means the mapping of alone $\bv x_i$, leaving other 
 	If $f \circ \varphi_i$ is differentiable at an interior point $\bv a_i \in X_i$, we call its derivative at this point the \indexbf{partial derivative} of $f$ with respect to $\bv x_i$ at $\bv a := (\bv a_i)_{i \in n}$, denoted by $\indexfm[partial i f]{\partial_i f}(\bv a)$ or $\indexfm[pdiff f x i]{\pdiff{f}{\bv x_i}(\bv a)}$.
 \end{definition}
 
-% We can denote all differentiable mappings on $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
+\begin{theorem}
+	Let $X_1, \cdots, X_{n - 1}$ and $Y$ be normed spaces, $X := \prod_{i \in n} X_i$, $f \in Y^X$, $\bv a \in X$.
+	If $f$ is differentiable at $\bv a$, then $\forall i \in n$, $f \circ \varphi_i$ is differentiable $\bv a_i \in X_i$, and
+	\begin{equation}
+		\dif f(\bv a) = \sum_{i \in n} \partial_i f(\bv a) \dif \bv x_i\,.
+	\end{equation}
+\end{theorem}
+
+\section{Finite-Increment Theorem}
+
+We now study the generalisation of the Lagrangian mean value theorem, or the finite-increment theorem.
+
+Let us recall and generalised the definition of interval:
+\begin{definition}
+	Let $X$ be a linear space over a field~$\mathbb F$ which contains $\mathbb R$, $\bv a, \bv b \in X$. The \emphbf{closed}\index{closed interval} and \indexbf{open interval} is defined as:
+	\begin{align*}
+		\indexfm[x y]{[\bv x, \bv y]} &:= \{\bv x + \theta(\bv y - \bv x) 
+			\mid 0 \leq \theta \leq 1\}\,,\\
+		\indexfm[x y]{(\bv x, \bv y)} &:= \{\bv x + \theta(\bv y - \bv x) 
+			\mid 0 < \theta < 1\}\,.
+	\end{align*}
+
+	Similarly we can define $[\bv x, \bv y)$, $(\bv x, \bv y]$.
+\end{definition}
+
+\begin{theorem}[Finite-increment theorem]
+	\label{theorem: finite-increment theorem}
+	Let $X$ and $Y$ be two normed spaces, $G \in \mathscr T_X$, where $\mathscr T_X$ is the topology induced by the norm $\|*\|_X$. 
+	Let $f \in C(G, Y)$, $[\bv x_0, \bv x_0 + \Delta \bv x] \subset G$.
+	If $\forall \bv x \in (\bv x_0, \bv x_0 + \Delta \bv x)$, $f$ is differentiable at $\bv x$, then
+	\begin{equation*}
+		\|f(\bv x_0 + \Delta x) - f(\bv x_0)\|_Y 
+			\leq \sup \{\|f'(\bv \xi)\|  \mid \bv \xi \in (\bv x_0, \bv x_0 + \Delta \bv x)\} \|\Delta \bv x\|_X\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	First we assume that $f$ is differentiable in closed interval $[\bv x, \bv x + \Delta \bv x]$ (later we would return to the more generalised situation).
+
+	Let us denote $M_{[t_1, t_2]} := \sup \{\|f'(\bv x_0 + t\Delta \bv x)\|  \mid t \in [t_1, t_2] \}$. 
+	If there exists $\varepsilon_0 \in \mathbb R_+$, $\|f(\bv x_0 + \Delta \bv x) - f(\bv x)\|_Y > (M_{[0, 1]} + \varepsilon_0) \|\Delta \bv x\|_X$, since 
+	\begin{equation*}
+		\|f(\bv x_0 + \Delta \bv x) - f(\bv x)\|_Y \leq
+		\|f(\bv x_0 + \Delta \bv x) - f(\bv x_0 + \Delta \bv x / 2)\|_Y
+			+ \|f(\bv x_0 + \Delta \bv x / 2) - f(\bv x)\|\,,
+	\end{equation*}
+	and $M_{[0, 1/2]} \leq M_{[0, 1]}$, $M_{[1/2, 1]} \leq M_{[0, 1]}$, the following two inequality \emph{cannot} be both true: 
+	\begin{align*}
+		\|f(\bv x_0 + \Delta \bv x) - f(\bv x_0 + \Delta \bv x / 2)\|_Y 
+			&\leq (M_{[1/2, 1]} + \varepsilon_0) \|\Delta \bv x\|_X/2\,;
+		\\
+		\|f(\bv x_0 + \Delta \bv x / 2) - f(\bv x)\| 
+			&\leq (M_{[0, 1/2]} + \varepsilon_0) \|\Delta \bv x\|_X / 2 \,.
+	\end{align*} 
+	
+	We would repeatedly divide the interval which does not satisfies the finite-increment theorem into two, and finally we would have a collections of closed intervals $\langle[a_i, b_i]\rangle_{i \in \mathbb N}$ s.t.\ $a_i \leq a_{i + 1} < b_{i +1} \leq b_i$, $\forall i \in \mathbb N$, over which the inequality
+	\begin{equation*}
+		\|f(\bv x_0 + b_i \Delta \bv x) - f(\bv x_0 + a_i \Delta \bv x)\|_Y
+			> (M_{[a_i, b_i]} + \varepsilon_0) |b_i - a_i| \|\Delta \bv x\|_X
+	\end{equation*}
+	holds.
+
+	Since $[0, 1]$ is a compact set in $\mathbb R$, and $|b_i - a_i| = 2^{-i}$, $\exists c \in [0, 1]$ s.t.\ $\bigcap_{i \in \mathbb N} [a_i, b_i] = \{c\}$.
+
+	Because we can say $c$ divides all $[a_i, b_i]$ into two, we shall always choose one of $\{a_i, b_i\}$ as $c_i$ s.t.\ 
+	\begin{equation}\label{equation: inequality that violates differentiable}
+		\|f(\bv x_0 + c \Delta \bv x) - f(\bv x_0 + c_i \Delta \bv x)\|_Y
+			> (M_{[c, c_i]} + \varepsilon_0) |c_i - c| \|\Delta \bv x\|_X\,.
+	\end{equation}
+
+	However, by the differentiability of $f$ at $\bv x_0 + c \Delta \bv x$, $\forall \varepsilon \in \mathbb R_+$, there exists an $N \in \mathbb N$, as long as $i > N$
+	\begin{align*}
+		\|f(\bv x_0 + c \Delta \bv x) - f(\bv x_0 + c_i \Delta \bv x)\|_Y 
+			&\leq \|f'(\bv x_0 + c\Delta \bv x)\||c_i - c|\|\Delta \bv x\|_X
+				+ o(|c_i - c|) \|\Delta \bv x\|_X
+		\\
+			&\leq (M_{[c, c_i]} + \varepsilon) |c_i - c|\|\Delta \bv x\|_X\,.
+	\end{align*}
+
+	Letting $\varepsilon = \varepsilon_0$ we would find a contradiction.
+
+	Now if the function~$f$ is only differentiable in $(\bv x_0, \bv x_0 + \Delta \bv x)$, we have proved that $\forall \bv x_1, \bv x_2 \in (\bv x_0, \bv x_0 + \Delta \bv x)$, 
+	\begin{equation*}
+		\|f(\bv x_2) - f(\bv x_1)\| \leq M_{[t_1, t_2]} \|\bv x_1, \bv x_2\|_X\,.
+	\end{equation*}
+	where $\bv x_1 = \bv x_0 + t_1 \Delta \bv x$, $\bv x_2 = \bv x_0 + t_2 \Delta \bv x$.
+
+	Since both $\|*\|$ and $f$ is continuous (Theorem~\ref{theorem: continuity of norm} and Theorem~\ref{theorem: differentiable then continuous}), we shall pass $\bv x_1$, $\bv x_2$ to $\bv x_0$ and $\bv x_0 + \Delta \bv x$, and get
+	\begin{equation*}
+		\|f(\bv x_0 + \Delta \bv x) - f(\bv x_0)\|_Y 
+			\leq \sup \{\|f'(\bv \xi)\|  \mid \bv \xi \in (\bv x_0, \bv x_0 + \Delta \bv x)\} \|\Delta \bv x\|_X\,.
+	\end{equation*}
+\end{proof}
+
+We can denote all differentiable mappings, of which the derivative theorem $f'$ is continuous, from an open set $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
 
 %\appendix
 
