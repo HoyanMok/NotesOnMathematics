@@ -138,7 +138,9 @@
 \frontmatter
 \chapter{preface}
 The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/Analysis} .
+
 \tableofcontents
+
 \mainmatter
 \part{Mathematical Analysis}
 
@@ -297,7 +299,7 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 \end{proof}
 
 \begin{definition}(Metric subspace)\label{definition: metric subspace}
-	We called $(X'; d')$ a \indexbf{subspace} of $(X, d)$ when $X' \subset X$ and $\forall x, y \in X'$, $d'(x, y)=d(x, y)$.
+	We called $(X', d')$ a \indexbf{subspace} of $(X, d)$ when $X' \subset X$ and $\forall x, y \in X'$, $d'(x, y)=d(x, y)$.
 \end{definition}
 
 \section{Topological Space}
@@ -444,7 +446,6 @@ This fact can be easily proved: we just need to notice that every open set $G_K$
 	Hence $x_0 \in K$. $\overline K = K$.
 \end{proof}
 
-
 \begin{theorem}\label{theorem: compact nested sequences have non-empty limit}
 	Each decreasing \emph{\textbf{nested sequences}}\index{nested sequence} of non-empty compact sets has a non-empty limit, i.e.\ 
 	$\forall (K_n)_{n \in \mathbb N} \in \mathscr P(X)^\mathbb N$ s.t.\ $\forall n \in \mathbb N_+$, $K_n \supset K_{n+1}\wedge K_n \neq \varnothing$ $\wedge$ ($K_n$ is compact): 
@@ -538,6 +539,51 @@ Then we get back to the Theorem~\ref{theorem: sequentially compact iff compact (
 		(Theorem~\ref{theorem: compact nested sequences have non-empty limit})
 	can't be finitely covered by any subcover of $\varOmega$, 
 	which means $\varOmega$ can't cover the whole $K$, leading to the contradiction.
+\end{proof}
+
+We now prove a very useful special case for compact sets: compact sets in $\mathbb R$.
+
+\begin{lemma}[$n$-dimemsional cuboids are compact]
+	\label{lemma: n-dimensional cuboids are compact}
+	Let $I$ be a cuboid in $\mathbb R^n$ i.e.\ 
+	\begin{equation*}
+		I := \{\bv x \in \mathbb R_n \mid a_i \leq x_i \leq b_i, \forall i \in n\}\,.
+	\end{equation*}
+	The cuboid $I$ is compact.
+\end{lemma}
+\begin{proof}
+	We only need to prove that $I$ is sequentially compact (Theorem~\ref{theorem: sequentially compact iff compact (metric)}). 
+	Let $(\bv x_i)_{i \in \mathbb N} \in I^\mathbb N$. 
+	
+	Denote $S_0 := I$.
+	We divide $S_m$ ($m \in \mathbb N$) into $2^n$ parts by equally dividing every $I_i := \{\bv x \in \mathbb R_n \mid a_i \leq x_i \leq b_i\}$ into two. 
+	Choose one that contains inifinite points of $(\bv x_i)_{i \in \mathbb N}$ as $S_{m+1}$. 
+	Then we get a closed nested sequence $S := (S_i)_{i \in \mathbb N}$.
+	Notice that $\forall i \in \mathbb N$, $S_i$ can be conceived as a product of $n$ 1-dimension intervals. These intervals are also closed nested sequence, but in $\mathbb R$. 
+	We have leaned that $\exists! \bv \xi := (\xi_i)_{i \in n}$ s.t.\ $\{\bv \xi\} := \bigcap S$ from the theory of real numbers.
+
+	In every $S_k$ we can find a $\bv x_{i_k}$, which is a convergent subsequence of the arbitary sequence~$(\bv x_i)_{i \in \mathbb N}$.
+\end{proof}
+
+\begin{theorem}[Compact iff closed and bounded in $\mathbb R^n$]
+	\label{theorem: compact iff closed and bounded in Rn}
+	Let $K \in \mathscr P(\mathbb R^n)$, $n \in \mathbb N_+$.
+	The set~$K$ is compact \emph{iff} it is closed and bounded.
+\end{theorem}
+\begin{proof}
+	$\to$: 
+	We have proved that compact sets are closed in a Hausdorff space (Theorem~\ref{theorem: compact sets are closed in Hausdorff space}). 
+	Now we prove that $K$ is also bounded. 
+	Let $\bv x \in \mathbb R^n$, and we could find an open covers of $K$: 
+	\begin{equation*}
+		\varOmega := \{B(\bv x; n) \mid n \in \mathbb N_+\}\,.
+	\end{equation*}
+
+	Assume that we find a finite subcover $\varOmega' := \{B(\bv x; n_k) \mid k \in m\}$, then $d(K) < n_m$.
+
+	$\gets$: Since $K$ is bounded, we can find it a $n$-dimension cuboid~$I$, which we have proved to be compact (Lemma~\ref{lemma: n-dimensional cuboids are compact}). 
+	The closed set~$K$ in the compact set~$I$ is compact (Theorem~\ref{theorem: closed subset of compact set}).
+
 \end{proof}
 
 \section{Connected Set}
@@ -893,7 +939,7 @@ Then we shall introduce some global properties of continuous mappings.
 	$\exists x_m, x_M \in K$, s.t.\ $f(x_m) = m := \inf f(K)$, $f(x_M) = M := \sup f(K)$.
 \end{theorem}
 \begin{proof}
-	By Theorem~\ref{theorem: conservation of compactness}, $f(K)$ is also compact, and therefore closed (Theorem~\ref{theorem: closed subset of compact set}). 
+	By Theorem~\ref{theorem: conservation of compactness}, $f(K)$ is also compact, and therefore closed and bounded (Theorem~\ref{theorem: theorem: compact iff closed and bounded in Rn}). 
 	If $M \notin f(K)$, then open covers $\{ B(M; (M-m)/n) - \tilde B(M; (M-m)/(n + 1)) \mid  n \in \mathbb N_+\} $ would not have a finite subcover, which is a contradiction to the compactness of $f(K)$.
 \end{proof}
 
@@ -1026,6 +1072,18 @@ Then we shall introduce some global properties of continuous mappings.
 
 	By passing to the limit as $k \to \infty$ in the inequality~\ref{equation: contraction Cauchy sequence}, we have the inequality~\ref{equation: fixed-point principle}.
 \end{proof}
+
+If the factor $q$ is not limited within $1$, we obtain:
+\begin{definition}[Lipschitz continuity]
+	Let $(X, d_X)$, $(Y, d_Y)$ be two metric spaces, $f \in Y^X$. If $\exists M \in \mathbb R_+$ s.t.\ $\forall x_1, x_2 \in X$, 
+	\begin{equation}\label{equation: Lipschitz condition}
+		d_Y(f(x_1), f(x_2)) \leq M d_X(x_1, x_2)\,,
+	\end{equation}
+	then $f$ is said to be \indexbf{Lipschitz continuous}. 
+	Inequality~\ref{equation: Lipschitz condition} is called the \indexbf{Libschitz condition}.
+\end{definition}
+
+It is almost obvious that a Lipschitz continuous mapping is continuous.
 
 \chapter{Normed Linear Space and Differential Calculus}
 \section{Normed Linear Space}
@@ -1461,8 +1519,6 @@ which is the notation we have been very familiar with.
 	\end{equation*}
 \end{proof}
 
-
-
 \begin{theorem}[Linearity of differentiation]
 	\label{theorem: linearity (differential)}
 	Let $X$, $Y$ be two normed space on $\mathbb F$ ($\mathbb C$ or $\mathbb R$), $\bv x \in X$ is an interior point. 
@@ -1639,13 +1695,41 @@ so that $f \circ \varphi_i$ means the mapping of alone $\bv x_i$, leaving other 
 	If $f \circ \varphi_i$ is differentiable at an interior point $\bv a_i \in X_i$, we call its derivative at this point the \indexbf{partial derivative} of $f$ with respect to $\bv x_i$ at $\bv a := (\bv a_i)_{i \in n}$, denoted by $\indexfm[partial i f]{\partial_i f}(\bv a)$ or $\indexfm[pdiff f x i]{\pdiff{f}{\bv x_i}(\bv a)}$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}[Differentiable then partial derivative exists]
+	\label{theorem: differentiable then partial derivative exists}
 	Let $X_1, \cdots, X_{n - 1}$ and $Y$ be normed spaces, $X := \prod_{i \in n} X_i$, $f \in Y^X$, $\bv a \in X$.
 	If $f$ is differentiable at $\bv a$, then $\forall i \in n$, $f \circ \varphi_i$ is differentiable $\bv a_i \in X_i$, and
 	\begin{equation}
 		\dif f(\bv a) = \sum_{i \in n} \partial_i f(\bv a) \dif \bv x_i\,.
 	\end{equation}
 \end{theorem}
+
+\begin{definition}[Continuously differentiable]
+	Let $f \in Y^X$ and differentiable at $\bv x \in X$. If the derivative mapping~$f' \in \mathscr B(X; Y)^X$ is continuous at $\bv x$, we say that $f$ is \indexbf{continuously differentiable} at point~$\bv x$. 
+
+	We can denote all continuously differentiable mappings from an open set $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. 
+\end{definition}
+
+By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
+
+\begin{theorem}[Continuously differentiable iff partial derivative is continuous (differentiable mapping)]
+	\label{theorem: continuously differentiable iff partial derivative is continuous (differentiable mapping)}
+	Let $X_0, \cdots, X_{n - 1}$, $Y$ be normed spaces, $X := \prod_{i \in n} X_i$, $\bv x \in X$, $f \in Y^X$ is differentiable at $\bv x$.
+	$f$ is continuouly differentiable at $\bv x$ \emph{iff} $\forall i \in n$, $\partial_i f \in \mathcal B(X_i; Y)^X$.
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		\|\partial_i f(\bv x + \Delta \bv x) - \partial_i f(\bv x)\| 
+			&\leq \left\|\sum_{j \in n} \big(
+					\partial_j f(\bv x + \Delta \bv x) - \partial_i f(\bv x)\big)
+				\right\|
+			= \|\dif f(\bv x + \Delta \bv x) - \dif f(\bv x)\|
+			\\
+			&\leq \sum_{j \in n}
+				\|\partial_j f(\bv x + \Delta \bv x) - \partial_j f(\bv x)\| 
+	\end{align*}
+\end{proof}
+
 
 \section{Finite-Increment Theorem}
 
@@ -1732,7 +1816,167 @@ Let us recall and generalised the definition of interval:
 	\end{equation*}
 \end{proof}
 
-We can denote all differentiable mappings, of which the derivative theorem $f'$ is continuous, from an open set $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
+\begin{corollary}
+	\label{corollary: difference between derivative and any linear operator}
+	Let $X$ and $Y$ be two normed spaces, $G \in \mathscr T_X$, where $\mathscr T_X$ is the topology induced by the norm $\|*\|_X$. 
+	Let $f \in C(G, Y)$, $[\bv x_0, \bv x_0 + \Delta \bv x] \subset G$.
+	$\forall \mathscr A \in \mathcal B(X, Y)$, 
+	\begin{equation*}
+		\|f(\bv x + \Delta \bv x) - f(\bv x) - \mathscr A \Delta \bv x\|_Y
+			\leq \sup \big\{\|f'(\bv \xi) - \mathscr A\| \|\Delta x\|_X 
+				\mid \bv \xi \in [\bv x_0, \bv x_0 + \Delta \bv x]\big\}\,.
+	\end{equation*}
+\end{corollary}
+\begin{proof}
+	Define:
+	\begin{equation*}
+		F \colon [0, 1] \to Y; \; 
+		t \mapsto f(\bv x + t \Delta \bv x) - \mathscr A t \Delta \bv x\,.
+	\end{equation*}
+
+	By the finite-increment theorem~\ref{theorem: finite-increment theorem}, 
+	\begin{align*}
+		\|F(1) - F(0)\|_Y 
+		&= \|f(\bv x + \Delta \bv x) - f(\bv x) - \mathscr A \Delta \bv x\|_Y
+		\\
+		&\leq \sup\big\{\|F'(\xi)\| \mid \xi \in [0, 1]\big\} |1 - 0|
+		= \sup\big\{\|f'(\bv x + \xi \Delta \bv x)\Delta \bv x - \mathscr A \Delta \bv x \| \mid \xi \in [0, 1]\big\}
+		\\
+		&\leq \sup\big\{\|f'(\bv x + \xi \Delta \bv x) - \mathscr A \| \mid \xi \in [0, 1]\big\} \|\Delta \bv x\|_X\,.
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Continuously differentiable then Lipschitz continuous]
+	\label{theorem: continuously differentiable then Lipschitz continuous}
+	Let $K$ be a convex%
+		\footnote{a \indexbf{convex set} is a set that contains all points on the straight segment jointing any two points i.e.\ $\forall \bv x_1, \bv x_2 \in C$, $[\bv x_1, \bv x_2] \subset C$.}
+	compact set in a normed space $X$, and $Y$ be a normed space, $f \in Y^K$.
+	If $f \in C^{(1)}(K, Y)$, then $f$ is Lipschitz continuous.
+\end{theorem}
+\begin{proof}
+	$f' \in C(K; \mathcal B(X; Y))$, $\|*\|_Y \in C (Y; \mathbb R)$, hence the composition~$g \colon K \to \mathbb R;\; \bv x \mapsto \|f'(\bv x)\|_Y$ is also continuous. 
+	Recall Theorem~\ref{theorem: Weierstrass maximum-value}, we conclude that $\exists M$, $\forall \bv x \in K$, $g(\bv x) \leq M$.
+
+	Since $K$ is convex, $\forall \bv x_1, \bv x_2 \in K$, $[\bv x_1, \bv x_2] \subset K$. 
+	By finite-increment theorem~\ref{theorem: finite-increment theorem}, we have:
+	\begin{equation*}
+		\|f(\bv x_2) - f(\bv x_1)\|_Y 
+			\leq \sup\big\{\|f'(\bv x)\| \mid \bv x \in [\bv x_1, \bv x_2]\big\} 
+				\|\bv x_2 - \bv x_1\|_X
+			\leq M  \|\bv x_2 - \bv x_1\|_X \,.
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}
+	Let $K$ be a convex compact set in a normed space $X$, and $Y$ be a normed space, $f \in C^{(1)}(K, Y)$. 
+	$\exists \omega \in \mathbb R^\mathbb R$ s.t.\ $\lim_{x \to + 0} \omega(x) = 0$, and $\forall \bv x \in X$, if $\Delta \bv x \in K \cap B(\bv x; \delta)$, then
+	\begin{equation*}
+		\|f(\bv x + \Delta \bv x) - f(\bv x) - f'(\bv x) \Delta \bv x\|_Y
+			\leq \omega(\delta) \|\Delta \bv x\|_X\,,
+	\end{equation*}
+	for some $\delta \in \mathbb R_+$.
+\end{theorem}
+\begin{proof}
+	By Theorem~\ref{corollary: difference between derivative and any linear operator}, 
+	\begin{equation*}
+		\|f(\bv x + \Delta \bv x) - f(\bv x) - f'(\bv x) \Delta \bv x\|_Y
+			\leq \sup \big\{\|f'(\bv \xi) - f'(\bv x)\|  
+				\mid \bv \xi \in [\bv x_0, \bv x_0 + \Delta \bv x]\big\}
+				\|\Delta x\|_X\,.
+	\end{equation*}
+
+	Let
+	\begin{equation*}
+		\omega(\delta) 
+		= \sup\big\{\|f'(\bv x_2) - f'(\bv x_1)\| \mid \bv x_1, \bv x_2 \in K 
+			\wedge d_X(\bv x_1, \bv x_2) < \delta\big\}\,.
+	\end{equation*}
+\end{proof}
+
+With the finite-increment theorem, we can generalised Theorem~\ref{theorem: continuously differentiable iff partial derivative is continuous (differentiable mapping)} to any mappings, instead of differentiable mappings alone.
+
+\begin{theorem}[Continuously differentiable iff partial differential is continuous]
+	\label{theorem: continuously differentiable iff partial differential is continuous}
+	Let $X_0$, $\cdots$, $X_{n-1}$, $Y$ be normed spaces, $X := \prod_{i \in n} X_i$, $G \in \mathscr T_X$, $f \in Y^G$.
+
+	$f \in C^{(1)}(G, Y)$ $\IFF$ $\forall i \in n$, $\partial_i f \in C(G, \mathcal B(X; Y))$.
+\end{theorem}
+\begin{proof}
+	$\to$: 
+	We have proved that if the mapping~$f$ is continuously differentiable in $G$, $\forall i \in n$, $\partial_i f$ is continuous. (Theorem~\ref{theorem: continuously differentiable iff partial derivative is continuous (differentiable mapping)}).
+
+	$\gets$:
+	Denote
+	\begin{equation*}
+		\mathscr L := \sum_{i \in n} \partial_i f(\bv x) \dif \bv x_i\,,
+	\end{equation*}
+	and we shall show that $\mathscr L$ is the differential of $f$ at $\bv x \in G$.
+
+	Let us introduce a notation, 
+	\begin{equation*}
+		\Delta_i f(\bv a) := f(\bv a_0, \cdots, \bv a_{i-1}, \bv a_i + \Delta \bv x_i, \bv a_{i+1}, \cdots, \bv a_{n-1}) - f(\bv a)\,.
+	\end{equation*}
+
+	Then
+	\begin{align*}
+		&f(\bv x + \Delta \bv x) - f(\bv x) - \mathscr L \Delta \bv x 
+		\\
+		&= \Delta_0 f(\bv x_0, \bv x_1 + \Delta \bv x_1, \cdots, \bv x_{n-1} + \Delta \bv x_{n-1}) - \partial_0 f(\bv x)\Delta \bv x_0
+		\\
+		&\quad + \Delta_1 f(\bv x_0, \bv x_1, \bv x_2 + \Delta \bv x_2, \cdots, \bv x_{n-1} + \Delta \bv x_{n-1}) 
+			- \partial_1 f(\bv x) \Delta \bv x_2
+		\\
+		&\quad + \cdots 
+		 + \Delta_{n-1} f(\bv x) \Delta \bv x_{n-1} - \partial_{n-1} f(\bv x) \Delta \bv x_{n-1}
+		\,.
+	\end{align*}
+
+	By Corollary~\ref{corollary: difference between derivative and any linear operator}, we have:
+	\begin{align*}
+		&\|f(\bv x + \Delta \bv x) - f(\bv x) - \mathscr L \Delta \bv x\|_Y 
+		\\
+		&\leq \|\Delta_0 f(\bv x_0, \bv x_1 + \Delta \bv x_1, \cdots, \bv x_{n-1} + \Delta \bv x_{n-1}) - \partial_0 f(\bv x)\Delta \bv x_0\|_Y
+		\\
+		&\quad + \cdots 
+		 + \|\Delta_{n-1} f(\bv x) \Delta \bv x_{n-1} - \partial_{n-1} f(\bv x) \Delta \bv x_{n-1}\|_Y
+		\\
+		&\leq \sup\Big\{\big\|\partial_0 f(\bv \xi_0, \bv x_1 + \Delta \bv x_1, \cdots, \bv x_{n-1} + \Delta \bv x_{n-1}) 
+		\\
+			&\qquad\qquad - \partial_0 f(\bv x_0, \bv x_1 + \Delta \bv x_1, \cdots, \bv x_{n-1} + \Delta \bv x_{n-1})\big\|_Y
+		\mid \bv \xi_0 \in [\bv x_0, \bv x_0 + \Delta \bv x_0]\Big\} 
+			\|\Delta \bv x_0\|_{X_0}
+		\\
+		&\quad + \cdots 
+		 + \sup\Big\{\big\|\partial_{n-1} f(\bv x_0, \cdots, \bv \xi_{n-1}) - \partial_{n-1} f(\bv x)\big\|_Y
+		 \mid \bv \xi_{n-1} \in [\bv x_0, \bv x_0 + \Delta \bv x_0]\Big\} 
+			 \|\Delta \bv x_{n-1}\|_{X_{n-1}} \,.
+	\end{align*}
+
+	Since $\partial_i f \in C(X_i, Y)$, we know
+	\begin{align*}
+		&\lim_{\Delta \bv x_i \to \bv 0}\sup\Big\{\big\|\partial_0 f(\bv x_0, \cdots, \bv \xi_i, \cdots, \bv x_{n-1} + \Delta \bv x_{n-1}) 
+		\\
+			&\qquad\qquad\qquad - \partial_0 f(\bv x_0, \cdots, \bv x_i, \cdots, \bv x_{n-1} + \Delta \bv x_{n-1})\big\|_Y
+		\mid \bv \xi_i \in [\bv x_0, \bv x_0 + \Delta \bv x_0]\Big\} 
+		\\
+		&= 0\,.
+	\end{align*}
+
+	Since $\max\{\|\Delta \bv x_i\|_{X_{i}}\}_{i \in n} \leq \|\Delta \bv x\|_X$ (check Eq.~\eqref{equation: norm of product space}), we know that
+	\begin{equation*}
+		f(\bv x + \Delta \bv x) - f(\bv x) - \mathscr L \Delta \bv x
+		= o(\Delta \bv x)\,,
+	\end{equation*}
+	which means $\dif f(\bv x) = \mathscr L$.
+\end{proof}
+
+\section{Higher-Order Derivative}
+
+\chapter{Integration}
+
+\part{Real Analysis}
+\part{Functional Analysis}
+\part{Complex Analysis}
 
 %\appendix
 
@@ -1744,4 +1988,5 @@ We can denote all differentiable mappings, of which the derivative theorem $f'$ 
 \printindex[symbol]
 
 \printindex
+
 \end{document}
