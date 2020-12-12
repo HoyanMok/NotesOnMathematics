@@ -1432,7 +1432,7 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 	\end{align*}
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{corollary: important isomorphism}
 	$\mathcal B(X_0; \mathcal B(X_1; \cdots; \mathcal B(X_{n-1}; Y) \cdots ))$  and $\mathcal B(X_0, \cdots, X_{n-1}; Y)$ are isomorphic.
 \end{corollary}
 
@@ -1730,6 +1730,30 @@ By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X
 	\end{align*}
 \end{proof}
 
+\begin{definition}[Derivative with respect to a vector]\index{derivative with respect to a vector}
+	Let $X$ and $Y$ be two normed space over $\mathbb R$ or $\mathbb C$, $U$ be an open set in $X$, $f \in Y^U$, $\bv x \in U$.
+	The derivative of $f$ with respect to a vector $\bv \ell$ is defined as:
+	\begin{equation*}
+		\pdiff{f}{\bv \ell}(\bv x) 
+			:= \lim_{t \to 0} \frac 1 t [f(\bv x + t \bv \ell) - f(\bv x)]\,.
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Derivative with respect to a vector when differentiable]
+	\label{theorem: derivative with respect to a vector when differentiable}
+	Let $X$ and $Y$ be two normed space over $\mathbb R$ or $\mathbb C$, $U$ be an open set in $X$, $f \in Y^U$, $\bv x \in U$.
+	If $f$ is differentiable at $\bv x$, then $\forall \bv \ell \in X$, the derivative of $f$ with respect to $\bv \ell$ exists, and
+	\begin{equation*}
+		\pdiff{\bv f}{\bv \ell} (\bv x) = f'(\bv x) \bv \ell\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	\begin{equation*}
+		\lim_{t \to 0} \frac 1 t [f(\bv x + t \bv \ell) - f(\bv x)]
+			= \lim_{t \to 0} \frac 1 t [f'(\bv x) t \bv \ell + o(t \bv \ell)]
+			= f'(\bv x) \bv \ell\,.
+	\end{equation*}
+\end{proof}
 
 \section{Finite-Increment Theorem}
 
@@ -1971,6 +1995,124 @@ With the finite-increment theorem, we can generalised Theorem~\ref{theorem: cont
 \end{proof}
 
 \section{Higher-Order Derivative}
+
+We denote the zeroth and first differential of $f \in Y^U$, where $U$ is an open set in a normed space $X$, by $f^{(0)} := f$, $f^{(1)} := f'$.
+
+\begin{definition}[$n$-th differentiation]
+	Let $X$ and $Y$ be normed spaces, with induced topologies $\mathscr T_X$ and $\mathscr T_Y$. 
+	For brevity, we define $Y_0 := Y$, and $Y_{n+1} := \mathcal B(X; Y_n)$.
+
+	The definition of \emphbf{$n$-th differential}%
+		\index{n-th differentiation@$n$-th differentiation}
+	is introduced below recursively:
+	We have already defined the zeroth and the first defferentiation. 
+	If the $n$-th differential $f^{(n)} \in {Y_n}^U$ is differentiable in $U \in \mathscr T_X$
+		\footnote{$Y_n$ is also a normed space.},
+	we can define the $(n + 1)$-th differential $\indexfm[f n x]{f^{(n)}(\bv x)}$ by:
+	\begin{equation*}
+		f^{(n + 1)}= (f^{(n)})'\,. 
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Higher-oder differentiation operates on vectors]
+	Let $X$ and $Y$ be normed spaces, with induced topologies $\mathscr T_X$ and $\mathscr T_Y$, $U \in \mathscr T_X$, $\bv x \in U$, $(\bv \ell_i)_{i \in n} \in X^n$.
+	If $f \in Y^U$ has $n$-th differential $f^{(n)}$ in $U$, 
+	\begin{equation}
+		\label{equation: higher-oder differentiation operates on vectors}
+		((f^{(n)}(\bv x) \bv \ell_0) \cdots \bv \ell_{n-1}) 
+			= \pdiff{}{\bv \ell_0} \cdots \pdiff{}{\bv \ell_{n-1}} f(\bv x)\,.
+	\end{equation} 
+\end{theorem}
+\begin{proof}
+	See Theorem~\ref{theorem: derivative with respect to a vector when differentiable}.
+\end{proof}
+
+\begin{theorem}[Symmetry of higher-order differentiation]
+	\label{theorem: symmetry of higher-order differentiation}
+	Let $\sigma \in S_n$ where $S_n$ is the symmetric group%
+		\footnote{Or permutation}
+	on $n$.
+	Let $X$ and $Y$ be normed spaces, with induced topologies $\mathscr T_X$ and $\mathscr T_Y$, $U \in \mathscr T_X$, $\bv x \in U$, $(\bv \ell_i)_{i \in n} \in X^n$.
+	If $f \in Y^U$ has $n$-th differential $f^{(n)}$ in $U$, then
+	\begin{equation*}
+		\pdiff{}{\bv \ell_{\sigma(0)}} \cdots \pdiff{}{\bv \ell_{\sigma(n-1)}} f(\bv x)
+			= \pdiff{}{\bv \ell_0} \cdots \pdiff{}{\bv \ell_{n-1}} f(\bv x)\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	We shall only prove the case when $n = 2$.
+
+	The second differetial~$f''(\bv x)$ exists implies that the first differential $f'(\bv x)$ also exists. 
+	Since $U$ is open, there exists an open ball $B(0; \delta) \subset U$, where $\delta \in \mathbb R_+$.
+
+	Let
+	\begin{align*}
+		&\Delta(t) := f(\bv x + t \bv \ell_0 + t \bv \ell_1) 
+			- f(\bv x + t \bv \ell_0) - f(\bv x + t \bv \ell_1) + f(\bv x)\,,
+		\\
+		&D(t, t') := f(\bv x + t \bv \ell_0 + t' \bv \ell_1)
+			- f(\bv x + t' \bv \ell_1)\,,
+	\end{align*}
+	where $t \in [0, \delta)$, $t' \in [0, t]$. 
+
+	It is obvious that $\Delta(t) = D(t, t) - D(t, 0)$. 
+	By the finite-increment theorem~\ref{theorem: finite-increment theorem}, 
+	\begin{align*}
+		\|\Delta(t) - &t^2 [f''(\bv x) \bv \ell_0] \bv \ell_1\|_Y
+			= \|D(t, t) - D(t, 0) - t^2 [f''(\bv x) \bv \ell_0] \bv \ell_1\|_Y
+		\\
+			&\leq t \sup \left\{
+				\left\|
+					\pdiff{D}{t'}(t, \theta) - t \theta [f''(\bv x) \bv \ell_0] \bv \ell_1
+				\right\|_Y
+			\middle|
+				\theta \in (0, t)
+			\right\}
+		\\
+			&\leq t \|\bv \ell_1\|_X \sup \left\{
+				\left\|
+					f'(\bv x + t \bv \ell_0 + \theta \bv \ell_1)
+						- f'(\bv x + \theta \bv \ell_1) 
+						- t \theta f''(\bv x) \bv \ell_0
+				\right\|
+			\middle|
+				\theta \in (0, t)
+			\right\}
+		\\
+			&= t  \|\bv \ell_1\|_X \sup \left\{
+				\left\|
+					 	\theta f''(\bv x) (t\bv \ell_0 + \theta \bv \ell_1 - \theta \bv \ell_1)
+						- t \theta f''(\bv x) \bv \ell_0
+						+ o(t)
+				\right\|
+			\middle|
+				\theta \in (0, t)
+			\right\}
+		\\
+			&= o(t^2)\,.
+	\end{align*} 
+
+	Hence, 
+	\begin{equation*}
+		[f''(\bv x) \bv \ell_0]\bv \ell_1 = \lim_{t \to 0} \frac{\Delta(t)}{t^2}\,.
+	\end{equation*}
+
+	Substituting $(\bv \ell_0, \bv \ell_1)$ by $(\bv \ell_1, \bv \ell_1)$ in the definition of $\Delta(t)$ doesn't change its value, hence we have proved the theorem in the case when $n = 2$.
+\end{proof}
+
+Theorem~\ref{theorem: symmetry of higher-order differentiation} implies that the $n$-th derivative~$f^{(n)}(\bv x)$ corresponds to a $n$-symmetric multilinear operator in $\mathcal B(X, \cdots, X; Y)$%
+\footnote{By Corollary~\ref{corollary: important isomorphism}, these two spaces are isomorphic}, 
+and we shall denote:
+\begin{equation*}
+	f^{(n)}(\bv x)(\bv \ell_i)_{i \in n} :=
+	((f^{(n)}(\bv x)\bv \ell_0)\cdots)\bv \ell_{n-1}\,,
+\end{equation*}
+and
+\begin{equation*}
+	f^{(n)}(\bv x) \bv \ell^n := f^{(n)}(\bv \ell, \cdots, \bv \ell)\,.
+\end{equation*}
+
+
 
 \chapter{Integration}
 
