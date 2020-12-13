@@ -1,6 +1,6 @@
 % Used TeXplate:
 % TeXplates/Mathematics.tex
-% v0.1.7
+% v0.1.8
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{book} 
 % \documentclass{ctexbook} 如果用中文
@@ -24,8 +24,8 @@
 	\makeindex[intoc, title={Index}]
 	\makeindex[intoc, name=symbol, title={Symbol List}]
 	\newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
-	\newcommand*{\indexfm}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
-	% \indexfm[name for sort]{display} 
+	\newcommand*{\indexmath}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
+	% \indexmath[name for sort]{display} 
 
 % 将PATH换成绝对路径 (Windows) 或相对路径 (Mac OS或Linux)
 % 使用「/」而不是「\」
@@ -158,32 +158,32 @@ The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/mas
 	\item	$d(x, z) \leq d(x,y)+d(y,z)$ (triangle inequality),
 	\end{conditionlist}
 	is called a \indexbf{metric} or \indexbf{distance} in $X$. 
-	Such $X$ is said to be equiped with a metric $d$, $\indexfm[X d]{(X, d)}$ is called a \indexbf{metric space}. 
+	Such $X$ is said to be equiped with a metric $d$, $\indexmath[X d]{(X, d)}$ is called a \indexbf{metric space}. 
 	If the metric defined over $X$ is definite, we just simply call the $X$ the metric space.
 \end{definition}
 
 Some examples:
 \begin{itemize}
 	\item 
-	We can define $\indexfm[R n p]{\mathbb R^n_p} := (\mathbb R^n, \indexfm[d p]{d_p})$, where
+	We can define $\indexmath[R n p]{\mathbb R^n_p} := (\mathbb R^n, \indexmath[d p]{d_p})$, where
 	\begin{equation}\label{equation:d_p}
 		d_p (x, y) := \left(
 			\sum_{i \in n}\big|x^i - y^i \big|^p \right)^{1/p}\,,
 	\end{equation}
 	while
 	\begin{equation}\label{equation:d_infty}
-		\indexfm[d infty]{d_\infty} (x, y) :=
+		\indexmath[d infty]{d_\infty} (x, y) :=
 		\max_{i \in n} \big|x^i - y^i\big|\,.
 	\end{equation}
 	\item 
-	Similarly we can define metric spaces as $(C[a, b], d_p)$ or simplified $\indexfm[C p a b]{C_p[a, b]}$. 
+	Similarly we can define metric spaces as $(C[a, b], d_p)$ or simplified $\indexmath[C p a b]{C_p[a, b]}$. 
 	\begin{equation}
 		d_p(f, g) =
 		\left(
 			\int^b_a \big| f - g \big|^p \dif x
 		\right)^{1/p}\,.
 	\end{equation}
-	while $\indexfm[C infty a b]{C_\infty [a, b]}$ is called a \indexbf{Chebyshev metric}, 
+	while $\indexmath[C infty a b]{C_\infty [a, b]}$ is called a \indexbf{Chebyshev metric}, 
 	where the metric is defined as $d_\infty(f, g) := \max_{x \in [a, b]} |f(x) - g(x)|$.
 	\item 
 	On equivalence class $\tilde {\mathfrak R}[a,b]$ over $\mathfrak R[a,b]$ similar metric can be defined. 
@@ -205,7 +205,7 @@ Some examples:
 	Let $(X, d)$ be a metric space, and $\delta \in \mathbb R_+$, $a \in X$. 
 	A set
 	\begin{equation*}
-		\indexfm[B a delta]{B(a; \delta)} = \{x \in X \mid d(a, x) < \delta\}
+		\indexmath[B a delta]{B(a; \delta)} = \{x \in X \mid d(a, x) < \delta\}
 	\end{equation*}
 	is then called a \indexbf{ball} with a centre at $a \in X$ and a radius of $\delta$, or a \emphbf{ball} of point $a$.
 \end{definition}
@@ -220,7 +220,7 @@ Some examples:
 	$X - F$ is an open set in $(X, d)$.
 \end{definition}
 
-A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X, d)$.
+A \indexbf{closed ball}~$\indexmath[overline B x delta]{\overline B(X, \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X, d)$.
 
 \begin{proposition}\label{proposition: open sets (metric)}
 	\begin{conditionlist}[label=\alph*)]
@@ -250,8 +250,8 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 \end{proof}
 
 \begin{definition}[Neighbourhood]\label{definition: neighbourhood (metric)}
-	If $x \in X$ is an element of an open set, then such open set is called a \indexbf{neighbourhood} of point $x$ in $X$, denoted by $\indexfm[U x]{U(x)}$.
-	The collection of all neighbourhoods of $x$ can be denoted by $\indexfm[U x]{\mathscr U(x)}$.
+	If $x \in X$ is an element of an open set, then such open set is called a \indexbf{neighbourhood} of point $x$ in $X$, denoted by $\indexmath[U x]{U(x)}$.
+	The collection of all neighbourhoods of $x$ can be denoted by $\indexmath[U x]{\mathscr U(x)}$.
 \end{definition}
 
 \begin{definition}[Interior point]\label{definition: interior point (metric)}
@@ -259,7 +259,7 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 	\begin{conditionlist}[label=\alph*)]
 	\item If $\exists U(x) \subset E$, $x$ is called an \indexbf{interior point} of $E$.
 	\item If $\exists U(x) \subset X - E$, $x$ is called an \indexbf{exterior point} of $E$.
-	\item If $x$ isn't an interior point nor exterior point of $E$, it is called a \indexbf{boundary point} of $E$. The set of boundary points is called \indexbf{boundary}, denoted by $\indexfm[partial E]{\partial E}$.
+	\item If $x$ isn't an interior point nor exterior point of $E$, it is called a \indexbf{boundary point} of $E$. The set of boundary points is called \indexbf{boundary}, denoted by $\indexmath[partial E]{\partial E}$.
 \end{conditionlist}
 \end{definition}
 
@@ -268,7 +268,7 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 \end{definition}
 
 \begin{definition}[Closure]\label{definition: closure (metric)}
-	The intersections of $E \subset X$ and set of all its limit points is called the \indexbf{closure} of $E$, denoted by $\indexfm[overline]{\overline E}$.
+	The intersections of $E \subset X$ and set of all its limit points is called the \indexbf{closure} of $E$, denoted by $\indexmath[overline]{\overline E}$.
 \end{definition}
 
 \begin{theorem}\label{theorem: closed sets' closure (metric)}
@@ -316,7 +316,7 @@ A \indexbf{closed ball}~$\indexfm[overline B x delta]{\overline B(X, \delta)} :=
 		\item $\forall G_1, G_2 \in \mathscr T$, $G_1 \cap G_2 \in \mathscr T$.
 	\end{conditionlist}
 
-	We call $\indexfm[X T]{(X, \mathscr T)}$ a \indexbf{topological space}, and sometimes we might simply call $X$ the topological space.
+	We call $\indexmath[X T]{(X, \mathscr T)}$ a \indexbf{topological space}, and sometimes we might simply call $X$ the topological space.
 \end{definition}
 
 These conditions is the intrinsic propoties of the open sets we have defined in the metric space%
@@ -344,10 +344,10 @@ The topology consisting of all the open sets defined in the metric space $(\math
 \end{definition}
 
 \begin{definition}[Neighbourhood]\label{definition: neighbourhood (topology)}
-	If $x \in U(x)$ and $U(x) \in \mathscr T$, then $\indexfm[U x]{U(x)}$ is a \indexbf{neighbourhood} of $x$ in topological space $(X, \mathscr T)$. 
-	All neighbourhoods of a point $x$ is denoted by $\indexfm[U x]{\mathscr U(x)}$.
+	If $x \in U(x)$ and $U(x) \in \mathscr T$, then $\indexmath[U x]{U(x)}$ is a \indexbf{neighbourhood} of $x$ in topological space $(X, \mathscr T)$. 
+	All neighbourhoods of a point $x$ is denoted by $\indexmath[U x]{\mathscr U(x)}$.
 
-	If $\indexfm[U x]{\mathring U(x)} := U(x) - \{x\} \neq \varnothing$, then it is a \indexbf{deleted neighbourhood}. 
+	If $\indexmath[U x]{\mathring U(x)} := U(x) - \{x\} \neq \varnothing$, then it is a \indexbf{deleted neighbourhood}. 
 	The collection of deleted neighbourhoods of $x$ is denoted as $\mathring{\mathscr U} (x)$.
 \end{definition}
 
@@ -816,13 +816,13 @@ Such definition is parallel to the definition we have introduced on the limits o
 \begin{definition}[Oscillation]
 	Let $X$, $Y$ be two topological spaces, $f \in Y^X$, $E \in \mathscr P(X)$.
 	\begin{equation*}
-		\indexfm[omega f E]{\omega(f; E)} 
+		\indexmath[omega f E]{\omega(f; E)} 
 			:= \sup \{d_Y(f(x_1), f(x_2)) \mid x_1, x_2 \in E\}
 	\end{equation*}
 	is called the \indexbf{oscillation} of the function~$f$ in set~$E$.
 	We can also define the \indexbf{oscillation} of $f$ at a point $x \in X$ as
 	\begin{equation*}
-		\indexfm[omega f x]{\omega(f; x)} 
+		\indexmath[omega f x]{\omega(f; x)} 
 			:= \inf \{\omega(f; B) \mid B \in \mathscr B\}\,,
 	\end{equation*}
 	where $\mathscr B$ is a filter base that $\cap \mathscr B = \{x\}$.
@@ -1114,7 +1114,7 @@ Over every normed space a distance can be defined as:
 \end{definition}
 
 \begin{definition}[Hermitian form]
-	A linear space~$X$ on the complex field~$\mathbb C$ is said to be given a \indexbf{Hermitian space} if there is a mapping~$\indexfm[langle rangle]{\langle, \rangle} \colon X^2 \to \mathbb C$ defined, s.t.\ $\forall \bv x_1, \bv x_2, \bv x_3 \in X$, $\forall \lambda \in \mathbb C$.
+	A linear space~$X$ on the complex field~$\mathbb C$ is said to be given a \indexbf{Hermitian space} if there is a mapping~$\indexmath[langle rangle]{\langle, \rangle} \colon X^2 \to \mathbb C$ defined, s.t.\ $\forall \bv x_1, \bv x_2, \bv x_3 \in X$, $\forall \lambda \in \mathbb C$.
 	\begin{conditionlist}[label=\alph*)]
 		\item $\langle \bv x_1, \bv x_2 \rangle = \overline{\langle \bv x_2, \bv x_1 \rangle}$;
 		\item $\langle \lambda \bv x_1, \bv x_2\rangle = \lambda \langle \bv x_1, \bv x_2 \rangle$;
@@ -1190,7 +1190,7 @@ and a metric
 
 \begin{definition}[Norm]
 	Let $\mathscr A$ be a $n$-multilinear operator space over normed space $(\bv X_i)_{i \in n}$ to a normed space $Y$ i.e.\ $\mathscr A \in \mathcal L(X_0, X_1, \cdots, X_{n - 1}; Y)$. 
-	We define the norm $\indexfm[vert vert]{ \Vert \mathscr A \Vert }$ as:
+	We define the norm $\indexmath[vert vert]{ \Vert \mathscr A \Vert }$ as:
 	\begin{equation}\label{equation: norm of operator}
 		\|\mathscr A\| := \sup 
 		\left\{
@@ -1307,7 +1307,7 @@ The following theorem gives an equivalent definition:
 \end{proof}
 
 Theorem~\ref{theorem: continuous at zero iff bounded} and Theorem~\ref{theorem: Continuous at zero then at everywhere} show the equivalence for linear operators of being bounded and being continuous.
-We shall denote the space of all the bounded $n$-multilinear operators from $X_0$, $\cdots$, $X_{n-1}$ to $Y$ by $\indexfm[B Xi Y]{\mathcal B(X_0, \cdots, X_{n-1}; Y)}$. 
+We shall denote the space of all the bounded $n$-multilinear operators from $X_0$, $\cdots$, $X_{n-1}$ to $Y$ by $\indexmath[B Xi Y]{\mathcal B(X_0, \cdots, X_{n-1}; Y)}$. 
 
 \begin{corollary}[Linear operators from finite dimensional space are continuous]
 	\label{corollary: linear operators from finite dimensional space are continuous}
@@ -1446,7 +1446,7 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 	\end{equation}
 	where $\alpha(\bv x; \Delta \bv x) = o(\Delta \bv x)$ as $\Delta \bv x \to 0$, i.e.\ $\lim_{\Delta \bv x \to \bv 0} \|\alpha(\bv x; \Delta \bv x)\|_Y / \|\Delta \bv x\|_X = 0$.
 
-	Such $\left.\mathscr L\right\vert_{\bv x}$ is called the \indexbf{differential} of $f$ at $\bv x$\footnote{Alternatively, \indexbf{tangent mapping} or \indexbf{derivative}.}, denoted by $\indexfm[df x]{\dif f(\bv x)}$ or $\indexfm[f prime x]{f'(\bv x)}$. 
+	Such $\left.\mathscr L\right\vert_{\bv x}$ is called the \indexbf{differential} of $f$ at $\bv x$\footnote{Alternatively, \indexbf{tangent mapping} or \indexbf{derivative}.}, denoted by $\indexmath[df x]{\dif f(\bv x)}$ or $\indexmath[f prime x]{f'(\bv x)}$. 
 \end{definition}
 
 
@@ -1475,7 +1475,7 @@ We shall denote the space of all the bounded $n$-multilinear operators from $X_0
 Theorem~\ref{theorem: uniqueness (differential)} gives us the right to define:
 
 \begin{definition}[Derivative mapping]
-	Let $X$, $Y$ be two normed spaces, $D \in \mathscr P(X)$, $f \in Y^D$, $\indexfm[Delta f]{\Delta(f)} := \{\bv x \in X \mid \text{$f$ is differentiable at $\bv x$}\}$.
+	Let $X$, $Y$ be two normed spaces, $D \in \mathscr P(X)$, $f \in Y^D$, $\indexmath[Delta f]{\Delta(f)} := \{\bv x \in X \mid \text{$f$ is differentiable at $\bv x$}\}$.
 	\begin{equation*}
 		f' \colon \Delta(f) \to \mathscr B(X, Y);\;
 			\bv x \mapsto \dif f(\bv x)
@@ -1490,7 +1490,7 @@ To make it clear, we must remember: $f \in Y^X$, $f' \in \mathscr B(X; Y)^X$, $f
 It is always convenient to define such notation:
 \begin{definition}
 	Let $X_i$, $i \in n$ be normed spaces, and $X := \prod_{i \in n} X_i$. 
-	We define $\indexfm[d x]{\dif \bv x}_i$ as:
+	We define $\indexmath[d x]{\dif \bv x}_i$ as:
 	\begin{equation*}
 		\dif \bv x_i \Delta \bv x = \Delta \bv x_i\,,
 	\end{equation*}
@@ -1692,7 +1692,7 @@ so that $f \circ \varphi_i$ means the mapping of alone $\bv x_i$, leaving other 
 \begin{definition}[Partial derivative]
 	Let $f \in Y^X$ where $X := \prod_{i \in n} X_i$ be the product of normed spaces, $Y$ be a normed space. 
 	$\forall i \in n$, $\varphi_i$ is defined as Eq.~\eqref{equation: local mapping}.
-	If $f \circ \varphi_i$ is differentiable at an interior point $\bv a_i \in X_i$, we call its derivative at this point the \indexbf{partial derivative} of $f$ with respect to $\bv x_i$ at $\bv a := (\bv a_i)_{i \in n}$, denoted by $\indexfm[partial i f]{\partial_i f}(\bv a)$ or $\indexfm[pdiff f x i]{\pdiff{f}{\bv x_i}(\bv a)}$.
+	If $f \circ \varphi_i$ is differentiable at an interior point $\bv a_i \in X_i$, we call its derivative at this point the \indexbf{partial derivative} of $f$ with respect to $\bv x_i$ at $\bv a := (\bv a_i)_{i \in n}$, denoted by $\indexmath[partial i f]{\partial_i f}(\bv a)$ or $\indexmath[pdiff f x i]{\pdiff{f}{\bv x_i}(\bv a)}$.
 \end{definition}
 
 \begin{theorem}[Differentiable then partial derivative exists]
@@ -1707,7 +1707,7 @@ so that $f \circ \varphi_i$ means the mapping of alone $\bv x_i$, leaving other 
 \begin{definition}[Continuously differentiable]
 	Let $f \in Y^X$ and differentiable at $\bv x \in X$. If the derivative mapping~$f' \in \mathscr B(X; Y)^X$ is continuous at $\bv x$, we say that $f$ is \indexbf{continuously differentiable} at point~$\bv x$. 
 
-	We can denote all continuously differentiable mappings from an open set $X$ to $Y$ by $\indexfm[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexfm[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. 
+	We can denote all continuously differentiable mappings from an open set $X$ to $Y$ by $\indexmath[C 1 X Y]{C^{(1)}(X, Y)}$\footnote{or $\indexmath[C 1 X]{C^{(1)}(X)}$ if you are sure about what $Y$ is.}. 
 \end{definition}
 
 By Theorem~\ref{theorem: differentiable then continuous} we know that $C^{(1)}(X, Y) \subset C(X, Y)$.
@@ -1763,9 +1763,9 @@ Let us recall and generalised the definition of interval:
 \begin{definition}
 	Let $X$ be a linear space over a field~$\mathbb F$ which contains $\mathbb R$, $\bv a, \bv b \in X$. The \emphbf{closed}\index{closed interval} and \indexbf{open interval} is defined as:
 	\begin{align*}
-		\indexfm[x y]{[\bv x, \bv y]} &:= \{\bv x + \theta(\bv y - \bv x) 
+		\indexmath[x y]{[\bv x, \bv y]} &:= \{\bv x + \theta(\bv y - \bv x) 
 			\mid 0 \leq \theta \leq 1\}\,,\\
-		\indexfm[x y]{(\bv x, \bv y)} &:= \{\bv x + \theta(\bv y - \bv x) 
+		\indexmath[x y]{(\bv x, \bv y)} &:= \{\bv x + \theta(\bv y - \bv x) 
 			\mid 0 < \theta < 1\}\,.
 	\end{align*}
 
@@ -2008,7 +2008,7 @@ We denote the zeroth and first differential of $f \in Y^U$, where $U$ is an open
 	We have already defined the zeroth and the first defferentiation. 
 	If the $n$-th differential $f^{(n)} \in {Y_n}^U$ is differentiable in $U \in \mathscr T_X$
 		\footnote{$Y_n$ is also a normed space.},
-	we can define the $(n + 1)$-th differential $\indexfm[f n x]{f^{(n)}(\bv x)}$ by:
+	we can define the $(n + 1)$-th differential $\indexmath[f n x]{f^{(n)}(\bv x)}$ by:
 	\begin{equation*}
 		f^{(n + 1)}= (f^{(n)})'\,. 
 	\end{equation*}
@@ -2112,7 +2112,25 @@ and
 	f^{(n)}(\bv x) \bv \ell^n := f^{(n)}(\bv \ell, \cdots, \bv \ell)\,.
 \end{equation*}
 
+\begin{theorem}
+	Let $X_0, \cdots, X_{m-1}, Y$ be normed spaces, and $X := \prod_{i \in m} X_i$.
+	Let $f \in Y^U$ where $U$ is an open set in $X$.
+	If $\forall (i_k)_{k \in n} \in m^n$, $\forall \bv x \in U$, $n$-th partial derivative
+	\begin{equation*}
+		\partial_{i_0} \cdots \partial_{i_{m-1}} f(\bv x) 
+	\end{equation*}
+	exists and continuous (with respect to $\bv x$), then $f$ is $n$-th differentiable at $\bv x$ i.e.\ $f^{(n)}$ exists, and is also continous.
 
+	Further more, 
+	\begin{equation*}
+		f \in C^{(n)}(U) 
+			\IFF \forall (i_k)_{k \in n} \in m^n,\; 
+				\partial_{i_0} \cdots \partial_{i_{m-1}} f \in C\,,
+	\end{equation*}
+	where we denote the set of $n$-th differentiable functions on $U$ by $\indexmath[C n U Y]{C^{(n)}(U; Y)}$ ($\indexmath[C n X]{C^{(n)}(X)}$, alternatively).
+\end{theorem}
+
+\section{Applications of Differentiation}
 
 \chapter{Integration}
 

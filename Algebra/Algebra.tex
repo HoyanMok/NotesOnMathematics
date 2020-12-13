@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.1.7
+% v0.1.8
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{ctexbook} 
 % \documentclass{ctexbook} 如果用中文
@@ -35,8 +35,8 @@
 \makeindex[intoc, title={索引}]
 \makeindex[intoc, name=symbol, title={符号列表}]
 \newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
-\newcommand*{\indexfm}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
-% \indexfm[name for sort]{display} 
+\newcommand*{\indexmath}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
+% \indexmath[name for sort]{display} 
 
 
 % 对目录项等的修改
@@ -198,7 +198,7 @@
 \begin{definition}[二元运算]
 	集合的Cartesian平方到自身的映射$* \colon X^2 \to X$称为其上的一个\indexbf{二元运算}.
 	通常我们记$*(a,b) := a * b$. 
-	当$X$上定义了二元运算$*$后, 称$*$定义了$X$上的一种\indexbf{代数结构} $\indexfm[X ast]{(X,*)}$, 也称\indexbf{代数系统}. 
+	当$X$上定义了二元运算$*$后, 称$*$定义了$X$上的一种\indexbf{代数结构} $\indexmath[X ast]{(X,*)}$, 也称\indexbf{代数系统}. 
 \end{definition}
 
 当指代是明确的时候, 我们将混用集合及其代数结构.
@@ -209,7 +209,7 @@
 
 若$\exists e\in X$满足$\forall x\in A\big(
 	e* x = x * e = x
-\big)$, 则称其为$*$的一个\indexbf{单位元} (identity), 这时可把$(X,*)$记作$\indexfm[X ast e]{(X,*, e)}$. 可以证明一个代数结构最多只有一个单位元. 
+\big)$, 则称其为$*$的一个\indexbf{单位元} (identity), 这时可把$(X,*)$记作$\indexmath[X ast e]{(X,*, e)}$. 可以证明一个代数结构最多只有一个单位元. 
 乘法单位元通常记为$1$, 而加法单位元 (也叫\indexbf{零元}) 记为$0$.
 
 \begin{definition}[半群和幺半群]
@@ -267,9 +267,9 @@
 
 交换群又叫做\indexbf{Abelian群}. 
 
-作为重要的例子, 设 $X$ 是一个集合, $\indexfm[S X]{S(X)} = \{ f \in X^X \mid \text{$f$ 是双射}\}$. 
+作为重要的例子, 设 $X$ 是一个集合, $\indexmath[S X]{S(X)} = \{ f \in X^X \mid \text{$f$ 是双射}\}$. 
 我们断言, $(S(X), \circ, \id_X)$ 是一个群, 称为\indexbf{变换群}或\indexbf{置换群}, 其中 $\circ$ 是函数的复合, $\id_X$是恒等变换. 
-当它的阶数 $\card X = n$ 是有限的时候, 记$\indexfm[S n]{S_n} := S(X)$.
+当它的阶数 $\card X = n$ 是有限的时候, 记$\indexmath[S n]{S_n} := S(X)$.
 
 群也有子群的概念. 
 设$(G, \cdot, e)$是一个群. 当一个集合$G' \subset G$满足:
@@ -298,7 +298,7 @@
 	群 $G$ 的子群族 $\mathscr H = \{H \mid \text{$H$ 是 $G$ 的子群}\}$ 的交 $\cap \mathscr H$ 也是 $G$ 的子群.
 \end{lemma}
 
-设 $G$ 有子集 $S$ , 我们说群 $(G, \cdot, 1)$ 是由 $S$ 生成的, 意思是说 $G$ 没有包含 $S$ 的真子群. 记为$G = \indexfm[S]{%
+设 $G$ 有子集 $S$ , 我们说群 $(G, \cdot, 1)$ 是由 $S$ 生成的, 意思是说 $G$ 没有包含 $S$ 的真子群. 记为$G = \indexmath[S]{%
 	\langle S\rangle}$.
 \begin{theorem}
 	$\langle S \rangle = \left\{
@@ -321,7 +321,7 @@
 \end{theorem}
 
 \begin{definition}[循环群]
-	设$(G, \cdot , 1)$是一个乘法群, $\exists g_0 \in G$, 使得$\forall g \in G$, $\exists n \in \mathbb Z$, $a^n = g$, 那么我们称它是一个\indexbf{循环群}, $g_0$是一个\indexbf{生成元} (generator), 并记作$G = \indexfm[g 0]{\langle g_0 \rangle}$.
+	设$(G, \cdot , 1)$是一个乘法群, $\exists g_0 \in G$, 使得$\forall g \in G$, $\exists n \in \mathbb Z$, $a^n = g$, 那么我们称它是一个\indexbf{循环群}, $g_0$是一个\indexbf{生成元} (generator), 并记作$G = \indexmath[g 0]{\langle g_0 \rangle}$.
 \end{definition}
 
 对于群 $G$ 中任意元素 $g$, 我们称 $\card \langle g \rangle$ 为元 $g$ 的\indexbf{阶数}, 或称 $g$ 为 \emphbf{$n$~阶元}%
@@ -340,7 +340,7 @@
 		\item $\forall a, b \in G$, $f(a * b) = f(a) \circ f(b)$; \label{item: 保结构}
 		\item $f$是双射,
 	\end{conditionlist}
-	则称 $f$ 是一个\indexbf{同构映射}或\indexbf{同构} (isomorphism), 并认为两个群是互相\indexbf{同构}的 (isomorphic), 记为$\indexfm[G simeq G prime]{G \simeq G'}$.
+	则称 $f$ 是一个\indexbf{同构映射}或\indexbf{同构} (isomorphism), 并认为两个群是互相\indexbf{同构}的 (isomorphic), 记为$\indexmath[G simeq G prime]{G \simeq G'}$.
 \end{definition}
 
 同构关系的自反性, 传递性和对称性是平凡的.
@@ -380,9 +380,9 @@
 	取$H := \{L_g \mid g \in G\}$, 其中$L_g \colon G \to G; g' \mapsto gg'$可以证明是双射. 那么 $L\colon G \to H; g \mapsto L_g$ 见证了 $H \simeq G$.
 \end{proof}
 
-若 $\varphi \colon G \to G$ 见证了 $G \simeq G$ (如 $\id_G$), 那么称 $\varphi$ 是群 $G$ 的一个 \indexbf{自同构} (automorphism). 所有自同构组成的集合 $\indexfm[Aut G]{\Aut(G)}$ 和其上的函数复合 $\circ$ 构成了 $S(G)$ 的一个子群, 称为$G$的\indexbf{自同构群}.
+若 $\varphi \colon G \to G$ 见证了 $G \simeq G$ (如 $\id_G$), 那么称 $\varphi$ 是群 $G$ 的一个 \indexbf{自同构} (automorphism). 所有自同构组成的集合 $\indexmath[Aut G]{\Aut(G)}$ 和其上的函数复合 $\circ$ 构成了 $S(G)$ 的一个子群, 称为$G$的\indexbf{自同构群}.
 
-自同构群有一特殊的子群$\indexfm[Inn G]{\Inn(G)} := \{I_a \colon g \mapsto a g a^{-1} \mid a \in G\}$,
+自同构群有一特殊的子群$\indexmath[Inn G]{\Inn(G)} := \{I_a \colon g \mapsto a g a^{-1} \mid a \in G\}$,
 称为\indexbf{内自同构群} (inner isomorphism), 其元素称为\indexbf{共轭映射} (conjugation). 
 
 \begin{definition}[共轭]
@@ -392,13 +392,13 @@
 我们毫不费力地就能证明共轭关系是等价关系, 而且当 $G$ 是Abelian群的时候, 其任意元素的共轭都是其自身.
 
 \begin{definition}[共轭类]
-	设 $G$ 是一个群. 由共轭规定的等价类称为\indexbf{共轭类} (Conjugacy class), 记为 $\indexfm[Cl g]{\Cl(g)}$, $g$ 为其代表元. 
+	设 $G$ 是一个群. 由共轭规定的等价类称为\indexbf{共轭类} (Conjugacy class), 记为 $\indexmath[Cl g]{\Cl(g)}$, $g$ 为其代表元. 
 	称 $\card \{ \Cl(g) \mid g \in G\}$ 为 $G$ 的\indexbf{类数} (class number). 
 	如果有一个函数 $f$ 满足 $g' \in \Cl(g) \,\to\, f(g) = g(g')$, 那么称 $f$ 是一个 \indexbf{类函数} (class function).
 \end{definition}
 
 \begin{definition}[正规子群]
-	设 $G$ 是一个群, $N$ 是其子群. 倘若 $\forall I \in \Inn(G)$, $I(N) = N$, 即其在共轭映射下不变, 则称其为 $G$ 的一个\indexbf{正规子群} (normal subgroup), 记为 $\indexfm[N triangleleft G]{N \triangleleft G}$.
+	设 $G$ 是一个群, $N$ 是其子群. 倘若 $\forall I \in \Inn(G)$, $I(N) = N$, 即其在共轭映射下不变, 则称其为 $G$ 的一个\indexbf{正规子群} (normal subgroup), 记为 $\indexmath[N triangleleft G]{N \triangleleft G}$.
 \end{definition}
 
 可以看出Abelian群的所有子群都是正规子群. 
@@ -422,7 +422,7 @@
 	\end{equation*}
 	则称其为群 $(G, *)$ 到群 $(G', \circ)$ 的一个\indexbf{同态} (homomorphism), 也叫\indexbf{态射} (morphism). 类似映射, 可定义\indexbf{单态射} (monomorphism), \indexbf{满态射} (epimorphism).
 
-	集合 $\indexfm[ker f]{\ker f} := f^{-1}(\{e'\})$ 叫做同态 $f$ 的\indexbf{核} (kernel). 群到自身的同态映射称为\indexbf{自同态} (endomorphism).
+	集合 $\indexmath[ker f]{\ker f} := f^{-1}(\{e'\})$ 叫做同态 $f$ 的\indexbf{核} (kernel). 群到自身的同态映射称为\indexbf{自同态} (endomorphism).
 \end{definition}
 
 同态 $f$ 的核是 $G$ 的正规子群, 即$\ker f \triangleleft G$, 而 $G$ 在同态下的像是 $G'$ 的子群.
@@ -450,8 +450,8 @@
 满足同构的条件~\ref{item: 保结构}, 因$f(a) \circ f(b) = I_{ab} = f(ab)$; 但它不一定是双射, 因而是一个同态.
 
 \begin{definition}[陪集]
-	设 $(G, *, e)$ 是一个群, $S$ 是其子群, $g \in G$, 那么我们称 $\indexfm[g ast S]{g * S} := \{ g * s \mid s \in S\}$ 为 $S$ 在 $G$ 内的\indexbf{左陪集} (left coset); 
-	同理 $\indexfm[S ast g]{S * g} := \{ s * g \mid s \in S\}$ 为 $S$ 在 $G$ 内的\indexbf{右陪集} (right coset). 
+	设 $(G, *, e)$ 是一个群, $S$ 是其子群, $g \in G$, 那么我们称 $\indexmath[g ast S]{g * S} := \{ g * s \mid s \in S\}$ 为 $S$ 在 $G$ 内的\indexbf{左陪集} (left coset); 
+	同理 $\indexmath[S ast g]{S * g} := \{ s * g \mid s \in S\}$ 为 $S$ 在 $G$ 内的\indexbf{右陪集} (right coset). 
 	这里我们称 $g$ 是一个代表元.
 	如果 $g * S = S * g$, 则称其为\indexbf{陪集}.
 \end{definition}
@@ -464,7 +464,7 @@
 \end{theorem}
 
 \begin{definition}[商群]
-	如果 $N \triangleleft G$, 那么我们记 $\indexfm[G N]{G / N} := \{ g * N \mid g \in G\}$, 称为 $G$ 对 $N$ 的\indexbf{商群}. 
+	如果 $N \triangleleft G$, 那么我们记 $\indexmath[G N]{G / N} := \{ g * N \mid g \in G\}$, 称为 $G$ 对 $N$ 的\indexbf{商群}. 
 	这个群的乘法定义为子群元素的积的集合: 
 	\begin{equation*}
 		(g * N) \cdot (g'* N)
@@ -515,7 +515,7 @@
 		\quad
 		f(x) + f(y) = f(x + y),
 	\end{equation*}
-	那么, 我们称其为 $R$ 到 $R'$ 的一个\indexbf{同态}或\indexbf{态射}, 集合 $\ker f := \{a \in R \mid f(a) = 0\}$ 称为同态的\indexbf{核}. 同态 $f$ 的核是 $R$ 的子环. 类似地我们也有\indexbf{单同态}, \indexbf{满同态}和\indexbf{同构}的概念. 两个环同构记为 $\indexfm[R cong R prime]{R \cong R'}$.
+	那么, 我们称其为 $R$ 到 $R'$ 的一个\indexbf{同态}或\indexbf{态射}, 集合 $\ker f := \{a \in R \mid f(a) = 0\}$ 称为同态的\indexbf{核}. 同态 $f$ 的核是 $R$ 的子环. 类似地我们也有\indexbf{单同态}, \indexbf{满同态}和\indexbf{同构}的概念. 两个环同构记为 $\indexmath[R cong R prime]{R \cong R'}$.
 \end{definition}
 
 设 $(R,+ ,\cdot)$ 是环, $X$ 是一个集合, 在 $R^X$ 上定义加法和乘法:
@@ -526,8 +526,8 @@
 \end{equation*}
 就得到了\indexbf{函数环} $(R^X, +, \cdot)$, 其零元是 $0_X \colon x \mapsto 0$. 如果 $R$ 有单位元 $1$，那么 $R^X$ 也有单位元 $1_X \colon x \mapsto 1$, $\forall x \in X $.
 
-作为例子, 考虑到将$\indexfm[k n]{\lbrack k\rbrack _n} \in \mathbb Z / \equiv \bmod n $ 映射到 $n^\mathbb Z \ni \bmod n := \{(m, k) \in \mathbb Z \times m \mid n \equiv k \bmod n\}$ 的同构, 
-\indexbf{模$n$的剩余类环}\index{剩余类环} $(\mathbb Z_n, +, \cdot)$ 即可看作函数环 $n^\mathbb Z$ 的一个交换子环, 其中$\indexfm[Z n]{\mathbb Z_n} := \{\lbrack k\rbrack_n \mid k \in n\}$. 
+作为例子, 考虑到将$\indexmath[k n]{\lbrack k\rbrack _n} \in \mathbb Z / \equiv \bmod n $ 映射到 $n^\mathbb Z \ni \bmod n := \{(m, k) \in \mathbb Z \times m \mid n \equiv k \bmod n\}$ 的同构, 
+\indexbf{模$n$的剩余类环}\index{剩余类环} $(\mathbb Z_n, +, \cdot)$ 即可看作函数环 $n^\mathbb Z$ 的一个交换子环, 其中$\indexmath[Z n]{\mathbb Z_n} := \{\lbrack k\rbrack_n \mid k \in n\}$. 
 同构关系让我们也能用剩余类的代表元组成的集合 $n$ 代替剩余类本身进行运算, 这种情况下, $n$ 称为\indexbf{模 $n$ 的剩余类的导出集}, 我们能用加法表和乘法表给出它的代数结构.
 
 \begin{definition}[整环]
@@ -552,7 +552,7 @@
 有单位元的环 $R$ 中元素 $x$ 的可逆性往往指关于乘法的可逆性. 
 
 \begin{theorem}
-	设 $R$ 是带单位元 $1$ 的环, $\indexfm[U R]{U(R)} := \{x \in R \mid \text{$x$ 可逆}\}$ 是一个乘法群.
+	设 $R$ 是带单位元 $1$ 的环, $\indexmath[U R]{U(R)} := \{x \in R \mid \text{$x$ 可逆}\}$ 是一个乘法群.
 \end{theorem}
 \begin{proof}
 	单位元 $1$ 当然可逆. 由定义可逆元素的逆也是可逆的. 如果 $x, y \in R$ 可逆, 那么 
@@ -579,7 +579,7 @@
 
 \begin{definition}[整除]
 	设 $R$ 是一个整环, $a, b \in R$. 
-	如果 $\exists c \in R$, $ac = b$, 那么我们称 $a$ \indexbf{整除} (divides) $b$, 或 $b$ 被 $a$ \textbf{整除} 或 $a$ 是 $b$ 的一个\indexbf{因子} (divisor), 记为 $\indexfm[a vert b]{a \vert b}$.
+	如果 $\exists c \in R$, $ac = b$, 那么我们称 $a$ \indexbf{整除} (divides) $b$, 或 $b$ 被 $a$ \textbf{整除} 或 $a$ 是 $b$ 的一个\indexbf{因子} (divisor), 记为 $\indexmath[a vert b]{a \vert b}$.
 \end{definition}
 
 这个定义与我们熟悉的整数环~$\mathbb Z$ 上的整除关系是一致的.
@@ -667,7 +667,7 @@
 		\item $d | a$, $d | b$;
 		\item $\forall c \in R$ $\big( c | a \wedge c | b \to c | d\big)$,
 	\end{enumerate*} 
-	则 $d$ 被称为 $a$, $b$ 的一个\indexbf{最大因} (greatest common divisor \emph{or} highest common factor), 记为 $\indexfm[gcd a b]{\gcd (a, b)}$. 
+	则 $d$ 被称为 $a$, $b$ 的一个\indexbf{最大因} (greatest common divisor \emph{or} highest common factor), 记为 $\indexmath[gcd a b]{\gcd (a, b)}$. 
 \end{definition}
 
 因为与 $d$ 相伴的数也都是最大因, 因而 $\gcd(a, b)$ 并不是一个确定的表述. 
@@ -679,7 +679,7 @@
 		\item $a | m$, $b | m$;
 		\item $\forall c \in R \big( a | c \wedge b | m \to m | c\big)$,
 	\end{enumerate*} 
-	则 $d$ 被称为 $a$, $b$ 的一个\indexbf{最小倍} (least common multiple), 记为 $\indexfm[lcm a b]{\lcm (a, b)}$. 
+	则 $d$ 被称为 $a$, $b$ 的一个\indexbf{最小倍} (least common multiple), 记为 $\indexmath[lcm a b]{\lcm (a, b)}$. 
 \end{definition}
 
 \begin{definition}[Euclidean 整环]\label{definition: Euclidean 整环}
@@ -755,7 +755,7 @@
 \end{theorem}
 \begin{proof}
 	记 $\mathbb Z_p$ 的元素为 $[0]$, $[1]$, \ldots, $[p -1]$.
-	由素数的定义, $\forall [k]  \in \indexfm[Z p ast]{\mathbb Z_p^*} := \mathbb Z_p - \{[0]\}$,
+	由素数的定义, $\forall [k]  \in \indexmath[Z p ast]{\mathbb Z_p^*} := \mathbb Z_p - \{[0]\}$,
 	\begin{equation*}
 		[k], [2k], \cdots, [(p-1) k]
 	\end{equation*}
@@ -764,7 +764,7 @@
 	又 $\mathbb Z_p$ 是交换环, 可知这个 $[i] = [k]^{-1}$, 即 $\mathbb Z_p$ 的乘法组成一个群.
 \end{proof}
 
-出于 $\mathbb Z_p$ 的这个性质, 我们也记其为 $\indexfm[F p]{\mathbb F_p}$ 或 $\GF(p)$. 值得一提的是, $p^n$ 元有限域 $\GF(p^n)$ 也是存在的.
+出于 $\mathbb Z_p$ 的这个性质, 我们也记其为 $\indexmath[F p]{\mathbb F_p}$ 或 $\GF(p)$. 值得一提的是, $p^n$ 元有限域 $\GF(p^n)$ 也是存在的.
 
 \begin{corollary}[\indexbf{Fermat小定理}]
 	设 $p$ 是素数, $a \in \mathbb N$ 且 $a \nmid p$. 
@@ -811,13 +811,13 @@
 
 在刚才的证明中, 我们已经遭遇了:
 \begin{definition}[特征]
-	设域 $F$ 的单位元和零元分别是$e$, $o$. 若存在$p \in \mathbb N$ 使得 $pe = o$, 则称 $p$ 为域的\indexbf{特征} (characteristic), 记为$\indexfm[char F]{\characteristic(F)} = p$; 特别地, 定义$\characteristic(F) = 0$, 如果不存在这样的 $p$.
+	设域 $F$ 的单位元和零元分别是$e$, $o$. 若存在$p \in \mathbb N$ 使得 $pe = o$, 则称 $p$ 为域的\indexbf{特征} (characteristic), 记为$\indexmath[char F]{\characteristic(F)} = p$; 特别地, 定义$\characteristic(F) = 0$, 如果不存在这样的 $p$.
 \end{definition}
 
 \begin{definition}[整环的分式域]
 	设 $A$ 是一个整环. 
 	记 $\sim$ 为 $A \times A^*$ 上这样的等价关系: $(a, b) \sim (c, d) \IFF ad = bc$.
-	从而在 $\indexfm[Q A]{Q(A)} := A \times A^*/\sim $ 上我们定义加法~$+$ 和乘法~$\cdot$:
+	从而在 $\indexmath[Q A]{Q(A)} := A \times A^*/\sim $ 上我们定义加法~$+$ 和乘法~$\cdot$:
 	\begin{equation*}
 		[(a, b)] + [(c, d)] = [(ad + bc, bc)]\,, \quad
 		[(a, b)][(c, d)] = [(ac, bd)] \,.
@@ -831,7 +831,7 @@
 	分式域是域.
 \end{theorem}
 
-由于 $Q(A)$ 的子环 $[a, 1]$ 与 $A$ 同构, 我们通常也直接说 $A \subset Q(A)$. 同时, 习惯上我们记 $[a, b] = \indexfm[a / b]{a / b}$, 甚至 $1/a^n =: a^{-n}$. 注意, $a^{-n} \in Q(A)$ 而不一定在 $A$ 中 (除非 $a \in U(A)$).
+由于 $Q(A)$ 的子环 $[a, 1]$ 与 $A$ 同构, 我们通常也直接说 $A \subset Q(A)$. 同时, 习惯上我们记 $[a, b] = \indexmath[a / b]{a / b}$, 甚至 $1/a^n =: a^{-n}$. 注意, $a^{-n} \in Q(A)$ 而不一定在 $A$ 中 (除非 $a \in U(A)$).
 
 
 
@@ -1047,7 +1047,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	那么, 两个线性空间被认为是\indexbf{同构}的.
 \end{definition}
 
-我们指出同构关系具有等价关系的性质, 并且将基底映射到基底, 并保持维数, 这里不再一一验证了. 类似地, 我们建立线性空间\indexbf{同态}的概念, 即保持线性结构的映射, 双同态即是同构. 线性空间 $V$ 到 $U$ 的同态集记作 $\indexfm[L V U]{\mathcal L (V, U)}$.
+我们指出同构关系具有等价关系的性质, 并且将基底映射到基底, 并保持维数, 这里不再一一验证了. 类似地, 我们建立线性空间\indexbf{同态}的概念, 即保持线性结构的映射, 双同态即是同构. 线性空间 $V$ 到 $U$ 的同态集记作 $\indexmath[L V U]{\mathcal L (V, U)}$.
 
 \begin{theorem}
 	所有 $\mathbb F$ 上的 $n$ 维线性空间都同构于 (坐标空间) $\mathbb F^n$.
@@ -1138,7 +1138,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 记 $\codim U = \dim V - \dim U$.
 
-当 $L$ 是 $V$ 的一个子空间时, 我们记线性空间作为加法群的陪集 $\indexfm[x plus L]{\bv x + L} := \{\bv x + \bv y \mid \bv y \in L\}$, 并记其代表元为. 
+当 $L$ 是 $V$ 的一个子空间时, 我们记线性空间作为加法群的陪集 $\indexmath[x plus L]{\bv x + L} := \{\bv x + \bv y \mid \bv y \in L\}$, 并记其代表元为. 
 考虑到线性空间作为加法群是Abelian群, 其所有子群 (子空间蕴含了加法子群) 都是正规子群, 从而:
 
 \begin{definition}[商空间]
@@ -1215,7 +1215,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 如此我们注意到 $V$ 上所有的线性型构成了一个线性空间, 其中零元是 $0_V \colon \bv x \mapsto 0$.
 
 \begin{definition}[对偶空间]
-	线性空间 $V$ 上所有的线性型构成线性空间 $\indexfm[V ast]{V^*}$, 称为 $V$的\indexbf{对偶空间} (dual space), 线性组合和零元已定义如前. 通常对偶空间的元素可称为\indexbf{余向量} (covector), 或\indexbf{共变向量} (covariant vector, 与此同时, $V$ 的元素对应地称为\indexbf{反变向量}, contravariant vector).
+	线性空间 $V$ 上所有的线性型构成线性空间 $\indexmath[V ast]{V^*}$, 称为 $V$的\indexbf{对偶空间} (dual space), 线性组合和零元已定义如前. 通常对偶空间的元素可称为\indexbf{余向量} (covector), 或\indexbf{共变向量} (covariant vector, 与此同时, $V$ 的元素对应地称为\indexbf{反变向量}, contravariant vector).
 \end{definition}
 
 为区别两种向量, 有用 $x^i$ 表示反变向量而用 $\ell_i$ 表示共变向量, 并引入Einstein求和约定的, 见之后第\ref{chapter:张量}章.
@@ -1358,11 +1358,11 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\end{equation*}
 	则称 $f$ 是 $V_0$, \ldots, $V_{p - 1}$ 上的\indexbf{多重线性型}, 或 \emphbf{$p$-线性型}%
 		\index{p-线性型@$p$-线性型}%
-	. 这些多重线性型的集合记为 $\indexfm[L V 0 dots V p minus 1 U]{%
+	. 这些多重线性型的集合记为 $\indexmath[L V 0 dots V p minus 1 U]{%
 		\mathcal L(V_0, \cdots, V_{p - 1};\; U)}$.
 \end{definition}
 
-如 $V_0 = V_1 = \cdots = V_{p - 1}$, 那么我们记 $V^p$ 上的多重线性型的集合为 $\indexfm[L p V U]{%
+如 $V_0 = V_1 = \cdots = V_{p - 1}$, 那么我们记 $V^p$ 上的多重线性型的集合为 $\indexmath[L p V U]{%
 	\mathcal L_p(V;\; U)}$. 
 当 $U = \mathbb F$ 时, 我们也可省略 $\mathbb F$ 不写.
 
@@ -1387,7 +1387,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 我们可以给出行列式的公理化构造, 它在实数上的计算方法我们已经在线性代数课程中非常熟悉了:
 
 \begin{definition}[行列式]\label{definition:行列式的公理化构造}
-	设 $\mathbb F$ 是一个域. 多重线性型 $\indexfm[det]{%
+	设 $\mathbb F$ 是一个域. 多重线性型 $\indexmath[det]{%
 		\det} \in \mathcal L_n(\mathbb F)$ 若满足:
 		\begin{conditionlist}
 			\item $\det$ 是反对称的;
@@ -1416,7 +1416,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\mathscr B(\bv x, \bv y) = \inbasis{\bv x}{\hat e}^\mathrm T \bv B \inbasis{\bv y}{\hat e}\,.
 \end{equation}
 
-这说明, 只要给出一组基底, 我们就有一个 $\mathcal L_2(V; \mathbb F)$ 到 $M_n(\mathbb F)$ 的同构. 而且我们能看到: 对称双线性型 (其集合记为 $\indexfm[L plus V F]{\mathcal L^+(V; \mathbb F)}$) 将对应对称矩阵, 而反对称双线性型 ($\indexfm[L minus V F]{\mathcal L^-(V; \mathbb F)}$) 对应一个反对称矩阵.
+这说明, 只要给出一组基底, 我们就有一个 $\mathcal L_2(V; \mathbb F)$ 到 $M_n(\mathbb F)$ 的同构. 而且我们能看到: 对称双线性型 (其集合记为 $\indexmath[L plus V F]{\mathcal L^+(V; \mathbb F)}$) 将对应对称矩阵, 而反对称双线性型 ($\indexmath[L minus V F]{\mathcal L^-(V; \mathbb F)}$) 对应一个反对称矩阵.
 
 \begin{theorem}[对称与反对称]
 	如果 $\characteristic \mathbb F \neq 2$, 那么
@@ -1597,10 +1597,10 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 在 $\mathcal L(V, W)$ 上定义加法和数乘, 可以验证它是一个线性空间. 
 
 \section{线性算子代数}
-域~$\mathbb F$ 上的线性空间~$V$ 的自同态 $\mathcal L(V, V)$ 可记作 $\indexfm[L V]{\mathcal L(V)}$ 或 $\indexfm[End]{\End(V)}$. 
+域~$\mathbb F$ 上的线性空间~$V$ 的自同态 $\mathcal L(V, V)$ 可记作 $\indexmath[L V]{\mathcal L(V)}$ 或 $\indexmath[End]{\End(V)}$. 
 如前已述, 它的元素唤作线性算子. 
 给定 $n$~维线性空间~$V$ 的一组基底~$\hat e$ (同时作为定义域和到达域的基底), $\mathcal L(V)$ 的元素可用 $n$~阶方阵表示. 
-其中恒等变换 $\indexfm[I]{\mathscr I} := \id_V$ 对应的矩阵通常记作 $\bv I$, 即 $n$~阶单位阵. 零映射记为 $\indexfm[O]{\mathscr O} \colon \bv x \mapsto \bv 0$.
+其中恒等变换 $\indexmath[I]{\mathscr I} := \id_V$ 对应的矩阵通常记作 $\bv I$, 即 $n$~阶单位阵. 零映射记为 $\indexmath[O]{\mathscr O} \colon \bv x \mapsto \bv 0$.
 
 习惯上记 $\mathscr A \bv x := \mathscr A(\bv x)$, $\mathscr A \mathscr B := \mathscr A \circ \mathscr B$. 
 
@@ -1809,12 +1809,12 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 由 $\bv A' \bv x' = \bv P^{-1} \bv A \bv P \bv P^{-1} \bv x = \bv P^{-1} \bv A \bv x = \lambda \bv P^{-1} \bv x = \lambda \bv x'$ 可以验证, 特征值是坐标无关的.
 
 \begin{definition}[谱]
-	算子~$\mathscr A$ 的特征值的集合 $\indexfm[Spec A]{\Spec \mathscr A}$ 称为 $\mathscr A$ 的 \indexbf{谱} (spectrum).
+	算子~$\mathscr A$ 的特征值的集合 $\indexmath[Spec A]{\Spec \mathscr A}$ 称为 $\mathscr A$ 的 \indexbf{谱} (spectrum).
 \end{definition}
 
 \begin{definition}[几何重数]
 	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \Spec \mathscr A$.
-	与特征值~$\lambda$ 相伴的\indexbf{特征空间} (eigenspace) $\indexfm[E A lambda]{E_\mathscr A(\lambda)} := \{\bv x \in V \mid \mathscr A \bv x = \lambda \bv x\}$ 的维数 $\indexfm[gamma A lambda]{\gamma_\mathscr A(\lambda)} := \dim E_\mathscr A(\lambda)$ 则被称为特征值~$\lambda$ 的\indexbf{几何重数} (geometirc multiplicity).
+	与特征值~$\lambda$ 相伴的\indexbf{特征空间} (eigenspace) $\indexmath[E A lambda]{E_\mathscr A(\lambda)} := \{\bv x \in V \mid \mathscr A \bv x = \lambda \bv x\}$ 的维数 $\indexmath[gamma A lambda]{\gamma_\mathscr A(\lambda)} := \dim E_\mathscr A(\lambda)$ 则被称为特征值~$\lambda$ 的\indexbf{几何重数} (geometirc multiplicity).
 \end{definition}
 
 \begin{definition}[单谱]
@@ -1835,12 +1835,12 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 
 \begin{definition}[特征多项式]
 	设 $V$ 是域~$\mathbb F$ 上的 $n$~线性空间, $\mathscr A \in \mathcal L(V)$. 
-	$\indexfm[chi A X]{\chi_\mathscr A(X)} := \det (\mathscr A - X \id_V) \in \mathbb F[X]$ 被称为算子~$\mathscr A$ 的\indexbf{特征多项式} (characteristic polynomial).
+	$\indexmath[chi A X]{\chi_\mathscr A(X)} := \det (\mathscr A - X \id_V) \in \mathbb F[X]$ 被称为算子~$\mathscr A$ 的\indexbf{特征多项式} (characteristic polynomial).
 	方程 $\chi_\mathscr A(X) = 0$ 被称为\indexbf{特征方程}或\indexbf{久期方程}.
 \end{definition}
 
 \begin{definition}[代数重数]
-	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \Spec \mathscr A$. 我们称 $\lambda$ 作为 $\chi_\mathscr A(X)$ 的根的重数为线性算子~$\mathscr A$ 的特征值~$\lambda$ 的\indexbf{代数重数} (algebraic multiplicity), 记为 $\indexfm[mu A lambda]{\mu_\mathscr A (\lambda)}$.
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$, $\lambda \in \Spec \mathscr A$. 我们称 $\lambda$ 作为 $\chi_\mathscr A(X)$ 的根的重数为线性算子~$\mathscr A$ 的特征值~$\lambda$ 的\indexbf{代数重数} (algebraic multiplicity), 记为 $\indexmath[mu A lambda]{\mu_\mathscr A (\lambda)}$.
 \end{definition}
 
 \begin{lemma}\label{lemma: 不同特征值特征向量线性无关}
@@ -1936,7 +1936,7 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 \section{置换群}
 
 置换群~$S_n$ 的定义已在正文的~\ref{section:群} 中给出, 我们在此重复一遍: 
-有限集~$n\in \mathbb N_+$ 上的\indexbf{置换群}~$\indexfm[S n]{S_n}$ 定义为 $n^n$ 中的双射的集合, 乘法定义为函数的复合, 单位元是 $\id_n$. 
+有限集~$n\in \mathbb N_+$ 上的\indexbf{置换群}~$\indexmath[S n]{S_n}$ 定义为 $n^n$ 中的双射的集合, 乘法定义为函数的复合, 单位元是 $\id_n$. 
 
 不难证明 $\card S_n = \mathrm P^n_n = n!$.
 
@@ -2059,9 +2059,9 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	那么 $\id_n = \pi \pi^{-1} = \prod_{k \in q} \sigma^{-1}_k \prod_{k \in q'} \sigma'_k = \prod_{k \in q} \sigma_k \prod_{k \in q'} \sigma'_k$, 由前 $q + q' \equiv 0 \pmod 2$.
 \end{proof}
 
-据此我们把置换群的元素分为\indexbf{奇置换} (分解得到奇数个对换) 和\indexbf{偶置换} (分解得到偶数个对换), 并引入置换的\indexbf{符号}或\indexbf{奇偶性}~$\indexfm[epsilon pi]{\varepsilon_\pi}$, 其值对于偶置换是 $1$, 奇置换是 $0$.
+据此我们把置换群的元素分为\indexbf{奇置换} (分解得到奇数个对换) 和\indexbf{偶置换} (分解得到偶数个对换), 并引入置换的\indexbf{符号}或\indexbf{奇偶性}~$\indexmath[epsilon pi]{\varepsilon_\pi}$, 其值对于偶置换是 $1$, 奇置换是 $0$.
 
-所有偶置换的集合 $\indexfm[A n]{A_n}$ 是 $S_n$ 的子群.
+所有偶置换的集合 $\indexmath[A n]{A_n}$ 是 $S_n$ 的子群.
 \chapter{矩阵和行列式}
 以下只是一些定义的罗列, 与一些术语的规定, 矩阵与行列式的性质则散见于正文中.
 如果读者感到陌生, 可参阅任意一本初等线性代数教材, 如\cite{kostrikin1982introduction}.
@@ -2072,7 +2072,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	将 $\{a_{ij}\}_{i \in m,\, j \in n} \in 2^{\mathbb F}$ ($n, m \in \mathbb N_+$) 
 	排成一个长方形的表: 
 	\begin{equation}\label{equation: 矩阵}
-		\bv A := \indexfm[a ij i in m j in n]{(a_{ij})_{i \in m,\, j \in n}} = 
+		\bv A := \indexmath[a ij i in m j in n]{(a_{ij})_{i \in m,\, j \in n}} = 
 		\begin{pmatrix}
 			a_{00} & a_{01} & \cdots & a_{0, n-1} \\
 			a_{10} & a_{11} & \cdots & a_{1, n-1} \\
@@ -2081,10 +2081,10 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 		\end{pmatrix}\,.
 	\end{equation}
 
-	式~\eqref{equation: 矩阵} 定义的 $\bv A$ 被称为 $\mathbb F$ 上的 $m \times n$ 的\indexbf{矩阵}, $m \times n$ 被称为它的尺寸或大小, $\{a_{ij}\}_{i \in m,\, j \in n}$ 是它的\indexbf{元素}. 所有 $\mathbb F$ 上的 $m \times n$~矩阵的集合记为 $\indexfm[M m times n F]{M_{m \times n}(\mathbb F)}$. 
+	式~\eqref{equation: 矩阵} 定义的 $\bv A$ 被称为 $\mathbb F$ 上的 $m \times n$ 的\indexbf{矩阵}, $m \times n$ 被称为它的尺寸或大小, $\{a_{ij}\}_{i \in m,\, j \in n}$ 是它的\indexbf{元素}. 所有 $\mathbb F$ 上的 $m \times n$~矩阵的集合记为 $\indexmath[M m times n F]{M_{m \times n}(\mathbb F)}$. 
 \end{definition}
 
-元素全为 $0$ 的矩阵记为 $\indexfm[O]{\bv O}$, 有时为了强调它的尺寸, 将之写在右下角 i.e.\ $\indexfm[O m times n]{\bv O_{m \times n}}$.
+元素全为 $0$ 的矩阵记为 $\indexmath[O]{\bv O}$, 有时为了强调它的尺寸, 将之写在右下角 i.e.\ $\indexmath[O m times n]{\bv O_{m \times n}}$.
  
 通常, 我们称 $1 \times n$ 或 $n \times 1$ 的矩阵为 $n$~维\indexbf{向量}%
 	\index{n维向量@$n$~维向量}%
@@ -2094,24 +2094,24 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 我们也常把矩阵写成列向量组的形式, 即
 \begin{equation}\label{equation: 矩阵的列向量组表示}
-	\bv A := \indexfm[x j j in n]{(\bv x_j)_{j \in n}}, \qquad 
+	\bv A := \indexmath[x j j in n]{(\bv x_j)_{j \in n}}, \qquad 
 	\forall j \in n \big(
 			\bv x_j \in \mathbb F_n \big)\,. 
 \end{equation}
 
-设矩阵~$\bv A$ 的尺寸为 $n \times n$, 我们称其为 $n$~维\indexbf{方阵}, 其集合记为 $\indexfm[M n F]{M_n(\mathbb F)}$.
+设矩阵~$\bv A$ 的尺寸为 $n \times n$, 我们称其为 $n$~维\indexbf{方阵}, 其集合记为 $\indexmath[M n F]{M_n(\mathbb F)}$.
 
 \begin{definition}[对角矩阵]
-	若方阵~$\bv A$ 的元素只有对角线上的元素非零 i.e.\ $ a_{ij} \neq 0  \to i = j$, 称其为\indexbf{对角矩阵}, 记为 $\indexfm[diag a ii i in n]{\diag(a_{ii})_{i \in n}}$. 特别地 $\indexfm[I]{\bv I} := \diag(1)_{i \in n}$ 称为 $n$~维\indexbf{单位阵}.
+	若方阵~$\bv A$ 的元素只有对角线上的元素非零 i.e.\ $ a_{ij} \neq 0  \to i = j$, 称其为\indexbf{对角矩阵}, 记为 $\indexmath[diag a ii i in n]{\diag(a_{ii})_{i \in n}}$. 特别地 $\indexmath[I]{\bv I} := \diag(1)_{i \in n}$ 称为 $n$~维\indexbf{单位阵}.
 \end{definition}
 
 
 \begin{definition}[转置]
 	设 $\bv A = (a_{ij})_{i \in m,\, j \in n} \in M_{m \times n}(\mathbb F)$.
-	我们称 $(a_{ji})_{j \in n,\, i \in m} \in M_{n \times n}(\mathbb F)$ 为矩阵~$\bv A$ 的\indexbf{转置}, 记为 $\indexfm[A T]{\bv A^\mathrm T}$.
+	我们称 $(a_{ji})_{j \in n,\, i \in m} \in M_{n \times n}(\mathbb F)$ 为矩阵~$\bv A$ 的\indexbf{转置}, 记为 $\indexmath[A T]{\bv A^\mathrm T}$.
 \end{definition}
 
-如果 $\mathbb F$ 是复数域~$\mathbb C$, 我们通常更加关注\indexbf{共轭转置} $\indexfm[A dagger]{\bv A^\dagger} := {\overline {\bv A}}^\mathrm T$.
+如果 $\mathbb F$ 是复数域~$\mathbb C$, 我们通常更加关注\indexbf{共轭转置} $\indexmath[A dagger]{\bv A^\dagger} := {\overline {\bv A}}^\mathrm T$.
 
 \begin{definition}[和]
 	在 $M_{m \times n}$ 上定义\emphbf{和}%
@@ -2156,7 +2156,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 \begin{definition}[逆]
 	设方阵~$\bv A \in M_n(\mathbb F)$. 
-	若 $\exists \bv B \in M_n(\mathbb F)$, s.t.\ $\bv B \bv A = \bv A \bv B = \bv I$ 则称其为 $\bv A$ 的\indexbf{逆}, 并记为 $\indexfm[A -1]{\bv A^{-1}}$, 同时称 $\bv A$ 是可逆的.
+	若 $\exists \bv B \in M_n(\mathbb F)$, s.t.\ $\bv B \bv A = \bv A \bv B = \bv I$ 则称其为 $\bv A$ 的\indexbf{逆}, 并记为 $\indexmath[A -1]{\bv A^{-1}}$, 同时称 $\bv A$ 是可逆的.
 \end{definition}
 
 \begin{theorem}[逆的转置]
@@ -2186,7 +2186,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 \begin{definition}[迹]
 	设 $\bv A = (a_{ij})_{i,j \in n} \in M_n(\mathbb F)$. 
-	方阵~$\bv A$ 的迹定义为 $\indexfm[tr]{\tr} \bv A := \sum_{i \in n} a_{ii}$.
+	方阵~$\bv A$ 的迹定义为 $\indexmath[tr]{\tr} \bv A := \sum_{i \in n} a_{ii}$.
 \end{definition}
 
 \begin{theorem}[迹的交换性]
@@ -2215,7 +2215,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 \begin{definition}[行列式]\label{definition:行列式}
 	方阵 $\bv A \in M_n(\mathbb F)$ 的\indexbf{行列式} $\det \bv A := 
-		\indexfm[a ij i j in n]{ \vert a_{ij} \vert _{i,j \in n} }$ 定义为:
+		\indexmath[a ij i j in n]{ \vert a_{ij} \vert _{i,j \in n} }$ 定义为:
 	\begin{equation*}
 		\det \bv A = \vert a_{ij} \vert _{i,j \in n}
 			= \sum_{\pi \in S_n} \varepsilon_\pi \prod_{i \in n} a_{i, \pi(i)}
@@ -2249,8 +2249,8 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 \end{theorem}
 
 设 $I, J \in \mathscr P(n)$, 而 $|I| = |J|$. 
-记 $\indexfm[M IJ]{M_{IJ}} := |a_{k\ell}|_{k \in n - I;\, \ell \in n - J}$ 为 $\bv A$ 的\indexbf{子式} (minor), 而\indexbf{代数子式} (cofactor) 则是定义为 $\indexfm[A IJ]{A_{IJ}} := (- 1)^{\sum_{i \in I} i + \sum_{j \in J}j} M_{IJ}$.
-如果 $|I| = |J| = 1$, 那么我们称 $\indexfm[M ij]{M_{ij}} := M_{\{i\}\{j\}}$ 为\indexbf{首子式} (first minor), 对应的代数子式也可记为 $\indexfm[A ij]{A_{ij}}$. 
+记 $\indexmath[M IJ]{M_{IJ}} := |a_{k\ell}|_{k \in n - I;\, \ell \in n - J}$ 为 $\bv A$ 的\indexbf{子式} (minor), 而\indexbf{代数子式} (cofactor) 则是定义为 $\indexmath[A IJ]{A_{IJ}} := (- 1)^{\sum_{i \in I} i + \sum_{j \in J}j} M_{IJ}$.
+如果 $|I| = |J| = 1$, 那么我们称 $\indexmath[M ij]{M_{ij}} := M_{\{i\}\{j\}}$ 为\indexbf{首子式} (first minor), 对应的代数子式也可记为 $\indexmath[A ij]{A_{ij}}$. 
 那么, 以下的定理将给出一种计算行列式的递推方法:
 
 \begin{theorem}[行列式按行 (列) 展开]
@@ -2285,7 +2285,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 \section{多项式环}
 \begin{definition}[多项式环]
 	设 $R$ 是一个交换环, $\langle X \rangle := \{ X^n \mid n \in \mathbb N\}$ 是 $X$ 生成的幺半群, 记 $I := X^0$. 
-	若形如 $\indexfm[P X]{P(X)} := \sum_{i \in \mathbb N} p_i X^i$ 的形式 (称为\indexbf{多项式}, 其中只有有限个 $p_i$ 非零) 的集合%
+	若形如 $\indexmath[P X]{P(X)} := \sum_{i \in \mathbb N} p_i X^i$ 的形式 (称为\indexbf{多项式}, 其中只有有限个 $p_i$ 非零) 的集合%
 		\footnote{$R^{< \mathbb N} := \bigcup_{n \in \mathbb N} R^n$}%
 		:
 	\begin{equation*}
@@ -2309,12 +2309,12 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 				\left( \sum_{i \in \mathbb N} q_i X^i \right) 
 				= \sum_{\ell \in \mathbb N} \sum_{i + j = \ell} p_i q_j X^\ell\,,  
 	\end{equation*}
-	那么, 我们称 $\indexfm[R X]{R[X]}$ 是 $R$ 上变元~$X$ 的\indexbf{多项式环}.
+	那么, 我们称 $\indexmath[R X]{R[X]}$ 是 $R$ 上变元~$X$ 的\indexbf{多项式环}.
 	在变元是明确的时候, 多项式~$P(X)$ 也简记为 $P$.
 
 \end{definition}
 
-记 $\indexfm[deg P X]{\deg P(X)} := \max \{n \mid p_n \neq 0\}$ 为多项式~$P(X)$ 的\indexbf{次数}.
+记 $\indexmath[deg P X]{\deg P(X)} := \max \{n \mid p_n \neq 0\}$ 为多项式~$P(X)$ 的\indexbf{次数}.
 而 $(p_n)_{n \in \deg P(X) + 1}$ 是多项式的\indexbf{系数}, 其中 $p_0$ 是\indexbf{常数项}, 而 $p_{\deg P(X)}$ 是\indexbf{最高次项系数}或\indexbf{首项系数}.
 
 所有系数都为 $0$ 的多项式被称为\indexbf{零多项式}, 次数为 $1$ 的多项式被称为\indexbf{线性多项式}. 
@@ -2417,13 +2417,13 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	设 $R$ 是一个整环, $P(X) \in R[X]$. 
 	多项式~$P(X)$ 的所有系数的最大因%
 		\footnote{最大因的定义可以递归地推广到任意有限多个元上}%
-	~$\indexfm[c P]{c(P)}$ 叫做多项式的\indexbf{容度} (content). 
+	~$\indexmath[c P]{c(P)}$ 叫做多项式的\indexbf{容度} (content). 
 	如果 $c(P) \in U(R)$, 那么 $P(X)$ 被称为一个\indexbf{本原多项式} (primitive polynomial). 
-	一个非零多项式 $P(X)$ 所有系数对 $c(P)$ (由最大因的定义, 它们都是容度的倍数) 的商为系数的多项式 $\indexfm[pp P X]{\pp P(X)}$ 称为该多项式的\indexbf{本原部分} (primitive part).
+	一个非零多项式 $P(X)$ 所有系数对 $c(P)$ (由最大因的定义, 它们都是容度的倍数) 的商为系数的多项式 $\indexmath[pp P X]{\pp P(X)}$ 称为该多项式的\indexbf{本原部分} (primitive part).
 \end{definition}
 
 \begin{definition}
-	我们通常称域~$\mathbb F$ 上的多项式环~$\mathbb F[X]$ 的分式域~$Q(\mathbb F[X])$ 为\indexbf{有理函数域}, 记为 $\indexfm[F X]{\mathbb F(X)}$. 
+	我们通常称域~$\mathbb F$ 上的多项式环~$\mathbb F[X]$ 的分式域~$Q(\mathbb F[X])$ 为\indexbf{有理函数域}, 记为 $\indexmath[F X]{\mathbb F(X)}$. 
 \end{definition}
 
 将有理函数域定义在域上是习惯, 以下的定理说明了我们同样可以在整环上定义有理函数域:
@@ -2557,7 +2557,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	作 $H(X) = F(X) - G(X)$, 注意到 $P$ 中的数都是 $H(X)$ 的零点, 倘若 $H$ 不是零, $\deg H \leq n$ 但是 $H(X)$ 有了 $n + 1$ 个零点, 与推论~\ref{corollary: 重数之和不大于多项式度数} 矛盾.
 \end{proof}
 
-我们把取值函数~$\varPi_t$ (定义如定理~\ref{theorem: 多项式环的泛性}) 的像记为 $\indexfm[A pol]{A_\text{pol}}$, 称为 $A$ 上的\indexbf{多项式函数环}.
+我们把取值函数~$\varPi_t$ (定义如定理~\ref{theorem: 多项式环的泛性}) 的像记为 $\indexmath[A pol]{A_\text{pol}}$, 称为 $A$ 上的\indexbf{多项式函数环}.
 
 \begin{theorem}
 	设 $A$ 是一个整环, 而且 $\card A = \infty$. 

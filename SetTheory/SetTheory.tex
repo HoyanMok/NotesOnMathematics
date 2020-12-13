@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.1.7
+% v0.1.8
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{ctexbook} 
 % \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
@@ -25,8 +25,8 @@
 	\makeindex[intoc, title={索引}]
 	\makeindex[intoc, name=symbol, title={符号列表}]
 	\newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
-	\newcommand*{\indexfm}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
-	% \indexfm[name for sort]{display} 
+	\newcommand*{\indexmath}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
+	% \indexmath[name for sort]{display} 
 
 
 
@@ -165,9 +165,9 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 设$\Sigma$是一个公式集, $\varphi$是一个公式.
 
 \begin{definition}
-有穷公式序列$\varphi_1,\,\cdots,\,\varphi_n$表示从$\Sigma$到$\varphi$的一个\indexbf{推演}, 如果其中的任意$\varphi_i$要么是属于$\Sigma$的, 要么可从之前的公式$\varphi_j$和$\varphi_k=\varphi_j\to\varphi_i$得到, 而且$\varphi_n=\varphi$. 记作$\indexfm[Sigma vdash varphi]{\Sigma\vdash\varphi}$.
+有穷公式序列$\varphi_1,\,\cdots,\,\varphi_n$表示从$\Sigma$到$\varphi$的一个\indexbf{推演}, 如果其中的任意$\varphi_i$要么是属于$\Sigma$的, 要么可从之前的公式$\varphi_j$和$\varphi_k=\varphi_j\to\varphi_i$得到, 而且$\varphi_n=\varphi$. 记作$\indexmath[Sigma vdash varphi]{\Sigma\vdash\varphi}$.
 
-特别地, 如果$T$是语句集, 而$\sigma$是语句, 如果$\indexfm[T vdash sigma]{T\vdash\sigma}$, 就称存在从$T$到$\sigma$的一个\indexbf{证明}.
+特别地, 如果$T$是语句集, 而$\sigma$是语句, 如果$\indexmath[T vdash sigma]{T\vdash\sigma}$, 就称存在从$T$到$\sigma$的一个\indexbf{证明}.
 \end{definition}
 
 如果语句集$T$满足: 对任意语句$\sigma$, $T\vdash\sigma$当且仅当$\sigma\in T$, 即$T$是一个对证明封闭的语句集, 就称$T$为\indexbf{理论}. 假设$T$是理论, 如果存在一个语句集$A\subseteq T$使得对任意的$\sigma\in T$都有$A\vdash \sigma$, 就称$A$为$T$的一集\indexbf{公理}.
@@ -235,7 +235,7 @@ $\properclass{ZFC}$公理之前, 需要先介绍一些数理逻辑的概念.
 $\varphi(u)$是一个性质. 称$\{u\mid u(u)\}$为一个\indexbf{类} (class). 若一个类不是集合, 则称其为\indexbf{真类} (proper class).
 \end{definition}
 
-如所有集合的类$\indexfm[V]{\properclass{V}}$就是一个真类 (根据Corollary \ref{Russell set}). 
+如所有集合的类$\indexmath[V]{\properclass{V}}$就是一个真类 (根据Corollary \ref{Russell set}). 
 
 \begin{definition}
 由Sep, 两个集合的\indexbf{交}和\indexbf{差}也是集合:
@@ -291,11 +291,11 @@ $\forall X(\varnothing\subseteq X).$
 \begin{align}
 	\forall X\exists Y\forall u (u\in Y\leftrightarrow u\subseteq X).
 \end{align}
-这样的$Y$称为$X$的\indexbf{幂集}, 记为$\indexfm[P X]{\mathscr{P}(X)}$或$\indexfm[2 X]{2^X}$.
+这样的$Y$称为$X$的\indexbf{幂集}, 记为$\indexmath[P X]{\mathscr{P}(X)}$或$\indexmath[2 X]{2^X}$.
 \end{axiom}
 
 \begin{definition}
-对任意集合$x$, $x\cup \{ x\} $称为其\indexbf{后继}, 记为$\indexfm[S x]{S(x)}$或$\indexfm[x plus]{x^+}$.
+对任意集合$x$, $x\cup \{ x\} $称为其\indexbf{后继}, 记为$\indexmath[S x]{S(x)}$或$\indexmath[x plus]{x^+}$.
 \end{definition}
 
 \begin{axiom}[\indexbf{无穷公理}, \indexbf{Inf}]\label{Inf} 
@@ -378,7 +378,7 @@ Axiom \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \chapter{关系与函数}
 
 \section{关系}
-\begin{definition}集合$a,b$的\indexbf{有序对}$\indexfm[a b]{( a,b)} := \big\{\{a\},\{a,b\}\big\}$.
+\begin{definition}集合$a,b$的\indexbf{有序对}$\indexmath[a b]{( a,b)} := \big\{\{a\},\{a,b\}\big\}$.
 \end{definition}
 
 \begin{theorem}\label{equality_ordered_pair}
@@ -397,9 +397,9 @@ Axiom \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \begin{definition}\label{Cartesian_product}
 令$X$和$Y$是集合, 其\indexbf{直积}或\indexbf{Cartesian积}定义为:
 \begin{align}
-	\indexfm[X times Y]{X\times Y} := \{ ( x,y) \mid x\in X\wedge y\in Y\}.
+	\indexmath[X times Y]{X\times Y} := \{ ( x,y) \mid x\in X\wedge y\in Y\}.
 \end{align}
-简记$X\times X =: \indexfm[X 2]{ X^2}$.
+简记$X\times X =: \indexmath[X 2]{ X^2}$.
 \end{definition}
 
 \begin{theorem}对于$\forall X\forall Y$, $X\times Y$是集合.
@@ -409,7 +409,7 @@ Axiom \ref{Exi} 到 \ref{Rep} 构成的公理系统称为\indexbf{Zermelo-Fraenk
 \end{proof}
 
 \begin{definition}
-如果存在集合$X,Y$ s.t.\ $R\subseteq X\times Y$, 则称集合$R$是\indexbf{二元关系}. 通常记$(x,y)\in R =: \indexfm[R x y]{R(x,y)}X$, 或$\indexfm[x R y]{xRy}{xRy}$. $\dom R := \{ x \mid \exists y R(x,y)\}$称为其\indexbf{定义域}, $\ran R=\{ y\mid \exists x R(x,y)\}$称为其\indexbf{值域}. 
+如果存在集合$X,Y$ s.t.\ $R\subseteq X\times Y$, 则称集合$R$是\indexbf{二元关系}. 通常记$(x,y)\in R =: \indexmath[R x y]{R(x,y)}X$, 或$\indexmath[x R y]{xRy}{xRy}$. $\dom R := \{ x \mid \exists y R(x,y)\}$称为其\indexbf{定义域}, $\ran R=\{ y\mid \exists x R(x,y)\}$称为其\indexbf{值域}. 
 
 特别地, 如果$R\subseteq X^2$, 则称其为$X$上的二元关系.
 \end{definition}
@@ -514,7 +514,7 @@ $\forall I \forall X$,
 \textbf{注}: 这里函数的逆的定义与通常不同, 因 $\dom f^{-1} = \ran f$ 而非 $Y$. 
 因而下面的定理在这样的定义下是成立的 (否则还要加上满射的条件):
 
-记 $\indexfm[Y X]{Y^X} := \{ f \mid f\colon X\to Y\}$. 
+记 $\indexmath[Y X]{Y^X} := \{ f \mid f\colon X\to Y\}$. 
 $\forall Y \big(Y^\varnothing = \{\varnothing_Y\} \big)$, 而若 $X\neq \varnothing$, $\varnothing^X=\varnothing$.
 
 \begin{theorem}[函数可逆的条件]
@@ -566,7 +566,7 @@ h=g\circ f \leftrightarrow
 
 \begin{definition}[限制和扩张]
 令 $f$ 是任意函数, $A$ 是任意集合. 
-函数$\indexfm[f upharpoonright A]{f \upharpoonright A} = \{ (x,y) \in f \mid x \in A\}$ 是 $f$ 在 $A$ 上的\indexbf{限制}. 
+函数$\indexmath[f upharpoonright A]{f \upharpoonright A} = \{ (x,y) \in f \mid x \in A\}$ 是 $f$ 在 $A$ 上的\indexbf{限制}. 
 若 $g = f \upharpoonright A$, 则称 $f$ 是 $g$ 在 $\dom f$ 的\indexbf{扩张}.
 \end{definition}
 
@@ -710,7 +710,7 @@ $\cup S=X \to
 
 
 \begin{definition}
-如果$X$上的关系$\indexfm[preceq]{\preceq}$只满足传递和自反, 称其为$X$上的\indexbf{拟序} (quasi-order)或\indexbf{预序} (preorder). $\succeq:=\preceq^{-1}$.
+如果$X$上的关系$\indexmath[preceq]{\preceq}$只满足传递和自反, 称其为$X$上的\indexbf{拟序} (quasi-order)或\indexbf{预序} (preorder). $\succeq:=\preceq^{-1}$.
 \end{definition}
 
 \begin{theorem}
@@ -750,7 +750,7 @@ $\cup S=X \to
 容易知道$0:=\varnothing$属于任何归纳集, $1:=0^+$也属于任何归纳集, ..., 以此类推. 最小的归纳集被称为\indexbf{自然数集}, 它的严格定义如下:
 \begin{definition}
 \begin{align*}
-	\indexfm[N]{\mathbb{N}} :=\{n\mid \forall X(X\text{ 是归纳集} \to n\in X)\}.
+	\indexmath[N]{\mathbb{N}} :=\{n\mid \forall X(X\text{ 是归纳集} \to n\in X)\}.
 \end{align*}
 $\mathbb{N}$是\indexbf{自然数集}, 其元素是\indexbf{自然数}.
 \end{definition}
