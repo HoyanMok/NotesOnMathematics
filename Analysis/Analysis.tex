@@ -1551,6 +1551,7 @@ By writing $f$ as $(f_i)_{i \in n}$ such that $f(\bv x) = (f_i(\bv x))_{i \in n}
 we can conclude that $f$ is differentiable at $\bv x \in X$ \emphbf{iff} for each $f_i \colon X \to Y_i$, $i \in n$, is differentiable at $\bv x$.
 
 \begin{theorem}[Differentiation of multilinear operators]
+	\label{theorem: differentiation of multilinear operators}
 	Let $X_0, \cdots, X_{n - 1}$, $Y$ be normed spaces, $\mathscr A \in \mathcal B(X_0, \cdots, X_{n - 1}; Y)$. 
 	Let $X := \prod_{i \in n} X_i$ be normed space with a norm defined as:
 	\begin{equation}\label{equation: norm of product space}
@@ -1994,6 +1995,71 @@ With the finite-increment theorem, we can generalised Theorem~\ref{theorem: cont
 	which means $\dif f(\bv x) = \mathscr L$.
 \end{proof}
 
+Then we shall use finite-increment theorem~\ref{theorem: finite-increment theorem} to prove some useful theorems.
+
+\begin{theorem}[Derivative functions doesn't have removable discontinuity]
+	Let $X$, $Y$ be two normed spaces, $\bv x_0 \in X$, $U \in \mathscr U(\bv x_0)$, $f \in Y^U$.
+	If $f$ is differentiable in $\mathring U := U - \{\bv x_0\}$, and
+	\begin{equation*}
+		\lim_{\bv x \to \bv x_0} f'(\bv x) = \mathscr L \in \mathcal B(X; Y)\,,
+	\end{equation*}
+	then $f$ is differentiable at $\bv x_0$ and $f'(\bv x_0) = \mathscr L$. 
+\end{theorem}
+\begin{proof}
+	Find a $\Delta \bv x$ that satisfies $[\bv x, \bv x + \Delta \bv x] \subset U$.
+	By Corollary~\ref{corollary: difference between derivative and any linear operator}, 
+	as $\Delta \bv x \to 0$, we have
+	\begin{equation*}
+		\|f(\bv x_0 + \Delta \bv x) - f(\bv x_0) - \mathscr L \Delta \bv x\|_Y
+			\leq \sup\left\{ 
+				\|f'(\bv \xi) - \mathscr L\| 
+			\middle|
+				\bv \xi \in (\bv x_0, \bv x_0 + \Delta \bv x)
+			 \right\} \|\Delta \bv x\|_X
+			 = o(1) \|\Delta \bv x\|_X
+			 = o(\Delta \bv x)\,.
+	\end{equation*}
+	
+	By the definition of differetial, we know $f'(\bv x_0) = \mathscr L$.
+\end{proof}
+
+\begin{theorem}[Constant if derivative is zero in a convex open set]
+	Let $X$, $Y$ be normed spaces, $U$ be a convex open set in $X$, $f \in Y^U$.
+	If $\forall \bv x \in U$, $f$ is differentiable at $\bv x$, and $f'(\bv x) = \mathscr O$, 
+	then $f$ is a constant function from $U$ 
+		i.e.\ $\exists \bv y_0 \in Y$, $\forall \bv x \in U$, $f(\bv x) = \bv y_0$.
+\end{theorem}
+\begin{proof}
+	Let $\bv x_0 \in U$. $\forall \bv x \in U$, since $U$ is convex, $[\bv x_0, \bv x] \subset U$.
+	The finite-increment theorem~\ref{theorem: finite-increment theorem} therefore yields:
+	\begin{equation*}
+		\|f(\bv x) - f(\bv x_0)\|_Y 
+			\leq \sup \{ \|f'(\bv \xi)\| \mid \bv \xi \in [\bv x_0, \bv x]\} \|\bv x - \bv x_0\|_X
+			= 0\,.
+		\end{equation*} 
+
+	In the normed space $Y$ this implies that $f(\bv x_0) = f(\bv x)$.
+\end{proof}
+
+\begin{theorem}[Constant if derivative is zero in a connected open set]
+	Let $X$, $Y$ be normed spaces, $U$ be a connected open set in $X$, $f \in Y^U$.
+	If $\forall \bv x \in U$, $f$ is differentiable at $\bv x$, and $f'(\bv x) = \mathscr O$, 
+	then $f$ is a constant function from $U$.
+\end{theorem}
+\begin{proof}
+	Let $\bv x_0 \in U$. 
+	Consider a set $E := \{\bv x \in U \mid f(\bv x) = f(\bv x_0)\}$.
+
+	First, $E$ is open.
+	$\forall \bv x \in E$, $\exists B(\bv x; \delta) \subset U$. 
+	Since $\forall \bv x' \in B(\bv x; \delta)$, $[\bv x, \bv x'] \subset B(\bv x; \delta)$, $f$ is constant in $B(\bv x; \delta)$ and therefore $B(\bv x; \delta) \subset E$. 
+	In conclusion, all points in $E$ are interior.
+
+	Then, $U - E$ is also open in the topological subspace $U$, with the same reason. 
+
+	Since $E$ is not empty, ($\bv x_0 \in E$), the only choice for a open-closed set in a connected set $U$ is $U$ itself, i.e.\ $\forall \bv x \in U$, $f(\bv x) = f(\bv x_0)$.
+\end{proof}
+
 \section{Higher-Order Derivative}
 
 We denote the zeroth and first differential of $f \in Y^U$, where $U$ is an open set in a normed space $X$, by $f^{(0)} := f$, $f^{(1)} := f'$.
@@ -2097,20 +2163,20 @@ We denote the zeroth and first differential of $f \in Y^U$, where $U$ is an open
 		[f''(\bv x) \bv \ell_0]\bv \ell_1 = \lim_{t \to 0} \frac{\Delta(t)}{t^2}\,.
 	\end{equation*}
 
-	Substituting $(\bv \ell_0, \bv \ell_1)$ by $(\bv \ell_1, \bv \ell_1)$ in the definition of $\Delta(t)$ doesn't change its value, hence we have proved the theorem in the case when $n = 2$.
+	Substituting $(\bv \ell_0, \bv \ell_1)$ by $(\bv \ell_1, \bv \ell_0)$ in the definition of $\Delta(t)$ doesn't change its value, hence we have proved the theorem in the case when $n = 2$.
 \end{proof}
 
 Theorem~\ref{theorem: symmetry of higher-order differentiation} implies that the $n$-th derivative~$f^{(n)}(\bv x)$ corresponds to a $n$-symmetric multilinear operator in $\mathcal B(X, \cdots, X; Y)$%
 \footnote{By Corollary~\ref{corollary: important isomorphism}, these two spaces are isomorphic}, 
 and we shall denote:
-\begin{equation*}
+\begin{equation} \label{equation: f^(n)(x)(l_i)_i in n}
 	f^{(n)}(\bv x)(\bv \ell_i)_{i \in n} :=
 	((f^{(n)}(\bv x)\bv \ell_0)\cdots)\bv \ell_{n-1}\,,
-\end{equation*}
+\end{equation}
 and
-\begin{equation*}
+\begin{equation}\label{equation: f^(n)(x) l^n}
 	f^{(n)}(\bv x) \bv \ell^n := f^{(n)}(\bv \ell, \cdots, \bv \ell)\,.
-\end{equation*}
+\end{equation}
 
 \begin{theorem}
 	Let $X_0, \cdots, X_{m-1}, Y$ be normed spaces, and $X := \prod_{i \in m} X_i$.
@@ -2127,10 +2193,51 @@ and
 			\IFF \forall (i_k)_{k \in n} \in m^n,\; 
 				\partial_{i_0} \cdots \partial_{i_{m-1}} f \in C\,,
 	\end{equation*}
-	where we denote the set of $n$-th differentiable functions on $U$ by $\indexmath[C n U Y]{C^{(n)}(U; Y)}$ ($\indexmath[C n X]{C^{(n)}(X)}$, alternatively).
+	where we denote the set of $n$-th differentiable functions on $U$ by $\indexmath[C n U Y]{C^{(n)}(U; Y)}$ ($\indexmath[C n X]{C^{(n)}(U)}$, alternatively).
 \end{theorem}
 
 \section{Applications of Differentiation}
+\subsection{Taylor's Formula}
+\begin{theorem}[Taylor's formula]\index{Taylor's formula}
+	Let $X$ and $Y$ be two normed spaces, $\bv x \in X$, $U \in \mathscr U(x)$, $f \in Y^U$. 
+	If $f$ is $(n-1)$-th differentiable in $U$, and $n$-th differentiable at point~$\bv x$, then as $\Delta \bv x \to \bv 0$ ($\bv x + \Delta \bv x \in U$), 
+	\begin{equation}\label{equation: Taylor}
+		f(\bv x + \Delta \bv x) = \sum_{k \in n + 1} f^{(k)}(\bv x) \frac{\Delta \bv x^k}{k !} + o(\|\Delta \bv x\|_X^n)\,,
+	\end{equation}
+	where we have made use of the notation we introduced at Eq.~\eqref{equation: f^(n)(x) l^n}.
+\end{theorem}
+\begin{proof}
+	If we consider each term of the Taylor's formula as a function of $\Delta \bv x$, we can find them to be differentiable (with respect to $\Delta \bv x$), since $f^{(k)}(\bv x) \in \mathcal B(X, \cdots, X; Y)$. The derivative of the symmetric $k$-linear operator
+	\begin{equation*}
+		T_k(\Delta \bv x) := \frac{1}{k!} f^{(k)}(\bv x) \Delta \bv x^k
+	\end{equation*}
+	with respect to $\Delta \bv x$ is%
+		\footnote{cf.~Theorem~\ref{theorem: differentiation of multilinear operators}}:
+	\begin{equation*}
+		T_k'(\Delta \bv x) \bv \ell = \frac{1}{(k - 1)!} f^{(k)}(\bv x) \Delta \bv x^{k - 1} \bv \ell\,.
+	\end{equation*}
+
+	Hence, if we assume that the Eq.~\eqref{equation: Taylor} holds for $n - 1$, by the finite-increment theorem~\ref{theorem: finite-increment theorem}, we conclude:
+	\begin{align*}
+		&\left\|
+			f(\bv x + \Delta \bv x) - \sum_{k \in n + 1} T_k(\Delta \bv x)
+		\right\|_Y 
+		\\
+		&\quad
+			\leq \sup \left\{
+				\left\|
+					f'(\bv x + \bv \xi) - \sum_{k \in n} \frac{1}{k!} f^{(k + 1)}(\bv x) \bv \xi^k
+				\right\|_Y
+			\middle|
+				\bv \xi \in [\bv 0, \Delta \bv x]
+			\right\} \|\Delta \bv x\|_X 
+			\\
+		&\quad
+			= o(\bv \xi^{n-1}) \|\Delta \bv x\|_X = o(\Delta \bv x^n)\,.
+	\end{align*}
+\end{proof}
+
+
 
 \chapter{Integration}
 
