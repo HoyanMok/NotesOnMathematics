@@ -951,7 +951,7 @@ Then we shall introduce some global properties of continuous mappings.
 \end{theorem}
 \begin{proof}
 	$\forall F = K - G$ s.t.\ $G \in \mathscr T_K$ is compact (Theorem~\ref{theorem: closed subset of compact set}). 
-	Hence $f(F)$ is compact (Theorem~\ref{theorem: compact image of continuous mapping}), then it is also closed
+	Hence $f(F)$ is compact (Theorem~\ref{theorem: conservation of compactness}), then it is also closed
 	(Theorem~\ref{theorem: compact sets are closed in Hausdorff space}). 
 	This fact shows that $f^{-1}$ is continuous (Theorem~\ref{theorem: criterion of continuity}).
 \end{proof}
@@ -1902,7 +1902,7 @@ Let us recall and generalised the definition of interval:
 	for some $\delta \in \mathbb R_+$.
 \end{theorem}
 \begin{proof}
-	By Theorem~\ref{corollary: difference between derivative and any linear operator}, 
+	By Corollary~\ref{corollary: difference between derivative and any linear operator}, 
 	\begin{equation*}
 		\|f(\bv x + \Delta \bv x) - f(\bv x) - f'(\bv x) \Delta \bv x\|_Y
 			\leq \sup \big\{\|f'(\bv \xi) - f'(\bv x)\|  
@@ -2237,7 +2237,164 @@ and
 	\end{align*}
 \end{proof}
 
+\begin{theorem}
+	Let $X$, $Y$ be two normed spaces, $U$ be an open set in $X$, $f \in C^{(n)}(X; Y)$. 
+	Let $[\bv x, \bv x + \Delta \bv x] \subset U$, and $f$ be $(n + 1)$-th differentiable in $(\bv x, \bv x + \Delta \bv x)$.
+	% Define a mapping from $[0, 1]$ to $Y$:
+	% \begin{equation*}
+	% 	g(t) := f(\bv x + t \Delta \bv x) - \sum_{k \in n + 1} \frac{1}{k!} f^{(k)}(\bv x) (t \Delta \bv x)^k\,.
+	% \end{equation*}
 
+	If $\forall \bv \xi \in (\bv x, \bv x + \Delta \bv x)$, $\|f^{(n+1)}(\bv \xi)\| \leq M$,
+	then 
+	\begin{equation*}
+		\left\|
+			f(\bv x + \Delta \bv x) - \sum_{k \in n + 1} \frac{1}{k!} f^{(k)}(\bv x) \Delta \bv x^k
+		\right\|_Y \leq \frac{M}{(n + 1)!}\|\Delta \bv x\|_X^{n + 1}\,.
+	\end{equation*}
+	% then $g(t)$ is differentiable in $(0, 1)$ and $\forall t \in (0, t)$, 
+	% \begin{equation*}
+	% 	\|g'(t)\| \leq \frac{1}{n!} M \|t \Delta \bv x\|_X^n \|\Delta \bv x\|_X\,.
+	% \end{equation*}
+\end{theorem}
+\begin{proof}
+	\url{https://math.stackexchange.com/questions/3954622/a-version-of-taylors-theorem-in-normed-space-from-zorichs-mathematical-analysi}
+\end{proof}
+
+\begin{lemma}
+	\label{lemma: zero symmetric multilinear operator}
+	Let $X$, $Y$ be a linear space, $\mathscr A \in \mathcal B(X, \cdots, X; Y)$ i.e.\ $\mathscr A$ is an $n$-linear operators from $X$, \ldots, $X$ to $Y$. 
+	If $\forall \bv x \in X$, $\mathscr A \bv x^n = \bv 0$, then $\forall (\bv x_i)_{i \in n} \in X^n$, $\mathscr A(\bv x_i)_{i \in n} = \bv 0$.
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		2 \mathscr A(\bv x_0, \bv x_1) 
+			&= \mathscr A(\bv x_0, \bv x_1) + \mathscr A(\bv x_0, \bv x_2)
+		\\
+			&= \mathscr A(\bv x_0, \bv x_0) + \mathscr A(\bv x_0, \bv x_1 - \bv x_0)
+				+ \mathscr A(\bv x_1, \bv x_0 - \bv x_1) + \mathscr A(\bv x_1, \bv x_1)
+		\\
+			&= \mathscr A(\bv x_0, \bv x_0) + \mathscr A(\bv x_1, \bv x_1) - \mathscr A(\bv x_1 - \bv x_0, \bv x_1 - \bv x_0)\,.
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[The uniqueness of Taylor's finite expansion]
+	Let $X$, $Y$ be normed spaces, $f \in Y^U$ where $U$ is an open set in $X$.
+	If $f$ is $n$-th differentiable at point $\bv x \in U$, and $\forall k \in n + 1$, exists $k$-linear operators $\mathscr L_k$ s.t.\ 
+	\begin{equation*}
+		f(\bv x + \Delta \bv x) = \sum_{k \in n+1} \mathscr L_k \Delta \bv x^k + o(\|\Delta \bv x\|_X^n)
+	\end{equation*}
+	as $\Delta \bv x \to \bv 0$, then, $\mathscr L_k = f^{(k)}(\bv x)$.
+\end{theorem}
+\begin{proof}
+	It is obvious that $\mathscr L_0 = f^{(0)}(\bv x) = f(\bv x)$. 
+	Assume that $\forall i \in k$, $f^{(i)}(\bv x) = \mathscr L_i$, then
+	\begin{equation*}
+		\sum_{i \in k + 1} \frac{1}{i!} f^{(i)}(\bv x)\Delta \bv x^i + o(\|\Delta \bv x\|_X^k)
+		 = \sum_{i \in k + 1} \frac{1}{i!} \mathscr L_i \Delta \bv x^i + o(\|\Delta \bv x\|_X^k)\,,
+	\end{equation*}
+	hence:
+	\begin{equation*}
+		[f^{(k)}(\bv x) - \mathscr L_k]\Delta \bv x^k = o(\|\Delta \bv x\|_X^k)\,.
+	\end{equation*}
+
+	Divides each sides by $\|\Delta \bv x\|_X^k$ and passing the limit $\Delta \bv x \to 0$, we have:
+	\begin{equation*}
+		\lim_{\Delta \bv x \to 0} [f^{(k)}(\bv x) - \mathscr L_k] \left( 
+			\frac{\Delta \bv x}{\|\Delta \bv x\|_X}
+		 \right)^k = \lim_{\Delta \bv x \to 0} o(1) = \bv 0\,,
+	\end{equation*}
+	which means $\forall \basis e \in X$ s.t. $\|\basis e\|_X = 1$, $[f^{(k)}(\bv x) - \mathscr L_k] \basis e^k = \bv 0$. This means $f^{(k)}(\bv x) - \mathscr L_k = \mathscr O$, by Lemma~\ref{lemma: zero symmetric multilinear operator}.
+\end{proof}
+
+\subsection{Interior Extrema}
+
+\begin{definition}[Extremum]
+	Let $X$ be a normed space, and $f \in \mathbb R^X$. 
+	If $\bv x \in X$ satisfies: $\exists U \in \mathscr U(\bv x)$ s.t.\ 
+	$\forall \bv x' \in U - \{\bv x\}$, $f(\bv x) > f(\bv x')$, then $\bv x$ is a \indexbf{locally maximum point} of $f$.
+	Similarily, we can define \indexbf{locally minimun point}. Both locally maximum point and minimum point are called \indexbf{extrmum point}.
+\end{definition}
+
+\begin{theorem}
+	Let $X$ be a normed space, $U$ is an open set in $X$, and $f \in \mathbb R^U$.
+	The mapping~$f$ is $n$-th differentiable in $U$, and $(n + 1)$-th differentiable at $\bv x \in U$, where $n \in \mathbb N_+$.
+	$\forall k \in n + 1$, $f^{(k)}(\bv x) = \mathscr O$, and $f^{(n + 1)}(\bv x) \neq \mathscr O$.
+
+	If $f$ reach its extremum at $\bv x$, then $n + 1 \in 2\mathbb Z$ and $f^{(n + 1)}(\bv x)$ is semidefinite, i.e.\ $\not\exists \Delta \bv x, \Delta \bv x' \in X$ s.t.\ $f^{(n + 1)}(\bv x) \Delta \bv x^{n+1} f^{(n + 1)}(\bv x) \Delta \bv x'^{n+1} < 0$.
+\end{theorem}
+\begin{proof}
+	$\exists \Delta \bv x \in X$, $f^{(n + 1)}(\bv x)\Delta \bv x^{n+1} \neq 0$ since $f^{(n + 1)}(\bv x) \neq \mathscr O$. $\exists \delta \in \mathbb R_+$, as $t \in (-\delta, \delta)$, 
+	\begin{equation*}
+		o(1) = \frac{1}{t^{n +1}} o((t\Delta \bv x)^n)  > -\frac{1}{(n+1)!} f^{(n + 1)}(\bv x) \Delta \bv x^{n+1}\,,
+	\end{equation*} 
+	hence
+	\begin{equation*}
+		f(\bv x + t \Delta \bv x) - f(\bv x) = \left( 
+			\frac{1}{(n+1)!} f^{(n + 1)}(\bv x) \Delta \bv x^{n+1} + o(1)
+		 \right)t^{n + 1}\,.
+	\end{equation*}
+
+	If the difference remians its sign, then $n + 1$ must be an even number.
+\end{proof}
+
+\begin{theorem}
+	Let $X$ be a normed space, $U$ is an open set in $X$, and $f \in \mathbb R^U$.
+	The mapping~$f$ is $n$-th differentiable in $U$, and $(n + 1)$-th differentiable at $\bv x \in U$, where $n \in \mathbb N_+$.
+	$\forall k \in n + 1$, $f^{(k)}(\bv x) = \mathscr O$, and $f^{(n + 1)}(\bv x) \neq \mathscr O$.
+
+	If $\exists \delta \in \mathbb R_+$, $\forall \basis e \in X$ s.t.\ $\|\basis e\|_X = 1$, $|f^{(n + 1)}(\bv x) \basis e^{n+1}| \geq \delta$, then $f$ reaches its extremum.
+	If $f^{(n + 1)}(\bv x) \basis e^{n+1} > 0$, then $\bv x$ is a local maximum point; 
+	If $f^{(n + 1)}(\bv x) \basis e^{n+1} < 0$, then $\bv x$ is a local minimum point. 
+\end{theorem}
+\begin{proof}
+	Assume that $f^{(n + 1)}(\bv x) \Delta \bv x^{n+1} > 0$.
+	
+	\begin{align*}
+		f(\bv x - \Delta \bv x) - f(\bv x)
+		&= \frac{1}{k!} f^{(n + 1)}(\bv x) \Delta \bv x^{n+1} + o(\Delta \bv x^{n+1})
+		\\
+		&= \|\Delta \bv x\|_X^{n+1} \left( 
+			\frac{1}{k!} f^{(n + 1)}(\bv x) \left(\frac{\Delta \bv x}{\|\Delta \bv x\|_X}\right)^{n+1} + o(1)
+		 \right)
+		\\
+		&\geq
+		\|\Delta \bv x\|_X^{n+1} \left( 
+			\frac{\delta}{k!}  + o(1)
+		 \right) \to \|\Delta \bv x\|_X^{n+1} \frac{\delta}{k!} > 0\,.
+	\end{align*}	
+\end{proof}
+
+\section{Implicit Function Theorem}
+
+\begin{theorem}[Implicit function theorem]
+	\label{theorem: implicit function theorem}
+	Let $X$, $Z$ be normed spaces, and $Y$ be a Banach space.
+	$\bv x_0 \in X$, $\bv y_0 \in Y$. Denote
+	\begin{equation*}
+		W := B(\bv x_0; \alpha) \times B(\bv y_0; \beta)\,,
+	\end{equation*}
+	where $\alpha, \beta \in \mathbb R_+$.
+	If $F \in Z^W$ satisfies:
+	\begin{conditionlist}[label=\alph*)]
+		\item $F(\bv x_0, \bv y_0) = \bv 0$;
+		\item $F$ is continuous at $(\bv x_0, \bv y_0)$;
+		\item There exists the partial derivative of $F(\bv x, \bv y)$ with respect to $\bv y \in Y$: $\partial_{\bv y} F(\bv x, \bv y)$ in $W$, and $\partial_{\bv y} F$ is continuous at point $(\bv x_0, \bv y_0)$;
+		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible i.e.\ $\exists [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \in \mathcal B(Z; Y)$ s.t.
+		\begin{equation*}
+			\partial_{\bv y} F(\bv x_0, \bv y_0) \circ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} = [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv y} F(\bv x_0, \bv y_0)\,,
+		\end{equation*}
+	\end{conditionlist}
+	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in V^U$ s.t.\ $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
+	\begin{equation*}
+		F(\bv x, \bv y) = \bv 0
+		\IFF
+		f(\bv x) = \bv y\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
 
 \chapter{Integration}
 
