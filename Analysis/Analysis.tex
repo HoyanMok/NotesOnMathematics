@@ -666,6 +666,17 @@ We now take a closer look at one of the most important examples of metric spaces
 
 For example, a metric space~$C_\infty[a,b]$ is complete while $C_1[a,b]$ isn't. The proof see \cite[p.~22]{Zorich:2137923}.
 
+\begin{theorem}[Closed subspace of a complete space is complete]
+	\label{theorem: closed subspace of a complete space is complete}
+	Let $(X, d)$ be a complete space, $A$ is a colsed set of $X$. 
+	The subspace~$(A, d)$ is also complete.
+\end{theorem}
+\begin{proof}
+	Let $\langle x_n \rangle_{n \in \mathbb N} \in A^\mathbb N$ be a Cauchy sequence in $A$.
+	Since $X$ is complete, $\lim_{n \to \infty} x_n = x \in X$. 
+	If $x \notin A$, then $\forall U \in \mathscr U(x)$, $\card(U \cap A) = \infty$ i.e.\ $x$ is a limit point of $A$. By Theorem~\ref{theorem: closed sets' closure (metric)}, $x \in A$.
+\end{proof}
+
 Let us consider an incomplete space~$\mathbb Q_1$, which is a subspace of the complete space $\mathbb R_1$. 
 If $\mathbb R_1$ is the smallest complete space containing $\mathbb Q_1$, we can say that we have achieved a \emphbf{completion} of $\mathbb Q_1$. 
 However, the term ``smallest'' hasn't been properly defined yet.
@@ -1006,7 +1017,7 @@ Then we shall introduce some global properties of continuous mappings.
 
 \section{Contraction}
 
-\begin{definition}[Fixed point]\label{definition: fixed_point}
+\begin{definition}[Fixed point]\label{definition: fixed point}
 	A point $a\in X$ is a \indexbf{fixed point} of a mapping $f \colon X \to X$ if $f( a) = a$.
 \end{definition}
 
@@ -1031,7 +1042,7 @@ Then we shall introduce some global properties of continuous mappings.
 \end{proof}
 
 \begin{theorem}[\textbf{Picard-Banach fixed-point principle} or \textbf{contraction mapping principle}]
-		\label{contraction_mapping_principle}%
+		\label{theorem: Picard-Banach}%
 		\index{Picard-Banach fixed-point principle}\index{contraction mapping principle}%
 	Let $(X, d)$ be a complete metric space. 
 	Each contraction $f \colon X \to X$ has a unique fixed point $a$. 
@@ -2368,7 +2379,7 @@ and
 \section{Implicit Function Theorem}
 
 \begin{theorem}[Implicit function theorem]
-	\label{theorem: implicit function theorem}
+	\label{theorem: implicit function theorem}\index{implicit function theorem}
 	Let $X$, $Z$ be normed spaces, and $Y$ be a Banach space.
 	$\bv x_0 \in X$, $\bv y_0 \in Y$. Denote
 	\begin{equation*}
@@ -2382,18 +2393,102 @@ and
 		\item There exists the partial derivative of $F(\bv x, \bv y)$ with respect to $\bv y \in Y$: $\partial_{\bv y} F(\bv x, \bv y)$ in $W$, and $\partial_{\bv y} F$ is continuous at point $(\bv x_0, \bv y_0)$;
 		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible i.e.\ $\exists [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \in \mathcal B(Z; Y)$ s.t.
 		\begin{equation*}
-			\partial_{\bv y} F(\bv x_0, \bv y_0) \circ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} = [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv y} F(\bv x_0, \bv y_0)\,,
+			\partial_{\bv y} F(\bv x_0, \bv y_0) \circ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} 
+			= [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \circ \partial_{\bv y} F(\bv x_0, \bv y_0) = \id_Y\,,
 		\end{equation*}
 	\end{conditionlist}
-	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in V^U$ s.t.\ $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
+	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in V^U$ s.t.\ $f$ is continuous at $\bv x_0$, $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
 	\begin{equation*}
 		F(\bv x, \bv y) = \bv 0
 		\IFF
 		f(\bv x) = \bv y\,.
 	\end{equation*}
 \end{theorem}
+
+Before our proof of the theorem, some explanation to it might be necessary. 
+Given a $\bv x \in B(\bv x_0; \alpha)$, we want to find a $f(\bv x) \in B(\bv y_0; \beta)$ that satisfies $F[\bv x, f(\bv x)] = \bv 0$. 
+If we have made an guess~$\bv y$, the error shall be $\Delta = f(\bv x) - \bv y$, of course since we don't know exactly what $f(\bv x)$ is, we shall estimate it.
+
+Then we made an approximation. 
+We assume that the behaviour of $F(\bv x, \bv y)$ is linear with respect to $\bv y$ around $(\bv x, f(\bv x))$, i.e.\ 
+\begin{equation*}
+	F(\bv x, \bv y) \approx \partial_{\bv y} F(\bv x, f(\bv x)) (\bv y - f(\bv x))
+	\approx \partial_{\bv y} F(\bv x_0, \bv y_0) (\bv y - f(\bv x))
+\end{equation*}
+
+If we find that $F(\bv x, \bv y) \neq \bv 0$, we know that $\bv y$ is not the $f(\bv x)$ we are searching for, and by our approximation, it is about:
+\begin{equation*}
+	\Delta \approx \tilde{\Delta} = [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \circ F(\bv x, \bv y)\,.
+\end{equation*}
+
+Making use of our estimate of the error to correct $\bv y$, we get $\bv y' = \bv y - \tilde \Delta$. 
+However, since we made a approximation (which is too much!), $\bv y'$ is also not $f(\bv x)$. So we repeat the procedure, which is estimate the error, correct it, and estimate the error again \ldots
+
+But wait, would we finally get what we want? 
+In analysis this is a bad question -- maybe we shall ask: as we repeat the procedure, would the result gets closed enough to the answer? 
+The proof below would answer.
+
 \begin{proof}
+	Consider a function from $B(\bv y_0; \beta)$ to $Y$: 
+	\begin{equation*}
+		\Delta_{\bv x} (\bv y) 
+			= \bv y - [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \circ F(\bv x, \bv y)\,,
+	\end{equation*}
 	
+	Obviously, if $\bv y = f(\bv x) \IFF F(\bv x, bv y)$ then $\Delta_{\bv x} (f(\bv x)) = f(\bv x)$ i.e.\ $f(\bv x)$ is a fix-point of the function $\Delta_{\bv x} (\bv y)$ of $\bv y$ with fixed $\bv x$. 
+	Now we need to prove such fix-point exists.
+
+	The function~$F(\bv x, \bv y)$ is differentiable with respect to $\bv y$ in $W$, so is $\Delta_{\bv x}(\bv y)$:
+	\begin{equation*}
+		\Delta_{\bv x}'(\bv y) 
+		= \id_Y - [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv y} F(\bv x, \bv y) 
+		= [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} [\partial_{\bv y} F(\bv x_0, \bv y_0) - \partial_{\bv y} F(\bv x, \bv y)]\,.
+	\end{equation*}
+
+	Take the norm of each side and by Theorem~\ref{theorem: norm of operator composition}, we have:
+	\begin{equation*}
+		\|\Delta_{\bv x}'(\bv y)\| 
+			\leq \|[\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1}\|
+			\|\partial_{\bv y} F(\bv x_0, \bv y_0) - \partial_{\bv y} F(\bv x, \bv y)\|\,.
+	\end{equation*}
+
+	Since $\partial_{\bv y} F$ is continuous at $(\bv x_0, \bv y_0)$, $\forall \varepsilon \in (0, 1)$, if $\gamma$ is small enough, $\forall \bv x \in B(\bv x_0; \gamma/2)$, $\forall \bv y \in B(\bv y_0; \gamma/2)$%
+	\footnote{so that $d_{X \times Y} \big((\bv x, \bv y), (\bv x_0, \bv y_0)\big) = \sqrt[p]{\|\bv x - \bv x_0\|_X^p + \|\bv y - \bv y_0\|_Y^p} \leq d_X(\bv x, \bv x_0) + d_Y(\bv y, \bv y_0) < \gamma$} , 
+	\begin{equation*}
+		\|\partial_{\bv y} F(\bv x_0, \bv y_0) - \partial_{\bv y} F(\bv x, \bv y)\| 
+			< \frac{\varepsilon}{\|[\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1}\|}\,.
+	\end{equation*}
+	
+	By the finite-increment theorem~\ref{theorem: finite-increment theorem}, $\forall \bv y, \bv y' \in B(\bv y_0; \gamma/2)$, 
+	\begin{align*}
+		\|\Delta_{\bv x}(\bv y) - \Delta_{\bv x}(\bv y)\|_Y 
+			&\leq \sup\{\|\Delta_{\bv x}'(\bv \xi)\| \mid \bv \xi \in [\bv y, \bv y']\}
+				\|\bv y - \bv y'\|_Y
+		\\
+			&\leq \|[\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1}\|
+			\|\partial_{\bv y} F(\bv x_0, \bv y_0) - \partial_{\bv y} F(\bv x, \bv y)\|
+			\|\bv y - \bv y'\|_Y
+		\\
+			&< \varepsilon \|\bv y - \bv y'\|_Y \,.
+	\end{align*}
+	
+	In another word, $\Delta_{\bv x} (\bv y)$ is a $\varepsilon$-contraction, from $B(\bv y_0; \gamma/2)$ to $B(\bv y_0; \gamma/2)$. 
+	
+	To apply the Picard-Banach fixed-point principle~\ref{theorem: Picard-Banach}, we need to find a closed metric subspace $\big(\tilde{B}(\bv y_0; \delta), d_Y\big)$, where $\delta \leq \gamma/2$. By Theorem~\ref{theorem: closed subspace of a complete space is complete}, $\tilde{B}(\bv y_0; \delta)$ is also complete. 
+	But we don't know if $\Delta_{\bv x}\big(\tilde{B}(\bv y_0; \delta)\big) \subset \tilde{B}(\bv y_0; \delta)$ yet. 
+	To satisfy this, we find a $\zeta \in (0, \gamma/2)$, s.t.\ $\|\Delta_{\bv x}(\bv y_0) - \bv y_0\|_Y < \delta (1 - \varepsilon)$ if $d_X(\bv x, \bv x_0) < \zeta$ so that 
+	\begin{equation*}
+		\|\Delta_{\bv x}(\bv y) - \bv y_0\|_Y
+			\leq \|\Delta_{\bv x}(\bv y) - \Delta_{\bv x}(\bv y_0)\|_Y 
+				+ \|\Delta_{\bv x}(\bv y_0) - \bv y_0\|_Y 
+			< \varepsilon \|\bv y - \bv y_0\|_Y + (\varepsilon - 1) \delta
+			< \varepsilon \varepsilon + (\varepsilon - 1) \delta = \delta\,.
+	\end{equation*}
+	
+	Hence, there exists the unique fixed point for $\Delta_{\bv x}(\bv y) \in \tilde B(\bv y; \delta)$ for each $\bv x \in U := B(\bv x_0; \zeta)$, which is the $f(\bv x)$ we have been searching for.
+
+	Finally we check if $f \colon U \to V$ is continuous at $\bv x_0$. 
+	For any $\delta' \in (0, \delta)$, we can find another $\zeta' \in (0, \zeta)$ s.t.\ $\|\Delta_{\bv x}(\bv y_0) - \bv y_0\|_Y < \delta' (1 - \varepsilon)$ if $d_X(\bv x, \bv x_0) < \zeta'$, so that $\|\Delta_{\bv x}(\bv y) - \bv y_0\|_Y < \delta'$.
 \end{proof}
 
 \chapter{Integration}
