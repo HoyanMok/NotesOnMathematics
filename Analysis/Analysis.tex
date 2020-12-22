@@ -2297,7 +2297,7 @@ and
 		\|g(t)\|_Y \leq \frac{M (1-t)^{n + 1}}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon (1 - t)\,.
 	\end{equation*}
 	
-	Since such $\delta$ exists, for $\varepsilon$, we define $\delta'$ as the supremum of the $\delta$s, i.e.\ 
+	Since such $\delta$ exists, for $\varepsilon$, we define $\delta'$ as the supremum of the $\delta$s\cite[p.~64]{coleman2012calculus}, i.e.\ 
 	\begin{equation*}
 		\delta' := \sup \left\{
 			\delta \in \mathbb R_+ 
@@ -2308,9 +2308,7 @@ and
 
 	If $\delta' \neq 1$, then for $ t < 1 - \delta'$, again we make use of the definition of differentiation, starting at $\delta'$, $\exists \eta \in \mathbb R_+$, if $\delta' - t \leq \eta$, then
 	\begin{equation*}
-		\|g(t) - g(\delta')\|_Y \leq \frac{M [(1-\delta')^{n + 1} - (1 - t)^{n+1}]}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon (\delta' - t) 
-		\quad\Rightarrow\quad
-		\left\|\frac{g(t)}{1 - t}\right\|\,,
+		\|g(t) - g(\delta')\|_Y \leq \frac{M [(1-\delta')^{n + 1} - (1 - t)^{n+1}]}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon (\delta' - t) \,,
 	\end{equation*}
 	and
 	\begin{align*}
