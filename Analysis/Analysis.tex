@@ -2251,10 +2251,6 @@ and
 \begin{theorem}
 	Let $X$, $Y$ be two normed spaces, $U$ be an open set in $X$, $f \in C^{(n)}(X; Y)$. 
 	Let $[\bv x, \bv x + \Delta \bv x] \subset U$, and $f$ be $(n + 1)$-th differentiable in $(\bv x, \bv x + \Delta \bv x)$.
-	% Define a mapping from $[0, 1]$ to $Y$:
-	% \begin{equation*}
-	% 	g(t) := f(\bv x + t \Delta \bv x) - \sum_{k \in n + 1} \frac{1}{k!} f^{(k)}(\bv x) (t \Delta \bv x)^k\,.
-	% \end{equation*}
 
 	If $\forall \bv \xi \in (\bv x, \bv x + \Delta \bv x)$, $\|f^{(n+1)}(\bv \xi)\| \leq M$,
 	then 
@@ -2263,13 +2259,82 @@ and
 			f(\bv x + \Delta \bv x) - \sum_{k \in n + 1} \frac{1}{k!} f^{(k)}(\bv x) \Delta \bv x^k
 		\right\|_Y \leq \frac{M}{(n + 1)!}\|\Delta \bv x\|_X^{n + 1}\,.
 	\end{equation*}
-	% then $g(t)$ is differentiable in $(0, 1)$ and $\forall t \in (0, t)$, 
-	% \begin{equation*}
-	% 	\|g'(t)\| \leq \frac{1}{n!} M \|t \Delta \bv x\|_X^n \|\Delta \bv x\|_X\,.
-	% \end{equation*}
 \end{theorem}
 \begin{proof}
-	\url{https://math.stackexchange.com/questions/3954622/a-version-of-taylors-theorem-in-normed-space-from-zorichs-mathematical-analysi}
+	Define a function $g \in Y^{[0, 1]}$:
+	\begin{equation*}
+		g(t) := f(\bv x + \Delta \bv x) - \sum_{k \in n + 1} \frac{(1 - t)^k}{k!} f^{(k)}(\bv x + t \Delta \bv x) \Delta \bv x^k\,,
+	\end{equation*}
+
+	Notice the derivative of $(1-t)^k f^{(k)}(\bv x + t \Delta \bv x) / k!$ with respect to $t$ is:
+	\begin{equation*}
+		\diff{}{t} \left( 
+			\frac{(1 - t)^k}{k!} f^{(k)}(\bv x + t \Delta \bv x)  
+		 \right)
+		= \frac{(1 - t)^k}{k!} f^{(k + 1)}(\bv x + t \Delta \bv x) \Delta \bv x 
+		- \frac{k(1 - t)^{k-1}}{k!} f^{(k)}(\bv x + t \Delta \bv x) \,,
+	\end{equation*}
+
+	We have:
+	\begin{equation*}
+		g'(t) = - \frac{(1 - t)^n}{n!} f^{(n + 1)}(\bv x + t \Delta \bv x) \Delta \bv x^{n + 1}\,,
+	\end{equation*}
+	therefore
+	\begin{equation*}
+		\|g'(t)\| 
+		\leq \frac{|1-t|^n}{n!} \|f^{(n + 1)}(\bv x + t \Delta \bv x)\| \| \Delta \bv x\|_X^{n + 1}
+		\leq \frac{M (1-t)^n}{n!} \|\Delta \bv x\|_X^{n+1}\,.
+	\end{equation*}
+
+	Making use of $[- (1-t)^{n + 1}]' = (n + 1) (1 - t)^n$ and the definition of differentiation, $\forall \varepsilon \in \mathbb R_+$, $\exists \delta \in \mathbb R_+$, if $1 - t \leq \delta$, then:
+	\begin{equation*}
+		\|g(t)\|_Y - \frac{\varepsilon}{2}(1 - t) \leq \|g'(t)\|(1 - t) 
+		\leq  \frac{M (1-t)^n}{n!} (1 - t) \|\Delta \bv x\|_X^{n+1}
+		\leq \frac{M (1-t)^{n + 1}}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \frac{\varepsilon}{2}(1 - t)\,,
+	\end{equation*}
+	or
+	\begin{equation*}
+		\|g(t)\|_Y \leq \frac{M (1-t)^{n + 1}}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon (1 - t)\,.
+	\end{equation*}
+	
+	Since such $\delta$ exists, for $\varepsilon$, we define $\delta'$ as the supremum of the $\delta$s, i.e.\ 
+	\begin{equation*}
+		\delta' := \sup \left\{
+			\delta \in \mathbb R_+ 
+			\middle| 
+			1 - t \leq \delta \;\to\; \|g(t)\|_Y \leq \frac{M (1-t)^{n + 1}}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon (1 - t)\,.
+		\right\}
+	\end{equation*}
+
+	If $\delta' \neq 1$, then for $ t < 1 - \delta'$, again we make use of the definition of differentiation, starting at $\delta'$, $\exists \eta \in \mathbb R_+$, if $\delta' - t \leq \eta$, then
+	\begin{equation*}
+		\|g(t) - g(\delta')\|_Y \leq \frac{M [(1-\delta')^{n + 1} - (1 - t)^{n+1}]}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon (\delta' - t) 
+		\quad\Rightarrow\quad
+		\left\|\frac{g(t)}{1 - t}\right\|\,,
+	\end{equation*}
+	and
+	\begin{align*}
+		\|g(t)\|_Y &\leq \|g(t) - g(\delta')\|_Y + \|g(\delta')\|_Y
+		\\
+		&\leq \frac{M [(1-\delta')^{n + 1} - (1 - t)^{n+1}]}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} 
+			+ \varepsilon (\delta' - t) 
+		+ \frac{M (1-\delta')^{n + 1}}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} 
+			+ \varepsilon (1 - \delta')
+		\\
+		&=  \frac{M (1-t)^{n + 1}}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon (1 - t)\,,
+	\end{align*}
+	which contradicts to the definition of $\delta'$.
+
+	Hence $\delta' = 1$, or:
+	\begin{equation*}
+		\|g(0)\|_Y \leq \frac{M}{(n + 1)!} \|\Delta \bv x\|_X^{n+1} + \varepsilon\,,
+	\end{equation*}
+	which holds for any $\varepsilon \in \mathbb R_+$, hence:
+	\begin{equation}\label{equation: Lagrange remainder}
+		\|g(0)\|_Y \leq \frac{M}{(n + 1)!} \|\Delta \bv x\|_X^{n+1}\,.
+	\end{equation}
+
+	Eq.~\eqref{equation: Lagrange remainder} is to prove.
 \end{proof}
 
 \begin{lemma}
