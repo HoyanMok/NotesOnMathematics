@@ -1640,6 +1640,7 @@ Let $\mathcal U(X; Y)$ be the set of \indexbf{reversible operators} in $\mathcal
 \end{equation*}
 
 \begin{theorem}[Differential of reversion]
+	\label{theorem: differential of reversion}
 	Let $X$ be a complete normed space, and $Y$ be a normed space. $\mathscr A \in \mathcal U(X; Y)$, $\delta \mathscr A \in \mathcal B(X; Y)$.
 	If $\|\delta \mathscr A\| < \|\mathscr A^{-1}\|^{-1}$, then $\mathscr A + \delta \mathscr A \in \mathcal U(X; Y)$,
 	\begin{equation*}
@@ -2498,7 +2499,7 @@ The proof below would answer.
 			= \bv y - [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \circ F(\bv x, \bv y)\,,
 	\end{equation*}
 	
-	Obviously, if $\bv y = f(\bv x) \IFF F(\bv x, bv y)$ then $\Delta_{\bv x} (f(\bv x)) = f(\bv x)$ i.e.\ $f(\bv x)$ is a fix-point of the function $\Delta_{\bv x} (\bv y)$ of $\bv y$ with fixed $\bv x$. 
+	Obviously, if $\bv y = f(\bv x) \IFF F(\bv x, \bv y)$ then $\Delta_{\bv x} (f(\bv x)) = f(\bv x)$ i.e.\ $f(\bv x)$ is a fix-point of the function $\Delta_{\bv x} (\bv y)$ of $\bv y$ with fixed $\bv x$. 
 	Now we need to prove such fix-point exists.
 
 	The function~$F(\bv x, \bv y)$ is differentiable with respect to $\bv y$ in $W$, so is $\Delta_{\bv x}(\bv y)$:
@@ -2553,6 +2554,212 @@ The proof below would answer.
 	Finally we check if $f \colon U \to V$ is continuous at $\bv x_0$. 
 	For any $\delta' \in (0, \delta)$, we can find another $\zeta' \in (0, \zeta)$ s.t.\ $\|\Delta_{\bv x}(\bv y_0) - \bv y_0\|_Y < \delta' (1 - \varepsilon)$ if $d_X(\bv x, \bv x_0) < \zeta'$, so that $\|\Delta_{\bv x}(\bv y) - \bv y_0\|_Y < \delta'$.
 \end{proof}
+
+\begin{theorem}[Continuity of implicit function]
+	\label{theorem: continuity of implicit function}
+	Let $X$, $Z$ be normed spaces, and $Y$ be a Banach space.
+	$\bv x_0 \in X$, $\bv y_0 \in Y$. Denote
+	\begin{equation*}
+		W := B(\bv x_0; \alpha) \times B(\bv y_0; \beta)\,,
+	\end{equation*}
+	where $\alpha, \beta \in \mathbb R_+$.
+	If $F \in Z^W$ satisfies:
+	\begin{conditionlist}[label=\alph*)]
+		\item $F(\bv x_0, \bv y_0) = \bv 0$;
+		\item $F \in C (W; Z)$; 
+		\item There exists the partial derivative of $F(\bv x, \bv y)$ with respect to $\bv y \in Y$: $\partial_{\bv y} F(\bv x, \bv y)$ in $W$, and $\partial_{\bv y} F$ is continuous at point $(\bv x_0, \bv y_0)$;
+		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible,
+	\end{conditionlist}
+	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in C(U; Y)$ s.t.\ $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
+	\begin{equation*}
+		F(\bv x, \bv y) = \bv 0
+		\IFF
+		f(\bv x) = \bv y\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	By Theorem~\ref{theorem: differential of reversion}, $\|\partial F_{\bv y}(\bv x, \bv y)^{-1}\|$ is continuous in some neighbourhoods. 
+	Hence, the conditions of implicit function theorem are also satisfied in these neighbourhoods.
+\end{proof}
+
+\begin{theorem}[Differentiability of implicit function]
+	\label{theorem: differentiability of implicit function}
+	Let $X$, $Z$ be normed spaces, and $Y$ be a Banach space.
+	$\bv x_0 \in X$, $\bv y_0 \in Y$. Denote
+	\begin{equation*}
+		W := B(\bv x_0; \alpha) \times B(\bv y_0; \beta)\,,
+	\end{equation*}
+	where $\alpha, \beta \in \mathbb R_+$.
+	If $F \in Z^W$ satisfies:
+	\begin{conditionlist}[label=\alph*)]
+		\item $F(\bv x_0, \bv y_0) = \bv 0$;
+		\item $F$ is continuous at $\bv x_0, \bv y_0$; 
+		\item There exist the partial derivatives of $F(\bv x, \bv y)$ with respect to $\bv y \in Y$: $\partial_{\bv y} F(\bv x, \bv y)$ and with respect to $\bv x$: $\partial_{\bv x} F(\bv x, \bv y)$, in $W$, and $\partial_{\bv y} F$, $\partial_{\bv x}(\bv x, \bv y)$ are continuous at point $(\bv x_0, \bv y_0)$;
+		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible,
+	\end{conditionlist}
+	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in V^U$ s.t.\ $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
+	\begin{equation*}
+		F(\bv x, \bv y) = \bv 0
+		\IFF
+		f(\bv x) = \bv y\,,
+	\end{equation*}
+	and, $f$ is differentiable at $\bv x_0$:
+	\begin{equation}
+		\label{equation: differential of implicit function}
+		f'(\bv x_0) = - [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0)\,.
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	Let's vertify that the right-hand side of Eq.~\eqref{equation: differential of implicit function} is the differential of $f$ at $\bv x_0$. 
+	Find a $\bv x + \Delta \bv x$ within $U$%
+		\footnote{notice that $F(\bv x, f(\bv x)) = F(\bv x_0, \bv y_0) = \bv 0$.},
+	\begin{align*}
+		&\big\| f(\bv x_0 + \Delta \bv x) - \bv y_0 
+		+ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x \big\|_Y
+		\\&\qquad
+		= \left\| [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1}
+			\big(
+				\partial_{\bv y} F(\bv x_0, \bv y_0) [f(\bv x_0 + \Delta \bv x) - \bv y_0] 
+				+ \partial_{\bv x} F(\bv x_0, \bv y_0) \Delta \bv x
+			\big)
+		\right\|_Y 
+		\\&\qquad
+		\leq  \| [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \|
+			\big\| \big(
+				\partial_{\bv y} F(\bv x_0, \bv y_0) [f(\bv x_0 + \Delta \bv x) - \bv y_0] 
+				+ \partial_{\bv x} F(\bv x_0, \bv y_0) \Delta \bv x
+			\big) 
+		\\&\qquad\qquad\qquad\qquad\qquad\qquad
+			+ \big( F(\bv x, f(\bv x)) - F(\bv x_0, \bv y_0) \big)
+			\big\|_Y\,.
+	\end{align*}
+
+	Since $F_{\bv x}'$, $F_{\bv y}'$ are continuous at $(\bv x_0, \bv y_0)$, $F$ is differentiable at $(\bv x_0, \bv y_0)$ (Theorem~\ref{theorem: continuously differentiable iff partial differential is continuous}).
+	As $(\bv x_0 + \Delta \bv x, f(\bv x_0 + \Delta \bv x)) \to (\bv x_0, \bv y_0)$:
+	\begin{align*}
+		&\big\| f(\bv x_0 + \Delta \bv x) - \bv y_0 
+		+ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x \big\|_Y
+		\\&\qquad
+		\leq \| [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \|
+		o\big(\Delta \bv x, f(\bv x_0 + \Delta \bv x) - f(\bv x_0) \big)
+		\\&\qquad
+		= \| [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \| o(1) 
+			(\|\Delta \bv x\|_X + \|f(\bv x_0 + \Delta \bv x) - f(\bv x_0)\|_Y)\,.
+	\end{align*}
+
+	However, 
+	\begin{align*}
+		&\|f(\bv x_0 + \Delta \bv x) - f(\bv x_0)\|_Y 
+		\\
+		&\quad
+		= \big\| f(\bv x_0 + \Delta \bv x) - \bv y_0 
+		+ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x 
+			- [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x 
+		\big\|_Y
+		\\
+		&\quad
+		\leq \big\| f(\bv x_0 + \Delta \bv x) - \bv y_0 
+		+ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x \big\|_Y 
+		\\&\qquad\qquad
+		+ \|[\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0)\| 
+			\|\Delta \bv x\|_X\,,
+	\end{align*}
+	hence we have:
+	\begin{align*}
+		&\big\| f(\bv x_0 + \Delta \bv x) - \bv y_0 
+		+ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x \big\|_Y
+		\\&\qquad
+		\leq
+		\| [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \| 
+			\Big[
+				(1 + \|[\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0)\|)\|\Delta \bv x\|_X 
+		\\&\qquad\qquad\qquad\qquad
+				+ \|f(\bv x_0 + \Delta \bv x) - f(\bv x_0) + [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x \big\|_Y \Big] o(1) \,,
+	\end{align*}
+	or,
+	\begin{align*}
+		&\big\| f(\bv x_0 + \Delta \bv x) - \bv y_0 
+		+ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0) 
+			\Delta \bv x \big\|_Y
+		\\&\qquad
+		\leq
+		\frac{\| [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \| (\|[\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0)\| + 1) }
+		{1 - \| [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \| o(1) } o(1) \|\Delta \bv x\|_X\,.
+	\end{align*}
+
+	By the continuity of $f$ at $\bv x_0$, as $\Delta \bv x \to \bv 0$, $o(1) \to 0$ as well, hence we have proved that: 
+	\begin{equation*}
+		f'(\bv x_0) 
+			= -[\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \partial_{\bv x} F(\bv x_0, \bv y_0)\,. 
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}[Continuous differentiability of implicit function]
+	\label{theorem: continuous differentiability of implicit function}
+	Let $X$, $Z$ be normed spaces, and $Y$ be a Banach space.
+	$\bv x_0 \in X$, $\bv y_0 \in Y$. Denote
+	\begin{equation*}
+		W := B(\bv x_0; \alpha) \times B(\bv y_0; \beta)\,,
+	\end{equation*}
+	where $\alpha, \beta \in \mathbb R_+$.
+	If $F \in Z^W$ satisfies:
+	\begin{conditionlist}[label=\alph*)]
+		\item $F(\bv x_0, \bv y_0) = \bv 0$;
+		\item $F \in C^{(1)}(W; Z)$; 
+		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible i.e.\ $\exists [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \in \mathcal B(Z; Y)$ s.t.
+		\begin{equation*}
+			\partial_{\bv y} F(\bv x_0, \bv y_0) \circ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} 
+			= [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \circ \partial_{\bv y} F(\bv x_0, \bv y_0) = \id_Y\,,
+		\end{equation*}
+	\end{conditionlist}
+	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in C^{(1)}(U; Y)$ s.t.\ $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
+	\begin{equation*}
+		F(\bv x, \bv y) = \bv 0
+		\IFF
+		f(\bv x) = \bv y\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	By Theorem~\ref{theorem: continuously differentiable iff partial differential is continuous}, we know $\partial_{\bv x} F$ and $\partial_{\bv y} F$ are continuous in $U$, $V$.
+	By Theorem~\ref{theorem: differential of reversion}, $[\partial_{\bv y} F]^{-1}$ is also continuous, hence $f'(bv x)$, being the composition of continuous mapping (given by Eq.~\ref{equation: differential of implicit function}), is also continuous.
+\end{proof}
+
+Recursively we can prove:
+
+\begin{theorem}[$n$-th continuous differentiability of implicit function]
+	\label{theorem: nth continuous differentiability of implicit function}
+	Let $X$, $Z$ be normed spaces, and $Y$ be a Banach space.
+	$\bv x_0 \in X$, $\bv y_0 \in Y$. Denote
+	\begin{equation*}
+		W := B(\bv x_0; \alpha) \times B(\bv y_0; \beta)\,,
+	\end{equation*}
+	where $\alpha, \beta \in \mathbb R_+$.
+	If $F \in Z^W$ satisfies:
+	\begin{conditionlist}[label=\alph*)]
+		\item $F(\bv x_0, \bv y_0) = \bv 0$;
+		\item $F \in C^{(k)}(W; Z)$; 
+		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible i.e.\ $\exists [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \in \mathcal B(Z; Y)$ s.t.
+		\begin{equation*}
+			\partial_{\bv y} F(\bv x_0, \bv y_0) \circ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} 
+			= [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \circ \partial_{\bv y} F(\bv x_0, \bv y_0) = \id_Y\,,
+		\end{equation*}
+	\end{conditionlist}
+	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in C^{(k)}(U; Y)$ s.t.\ $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
+	\begin{equation*}
+		F(\bv x, \bv y) = \bv 0
+		\IFF
+		f(\bv x) = \bv y\,.
+	\end{equation*}
+\end{theorem}
+
+
 
 \chapter{Integration}
 
