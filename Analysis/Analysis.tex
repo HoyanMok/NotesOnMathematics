@@ -136,7 +136,7 @@
 \pagenumbering{Alph}
 \maketitle % 打印标题
 \frontmatter
-\chapter{preface}
+\chapter{Preface}
 The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/Analysis} .
 
 \tableofcontents
@@ -2525,7 +2525,7 @@ The proof below would answer.
 	
 	By the finite-increment theorem~\ref{theorem: finite-increment theorem}, $\forall \bv y, \bv y' \in B(\bv y_0; \gamma/2)$, 
 	\begin{align*}
-		\|\Delta_{\bv x}(\bv y) - \Delta_{\bv x}(\bv y)\|_Y 
+		\|\Delta_{\bv x}(\bv y') - \Delta_{\bv x}(\bv y)\|_Y 
 			&\leq \sup\{\|\Delta_{\bv x}'(\bv \xi)\| \mid \bv \xi \in [\bv y, \bv y']\}
 				\|\bv y - \bv y'\|_Y
 		\\
@@ -2762,6 +2762,268 @@ Recursively we can prove:
 
 
 \chapter{Integration}
+
+\section{Lebesgue Measure}
+
+We now generalise the concepts of `length', `area' and `volume', that is, we want to \emph{measure} the subset of a normed space.
+
+\begin{definition}[Box]
+	Let $X_i$, $i \in n$ be 1D normed spaces. 
+	The \emphbf{boxes}\index{box}~$I_{\bv a, \bv b}$ in $X := \prod_{i \in n} X_i$, where $\bv a, \bv b \in X$, are defined as:
+	\begin{equation*}
+		I_{\bv a, \bv b} 
+			:= \{\bv x \in X \mid x_i \in  [a_i, b_i],\, \forall i \in n\}\,.
+	\end{equation*}
+\end{definition}
+
+Before our definition of volume of subsets of $X$, we discuss on the volume of boxes. 
+The volume, or, the measure of the boxes shall be like:
+
+\begin{equation}
+	\label{equation: measure of box}
+	\mu(I_{\bv a, \bv b}) = \prod_{i \in n} \|a_i - b_i\|_i
+\end{equation}
+
+If a (countable) collection of boxes are pairwise disjoint i.e.\ in which each two boxes are disjoint, we shall expect their union has a volume:
+\begin{equation*}
+	\mu \left( 
+		\bigcup_{i \in \mathbb N} I_i 
+	 \right) = \sum_{i \in \mathbb N} \mu(I_i)\,,
+\end{equation*}
+where the right hand side could be finite or $\infty$.
+
+If there are a collections of boxes $\{I_i\}_{i \in n}$ that covers the given box $I$, we shall see:
+\begin{equation*}
+	\mu(I) \leq \sum_{i \in n} \mu(I_k)\,.
+\end{equation*}
+
+We shall expect the measue of the subsets of $X$ has the same properties. 
+But we must limit our discussion on \emph{some} subsets of $X$, and we may study the reason in real analysis later.
+
+\begin{definition}[$\sigma$-algebra]
+	Let $\mathscr F \in 2^X$ be a collection of subsets of a set~$X$.
+	If $\mathscr F$ satisfies:
+	\begin{conditionlist}
+		\item $\varnothing \in \mathscr F$;
+		\item $\forall A \in \mathscr F$, $X - A \in \mathscr F$ (closed under complementation);
+		\item $\forall \langle A_i\rangle_{i \in \mathbb N} \in \mathscr F^\mathbb N$, $\bigcup_{i \in \mathbb N} A_i \in \mathscr F$ (closed under counterable unions),
+	\end{conditionlist}
+	then $\mathscr F$ is said to be a \emphbf{$\sigma$-algebra}\index{sigma-algebra@$\sigma$-algebra}.
+\end{definition}
+
+As an example, the $\sigma$-algebra closure of boxes (The intersections of all $\sigma$-algeras containing all boxes) is called the \indexbf{Borel sets}.
+
+\begin{definition}[Measure]
+	Let $\mathscr F$ be a $\sigma$-algebra over $X$, $\mu \in (\{0\} \cup \mathbb R_+)^\mathscr F$. 
+	If the function~$\mu$ satisfies:
+	\begin{conditionlist}
+		\item $\mu(\varnothing) = 0$;
+		\item (Countable additivity) If $\langle A_i\rangle_{i \in \mathbb N} \in \mathscr F^\mathbb N$ are pair wise disjoint, then
+		\begin{equation*}
+			\mu \left( 
+				\bigcup_{i \in \mathbb N} A_i 
+			 \right) = \sum_{i \in \mathbb N} \mu(A_i)\,,
+		\end{equation*}
+	\end{conditionlist}
+		then $\mu$ is called a \indexbf{measure function}.
+
+		The pair $(X, \mathscr F, \mu)$ is called a \indexbf{measurable space}, and the sets in $\mathscr F$ are called \emphbf{measurable sets}\index{measurable set}.
+		The image of a set in $\mathscr F$ under $\mu$ is called the measure of the set.
+	
+\end{definition}
+
+We shall study one of the most import measures: Lebesgue measure. 
+
+\begin{definition}[Lebesgue outer measure]
+	The \indexbf{Lebsgue outer measure}~$\lambda^*$ is a function from $2^X$ to $[0, \infty] \subset \overline{\mathbb R} := \mathbb R \cup \{-\infty, \infty\}$, and is defined as:
+	\begin{equation*}
+		\lambda^*(A) := \inf \left\{
+			\sum_{i \in \mathbb N} \mu(I_i) 
+		\middle|
+			A \subseteq \bigcup_{i \in \mathbb N} I_i 
+		\right\}\,,
+	\end{equation*}
+	where the volume of the boxes~$\mu$ is defined as Eq.~\eqref{equation: measure of box}.
+\end{definition}
+
+\begin{theorem}[Monotone of Lebesgue outer measure]
+	\label{theorem: monotone of Lebesgue outer measure}
+	If $A \subseteq B$, then $\lambda^*(A) \leq \lambda^*(B)$.
+\end{theorem}
+\begin{proof}
+	If $\{I_i\}_{i \in \mathbb N}$ cover $B$, then they must cover $A$.
+\end{proof}
+
+\begin{theorem}[Countable subadditivity of Lebesgue outer measure]
+	\label{theorem: countable subadditivity of Lebesgue outer measure}
+	$\forall \langle A_k \rangle_{k \in \mathbb N} \in (2^X)^\mathbb N$, 
+	\begin{equation*}
+		\lambda^* \left( \bigcup_{k \in \mathbb N} A_k \right)
+		\leq
+		\sum_{k \in \mathbb N} \lambda^*(A_k)\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	$\forall \varepsilon \in \mathbb R_+$, by the definition of infimum, for each $k \in \mathbb N$, find a sequence of boxes~$\langle I^{(k)}_i \rangle_{i \in n}$ that covers $A_k$, and:
+	\begin{equation*}
+		\lambda^*(A_k) + \frac{\varepsilon}{2^k} > \sum_{i \in \mathbb N} \mu(I_i^{(k)})\,.
+	\end{equation*}
+
+	Summing the equation over $k$, we have:
+	\begin{equation*}
+		\sum_{k \in \mathbb N} \sum_{i \in \mathbb N} \mu(I_i^{(k)})
+		\leq \sum_{k \in \mathbb N} \lambda^*(A_k) + \varepsilon\,.
+	\end{equation*}
+
+	As $\langle I^{(k)}_i \rangle_{i, k \in \mathbb N}$ covers $\bigcup_{k \in \mathbb N} A_k$, we have:
+	\begin{equation*}
+		\sum_{k \in \mathbb N} \lambda^*(A_k) + \varepsilon 
+			\geq \sum_{k \in \mathbb N} \sum_{i \in \mathbb N} \mu(I_i^{(k)})
+			\geq \lambda^* \left( 
+				\bigcup_{k \in \mathbb N} A_k
+			 \right)\,.
+	\end{equation*}
+
+	The inequality holds for any positive real number $\varepsilon$, hence:
+	\begin{equation*}
+		\sum_{k \in \mathbb N} \lambda^*(A_k) 
+			\geq \lambda^* \left( 
+				\bigcup_{k \in \mathbb N} A_k
+			 \right)\,.
+	\end{equation*}
+\end{proof}
+
+\begin{definition}[Carath\'eodory criterion]
+	\index{Caratheodory criterion@Carath\'eodory criterion}%
+	If $E \in 2^X$ satisfies that $\forall A \in 2^X$:
+	\begin{equation*}
+		\lambda^*(A) = \lambda^*(A \cap E) + \lambda^*(A  - E)\,,
+	\end{equation*}
+	then we say that $E$ is \indexbf{Lebesgue measurable}, and we can say $\lambda(E) := \lambda^*(E)$.
+\end{definition}
+
+We shall denote the collection of Lebesgue measurable sets in $X$ by $\mathscr F$.
+
+\begin{theorem}[Lebesgue measurable sets is closed under finite unions]
+	\label{theorem: Lebesgue measurable sets is closed under finite unions}
+	Let $E_1$, $E_2$ be two Lebesgue measuable sets. 
+	$E_1 \cup E_2 \in \mathscr F$.
+\end{theorem}
+\begin{proof}
+	$\forall A \in 2^X$, 
+	\begin{align*}
+		\lambda^*(A) 
+			&= \lambda^*(A \cap E_1) + \lambda^*(A - E_1)
+		\\
+			&= \lambda^*(A \cap E_1 \cap E_2) + \lambda^*(A \cap E_1 - E_2)
+		+ \lambda^*((A - E_1) \cap E_2) + \lambda^*(A - E_1 - E_2)\,.
+	\end{align*}
+
+	It is easy to verify that:
+	\begin{equation*}
+		(A \cap E_1 \cap E_2) \cup ((A \cap E_1) - E_2) \cup ((A - E_1) \cap E_2)
+		= A \cap (E_1 \cup E_2)\,,
+	\end{equation*}
+	therefore by Theorem~\ref{theorem: countable subadditivity of Lebesgue outer measure}:
+	\begin{equation*}
+		\lambda^*(A) \geq \lambda^*(A \cap (E_1 \cup E_2)) + \lambda^*(A - (E_1 \cup E_2))\,.
+	\end{equation*}
+
+	But $(A \cap (E_1 \cup E_2)) \cup (A - (E_1 \cup E_2)) = A$, again by Theorem~\ref{theorem: countable subadditivity of Lebesgue outer measure}, the reverse of the inequality holds.
+\end{proof}
+
+\begin{theorem}[Finite additivity of Lebesgue measure]
+	\label{theorem: finite additivity of Lebesgue measure}
+	Let $\langle E_i \rangle_{i \in n} \in \mathscr F^n$ be pairwise disjoint.
+	$\forall A \in 2^X$, 
+	\begin{equation*}
+		\lambda^*\left(A \cap \bigcup_{i \in n} E_i \right)
+		= \sum_{i \in n} \lambda^* (A \cap E_i)\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	We might prove this inductively.
+
+	As $n = 1$, the proposition is trivial. Assume that for $n \in \mathbb N_+$ the proposition holds:
+	\begin{align*}
+		\lambda^*\left( A \cap \bigcup_{i \in n + 1} E_i \right)
+		&= \lambda^*\left( A \cap \bigcup_{i \in n + 1} E_i \cap E_n \right)
+		+  \lambda^*\left( A \cap \bigcup_{i \in n + 1} E_i - E_n \right)
+		\\
+		&= \lambda^*( A \cap E_n ) + \lambda^*\left( A \cap \bigcup_{i \in n} E_i \right)
+		= \sum_{i \in n + 1} \lambda^*(A \cap E_i)\,.
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Lebesgue measurable sets are $\sigma$-algebra]
+	\label{theorem: Lebesgue measurable sets are sigma-algebra}
+	$\mathscr F$ is a $\sigma$-algebra.
+\end{theorem}
+\begin{proof}
+	It is obvious that $\varnothing \in \mathscr F$.
+	Since $A \cap E = A - (X - E)$, $A - E = A \cap (X - E)$, the complement of a Lebesgue measurable set is also Lebesgue measurable.
+
+	For any (convergent) sequence of sets $\langle E_i \rangle_{i \in \mathbb N}$, a pairwise disjoint sequence can be consturcted:
+	\begin{equation*}
+		F_i = E_i - \bigcup_{j \in i} E_j\,,
+	\end{equation*}
+	so that $\bigcup_{i \in n} F_i = \bigcup_{i \in n} E_i$.
+
+	By the monotone of $\lambda^*$ (Theorem~\ref{theorem: monotone of Lebesgue outer measure}):
+	\begin{equation*}
+		\lambda^* \left( A - \bigcup_{i \in n} F_i \right) 
+			\geq \lambda^* \left( A - \bigcup_{i \in \mathbb N} F_i \right)\,.
+	\end{equation*}
+
+	Since $\mathscr F$ is closed under finite unions%
+		(Theorem~\ref{theorem: Lebesgue measurable sets is closed under finite unions}), 
+	$\bigcup_{i \in n} F_i$ is also Lebesgue measurable.
+	Also, $\lambda^*$ is countably subadditive:
+	\begin{align*}
+		\lambda^*(A) 
+		&= \lambda^*\left( A - \bigcup_{i \in n} F_i \right) 
+			+  \lambda^*\left( A \cap \bigcup_{i \in n} F_i \right)
+		\\
+		&\geq  \lambda^* \left( A - \bigcup_{i \in \mathbb N} F_i \right) 
+			+ \sum_{i \in n} \lambda^* (A \cap F_i)\,. 
+	\end{align*}
+
+	Pass $n$ to the infinity, the inequality becomes:
+	\begin{equation*}
+		\lambda^*(A) 
+		\geq  \lambda^* \left( A - \bigcup_{i \in \mathbb N} F_i \right) 
+			+ \sum_{i \in \mathbb N} \lambda^* (A \cap F_i)
+		\geq \lambda^* \left( A - \bigcup_{i \in \mathbb N} F_i \right) 
+		+ \lambda^* \left( A \cap \bigcup_{i \in \mathbb N} F_i \right) \,.
+	\end{equation*}
+
+	The validity of the second `$\leq$' is again by the countable subadditivity of $\lambda^*$.
+\end{proof}
+
+\begin{theorem}[Countable additivity of Lebesgue measure]
+	\label{theorem: countable additivity of Lebesgue measure}
+	If $\langle E_i\rangle_{i \in \mathbb N} \in \mathscr F^\mathbb N$ is pairwise disjoint, then
+	\begin{equation*}
+		\lambda \left( 
+				\bigcup_{i \in \mathbb N} A_i 
+			 \right) = \sum_{i \in \mathbb N} \lambda(A_i)\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	By Theorem~\ref{theorem: finite additivity of Lebesgue measure}, we have:
+	\begin{equation*}
+		\lambda^*\left( \bigcup_{i \in \mathbb N} E_i \right) 
+			\geq \lambda^*\left( \bigcup_{i \in n} E_i \right)
+			= \sum_{i \in n} \lambda^*(E_i)\,.
+	\end{equation*}
+
+	Passing $n \to \infty$, 
+	\begin{equation*}
+		\lambda^*\left( \bigcup_{i \in \mathbb N} E_i \right) 
+			\geq  \sum_{i \in \mathbb N} \lambda^*(E_i)\,,
+	\end{equation*}
+	while the subadditive of $\lambda^*$ yields the reverse.
+\end{proof}
 
 \part{Real Analysis}
 \part{Functional Analysis}
