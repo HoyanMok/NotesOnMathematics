@@ -374,7 +374,7 @@
 
 \begin{theorem}[\indexbf{Cayley定理}]
 	设 $(G, *, e)$ 任意 $n$ 阶有限群. 
-	$\exists H \subset S_0$ s.t.\ $(H, \circ,\id_X)$是$S_n$的子群且 $G \simeq H$. 
+	$\exists H \subset S_n$ s.t.\ $(H, \circ,\id_X)$是$S_n$的子群且 $G \simeq H$. 
 \end{theorem}
 \begin{proof}
 	取$H := \{L_g \mid g \in G\}$, 其中$L_g \colon G \to G; g' \mapsto gg'$可以证明是双射. 那么 $L\colon G \to H; g \mapsto L_g$ 见证了 $H \simeq G$.
@@ -1649,12 +1649,12 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 \begin{definition}[极小多项式]
 	设 $V$ 是域~$\mathbb F$ 上的线性空间, $\mathscr A \in \mathcal L(V)$, $P(X) \in \mathbb F[X]$.
-	如果 $P(\mathscr A) = \mathscr O$, 那么称多项式 $P(X)$ \indexbf{零化}线性算子 $\mathscr A$. 首项系数为 $1$ 的零化 $\mathscr A$ 的最小次数的多项式称为其\indexbf{极小多项式}, 可记为 $\mu_{\mathscr A}(X)$.
+	如果 $P(\mathscr A) = \mathscr O$, 那么称多项式 $P(X)$ \indexbf{零化}线性算子 $\mathscr A$. 首项系数为 $1$ 的零化 $\mathscr A$ 的最小次数的多项式称为其\indexbf{极小多项式}, 可记为 $m_{\mathscr A}(X)$.
 \end{definition}
 
 \begin{theorem}[极小多项式存在]
 	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间. 
-	$\forall \mathscr A \in \mathcal L(V)$, 都存在极小多项式 $\mu_\mathscr A (X)$, 且 $\deg \mu_{\mathscr A} (X) = \dim \mathbb F[\mathscr A]$.
+	$\forall \mathscr A \in \mathcal L(V)$, 都存在极小多项式 $m_\mathscr A (X)$, 且 $\deg m_{\mathscr A} (X) = \dim \mathbb F[\mathscr A]$.
 \end{theorem}
 \begin{proof}
 	考虑到 $\mathbb F[\mathscr A]$ 是 $\mathcal L(V)$ 的子代数, $\dim \mathbb F[\mathscr A] \leq \dim \mathcal L(V)$. 
@@ -1674,11 +1674,11 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \end{proof}
 
 \begin{theorem}[可逆算子与极小多项式的常数项]
-	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$, 其极小多项式是 $\mu_\mathscr A (X)$. 
-	算子~$\mathscr A$ 可逆当且仅当 $\mu_\mathscr A$ 的常数项非零.
+	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$, 其极小多项式是 $m_\mathscr A (X)$. 
+	算子~$\mathscr A$ 可逆当且仅当 $m_\mathscr A$ 的常数项非零.
 \end{theorem}
 \begin{proof}
-	如果极小多项式常数项为 $0$, 即 $\mu_\mathscr A(X) = \sum_{i \in n - \{0\}} p_i X^i$, 那么由线性空间的分配律与方幂的分解,
+	如果极小多项式常数项为 $0$, 即 $m_\mathscr A(X) = \sum_{i \in n - \{0\}} p_i X^i$, 那么由线性空间的分配律与方幂的分解,
 	\begin{equation*}
 		\mathscr A 
 		\left(
@@ -1701,11 +1701,11 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 
 \begin{theorem}[化零算子的多项式是极小多项式的倍式]
 	设 $V$ 是域~$\mathbb F$ 上的线性空间.
-	能零化 $\mathscr A \in \mathcal L (V)$ 的多项式 $P(X) \in \mathbb F[X]$ 一定是 $\mu_\mathscr A (X)$ 的倍式.
+	能零化 $\mathscr A \in \mathcal L (V)$ 的多项式 $P(X) \in \mathbb F[X]$ 一定是 $m_\mathscr A (X)$ 的倍式.
 \end{theorem}
 \begin{proof}
-	作带余除法 $P(X) = Q(X) \mu_\mathscr A(X) + R(X)$, 其中 $\deg R(X) < \deg \mu_\mathscr A(X)$. 
-	如果 $R(X) \neq 0$, 那么 $R(\mathscr A) = P(\mathscr A) - Q(\mathscr A) \mu_\mathscr A(X) = \mathscr O$ 说明 $R(X)$ 是次数比 $\mu_\mathscr A(X)$ 还小的能化零 $\mathscr A$ 的多项式, 这与极小多项式的定义是矛盾的.
+	作带余除法 $P(X) = Q(X) m_\mathscr A(X) + R(X)$, 其中 $\deg R(X) < \deg m_\mathscr A(X)$. 
+	如果 $R(X) \neq 0$, 那么 $R(\mathscr A) = P(\mathscr A) - Q(\mathscr A) m_\mathscr A(X) = \mathscr O$ 说明 $R(X)$ 是次数比 $m_\mathscr A(X)$ 还小的能化零 $\mathscr A$ 的多项式, 这与极小多项式的定义是矛盾的.
 \end{proof}
 
 \begin{definition}[幂零算子]
@@ -1908,22 +1908,51 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 	那么我们称算子~$\mathscr A$ 是\indexbf{可对角化的}.
 \end{definition}
 
-%\begin{theorem}
-%	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$.
-%	倘若 $\mathscr A$ 具有 $n$ 个单谱点, 则 $\mathscr A$ 是可对角化的.
-%\end{theorem}
-%\begin{proof}
-%	谱是单的, 意味着
-%\end{proof}
-
 \begin{theorem}
 	设 $V$ 是域~$\mathbb F$ 上的 $n$~维线性空间, $\mathscr A \in \mathcal L(V)$.
 	当且仅当 \begin{enumerate*}
-		\item $\chi_\mathscr A(X)$ 的所有根都在 $\mathbb F$ 中;
+		\item $\chi_\mathscr A(X)$ 的所有 (以代数重数记的 $n$ 个) 根都在 $\mathbb F$ 中;
 		\item $\forall \lambda \in \Spec \mathscr A$, $\mu_\mathscr A(\lambda) = \gamma_\mathscr A(\lambda)$,
 	\end{enumerate*}
 	线性算子~$\mathscr A$ 可对角化.
 \end{theorem}
+\begin{proof}
+	条件~2 告诉我们, 特征子空间的维数就是对应的代数重数: $E_\mathscr A(\lambda_i) = k_i$, 而且条件~1: $\sum_{i \in m} k_i = n$.
+	那么特征子空间的和 (而且是直和, 由引理~\ref{lemma: 特征子空间之和是直和}):
+	\begin{equation*}
+		\dim \bigoplus_{i \in m} E_\mathscr A(\lambda_i) = \sum_{i \in m}k_i = n,
+	\end{equation*}
+	与 $V$ 的维数相同, 从而也只能是 $V$ 自己. 
+	从 $E_\mathscr A(V)$ 中取出基底, 就能组合出 $V$ 的基底, 使得 $\mathscr A$ 是对角化的.
+
+	反过来, 如果 $\sum_{i \in m} k_i < n$, 或者有一个 $j \in m$, $\dim E_\mathscr A(\lambda_j) \neq k_i$ (或者都是), 那么 $\sum_{i \in m} \dim E_\mathscr A(\lambda_i) < n$. 
+	注意我们用到了定理~\ref{theorem: 几何重数不超过代数重数}.
+\end{proof}
+
+\begin{theorem}[复线性算子有一维不变子空间]
+	$V$ 是 $\mathbb C$ 上的 $n$ 维线性空间, $\mathscr A \in \mathcal L(V)$. 
+	$\mathscr A$ 有一维不变子空间.
+\end{theorem}
+\begin{proof}
+	因为复数域 $\mathbb C$ 是代数封闭的 (定理~\ref{theorem: 代数基本定理}), $\mathscr A$ 一定有对应的特征子空间, 从中取出的一维子空间就是其一维不变子空间.
+\end{proof}
+
+\begin{theorem}[实线性算子有一维或二维不变子空间]
+	$V$ 是 $\mathbb R$ 上的 $n$ 维线性空间, $\mathscr A \in \mathcal L(V)$. 
+	$\mathscr A$ 有一维或二维的不变子空间.
+\end{theorem}
+\begin{proof}
+	考虑 $\mathscr A$ 的极小多项式 $m_\mathscr A(X)$.
+
+	如有 $\alpha \in \mathbb R$ s.t.\ $m_\mathscr A(\alpha) = 0$, 即 $\alpha$ 是 $m_\mathscr A$ 的一个实根: $m_\mathscr A(X) = (X - \alpha) P(X)$, $P(\mathscr A) \neq \mathscr O$.
+
+	那么 $(\mathscr A - \alpha \id_V) P(\mathscr A) \bv u = m_\mathscr A(\mathscr A) \bv u = \bv 0$, 从而 $P(\mathscr A) \bv u \in E_\mathscr A(\alpha)$, $\mathscr A$ 因而就有一维不变子空间.
+
+	如 $m_\mathscr A$ 没有实根, ...% TODO
+\end{proof}
+
+
+
 
 \chapter{内积空间}
 
@@ -2345,7 +2374,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 我们把这样的 $\varPi_t (P) =: P(t)$ 称为 $P$ 在 $X = t$ 时的取值, 或者说用 $t$ 替换 $X$. 当两个多项式不相等时, 它们的值却可能相等. 
 
 \begin{definition}[代数元和超越元]
-	若 $t \in R$ 满足 $\exists P \in A[X]$ s.t.\ $\exists n \in \mathbb N (p_n \neq 0) \wedge P(t) = 0$, 那么 $t$ 是 $A$ 上的一个\indexbf{代数元}.
+	若 $t \in R$ 满足 $\exists P \in A[X]$ s.t.\ $P \neq 0 \wedge P(t) = 0$, 那么 $t$ 是 $A$ 上的一个\indexbf{代数元}.
 	若 $t \in R$ 满足 $\varPi_t$ 是单的, 那么我们称其为 $A$ 上的一个\indexbf{超越元}.
 \end{definition}
 
@@ -2513,7 +2542,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 
 \begin{theorem}[B\'ezout]\label{theorem: Bezout}
 	设 $A$ 是一个整环, $F(X) \in A[X]$, $c \in A$.
-	$X - c \vert F(X) \IFF F(c) = 0$. 
+	$X - c \mid F(X) \IFF F(c) = 0$. 
 \end{theorem}
 \begin{proof}
 	用 $X - c$ 去除 $F(X)$, 得到:
@@ -2557,7 +2586,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	作 $H(X) = F(X) - G(X)$, 注意到 $P$ 中的数都是 $H(X)$ 的零点, 倘若 $H$ 不是零, $\deg H \leq n$ 但是 $H(X)$ 有了 $n + 1$ 个零点, 与推论~\ref{corollary: 重数之和不大于多项式度数} 矛盾.
 \end{proof}
 
-我们把取值函数~$\varPi_t$ (定义如定理~\ref{theorem: 多项式环的泛性}) 的像记为 $\indexmath[A pol]{A_\text{pol}}$, 称为 $A$ 上的\indexbf{多项式函数环}.
+我们把取值函数~$\varPi_t$ (定义如定理~\ref{theorem: 多项式环的泛性}) 和多项式确定的函数 $A \to A; a \mapsto P(a)$的集合记为 $\indexmath[A pol]{A_\text{pol}}$, 称为 $A$ 上的\indexbf{多项式函数环}.
 
 \begin{theorem}
 	设 $A$ 是一个整环, 而且 $\card A = \infty$. 
@@ -2566,6 +2595,18 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 \begin{proof}
 	这个环同构的单性由推论~\ref{corollary: 重数之和不大于多项式度数} 保证, 若其核不是平凡的, 那么存在一个非零多项式有无穷多个根.
 \end{proof}
+
+\begin{definition}[代数封闭]
+	设 $\mathbb F$ 是一个域. 如果 $\mathbb F[X]$ 中每个多项式都能分解成线性因式的乘积, 那么, 我们称 $\mathbb F$ 是\indexbf{代数封闭}的.
+\end{definition}
+
+\begin{theorem}[代数基本定理]\label{theorem: 代数基本定理}
+	$\mathbb C$ 是代数封闭的.
+\end{theorem}
+
+这个命题的证明, 或者需要分析的知识, 或者需要域扩张的知识, 在这里就略去了 (或者择日我再补充).
+
+
 
 \backmatter
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
