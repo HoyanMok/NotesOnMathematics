@@ -1,6 +1,6 @@
 % Used TeXplate:
 % TeXplates/Mathematics.tex
-% v0.1.8
+% v0.1.10
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{book} 
 % \documentclass{ctexbook} 如果用中文
@@ -96,20 +96,19 @@
 \newcommand{\dif}{\mathop{}\!\mathrm{d}} % 微分算子d
 \newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}} % 基底
 \newcommand*{\bv}{\boldsymbol} % 向量加粗
-\newcommand*{\id}{\mathrm{id}} % 单位映射
 \newcommand*{\IFF}{\;\leftrightarrow\;} % 充要条件
 
 \newcommand*{\diff}[3][1]
 {\if#11%
 	\frac{\mathrm{d} #2}{\mathrm{d} #3}% 导数\diff{y}{x}
 \else%
-	\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}% n阶导数\diff[n]{y}{x}
+	\frac{\mathrm{d}^{#1} #2}{\mathrm{d} {#3}^{#1}}% n阶导数\diff[n]{y}{x}
 \fi}
 \newcommand*{\pdiff}[3][1]
 {\if#11%
 	\frac{\partial #2}{\partial #3}% 偏导数\pdiff{y}{x}
 \else%
-	\frac{\partial^{#1} #2}{\partial #3^{#1}}% n阶偏导数\pdiff[n]{y}{x}
+	\frac{\partial^{#1} #2}{\partial {#3}^{#1}}% n阶偏导数\pdiff[n]{y}{x}
 \fi}
 \newcommand{\emphbf}[1]{\emph{\textbf{#1}}}
 % \indexbf 的定义见前imakeidx的引用下
@@ -124,12 +123,19 @@
 \DeclareMathOperator{\ran}{ran}
 \DeclareMathOperator{\interior}{int}
 \DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\id}{id}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
 % 文章标题页信息:
 \title{Analysis}
-\author{ Hoyan Mok\thanks{E-mail: victoriesmo@hotmail.com}
+\author{Hoyan Mok\thanks{E-mail: victoriesmo@hotmail.com}
 }
 \date{\today} % 自动生成日期
 \begin{document}
@@ -147,7 +153,8 @@ The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/mas
 \chapter{Metric Space and Continuous Mapping}
 
 \section{Metric Space}
-\begin{definition}[Metric]\label{definition: metric} A function
+\begin{definition}[Metric]\label{definition: metric} 
+	A function
 	\begin{equation*}
 		d \colon X^2 \to \mathbb R
 	\end{equation*}
@@ -208,6 +215,20 @@ Some examples:
 		\indexmath[B a delta]{B(a; \delta)} = \{x \in X \mid d(a, x) < \delta\}
 	\end{equation*}
 	is then called a \indexbf{ball} with a centre at $a \in X$ and a radius of $\delta$, or a \emphbf{ball} of point $a$.
+\end{definition}
+
+\begin{definition}
+	The \indexbf{diametre} of a set $A \subset X$, is defined as:
+	\begin{equation*}
+		d(A) := \sup \{d(x, y) \mid x, y \in A\}.
+	\end{equation*}
+
+	The distance between a set and a point, and the distance between sets are defined as:\
+	\begin{equation*}
+		d(A, a) := \inf\{d(x, a) \mid x \in A\},
+		\quad
+		d(A, B) := \inf\{d(x, y) \mid x \in A, y \in B\}.
+	\end{equation*}
 \end{definition}
 
 \begin{definition}[Open set]\label{definition: open set (metric)}
@@ -996,6 +1017,15 @@ Then we shall introduce some global properties of continuous mappings.
 		\delta(x'', x_i) \leq \delta(x', x'') + \delta(x', x'') < \delta + \delta(x_i) \leq \delta(x_i)\,,
 	\end{equation*}
 	therefore $x', x'' \in B(x_i; \delta(x_i))$, we have assume that $\omega(f; B(x_i; \delta(x_i)))$.
+\end{proof}
+
+\begin{theorem}[Cantor (generalised)]
+	\label{theorem: generalised Cantor}
+	Let $K$ be a compact set, $f \in \mathbb R^K$.
+	If $\forall x \in K$, $\omega(f, x) \leq \omega_0$, then $\forall \varepsilon \in \mathbb R_+$, $\exists \delta \in \mathbb R_+$ s.t.\ $\forall \bv x \in K$, $\omega(f, B_K(\bv x; \delta)) < \omega_0 + \varepsilon$.
+\end{theorem}
+\begin{proof}
+	We will get the proof if we repeat the prove of Theorem~\ref{theorem: Heine-Cantor}, only to replace $\varepsilon$ in the definition of $\varOmega$ by $\omega_0 + \varepsilon$.
 \end{proof}
 
 \begin{theorem}[Conservation of connectedness]\label{theorem: conservation of connectedness}
@@ -2767,6 +2797,7 @@ Recursively we can prove:
 
 We now generalise the concepts of `length', `area' and `volume', that is, we want to \emph{measure} the subset of a normed space.
 
+
 \begin{definition}[Box]
 	Let $X_i$, $i \in n$ be 1D normed spaces. 
 	The \emphbf{boxes}\index{box}~$I_{\bv a, \bv b}$ in $X := \prod_{i \in n} X_i$, where $\bv a, \bv b \in X$, are defined as:
@@ -2778,7 +2809,6 @@ We now generalise the concepts of `length', `area' and `volume', that is, we wan
 
 Before our definition of volume of subsets of $X$, we discuss on the volume of boxes. 
 The volume, or, the measure of the boxes shall be like:
-
 \begin{equation}
 	\label{equation: measure of box}
 	\mu(I_{\bv a, \bv b}) = \prod_{i \in n} \|a_i - b_i\|_i
@@ -2791,6 +2821,7 @@ If a (countable) collection of boxes are pairwise disjoint i.e.\ in which each t
 	 \right) = \sum_{i \in \mathbb N} \mu(I_i)\,,
 \end{equation*}
 where the right hand side could be finite or $\infty$.
+Moreover, if they have no common interior point pairwisely, the equation still holds.
 
 If there are a collections of boxes $\{I_i\}_{i \in n}$ that covers the given box $I$, we shall see:
 \begin{equation*}
@@ -3025,7 +3056,110 @@ We shall denote the collection of Lebesgue measurable sets in $X$ by $\mathscr F
 	while the subadditive of $\lambda^*$ yields the reverse.
 \end{proof}
 
+\begin{definition}[Measure zero]
+	If a set $E \in 2^X$ is Lebesgue measurable ($E \in \mathscr F$), and its measure is $0$, we say it is a set of (Lebesgue) \indexbf{measure zero}. 
+	In another word, $E$ has measure zero, meaning, $\forall \varepsilon \in \mathbb R_+$, $\exists \langle I_i\rangle_{i \in \mathbb N}$ s.t.\ $E \subset \bigcup_{i \in \mathbb N} I_i$ and $\sum_{i \in \mathbb N} \mu(I_i) < \varepsilon$. 
+	Here $I_i$ are boxes.
+\end{definition}
+
+We can easily conclude that the sets containing only a point is of measure zero.
+
+\begin{theorem}[The countable union of sets of measure zero is also of measure zero]
+	\label{theorem: the countable union of sets of measure zero is also of measure zero}
+	Let $E_k$, $k \in \mathbb N$ be sets of measure zero, then $\bigcup_{k \in \mathbb N} E_k = 0$.
+\end{theorem}
+\begin{proof}
+	For each set $E_k$, find it a cover with boxes that the sum of the measure of the boxes are less than $\varepsilon / 2^k$.
+\end{proof}
+
+\begin{theorem}[The subset of a set of measure zero is also of measure zero]
+	\label{theorem: the subset of a set of measure zero is also of measure zero}
+	Let $E$ be of measure zero, $F \subset E$. $F$ is of measure zero.
+\end{theorem}
+
+\begin{lemma}
+	\label{lemma: zero measure defined by open boxes}
+	$E$ has measure zero iff $\forall \varepsilon \in \mathbb R_+$, $\exists \langle I'_i\rangle_{i \in \mathbb N}$ s.t.\ $E \subset \bigcup_{i \in \mathbb N} I'_i$ and $\sum_{i \in \mathbb N} \mu(I'_i) < \varepsilon$.
+	Here $I'_i$ are open boxes, defined by products of $n$ open intervals. 
+\end{lemma}
+\begin{proof}
+	For any $\varepsilon$ we multiply it by $\lambda^n$ where $\lambda < 1$, the definition yield that we can find a sequence of boxes, the sum of the measure of which is less than $\lambda^n \varepsilon$.
+	We extend the boxes by $\lambda^{-1}$, we see that the interior point of which contain the previous boxes.
+\end{proof}
+
+\begin{theorem}
+	\label{theorem: compact zero measure defined by finite boxes}
+	A compact set~$K$ has measure zero iff $\forall \varepsilon \in \mathbb R_+$, $\exists \langle I_i\rangle_{i \in \mathbb N}$ s.t.\ $E \subset \bigcup_{i \in \mathbb N} I_i$ and $\sum_{i \in \mathbb N} \mu(I_i) < \varepsilon$. 
+\end{theorem}
+\begin{proof}
+	By Lemma~\ref{lemma: zero measure defined by open boxes}, we can find an open cover with measure less than $\varepsilon$ of $E$, and therefore there is a finite subcover. 
+	The measure of the subcover is of course less than that of the cover. 
+\end{proof}
+
+\section{\texorpdfstring{Riemann Integral on $n$-D boxes}{Riemann Integral on n-D boxes}}
+
+Now we introduce the partition of the box: 
+\begin{definition}[Partition of a box]
+	A \indexbf{partition}~$P$ of a box~$I_{\bv a, \bv b}$, is defined as a \emph{finite} collection of boxes which have no common interior point pairwisely, and the union of which is the box itself $I_{\bv a, \bv b}$.
+\end{definition}
+
+\begin{definition}[Mesh]
+	The \indexbf{mash} of a partition $P$ is the maximum diametre of the boxes in $P$:
+	\begin{equation*}
+		\indexmath[lambda(P)]{\lambda(P)} := \max \{d(I') \mid I' \in P\}.
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Distinguished points]
+	The image of a choose function from $P$ to $I$ is the distinguished points of $P$, denoted by $\bv \xi_j \in I_j$, $I_j \in P$, $j \in \card P$. $\bv \xi := (\bv \xi_j)_{j \in \card P}$.
+\end{definition}
+
+All partitions of a box $I$ is denoted by $\mathfrak P(I)$.
+Now define a filter base $\lambda(P) \to 0$, the elements of which are $B_\delta := \{(P, \bv \xi) \in \mathfrak P(I) \mid \lambda(P) < \delta\}$, $\delta \in \mathbb R_+$.
+
+\begin{definition}[Riemann sum]
+	Let $X := \prod_{i \in n} X_i$, $Y$ be normed spaces, where $X_i$ are 1-D spaces.
+	Let $I$ be a box in $X$, $f \in Y^I$, $(P, \bv \xi) \in \mathfrak P(I)$. 
+	$N := \card P$, $P := \{I_j \mid j \in N\}$.
+	The \indexbf{Riemann sum} of $f$ over $P$ with distinguished points $\bv \xi$ is defined as:
+	\begin{equation*}
+		\indexmath[sigma(f, P, xi)]{\sigma(f, P, \bv \xi)} := \sum_{j \in N} f(\bv \xi_j) \mu(I_j).
+	\end{equation*}
+\end{definition}
+
+\begin{definition}{Riemann integral}
+	If the following limit exists, we define:
+	\begin{equation*}
+		\indexmath[int I f(x) dx]{\int\limits_I f(\bv x) \dif \bv x} := \lim_{\lambda(P) \to 0} \sigma(f, P, \bv \xi)
+	\end{equation*}
+	as the \indexbf{Riemann integral} of $f$ on $I$.
+\end{definition}
+
+\begin{definition}[Riemann integrable]
+	If the integral of $f$ in $I$ exists, we call $f$ {Riemann integrable}. The Riemann integrable functions on $I$ is denoted by $\indexmath[R(I)]{\mathfrak R(I)}$.
+\end{definition}
+
+\begin{theorem}[Riemann integrable then bounded]
+	\label{theorem: Riemann integrable then bounded}
+	$f \in \mathfrak R(I) \; \to \; \exists M \in \mathbb R_+ \forall \bv x \in I \,(\|f(\bv x)\|_Y < M)$.
+\end{theorem}
+\begin{proof}
+	If $f$ is not bounded, $\forall M \in \mathbb R_+$ there always exists a $\bv x_j \in I_j \in P$, $\forall \delta \in \mathbb R_+$, even if $\lambda(P) < \delta$, $\sigma(f, P, \bv \xi) \geq \|f(\bv x_j)\| \mu(I_j) > M$.
+\end{proof}
+
+We say a proposition $p(x)$ holds \indexbf{almost everywhere} on $X$, meaning $\exists E \subset X$, s.t.\ $E$ is of measure zero and $\forall x \in (X - E) \big(p (x)\big)$. 
+
+\begin{theorem}[Lebesgue's criterion]
+	Let $f \in \mathbb R^I$, where $I$ is a box.
+	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded in $I$ and $f$ is almost continuous on $I$.
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
 \part{Real Analysis}
+
+
 \part{Functional Analysis}
 \part{Complex Analysis}
 
