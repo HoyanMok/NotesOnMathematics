@@ -2798,23 +2798,23 @@ Recursively we can prove:
 We now generalise the concepts of `length', `area' and `volume', that is, we want to \emph{measure} the subset of a normed space.
 
 
-\begin{definition}[Box]
+\begin{definition}[Cuboid]
 	Let $X_i$, $i \in n$ be 1D normed spaces. 
-	The \emphbf{boxes}\index{box}~$I_{\bv a, \bv b}$ in $X := \prod_{i \in n} X_i$, where $\bv a, \bv b \in X$, are defined as:
+	The \emphbf{cuboids}\index{cuboid}~$I_{\bv a, \bv b}$ in $X := \prod_{i \in n} X_i$, where $\bv a, \bv b \in X$, are defined as:
 	\begin{equation*}
 		I_{\bv a, \bv b} 
 			:= \{\bv x \in X \mid x_i \in  [a_i, b_i],\, \forall i \in n\}\,.
 	\end{equation*}
 \end{definition}
 
-Before our definition of volume of subsets of $X$, we discuss on the volume of boxes. 
-The volume, or, the measure of the boxes shall be like:
+Before our definition of volume of subsets of $X$, we discuss on the volume of cuboids. 
+The volume, or, the measure of the cuboids shall be like:
 \begin{equation}
-	\label{equation: measure of box}
+	\label{equation: measure of cuboid}
 	\mu(I_{\bv a, \bv b}) = \prod_{i \in n} \|a_i - b_i\|_i
 \end{equation}
 
-If a (countable) collection of boxes are pairwise disjoint i.e.\ in which each two boxes are disjoint, we shall expect their union has a volume:
+If a (countable) collection of cuboids are pairwise disjoint i.e.\ in which each two cuboids are disjoint, we shall expect their union has a volume:
 \begin{equation*}
 	\mu \left( 
 		\bigcup_{i \in \mathbb N} I_i 
@@ -2823,7 +2823,7 @@ If a (countable) collection of boxes are pairwise disjoint i.e.\ in which each t
 where the right hand side could be finite or $\infty$.
 Moreover, if they have no common interior point pairwisely, the equation still holds.
 
-If there are a collections of boxes $\{I_i\}_{i \in n}$ that covers the given box $I$, we shall see:
+If there are a collections of cuboids $\{I_i\}_{i \in n}$ that covers the given cuboid $I$, we shall see:
 \begin{equation*}
 	\mu(I) \leq \sum_{i \in n} \mu(I_k)\,.
 \end{equation*}
@@ -2842,7 +2842,7 @@ But we must limit our discussion on \emph{some} subsets of $X$, and we may study
 	then $\mathscr F$ is said to be a \emphbf{$\sigma$-algebra}\index{sigma-algebra@$\sigma$-algebra}.
 \end{definition}
 
-As an example, the $\sigma$-algebra closure of boxes (The intersections of all $\sigma$-algeras containing all boxes) is called the \indexbf{Borel sets}.
+As an example, the $\sigma$-algebra closure of cuboids (The intersections of all $\sigma$-algeras containing all cuboids) is called the \indexbf{Borel sets}.
 
 \begin{definition}[Measure]
 	Let $\mathscr F$ be a $\sigma$-algebra over $X$, $\mu \in (\{0\} \cup \mathbb R_+)^\mathscr F$. 
@@ -2874,7 +2874,7 @@ We shall study one of the most import measures: Lebesgue measure.
 			A \subseteq \bigcup_{i \in \mathbb N} I_i 
 		\right\}\,,
 	\end{equation*}
-	where the volume of the boxes~$\mu$ is defined as Eq.~\eqref{equation: measure of box}.
+	where the volume of the cuboids~$\mu$ is defined as Eq.~\eqref{equation: measure of cuboid}.
 \end{definition}
 
 \begin{theorem}[Monotone of Lebesgue outer measure]
@@ -2895,7 +2895,7 @@ We shall study one of the most import measures: Lebesgue measure.
 	\end{equation*}
 \end{theorem}
 \begin{proof}
-	$\forall \varepsilon \in \mathbb R_+$, by the definition of infimum, for each $k \in \mathbb N$, find a sequence of boxes~$\langle I^{(k)}_i \rangle_{i \in n}$ that covers $A_k$, and:
+	$\forall \varepsilon \in \mathbb R_+$, by the definition of infimum, for each $k \in \mathbb N$, find a sequence of cuboids~$\langle I^{(k)}_i \rangle_{i \in n}$ that covers $A_k$, and:
 	\begin{equation*}
 		\lambda^*(A_k) + \frac{\varepsilon}{2^k} > \sum_{i \in \mathbb N} \mu(I_i^{(k)})\,.
 	\end{equation*}
@@ -3059,7 +3059,7 @@ We shall denote the collection of Lebesgue measurable sets in $X$ by $\mathscr F
 \begin{definition}[Measure zero]
 	If a set $E \in 2^X$ is Lebesgue measurable ($E \in \mathscr F$), and its measure is $0$, we say it is a set of (Lebesgue) \indexbf{measure zero}. 
 	In another word, $E$ has measure zero, meaning, $\forall \varepsilon \in \mathbb R_+$, $\exists \langle I_i\rangle_{i \in \mathbb N}$ s.t.\ $E \subset \bigcup_{i \in \mathbb N} I_i$ and $\sum_{i \in \mathbb N} \mu(I_i) < \varepsilon$. 
-	Here $I_i$ are boxes.
+	Here $I_i$ are cuboids.
 \end{definition}
 
 We can easily conclude that the sets containing only a point is of measure zero.
@@ -3069,7 +3069,7 @@ We can easily conclude that the sets containing only a point is of measure zero.
 	Let $E_k$, $k \in \mathbb N$ be sets of measure zero, then $\bigcup_{k \in \mathbb N} E_k = 0$.
 \end{theorem}
 \begin{proof}
-	For each set $E_k$, find it a cover with boxes that the sum of the measure of the boxes are less than $\varepsilon / 2^k$.
+	For each set $E_k$, find it a cover with cuboids that the sum of the measure of the cuboids are less than $\varepsilon / 2^k$.
 \end{proof}
 
 \begin{theorem}[The subset of a set of measure zero is also of measure zero]
@@ -3078,33 +3078,33 @@ We can easily conclude that the sets containing only a point is of measure zero.
 \end{theorem}
 
 \begin{lemma}
-	\label{lemma: zero measure defined by open boxes}
+	\label{lemma: zero measure defined by open cuboids}
 	$E$ has measure zero iff $\forall \varepsilon \in \mathbb R_+$, $\exists \langle I'_i\rangle_{i \in \mathbb N}$ s.t.\ $E \subset \bigcup_{i \in \mathbb N} I'_i$ and $\sum_{i \in \mathbb N} \mu(I'_i) < \varepsilon$.
-	Here $I'_i$ are open boxes, defined by products of $n$ open intervals. 
+	Here $I'_i$ are open cuboids, defined by products of $n$ open intervals. 
 \end{lemma}
 \begin{proof}
-	For any $\varepsilon$ we multiply it by $\lambda^n$ where $\lambda < 1$, the definition yield that we can find a sequence of boxes, the sum of the measure of which is less than $\lambda^n \varepsilon$.
-	We extend the boxes by $\lambda^{-1}$, we see that the interior point of which contain the previous boxes.
+	For any $\varepsilon$ we multiply it by $\lambda^n$ where $\lambda < 1$, the definition yield that we can find a sequence of cuboids, the sum of the measure of which is less than $\lambda^n \varepsilon$.
+	We extend the cuboids by $\lambda^{-1}$, we see that the interior point of which contain the previous cuboids.
 \end{proof}
 
 \begin{theorem}
-	\label{theorem: compact zero measure defined by finite boxes}
+	\label{theorem: compact zero measure defined by finite cuboids}
 	A compact set~$K$ has measure zero iff $\forall \varepsilon \in \mathbb R_+$, $\exists \langle I_i\rangle_{i \in \mathbb N}$ s.t.\ $E \subset \bigcup_{i \in \mathbb N} I_i$ and $\sum_{i \in \mathbb N} \mu(I_i) < \varepsilon$. 
 \end{theorem}
 \begin{proof}
-	By Lemma~\ref{lemma: zero measure defined by open boxes}, we can find an open cover with measure less than $\varepsilon$ of $E$, and therefore there is a finite subcover. 
+	By Lemma~\ref{lemma: zero measure defined by open cuboids}, we can find an open cover with measure less than $\varepsilon$ of $E$, and therefore there is a finite subcover. 
 	The measure of the subcover is of course less than that of the cover. 
 \end{proof}
 
-\section{\texorpdfstring{Riemann Integral on $n$-D boxes}{Riemann Integral on n-D boxes}}
+\section{\texorpdfstring{Riemann Integral on $n$-D cuboids}{Riemann Integral on n-D cuboids}}
 
-Now we introduce the partition of the box: 
-\begin{definition}[Partition of a box]
-	A \indexbf{partition}~$P$ of a box~$I_{\bv a, \bv b}$, is defined as a \emph{finite} collection of boxes which have no common interior point pairwisely, and the union of which is the box itself $I_{\bv a, \bv b}$.
+Now we introduce the partition of the cuboid: 
+\begin{definition}[Partition of a cuboid]
+	A \indexbf{partition}~$P$ of a cuboid~$I_{\bv a, \bv b}$, is defined as a \emph{finite} collection of cuboids which have no common interior point pairwisely, and the union of which is the cuboid itself $I_{\bv a, \bv b}$.
 \end{definition}
 
 \begin{definition}[Mesh]
-	The \indexbf{mash} of a partition $P$ is the maximum diametre of the boxes in $P$:
+	The \indexbf{mash} of a partition $P$ is the maximum diametre of the cuboids in $P$:
 	\begin{equation*}
 		\indexmath[lambda(P)]{\lambda(P)} := \max \{d(I') \mid I' \in P\}.
 	\end{equation*}
@@ -3114,12 +3114,12 @@ Now we introduce the partition of the box:
 	The image of a choose function from $P$ to $I$ is the distinguished points of $P$, denoted by $\bv \xi_j \in I_j$, $I_j \in P$, $j \in \card P$. $\bv \xi := (\bv \xi_j)_{j \in \card P}$.
 \end{definition}
 
-All partitions of a box $I$ is denoted by $\mathfrak P(I)$.
+All partitions of a cuboid $I$ is denoted by $\mathfrak P(I)$.
 Now define a filter base $\lambda(P) \to 0$, the elements of which are $B_\delta := \{(P, \bv \xi) \in \mathfrak P(I) \mid \lambda(P) < \delta\}$, $\delta \in \mathbb R_+$.
 
 \begin{definition}[Riemann sum]
 	Let $X := \prod_{i \in n} X_i$, $Y$ be normed spaces, where $X_i$ are 1-D spaces.
-	Let $I$ be a box in $X$, $f \in Y^I$, $(P, \bv \xi) \in \mathfrak P(I)$. 
+	Let $I$ be a cuboid in $X$, $f \in Y^I$, $(P, \bv \xi) \in \mathfrak P(I)$. 
 	$N := \card P$, $P := \{I_j \mid j \in N\}$.
 	The \indexbf{Riemann sum} of $f$ over $P$ with distinguished points $\bv \xi$ is defined as:
 	\begin{equation*}
@@ -3147,11 +3147,147 @@ Now define a filter base $\lambda(P) \to 0$, the elements of which are $B_\delta
 	If $f$ is not bounded, $\forall M \in \mathbb R_+$ there always exists a $\bv x_j \in I_j \in P$, $\forall \delta \in \mathbb R_+$, even if $\lambda(P) < \delta$, $\sigma(f, P, \bv \xi) \geq \|f(\bv x_j)\| \mu(I_j) > M$.
 \end{proof}
 
-We say a proposition $p(x)$ holds \indexbf{almost everywhere} on $X$, meaning $\exists E \subset X$, s.t.\ $E$ is of measure zero and $\forall x \in (X - E) \big(p (x)\big)$. 
+We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.e.}\ on $X$, meaning $\exists E \subset X$, s.t.\ $E$ is of measure zero and $\forall \bv x \in (X - E) \big(p (\bv x)\big)$. 
 
 \begin{theorem}[Lebesgue's criterion]
-	Let $f \in \mathbb R^I$, where $I$ is a box.
-	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded in $I$ and $f$ is almost continuous on $I$.
+	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
+	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded in $I$ and $f$ is almoost everywhere continuous on $I$.
+\end{theorem}
+\begin{proof}
+	$\to$: $f \in \mathfrak R(I) \to$ $f$ is bounded on $I$ (Theorem~\ref{theorem: Riemann integrable then bounded}).
+	Denote the discontinuous points of $f$ on $I$ by $E$. In another word, $E = \{\bv x \in I \mid \omega(f; \bv x) > 0\}$.
+
+	Now consider a sequence of sets $E_k := \{x \in I \mid \omega(f; \bv x) \geq 1/k\}$, which is monotone, and limits at $E$: $E = \bigcup_{k \in \mathbb N_+} E_k$.
+
+	If $E$ is not of measure zero, since it is a union of a countable sequence, $\exists k_0 \in \mathbb N_+$, $E_{k_0}$ is not of measure zero.
+
+	Assume that there were a partition $P = \{I_j \mid j \in N\}$ of $I$. Let:
+	\begin{equation*}
+		A = \{I_j \in P \mid I_j \cap E_{k_0} \neq \varnothing \wedge \omega(f; I_i) \geq 1/2k_0\},
+	\end{equation*}
+	and $B = P - A$.
+
+	Now we prove: $E_{k_0} \subset \cup A$. 
+	If a point $\bv x$ of $E_{k_0}$ locates as an interior point in $I_j$, then there exists a neighbourhood of $\bv x$, where the oscillation of $f$ is larger than $1/k_0 - 1/2k_0 = 1/2k_0$
+		\footnote{We take the $\varepsilon = 1/2k_0$ in the definition of oscillation at a point (as a limit)}.
+	
+	Else, if $\bv x$ locates as a boundary point of cuboids in $P$, we denote these cuboids by $C(\bv x) := \{I_j \in P \mid \bv x \in I_j\}$. 
+	If (assuming) $\forall I_j \in C(\bv x)$, $\omega(f; I_j) < 1/2k_0$ (that is, $C(\bv x) \cap A \neq \varnothing$). $\forall \varepsilon \in \mathbb R_+$, $\exists \delta \in \mathbb R_+$ s.t.\ $\forall \bv x_1, \bv x_2 \in B(\bv x; \delta)\subset \cup C(\bv x) $, 
+	\begin{equation*}
+		d(f(\bv x_1), f(\bv x_2)) \leq d(f(\bv x), f(\bv x_1)) + d(f(\bv x), f(\bv x_2)) < \frac{1}{k_0} - \varepsilon.
+	\end{equation*}
+
+	Passing $\delta \to 0$, we have: $\forall \varepsilon$, $\omega(f; \bv x) \leq 1/k_0 - \varepsilon$, or $\omega(f; \bv x) < 1/k_0$, which contradicts with the fact that $\bv x \in E_{k_0}$. Hence: there must be a $I_j \in C(\bv x)$, $\omega(f; I_j) \geq 1/2k_0$, therefore such $I_j \in A$.
+
+	In conclusion, we have proved that $A$ covers $E_{k_0}$. 
+
+	Since $E_{k_0}$, by our assumption, is not of measure zero, then $\exists \varepsilon_0 \in \mathbb R_+$, $\sum_{I_j \in A} \mu(I_j) > \varepsilon_0$. Take two sets of distinguished points $\bv \xi$ and $\bv \xi'$, when they belong to $I_j \in A$, we let $d(f(\bv \xi_j), f(\bv \xi'_j)) > 1/3k_0$
+		\footnote{which is possible, because $\omega(f; I_j) \geq 1/2k_0$.}, and when $I_j \in B$, $\bv \xi_j = \bv \xi'_j$.
+	\begin{equation*}
+		d\big(\sigma(f, P, \bv \xi), \sigma(f, P, \bv \xi')\big) 
+		= \sum_{I_j \in A} \mu(I_j) d(f(\bv \xi_j), f(\bv \xi'_j))
+		> \frac{\varepsilon_0}{3k_0} .
+	\end{equation*}
+
+	By Cauchy's criterion, $\sigma(f, P, \bv \xi)$ would have no limit.
+
+	$\gets$: Let $\varepsilon \in \mathbb R_+$ and $E_\varepsilon = \{\bv x \in I \mid \omega(f; \bv x) \geq \varepsilon\}$. Since $f$ is a.e.\ continuous on $I$, $\mu(E_\varepsilon) = 0$.
+
+	Now we prove that $E_\varepsilon$ is closed. If $\bv x \notin E_\varepsilon$ i.e.\ $\omega(f; \bv x) \leq \varepsilon'$ where $\varepsilon' < \varepsilon$. 
+	By the definition of the oscillation at a point, $\forall \varepsilon'' \in \mathbb R_+$, there exists a ball $B(\bv x; \delta)$ on which $\omega(f, B(\bv x; \delta)) < \varepsilon' + \varepsilon''$. 
+	Let $\varepsilon'' = \varepsilon - \varepsilon'$, and notice that $\omega(f; \bv x') \leq \omega(f, B(\bv x, \delta))$ where $\bv x' \in B(\bv x, \delta)$. 
+	Therefore, $B(\bv x; \delta) \subset I - E_\varepsilon$. 
+	Hence: $E_\varepsilon$ is closed. 
+	
+	Since $E_\varepsilon$ is closed in a compact set~$I$
+		\footnote{Lemma~\ref{lemma: n-dimensional cuboids are compact}}, 
+	we know by Theorem~\ref{theorem: closed subset of compact set} that $E_\varepsilon$ is also compact. 
+	By Theorem~\ref{theorem: compact zero measure defined by finite cuboids} we can find a finite cover $C_1 = \{I_j \mid j \in k\}$ of $E_\varepsilon$ with $\sum_{j \in k} \mu(I_j) < \varepsilon$. Now we extend these cuboids by $\alpha > 1$, $\beta > \alpha$ to get $C_2 = \{\alpha I_j \mid j \in k\}$ and $C_3 = \{\beta I_j \mid j \in k\}$.
+
+	Let $\delta = d\big(\cup C_2, \partial (\cup C_3)\big)$. 
+	Since any point in $\cup C_2$ is an interior point of one of the $\beta I_j$, we claim: $\delta > 0$.
+
+	Let $K = I - (\cup C_2 - \partial (\cup C_2))$. Obviously $K$ is also compact, and $E_\varepsilon \subset I - K$. $\forall \bv x \in K$, since $\bv x \notin E_\varepsilon$, $\omega(f; \bv x) < \varepsilon$.
+
+	By Theorem~\ref{theorem: generalised Cantor}, $\exists \delta' \in \mathbb R_+$, if $\bv x', \bv x'' \in K$ satisfies that $d(\bv x', \bv x'') < \delta'$, $d(f(\bv x'), f(\bv x'')) < 2\varepsilon$. 
+	Let $\delta'' = \min\{\delta, \delta'\}$.
+
+	Assume that there were two partitions $P, P' \in \mathfrak P(I)$ s.t.\ $\lambda(P) < \delta''$, $\lambda(P') < \delta''$. Let $P'' := \{I''_{jj'} := I_j \cap I'_{j'} \mid I_j \in P \wedge I'_{j'} \in P'\}$.
+
+	\begin{align*}
+		d\big(\sigma(f, P, \bv \xi), \sigma(f, P'', \bv \xi'')\big)
+			&= d\left( 
+				\sum_{j \in N} \sum_{j' \in N'} f(\bv \xi_j) \mu(I''_{jj'}), \sum_{j' \in N'}\sum_{j \in N} f(\bv \xi''_{jj'}) \mu(I''_{jj'})
+			 \right)
+		\\
+		&\leq \sum_{j \in N} \sum_{j' \in N'} d\big(f(\bv \xi_j), f(\bv \xi''_{jj'})\big) 
+			\mu(I''_{jj'}).
+	\end{align*}
+
+	Now we divide $P''$ into two parts: $A := \{I''_{jj'} \in P'' \mid I_j \subset \cup C_3\}$, $B = P'' - A$. 
+	We shall see $\cup B \subset K$: if there were a cuboid $I_j$ in $P$ s.t.\ $I_j \cap (I - \cup C_3) \neq \varnothing$, since $\lambda(I_j) < \delta'' \leq \delta$, there is no way that $I_j \cap \cup C_2 \neq \varnothing$.
+
+	We assume the function $f$ to be bounded, let $2M \geq \sup \{d(f(\bv x), f(\bv x')) \mid \bv x, \bv x' \in I\}$.
+
+	Therefore:
+	\begin{align*}
+		d\big(\sigma(f, P, \bv \xi), \sigma(f, P'', \bv \xi'')\big)
+		&\leq \sum_{I''_{jj'} \in A} d\big(f(\bv \xi_j), f(\bv \xi''_{jj'})\big) \mu(I''_{jj'})
+			+ \sum_{I''_{jj'} \in B} d\big(f(\bv \xi_j), f(\bv \xi''_{jj'})\big) \mu(I''_{jj'})
+		\\
+		&<  2 M \sum_{I''_{jj'} \in A} \mu(I''_{jj'}) + \varepsilon \sum_{I''_{jj'} \in B} \mu(I''_{jj'})
+		\\
+		&\leq 2M \cdot \beta^n \varepsilon + \varepsilon \mu(I)
+		=  ( 2M \cdot \beta^n + \mu(I)) \varepsilon.
+	\end{align*}
+
+	Similarly we have $d\big(\sigma(f, P', \bv \xi'), \sigma(f, P'', \bv \xi'')\big) < ( 2M \cdot \beta^n + \mu(I)) \varepsilon$, then by triangle inequality:
+	\begin{equation*}
+		d\big(\sigma(f, P, \bv \xi), \sigma(f, P', \bv \xi')\big) < 2( 2M \cdot \beta^n + \mu(I)) \varepsilon.
+	\end{equation*}
+
+	Therefore, $f \in \mathfrak R(I)$.
+\end{proof}
+
+\begin{definition}[Darboux sum]
+	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
+	$P = \{I_j \mid j \in N\} \in \mathfrak P(I)$, the \indexbf{Darboux lower sum} and the \indexbf{Darboux upper sum} is defined as:
+	\begin{equation*}
+		\indexmath[s(f, P)]{s(f, P)} = \sum_{I_j \in P} \mu(I_j) \inf\{f(\bv x) \mid \bv x \in I_j\},
+		\quad
+		\indexmath[S(f, P)]{S(f, P)} = \sum_{I_j \in P} \mu(I_j) \sup\{f(\bv x) \mid \bv x \in I_j\}.
+	\end{equation*}
+\end{definition}
+
+\begin{lemma}
+	\label{lemma: Darboux sum}
+	$\forall P, P' \in \mathfrak P(I)$, $s(f, P) \leq S(f, P')$.
+\end{lemma}
+\begin{proof}
+	Let $P'' := \{I_j \cap I'_j \mid I_{j'} \in P \wedge I'_{j'} \in P'\}$, we have:
+	\begin{equation*}
+		s(f, P) \leq s(f, P'') \leq S(f, P'') \leq S(f, P').
+	\end{equation*}
+\end{proof}
+
+\begin{definition}[Darboux integrals]
+	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
+	The \indexbf{lower Darboux integral} and the \indexbf{upper Darboux integral} are defined as:
+	\begin{equation*}
+		\indexmath[underline I]{\underline{\mathfrak I}} := \sup \{s(f, P) \mid P \in \mathfrak P\},
+		\quad
+		\indexmath[overline I]{\overline{\mathfrak I}} := \inf \{S(f, P) \mid P \in \mathfrak P\}.
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Darboux theorem]
+	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
+	If $f$ is bounded on $I$, then the limits of Darboux sums exist (as $\lambda(P) \to 0$):
+	\begin{equation*}
+		\underline{\mathfrak I} = \lim_{\lambda(P) \to 0} s(f, P),
+		\quad
+		\overline{\mathfrak I} = \lim_{\lambda(P) \to 0} S(f, P).
+	\end{equation*}
 \end{theorem}
 \begin{proof}
 	
