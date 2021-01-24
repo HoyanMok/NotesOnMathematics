@@ -241,7 +241,7 @@ Some examples:
 	$X - F$ is an open set in $(X, d)$.
 \end{definition}
 
-A \indexbf{closed ball}~$\indexmath[overline B x delta]{\overline B(X, \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X, d)$.
+A \indexbf{closed ball}~$\indexmath[tilde B x delta]{\tilde B(X, \delta)} := \{x \in X \mid d(a, x) \leq r \}$ is an example of closed sets in $(X, d)$.
 
 \begin{proposition}\label{proposition: open sets (metric)}
 	\begin{conditionlist}[label=\alph*)]
@@ -2882,7 +2882,7 @@ We shall study one of the most import measures: Lebesgue measure.
 	If $A \subseteq B$, then $\lambda^*(A) \leq \lambda^*(B)$.
 \end{theorem}
 \begin{proof}
-	If $\{I_i\}_{i \in \mathbb N}$ cover $B$, then they must cover $A$.
+	If $\{I_i\}_{i \in \mathbb N}$ covers $B$, then they must cover $A$.
 \end{proof}
 
 \begin{theorem}[Countable subadditivity of Lebesgue outer measure]
@@ -3151,7 +3151,7 @@ We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.
 
 \begin{theorem}[Lebesgue's criterion]
 	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
-	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded in $I$ and $f$ is almoost everywhere continuous on $I$.
+	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded in $I$ and $f$ is almost everywhere continuous on $I$.
 \end{theorem}
 \begin{proof}
 	$\to$: $f \in \mathfrak R(I) \to$ $f$ is bounded on $I$ (Theorem~\ref{theorem: Riemann integrable then bounded}).
@@ -3281,6 +3281,7 @@ We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.
 \end{definition}
 
 \begin{theorem}[Darboux theorem]
+	\label{theorem: Darboux}
 	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
 	If $f$ is bounded on $I$, then the limits of Darboux sums exist (as $\lambda(P) \to 0$):
 	\begin{equation*}
@@ -3290,8 +3291,65 @@ We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.
 	\end{equation*}
 \end{theorem}
 \begin{proof}
-	
+	We will only prove the lower Darboux theorem.
+
+	$\forall \varepsilon \in \mathbb R_+$, $\exists P_\varepsilon \in \mathfrak P(I)$ s.t.\ $s(f, P_\varepsilon) > \underline{\mathfrak I} - \varepsilon$.
+	Let $\varGamma_\varepsilon := \bigcup_{I_j \in P_\varepsilon} \partial I_j$.
+	Obviously, $\lambda(\varGamma_\varepsilon) = 0$.
+
+	We claim that: $\exists \delta \in \mathbb R_+$ s.t.\ $\forall P \in \mathfrak P$, if $\lambda(P) < \delta$, then
+	\begin{equation*}
+		\sum_{\substack{I_j \in P;\\ I_j \cap \varGamma_\varepsilon \neq \varnothing}} \mu(I_j) < \varepsilon.
+	\end{equation*}
+	This can be proved by assuming the opposite, then there exists a lower bound (that is non-zero) for the sum of the measure of the cuboids that covers $\varGamma_\varepsilon$, which contradicts with the fact that $\lambda(\varGamma_\varepsilon) = 0$.
+
+	Now let $P' := \{I_j \cap J_{j'} \mid I_j \in P_\varepsilon \wedge J_{j'} \in P\}$, we can see:
+	\begin{equation*}
+		\underline{\mathfrak I} - \varepsilon < s(f, P_\varepsilon) \leq s(f, P') \leq \underline{\mathfrak I}.
+	\end{equation*}
+
+	\begin{align*}
+		&|s(f, P') - s(f, P)| 
+		\\
+		&= \left|
+			\sum_{\substack{J_{j'} \in P,\\ J_{j'} \cap \varGamma_\varepsilon \neq \varnothing}}
+				\left(
+					\sum_{I_j \in P_\varepsilon} \inf\{f(\bv x)\mid \bv x \in J_{j'} \cap I_j\} \mu(J_{j'} \cap I_j)
+					-
+					\inf\{f(\bv x)\mid \bv x \in J_{j'}\} \mu(J_{j'})
+				\right)
+		\right|
+		\\
+		&\leq M \left|
+		\sum_{\substack{J_{j'} \in P,\\ J_{j'} \cap \varGamma_\varepsilon \neq \varnothing}}
+			\left(
+				\sum_{I_j \in P_\varepsilon} \mu(J_{j'} \cap I_j)
+				+ \mu(J_{j'})
+			\right)
+		\right|
+		= 2M \sum_{\substack{J_{j'} \in P,\\ J_{j'} \cap \varGamma_\varepsilon \neq \varnothing}}\mu(J_{j'}) < 2M \varepsilon.
+	\end{align*}
+
+	Hence: $s(f, P') > s(f, P) - 2M \varepsilon > \underline{\mathfrak I} - \varepsilon$, or, $\underline{\mathfrak I} \geq s(f, P) > (2M + 1)\underline{\mathfrak I} - \varepsilon$. 
+	Therefore:
+	\begin{equation*}
+		\lim_{\lambda(P) \to 0} s(f, P) = \underline{\mathfrak I}.
+	\end{equation*}
 \end{proof}
+
+\begin{theorem}[Darboux criterion]
+	\label{theorem: Darboux criterion}
+	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
+	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded on $I$, and $\underline{\mathfrak I} = \overline{\mathfrak I}$.
+\end{theorem}
+\begin{proof}
+	$\to$: If $f \in \mathfrak R(I)$, $f$ is bounded (Theorem~\ref{theorem: Riemann integrable then bounded}), then both upper integral and lower integral exists. 
+	As $\lambda(P) \to 0$, the infimum and supremum of Riemann sums must converge to the Riemann integral itself.
+
+	$\gets$: We only need to notice that $s(f, P) \leq \sigma(f, P, \bv \xi) \leq S(f, P)$.
+\end{proof}
+
+\section{Riemann Integral on Jordan Measurable sets}
 
 \part{Real Analysis}
 
