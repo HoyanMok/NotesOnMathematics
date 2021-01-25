@@ -383,6 +383,8 @@ we call $f$ define a \indexbf{germ} at point $a$, denoted by $f_a$.
 If $f \in C(\mathbb R; \mathbb R)$ is defined in $U(a)$, then we can call $\{f_x \mid x \in U(a)\}$ a neighbourhood of germ $f_a$. 
 Class of neighbourhoods of each $f_x$ constructs a base of topological space $(C(\mathbb R; \mathbb R); \mathscr T)$, where $\mathscr T$ is made of the sets of germs of continuous function in $C(\mathbb R; \mathbb R)$.
 
+
+
 \begin{definition}[Hausdorff space]\label{definition: Hausdorff space}
 	We call a topological space $(X, \mathscr T)$ a \indexbf{Hausdorff space}, \indexbf{separated space} or \indexbf{$\mathrm T_2$ space}, if $\forall x,y \in X$, $x \neq y \to \big( \exists U(x), U(y)$ s.t.\ $U(x) \cap U(y) = \varnothing \big)$%
 		\footnote{This definition is also called \indexbf{Hausdorff axiom} or \indexbf{separation axiom}. }%
@@ -2811,7 +2813,7 @@ Before our definition of volume of subsets of $X$, we discuss on the volume of c
 The volume, or, the measure of the cuboids shall be like:
 \begin{equation}
 	\label{equation: measure of cuboid}
-	\mu(I_{\bv a, \bv b}) = \prod_{i \in n} \|a_i - b_i\|_i
+	\indexmath[mu(I(a, b))]{\mu(I_{\bv a, \bv b})} = \prod_{i \in n} \|a_i - b_i\|_i
 \end{equation}
 
 If a (countable) collection of cuboids are pairwise disjoint i.e.\ in which each two cuboids are disjoint, we shall expect their union has a volume:
@@ -3096,7 +3098,7 @@ We can easily conclude that the sets containing only a point is of measure zero.
 	The measure of the subcover is of course less than that of the cover. 
 \end{proof}
 
-\section{\texorpdfstring{Riemann Integral on $n$-D cuboids}{Riemann Integral on n-D cuboids}}
+\section{\texorpdfstring{Riemann Integral over $n$-D cuboids}{Riemann Integral over n-D cuboids}}
 
 Now we introduce the partition of the cuboid: 
 \begin{definition}[Partition of a cuboid]
@@ -3104,7 +3106,7 @@ Now we introduce the partition of the cuboid:
 \end{definition}
 
 \begin{definition}[Mesh]
-	The \indexbf{mash} of a partition $P$ is the maximum diametre of the cuboids in $P$:
+	The \indexbf{mesh} of a partition $P$ is the maximum diametre of the cuboids in $P$:
 	\begin{equation*}
 		\indexmath[lambda(P)]{\lambda(P)} := \max \{d(I') \mid I' \in P\}.
 	\end{equation*}
@@ -3150,6 +3152,7 @@ Now define a filter base $\lambda(P) \to 0$, the elements of which are $B_\delta
 We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.e.}\ on $X$, meaning $\exists E \subset X$, s.t.\ $E$ is of measure zero and $\forall \bv x \in (X - E) \big(p (\bv x)\big)$. 
 
 \begin{theorem}[Lebesgue's criterion]
+	\label{theorem: Lebesgue's criterion}
 	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
 	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded in $I$ and $f$ is almost everywhere continuous on $I$.
 \end{theorem}
@@ -3337,8 +3340,8 @@ We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.
 	\end{equation*}
 \end{proof}
 
-\begin{theorem}[Darboux criterion]
-	\label{theorem: Darboux criterion}
+\begin{theorem}[Darboux's criterion]
+	\label{theorem: Darboux's criterion}
 	Let $f \in \mathbb R^I$, where $I$ is a cuboid in a $n$-D space.
 	$f \in \mathfrak R(I)$ $\IFF$ $f$ is bounded on $I$, and $\underline{\mathfrak I} = \overline{\mathfrak I}$.
 \end{theorem}
@@ -3349,7 +3352,120 @@ We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.
 	$\gets$: We only need to notice that $s(f, P) \leq \sigma(f, P, \bv \xi) \leq S(f, P)$.
 \end{proof}
 
-\section{Riemann Integral on Jordan Measurable sets}
+\section{Riemann Integral over Jordan Measurable sets}
+
+\begin{definition}[Jordan Measurable]
+	A set $E$ in a $n$-D normed space $X$ is said to be \indexbf{Jordan measurable} if it is bounded, and its boundary $\partial E$ is of measure zero.
+\end{definition}
+
+In fact, Jordan measurable set is not a $\sigma$-algeba. 
+For example, sets of a single points in $\mathbb R^n$ is Jordan measurable, but their countable union $\mathbb Q^n \cap [0, 1]^n$ is not Jordan measurable.
+
+\begin{lemma}[Jordan measurable sets is closed under finite union, finite intersection and difference]
+	\label{lemma: Jordan measurable sets is closed under finite union, finite intersection and difference}
+	If $A$, $B$ are two Jordan measurable sets, $A \cap B$, $A \cup B$, $A - B$ are also Jordan measurable.
+\end{lemma}
+\begin{proof}
+	Only to notice that $\partial(A \cup B) \subset \partial A \cup \partial B$, $\partial(A \cap B) \subset \partial A \cup \partial B$, $\partial(A - B) \subset \partial A \cup \partial B$.
+\end{proof}
+
+\begin{definition}[Characteristic function]
+	Let $E$ be a set in a $n$-D normed space $X$, $\chi_E \in X \to 2$ is defined as:
+	\begin{equation*}
+		\chi_E(\bv x) := \begin{cases}
+			1 & \bv x \in E,
+			\\
+			0 & \bv x \notin E.
+		\end{cases}
+	\end{equation*}
+\end{definition}
+
+If a function $f$ is defined on $E$, and $E \subset I$ where $I$ is a cuboid. 
+By default, we assign any values to $f(\bv x)$ when $\bv x \in I - E$, so that $\chi_E(\bv x) f(\bv x)$ is considered equal to $f(\bv x)$ when $\bv x \in E$, $\chi_E(\bv x) f(\bv x)$ is zero when $\bv x \notin E$. 
+We might denote the function $\bv x \mapsto \chi_E(\bv x) f(\bv x)$ by $\chi_E f$.
+
+\begin{lemma}
+	Let $f \in Y^E$ where $E$ is a set in $n$-D normed space $X$ and $Y$ is a normed space.
+	$E \subset I' \cap I''$ where $I'$ and $I''$ are cuboids in $X$. 
+	If $\chi_E \cdot f|_I \in \mathfrak R(I)$, then $\chi_E \cdot f|_{I'} \in \mathfrak R(I')$, and
+	\begin{equation*}
+		\int\limits_{I} \chi_E(\bv x) f(\bv x) \dif \bv x,
+			= \int\limits_{I'} \chi_E(\bv x) f(\bv x) \dif \bv x.
+	\end{equation*} 
+\end{lemma}
+\begin{proof}
+	Let $I = I' \cap I''$. 
+
+	Since all discontinuous points of $\chi_E f$ are contained in $E \cup \partial E = \overline{E}\subset I$\footnote{The closure of $E$ is the smallest closed set that contain $E$.}, therefore, by Lebesgue's criterion~\ref{theorem: Lebesgue's criterion} if $\chi_E f$ is Riemann integrable in either all of or none of $I$, $I'$ and $I''$.
+
+	If the integrals exist, we choose partitions such that $P \in \mathfrak P(I)$ is a subset of $P' \in \mathfrak P(I')$. Passing $\lambda(P') \to 0$, we can prove the equality.
+\end{proof}
+
+\begin{definition}[Riemann integrals over a set]
+	Let $f \in Y^E$ where $E$ is a bounded set in $n$-D normed space $X$ and $Y$ is a normed space.
+	The Riemann integral of $f$ over $E$ is defined as:
+	\begin{equation*}
+		\int\limits_E f(\bv x) \dif \bv x := \int\limits_I \chi_E(\bv x) f(\bv x) \dif \bv x,
+	\end{equation*}
+	where $I$ is a arbitary cuboid that contains $E$.
+\end{definition}
+
+\begin{theorem}[Lebesgue's criterion over a set]
+	\label{Lebesgue's criterion over a set}
+	Let $f \in \mathbb R^E$, where $E$ is a Jordan measurable set in a $n$-D space.
+	$f \in \mathfrak R(E)$ $\IFF$ $f$ is bounded in $E$ and $f$ is almost everywhere continuous on $E$.
+\end{theorem}
+\begin{proof}
+	The Lebesgue's criterion over a cuboid~\ref{theorem: Lebesgue's criterion} and the definition of Jordan measurable set.
+\end{proof}
+
+The definition of Darboux integrals and the Darboux's criterion can be generalised to Riemann integrals over a bounded set. We might denote the Darboux lower and upper integrals by:
+\begin{equation*}
+	\indexmath[overline int E f(x) dx]{\overline{\int\limits_E} f(\bv x) \dif \bv x},
+	\quad
+	\indexmath[underline int E f(x) dx]{\underline{\int\limits_E} f(\bv x) \dif \bv x}.
+\end{equation*}
+
+\begin{definition}[Jordan content]
+	Let $E$ be a Jordan measurable set. The \indexbf{Jordan content} or the \indexbf{Jordan measure}
+		\footnote{Though Jordan content is not a measure.}
+	is defined as: 
+	\begin{equation*}
+		\indexmath[mu E]{\mu(E)} := \int\limits_E 1 \dif \bv x.
+	\end{equation*}
+\end{definition}
+
+We might call the Jordan content of a set the content, the area or the volume of it.
+
+\begin{definition}[Zero content]
+	A set $E$ is said to be of \indexbf{zero content}, if it is Jordan measurable, and $\mu(E) = 0$.
+\end{definition}
+
+A set of zero content must be of zero measure.
+
+\begin{theorem}
+	A set $E$ is of zero content, iff $\forall \varepsilon \in \mathbb R_+$, $\exists \langle I_j\rangle_{j \in N}$ s.t.\ 
+	\begin{equation*}
+		E \subset \bigcup_{j \in N} I_j, \quad
+		\sum_{j \in N} \mu(I_j) < \varepsilon.
+	\end{equation*}
+\end{theorem}
+
+\section{Properties of Riemann Integrals}
+
+\begin{theorem}[Integrals are linear operators]
+	Let $E$ be a bounded set in an $n$-D normed space $X$, $\mathfrak R(E)$ is a linear space, and $\int_E \dif \bv x \colon \mathfrak R(E) \to Y$ is a linear operator.
+\end{theorem}
+
+\begin{theorem}
+	If a Riemann integrable function $f \in \mathfrak R(E)$ is a.e. zero over $E$, $\int_E f(\bv x) \dif \bv x = 0$.
+\end{theorem}
+\begin{proof}
+	Choosing distinguished point $\bv \xi$ such that $f(\bv \xi_j) = 0$, the Riemann sum $\sigma(f, P, \bv \xi)$ must be zero, therefore limits to zero as $\lambda(P) \to 0$.
+\end{proof}
+
+We can define a equivalence relation $\sim$ on $\mathfrak R(E)$, so that $f \sim g$ as long as $f(\bv x) = g(\bv x)$ a.e.\ in $E$, which induces a equivalence class $\tilde{\mathfrak R}(E)$. 
+$\tilde{\mathfrak R}(E)$ is also a linear space, $\int_E \dif \bv x$ is also a linear operators from $\tilde{\mathfrak R}(E)$.
 
 \part{Real Analysis}
 
