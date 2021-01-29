@@ -9,7 +9,7 @@
 
 \usepackage{xpatch}
 
-\ExplSyntaxOn
+\ExplSyntaxOn{}
 \xpatchcmd \fontspec_new_script:nn
 	{ \__fontspec_warning:nxx }
 	{ \__fontspec_info:nxx }
@@ -191,7 +191,7 @@
 
 \tableofcontents
 
-\mainmatter
+\mainmatter{}
 \part{线性代数}
 \chapter{群. 环. 域}
 \section{代数运算}
@@ -279,7 +279,7 @@
 	\item $x \in G' \to x^{-1} \in G'$,
 \end{conditionlist}
 则称$(G', \cdot , e)$是一个$G$的\indexbf{子群}.
-倘若还有$G' \neq G$则称其为一个\indexbf{真子群}\footnote{\cite{kostrikin1982introduction}等文献把\indexbf{平凡群}$\{e\}$也排在真子群的定义外.}.
+倘若还有$G' \neq G$则称其为一个\indexbf{真子群}\footnote{\cite{kostrikin1982introduction}等文献把\indexbf{平凡群} $\{e\}$ 也排在真子群的定义外.}.
 
 \begin{theorem}
 	非空的 $G'$ 是群 $(G, \cdot, 1)$ 的子群 $\IFF$ $\forall x,y \in G' (xy^{-1} \in G')$.
@@ -288,7 +288,7 @@
 	根据子群的定义, $\to$ 是显然的, 下给出 $\gets$ 的证明:
 	\begin{conditionlist}[label=SG\arabic*)]
 		\item $\forall x \in G' (x x^{-1} = 1 \in G)$;
-		\item $\forall x,y\in G'$, $x1^{-1} {1y^{-1}}^{-1} = xy \in G'$;
+		\item $\forall x,y\in G'$, $x1^{-1} (1y^{-1})^{-1} = xy \in G'$;
 		\item $\forall x \in G'$, $1x^{-1} = x^{-1} \in G'$.
 	\end{conditionlist}
 \end{proof}
@@ -298,7 +298,7 @@
 	群 $G$ 的子群族 $\mathscr H = \{H \mid \text{$H$ 是 $G$ 的子群}\}$ 的交 $\cap \mathscr H$ 也是 $G$ 的子群.
 \end{lemma}
 
-设 $G$ 有子集 $S$ , 我们说群 $(G, \cdot, 1)$ 是由 $S$ 生成的, 意思是说 $G$ 没有包含 $S$ 的真子群. 记为$G = \indexmath[S]{%
+设 $G$ 有子集 $S$, 我们说群 $(G, \cdot, 1)$ 是由 $S$ 生成的, 意思是说 $G$ 没有包含 $S$ 的真子群. 记为$G = \indexmath[S]{%
 	\langle S\rangle}$.
 \begin{theorem}
 	$\langle S \rangle = \left\{
@@ -325,8 +325,8 @@
 \end{definition}
 
 对于群 $G$ 中任意元素 $g$, 我们称 $\card \langle g \rangle$ 为元 $g$ 的\indexbf{阶数}, 或称 $g$ 为 \emphbf{$n$~阶元}%
-	\index{n阶元@$n$~阶元}%
-	. 而且它将满足:
+	\index{n阶元@$n$~阶元}. 
+	而且它将满足:
 \begin{theorem}
 	任意群 $G$ 中若有 $q \in \mathbb Z$ 阶元 $g$, 则 $\langle g \rangle = \{e, g, \dots, g^{q-1}\}$, 且:
 	\begin{equation}
@@ -539,7 +539,7 @@
 
 也有将无非平凡左零因子的带单位的非平凡环称为 \indexbf{domain} 的.
 
-\begin{theorem}[消去律] \label{theorem: 消去律}
+\begin{theorem}[消去律]\label{theorem: 消去律}
 	设 $R$ 是带单位元 $1 \neq 0$ 的交换环.
 	环 $R$ 是整环 $\IFF$ $\forall x,y,c \in R$, $cx = cy \wedge c\neq 0  \;\to\; x = y$.
 \end{theorem}
@@ -571,8 +571,7 @@
 
 \begin{definition}[正则元]
 	整环~$R$ 的可逆元 ($U(R)$ 之元素) 被称为\indexbf{正则元} (unit%
-		\footnote{为避免混淆, 通常称单位元~$1$ 为 identity}%
-	). 
+		\footnote{为避免混淆, 通常称单位元~$1$ 为 identity}). 
 \end{definition}
 
 对于整数环~$\mathbb Z$, 正则元只有单位元~$1$ 和它的相反数 $-1$.
@@ -647,7 +646,7 @@
 		ab = u_{ab}\prod_{i \in r_a} a_i \prod_{j \in r_b} b_j = u_c p \prod_{k \in r_c} c_k \,,
 	\end{equation*}
 	其中 $u_{ab}, u_c \in U(R)$, $a_i, b_j, c_k$ 都是素元. 
-	由唯一分解整环的定义, $\exists p' \in \{a_i\}_{i \in r_a} \cup \{b_j\}_{j \in r_b}$ s.t.\ $p'$ 与 $p$ 相伴, 那么 $p' = u_p p$, 从而 $a$ 或 $b$ 必能表成 $p$ 的倍(将与 $p$ 相伴的素因子换成 $u_p$ 即可).
+	由唯一分解整环的定义, $\exists p' \in \{a_i\}_{i \in r_a} \cup \{b_j\}_{j \in r_b}$ s.t.\ $p'$ 与 $p$ 相伴, 那么 $p' = u_p p$, 从而 $a$ 或 $b$ 必能表成 $p$ 的倍 (将与 $p$ 相伴的素因子换成 $u_p$ 即可).
 
 	若 $\forall a, b, p \in R$, 
 	$\big( \text{$p$ 是素元} \wedge p | ab \big) \to \big( p | a \vee p | b\big)$, 我们来证明分解是唯一的. 
@@ -686,13 +685,13 @@
 	设 $R$ 是一个整环, $R^* := R - \{0\}$. 
 	如果 $\exists \delta \colon R^* \to \mathbb N$ s.t.\ 
 	\begin{conditionlist}[label = E\arabic*)]
-		\item $\forall a, b \in R^*$, $\delta(ab) \geq \delta(a)$; \label{item: Euclidean 函数}
+		\item $\forall a, b \in R^*$, $\delta(ab) \geq \delta(a)$;\label{item: Euclidean 函数}
 		\item $\forall a \in R$, $\forall b \in R^*$, $\exists q,r \in R$ s.t.\ 
 		\begin{equation}\label{equation: 带余除法}
 			a = qb + r 
 			\quad \wedge \quad  
 			\big( \delta(r) < \delta(b) \vee r = 0 \big)\,, 
-		\end{equation} \label{item: 带余除法}
+		\end{equation}\label{item: 带余除法}
 	\end{conditionlist}
 	那么我们称 $R$ 是一个 \indexbf{Euclidean~整环} (Euclidean domain), 这样的函数~$\delta$ 被称为 \indexbf{Euclidean~函数}. 
 	以上的式~\eqref{equation: 带余除法} 中, $a$ 被称为\indexbf{被除元} (dividend), $b$ 是\indexbf{除元} (divisor), $q$ 是\indexbf{商元}或\indexbf{商} (quotient) 而 $r$ 是\indexbf{余元} (remiander).
@@ -719,8 +718,9 @@
 	
 	首先, 素元和正则元自身就是一个素分解. 
 	所以现在我们设 $a = bc$, $b, c \notin U(R)$. 
-	由 \ref{item: Euclidean 函数}, $\delta(b) \leq \delta(a) $. 
-	假设 $\delta(b) = \delta(a)$, 那么由 \ref{item: 带余除法}, 我们作带余除法 $b = qa + r$: 而 $r = 0$ 的情况将意味着 $c \in U(R)$, 因此我们研究 $r \neq 0$ 且 $\delta(r) < \delta(a)$ 的情况. 考虑 $b - qa = b(1 - qc)$, 由 \ref{item: Euclidean 函数}, $\delta(r) = \delta(b - qa) \geq \delta(b) = \delta(a)$, 这与 $\delta(r) < \delta(a)$ 矛盾. 
+	由~\ref{item: Euclidean 函数}, $\delta(b) \leq \delta(a) $. 
+	假设 $\delta(b) = \delta(a)$, 那么由~\ref{item: 带余除法}, 我们作带余除法 $b = qa + r$: 而 $r = 0$ 的情况将意味着 $c \in U(R)$, 因此我们研究 $r \neq 0$ 且 $\delta(r) < \delta(a)$ 的情况. 
+	考虑 $b - qa = b(1 - qc)$, 由~\ref{item: Euclidean 函数}, $\delta(r) = \delta(b - qa) \geq \delta(b) = \delta(a)$, 这与 $\delta(r) < \delta(a)$ 矛盾. 
 	所以: $\delta(b) < \delta(a)$.
 
 	接着我们研究 $A := \{(a_i)_{i \in n} \in (R - U(R))^{< \infty} \mid a = \prod_{i \in n} a_i\}$. 
@@ -735,8 +735,8 @@
 	\begin{conditionlist}[label = \roman*)]
 		\item 如果 $\gcd(p, b) = up$, $u \in U(R)$, 从而我们晓得 $up | b$, 不难证明 $p |b$; 
 		\item 如果 $\gcd(p, b) = 1$, 那么 $\exists x, y \in R$, $xp + yb = 1$ 
-			(推论~\ref{corollary: Euclidean 整环上的 Bezout 定理互素时})%
-		, 从而 $a = axp + yab$, $p | axp$, $p | yab$ (因 $p | ab$) 从而 $p | (axp + yab)$ i.e.\ $p | a$. 
+			(推论~\ref{corollary: Euclidean 整环上的 Bezout 定理互素时}), 
+		从而 $a = axp + yab$, $p | axp$, $p | yab$ (因 $p | ab$) 从而 $p | (axp + yab)$ i.e.\ $p | a$. 
 	\end{conditionlist}
 \end{proof}
 
@@ -757,7 +757,7 @@
 	记 $\mathbb Z_p$ 的元素为 $[0]$, $[1]$, \ldots, $[p -1]$.
 	由素数的定义, $\forall [k]  \in \indexmath[Z p ast]{\mathbb Z_p^*} := \mathbb Z_p - \{[0]\}$,
 	\begin{equation*}
-		[k], [2k], \cdots, [(p-1) k]
+		[k], [2k], \ldots, [(p-1) k]
 	\end{equation*}
 	都不为 $[0]$, 而且两两不等.
 	进而, $\exists i \in \mathbb N_+$ s.t.\ $i < p \wedge [ik] = 1$.
@@ -806,7 +806,7 @@
 
 	如果 $m \neq 0$, 那么 $m =p$ 是素数. 
 	如果 $m$ 不是素数, 假设它有两个 ($m$ 和 $1$ 以外的) 因数 $a, b$, $ab e = o$ 意味着 $a e = o$ 或 $b e = o$ (定理~\ref{theorem: 消去律}), 将与 $\ker f = m\mathbb Z$ 矛盾.
-	考虑 $f$ 在 $p$ (作为 $\mathbb Z_p$ 的导出集) 上的限制, $P := \{o, e, 2e, \cdots, (p-1)e\}$ 即构成了与 $\mathbb Z_p$ 同构的素子域.
+	考虑 $f$ 在 $p$ (作为 $\mathbb Z_p$ 的导出集) 上的限制, $P := \{o, e, 2e, \ldots, (p-1)e\}$ 即构成了与 $\mathbb Z_p$ 同构的素子域.
 \end{proof}
 
 在刚才的证明中, 我们已经遭遇了:
@@ -915,7 +915,7 @@
 \begin{definition}[维数]
 	设 $V$ 是 $\mathbb F$ 上的线性空间. 若 $\exists n \in \mathbb N$, 满足
 	\begin{equation*}
-		n = \max \{r \mid \exists (x_i)_{i \in r} \text{\ s.t.\ 它们是线性独立的}) \}\,,
+		n = \max \{r \mid \exists (x_i)_{i \in r} (\text{\ s.t.\ 它们是线性独立的}) \}\,,
 	\end{equation*}
 	那么称 $n$ 是 $V$ 的\indexbf{维数}, 记为 $\dim V = n$, $V$ 是 \textbf{$n$ 维线性空间}. 倘若不存在这样的 $n$, 则 $V$ 是\indexbf{无穷维线性空间}. 
 \end{definition}
@@ -938,8 +938,8 @@
 \begin{proof}
 	唯一性只需要假定有两组分解, 相减并利用基底的线性独立性即可证明. 
 	下面只证存在性:
-	根据维数的定义, $(\bv v, \basis e_0, \cdots, \basis e_{n - 1})$ 线性相关, 从而
-	$\exists \alpha \in \mathbb F\, \exists (\alpha_i)_{i \in n} \in \mathbb F^n$ s.t.\ $(\alpha, \alpha_0, \cdots, \alpha_{n - 1})$ 不全为 $0$ 且
+	根据维数的定义, $(\bv v, \basis e_0, \ldots, \basis e_{n - 1})$ 线性相关, 从而
+	$\exists \alpha \in \mathbb F\, \exists (\alpha_i)_{i \in n} \in \mathbb F^n$ s.t.\ $(\alpha, \alpha_0, \ldots, \alpha_{n - 1})$ 不全为 $0$ 且
 	\begin{equation*}
 		\alpha \bv v + \sum_{i \in n} \alpha_i \basis e_i = \bv 0\,,
 	\end{equation*}
@@ -1081,7 +1081,7 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	设 $\dim (U \cap W) = m$, 有基底 $\hat e = (\basis e_i)_{i \in m}$, $\dim U = k$, $\dim W = \ell$. 由定理, $\dim U$ 可取基底 $(\basis e_0, \cdots \basis e_{m-1};\; \basis f_0, \cdots, \basis f_{k - m - 1})$, $\dim V$ 可取基底 $(\basis e_0, \cdots \basis e_{m-1};\; \basis g_0, \cdots, \basis g_{\ell - m - 1})$, 那么
 	\begin{equation*}
 		U + W = \langle
-			\basis e_0, \cdots \basis e_{m-1};\;
+			\basis e_0, \cdots, \basis e_{m-1};\;
 			\basis f_0, \cdots, \basis f_{k - m - 1};\;
 			\basis g_0, \cdots, \basis g_{\ell - m - 1}
 		\rangle\,.
@@ -1336,7 +1336,6 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	设 $V$ 是 $n$~维线性空间, 有基底 $\hat e$, 向量组 $(\bv x_j)_{j \in m}$ 的维数等于矩阵 $(
 			\inbasis{\bv x_j}{\hat e}
 		)_{j \in m}$ 的最大非零子式的阶数.
-	. 
 \end{corollary}
 \begin{proof}
 	在定理~\ref{theorem: 线性相关, 对偶空间基底的阶数} 中令 $\hat f = \hat e^*$ 即可.

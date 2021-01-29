@@ -3454,10 +3454,12 @@ A set of zero content must be of zero measure.
 \section{Properties of Riemann Integrals}
 
 \begin{theorem}[Integrals are linear operators]
+		\label{theorem: integrals are linear operators}
 	Let $E$ be a bounded set in an $n$-D normed space $X$, $\mathfrak R(E)$ is a linear space, and $\int_E \dif \bv x \colon \mathfrak R(E) \to Y$ is a linear operator.
 \end{theorem}
 
 \begin{theorem}
+	\label{theorem: integral is zero if a.e. zero}
 	If a Riemann integrable function $f \in \mathfrak R(E)$ is a.e. zero over $E$, $\int_E f(\bv x) \dif \bv x = 0$.
 \end{theorem}
 \begin{proof}
@@ -3465,7 +3467,131 @@ A set of zero content must be of zero measure.
 \end{proof}
 
 We can define a equivalence relation $\sim$ on $\mathfrak R(E)$, so that $f \sim g$ as long as $f(\bv x) = g(\bv x)$ a.e.\ in $E$, which induces a equivalence class $\tilde{\mathfrak R}(E)$. 
-$\tilde{\mathfrak R}(E)$ is also a linear space, $\int_E \dif \bv x$ is also a linear operators from $\tilde{\mathfrak R}(E)$.
+$\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also a linear operators from $\tilde{\mathfrak R}(E)$.
+
+\begin{theorem}[Additivity of integrals]
+	Let $E_1$ and $E_2$ be two Jordan measurable sets in a $n$-D normed space $X$, $f \in Y^{E_1 \cup E_2}$.
+	\begin{enumerate*}
+		\item $\mathfrak R(E_1 \cup E_2) = \mathfrak R(E_1) \cap \mathfrak R(E_2)$;
+		\item If $\mu(E_1 \cap E_2) = 0$, then:
+	\end{enumerate*} 
+	\begin{equation*}
+		\int\limits_{E_1 \cup E_2} f(\bv x) \dif \bv x 
+			= \int\limits_{E_1} f(\bv x) \dif \bv x
+				+ \int\limits_{E_2} f(\bv x) \dif \bv x.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item By Lebesgue's criterion~\ref{theorem: Lebesgue's criterion}.
+		\item By the linearity of integrals~\ref{theorem: integrals are linear operators}, we have:
+		\begin{align*}
+			\int\limits_{E_1} f(\bv x) \dif \bv x
+				+ \int\limits_{E_2} f(\bv x) \dif \bv x 
+				&= \int\limits_{E_1 \cup E_2} \big(
+						\chi_{E_1}(\bv x)  + \chi_{E_2}(\bv x)
+					\big) f(\bv x) \dif \bv x.
+		\end{align*}
+
+		The value of $\big(\chi_{E_1}(\bv x)  + \chi_{E_2}(\bv x)\big) f(\bv x)$ is the same as $f(\bv x)$ except for $\bv x \in E_1 \cap E_2$, where its value is $2f(\bv x)$. 
+		By Theorem~\ref{theorem: integral is zero if a.e. zero}, the integral of $\big(\chi_{E_1}(\bv x)  + \chi_{E_2}(\bv x)\big) f(\bv x)$ is the same as $f(\bv x)$.
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{theorem: the int of abs and the abs of int}
+	$f \in Y^E$, where $E$ is a set in a $n$-D normed space and $Y$ is a complete normed space. 
+	If $f \in \mathfrak R(E)$, then
+	\begin{equation*}
+		\left\|
+			\int\limits_E f(\bv x) \dif \bv x
+		\right\|_Y \leq \int\limits_E \|f(\bv x)\|_X \dif \bv x.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	First we can see, the discontinuous points of $|f|$ is the same as $f$'s.
+	Use the Riemann sum to give the inequality and pass the limits $\lambda(P) \to 0$.
+\end{proof}
+
+\begin{theorem}\label{theorem: the integral of a non-negative function is also non-negative}
+	$f \in \mathbb R^E$, where $E$ is a set in a $n$-D normed space.
+	If $f(\bv x) \geq 0$ a.e. $\bv x \in E$, and $f \in \mathfrak R(E)$, then
+	\begin{equation*}
+		\int\limits_E f(\bv x) \dif \bv x \geq 0.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	We can always find a function $f'(\bv x)$ that is always non-negative (hence a.e.\ equal to $f(\bv x)$), hence:
+	\begin{equation*}
+		\int\limits_E f(\bv x) \dif \bv x 
+			\geq \underline{\int\limits_E} f(\bv x) \dif \bv x \geq 0.
+	\end{equation*}
+\end{proof}
+
+\begin{corollary}
+	$f, g \in \mathbb R^E$, where $E$ is a set in a $n$-D normed space.
+	If $f(\bv x) \geq g(\bv x)$ a.e. $\bv x \in E$, and $f, g \in \mathfrak R(E)$, then
+	\begin{equation*}
+		\int\limits_E f(\bv x) \dif \bv x \geq \int\limits_E g(\bv x) \bv x.
+	\end{equation*}
+\end{corollary}
+
+\begin{corollary}\label{corollary: integral average}
+	$f \in \mathbb R^E$, where $E$ is a Lebesgue measurable set in a $n$-D normed space. 
+	If $f \in \mathfrak R(E)$, and $m \leq f(\bv x) \leq M$ a.e.\ in $E$, we have:
+	\begin{equation*}
+		\lambda(E) m \leq \int\limits_E f(\bv x) \dif \bv x \leq \lambda(E) M.
+	\end{equation*}
+\end{corollary}
+
+\begin{corollary}
+	$f \in \mathbb R^E$, where $E$ is a bounded, Lebesgue measurable set in a $n$-D normed space. 
+	Let $m := \inf\{f(\bv x) \mid \bv x \in E\}$, $M := \sup\{f(\bv x) \mid \bv x \in E\}$.
+	If $f \in \mathfrak R(E)$, then $\exists \theta \in [m, M]$ s.t.\ 
+	\begin{equation*}
+		\int\limits_E f(\bv x) \dif \bv x = \theta \mu(E).
+	\end{equation*}
+\end{corollary}
+
+\begin{theorem}[First mean-value theorem for the integral]
+	\label{theorem: first mean-value theorem for the integral}
+	$f \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in a $n$-D normed space. 
+	Let $m := \inf\{f(\bv x) \mid \bv x \in E\}$, $M := \sup\{f(\bv x) \mid \bv x \in E\}$.
+	If $f \in C(E)$ and $f$ is bounded on $E$, then $\exists \bv \xi \in E$ s.t.\ 
+	\begin{equation*}
+		\int\limits_E f(\bv x) \dif \bv x = f(\bv \xi) \mu(E).
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	By Theorem~\ref{theorem: conservation of connectedness}, the image of $E$ under continuous function~$f$ must be also connected, which, in $\mathbb R$, must be intervals (or a single point).
+
+	If $\lambda(E) = 0$, the theorem is trivial. 
+	Since:
+	\begin{equation*}
+		m \leq \frac{1}{\lambda (E)} \int\limits_E f(\bv x) \dif \bv x \leq M, 
+	\end{equation*}
+	there must be a point in $E$ where $f$ takes value~$\int_E f(\bv x) \dif \bv x / \lambda(E)$.
+\end{proof}
+
+\begin{theorem}[Mean-value theorem for the integral]
+	\label{theorem : mean-value theorem for the integral}
+	$f, g \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in a $n$-D normed space. 
+	$f, g \in \mathfrak R(E)$. 
+	If a.e.\ $\bv x \in E$, $m \leq f(\bv x) \leq M$ and $g(\bv x) \geq 0$, we have
+	s.t.\ 
+	\begin{equation*}
+		m \int\limits_E g(\bv x) \dif \bv x 
+			\leq \int\limits_E f(\bv x) g(\bv x)\dif \bv x 
+			\leq M \int\limits_E g(\bv x) \dif \bv x.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	The discontinuous points of $fg \colon \bv x \mapsto f(\bv x)g(\bv x)$ must be either the discontinuous points of $f$ or $g$, which are both of measure zero. Therefore, $fg \in \mathfrak R(E)$.
+	\begin{equation*}
+		m g(\bv x) \leq f(\bv x) g(\bv x) \leq M g(\bv x).
+	\end{equation*}
+\end{proof}
+
+\section{Fubini's Theorem}
 
 \part{Real Analysis}
 
@@ -3475,7 +3601,8 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, $\int_E \dif \bv x$ is also a l
 
 %\appendix
 
-\backmatter
+\backmatter{}
+
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
 \printbibliography[heading=bibliography, title={Bibliography}]
 
