@@ -3593,6 +3593,122 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 
 \section{Fubini's Theorem}
 
+Let $X$ be a cuboid in $\mathbb R^n$ and $Y$ be a cuboid in $\mathbb R^m$, $f \in \mathbb R^{X \times Y}$. 
+
+We use the following notation to denote one of the \emphbf{iterated integrals}\index{iterated integral}:
+\begin{equation*}
+	\int\limits_X \dif \bv x \int\limits_Y  f(\bv x, \bv y)  \dif \bv y, 
+\end{equation*}
+which should be understood as the integral of $\bv F(\bv x)$ over $X$, where $F(\bv x)$ is the integral of $f(\bv x, \bv y)$ over $Y$ with fixed $\bv x$. 
+What if at some point $\bv x_0 \in X$, $\bv y \mapsto f(\bv x, \bv y) \notin \mathfrak R(Y)$? 
+If the function $f$ is bounded, we can assign a value to $\bv F(\bv x_0)$ between $\overline{\int}_Y f(\bv x_0, \bv y) \dif \bv y$ and $\underline{\int}_Y f(\bv x_0, \bv y) \dif \bv y$. 
+The way of assignment can be arbitary if $f \in \mathfrak R(X \times Y)$, which we might see in the following famous theorem:
+
+\begin{theorem}[Fubini's theorem]
+	\label{theorem: Fubini's theorem}
+	Let $X$ be a cuboid in $\mathbb R^n$ and $Y$ be a cuboid in $\mathbb R^m$, $f \in \mathbb R^{X \times Y}$. 
+	If $f \in \mathfrak R(X \times Y)$, then all three of the following interals%
+		\footnote{The first one is known as the \indexbf{multiple integral}.}:
+	\begin{equation*}
+		\int\limits_{X \times Y} f(\bv x, \bv y) \dif \bv x \dif \bv y, 
+		\quad
+		\int\limits_X \dif \bv x \int\limits_Y  f(\bv x, \bv y)  \dif \bv y, 
+		\quad
+		\int\limits_Y \dif \bv y \int\limits_X  f(\bv x, \bv y)  \dif \bv x
+	\end{equation*}
+	exist and equal.
+\end{theorem}
+\begin{proof}
+	$P_X \in \mathfrak P(X)$, $P_Y \in \mathfrak P(Y)$. 
+	Let $N_X = \card P_X$, $N_Y = \card P_Y$.
+	Let $P := \{I_X \times I_Y \mid I_X \in P_X \wedge I_Y \in P_Y\}$, which is a partition of $X \times Y$.
+	
+	The Darboux lower sum:
+	\begin{align*}
+		s(f, P) &= \sum_{\substack{I_X \in P_X,\\ I_Y \in P_Y}} \mu_{\mathbb R^n}(I_X) \mu_{\mathbb R^m}(I_Y)
+			\inf\{f(\bv x, \bv y) \mid \bv x \in I_X \wedge \bv y \in I_Y\}
+		\\
+		&\leq \sum_{\substack{I_X \in P_X,\\ I_Y \in P_Y}} 
+			\mu_{\mathbb R^n}(I_X) \mu_{\mathbb R^m}(I_Y)
+			\inf \big\{ \inf \{f(\bv x, \bv y) \mid \bv y \in I_Y  \} 
+				\,\big\vert\, \bv x \in I_X \big\}
+		\\
+		&= \sum_{I_X \in P_X} \mu_{\mathbb R^n}(I_X) 
+			\inf \bigg\{ \sum_{I_Y \in P_Y} \mu_{\mathbb R^m}(I_Y) 
+				\inf \{ f(\bv x, \bv y) \mid  \bv y \in I_Y\} 
+			\,\bigg\vert\, \bv x \in I_X \bigg\}
+		\\
+		&= \sum_{I_X \in P_X} \mu_{\mathbb R^n}(I_X) 
+			\inf \left\{ 
+				\underline{\int\limits_Y} f(\bv x, \bv y) \dif \bv y
+			\,\middle\vert\, 
+				\bv x \in I_X 
+			\right\} 
+		\leq \sum_{I_X \in P_X} \mu_{\mathbb R^n}(I_X) 
+			\inf \{ F(\bv x) \mid \bv x \in I_X \}
+		\\
+		&\leq \sum_{I_X \in P_X} \mu_{\mathbb R^n}(I_X) 
+		\sup \{ F(\bv x) \mid \bv x \in I_X \}
+		\\
+		&\leq
+		\sum_{\substack{I_X \in P_X,\\ I_Y \in P_Y}} \mu_{\mathbb R^n}(I_X) \mu_{\mathbb R^m}(I_Y)
+		\sup\{f(\bv x, \bv y) \mid \bv x \in I_X \wedge \bv y \in I_Y\}
+		= S(f, P).
+	\end{align*}
+
+	As $\lambda(P) \to 0$, $s(f, P)$ and $S(f, P)$ must converge to the multiple integral, hence the upper and lower Darboux integrals of $F$ are equal, hence $F \in \mathfrak R(X)$.
+\end{proof}
+
+\begin{corollary}
+	Let $X$ be a cuboid in $\mathbb R^n$ and $Y$ be a cuboid in $\mathbb R^m$, $f \in \mathbb R^{X \times Y}$. 
+	If $f \in \mathfrak R(X \times Y)$, then $\bv x \mapsto f(\bv x, \bv y) \in \mathfrak R(X)$ a.e.\ $\bv y \in Y$, $\bv y \mapsto f(\bv x, \bv y) \in \mathfrak R(Y)$ a.e.\ $\bv x \in X$.
+\end{corollary}
+\begin{proof}
+	By the Fubini's theorem~\ref{theorem: Fubini's theorem}, whatever value we assign to $F(\bv x)$ when $\bv y \mapsto f(\bv x, \bv y) \notin \mathfrak R(Y)$, the multiple integrals are the same.
+
+	Hence:
+	\begin{equation*}
+		\int\limits_X \left(
+			\underline{\int\limits_Y} f(\bv x, \bv y) \dif \bv y 
+		\right) \dif \bv x
+		= \int\limits_X \left(
+			\overline{\int\limits_Y} f(\bv x, \bv y) \dif \bv y 
+		\right) \dif \bv x,
+		\quad\Rightarrow\quad
+		\int\limits_X \left(
+			\overline{\int\limits_Y} f(\bv x, \bv y) \dif \bv y
+			- \underline{\int\limits_Y} f(\bv x, \bv y) \dif \bv y 
+		\right) \dif \bv x.
+	\end{equation*}
+
+	Hence, the upper and lower integrals of $\bv y \mapsto f(\bv x, \bv y)$ are equal a.e. $\bv x \in X$.
+\end{proof}
+
+\begin{theorem}
+	Let $\varphi_1, \varphi_2 \in \mathbb R^X$ be bounded functions on $X$, where $X$ is a bounded set in $\mathbb R^n$. 
+	Let $E := \{ (\bv x, \bv y) \mid \bv x \in X \wedge \bv y \in [\varphi_1(\bv x), \varphi_2(\bv x)] \}$.
+	$f \in \mathbb R^E$.
+
+	If $f \in \mathfrak R(E)$, then:
+	\begin{equation*}
+		\int\limits_E f(\bv x, \bv y) \dif \bv x \dif \bv y 
+			:= \int\limits_X \dif \bv x \int^{\varphi_2(\bv x)}_{\varphi_1(\bv x)} f(\bv x, \bv y) \dif \bv y.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Find a cuboid $I := I_X \times I_Y$ that is large enough to contain $E$, we shall see $X \subset I_X$, $\forall \bv x \in X$, $[\varphi_1(\bv x), \varphi_2(\bv x)] \subset I_Y$. 
+
+	\begin{align*}
+		\int\limits_E f(\bv x, \bv y) \dif \bv x \dif \bv y
+		&= \int\limits_I \chi_E(\bv x, \bv y) f(\bv x, \bv y) \dif \bv x \dif \bv y
+		= \int\limits_{I_X} \dif \bv x \int\limits_{I_Y} \chi_X (\bv x) \chi_{[\varphi_1(\bv x), \varphi_2(\bv x)]} (\bv y) f(\bv x, \bv y)  \dif \bv y
+		\\
+		&= \int\limits_{I_X} \chi_X (\bv x) \dif \bv x 
+			\int\limits_{I_Y}  \chi_{[\varphi_1(\bv x), \varphi_2(\bv x)]} (\bv y) f(\bv x, \bv y)  \dif \bv y
+		= \int\limits_X \dif \bv x \int^{\varphi_2(\bv x)}_{\varphi_1(\bv x)} f(\bv x, \bv y) \dif \bv y.
+	\end{align*}
+\end{proof}
+
 \part{Real Analysis}
 
 
