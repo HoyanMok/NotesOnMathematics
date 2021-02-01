@@ -130,6 +130,7 @@
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\supp}{supp}
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -973,7 +974,7 @@ Then we shall introduce some global properties of continuous mappings.
 	$\exists x_m, x_M \in K$, s.t.\ $f(x_m) = m := \inf f(K)$, $f(x_M) = M := \sup f(K)$.
 \end{theorem}
 \begin{proof}
-	By Theorem~\ref{theorem: conservation of compactness}, $f(K)$ is also compact, and therefore closed and bounded (Theorem~\ref{theorem: theorem: compact iff closed and bounded in Rn}). 
+	By Theorem~\ref{theorem: conservation of compactness}, $f(K)$ is also compact, and therefore closed and bounded (Theorem~\ref{theorem: compact iff closed and bounded in Rn}). 
 	If $M \notin f(K)$, then open covers $\{ B(M; (M-m)/n) - \tilde B(M; (M-m)/(n + 1)) \mid  n \in \mathbb N_+\} $ would not have a finite subcover, which is a contradiction to the compactness of $f(K)$.
 \end{proof}
 
@@ -1730,7 +1731,7 @@ Let $f \in Y^X$ where $X := \prod_{i \in n} X_i$.
 We define a mapping
 \begin{equation}\label{equation: local mapping}
 	\varphi_i \colon X_i \to X;\;
-	 \bv x_i \mapsto (\bv a_0, \bv a_1, \cdots, \bv a_{i-1}, \bv x_i, \bv a_{i + 1}, \cdots, \bv a_{n-1})\,,
+	 \bv x_i \mapsto (\bv a_0, \bv a_1, \ldots, \bv a_{i-1}, \bv x_i, \bv a_{i + 1}, \ldots, \bv a_{n-1})\,,
 \end{equation}
 so that $f \circ \varphi_i$ means the mapping of alone $\bv x_i$, leaving other variables unchanged.
 
@@ -2124,6 +2125,19 @@ We denote the zeroth and first differential of $f \in Y^U$, where $U$ is an open
 	\end{equation*}
 \end{definition}
 
+Like $C^{(1)}$, we can define $\indexmath[C (p)]{C^{(p)}}$.
+
+\begin{definition}[Diffeomorphism]
+	$f \in U^V$, where $U$, $V$ are two open subsets of normed spaces $X$, $Y$. 
+	If: 
+	\begin{conditionlist}
+		\item $f \in C^{(p)}(U)$;
+		\item $\exists f^{-1} \in V^U$;
+		\item $f^{-1} \in C^{(p)}(V)$,
+	\end{conditionlist}
+	then we call $f$ a \indexbf{$C^{(p)}$-diffeomorphism} or a \indexbf{diffeomorphism with smoothness $p$}.
+\end{definition}
+
 \begin{theorem}[Higher-oder differentiation operates on vectors]
 	Let $X$ and $Y$ be normed spaces, with induced topologies $\mathscr T_X$ and $\mathscr T_Y$, $U \in \mathscr T_X$, $\bv x \in U$, $(\bv \ell_i)_{i \in n} \in X^n$.
 	If $f \in Y^U$ has $n$-th differential $f^{(n)}$ in $U$, 
@@ -2210,7 +2224,7 @@ We denote the zeroth and first differential of $f \in Y^U$, where $U$ is an open
 	Substituting $(\bv \ell_0, \bv \ell_1)$ by $(\bv \ell_1, \bv \ell_0)$ in the definition of $\Delta(t)$ doesn't change its value, hence we have proved the theorem in the case when $n = 2$.
 \end{proof}
 
-Theorem~\ref{theorem: symmetry of higher-order differentiation} implies that the $n$-th derivative~$f^{(n)}(\bv x)$ corresponds to a $n$-symmetric multilinear operator in $\mathcal B(X, \cdots, X; Y)$%
+Theorem~\ref{theorem: symmetry of higher-order differentiation} implies that the $n$-th derivative~$f^{(n)}(\bv x)$ corresponds to a $n$-symmetric multilinear operator in $\mathcal B(X, \ldots, X; Y)$%
 \footnote{By Corollary~\ref{corollary: important isomorphism}, these two spaces are isomorphic}, 
 and we shall denote:
 \begin{equation} \label{equation: f^(n)(x)(l_i)_i in n}
@@ -2219,11 +2233,11 @@ and we shall denote:
 \end{equation}
 and
 \begin{equation}\label{equation: f^(n)(x) l^n}
-	f^{(n)}(\bv x) \bv \ell^n := f^{(n)}(\bv \ell, \cdots, \bv \ell)\,.
+	f^{(n)}(\bv x) \bv \ell^n := f^{(n)}(\bv \ell, \ldots, \bv \ell)\,.
 \end{equation}
 
 \begin{theorem}
-	Let $X_0, \cdots, X_{m-1}, Y$ be normed spaces, and $X := \prod_{i \in m} X_i$.
+	Let $X_0, \ldots, X_{m-1}, Y$ be normed spaces, and $X := \prod_{i \in m} X_i$.
 	Let $f \in Y^U$ where $U$ is an open set in $X$.
 	If $\forall (i_k)_{k \in n} \in m^n$, $\forall \bv x \in U$, $n$-th partial derivative
 	\begin{equation*}
@@ -2521,7 +2535,7 @@ Making use of our estimate of the error to correct $\bv y$, we get $\bv y' = \bv
 However, since we made a approximation (which is too much!), $\bv y'$ is also not $f(\bv x)$. So we repeat the procedure, which is estimate the error, correct it, and estimate the error again \ldots
 
 But wait, would we finally get what we want? 
-In analysis this is a bad question -- maybe we shall ask: as we repeat the procedure, would the result gets closed enough to the answer? 
+In analysis this is a bad question --- maybe we shall ask: as we repeat the procedure, would the result gets closed enough to the answer? 
 The proof below would answer.
 
 \begin{proof}
@@ -2777,11 +2791,7 @@ Recursively we can prove:
 	\begin{conditionlist}[label=\alph*)]
 		\item $F(\bv x_0, \bv y_0) = \bv 0$;
 		\item $F \in C^{(k)}(W; Z)$; 
-		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible i.e.\ $\exists [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \in \mathcal B(Z; Y)$ s.t.
-		\begin{equation*}
-			\partial_{\bv y} F(\bv x_0, \bv y_0) \circ [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} 
-			= [\partial_{\bv y} F(\bv x_0, \bv y_0)]^{-1} \circ \partial_{\bv y} F(\bv x_0, \bv y_0) = \id_Y\,,
-		\end{equation*}
+		\item $\partial_{\bv y} F(\bv x_0, \bv y_0) \in \mathcal B(Y; Z)$ is reversible,
 	\end{conditionlist}
 	then, $\exists U \in \mathscr U(\bv x_0)$, $\exists V \in \mathscr U(\bv y_0)$, $\exists f \in C^{(k)}(U; Y)$ s.t.\ $U \times V \subset W$ and $\forall \bv x \in U$, $\forall \bv y \in V$, 
 	\begin{equation*}
@@ -2790,6 +2800,8 @@ Recursively we can prove:
 		f(\bv x) = \bv y\,.
 	\end{equation*}
 \end{theorem}
+
+
 
 
 
@@ -2939,7 +2951,7 @@ We shall denote the collection of Lebesgue measurable sets in $X$ by $\mathscr F
 
 \begin{theorem}[Lebesgue measurable sets is closed under finite unions]
 	\label{theorem: Lebesgue measurable sets is closed under finite unions}
-	Let $E_1$, $E_2$ be two Lebesgue measuable sets. 
+	Let $E_1$, $E_2$ be two Lebesgue measurable sets. 
 	$E_1 \cup E_2 \in \mathscr F$.
 \end{theorem}
 \begin{proof}
@@ -3352,10 +3364,10 @@ We say a proposition $p(\bv x)$ holds \indexbf{almost everywhere} or \indexbf{a.
 	$\gets$: We only need to notice that $s(f, P) \leq \sigma(f, P, \bv \xi) \leq S(f, P)$.
 \end{proof}
 
-\section{Riemann Integral over Jordan Measurable sets}
+\section{Riemann Integral over Jordan Measurable Sets}
 
 \begin{definition}[Jordan Measurable]
-	A set $E$ in a $n$-D normed space $X$ is said to be \indexbf{Jordan measurable} if it is bounded, and its boundary $\partial E$ is of measure zero.
+	A set $E$ in an $n$-D normed space $X$ is said to be \indexbf{Jordan measurable} if it is bounded, and its boundary $\partial E$ is of measure zero.
 \end{definition}
 
 In fact, Jordan measurable set is not a $\sigma$-algeba. 
@@ -3370,7 +3382,7 @@ For example, sets of a single points in $\mathbb R^n$ is Jordan measurable, but 
 \end{proof}
 
 \begin{definition}[Characteristic function]
-	Let $E$ be a set in a $n$-D normed space $X$, $\chi_E \in X \to 2$ is defined as:
+	Let $E$ be a set in an $n$-D normed space $X$, $\chi_E \in X \to 2$ is defined as:
 	\begin{equation*}
 		\chi_E(\bv x) := \begin{cases}
 			1 & \bv x \in E,
@@ -3470,7 +3482,7 @@ We can define a equivalence relation $\sim$ on $\mathfrak R(E)$, so that $f \sim
 $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also a linear operators from $\tilde{\mathfrak R}(E)$.
 
 \begin{theorem}[Additivity of integrals]
-	Let $E_1$ and $E_2$ be two Jordan measurable sets in a $n$-D normed space $X$, $f \in Y^{E_1 \cup E_2}$.
+	Let $E_1$ and $E_2$ be two Jordan measurable sets in an $n$-D normed space $X$, $f \in Y^{E_1 \cup E_2}$.
 	\begin{enumerate*}
 		\item $\mathfrak R(E_1 \cup E_2) = \mathfrak R(E_1) \cap \mathfrak R(E_2)$;
 		\item If $\mu(E_1 \cap E_2) = 0$, then:
@@ -3499,7 +3511,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 \end{proof}
 
 \begin{theorem}\label{theorem: the int of abs and the abs of int}
-	$f \in Y^E$, where $E$ is a set in a $n$-D normed space and $Y$ is a complete normed space. 
+	$f \in Y^E$, where $E$ is a set in an $n$-D normed space and $Y$ is a complete normed space. 
 	If $f \in \mathfrak R(E)$, then
 	\begin{equation*}
 		\left\|
@@ -3513,7 +3525,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 \end{proof}
 
 \begin{theorem}\label{theorem: the integral of a non-negative function is also non-negative}
-	$f \in \mathbb R^E$, where $E$ is a set in a $n$-D normed space.
+	$f \in \mathbb R^E$, where $E$ is a set in an $n$-D normed space.
 	If $f(\bv x) \geq 0$ a.e. $\bv x \in E$, and $f \in \mathfrak R(E)$, then
 	\begin{equation*}
 		\int\limits_E f(\bv x) \dif \bv x \geq 0.
@@ -3528,7 +3540,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 \end{proof}
 
 \begin{corollary}
-	$f, g \in \mathbb R^E$, where $E$ is a set in a $n$-D normed space.
+	$f, g \in \mathbb R^E$, where $E$ is a set in an $n$-D normed space.
 	If $f(\bv x) \geq g(\bv x)$ a.e. $\bv x \in E$, and $f, g \in \mathfrak R(E)$, then
 	\begin{equation*}
 		\int\limits_E f(\bv x) \dif \bv x \geq \int\limits_E g(\bv x) \bv x.
@@ -3536,7 +3548,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 \end{corollary}
 
 \begin{corollary}\label{corollary: integral average}
-	$f \in \mathbb R^E$, where $E$ is a Lebesgue measurable set in a $n$-D normed space. 
+	$f \in \mathbb R^E$, where $E$ is a Lebesgue measurable set in an $n$-D normed space. 
 	If $f \in \mathfrak R(E)$, and $m \leq f(\bv x) \leq M$ a.e.\ in $E$, we have:
 	\begin{equation*}
 		\lambda(E) m \leq \int\limits_E f(\bv x) \dif \bv x \leq \lambda(E) M.
@@ -3544,7 +3556,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 \end{corollary}
 
 \begin{corollary}
-	$f \in \mathbb R^E$, where $E$ is a bounded, Lebesgue measurable set in a $n$-D normed space. 
+	$f \in \mathbb R^E$, where $E$ is a bounded, Lebesgue measurable set in an $n$-D normed space. 
 	Let $m := \inf\{f(\bv x) \mid \bv x \in E\}$, $M := \sup\{f(\bv x) \mid \bv x \in E\}$.
 	If $f \in \mathfrak R(E)$, then $\exists \theta \in [m, M]$ s.t.\ 
 	\begin{equation*}
@@ -3554,7 +3566,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 
 \begin{theorem}[First mean-value theorem for the integral]
 	\label{theorem: first mean-value theorem for the integral}
-	$f \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in a $n$-D normed space. 
+	$f \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in an $n$-D normed space. 
 	Let $m := \inf\{f(\bv x) \mid \bv x \in E\}$, $M := \sup\{f(\bv x) \mid \bv x \in E\}$.
 	If $f \in C(E)$ and $f$ is bounded on $E$, then $\exists \bv \xi \in E$ s.t.\ 
 	\begin{equation*}
@@ -3574,7 +3586,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 
 \begin{theorem}[Mean-value theorem for the integral]
 	\label{theorem : mean-value theorem for the integral}
-	$f, g \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in a $n$-D normed space. 
+	$f, g \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in an $n$-D normed space. 
 	$f, g \in \mathfrak R(E)$. 
 	If a.e.\ $\bv x \in E$, $m \leq f(\bv x) \leq M$ and $g(\bv x) \geq 0$, we have
 	s.t.\ 
@@ -3686,27 +3698,117 @@ The way of assignment can be arbitary if $f \in \mathfrak R(X \times Y)$, which 
 
 \begin{theorem}
 	Let $\varphi_1, \varphi_2 \in \mathbb R^X$ be bounded functions on $X$, where $X$ is a bounded set in $\mathbb R^n$. 
-	Let $E := \{ (\bv x, \bv y) \mid \bv x \in X \wedge \bv y \in [\varphi_1(\bv x), \varphi_2(\bv x)] \}$.
+	Let $E := \{ (\bv x, y) \mid \bv x \in X \wedge y \in [\varphi_1(\bv x), \varphi_2(\bv x)] \}$.
 	$f \in \mathbb R^E$.
 
 	If $f \in \mathfrak R(E)$, then:
 	\begin{equation*}
-		\int\limits_E f(\bv x, \bv y) \dif \bv x \dif \bv y 
-			:= \int\limits_X \dif \bv x \int^{\varphi_2(\bv x)}_{\varphi_1(\bv x)} f(\bv x, \bv y) \dif \bv y.
+		\int\limits_E f(\bv x, y) \dif \bv x \dif y 
+			:= \int\limits_X \dif \bv x \int^{\varphi_2(\bv x)}_{\varphi_1(\bv x)} f(\bv x, y) \dif y.
 	\end{equation*}
 \end{theorem}
 \begin{proof}
 	Find a cuboid $I := I_X \times I_Y$ that is large enough to contain $E$, we shall see $X \subset I_X$, $\forall \bv x \in X$, $[\varphi_1(\bv x), \varphi_2(\bv x)] \subset I_Y$. 
 
 	\begin{align*}
-		\int\limits_E f(\bv x, \bv y) \dif \bv x \dif \bv y
-		&= \int\limits_I \chi_E(\bv x, \bv y) f(\bv x, \bv y) \dif \bv x \dif \bv y
-		= \int\limits_{I_X} \dif \bv x \int\limits_{I_Y} \chi_X (\bv x) \chi_{[\varphi_1(\bv x), \varphi_2(\bv x)]} (\bv y) f(\bv x, \bv y)  \dif \bv y
+		\int\limits_E f(\bv x, y) \dif \bv x \dif y
+		&= \int\limits_I \chi_E(\bv x, y) f(\bv x, y) \dif \bv x \dif y
+		= \int\limits_{I_X} \dif \bv x \int\limits_{I_Y} \chi_X (\bv x) \chi_{[\varphi_1(\bv x), \varphi_2(\bv x)]} (y) f(\bv x, y)  \dif y
 		\\
 		&= \int\limits_{I_X} \chi_X (\bv x) \dif \bv x 
-			\int\limits_{I_Y}  \chi_{[\varphi_1(\bv x), \varphi_2(\bv x)]} (\bv y) f(\bv x, \bv y)  \dif \bv y
-		= \int\limits_X \dif \bv x \int^{\varphi_2(\bv x)}_{\varphi_1(\bv x)} f(\bv x, \bv y) \dif \bv y.
+			\int\limits_{I_Y}  \chi_{[\varphi_1(\bv x), \varphi_2(\bv x)]} (y) f(\bv x, y)  \dif y
+		= \int\limits_X \dif \bv x \int^{\varphi_2(\bv x)}_{\varphi_1(\bv x)} f(\bv x, y) \dif y.
 	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	Let $\varphi_1, \varphi_2 \in C(X)$ be bounded and continuous real-valued functions on $X$, where $X$ is a bounded set in $\mathbb R^n$. 
+	Let $E := \{ (\bv x, y) \mid \bv x \in X \wedge y \in [\varphi_1(\bv x), \varphi_2(\bv x)] \}$.
+
+	If $X$ is Jordan measurable, $E$ is also Jordan measurable, and its volume can be formulated as:
+	\begin{equation*}
+		\mu(E) = \int\limits_{\substack{X \\ \varphi_2(\bv x) \geq \varphi_1(\bv x)}} [\varphi_2(\bv x) - \varphi_1(\bv x)] \dif \bv x .
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	First we examine the component of $\partial E$, which is a compact set in $\mathbb R^n$.  
+	\begin{equation*}
+		\partial E = \bigcup_{i \in \{1, 2\}}\{(\bv x, \varphi_i(\bv x)) \mid \bv x \in X \wedge \varphi_1(\bv x) \leq \varphi_2(\bv x)\}
+		\cup (\partial X \times [\varphi_1(\partial X), \varphi_2(\partial X)]).
+	\end{equation*}
+
+	$\forall i \in \{1, 2\}$: since $\varphi_i$ is continuous and bounded on $\overline X$, which is a closed and bounded (therefore compact) set, by Theorem~\ref{theorem: Heine-Cantor}, $\varphi_i$ is also uniformly continuous on it. 
+	Then, $\forall \varepsilon \in \mathbb R_+$, we can find a $\delta$, so that $\{(\bv x, \varphi_i(\bv x)) \mid \bv x \in X\}$ is covered by a finite collection of products of a cuboid with side less than $\delta$ and an interval with length $\varepsilon$, where the cuboids have no common interior points pairwisely. 
+	Let $I$ be a cuboid that large enough to cover $X$, the total volume must less than $\mu(I) \varepsilon$.
+	Hence: $\{(\bv x, \varphi_i(\bv x)) \mid \bv x \in X\}$ is of zero measure.
+	
+	Since $\varphi_i$, $i = 1, 2$ are bounded and continuous, they must be also bounded on the boundary of $X$, hence there exxists a $M \in \mathbb R_+$ s.t.\ $\varphi_2(\bv x) - \varphi_1(\bv x) < M$ when $\bv x \in \partial X$ and $\varphi_2(\bv x) \geq \varphi_1(\bv x)$. 
+	Hence, $\forall \varepsilon \in \mathbb R_+$, there exists a finite cover made of cuboids, with total volume less than $\varepsilon / M$. 
+	Therefore: $\partial X \times [\varphi_1(\partial X), \varphi_2(\partial X)]$ is of zero measure.
+\end{proof}
+
+\section{Change of Variables}
+
+\begin{definition}[Support]
+	The \indexbf{support} of a function~$f \in Y^X$ is defined as:
+	\begin{equation*}
+		\indexmath[supp]{\supp f} := \overline{\{\bv x \in X \mid f(\bv x) \neq \bv 0\}}.
+	\end{equation*}
+\end{definition}
+
+\begin{lemma}
+	\label{lemma: countable partition of any open set}
+	Let $X$ be an $n$-D normed space, $U$ be a bounded open subset of $X$.
+	There exists a collection of cuboids $P$ s.t.\ the cuboids in $P$ have no common interior points pairwisely, and
+	\begin{equation*}
+		U = \bigcup_{I \in P} I.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	We divide the $n$-D normed space into grids with gap $1/{2^k}$, collect those cubes that fully contained in $U - \cup P_{k-1}$, and add it to $P_{k-1}$ to get $P_k$. 
+	$P = \bigcup_{k \in \mathbb N} P_k$ is what we want.
+\end{proof}
+
+\begin{lemma}[Conservation of zero-measure under diffeomorphism]
+	\label{lemma: conservation of zero-measure under diffeomorphism}
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between open sets in $X$, where $X$ is an $n$-D normed space.
+	If $E_t \subset D_t$ is of measure zero, its image $\varphi(E_t)$ is also of measure zero.
+\end{lemma}
+\begin{proof}
+	Let $P$ be a collection of cuboids that their union is $D_t$ and they have no common interior points pairwisely (Lemma~\ref{lemma: countable partition of any open set}). 
+	Now consider $\forall I \in P$, let $E_t(I) := E_t \cap I$. 
+	As a subset of $E_t$, which is of measure zero, $E_t(I)$ is also of measure zero.
+
+	$\varphi \in C^{(1)}(I)$, where $I$ is a compact set, hence $\exists M \in \mathbb R_+$ s.t.\ $\forall \bv t \in I$, $\|\varphi'(\bv t)\| < M$ (Theorem~\ref{theorem: Weierstrass maximum-value}). 
+	By finite-increment theorem (Theorem~\ref{theorem: finite-increment theorem}), $\forall \bv t_1, \bv t_2 \in I$, $\|\varphi(\bv t_1) - \varphi(\bv t_2)\|_X \leq M\|\bv t_1 - \bv t_2\|_X$.
+
+	From any cover $\varOmega$ of $E_t(I)$, a cover $\varOmega(I) := \{O \cap I \mid O \in \varOmega \}$ can be constructed. 
+	Hence, we can assume that $\varOmega = \{I_i \mid i \in \mathbb N\} \subset 2^I$, where $E_t(I) \subset \cup \varOmega$ and $\sum_{i \in \mathbb N} \mu(I_i) < \varepsilon$. 
+	Since $\varphi(I_i)$ can be contained in a cuboids that is centered at $\varphi(\bv t_i)$ where $\bv t_i$ is the centre of $I_i$, and with sides of $M$ times, we claim: $\varphi(E_t(I))$ is also of measure zero.
+	
+	As the countable union of $\varphi(E_t(I))$ ($I \in P$), $\varphi(E_t)$ is also of measure zero.
+\end{proof}
+
+\begin{lemma}[Conservation of zero-content under diffeomorphism]
+	\label{lemma: conservation of zero-content under diffeomorphism}
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between open sets in $X$, where $X$ is an $n$-D normed space.
+	If $\overline{E_t} \subset D_t$, and $E_t$ is of zero content, its image $\varphi(E_t)$ is also of zero content.
+\end{lemma}
+\begin{proof}
+	As the boundary of a set with zero content, $\partial E_t$ must also be of zero content. 
+	Hence, compact set $\overline{E_t}$ is also of zero content, therefore of zero measure.  
+	By Lemma~\ref{lemma: conservation of zero-measure under diffeomorphism}, $\varphi(\overline{E_t}) = \overline{\varphi(E_t)}$ is a compact set of zero measure, therefore of zero content.
+
+	As a subset of $\overline{\varphi(E_t)}$, $\varphi(E_t)$ is also of zero content.
+\end{proof}
+
+\begin{lemma}[Conservation of Jordan-measurability under diffeomorphism]
+	\label{lemma: conservation of Jordan-measurability under diffeomorphism}
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between open sets in $X$, where $X$ is an $n$-D normed space.
+	If $\overline{E_t} \subset D_t$, and $E_t$ is Jordan measurable, its image $\varphi(E_t)$ is also Jordan measurable.
+\end{lemma}
+\begin{proof}
+	One must have $\varphi(\partial E_t) = \partial \varphi(E_t)$ since $\varphi$ is a diffeomorphism (therefore a homeomorphism).
 \end{proof}
 
 \part{Real Analysis}
