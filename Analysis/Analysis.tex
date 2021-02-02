@@ -3749,6 +3749,14 @@ The way of assignment can be arbitary if $f \in \mathfrak R(X \times Y)$, which 
 
 \section{Change of Variables}
 
+In this section the following formula will be establish:
+\begin{equation}
+	\label{equation: change of variables}
+	\int\limits_{\varphi(D_t)} f(\bv x) \dif \bv x = \int\limits_{D_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t.
+\end{equation}
+
+To get rid of some boundary problem, we want the formula to be apllied on some compact set, however a linear approximation is only valid in an open set, hence we introduce: % I do not understand yet
+
 \begin{definition}[Support]
 	The \indexbf{support} of a function~$f \in Y^X$ is defined as:
 	\begin{equation*}
@@ -3809,6 +3817,24 @@ The way of assignment can be arbitary if $f \in \mathfrak R(X \times Y)$, which 
 \end{lemma}
 \begin{proof}
 	One must have $\varphi(\partial E_t) = \partial \varphi(E_t)$ since $\varphi$ is a diffeomorphism (therefore a homeomorphism).
+\end{proof}
+
+Now we are in the position to discuss the existance of integrals at the right hand side of Eq.~\ref{equation: change of variables}.
+
+\begin{lemma}
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $X$, where $X$ is an $n$-D normed space. 
+	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \in \mathfrak R(D_t)$.  
+\end{lemma}
+\begin{proof}
+	Let $\psi(\bv t) := f \circ \varphi (\bv t) |\det \varphi'(\bv t)|$.
+
+	Since $\varphi$ is a diffeomorphism, $\varphi^{-1}$ must also be differentiable, hence $\varphi'(\bv t)$ must be reversible, therefore with non-zero determinent. 
+	Hence: $\supp \psi = \supp f \circ \varphi = \varphi^{-1}(\supp f)$. 
+	$\varphi^{-1}(\supp f)$ is a closed set in $D_t$, hence $\supp \psi$ is a compact set.
+
+	Note that the discontinuous points must be contained in the support of the function (the complement of the support is an open set where the value of the function is always a constant: zero).
+	The discontinuous points of $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \chi_{D_t}(\bv t)$ must be all preimage of the discontinuous points of $f$ under $\varphi$. 
+	Since $f \in \mathfrak R(D_x)$, by Lemma~\ref{lemma: conservation of zero-measure under diffeomorphism}, the set of these points are also of zero measure.
 \end{proof}
 
 \part{Real Analysis}
