@@ -1824,7 +1824,7 @@ Let us recall and generalised the definition of interval:
 	Let $f \in C(G, Y)$, $[\bv x_0, \bv x_0 + \Delta \bv x] \subset G$.
 	If $\forall \bv x \in (\bv x_0, \bv x_0 + \Delta \bv x)$, $f$ is differentiable at $\bv x$, then
 	\begin{equation*}
-		\|f(\bv x_0 + \Delta x) - f(\bv x_0)\|_Y 
+		\|f(\bv x_0 + \Delta \bv x) - f(\bv x_0)\|_Y 
 			\leq \sup \{\|f'(\bv \xi)\|  \mid \bv \xi \in (\bv x_0, \bv x_0 + \Delta \bv x)\} \|\Delta \bv x\|_X\,.
 	\end{equation*}
 \end{theorem}
@@ -1885,6 +1885,9 @@ Let us recall and generalised the definition of interval:
 			\leq \sup \{\|f'(\bv \xi)\|  \mid \bv \xi \in (\bv x_0, \bv x_0 + \Delta \bv x)\} \|\Delta \bv x\|_X\,.
 	\end{equation*}
 \end{proof}
+
+The equality can be satisfied for some points when $f$ is a real-valued function. 
+cf.\ Theorem~\ref{theorem: Lagrange's finite-increment}.
 
 \begin{corollary}
 	\label{corollary: difference between derivative and any linear operator}
@@ -2040,7 +2043,7 @@ With the finite-increment theorem, we can generalised Theorem~\ref{theorem: cont
 	which means $\dif f(\bv x) = \mathscr L$.
 \end{proof}
 
-Then we shall use finite-increment theorem~\ref{theorem: finite-increment theorem} to prove some useful theorems.
+Then we shall use finite-increment theorem (Theorem~\ref{theorem: finite-increment theorem}) to prove some useful theorems.
 
 \begin{theorem}[Derivative functions doesn't have removable discontinuity]
 	Let $X$, $Y$ be two normed spaces, $\bv x_0 \in X$, $U \in \mathscr U(\bv x_0)$, $f \in Y^U$.
@@ -2438,6 +2441,7 @@ and
 \end{definition}
 
 \begin{theorem}
+	\label{theorem: interior extremum}
 	Let $X$ be a normed space, $U$ is an open set in $X$, and $f \in \mathbb R^U$.
 	The mapping~$f$ is $n$-th differentiable in $U$, and $(n + 1)$-th differentiable at $\bv x \in U$, where $n \in \mathbb N_+$.
 	$\forall k \in n + 1$, $f^{(k)}(\bv x) = \mathscr O$, and $f^{(n + 1)}(\bv x) \neq \mathscr O$.
@@ -2484,6 +2488,39 @@ and
 			\frac{\delta}{k!}  + o(1)
 		 \right) \to \|\Delta \bv x\|_X^{n+1} \frac{\delta}{k!} > 0\,.
 	\end{align*}	
+\end{proof}
+
+With the study of extrema, we can rewrite and specify the finite-increment theorem (Theorem~\ref{theorem: finite-increment theorem}). 
+First let's prove a useful theorem:
+
+\begin{theorem}[Rolle's theorem]
+	\label{theorem: Rolle}
+	Let $f \in C([x_0, x_0 + \Delta x]; \mathbb R)$, where $[x_0, x_0 + \Delta x] \subset \mathbb R$. 
+	If $f$ is differentiable in $(x_0, x_0 + \Delta x)$, and $f(x_0 + \Delta x) - f(x_0) = 0$, then $\exists \xi \in (x_0, x_0 + \Delta x)$ s.t.\ $f'(\xi) = 0$.
+\end{theorem}
+\begin{proof}
+	By the Weierstrass maximum value theorem (Theorem~\ref{theorem: Weierstrass maximum-value}), $f$ reaches its extrema in $[x_0, x_0 + \Delta x]$.
+	
+	Either the maximum and minimum point are equal, then the function is constant on $[x_0, x_0 + \Delta x]$ (hence the theorem is trivial), or, one of the maximum and minimum must locates in $(x_0, x_0 + \Delta x)$. 
+	By Theorem~\ref{theorem: interior extremum}, the point when $f$ reach its extremum is the point when $f' = 0$.
+\end{proof}
+
+\begin{theorem}[Lagrange's finite-increment theorem]
+	\label{theorem: Lagrange's finite-increment}
+	Let $X$ be a normed space, $G \in \mathscr T_X$, where $\mathscr T_X$ is the topology induced by the norm $\|*\|_X$. 
+	Let $f \in C(G; \mathbb R)$. 
+	If $\forall \bv x \in (\bv x_0, \bv x_0 + \Delta \bv x)$, $f$ is differentiable at $\bv x$, then $\exists \bv \xi \in (\bv x_0, \bv x_0 + \Delta \bv x)$, 
+	\begin{equation*}
+		|f(\bv x_0 + \Delta \bv x) - f(\bv x_0)| 
+			= |f'(\bv \xi)|  \|\Delta \bv x\|_X\,.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Let:
+	\begin{equation*}
+		F(t) = f(\bv x_0 + t \Delta \bv x) + t [f(\bv x_0 + \Delta \bv x) - f(\bv x_0)],
+	\end{equation*}
+	and apply Rolle's theorem (Theorem~\ref{theorem: Rolle}) on $t \in [0, 1]$.
 \end{proof}
 
 \section{Implicit Function Theorem}
@@ -3585,7 +3622,7 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 \end{proof}
 
 \begin{theorem}[Mean-value theorem for the integral]
-	\label{theorem : mean-value theorem for the integral}
+	\label{theorem: mean-value theorem for the integral}
 	$f, g \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in an $n$-D normed space. 
 	$f, g \in \mathfrak R(E)$. 
 	If a.e.\ $\bv x \in E$, $m \leq f(\bv x) \leq M$ and $g(\bv x) \geq 0$, we have
@@ -3823,7 +3860,7 @@ Now we are in the position to discuss the existance of integrals at the right ha
 
 \begin{lemma}
 	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $X$, where $X$ is an $n$-D normed space. 
-	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \in \mathfrak R(D_t)$.  
+	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \in \mathfrak R(D_t)$. 
 \end{lemma}
 \begin{proof}
 	Let $\psi(\bv t) := f \circ \varphi (\bv t) |\det \varphi'(\bv t)|$.
@@ -3835,6 +3872,48 @@ Now we are in the position to discuss the existance of integrals at the right ha
 	Note that the discontinuous points must be contained in the support of the function (the complement of the support is an open set where the value of the function is always a constant: zero).
 	The discontinuous points of $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \chi_{D_t}(\bv t)$ must be all preimage of the discontinuous points of $f$ under $\varphi$. 
 	Since $f \in \mathfrak R(D_x)$, by Lemma~\ref{lemma: conservation of zero-measure under diffeomorphism}, the set of these points are also of zero measure.
+\end{proof}
+
+First, we need to prove Eq.~\ref{equation: change of variables} in 1-D space.
+
+\begin{theorem}[Change of variables in 1-D space]
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $\mathbb R$.
+	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then
+	\begin{equation}
+		\label{equation: change of variables in 1-D}
+		\int\limits_{D_x} f(x) \dif x = \int\limits_{D_t} f \circ \varphi(t) |f'(t)|\dif t.
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	Since $D_x$ is open, $\forall x \in \supp f$, $\exists \delta \in \mathbb R_+$, $B(x; \delta) \subset D_x$. 
+	The collection of $B(x; \delta)$ is therefore an open cover of the compact set~$\supp f$, hence there exists a finite subcover. 
+	Note that $B(x; \delta)$ is a interval in $\mathbb R$, and any intersection of two intervals is either empty or another interval. 
+	Hence, we can find a finite collection of closed intervals (as the closure of open intervals), the intervals of which have no common interior points pairwise, and the union of the collection contains $\supp f$.
+
+	Assume one of the intervals is $I_x = [a, b]$. 
+	In 1-D space, diffeomorphism maps intervals into intervals, hence any partition~$P_x$ of $I_x$ would induce a partition~$P_t$ of $I_t = \varphi^{-1}(I_x)$. 
+	
+	Let $P_x := \{[x_i, x_{i+1}] \mid i \in N\}$ where $x_0 = a$, $x_{N} = b$, and $x_i < x_{i+1}$. 
+	Let $P_t = \{[t_i, t_{i+1}] := \varphi^{-1}([x_i, x_{i+1}]) \mid i \in N\}$\footnote{Be careful! $\varphi$ could be decreasing.}.
+	By Lagrange's finite-increment theorem (Theorem~\ref{theorem: Lagrange's finite-increment}), $\forall i \in N$, $\exists \tau_i \in [t_i, t_{i+1}]$ s.t.\ 
+	\begin{equation*}
+		|x_{i+1} - x_i| = |\varphi(t_{i+1}) - \varphi(t_i)| 
+			= |\varphi'(\tau_i)| |t_{i+1} - t_i|.
+	\end{equation*}
+
+	Let $\xi_i = \varphi(\tau_i)$, and denote $\psi(t) := f \circ \varphi(t)|\varphi'(t)|$. The Riemann sum:
+	\begin{equation*}
+		\sigma(f, P_x, \bv\xi) = \sum_{i \in N} f(\xi_i)|x_{i+1} - x_i| 
+			= \sum_{i \in N} f \circ \varphi(\tau_i) |\varphi'(\tau_i)||t_{i+1} - t_i|
+			= \sigma(\psi, P_t, \bv\tau).
+	\end{equation*}
+
+	Since $\psi \in \mathfrak R(I_x)$, the limit of $\sigma(\psi, P_t, \bv\tau)$ is the integral, and by the fact that $\lambda(P_x) \to 0$ iff $\lambda(P_t) \to 0$, we have the equation:
+	\begin{equation*}
+		\int\limits_{I_x} f(x) \dif x = \int\limits_{I_t} f \circ \varphi(t) |f'(t)|\dif t.
+	\end{equation*} 
+
+	Summing all $I_x$ (finite), we have Eq.~\ref{equation: change of variables in 1-D}.
 \end{proof}
 
 \part{Real Analysis}
