@@ -3877,11 +3877,12 @@ Now we are in the position to discuss the existance of integrals at the right ha
 First, we need to prove Eq.~\ref{equation: change of variables} in 1-D space.
 
 \begin{theorem}[Change of variables in 1-D space]
+	\label{theorem: change of variables in 1-D}
 	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $\mathbb R$.
 	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then
 	\begin{equation}
 		\label{equation: change of variables in 1-D}
-		\int\limits_{D_x} f(x) \dif x = \int\limits_{D_t} f \circ \varphi(t) |f'(t)|\dif t.
+		\int\limits_{D_x} f(x) \dif x = \int\limits_{D_t} f \circ \varphi(t) |\varphi'(t)|\dif t.
 	\end{equation}
 \end{theorem}
 \begin{proof}
@@ -3915,6 +3916,68 @@ First, we need to prove Eq.~\ref{equation: change of variables} in 1-D space.
 
 	Summing all $I_x$ (finite), we have Eq.~\ref{equation: change of variables in 1-D}.
 \end{proof}
+
+In a finite-dimensional space~$V$ over $\mathbb R$, vectors can be represented as coordinates, in another word, $V$ and $\mathbb R^{\dim V}$ are isomorphic. 
+
+\begin{definition}[Elementary diffeomorphism]
+	An \indexbf{elementary diffeomorphism}~$\varphi \colon D_t \mapsto D_x$ is defined as a diffeomorphism, being a change of one of the coordinates in a given basis, i.e.\ 
+	\begin{equation*}
+		x_i = \varphi(\bv t) = \begin{cases}
+			t_i, & i \neq k;
+			\\
+			\varphi_k(\bv t), & i = k.
+		\end{cases}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Change of variables for elementary diffeomorphism]
+	Let $\varphi \colon D_t \to D_x$ be an elementary diffeomorphism between bounded open sets in $\mathbb R^n$.
+	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then
+	\begin{equation*}
+		\int\limits_{D_x} f(x) \dif x = \int\limits_{D_t} f \circ \varphi(t) |\det \varphi'(t)|\dif t.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Use Theorem~\ref{theorem: change of variables in 1-D} and Fubini's theorem (Theorem~\ref{theorem: Fubini's theorem}).
+\end{proof}
+
+\begin{theorem}[Change of variables for composite diffeomorphism]
+	Let $\varphi \colon D_t \to D_x$ and $\psi \colon D_\tau \to D_t$ be two elementary diffeomorphisms between bounded open sets in $\mathbb R^n$. 
+	If Eq.~\ref{equation: change of variables} holds for both $\varphi$ and $\psi$ (for any $f \in \mathfrak R(D_x)$ or $f \in \mathfrak R(D_t)$), 
+	then $\forall f \in \mathfrak R(D_\tau)$:
+	\begin{equation*}
+		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_{\tau}} f \circ \varphi \circ \psi(\bv \tau) |\det (\varphi \circ \psi)' (\bv \tau)| \dif \bv \tau
+	\end{equation*}
+\end{theorem}
+
+\begin{lemma}[Decomposition diffeomorphism]
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $\mathbb R^n$. 
+	$\forall \bv t \in D_t$, $\exists U \in \mathscr U(\bv t)$, where $\varphi$ can be considered as a composition of elementary diffeomorphisms.
+\end{lemma}
+\begin{proof}
+	The proof would be taken assuming $n = 2$. For $n > 2$, the proof can be given by induction.
+
+	First we prove the the existance of a neighbourhood~$U$, where the change of the first coordinates $\psi \colon (t_0, t_1) \mapsto (\varphi_0(t_0, t_1), t_1)$ is a diffeomorphism.
+
+	Consider $F(\bv t, \bv x) := \psi(\bv t) - \bv x$. 
+	Notice that $F(\bv t, \bv x)$ must be continuously differentiable
+	Hence $F(\bv t, \bv x) = \bv 0 $ or $\psi(\bv t) = \bv x$ yields a function $\bv t = \psi^{-1}(\bv x)$ in some neighbourhood, which is also continuously differentiable.
+
+	Then, consider $\varphi \circ \psi^{-1}$, which is a composition of two diffeomorphism, hence must also be a diffeomorphism, and we can see it is elementary. 
+	Therefore we have: $\varphi = (\varphi \circ \psi^{-1}) \circ \psi$.
+\end{proof}
+
+\begin{theorem}[Change of variables]
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $\mathbb R^n$.
+	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then
+	\begin{equation*}
+		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)|\dif \bv t.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
 
 \part{Real Analysis}
 
