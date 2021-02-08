@@ -586,7 +586,7 @@ We now prove a very useful special case for compact sets: compact sets in $\math
 	Notice that $\forall i \in \mathbb N$, $S_i$ can be conceived as a product of $n$ 1-dimension intervals. These intervals are also closed nested sequence, but in $\mathbb R$. 
 	We have leaned that $\exists! \bv \xi := (\xi_i)_{i \in n}$ s.t.\ $\{\bv \xi\} := \bigcap S$ from the theory of real numbers.
 
-	In every $S_k$ we can find a $\bv x_{i_k}$, which is a convergent subsequence of the arbitary sequence~$(\bv x_i)_{i \in \mathbb N}$.
+	In every $S_k$ we can find a $\bv x_{i_k}$, which is a convergent subsequence of the arbitrary sequence~$(\bv x_i)_{i \in \mathbb N}$.
 \end{proof}
 
 \begin{theorem}[Compact iff closed and bounded in $\mathbb R^n$]
@@ -802,9 +802,9 @@ We shall consider isometric spaces as identical, when only discussing within met
 	\end{equation*}
 	So, $[(a^n)_{n \in \mathbb N}]$ is a Cauchy sequence, therefore it is an element of $S$. 
 	
-	By $\lim_{i \to \infty} d\big([(x^i_n)_{n \in \mathbb N}], [(a^n)_{n \in \mathbb N}]\big) = 0$, we found a limit for the arbitary Cauchy sequence $\big([(x^i_n)_{n \in \mathbb N}]\big)_{i \in \mathbb N}$ in $S$.
+	By $\lim_{i \to \infty} d\big([(x^i_n)_{n \in \mathbb N}], [(a^n)_{n \in \mathbb N}]\big) = 0$, we found a limit for the arbitrary Cauchy sequence $\big([(x^i_n)_{n \in \mathbb N}]\big)_{i \in \mathbb N}$ in $S$.
 
-	Finally, we have to check that $S_X$ is everywhere dense in $S$. For any aribitary $[(x_n)_{n \in \mathbb N}] \in S$, $\forall \varepsilon$, we can always choose a $N \in \mathbb N$ great enough so that $[(x_N)_{n \in \mathbb N}] \in S_X \cap B\big([(x_n)_{n \in \mathbb N}], \varepsilon\big)$. 
+	Finally, we have to check that $S_X$ is everywhere dense in $S$. For any arbitrary $[(x_n)_{n \in \mathbb N}] \in S$, $\forall \varepsilon$, we can always choose a $N \in \mathbb N$ great enough so that $[(x_N)_{n \in \mathbb N}] \in S_X \cap B\big([(x_n)_{n \in \mathbb N}], \varepsilon\big)$. 
 	Since every neighbourhood of $[(x_n)_{n \in \mathbb N}]$ contains a ball centred at it, we have proved that $\forall U \in \mathscr U([(x_n)_{n \in \mathbb N}]) \big( U \cap S_X \neq \varnothing \big)$.
 \end{proof}
 
@@ -892,7 +892,7 @@ Such definition is parallel to the definition we have introduced on the limits o
 		d(f(x'), a) \leq d(f(x'), f(x_n)) + d(f(x_n), a)
 		< \frac 1 n + \varepsilon\,,
 	\end{equation*}
-	the right-hand side can be arbitary small, if $n$ is even greater.
+	the right-hand side can be arbitrary small, if $n$ is even greater.
 \end{proof}
 
 \begin{definition}[Continuity]
@@ -3456,7 +3456,7 @@ We might denote the function $\bv x \mapsto \chi_E(\bv x) f(\bv x)$ by $\chi_E f
 	\begin{equation*}
 		\int\limits_E f(\bv x) \dif \bv x := \int\limits_I \chi_E(\bv x) f(\bv x) \dif \bv x,
 	\end{equation*}
-	where $I$ is a arbitary cuboid that contains $E$.
+	where $I$ is a arbitrary cuboid that contains $E$.
 \end{definition}
 
 \begin{theorem}[Lebesgue's criterion over a set]
@@ -3651,7 +3651,7 @@ We use the following notation to denote one of the \emphbf{iterated integrals}\i
 which should be understood as the integral of $\bv F(\bv x)$ over $X$, where $F(\bv x)$ is the integral of $f(\bv x, \bv y)$ over $Y$ with fixed $\bv x$. 
 What if at some point $\bv x_0 \in X$, $\bv y \mapsto f(\bv x, \bv y) \notin \mathfrak R(Y)$? 
 If the function $f$ is bounded, we can assign a value to $\bv F(\bv x_0)$ between $\overline{\int}_Y f(\bv x_0, \bv y) \dif \bv y$ and $\underline{\int}_Y f(\bv x_0, \bv y) \dif \bv y$. 
-The way of assignment can be arbitary if $f \in \mathfrak R(X \times Y)$, which we might see in the following famous theorem:
+The way of assignment can be arbitrary if $f \in \mathfrak R(X \times Y)$, which we might see in the following famous theorem:
 
 \begin{theorem}[Fubini's theorem]
 	\label{theorem: Fubini's theorem}
@@ -3967,7 +3967,8 @@ In a finite-dimensional space~$V$ over $\mathbb R$, vectors can be represented a
 	Therefore we have: $\varphi = (\varphi \circ \psi^{-1}) \circ \psi$.
 \end{proof}
 
-\begin{theorem}[Change of variables]
+\begin{theorem}[Change of variables for diffeomorphism]
+	\label{theorem: change of variables for diffeomorphism}
 	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $\mathbb R^n$.
 	If $f \in \mathfrak R(D_x)$, and $\supp f$ is a compact set in $D_x$, then
 	\begin{equation*}
@@ -3975,9 +3976,99 @@ In a finite-dimensional space~$V$ over $\mathbb R$, vectors can be represented a
 	\end{equation*}
 \end{theorem}
 \begin{proof}
+	$\forall \bv x \in K_t := \varphi^{-1}(\supp f)$, $\exists \delta(\bv t) \in \mathbb R_+$ s.t.\ $\varphi$ decomposes into elementary diffeomorphisms in $B(\bv t, \delta(\bv t))$. 
+	It is clear that the collection of $B(\bv t; \delta(\bv t)/2)$ must be a open cover of $K_t$, hence there exists a finite subcover~$\varOmega := \{ B(\bv t_i; \delta(\bv t_i)/2) \mid i \in m\}$. 
+	Let $\delta := \min \{\delta(\bv t_i)/2 \mid i \in m\}$. 
+	Now if a set with diametre less than $\delta$ intersects with $K_t$, it would be contained in a $B(\bv t_i; \delta(\bv t_i))$ where $\delta(\bv t_i) \geq 2 \delta$.
 	
+	Let $d := d(K_t, \partial D_t)$\footnote{$d$ must be positive since $K_t$ is a closed set contained in the open set $D_t$.}. 
+
+	Find a cuboid $I$ that contains $D_t$. 
+	$P \in \mathfrak P(I)$ and $\lambda(P) < \min \{\delta, d\}$. 
+	Let $P' := \{I_i \mid I_i \cap K_t \neq 0 \wedge I_i \in P, \, i \in N\}$. 
+	
+	\begin{equation*}
+		\int\limits_{D_t}  f \circ \varphi(\bv t) |\det \varphi'(\bv t)|\dif \bv t
+			= \sum_{i \in N} \int\limits_{I_i} f \circ \varphi(\bv t) |\det \varphi'(\bv t)|\dif \bv t.
+	\end{equation*}
+
+	Now we know that $\varphi$ decomposes into elementary diffeomorphisms in $I_i$, which is contained in some $B(\bv t_i; \delta(\bv t_i))$. 
+	Use Theorem~\ref{theorem: change of variables in 1-D}, Theorem~\ref{theorem: Fubini's theorem}.
 \end{proof}
 
+The corollary below might be more partically convenient:
+
+\begin{corollary}
+	\label{corollary: change of variables in a subset}
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between bounded open sets in $\mathbb R^n$. 
+	$\overline{E_x} \subset D_x$, $\varphi^{-1}(E_x) = E_t$. 
+	If $f \in \mathfrak R(E_x)$, then
+	\begin{equation*}
+		\int\limits_{E_x} f(\bv x) \dif \bv x = \int\limits_{E_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)|\dif \bv t.
+	\end{equation*}
+\end{corollary}
+
+\begin{theorem}[Change of variables]
+	Let $D_t$, $D_x$ be two Jordan measurable sets in $\mathbb R^n$, $\varphi \in D_x^{D_t}$. 
+	$S_t \subset D_t$ and $S_x \subset D_x$ are of measure zero.
+	If $D_t \backslash S_t$ and $D_x \backslash S_x$ are open, $\varphi|_{D_t \backslash S_t}$ is a diffeomorphism from $D_t \backslash S_t$ to $D_x \backslash S_x$, and $\exists M \in \mathbb R_+$ s.t.\ $\forall \bv t \in D_t \backslash S_t$, $|\det (\varphi|_{D_t \backslash S_t})'(\bv t)| < M$; 
+	then, $\forall f \in \mathfrak R(D_x)$, $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \in \mathfrak R(D_t \backslash S_t)$, and, 
+	\begin{equation*}
+		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_t\backslash S_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t.
+	\end{equation*}
+
+	If also $|\det \varphi'|$ exists and bounded on $D_t$, we have:
+	\begin{equation*}
+		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	By Lemma~\ref{lemma: conservation of zero-measure under diffeomorphism}, the discontinuous points of $f \circ \varphi$ is of zero measure. 
+	Now we prove that $D_t \backslash S_t$ is also Jordan measurable.
+
+	Since $D_x \backslash S_x$ is open, it and its boundary must be disjoint, and the later contains $\partial S_x$. 
+	Hence: $(D_x \backslash S_x) \cap \partial S_x = \varnothing$. 
+	Recall that $S_x \subset D_x$, hence $\partial S_x \subset \overline{D_x}$. 
+	Therefore, 
+	\begin{equation*}
+		\partial S_x 
+		\subset \overline{D_x} \cap \complement_{\mathbb R^n} (D_x \backslash S_x) 
+		= \overline{D_x} \cap (\complement_{\mathbb R^n} D_x \cup S_x)
+		\subset \partial D_x \cup S_x.
+	\end{equation*}
+
+	Hence, $\partial D_x \cup S_x = \partial D_x \cup \overline{S_x}$, in another word, $\partial D_x \cup S_x$ is a compact set. 
+	As a union of sets of zero measure, $\partial D_x \cup S_x$ is of zero measure too, hence it is of zero content (Theorem~\ref{theorem: compact zero measure defined by finite cuboids}). 
+	Since $\partial (D_x \backslash S_x) \subset \partial D_x \cup S_x$, $D_x \backslash S_x$ is Jordan measurable. 
+	Similarily we can prove that $D_t \backslash S_t$ is also Jordan measurable.
+
+	By Lebesgure's criterion~\ref{theorem: Lebesgue's criterion}, $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \in \mathfrak R(D_t \backslash S_t)$. 
+	
+	Next we need to find a subset of $D_x \backslash S_x$ so that we can use Corollary~\ref{corollary: change of variables in a subset}.
+
+	$\forall \varepsilon \in \mathbb R_+$, we can find a finite collection $\{I_i \mid i \in N\}$ of cuboids that covers $\partial D_x \cup S_x$, and $\forall \bv x \in \partial (D_x \backslash S_x)$, $\bv x$ locates interiorly in at least one cuboid in the collection, and $\sum_{i \in N} \mu(I_i) < \varepsilon$. 
+	Let $U_x := \bigcup_{i \in N} I_i$ and $V_x := D_x \backslash U_x$.
+
+	Any Jordan measurable set $E_x$ that contains $\overline{V_x}$ and is contained in $D_x$ must have:
+	\begin{equation*}
+		\left|
+			\int\limits_{D_x} f(\bv x) \dif \bv x - \int\limits_{E_x} f(\bv x) \dif \bv x
+		\right|
+		 = \left|
+		 \int\limits_{D_x \backslash E_x} f(\bv x) \dif \bv x
+	 \right| \leq M \mu(D_x \backslash E_x) < M \varepsilon,
+	\end{equation*}
+	where $M = \sup \{f(\bv x) \mid \bv x \in D_x\}$.
+
+	Let $E_t = \varphi^{-1}(E_x)$. 
+	By Corollary~\ref{corollary: change of variables in a subset} and the arbitrariness of $\varepsilon$, we have Eq.~\ref{equation: change of variables}.
+
+	If $|\det \varphi'|$ exists and bounded on $D_t$:
+	The discontinuous points of $\bv t \mapsto f \circ \varphi(\bv t) |\det\varphi'(\bv t)|$ on $D_t$ are made up by the discontinuous points in $D_t \backslash E_t$, which we have proved is of zero measure, and a subset of $S_t \cup \partial D_t$, which is also of zero measure. 
+	Hence: $\bv t \mapsto f \circ \varphi(\bv t) |\det\varphi'(\bv t)| \in \mathfrak R(D_t)$.
+\end{proof}
+
+\section{Improper Integral}
 
 \part{Real Analysis}
 
