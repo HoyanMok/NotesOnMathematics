@@ -144,7 +144,7 @@
 \maketitle % 打印标题
 \frontmatter
 \chapter{Preface}
-The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/Analysis} .
+The latest version: \url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/Analysis}.
 
 \tableofcontents
 
@@ -586,7 +586,7 @@ We now prove a very useful special case for compact sets: compact sets in $\math
 	Notice that $\forall i \in \mathbb N$, $S_i$ can be conceived as a product of $n$ 1-dimension intervals. These intervals are also closed nested sequence, but in $\mathbb R$. 
 	We have leaned that $\exists! \bv \xi := (\xi_i)_{i \in n}$ s.t.\ $\{\bv \xi\} := \bigcap S$ from the theory of real numbers.
 
-	In every $S_k$ we can find a $\bv x_{i_k}$, which is a convergent subsequence of the arbitrary sequence~$(\bv x_i)_{i \in \mathbb N}$.
+	In every $S_k$ we can find an $\bv x_{i_k}$, which is a convergent subsequence of the arbitrary sequence~$(\bv x_i)_{i \in \mathbb N}$.
 \end{proof}
 
 \begin{theorem}[Compact iff closed and bounded in $\mathbb R^n$]
@@ -650,7 +650,7 @@ Notice that if $A \in 2^X$ is open-closed, its complement $X - A$ is also open-c
 	Connected sets have connected closure.
 \end{theorem}
 \begin{proof}
-
+	% TODO finish proof of the colosure of a connected set is also a connected set
 \end{proof}
 
 
@@ -4026,8 +4026,7 @@ The corollary below might be more partically convenient:
 	By Lemma~\ref{lemma: conservation of zero-measure under diffeomorphism}, the discontinuous points of $f \circ \varphi$ is of zero measure. 
 	Now we prove that $D_t \backslash S_t$ is also Jordan measurable.
 
-	Since $D_x \backslash S_x$ is open, it and its boundary must be disjoint, and the later contains $\partial S_x$. 
-	Hence: $(D_x \backslash S_x) \cap \partial S_x = \varnothing$. 
+	Since $D_x \backslash S_x$ is open, every point of $D_x \backslash S_x$ has a neighbourhood of it contained in $D_x \backslash S_x$, therefore disjoint from $S_x$, hence by the definition of boundary: $(D_x \backslash S_x) \cap \partial S_x = \varnothing$. 
 	Recall that $S_x \subset D_x$, hence $\partial S_x \subset \overline{D_x}$. 
 	Therefore, 
 	\begin{equation*}
@@ -4069,6 +4068,103 @@ The corollary below might be more partically convenient:
 \end{proof}
 
 \section{Improper Integral}
+
+\begin{definition}[Exhaustion]
+	Let $\langle E_n \rangle_{n \in \mathbb N}$ be a increasing sequence of sets i.e.\ $\forall n, m \in \mathbb N$, $n \leq m \to E_n \subseteq E_m$. 
+	We denote $\indexmath[En uparrow E]{E_n \uparrow E} := \bigcup_{n \in \mathbb N} E_n$, and say that $\langle E_n \rangle_{n \in \mathbb N}$ is an \indexbf{exhaustion} of the set $E$.
+\end{definition}
+
+
+\begin{theorem}
+	\label{theorem: measure of limit of sets}
+	Let $\langle E_n \rangle_{n \in \mathbb N}$ be an Jordan measurable exhaustion of a Jordan measurable set $E$.
+	\begin{enumerate}
+		\item $\lim_{n \to \infty} \mu(E_n) = \mu(E)$;
+		\item $\forall f \in \mathfrak R(E)$, $\forall n \in \mathbb N$, $f|_{E_n} \in \mathfrak R(E_n)$, and
+		\begin{equation*}
+			\lim_{n \to \infty} \int\limits_{E_n} f(\bv x) \dif \bv x = \int\limits_E f(\bv x) \dif \bv x.
+		\end{equation*}
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	By $\mu(E_n) \leq \mu(E)$ we have $\lim_{n \to \infty} \mu(E_n) \leq \mu(E)$.
+	$\forall \varepsilon \in \mathbb R_+$, find $\partial E$ a cover $\varOmega$ by open cuboids, where $\sum_{I \in \varOmega} \mu(I) < \varepsilon$. 
+	For $\varepsilon / 2^n$, repeat this for $\partial E_n$ to get $\varOmega_n$.
+	Let $\tilde E := E \cup (\cup \varOmega)$ and $\tilde E_n := E_n \cup (\cup \varOmega)$.
+
+	$\{\cup \varOmega\} \cup \{\tilde E_n \mid n \in \mathbb N\}$ is an open cover of the compact set $\overline E$, hence we can find it a finite subcover\footnote{Notice that $E_n$ is monotone.}: $\{\cup \varOmega\} \cup \{E_{i} \mid i \in N\}$. 
+	Or: $\{\cup \varOmega, E_{N-1}\} \cup \{\cup \varOmega_i \mid i \in N\}$ is also a finite open cover of $\overline E$. 
+	Hence:
+	\begin{equation*}
+		\mu(E) \leq \mu(\overline E) 
+		\leq \mu(E_{N-1}) + \mu(\cup \varOmega) + \sum_{i \in N} \mu(\cup \varOmega_i)
+		< \mu(E_{N-1}) + \varepsilon + \sum_{i \in N} \varepsilon/2^i 
+		< \mu(E_{N-1}) + 3\varepsilon.
+	\end{equation*}
+
+	In conclusion: $\forall \varepsilon \in \mathbb R_+$, $\exists N \in \mathbb N$, $\mu(E) < \mu(E_N) + 3 \varepsilon$. Hence: $\mu(E) = \sup \{\mu(E_n) \mid n \in \mathbb N\}$, or:
+	\begin{equation*}
+		\lim_{n \to \infty} \mu(E_n) = \mu(E).
+	\end{equation*}
+
+	Since $f$ is Riemann integrable, $\exists M \in \mathbb R_+$ s.t.\ $\forall \bv x \in E$, $|f(\bv x)| < M$.
+	\begin{equation*}
+		\left|
+			\int\limits_E f(\bv x) \dif \bv x - \int\limits_{E_n} f(\bv x) \dif \bv x
+		\right| 
+		= \left|
+			\int\limits_{E \backslash E_n} f(\bv x) \dif \bv x 
+		\right|
+		\leq M \mu(E \backslash E_n) = M (\mu(E) - \mu(E_n)).
+	\end{equation*}
+
+	Passing $n \to \infty$, we have: 
+	\begin{equation*}
+		\left|
+			\int\limits_E f(\bv x) \dif \bv x - \lim_{n \mapsto \infty}\int\limits_{E_n} f(\bv x) \dif \bv x
+		\right| = 0.
+	\end{equation*}
+\end{proof}
+
+\begin{definition}[Improper integral]
+	$f \colon E \mapsto Y$, where $Y$ is a normed space.
+	If $\exists I \in Y$ s.t.\  $\forall$ exhaustion~$\langle E_n \rangle_{n \in \mathbb N} \in E^\mathbb N$ that $\forall n \in \mathbb N$, $f|_{E_n} \in \mathfrak R(E_n)$, 
+	\begin{equation*}
+		I = \lim_{n \mapsto \infty} \int\limits_{E_n} f(\bv x) \dif \bv x,
+	\end{equation*}
+	we call $I$ the \indexbf{improper integral} of $f$ over $E$, denoted by:
+	\begin{equation*}
+		\int\limits_{E} f(\bv x) \dif \bv x := I.
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Existance of improper integral for non-negative function]
+	If $f \colon E \mapsto \mathbb R$ is non-negative, and $\exists$ an exhaustion~$\langle E_n \rangle_{n \in \mathbb N} \in E^\mathbb N$ s.t.\ $\forall n \in \mathbb N$, $f|_{E_n} \in \mathfrak R(E_n)$, and
+	\begin{equation*}
+		I = \lim_{n \mapsto \infty} \int\limits_{E_n} f(\bv x) \dif \bv x
+	\end{equation*}
+	exists, then the improper integral of $f$ over $E$ exists and equals to $I$. 
+\end{theorem}
+\begin{proof}
+	If there were another exhaustion $\langle E'_n \rangle_{n \in \mathbb N}$ where $f$ is integrable over each $E'_n$: $\langle E'_n \cap E_k \rangle_{k \in \mathbb N}$ is an exhaustion of $E'_n$, hence:
+	\begin{equation*}
+		\int\limits_{E'_n} f(\bv x) \dif \bv x
+		 = \lim_{k \to \infty} \int\limits_{E'_n \cap E_k} f(\bv x) \dif \bv x 
+		\leq  \lim_{k \to \infty} \int\limits_{E_k} f(\bv x) \dif \bv x = I.
+	\end{equation*}
+
+	A monotonely increasing\footnote{$f$ is non-negative.} bounded sequence must be convergent:
+	\begin{equation*}
+		I' = \lim_{n \to \infty} \int\limits_{E'_n} f(\bv x) \dif \bv x \leq I.
+	\end{equation*}
+
+	\begin{equation*}
+		I = \lim_{k \to \infty} \int\limits_{E_k} f(\bv x) \dif \bv x =
+		\lim_{k \to \infty} \lim_{n \to \infty} \int\limits_{E'_n \cap E_k} f(\bv x) \dif \bv x 
+		\leq I',
+	\end{equation*}
+	hence $I = I'$.
+\end{proof}
 
 \part{Real Analysis}
 
