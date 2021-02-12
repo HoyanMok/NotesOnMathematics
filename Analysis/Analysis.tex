@@ -3640,6 +3640,32 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 	\end{equation*}
 \end{proof}
 
+\begin{theorem}
+	\label{theorem: positive part of the integral}
+	$f \colon E \to \mathbb R$, where $E$ is a bounded set in $\mathbb R^n$, $f_+ := (|f| + f)/2$. 
+	If $\int_E f(\bv x) \dif \bv x > A$, then there exists a subset $F \subset E$ s.t.\ $F$ consists of finite cuboids in $\mathbb R^n$, and:
+	\begin{equation*}
+		\int\limits_F f(\bv x) \dif \bv x > A.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Let $I$ be a cuboid that contains $E$.
+	$\exists d \in \mathbb R_+$, $\forall P \in \mathfrak R(I) (\lambda(P) < d)$, Darboux lower sum~$s(f_+, P) > A$. 
+	\begin{align*}
+		s(f_+, P) &= \sum_{I_i \in P} \frac{\mu(I_i)}{2} \inf\{|f(\bv x)| + f(\bv x) \mid \bv x \in I_i\} 
+		\\
+		&= \sum_{I'_i \in P'} \mu(I'_i) \inf\{f(\bv x) \mid \bv x \in I_i\}
+		= s(f|_{\cup P'}, P') > A,
+	\end{align*}
+	where $P'$ can be considered as a partition of $\cup P'$, where $f$ is non-negative.
+	Let $F = \cup P'$
+
+	Hence:
+	\begin{equation*}
+		\int\limits_F f(\bv x) \dif \bv x \geq \underline{\int\limits_F} f(\bv x) \dif \bv x > A.
+	\end{equation*}
+\end{proof}
+
 \section{Fubini's Theorem}
 
 Let $X$ be a cuboid in $\mathbb R^n$ and $Y$ be a cuboid in $\mathbb R^m$, $f \in \mathbb R^{X \times Y}$. 
@@ -4128,7 +4154,7 @@ The corollary below might be more partically convenient:
 
 \begin{definition}[Improper integral]
 	$f \colon E \mapsto Y$, where $Y$ is a normed space.
-	If $\exists I \in Y$ s.t.\  $\forall$ exhaustion~$\langle E_n \rangle_{n \in \mathbb N} \in E^\mathbb N$ that $\forall n \in \mathbb N$, $f|_{E_n} \in \mathfrak R(E_n)$, 
+	If $\exists I \in Y$ s.t.\  $\forall$ Jordan measurable exhaustion~$\langle E_n \rangle_{n \in \mathbb N} \in E^\mathbb N$ that $\forall n \in \mathbb N$, $f|_{E_n} \in \mathfrak R(E_n)$, 
 	\begin{equation*}
 		I = \lim_{n \mapsto \infty} \int\limits_{E_n} f(\bv x) \dif \bv x,
 	\end{equation*}
@@ -4138,7 +4164,34 @@ The corollary below might be more partically convenient:
 	\end{equation*}
 \end{definition}
 
-\begin{theorem}[Existance of improper integral for non-negative function]
+
+The following statement explains the reason why we can use the same notation as for proper integral (notice that we don't assume that $E$ is Jordan measurable, as in Theorem~\ref{theorem: measure of limit of sets}):
+
+\begin{theorem}[Agreement of improper integrals with (proper) integrals]
+	\label{theorem: agreement of improper integrals with (proper) integrals}
+	$f \colon E \mapsto Y$, where $Y$ is a normed space. 
+	If $f \in \mathfrak R(E)$, then the improper integral of $f$ over $E$ converges, and equals to the integral of $f$ over $E$.
+\end{theorem}
+\begin{proof}
+	Find a cuboid~$I$ that contains $E$, and let $\langle E_n \rangle_{n \in \mathbb N}$ be a Joran measurable exhaustion of $E$. 
+	Let $D_E$ be the discontinuous points of $\bv x \mapsto \chi_E(\bv x) f(\bv x)$. Since $f \in \mathfrak R(E)$, $D_E$ must be of measure zero. 
+
+	Let $D_{E_n}$ be the discontinuous points of $\bv x \mapsto \chi_{E_n}(\bv x) f(\bv x)$. 
+	$D_{E_n} \subset D_E \cup \partial E_n$, while $\partial E_n$ is of measure zero since $E_n$ is Jordan measurable. 
+	Hence $f \in \mathfrak R(E_n)$. 
+
+	Notice:
+	\begin{equation*}
+		\int\limits_E f(\bv x) \dif \bv x - \int\limits_{E_n} f(\bv x) \dif \bv x
+		= \int\limits_I (\chi_E(\bv x) - \chi_{E_n}(\bv x)) f(\bv x) \dif \bv x
+		= \int\limits_{E \backslash E_n} f(\bv x) \dif \bv x.
+	\end{equation*} 
+
+	The remaining part has been done in the proof of Theorem~\ref{theorem: measure of limit of sets}
+\end{proof}
+
+\begin{theorem}[Convergence of improper integral for non-negative function]
+	\label{theorem: convergence of improper integral for non-negative function}
 	If $f \colon E \mapsto \mathbb R$ is non-negative, and $\exists$ an exhaustion~$\langle E_n \rangle_{n \in \mathbb N} \in E^\mathbb N$ s.t.\ $\forall n \in \mathbb N$, $f|_{E_n} \in \mathfrak R(E_n)$, and
 	\begin{equation*}
 		I = \lim_{n \mapsto \infty} \int\limits_{E_n} f(\bv x) \dif \bv x
@@ -4166,6 +4219,111 @@ The corollary below might be more partically convenient:
 	hence $I = I'$.
 \end{proof}
 
+\begin{theorem}[Comparision criterion]
+	\label{theorem: comparision criterion (improper integral)}
+	Let $E$ be a set over which the improper integral of $g \in \mathbb R^E$ converges. 
+	$f \in \mathbb R^E$.
+	If for each Jordan measurable exhaustion $\langle E_n \rangle_{n \in \mathbb N}$ of $E$ where $g$ is integrable over $E_n$ ($\forall n \in \mathbb N$), $f$ is also integrable over $E_n$ for any $n \in \mathbb N$, and $\forall \bv x \in E$, $|f(\bv x)| \leq g(\bv x)$, then:
+	\begin{equation*}
+		\int\limits_{E} |f(\bv x)| \dif \bv x, \quad \int\limits_{E} f(\bv x) \dif \bv x
+	\end{equation*}
+	converge (as improper integrals).
+\end{theorem}
+\begin{proof}
+	A function is integrable over two Jordan measurable sets, then it is integrable over the difference of them.
+
+	$\forall \varepsilon \in \mathbb R_+$, $\exists N \in \mathbb N$ s.t.\ if $n > m > N$, then:
+	\begin{equation*}
+		\int\limits_{E_n} |f(\bv x)| \dif \bv x - \int\limits_{E_m} |f(\bv x)| \dif \bv x = \int\limits_{E_n \backslash E_m} |f(\bv x)| \dif \bv x
+		\leq \int\limits_{E_n \backslash E_m} |g(\bv x)| \dif \bv x < \varepsilon.
+	\end{equation*}
+
+	Hence, by Cauchy's criterion, we know the convergence of the improper integral of $\bv x \mapsto |f(\bv x)|$ over $E$.
+
+	Let $f_+ := (|f| + f)/2$, $f_- := (|f| - f)/2$. 
+	We can verify that both $f_+$ and $f_-$ are non-negative, and since they are $\leq |f|$, we conclude that the improper integral of $f_+$ and $f_-$ converges. 
+	By the fact that $f = f_+ - f_-$, we know the convergence of the improper integral of $f$ over $E$.
+\end{proof}
+
+The following theorem tells us, the convergence of $f$ and $|f|$ is in fact equivalent, which is different from the improper integrals defined as the limit of integrals over cuboids as the boundary moves towards infinity:
+\begin{theorem}[Equivalence of convergence and absolute convergence]
+	\label{theorem: equivalence of convergence and absolute convergence}
+	Let $D$ be an open set in $\mathbb R^n$, and $f$ is integrable over any compact subset of $D$.
+	The improper integral of $f$ over $D$ converges $\IFF$ the improper integral of $|f|$ over $D$ converges.
+\end{theorem}
+\begin{proof}
+	$\gets$: we have proved in the proof of Theorem~\ref{theorem: comparision criterion (improper integral)}.
+
+	$\to$: Assume that the improper integral of $|f|$ over $D$ diverges while $f$ doesn't. 
+	By Theorem~\ref{theorem: convergence of improper integral for non-negative function}, if the improper integral of $|f|$ diverges, then for any compact and Jordan measurable exhaustion $\langle E_n \rangle_{n \in \mathbb N}$ over which $|f|$ is integrable, 
+	\begin{equation*}
+		\lim_{n \to \infty} \int\limits_{E_n} |f(\bv x)| \dif \bv x = \infty.
+	\end{equation*}
+
+	Let $f_+ := (|f| + f)/2$, $f_- := (|f| - f)/2$. 
+	It can be verified that the improper integrals of $f_+$ and $f_-$ must also diverge to $\infty$. 
+	$\forall n \in \mathbb N$, $\exists N \in \mathbb N$ s.t.\ 
+	\begin{equation*}
+		\int\limits_{E_N} f_+(\bv x) \dif \bv x > \int\limits_{E_n} f_+(\bv x) \dif \bv x + \int\limits_{E_n} |f(\bv x)| \dif \bv x + n.
+	\end{equation*}
+
+	Now rechoose $\langle E_n \rangle_{n \in \mathbb N}$ so that $E_{n+1} := E_N$, repeatedly do it so that we have a Jordan measurable exhaustion of $E$ that satisfies $\forall n \in \mathbb N$:
+	\begin{equation*}
+		\int\limits_{E_{n+1} \backslash E_n} f_+(\bv x) \dif \bv x > \int\limits_{E_n} |f(\bv x)| \dif \bv x + n.
+	\end{equation*}
+
+	Now by Theorem~\ref{theorem: positive part of the integral}, we have $F_n \subset E_{n+1} \backslash E_n$ s.t.\ $F_n$ consists of finite cuboids and
+	\begin{equation*}
+		\int\limits_{F_n} f(\bv x) \dif \bv x > \int\limits_{E_n} |f(\bv x)| \dif \bv x + n.
+	\end{equation*}
+
+	Let $G_n = F_n \cup E_n$. 
+	$\bigcup_{n \in \mathbb N} G_n = E$, $G_n \subset G_{n+1}$, $\forall n \in \mathbb N$.
+	Hence:
+	\begin{equation*}
+		\int\limits_{G_n} f(\bv x) \dif \bv x > \int\limits_{E_n} (|f(\bv x)| + f(\bv x)) \dif \bv x + n \geq n,
+	\end{equation*}
+	therefore: the improper integral of $f$ over $E$ diverges, which contradicts to our previous assumption.
+\end{proof}
+
+\begin{theorem}[Change of variables for diffeomorphism (improper integrals)]
+	\label{theorem: change of variables for diffeomorphism (improper integrals)}
+	Let $\varphi \colon D_t \to D_x$ be a diffeomorphism between open sets in $\mathbb R^n$.
+	If $f$ is integrable over any Jordan measurable compact subset of $D_x$, the improper integral of $f$ over $D_x$ converges, then, the improper integral of $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)|$ over $D_t$ also converges, and
+	\begin{equation*}
+		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_t} \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	By Lemma~\ref{lemma: countable partition of any open set}, we can find an exhaustion $\langle E_{x, n}\rangle_{n \in \mathbb N}$ of $D_x$, where $E_{x, n}$ is the union of finite amount of cuboids (hence Jordan measurable and compact). 
+
+	Hence we have:
+	\begin{equation*}
+		\int\limits_{E_{x, n}} f(\bv x) \dif \bv x = \int\limits_{E_{t, n}} \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t,
+	\end{equation*}
+	where $E_{t, n} = \varphi^{-1}(E_{x, n})$.
+
+	Passing $n \to \infty$ and by the condition, the left-hand side converges. 
+	By Theorem~\ref{theorem: equivalence of convergence and absolute convergence} and Theorem~\ref{theorem: convergence of improper integral for non-negative function}, this implies the convergence of the improper integral of $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)|$ over $D_t$ and its equality with $f$'s.
+\end{proof}
+
+With same technique, we have:
+
+\begin{theorem}[Change of variables (improper integrals)]
+	Let $D_t$, $D_x$ be two open sets in $\mathbb R^n$, $\varphi \in D_x^{D_t}$. 
+	$S_t \subset D_t$ and $S_x \subset D_x$ are of measure zero.
+	If $D_t \backslash S_t$ and $D_x \backslash S_x$ are open, $\varphi|_{D_t \backslash S_t}$ is a diffeomorphism from $D_t \backslash S_t$ to $D_x \backslash S_x$, and $\exists M \in \mathbb R_+$ s.t.\ $\forall \bv t \in D_t \backslash S_t$, $|\det (\varphi|_{D_t \backslash S_t})'(\bv t)| < M$; 
+	then, if the improper integral of a function $f$ over $D_x$ converges, so does the improper integral of $\bv t \mapsto f \circ \varphi(\bv t) |\det \varphi'(\bv t)|$ over $D_t \backslash$, and, 
+	\begin{equation*}
+		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_t\backslash S_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t.
+	\end{equation*}
+
+	If also $|\det \varphi'|$ exists and bounded on $D_t$, we have:
+	\begin{equation*}
+		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t.
+	\end{equation*}
+\end{theorem}
+\chapter{\texorpdfstring{Curves and differential forms in $\mathbb R^n$}{Curves and differential forms in Rn}}
 \part{Real Analysis}
 
 
