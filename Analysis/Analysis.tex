@@ -131,6 +131,8 @@
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\rank}{rank}
+
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
 
@@ -650,7 +652,7 @@ Notice that if $A \in 2^X$ is open-closed, its complement $X - A$ is also open-c
 	Connected sets have connected closure.
 \end{theorem}
 \begin{proof}
-	% TODO finish proof of the colosure of a connected set is also a connected set
+	% TODO proof of the closure of a connected set is also a connected set
 \end{proof}
 
 
@@ -3601,6 +3603,14 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 	\end{equation*}
 \end{corollary}
 
+\begin{corollary}
+	$E$ is a Jordan measurable set in $\mathbb R^n$, $f \colon E \to \mathbb R$. 
+	If $f$ is continuous at $\bv x_0 \in E$ and $\forall \delta \in \mathbb R_+$, $\mu \big( B(\bv x_0; \delta) \cap E) > 0$, then:
+	\begin{equation*}
+		\lim_{\delta \to +0} \frac{1}{\mu \big( B(\bv x_0; \delta) \cap E)} \int\limits_{\mu \big( B(\bv x_0; \delta) \cap E)} f(\bv x) \dif \bv x = f(\bv x_0).
+	\end{equation*} 
+\end{corollary}
+
 \begin{theorem}[First mean-value theorem for the integral]
 	\label{theorem: first mean-value theorem for the integral}
 	$f \in \mathbb R^E$, where $E$ is a connected, bounded, Lebesgue measurable set in an $n$-D normed space. 
@@ -3638,6 +3648,29 @@ $\tilde{\mathfrak R}(E)$ is also a linear space, and $\int_E \dif \bv x$ is also
 	\begin{equation*}
 		m g(\bv x) \leq f(\bv x) g(\bv x) \leq M g(\bv x).
 	\end{equation*}
+\end{proof}
+
+\begin{theorem}[Limit of $p$-norm]
+	\label{theorem: limit of p-norm}
+	$E$ is Jordan measurable, $\mu(E) > 0$. 
+	If $f \in C(E; \mathbb R)$, $\forall \bv x \in E$, $f(\bv x) \geq 0$ and $\sup \{f(\bv x) \mid \bv x \in E\}$, then:
+	\begin{equation*}
+		\lim_{n \to \infty} \sqrt[n]{\int\limits_E [f(\bv x)]^n \dif \bv x}
+		= M.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	$\forall \varepsilon \in (0, M)$, since $f$ is continuous, $\exists \delta \in \mathbb R^+$ and $\exists \bv x_0 \in E$ s.t.\ $B(\bv x_0; \delta) \subset E_\varepsilon = \{\bv x \mid f(\bv x) \geq M - \varepsilon\}$:
+	\begin{equation*}
+		\sqrt[n]{\int\limits_E [f(\bv x)]^n \dif \bv x} \geq \sqrt[n]{\int\limits_{B(\bv x_0; \delta)} (M - \varepsilon)^n \dif \bv x}
+		= (M - \varepsilon) \sqrt[n]{\mu(B(\bv x_0; \delta))},
+	\end{equation*}
+	while
+	\begin{equation*}
+		\sqrt[n]{\int\limits_E [f(\bv x)]^n \dif \bv x} \leq M \sqrt[n]{\mu(E)}.
+	\end{equation*}
+
+	Pass $n \to \infty$ and use the fact that $\varepsilon$ is arbitrary.
 \end{proof}
 
 \begin{theorem}
@@ -4323,14 +4356,109 @@ With same technique, we have:
 		\int\limits_{D_x} f(\bv x) \dif \bv x = \int\limits_{D_t} f \circ \varphi(\bv t) |\det \varphi'(\bv t)| \dif \bv t.
 	\end{equation*}
 \end{theorem}
-\chapter{\texorpdfstring{Curves and differential forms in $\mathbb R^n$}{Curves and differential forms in Rn}}
+\chapter{\texorpdfstring{Surfaces and differential forms in $\mathbb R^n$}{Surfaces and differential forms in Rn}}
+\section{Surfaces}
+\begin{definition}[$k$-D surface]
+	A set $S \subset \mathbb R^n$ is called a \indexbf{$k$-D surface} if $\forall \bv x \in S$, $\exists U \in \mathscr U(\bv x)$ s.t.\ $U \cap S$ is homeomorphic to $\mathbb R^k$.
+\end{definition}
+
+A $k$-D surface is a $k$-D manifold embedded in $\mathbb R^n$, which we will introduce later. 
+
+A 1-D surface is always called a curve. 
+
+\begin{definition}[Chart]
+	Let $S$ be a $k$-D surface, and $U \subset S$ be a neighbourhood of a point $\bv x \in S$ in $S$ that is homormorphic to $\mathbb R^k$.
+	Given a homeomorphism~$\varphi \colon \mathbb R^k \to U$ (or from any parameterised topological space that is homeomorphic to $\mathbb R^k$, e.g.\ a ball or a (non-degenerate) cuboid in $\mathbb R^k$), the pair~$(U, \varphi)$, is called a \indexbf{chart} or \indexbf{local chart} of $S$. 
+	$\mathbb R^k$ is called the \indexbf{parametre domain} of the chart and $U$ is called the \indexbf{range of action} or \indexbf{domain of action} of the chart on $S$. 
+\end{definition}
+
+\begin{definition}[Atlas]
+	An \indexbf{Atlas} of a surface~$S$ is a countable collection of charts $\{(U_i, \varphi_i) \mid i \in \mathbb N\}$, whose domians of action cover the surface $S$ i.e.\ $\bigcup_{i \in m} U_i = S$.
+\end{definition}
+
+Sometimes there is an atlas with only one chart $\{(S, \varphi)\}$ (when $S$ itself is homeomorphic to $\mathbb R^k$), such surface is called a elementary surface.
+
+\begin{definition}[Smooth surface]
+	Let $S$ be a $k$-D surface in $\mathbb R^n$.
+	If there is an atlas $\{(U_i, \varphi_i) \mid i \in \mathbb N\}$ of $S$ s.t.\ $\varphi_i \in C^{(m)}(U_i)$ ($m \in \mathbb N_+$) and $\forall \bv x \in U_i$, $\rank \varphi_i'(\bv x) = k$, we shall call $S$ a \indexbf{smooth surface} (of class~$C^{(m)}$).
+\end{definition}
+
+Surface can be given by either an atlas or a group of equations:
+\begin{theorem}[Surface given by equations]
+	$\forall i \in n-k$, $F_i \in C^{(m)}(\mathbb R^n; \mathbb R)$ ($m \in \mathbb N_+$). 
+	If $S$ is the solutions of equation: 
+	\begin{equation}
+		\label{equation: surface given by equation}
+		F_i(\bv x) = 0, \quad i \in n-k,
+	\end{equation}
+	and $\forall \bv x \in S$,
+	\begin{equation*}
+		\rank \left(
+			\pdiff{F_i}{x_j}(\bv x)
+		\right)_{i \in n-k, j \in n} = k,
+	\end{equation*}
+	then $S$ is a $k$-D smooth surface of class $C^{(m)}$.
+\end{theorem}
+\begin{proof}
+	Let $\bv x_0 \in S$. By the condition of the theorem, there are $k$ coordinates, without loss of generality we assume the indices of which are $k, k+1, \ldots, n-1$, s.t.\ 
+	\begin{equation*}
+		\det \left(
+			\pdiff{F_i}{x_j}(\bv x_0)
+		\right)_{\substack{i \in n - k \\ j \in n \backslash k}} \neq 0.
+	\end{equation*}
+
+	By implicit function theorem (Theorem~\ref{theorem: implicit function theorem}), we have a cuboid $I$ centered at $\bv x_j$:
+	\begin{equation*}
+		x_j = f_j(\bv t), \qquad \bv t \in \mathbb R^{k} \cap I, \quad j \in n \backslash k,
+	\end{equation*}
+	where $f_j \in C^{(m)}(U)$.
+
+	Now we can define a homeomorphism~$\varphi \colon \mathbb R^{k} \cap I \to I \cap S$:
+	\begin{equation*}
+		\varphi_i(\bv t) = 
+		\begin{cases}
+			t_i, & i \in k; \\
+			f_i(\bv t), & i \in n \backslash k.
+		\end{cases}
+	\end{equation*}
+\end{proof}
+
 \part{Real Analysis}
 
 
 \part{Functional Analysis}
 \part{Complex Analysis}
 
-%\appendix
+\appendix
+\part{Appendices}
+\chapter{Several Important Inequality}
+\section{Mean-value Inequality}
+% TODO: Mean-Value Inequality
+\section{Cauchy's Inequality}
+% TODO: Cauchy's Inequality
+\section{Jensen's Inequality}
+% TODO: Jensen's Inequality
+\section{Brunn-Minkowski Inequality}
+% TODO: Brunn-Minkowski Inequality
+\section{H\"older's Inequality and Minkowski's Inequality}
+% TODO: H\"older's Inequality and Minkowski's Inequality
+\begin{theorem}[Young's Inequality]
+	Let $a \geq 0$, $b \geq 0$ be two non-negative numbers. 
+	If $p > 1$, $q > 1$ and
+	\begin{equation*}
+		\frac 1 p + \frac 1 q = 1,
+	\end{equation*}
+	then
+	\begin{equation*}
+		ab \leq \frac{a^p}{p} + \frac{b^q}{q}.
+	\end{equation*}
+
+	The equality iff $a^p = b^q$.
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
 
 \backmatter{}
 
