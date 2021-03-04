@@ -4376,7 +4376,58 @@ A 1-D surface is always called a curve.
 	An \indexbf{Atlas} of a surface~$S$ is a countable collection of charts $\{(U_i, \varphi_i) \mid i \in \mathbb N\}$, whose domians of action cover the surface $S$ i.e.\ $\bigcup_{i \in m} U_i = S$.
 \end{definition}
 
-Sometimes there is an atlas with only one chart $\{(S, \varphi)\}$ (when $S$ itself is homeomorphic to $\mathbb R^k$), such surface is called a elementary surface.
+Sometimes there is an atlas with only one chart $\{(S, \varphi)\}$ (when $S$ itself is homeomorphic to $\mathbb R^k$), such surface is called an elementary surface.
+
+\begin{theorem}
+	Let $S$ be a $k$-D surface embedded in $\mathbb R^n$, and there is a chart $(\varphi, U)$ with range of action $U \subset S$, where $\varphi \colon I_k \to U$ and
+	\begin{equation*}
+		I_k = \{ \bv t \in \mathbb R^n \mid |t_i| < 1, i \in k \}.
+	\end{equation*} 
+	If $\varphi \in C^{(1)}(I_k, \mathbb R^n)$ and $\forall \bv t \in I_k$, $\rank \varphi'(\bv t) = k$, then $\exists \varphi \in \mathbb R_+$, $\exists \varphi_\varepsilon \colon I_n \to \mathbb R^n$ s.t.\ $\varphi_\varepsilon |_{I_k \cap I_n} = \varphi |_{I_k \cap I_n}$, where $\varphi_\varepsilon$ is a diffeomorphism from
+	\begin{equation*}
+		I_n := \{\bv t \in \mathbb R^n \mid |t_i| < \varphi, i \in n\}
+	\end{equation*}
+	to $\mathbb R^n$.
+\end{theorem}
+\begin{proof}
+	Without loss of generality, we assume that the principal minor
+	\begin{equation*}
+		\det \left( 
+			\pdiff{\varphi_i}{t_j}(\bv 0)
+		 \right)_{i, j \in k} \neq 0.
+	\end{equation*}
+
+	By the implicit function theorem (Theorem~\ref{theorem: implicit function theorem}), we can find functions~$f_i \in C^{(1)}(I_n; \mathbb R)$ ($i \in n$):
+	\begin{equation*}
+		\left\{
+			\begin{aligned}
+				t_0 &= f_0(x_0, \ldots, x_{k-1}), \\
+				\cdots&\cdots\cdots\cdots \\
+				t_{k-1} &= f_{k-1}(x_0, \ldots, x_{k-1}), \\
+				x_k &= f_k(x_0, \ldots, x_{k-1}), \\
+				\cdots&\cdots\cdots\cdots \\
+				x_{n-1} &= f_{n-1}(x_0, \ldots, x_{k-1}), \\
+			\end{aligned}
+		\right.
+	\end{equation*}
+	where $\bv x = \varphi(\bv t)$. 
+
+	Hence
+	\begin{equation*}
+		\left\{
+			\begin{aligned}
+				t_0 &= f_0(x_0, \ldots, x_{k-1}), \\
+				\cdots&\cdots\cdots\cdots \\
+				t_{k-1} &= f_{k-1}(x_0, \ldots, x_{k-1}), \\
+				t_k &= x_k - f_k(x_0, \ldots, x_{k-1}), \\
+				\cdots&\cdots\cdots\cdots \\
+				t_{n-1} &= x_{n-1} - f_{n-1}(x_0, \ldots, x_{k-1}) \\
+			\end{aligned}
+		\right.
+	\end{equation*}
+	is the diffeomorphism that we are looking for.
+
+\end{proof}
 
 \begin{definition}[Smooth surface]
 	Let $S$ be a $k$-D surface in $\mathbb R^n$.
@@ -4422,6 +4473,18 @@ Surface can be given by either an atlas or a group of equations:
 		\end{cases}
 	\end{equation*}
 \end{proof}
+
+\section{Orientation of a Surface}
+
+Algebra has taught us that we can find a basis $\langle \basis e_i\rangle_{i \in n}$ for $\mathbb R^n$ and the transformation from one basis to another is taken by a non-degenerate matrix $\bv P$. 
+
+\begin{definition}[Orientation classes of frames]
+	Two bases are said to belong one \indexbf{orientation class of frames} if the transform matrix between them has a positive determinent.
+\end{definition}
+
+It is clear that there are two orientation classes of frames.
+
+
 
 \part{Real Analysis}
 
