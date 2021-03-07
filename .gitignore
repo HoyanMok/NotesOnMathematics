@@ -13,3 +13,4 @@
 *.gz
 Algebra/PUBLISH.bat
 *.bat
+Analysis/.vscode/settings.json

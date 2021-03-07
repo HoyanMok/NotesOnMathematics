@@ -4430,6 +4430,7 @@ Sometimes there is an atlas with only one chart $\{(S, \varphi)\}$ (when $S$ its
 \end{proof}
 
 \begin{definition}[Smooth surface]
+	\label{definition: smooth surface}
 	Let $S$ be a $k$-D surface in $\mathbb R^n$.
 	If there is an atlas $\{(U_i, \varphi_i) \mid i \in \mathbb N\}$ of $S$ s.t.\ $\varphi_i \in C^{(m)}(U_i)$ ($m \in \mathbb N_+$) and $\forall \bv x \in U_i$, $\rank \varphi_i'(\bv x) = k$, we shall call $S$ a \indexbf{smooth surface} (of class~$C^{(m)}$).
 \end{definition}
@@ -4483,6 +4484,104 @@ Algebra has taught us that we can find a basis $\langle \basis e_i\rangle_{i \in
 \end{definition}
 
 It is clear that there are two orientation classes of frames.
+
+Now consider two open and connected set $G$ and $D$ in $\mathbb R_n$, whose diffeomorphism is witnessed by $\varphi \colon D \to G$. 
+If for each point $\bv t \in D$, we translate the basis of $\mathbb R_n$ at $\bv t$ as the basis of the tangent space $\mathrm TD_{\bv t}$. 
+
+As we have shown in our previous chapter, $\varphi'(\bv t)$ is the isomorphism from $\mathrm TD_{\bv t}$ to $\mathrm TG_{\bv x}$ ($\bv x := \varphi(\bv t)$), and therefore maps a basis of $\mathrm TD_{\bv t}$ to a basis of $\mathrm TG_{\bv x}$.
+
+Since $\det \varphi' \neq 0$ (or there would be no inverse), $\det \varphi' \in C(D; \mathbb R) $ and $D$ is connected, we know that either $\forall \bv t \in D$, $\det \varphi'(\bv t) > 0$ or $\forall \bv t \in D$, $\det \varphi'(\bv t) < 0$. 
+Therefore we are able to find two orientation classes of $G$, by the choice of diffeomorphism~$\varphi$, or, in other words, the curvilinear coordinates of $G$.
+
+We apply these discussions to the definition of the orientation of a surface:
+
+\begin{definition}[Consistence of two charts]
+	Let $S$ be a $k$-D surface, $(\varphi_i, U_i)$, $i \in 2$ be two charts of $S$. 
+	If $\forall \bv x \in U_0 \cap U_1$, $\det \varphi'_0(\bv t_0) \det \varphi'_1(\bv t_1) > 0$ (i.e.\ with a same sign) where $\bv t_i := \varphi^{-1}_i(\bv x)$, $i \in 2$, then we say that these two charts are \emphbf{consistent}\index{consistence of two charts}.
+\end{definition}
+
+\begin{definition}[Orienting atlas and orientable surface]
+	If an atlas is made up of charts consistent pairwisely, we say that it is an \indexbf{orienting atlas}.
+
+	If a surface has an orienting atlas, we say that it is an \indexbf{orientable surface}. 
+	Otherwise we say that it is an \indexbf{nonorientable surface}.
+\end{definition}
+
+\begin{definition}[Orientation class of atlases]
+	We can define such a equivalence relation that, if the union of two orienting atlases is also a orienting atlas, we say they are equivalent.
+	Such equivalence relation induces an equivalence class, called \indexbf{orientation class of atlases}.
+
+	A surface with a certain class of atlases is said to be \emphbf{oriented}\index{oriented surface}, or we say that we have a orientation of the surface.
+\end{definition}
+
+A geometry theorem told us that \emph{a orientable connected surface has two different orientations}, the proof would be given later.
+
+\begin{theorem}[Conservation of orientability under diffeomorphism]
+	Let $\varphi \colon C \to C'$ be a diffeomorphism, $S \subset C$ is an orientable surface. 
+	$S' := \varphi(S)$ is also an orientable surface.
+\end{theorem}
+\begin{proof}
+	% TODO Conservation of orientability under diffeomorphism
+\end{proof}
+
+\begin{definition}[Normal vector]
+	Let $S$ be a $k$-D surface in $\mathbb R^n$, $\bv x \in S$. 
+	If a non-zero vector $\basis n \in \mathrm TS_{\bv x}^{\bot}$ i.e.\ the inner product of $\basis n$ and any vector in $\mathrm TS_{\bv x}$ is zero, then we say that $\basis n$ is a \indexbf{normal vector} of $S$ at $\bv x$.
+\end{definition}
+
+\begin{lemma}
+	Let $\basis n \in \mathbb R^n \backslash \mathbb R^{n-1}$, and $e := \langle \basis e_i \rangle_{i \in n - 1}$, $e' := \langle \basis e'_i \rangle_{i \in n - 1}$ be two bases of $\mathbb R^{n-1}$.
+
+	$e$ and $e'$ belong to the same class of frames of $\mathbb R^{n-1}$, iff $\langle\basis n, \basis e_0, \ldots, \basis e_{n-1}\rangle$ and $\langle\basis n, \basis e'_0, \ldots, \basis e'_{n-1}\rangle$ belong to the same class of frames of $\mathbb R^n$. 
+\end{lemma}
+\begin{proof}
+	\begin{equation*}
+		\begin{vmatrix}
+			1 & \bv 0_{n-1}^\mathrm T \\
+			\bv 0_{n-1} & \bv P_{(n-1)\times (n-1)}
+		\end{vmatrix}
+		= \det \bv P_{(n-1)\times (n-1)}.
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}
+	A $(n-1)$-D surface $S$ in $\mathbb R^n$ is orientable iff there exists a continuous normal vector field on $S$.
+\end{theorem}
+\begin{proof}
+	% TODO orientation given by normal vector
+\end{proof}
+
+\section{The Boundary of a Surface and Its Orientation}
+
+The definition of $k$-D surface has some defects: what if we want to discuss the half space $H_k := [0, +\infty) \times \mathbb R^{k-1}$? 
+We found that at the boundary $\partial H_k = \mathbb R^{k-1}$, the neighbourhood of each point does not homeomorphic to $\mathbb R^k$, while $H_k \backslash \partial H_k = \mathbb R_+ \times \mathbb R^{k-1}$ is a $k$-D surface.
+
+\begin{definition}[Surface with boundary]
+	Let $S \subset \mathbb R^n$. 
+	If $\forall \bv x \in S$, $\exists U \in \mathscr U(\bv x)$ s.t.\ $U$ is diffeomorphic to $\mathbb R^k$ or $H_k$, then we call $S$ a $k$-D \indexbf{surface with boundary}.
+
+	If $\varphi \colon H_k \to U$ is a homeomorphism, and $\varphi^{-1}(\bv x) \in \partial H_k$, then we say that $\bv x$ is on the boundary of $S$. 
+	The collection of all boundary point of $S$ is said \emphbf{the boundary of the surface} $S$\index{boundary of a surface}, denoted by $\indexmath[partial S]{\partial S}$.
+\end{definition}
+
+The boundary of a surface is \emph{not} the topological boundary of the set.
+
+Since the parametre domain might varies for surface with boundary, we usually denote a chart of $S$ by $\indexmath[(T, varphi, U)]{(T, \varphi, U)}$, where $U = \mathbb R^k$ or $H_k$ or sets that are homeomorphic (or diffeomorphic) to them.
+
+As Definition~\ref{definition: smooth surface}, we can define $C^{(m)}$ \emphbf{smooth surface with boundary}, but only to limit the calculation of partial derivative within $H_k$. % TODO: make the def of smooth surface with boundary clear
+
+\begin{theorem}[Boundary of a smooth surface with boundary]
+	Let $S$ be a $k$-D $C^{(m)}$ smooth surface with boundary. 
+	$\partial S$ is a $(k - 1)$-D $C^{(m)}$ smooth surface (without boundary).
+\end{theorem}
+\begin{proof}
+	\begin{equation*}
+		A(S) = \{(H_k, \varphi_i, U_i) \mid i \in I\} \cup \{(\mathbb R^k, \varphi_j, U_j) \mid j \in J\}.
+	\end{equation*}
+
+	We let $A(\partial S) := \{(\mathbb R^{k-1}, \varphi_i|_{\mathbb R^{k-1}}, \partial U_i \cap U_i) \mid i \in I\}$. 
+	Notice that $\partial H_k = \mathbb R^{k-1}$.
+\end{proof}
 
 
 
