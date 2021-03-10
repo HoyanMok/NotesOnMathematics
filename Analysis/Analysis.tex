@@ -68,6 +68,9 @@
 \usepackage{esint} % 积分
 \usepackage{siunitx} % 标准SI数值和单位处理
 
+\usepackage{etoolbox} % for '\AtBeginEnvironment' macro
+\AtBeginEnvironment{pmatrix}{\everymath{\displaystyle}} % 强制矩阵中使用 display 模式
+
 \usepackage{tikz} % 绘图
 \usepackage{float} % 浮动体 (供图片, 表格等) 扩展, 主要用于提供h模式
 \usepackage{graphicx} % 插入图片
@@ -4537,7 +4540,7 @@ A geometry theorem told us that \emph{a orientable connected surface has two dif
 \begin{proof}
 	\begin{equation*}
 		\begin{vmatrix}
-			1 & \bv 0_{n-1}^\mathrm T \\
+			1 & \bv 0_{n-1}^{\mathrm T} \\
 			\bv 0_{n-1} & \bv P_{(n-1)\times (n-1)}
 		\end{vmatrix}
 		= \det \bv P_{(n-1)\times (n-1)}.
@@ -4583,18 +4586,148 @@ As Definition~\ref{definition: smooth surface}, we can define $C^{(m)}$ \emphbf{
 	Notice that $\partial H_k = \mathbb R^{k-1}$.
 \end{proof}
 
+In order to discuss the orientation of the boundary of a surface, we have to note that the boundary might be a 0D surface i.e.\ a point. 
+We assign a sign $+$ or $-$ to the point so that the orientation of the 0D surface is given.
 
+\begin{theorem}[The orientation of the boundary of a smooth surface]
+	\label{theorem: the orientation of the boundary of a smooth surface}
+	Let $S$ be a $k$-D smooth surface with boundary. $\partial S$ is a smooth orientable surface.
+\end{theorem}
+\begin{proof}
+	Let $A(S) := \{(H_k, \varphi_i, U_i) \mid i \in I\} \cup \{(\mathbb R^k, \varphi_j, U_j) \mid j \in J\}$ be a orienting atlas of $S$, we need to prove that $A(\partial S) := \{(\mathbb R^{k-1}, \varphi_i|_{\mathbb R^{k-1}}, \partial U_i \cap U_i) \mid i \in I\}$ is also an orienting atlas, that is, the charts are pairwisely consistent.  
 
-\part{Real Analysis}
+	Now we assume the diffeomorphism $\psi$ from $V := \varphi^{-1}(U_i)$, $W:= \varphi^{-1}(U_{i'})$ has a \emph{positive} Jacobian, for some $i, i' \in I$. 
+	Let $\bv t \in \varphi^{-1}(U_i) \cap \mathbb R^{k-1}$ (therefore $\varphi(\bv t) \in \partial S$, $t_0 = 0$).
 
+	The partial derivative with respect to $t_m$, $m \in k^*$ shall be zero, hence:
+	\begin{equation}\label{equation: Jacobian of psi at boundary}
+		\begin{aligned}
+			\det \psi'(\bv t) &= 
+		\det \begin{pmatrix}
+			\pdiff{\psi_0}{t_0} & 0 & \cdots & 0 \\
+			\pdiff{\psi_1}{t_0} & \pdiff{\psi_1}{t_1} & \cdots & \pdiff{\psi_1}{t_{n-1}} \\
+			\vdots & \vdots & & \vdots \\
+			\pdiff{\psi_{n-1}}{t_0} & \pdiff{\psi_1}{t_1} & \cdots & \pdiff{\psi_{n-1}}{t_{n-1}}
+		\end{pmatrix}
+		\\
+		&= \pdiff{\psi_0}{t_0} 
+		\det \begin{pmatrix}
+			\pdiff{\psi_1}{t_1} & \cdots & \pdiff{\psi_1}{t_{n-1}} \\
+			\vdots & & \vdots \\
+			\pdiff{\psi_1}{t_1} & \cdots & \pdiff{\psi_{n-1}}{t_{n-1}}
+		\end{pmatrix}
+		= \pdiff{\psi_0}{t_0} \det \psi'|_{\mathbb R^{k-1}}
+		\end{aligned}
+	\end{equation}
 
-\part{Functional Analysis}
-\part{Complex Analysis}
+	Since $\forall \bv t' \in V$ s.t.\ $t_0 > 0$, $\psi(\bv t')_0 > 0$ while $\psi(\bv t)_0 = 0$, we have
+	\begin{equation*}
+		\pdiff{\psi_0}{t_0} \geq 0.
+	\end{equation*}
+
+	Since $\psi$ is a diffeomorphism, its Jacobian must be non-zero, hence by Eq.~\ref{equation: Jacobian of psi at boundary}:
+	\begin{equation*}
+		\det \psi'|_{\mathbb R^{k-1}} > 0.
+	\end{equation*}
+\end{proof}
+
+We can give canonical orientation of the boundary by the surface's orientation:
+
+\begin{definition}[Consistency of orientation]
+	Let $A(S) := \{(H_k, \varphi_i, U_i) \mid i \in I\} \cup \{(\mathbb R^k, \varphi_j, U_j) \mid j \in J\}$ be a orienting atlas of a $k$-D surface with boundary $S$. 
+	The orientation of $\partial S$ given by the orienting atlas $A(\partial S) := \{(\mathbb R^{k-1}, \varphi_i|_{\mathbb R^{k-1}}, \partial U_i \cap U_i) \mid i \in I\}$ is said to be \indexbf{consistent with the orientation of the surface}.
+\end{definition}
+
+Now we give a recursive definition of piecewise-smooth surface, and discuss its orientation.
+
+\begin{definition}[Piecewise-smooth surface]
+	First, we consider 0D surface, a point, as a smooth surface of class $C^{(\infty)}$. 
+	If a $k$-D surface $S$ in $\mathbb R^n$ can become a union of several smooth surfaces $S_i$ ($i \in \mathbb N$) after removing countable amount of piecewise-smooth surfaces of dimension at most $k-1$ from it, we say that $S$ is a \indexbf{piecewise-smooth surface}.
+\end{definition}
+
+The definition can also apply to piecewise-smooth surfaces with boundary.
+
+We call $S_i$ the smooth pieces of $S$.
+
+\begin{definition}[Orientable piecewise-smooth surface]
+	Let $S$ be a $k$-D piecewise-smooth surface in $\mathbb R^n$. 
+	$S_i$ ($i \in \mathbb N$) are the smooth pieces of $S$.
+
+	If $\forall i \in \mathbb N$, $S_i$ is orientable, and, $\forall j \in \mathbb N$, $\overline{S_i} \cap \overline{S_j} = \varnothing$ or $\overline{S_i} \cap \overline{S_j}$ is contained in a surface has a dimension less than $k - 1$, or the two \emph{consistent orientations} of $\varGamma \subset \overline{S_i} \cap \overline{S_j}$ as a part of a $(k-1)$-D surface with $S_i$ and $S_j$ are always \emph{opposite}:
+	we say $S$ is an \indexbf{orientable piecewise-smooth surface}.
+\end{definition}
+
+\section{The Area of a Surface in Euclidean Space}
+
+\begin{definition}{Metric tensor}
+	Let $S$ be a $k$-D smooth surface in $\mathbb R^n$, and can be parameterised by a diffeomorphism $\varphi \colon D \to S$ where $D \subset \mathbb R^k$. 
+	The \indexbf{metric tensor} at a point $\bv t \in D$ is given by:
+	\begin{equation*}
+		\indexmath[G(t)]{\bv G(\bv t)} 
+		= (\indexmath[g_ij(t)]{g_{ij}(\bv t)})_{i, j \in k} := (\varphi')^{\mathrm T} \varphi' = \left( 
+			\sum_{\ell \in n} \pdiff{\varphi_\ell}{t_i} \pdiff{\varphi_\ell}{t_j} 
+		 \right)_{i, j \in k}.
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Area of surface]
+	\label{definition: area of surface}
+	Let $S$ be a $k$-D piecewise-smooth surface in $\mathbb R^n$, $S_i$ ($i \in \mathbb N$) are the smooth pieces of $S$.
+	If $\varphi_i \colon D_i \to S_i \in C^{(1)}(D)$, where $D_i$ is a bounded, connected open set in $\mathbb R^k$, we define the \emphbf{area of the surface}\index{area of surface} $S$ as:
+	\begin{equation*}
+		V_k(S) = \sum_{i \in \mathbb N} \int\limits_{D_i} \sqrt{\det \bv G_i (\bv t)} \dif \bv t,
+	\end{equation*}
+	if the series and the integration, as proper or improper integral, converge. 
+\end{definition}
+
+To show that such definition is proper:
+
+\begin{theorem}[Area is independent of frames]
+	The area defined in Definition~\ref{definition: area of surface} is independent of the choice of $D_i$ and $\varphi_i$.
+\end{theorem}
+\begin{proof}
+	Let there be two connected, bounded open set $D$, $E$ and their diffeomorphism $\varphi$, $\psi$ to $S$, a $k$-D smooth surface.
+	Let $\chi := \psi^{-1} \circ \varphi$.
+
+	If the metric tensors is $\bv G$ and $\bv F$, we must have:
+	\begin{equation*}
+		\bv G = \varphi'^{\mathrm T} \varphi' = \chi'^{\mathrm T} \psi'^{\mathrm T} \psi' \chi' = \chi'^{\mathrm T} \bv F \chi'.
+	\end{equation*}
+
+	Therefore $\det \bv G = \det \bv F (\det \chi')^2$, by the formula of the change of variables:
+	\begin{equation*}
+		\int\limits_{D} \sqrt{\det \bv G (\bv t)} \dif \bv t
+			= \int\limits_{D} \sqrt{\det \bv F[\chi(\bv t)]} |\det \chi'(\bv t)|\dif \bv t
+			= \int\limits_{E} \sqrt{\det \bv F (\bv s)} \dif \bv s
+	\end{equation*}
+\end{proof}
+
+\begin{definition}[Zero measure on a surface]
+	A set $E \subset S$, where $S$ is a $k$-D piecewise smooth surface. 
+	If $\forall \varepsilon \in \mathbb R_+$, $\exists \langle S_i \rangle_{i \in \mathbb N}$ s.t.\ $S_i \subset S$ is a surface, and $E \subset \bigcup_{i \in \mathbb N} S_i$, $\sum_{i \in \mathbb N} V_k(S_i) < \varepsilon$, 
+	we say that $E$ is of \indexbf{$k$-D zero measure} or $E$ has \indexbf{zero Lebesgue area}.
+\end{definition}
+
+\section{Differential Forms}
+
+% \part{Real Analysis}
+% \part{Functional Analysis}
+% \part{Complex Analysis}
 
 \appendix
 \part{Appendices}
 \chapter{Several Important Inequality}
 \section{Mean-value Inequality}
+\begin{theorem}[AM-GM inequality]
+	\label{theorem: AM-GM inequality}
+	If $\forall i \in n$, $x_i \in \mathbb R_+$, then:
+	\begin{equation}
+		\label{equation: AM-GM inequality}
+		\frac{1}{n} \sum_{i \in n} x_i \geq \sqrt[n]{\prod_{i \in n} x_i},
+	\end{equation}
+	and the equality holds iff $x_0 = x_1 = \cdots = x_{n-1}$.
+\end{theorem}
+
 % TODO: Mean-Value Inequality
 \section{Cauchy's Inequality}
 % TODO: Cauchy's Inequality
