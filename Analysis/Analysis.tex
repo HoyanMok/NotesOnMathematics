@@ -4708,7 +4708,112 @@ To show that such definition is proper:
 	we say that $E$ is of \indexbf{$k$-D zero measure} or $E$ has \indexbf{zero Lebesgue area}.
 \end{definition}
 
+Now we are able to omit some sets of zero measure on a surface to get the area of it.
+
+\begin{theorem}
+	Let $f \colon D \to \mathbb R$ be a smooth function from $D \subset \mathbb R^n$, $S := \{(\bv x, f(\bv x)) \mid \bv x \in D\}$. 
+	If $S$ has an area, than it is:
+	\begin{equation*}
+		\int\limits_D \sqrt{1 + \sum_{i \in n} (\partial_i f(\bv x))^2} \dif \bv x.
+	\end{equation*} 
+\end{theorem}
+\begin{proof}
+	Let $\varphi \colon \bv x \mapsto (\bv x, f(\bv x))$, Then
+	\begin{equation*}
+		\varphi'(\bv x) = 
+		\begin{pmatrix}
+			1 & 0 & \cdots & 0 \\
+			0 & 1 & \cdots & 0 \\
+			\vdots & \cdots & & \vdots \\
+			0 & 0 & \cdots & 1 \\
+			\partial_0 f & \partial_1 f & \cdots & \partial_{n-1} f
+		\end{pmatrix}.
+	\end{equation*}
+	
+	The metric tensor:
+	\begin{equation*}
+		\bv G = \varphi'^{\mathrm T}\varphi' = \id_{\mathrm R^n} + (\partial_i f \partial_j f)_{i, j \in n},
+	\end{equation*}
+	 
+	\begin{align*}
+		\det \bv G = 
+		\begin{vmatrix}
+			1 & f'^{\mathrm T} \\
+			\bv 0 & \bv G
+		\end{vmatrix}
+		= \begin{vmatrix}
+			1 & \partial_0 f & \cdots & \partial_{n-1} f \\
+			0 & 1 + (\partial_0 f)^2 & \cdots & \partial_{n-1} f \partial_0 f \\
+			\vdots & \vdots & & \vdots \\
+			0 & \partial_0 f \partial_{n-1} f & \cdots & 1 + (\partial_{n-1} f)^2 
+		\end{vmatrix}.
+	\end{align*}
+
+	Subtracting the first row multiplied by $\partial_i f$ from the $(i + 1)$-row, and then add the first column by the $(j+1)$-column multiplied by $\partial_j f$, we have:
+	\begin{equation*}
+		\det \bv G = \begin{vmatrix}
+			1 & f'^{\mathrm T} \\
+			-f' & \bv I
+		\end{vmatrix}
+		= \begin{vmatrix}
+			1 + \sum_{i \in n} (\partial_i f)^2 & f'^{\mathrm T} \\
+			\bv 0 & \bv I
+		\end{vmatrix}
+		= 1 + \sum_{i \in n} (\partial_i f)^2.
+	\end{equation*} 
+\end{proof}
+
+
+
 \section{Differential Forms}
+
+\begin{definition}[Exterior product]
+	Let $\mathscr A$, $\mathscr B$, $\mathscr C$ be multilinear skew-symmetric forms, of degrees $a$, $b$ and $c$. The \indexbf{exterior product} $\indexmath[A wedge B]{\mathscr A \wedge \mathscr B}$ is defined as a $(a + b)$-linear skew-symmetric forms, and satisfies that:
+	\begin{conditionlist}
+		\item $(\mathscr A \wedge \mathscr B) \wedge \mathscr C = \mathscr A \wedge (\mathscr B \wedge \mathscr C)$ (associative);
+		\item If $a = b$, $(\mathscr A + \mathscr B) \wedge \mathscr C = \mathscr A \wedge \mathscr C + \mathscr B \wedge \mathscr C$ (distributive);
+		\item $\mathscr A \wedge \mathscr B = (- 1)^{ab} \mathscr B \wedge \mathscr A$ (skew-commutative).
+	\end{conditionlist}
+\end{definition}
+
+If $\mathscr L_i \in (\mathbb R^n)^*$ ($i \in k$), $\bv x_i \in \mathbb R^n$, then (we define):
+\begin{equation*}
+	\bigwedge_{i \in k} \mathscr L_i
+		\;\footnote{By convention, from left to right, the index shall rise.}
+	:= \det (L_j(\bv x_i))_{i, j \in n}.
+\end{equation*}
+
+Therefore, if $f_j \colon G \to \mathbb R$ ($j \in k$, $G \subset \mathbb R^n$) are differentiable, $\Delta \bv x_i \in \mathbb R^n$ ($i \in k$):
+\begin{equation*}
+	\bigwedge_{i \in k} \dif f_i(\Delta \bv x_0, \ldots, \Delta \bv x_{n-1}) 
+		= \det (\dif f_j(\bv x_i))_{i, j \in k}
+\end{equation*}
+
+\begin{definition}[Differential $p$-form]
+	Let $D \subset \mathbb R^n$ (or $\mathbb C^n$) be an open, connected and bounded set in $\mathbb R^n$. 
+	If we assign each point $\bv x \in D$ a skew-symmetric $p$-form $\omega(\bv x) \colon (\mathrm T_{\bv x} D)^p \to \mathbb R$ (or $\mathbb C$), we say that we have a real (or complex) \indexbf{differential $p$-form} $\omega$.
+\end{definition}
+
+For example, if we define a force field $\bv F \colon D \to \mathbb R^n$, naturally a \indexbf{work form of the field} $\bv F(\bv x)$ can be defined as:
+\begin{equation*}
+	W_{\bv F} (\bv x) (\Delta \bv x) := \langle \bv F(\bv x), \Delta \bv x \rangle.
+\end{equation*}
+
+Or, if we define a velocity field $\bv V \colon D \to \mathbb R^n$, a \indexbf{flow form of the field} $\bv V(\bv x)$ can be defined as:
+\begin{equation*}
+	\varPhi_{\bv V}(\bv x) (\Delta \bv x_0, \ldots, \Delta \bv x_{n-2})
+		:= \det(\bv V, \bv x_0, \ldots, \bv x_{n-2}).
+\end{equation*}
+
+Linear algebra would tell us, if we choose a set of bases $\basis e_i$, $i \in n$, the skew-symmetric $k$-form $\omega$ would satisfies:
+\begin{align*}
+	\omega(\bv x_0, \ldots, \bv x_{k-1}) 
+	&= \sum_{0 \leq i_0 < \cdots < i_{k-1} < n} \omega(\basis e_0, \ldots, \basis e_{k-1}) \det((\bv x_j)_{i_\ell})_{k, \ell \in k}\\
+	&= \sum_{0 \leq i_0 < \cdots < i_{k-1} < n} a_{i_0, \ldots, i_{k-1}} \bigwedge_{\ell \in k} \dif \bv x_{i_k} (\bv x_0, \ldots, \bv x_{k-1}),
+\end{align*}
+where $\bv x_j = \sum_{i \in n} (x_j)_i \basis e_i$. 
+$a_{i_0, \ldots, i_{k-1}} $ can be understood as the coordinate expression of the skew-symmetric $k$-form.
+
 
 % \part{Real Analysis}
 % \part{Functional Analysis}
