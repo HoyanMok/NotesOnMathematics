@@ -4712,7 +4712,7 @@ Now we are able to omit some sets of zero measure on a surface to get the area o
 
 \begin{theorem}
 	Let $f \colon D \to \mathbb R$ be a smooth function from $D \subset \mathbb R^n$, $S := \{(\bv x, f(\bv x)) \mid \bv x \in D\}$. 
-	If $S$ has an area, than it is:
+	If $S$ has an area, then it is:
 	\begin{equation*}
 		\int\limits_D \sqrt{1 + \sum_{i \in n} (\partial_i f(\bv x))^2} \dif \bv x.
 	\end{equation*} 
@@ -4767,14 +4767,55 @@ Now we are able to omit some sets of zero measure on a surface to get the area o
 
 \section{Differential Forms}
 
+Let us review the important conceptions in the form algebra.
+
+Let $\indexmath[F k]{\mathfrak F^k}$ be the set of $k$-linear forms on linear space $X$. 
+We denote the \indexbf{tensor product} of a $k$-form and a $\ell$-form by $\indexmath[otimes]{\otimes}$: 
+\begin{equation}\label{equation: tensor product}
+	\otimes \colon \mathfrak F^k \times \mathfrak F^\ell \to \mathfrak F^{k + \ell},
+	\quad
+	(F \otimes \tilde F)(\bv x_i)_{i \in (k + \ell)}
+		= F(\bv x_i)_{i \in k} \tilde F(\bv x_j)_{j \in (k + \ell) \backslash k}.
+\end{equation}
+
+We can see that, any multilinear form $F$ can be written as:
+\begin{equation*}
+	F = a_{i_0 \cdots i_{k-1}} \bigotimes_{j \in k} \dif x^{i_j}.
+\end{equation*}
+where we have used the Einstein summation convention.
+
+Let $\indexmath[varOmega]{\varOmega^k}$ be the set of skew-symmetric $k$-form on linear space $X$. 
+We can define a \indexbf{skew-symmetrisation operator}:
+\begin{equation}\label{equation: skew-symmetrisation operator}
+	\indexmath[A]{\mathcal A} \colon \mathfrak F^k \to \varOmega^k;
+	\quad
+	\mathcal A F (\bv x_i)_{i \in k} = \frac{1}{k!} \sum_{\pi \in S_k} F(\bv x_{\pi (i)})_{i \in k} \varepsilon(\pi).
+\end{equation}
+
+In fact:
+\begin{equation*}
+	\mathcal A \bigotimes_{j \in k} \dif x^{i_j} (\bv x_\ell)_{\ell \in k} 
+		= \frac{1}{k!} \det (x_\ell^{i_j} )_{j, \ell \in k}.
+\end{equation*}
+
 \begin{definition}[Exterior product]
-	Let $\mathscr A$, $\mathscr B$, $\mathscr C$ be multilinear skew-symmetric forms, of degrees $a$, $b$ and $c$. The \indexbf{exterior product} $\indexmath[A wedge B]{\mathscr A \wedge \mathscr B}$ is defined as a $(a + b)$-linear skew-symmetric forms, and satisfies that:
+	$\mathscr A \in \varOmega^k$, $\mathscr B \in \varOmega^\ell$, the \indexbf{exterior product} of $\mathscr A$ and $\mathscr B$ is defined:
+	\begin{equation*}
+		\indexmath[wedge]{\wedge} \colon 
+			\varOmega^k \times \varOmega^\ell \to \varOmega^{k + \ell};
+			\mathscr A \wedge \mathscr B 
+				= \frac{(k+\ell)!}{k! \ell!} \mathcal A (\mathscr A \otimes \mathscr B).
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	Let $\mathscr A$, $\mathscr B$, $\mathscr C$ be multilinear skew-symmetric forms, of degrees $a$, $b$ and $c$. 
 	\begin{conditionlist}
 		\item $(\mathscr A \wedge \mathscr B) \wedge \mathscr C = \mathscr A \wedge (\mathscr B \wedge \mathscr C)$ (associative);
 		\item If $a = b$, $(\mathscr A + \mathscr B) \wedge \mathscr C = \mathscr A \wedge \mathscr C + \mathscr B \wedge \mathscr C$ (distributive);
 		\item $\mathscr A \wedge \mathscr B = (- 1)^{ab} \mathscr B \wedge \mathscr A$ (skew-commutative).
 	\end{conditionlist}
-\end{definition}
+\end{theorem}
 
 If $\mathscr L_i \in (\mathbb R^n)^*$ ($i \in k$), $\bv x_i \in \mathbb R^n$, then (we define):
 \begin{equation*}
