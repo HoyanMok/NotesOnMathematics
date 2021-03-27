@@ -4765,7 +4765,7 @@ Now we are able to omit some sets of zero measure on a surface to get the area o
 
 
 
-\section{Differential Forms}
+\section{Multilinear Forms}
 
 Let us review the important conceptions in the form algebra.
 
@@ -4830,10 +4830,84 @@ Therefore, if $f_j \colon G \to \mathbb R$ ($j \in k$, $G \subset \mathbb R^n$) 
 		= \det (\dif f_j(\bv x_i))_{i, j \in k}
 \end{equation*}
 
-\begin{definition}[Differential $p$-form]
-	Let $D \subset \mathbb R^n$ (or $\mathbb C^n$) be an open, connected and bounded set in $\mathbb R^n$. 
-	If we assign each point $\bv x \in D$ a skew-symmetric $p$-form $\omega(\bv x) \colon (\mathrm T_{\bv x} D)^p \to \mathbb R$ (or $\mathbb C$), we say that we have a real (or complex) \indexbf{differential $p$-form} $\omega$.
+Linear algebra would tell us, if we choose a frame of bases $\basis e_i$, $i \in n$, the skew-symmetric $k$-form $\omega$ would satisfies:
+\begin{align*}
+	\omega(\bv x_0, \ldots, \bv x_{k-1}) 
+	&= \sum_{0 \leq i_0 < \cdots < i_{k-1} < n} \omega(\basis e_0, \ldots, \basis e_{k-1}) \det((\bv x_j)^{i_\ell})_{k, \ell \in k}\\
+	&= \sum_{0 \leq i_0 < \cdots < i_{k-1} < n} a_{i_0, \ldots, i_{k-1}} \bigwedge_{\ell \in k} \dif x^{i_k} (\bv x_0, \ldots, \bv x_{k-1}),
+\end{align*}
+where $\bv x_j = (x_j)^i \basis e_i$. 
+$a_{i_0, \ldots, i_{k-1}} $ can be understood as the coordinate expression of the skew-symmetric $k$-form.
+
+\begin{definition}[Adjoint mappings]
+	Let $X$ and $Y$ be linear spaces over field $\mathbb F$, $\mathscr L \in \mathcal L(X; Y)$. 
+	$\mathfrak F_X$ and $\mathfrak F_Y$ are sets of multilinear forms on $X$ and $Y$.
+	The \indexbf{adjoint mapping} $\indexmath[L ast]{\mathscr L^*}$ is defined as:
+	\begin{equation*}
+		\mathscr L^* \colon \mathfrak F_Y \mapsto \mathfrak F_X;
+		\quad
+		\mathscr L^* F_Y(\bv x_i)_{i \in k} = F_Y(\mathscr L \bv x_i)_{i \in k}.
+	\end{equation*}
 \end{definition}
+
+\begin{theorem}
+	Let $X$ and $Y$ be linear spaces over field $\mathbb F$, $\mathscr L \in \mathcal L(X; Y)$. 
+	$\mathfrak F_X$ and $\mathfrak F_Y$ are sets of multilinear forms on $X$ and $Y$.
+	\begin{conditionlist}
+		\item $\mathscr L^* \in \mathcal L(\mathfrak F_Y; \mathfrak F_X)$;
+		\item $\mathscr L^* (F \otimes G) = \mathscr L^* F \otimes \mathscr L^* G$;
+		\item $\mathscr L^* (F \wedge G) = \mathscr L^* F \wedge \mathscr L^* G$.
+		\item If $\dif x^i$ and $\dif y^j$ are bases of $X^*$ and $Y^*$, and the matrix expression of $\mathscr L$ is $\bv L = (L_{ij})_{i \in m, j \in n}$:
+		\begin{equation*}
+			\mathscr L^* \left( 
+				\sum_{0 \leq j_0 < \cdots < j_{k-1} < n} b_{j_0 \cdots j_{k-1}}
+				\bigwedge_{\ell \in k} \dif y^{j_\ell}
+			 \right)
+			= \sum_{0 \leq i_0 < \cdots < i_{k-1} < n} a_{i_0 \cdots i_{k-1}}
+			\det (L_{i_r j_s})_{r, s \in k}
+			\bigwedge_{\ell \in k} \dif x^{i_\ell}.
+		\end{equation*}
+	\end{conditionlist}
+\end{theorem}
+
+
+\section{Differential Forms on Surfaces}
+
+We understand $\mathrm T_{\bv t} \mathbb R^k$ (or $\mathrm T_{\bv t} H^k$) as a pair $(\bv x_0, \mathbb R^k)$, meaning tanslating the vectors on $\bv x_0$ and it is isomorphic to $\mathbb R^k$ so there is no much difference between $\mathrm T_{\bv t} \mathbb R^k$ (or $\mathrm T_{\bv t} H^k$) and $\mathbb R^k$.
+
+\begin{definition}[Tangent space]
+	Let $S$ be a $k$-D smooth surface in $\mathbb R^n$, $A = \{(\varphi_\alpha, U_\alpha)\}_{\alpha \in A}$ is a smooth atlas of the surface, where $\varphi_\alpha \colon \mathbb R^k \to U_\alpha$ or $\varphi_\alpha \colon H^k \to U_\alpha$.
+	The \indexbf{tangent space} $\indexmath[T x S]{\mathrm T_{\bv x} S}$ of $S$ at point $\bv x = \varphi_i(\bv t) \in S$ is defined as:
+	\begin{equation*}
+		\mathrm T_{\bv x} S := \varphi'_\alpha(\bv t) [\mathrm T_{\bv t} \varphi_\alpha^{-1}(U_i)]. 
+	\end{equation*}
+
+	An element in the tangent space is a \indexbf{tangent vector}. 
+	The union of all tagent space of $S$ is called the \indexbf{tangent bundle} of the surface $S$, denoted by $\indexmath[T(S)]{\mathrm T(S)}$, which can be considered as the collection of $(\bv x, \bv v)$, where $\bv x \in M$, $\bv v \in \mathrm T_{\bv x} S$.
+\end{definition}
+
+If $\varphi_\alpha(\bv t) = \bv x$, $\bv u \in \mathrm T_{\bv t} \mathbb R^k$ (or $\mathrm T_{\bv t} H^k$), we have:
+\begin{equation*}
+	\bv v = \varphi'_\alpha(\bv x) \bv u = \pdiff{\varphi_\alpha}{\bv u}(\bv t).
+\end{equation*}
+
+\begin{definition}[Cotangent space]
+	Let $S$ be a $k$-D smooth surface in $\mathbb R^n$. 
+	The co-space of $T_{\bv x} S$ is called the \indexbf{cotangent space} of $S$ at $\bv x \in S$, denoted by $\indexmath[T ast x S]{T^*_{\bv x} S}$.
+\end{definition}
+
+If we assign a basis $\basis e_i$ for $\mathrm T_{\bv t} \mathbb R^k$ ($\mathrm T_{\bv t} H^k$), there is a natural isomorphism to the co-space $\mathrm T^*_{\bv t} \mathbb R^k$ ($\mathrm T^*_{\bv t} H^k$), and the corresponding spaces can be denoted by $\dif t^i$ ($\dif t^i(\basis e_j) = {\delta^i}_j$). 
+With this co-basis, we can express the cotangent space of $S$ by coordinates in $\mathrm T_{\bv t} \mathbb R^k$ ($\mathrm T_{\bv t} H^k$).
+
+\begin{definition}[Differential form]
+	Let $S$ be a $k$-D smooth surface in $\mathbb R^n$. 
+	If $\bv x \in S$, let $\varOmega^p(\mathrm T_{\bv x} S)$ denote the set of skew-symmetric forms of degree $p$ on $\mathrm T_{\bv x} S$. 
+	
+	If we assign a $\omega(\bv x) \in \varOmega^p(\mathrm T_{\bv x} S)$ for any $\bv x$, we say that we have defined a \indexbf{differential $p$-form} $\omega$. 
+	The set of differential forms of degree $p$ on $S$ is denoted by $\varOmega_{(0)}^p(S)$ or $\indexmath[Omega (0) p]{\varOmega_{(0)}^p}$.
+\end{definition}
+
+Especially, we call a function $f := \cup f_\alpha$ where $f_\alpha \colon \mathbb R^k \to U_\alpha$ a zero-form, denoted by $f \in \varOmega_{(0)}^0$.
 
 For example, if we define a force field $\bv F \colon D \to \mathbb R^n$, naturally a \indexbf{work form of the field} $\bv F(\bv x)$ can be defined as:
 \begin{equation*}
@@ -4846,14 +4920,43 @@ Or, if we define a velocity field $\bv V \colon D \to \mathbb R^n$, a \indexbf{f
 		:= \det(\bv V, \bv x_0, \ldots, \bv x_{n-2}).
 \end{equation*}
 
-Linear algebra would tell us, if we choose a frame of bases $\basis e_i$, $i \in n$, the skew-symmetric $k$-form $\omega$ would satisfies:
-\begin{align*}
-	\omega(\bv x_0, \ldots, \bv x_{k-1}) 
-	&= \sum_{0 \leq i_0 < \cdots < i_{k-1} < n} \omega(\basis e_0, \ldots, \basis e_{k-1}) \det((\bv x_j)_{i_\ell})_{k, \ell \in k}\\
-	&= \sum_{0 \leq i_0 < \cdots < i_{k-1} < n} a_{i_0, \ldots, i_{k-1}} \bigwedge_{\ell \in k} \dif \bv x_{i_k} (\bv x_0, \ldots, \bv x_{k-1}),
-\end{align*}
-where $\bv x_j = \sum_{i \in n} (x_j)_i \basis e_i$. 
-$a_{i_0, \ldots, i_{k-1}} $ can be understood as the coordinate expression of the skew-symmetric $k$-form.
+The coordinates expression of $\omega(\bv x)$ is given by 
+\begin{equation}\label{equation: coordinate expression of differential form}
+	(\varphi'_\alpha)^* \omega(\bv x) = \sum_{0 \leq i_0 < \cdots < i_{p-1} < n} a_{\alpha; i_0 \cdots i_{p-1}}(\bv t) \bigwedge_{\ell \in p} \dif t_\alpha^{i_\ell},
+\end{equation}
+if $\bv x \in U_\alpha$ and $\bv t = \varphi^{-1}_\alpha (\bv x)$.
+
+\begin{definition}[Smooth differential form]
+	If the coordinate expression of differential form $\omega$ is given by Eq.~\ref{equation: coordinate expression of differential form}, and $\forall \alpha \in A$, $\forall \bv x \in U_\alpha$, $a_{\alpha; i_0 \cdots i_{p-1}}$ is a smooth function (of class $C^{(m)}$), then we call $\omega$ a \indexbf{smooth differential form} (of class $C^{(m)}$).
+
+	The set of differential forms of degree $p$, class $C^{(m)}$ on $S$ is denoted by $\varOmega_{(m)}^p(S)$ or $\indexmath[Omega (m) p]{\varOmega_{(m)}^p}$.
+	$\indexmath[Omega p]{\varOmega^p}(S) := \bigcup_{m \in \mathbb N} \varOmega_{(m)}^p(S)$.
+\end{definition}
+
+Now we are at a position to study the differential structure of smooth differential forms:
+
+\begin{definition}[Exterior differentiation]
+	Let $S$ be a $k$-D smooth surface in $\mathbb R^n$.
+	Let $\dif \colon \varOmega^p_{(m)} \to \varOmega^{p+1}_{(m-1)}$ ($m \geq 2$), if it satisfies:
+	\begin{conditionlist}
+		\item $\forall f \in \varOmega^0_{(m)}$, $\dif f = f'$;
+		\item $\forall \alpha \in \varOmega^a_{(m)}$, $\forall \beta \in \varOmega^b_{(m)}$, $\dif (\alpha \wedge \beta) = \dif \alpha \wedge \beta + (-1)^a \alpha \wedge \dif \beta$;
+		\item $\forall \omega \in \varOmega^p$, $\dif^2 \omega := \dif (\dif \omega) = 0$,
+	\end{conditionlist}
+	then we call $\dif$ the \indexbf{exterior differentiation}.
+\end{definition}
+
+By the definition, we can calculate the coordinate expression of the exterior differentiation of any form by:
+\begin{equation}\label{equation: exterior differentiation}
+	\dif \left( 
+		\sum_{0 \leq i_0 < \cdots < i_{p-1} < n} a_{\alpha; i_0 \cdots i_{p-1}}(\bv t) \bigwedge_{\ell \in p} \dif t_\alpha^{i_\ell}
+	\right)
+	= \sum_{0 \leq i_0 < \cdots < i_{p-1} < n} \dif a_{\alpha; i_0 \cdots i_{p-1}}(\bv t) \wedge \bigwedge_{\ell \in p} \dif t_\alpha^{i_\ell}.
+\end{equation}
+
+\chapter{The Integration of Differential Forms on Surfaces}
+\section{The Integration of Differential Forms on Surfaces}
+
 
 
 % \part{Real Analysis}
