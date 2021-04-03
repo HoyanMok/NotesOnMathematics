@@ -272,6 +272,172 @@ By Sylvester's law of inertia, the index of inertia i.e.\ the number of positive
 We denote a pseudo-Euclidean space by $\mathbb R^n_{p, n-p}$, where $p$ is the index of innertia.
 Especially, we call $\mathbb R^4_{1, 3}$ the \indexbf{Minkowski space}, since its significance in relativistic mechanics.
 
+\section{The Simplest Groups of Transformations of a Euclidean Space}
+
+When we say a \indexbf{tansformation} from $\varOmega$ to $\varOmega'$, we refer to a bijective $\varphi$ s.t.\ both $\varphi$ and $\varphi^{-1}$ are smooth, i.e.\ a \indexbf{diffeomorphism}. 
+If $\varOmega = \varOmega'$, we would call it the transformation of $\varOmega$.
+
+The transformations form a group, we might call it the \indexbf{transformation group}. 
+
+\begin{definition}[Isometry]
+	If a transformation $\varphi$ of $\varOmega$, with a metric $\bv G$, satisfies that $\forall \bv x \in \varOmega$, 
+	\begin{equation*}
+		g_{ij} = g_{k \ell} \pdiff{\varphi^k}{x^i} \pdiff{\varphi^\ell}{x^j},
+	\end{equation*}
+	we shall call it a \indexbf{isometry}, or a \indexbf{motion} of the given metric.
+\end{definition}
+
+\begin{theorem}[Isometry group]
+	The isometries of a region form a group.
+\end{theorem}
+
+We might call this group the \indexbf{isometries} or the \indexbf{group of motions}. 
+If an isometry preserve the orientation of $\mathbb R^n$, we might call it a \indexbf{proper isometry}. 
+The proper isometries is a subgroup of the isometries of $\mathbb R^n$.
+
+\begin{lemma}[Proper isometries of Euclidean space]
+	Every proper isometry of $\mathbb R^n$ is either a translation along a vector, or a rotation about a point.
+\end{lemma}
+
+The proper isometries can be parameteriesed by a special othogonal matrix $\bv A \in \SO(n)$ (2D special othogonal group), and a vector $\bv v$:
+\begin{equation*}
+	\bv x \mapsto \bv A \bv x + \bv v.
+\end{equation*}
+
+We can find the group a representation by a matrix:
+\begin{equation}\label{equation: representation of isometry group}
+	\begin{pmatrix}
+		\bv A & \bv v \\
+		\bv 0^\mathrm T & 1
+	\end{pmatrix}
+\end{equation}
+
+If $\det \bv A = \pm 1$, then we have the parametrisation of the isometry of the Euclidean space $\mathbb R^n$. 
+
+\begin{theorem}[Mazur-Ulam Theorem]
+	The isometry group of $\mathbb R^n$ is the semiproduct of translations ($\simeq \mathbb R^n$) and the othogonal group $\mathrm O(n)$ (rotations and rotatory reflections).
+\end{theorem}
+
+The isometry group can be represented by Eq.~\ref{equation: representation of isometry group}.
+
+\begin{theorem}
+	$\SO(n)$, as a Lie group, is continuous.
+\end{theorem}
+\begin{proof}
+	find the rotation a basis so that it take canonical form
+	\begin{equation*}
+		\begin{pmatrix}
+			\pm 1 &		   &  &&\\
+				& \ddots &  \\
+				&		   & \pm 1 \\
+			& & & \cos\theta_1 & -\sin\theta_1\\
+			& & & \sin\theta_1 & \cos\theta_1\\
+			& & &		&				& \ddots & \\
+			& & &		&				&		 &  \cos\theta_m & -\sin\theta_m \\
+			& & &		&				& 		 &	\sin \theta_m & \cos \theta_m \\
+		\end{pmatrix}
+	\end{equation*}
+	Hence by replacing $\theta_i$ by $t \theta_i$, we can get the rotation from identity continuously by changing $t$ from $0$ to $1$.
+\end{proof}
+
+The \indexbf{Galilean group} is the group of \indexbf{Galilean transformation}, characterising by a rotatory reflection $\bv A \in \mathrm O(3)$, a translation $\bv x_0 \in \mathbb R^3$ a velocity $\bv v \in \mathbb R^3$:
+\begin{equation*}
+	x := (ct, \bv x) \mapsto (ct, \bv A \bv x + \bv x_0 - \bv v t).
+\end{equation*}
+
+The Galilean group can be represented as:
+\begin{equation}\label{equation: representation of Galilean group}
+	\begin{pmatrix}
+		\bv A & \bv x_0 & \bv v \\
+		\bv 0^\mathrm T & 1 & 0 \\
+		\bv 0^\mathrm T & 0 & 1
+	\end{pmatrix}	
+\end{equation}
+
+\section{Curvature and Torsion}
+
+Let $\gamma \colon [t_1, t_2] \to \mathbb R^3; t \mapsto \bv x(t)$ be a diffeomorphism to a smooth curve in $\mathbb R^3$, the velocity and the acceleration are defined as:
+\begin{equation*}
+	\bv v := \dot{\bv x} := \diff{\bv x}{t} = \gamma'(t),
+	\qquad
+	\bv a := \ddot{\bv x} := \diff[2]{\bv x}{t} = \gamma''(t).
+\end{equation*}
+
+\begin{definition}[Natural parametre]
+	$s(t)$ is the \indexbf{natural parametre} of the curve defined as:
+	\begin{equation*}
+		s(t) = \int_0^t |\bv v| \dif t.
+	\end{equation*}
+\end{definition}
+
+We shall denote the velocity and the accelaration by $\bv v_s$ and $\bv a_s$, with natural parametre. 
+To change the parametre, we only need:
+\begin{equation*}
+	\dif s = |\bv v| \dif t,
+	\qquad
+	\diff{}{s} = \frac{1}{|\bv v|} \diff{}{t}.
+\end{equation*}
+
+By differentiating $\bv v_s \cdot \bv v_s = 1$ we know the orthogonality of $\bv a_s$ and $\bv v_s$.
+
+Define three unit vectors for a parameteriesed curve $t \mapsto \bv x(t)$: the tangent vector $\basis t := \bv v/|\bv v|$, the (primary) normal $\basis n := \diff{\basis t}{s} / |\diff{\basis t}{s}|$ and $\basis b = \basis t \times \basis n$. 
+
+$\bv v_s = \basis t$, $\basis n = \basis a_s / |\basis a_s|$.
+
+\begin{definition}[Curvature and torsion]
+	The \indexbf{curvature} $\indexmath[kappa]{\kappa}$ is the norm of $\bv a_s$, and the torsion is defined as $\indexmath[tau]{\tau} = \diff{\basis n}{s}$.
+\end{definition}
+
+\begin{theorem}[Serret-Frenet formulae for space curve]%
+	\index{Serret-Frenet formulae}
+	\begin{equation}\label{equation: Serret-Frenet}
+		\diff{}{s} \begin{pmatrix}
+			\basis t \\ \basis n \\ \basis b
+		\end{pmatrix}
+		= \begin{pmatrix}
+			0 & \kappa & 0 \\
+			-\kappa & 0 & \tau \\
+			0 & -\tau \\ 0
+		\end{pmatrix}
+		\begin{pmatrix}
+			\basis t \\ \basis n \\ \basis b
+		\end{pmatrix}.
+	\end{equation}
+\end{theorem}
+
+\section{Pseudo-Euclidean Spaces}
+
+$\mathbb R^4_{1, 2}$ (or, more general case, $\mathbb R^n_{1, n-1}$) is called the Minkowski space. 
+The metric is always denoted by $\eta_{\mu\nu}$, $\eta_{00} = 1$, $\eta_{ij} = - \delta_{ij}$, $i, j \neq 0$. (By convention, greek index take its value from $0$ to $n-1$)
+Considering the physics reality, we usually restrict our study to the region where $x_\mu x^\mu = \eta_{\mu\nu} x^\mu x^\nu \geq 0$, that is, the \indexbf{time-like} region bounded by the \indexbf{light cone} (or \indexbf{isotropic cone}).
+
+A \indexbf{world-line} is the curve $x(t) := (ct, \bv x(t))$, where $t := x^0/c$.
+The natural parametre of a world-line is called the \indexbf{proper time} $\indexmath[tau]{\tau}$ (not to be confused with the torsion).
+
+The isomeries of $\mathbb R^4_{1, 3}$ is called the \indexbf{Poincar\'er group}. 
+
+\begin{theorem}
+	Any isometry of $\mathbb R^4_{1, 3}$ is an affine transformation.
+\end{theorem}
+\begin{proof}
+	We need to prove that if there points are collinear, the image of them under the isometry is also collinear. 
+	After a translation, which is affine, we can set one of the point to be the origin, and the remianing two points are in the same branch (both $t > 0$ or both $t < 0$). 
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=12cm]{./img/special_reletivity.eps}
+		\caption{Pseudo-spheres in $\mathbb R^2_{1,1}$.}
+		\label{figure: special relativity}
+	\end{figure}
+
+	A pseudo-sphere centred at a point is a hyperboloid (of two sheets) centred at it and the principal axis is along the $x^0$-axis. 
+	Since the isometry preserve the distance, under which the points must move along the pseudo-sphere centred at origin.
+	As illustrated in Fig.~\ref{figure: special relativity}. 
+	If $x_\mu x^\mu = \ell$, and $y^\mu = \lambda x^\mu$, under an isometry, $x \mapsto x'$. 
+	The pseudo-sphere centred at $x'$ of radius $(\lambda - 1) \ell$ and thepseudo-sphere centred at origin of radius $\lambda \ell$ are tangent at $y'$, which along with $x'$ and the origin are collinear.	
+\end{proof}
+
+
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
 \printbibliography[heading=bibliography, title={Bibliography}]
