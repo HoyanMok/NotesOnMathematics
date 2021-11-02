@@ -86,13 +86,13 @@
 \usepackage{svg} % svg位图
 \usepackage{wrapfig} % 简单的图文绕排
 \usepackage[inline]{enumitem} % 编号
+\usepackage{geometry} % 调整页边距
 	% 新列表:
 	\newlist{conditionlist}{enumerate}{2}
 	\setlist[conditionlist,1]{topsep = 0pt, itemsep = 0pt, parsep = 0pt,%
 		label=\arabic*), leftmargin=2\parindent}
 	\setlist[conditionlist,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt,%
 		label=\alph*), leftmargin=3\parindent}
-\usepackage{geometry} % 调整页边距
 % \geometry{left=1.6cm,right=1.6cm}
 \usepackage{xcolor} % 颜色
 \usepackage[colorlinks=true,bookmarks=true]{hyperref} % 引用, 交叉引用, 图表等的链接; 生成书签
@@ -112,13 +112,13 @@
 {\if#11%
 	\frac{\mathrm{d} #2}{\mathrm{d} #3}% 导数\diff{y}{x}
 \else%
-	\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}% n阶导数\diff[n]{y}{x}
+	\frac{\mathrm{d}^{#1} #2}{\mathrm{d} {#3}^{#1}}% n阶导数\diff[n]{y}{x}
 \fi}
 \newcommand*{\pdiff}[3][1]
 {\if#11%
 	\frac{\partial #2}{\partial #3}% 偏导数\pdiff{y}{x}
 \else%
-	\frac{\partial^{#1} #2}{\partial #3^{#1}}% n阶偏导数\pdiff[n]{y}{x}
+	\frac{\partial^{#1} #2}{\partial {#3}^{#1}}% n阶偏导数\pdiff[n]{y}{x}
 \fi}
 
 \newcommand*{\inbasis}[2]{\left.%
