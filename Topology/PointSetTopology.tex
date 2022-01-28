@@ -11,115 +11,6 @@
 
 \addbibresource{PointSetTopology.bib} % 把这里改成实际的文件名
 
-% 令参考资料能够加入目录中:
-% \defbibheading{bibliography}[\bibname]{% 
-% 	% \addcontentsline{toc}{chapter}{参考文献}
-% 	\chapter{#1}%   
-% 	\markboth{#1}{#1}}
-
-% \usepackage{imakeidx} %索引
-% 	\makeindex[intoc, title={Index}]
-% 	\makeindex[intoc, name=symbol, title={Symbol List}]
-% 	\newcommand*{\indexbf}[1]{\emph{\textbf{#1}}\index{#1}} % Index for definition
-% 	\newcommand*{\indexmath}[2][\ ]{#2\index[symbol]{#1@$#2$}} % Used Symbol
-% 	% \indexmath[name for sort]{display} 
-
-% % 将PATH换成绝对路径或相对路径
-% % 使用「/」而不是「\」
-% \newcommand{\PATH}{./}
-
-% % 对目录项等的修改
-% \usepackage{chngcntr}
-% 	\counterwithout{section}{chapter} % So that the section won't reset when newing a chapter
-% \renewcommand{\thesection}{\textmd{\S}\arabic{section}}
-% \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
-
-% % 引用的宏包:
-% % 宏包的使用, 可以在命令行运行texdoc <宏包名>获得文档
-% \usepackage{multicol} % 分栏 (全局分栏建议在文档类处设置)
-% \usepackage{amsmath} % AMS数学标准
-% 	\makeatletter % '@' now normal "letter"
-% 	\@addtoreset{equation}{section} % 每次换section就把equation清零
-% 	\makeatother  % '@' is restored as "non-letter"
-% 	\renewcommand\theequation{\oldstylenums{\arabic{section}}%
-% 					-\oldstylenums{\arabic{equation}}} % 显示为section数-equation数
-% \usepackage{amssymb} % 数学符号
-% \usepackage{mathrsfs} % 花体
-% \usepackage{amsthm} %定义、证明、定理等
-% 	\theoremstyle{plain}
-% 		\newtheorem{axion}{Axion} %公理
-% 		\newtheorem{theorem}{Theorem}[section] %定理
-% 		\newtheorem{corollary}{Corollary} %推论
-% 		\newtheorem{lemma}{Lemma} %引理
-% 	\theoremstyle{definition}
-% 		\newtheorem{definition}{Definition}[section] %定义
-% 		\newtheorem{proposition}{Proposition} %命题
-% 	\renewcommand{\proofname}{\textbf{Proof}}
-
-% \renewcommand{\thetheorem}{%
-% 	\arabic{section}.\arabic{theorem}%
-% } % 公式编号不显示`\S`
-% \renewcommand{\thedefinition}{%
-% 	\arabic{section}.\arabic{definition}%
-% } % 公式编号不显示`\S`
-
-% \usepackage{esint} % 积分
-% \usepackage{siunitx} % 标准SI数值和单位处理
-
-% \usepackage{tikz} % 绘图
-% \usepackage{float} % 浮动体 (供图片, 表格等) 扩展, 主要用于提供h模式
-% \usepackage{graphicx} % 插入图片
-% \usepackage{titlepic}
-% \usepackage[font=small, skip=5pt]{caption} % 缩小题注字体和题注与图片距离
-% \usepackage{subcaption} % 子图和子图的题注
-% \usepackage{svg} % svg位图
-% \usepackage{wrapfig} % 简单的图文绕排
-% \usepackage[inline]{enumitem} % 编号
-% 	% 新列表:
-% 	\newlist{conditionlist}{enumerate}{2}
-% 	\setlist[conditionlist,1,2]{topsep = 0pt, itemsep = 0pt, parsep = 0pt}
-% \usepackage{geometry} % 调整页边距
-% % \geometry{left=1.6cm,right=1.6cm}
-% \usepackage{xcolor} % 颜色
-% \usepackage[colorlinks=true,bookmarks=true]{hyperref} % 引用, 交叉引用, 图表等的链接; 生成书签
-% \hypersetup{linkcolor=[rgb]{1,0.27,0},bookmarksopen = true}% 更多设置请查阅: texdoc hyperref
-
-% % 定义一些笔者常用的指令:
-% \newcommand{\me}{\mathrm{e}} % 自然对数的底
-% \newcommand{\mi}{\mathrm{i}} % 虚数单位
-% \newcommand{\dif}{\mathop{}\!\mathrm{d}} % 微分算子d
-% \newcommand*{\basis}[1]{\hat{\boldsymbol{#1}}} % 基底
-% \newcommand*{\bv}{\boldsymbol} % 向量加粗
-% \newcommand*{\id}{\mathrm{id}} % 单位映射
-% \newcommand*{\IFF}{\;\leftrightarrow\;} % 充要条件
-
-% \newcommand*{\diff}[3][1]
-% {\if#11%
-% 	\frac{\mathrm{d} #2}{\mathrm{d} #3}% 导数\diff{y}{x}
-% \else%
-% 	\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}% n阶导数\diff[n]{y}{x}
-% \fi}
-% \newcommand*{\pdiff}[3][1]
-% {\if#11%
-% 	\frac{\partial #2}{\partial #3}% 偏导数\pdiff{y}{x}
-% \else%
-% 	\frac{\partial^{#1} #2}{\partial #3^{#1}}% n阶偏导数\pdiff[n]{y}{x}
-% \fi}
-% \newcommand{\emphbf}[1]{\emph{\textbf{#1}}}
-% % \indexbf 的定义见前imakeidx的引用下
-
-% % 笔者习惯的运算符:
-% \DeclareMathOperator{\tg}{tg}
-% \DeclareMathOperator{\ctg}{ctg}
-% \DeclareMathOperator{\arctg}{arctg}
-% \DeclareMathOperator{\sh}{sh}
-% \DeclareMathOperator{\ch}{ch}
-% \DeclareMathOperator{\dom}{dom}
-% \DeclareMathOperator{\ran}{ran}
-% \DeclareMathOperator{\interior}{int}
-% \DeclareMathOperator*{\指令}{显示} 
-% 带星号的版本会像\lim一样
-
 \title{Point Set Topology}
 \author{Hoyan Mok}
 \begin{document}
@@ -695,13 +586,16 @@ Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
 \end{proof}
 
 \section{Basis}
-\begin{definition}
+\begin{definition}[Basis]
 Let $(X,\mathscr T)$ be a topological space and $\mathscr B$ be a subset of $\mathscr T$.
 If $\forall G\in \mathscr T 
 	\exists \mathscr B_G\in \mathscr P(\mathscr B) \big(
 		G=\cup \mathscr B_G\big)$, 
 then we call $\mathscr B$ a \indexbf{basis} or a \indexbf{base} of the topology $\mathscr T$.
+We call the minimum topology of which $\mathscr B$ is a basis the \indexbf{closure} of basis $\mathscr B$.
 \end{definition}
+
+
 
 \begin{theorem}\label{basis_iff_neighbourhood}
 Let $(X,\mathscr T)$ be a topological space and $\mathscr B$ be a subset of $\mathscr T$.
@@ -854,9 +748,134 @@ This is the proof of $\mathscr B_x \subseteq \tilde{\mathscr B}_x$,
 and $\tilde{\mathscr B}_x \subseteq \mathscr B_x$ can be proved similarly.
 \end{proof}
 
-\chapter{Subspace}
+\chapter{Basic Properties of Topological Spaces}
 
-\backmatter
+\section{Seperability}
+
+Seperabilities are some properties that describe how to can distinguish points in a topological space with their neighbourhoods.
+Since they are some additional properties to our definition, they are often call ``axioms''.
+
+\begin{definition}[$T_0$ \emph{or} Kolmogorov]%
+	\label{def: T0}
+	Let $(X, \mathscr T)$ be a topological space. 
+	If $\forall x \in X \,\forall y \in X (x \neq y)$, $\exists U \in \mathscr U(x) \,\exists V \in \mathscr U(y)$ s.t.\ $x \notin V \vee y \notin U$, we say that $(X, \mathscr T)$ is a \emphbf{$T_0$~space}%
+		\index{T0 space@$T_0$~space} 
+	or \indexbf{Kolmogorov space}.
+\end{definition}
+
+\begin{definition}[$T_1$ \emph{or} Fr\'echet]%
+	\label{def: T1}
+	Let $(X, \mathscr T)$ be a topological space. 
+	If $\forall x \in X \,\forall y \in X (x \neq y)$, $\exists U \in \mathscr U(x) \,\exists V \in \mathscr U(y)$ s.t.\ $x \notin V \wedge y \notin U$, we say that $(X, \mathscr T)$ is a \emphbf{$T_1$~space}
+		\index{T1 space@$T_1$~space}% 
+	or \indexbf{Fr\'echet space}.
+\end{definition}
+
+\begin{theorem}[Finite subspaces are closed iff $T_1$]%
+	\label{theorem: finite subspaces are closed if T1}
+	Topological space $(X, \mathscr T)$ is $T_1$ iff $\forall F \in 2^X$, $\card F \in \mathbb N \to \complement_X F \in \mathscr T$.
+\end{theorem}
+
+\begin{corollary}
+	Let $X$ be $T_1$, and $A \in 2^X$, $a \in A$. 
+	If $a$ is a accumulation point of $A$, then $\forall U \in \mathscr U(a)$, $\card U \cap A \geq \omega$.
+\end{corollary}
+
+\begin{definition}[$T_2$ \emph{or} Hausdorff]%
+	\label{def: T2}
+	Let $(X, \mathscr T)$ be a topological space. 
+	If $\forall x \in X \,\forall y \in X (x \neq y)$, $\exists U \in \mathscr U(x) \,\exists V \in \mathscr U(y)$ s.t.\ $U \cap V = \varnothing$, we say that $(X, \mathscr T)$ is a \emphbf{$T_2$~space}
+		\index{T2 space@$T_1$~space}% 
+	or \indexbf{Hausdorff space}.
+\end{definition}
+
+\begin{theorem}[The uniqueness of limit in $T_2$]
+	Let $X$ be $T_2$, $\langle x_n\rangle \in X^\mathbb N$. 
+	If $a$, $b$ are both limits of  $\langle x_n\rangle$, then $a = b$.
+\end{theorem}
+
+
+
+\chapter{Product Spaces and Quotient Spaces}
+
+\section{Product Space}
+
+\begin{definition}[Product space]%
+	\label{def: product space}
+	Let $(X_1, \mathscr T_1$, $(X_2, \mathscr T_2)$ be two topological spaces. The topology $\mathscr T$ of the \indexbf{product space} $(X_1 \times X_2, \mathscr T)$ is defined by the closure of basis $\mathscr B = \{U_1 \times U_2 \mid U_1 \in \mathscr T_1 \wedge U_2 \in \mathscr T_2\}$.
+\end{definition}
+
+By definition, we can tell that the projection mappings $\pi_1 \colon X_1 \times X_2 \to X_1 ; (x_1, x_2) \mapsto x_1$ is continuous, so is $\pi_2$.
+
+\begin{theorem}%
+	\label{theorem: continuity of component mappings to product space}
+	$f \colon Y \to X_1 \times X_2 \in C(Y, X_1 \times X_2) \iff \pi_1 \circ f \in C(Y, X_1) \wedge \pi_2 \circ f \in C(Y, X_2)$.
+\end{theorem}
+
+\section{Quotient Space}
+
+
+
+\begin{definition}[Quotient space]
+	Let $(X, \mathscr T)$ be a topological space, $\sim$ be a equivalence relation of $X$, $p \colon X \to X/\sim; x \mapsto [x]$.
+	The topological space  $(\indexmath[X divided by sim]{X/\sim}, p(\mathscr T))$ is called the \indexbf{quotient space} of $X$ with respect to $\sim$.
+	Here $p$ is called a \indexbf{quotient map} associated to $\sim$.
+\end{definition}
+
+\begin{theorem}
+	$f \in C(X/\sim, Y) \iff f \circ p \in C(X, Y)$.
+\end{theorem}
+
+\begin{definition}[Quotient map]%
+	\label{quotient map}
+	$f \colon X \to Y$ is called a \indexbf{quotient map} if:
+	\begin{conditionlist}[label=(\arabic*)] % chktex 36
+		\item $f \in C(X, Y)$;
+		\item $f(X) = Y$;
+		\item $f^{-1}(V) \in \mathscr T_X \to V \in \mathscr T_Y$.
+	\end{conditionlist}
+\end{definition}
+
+We can consider fibres of $f$ be equivalence classes of $X$, in that way, ${X / \sim_f} \simeq Y$ ($Y$ and $X/\sim_f$ are homeomorphic).
+
+\begin{theorem}[Continuous surjective to Hausdorff space is quotient]
+	Let $Y$ be a Hausdorff space.
+	If $f \in C(X, Y)$ is surjective, then $f$ is a quotient map.
+\end{theorem}
+
+\begin{theorem}[Composition of quotient maps is quotient]
+	If $f \colon X \to Y$ and $g \colon Y \to Z$ are both quotient, then $g \circ f$ is also quotient.
+\end{theorem}
+
+\begin{definition}[Quotient space divided by a subset]
+	$A \subseteq X$. 
+	If we define $\sim$ by $x \sim y \iff (x \in A \wedge y \in A) \vee (x \notin A \wedge y \notin A)$, we denote the quotient space $X/\sim$ by $\indexmath[X divided by A]{X / A}$.
+
+\end{definition}
+
+\begin{wrapfigure}{r}{.6\textwidth}
+	\centering
+	\includegraphics[width=.6\textwidth]{cone.png}
+	\caption{A topological cone}%
+	\label{figure: topological cone}
+\end{wrapfigure}
+
+
+\begin{definition}[Topological cone]
+	The \indexbf{topological cone} of $X$ is defined as $\indexmath[CX]{\mathrm CX} := X \times [0, 1] / X \times \{1\}$.
+\end{definition}
+
+Fig.~\ref{figure: topological cone} illustrates a topological cone.
+
+\begin{definition}[Gluing]
+	$X$ and $Y$ are both subspaces of $Z$, $f$ is a surjective map from $X$ to $Y$ ($f(X) = Y$). 
+	Define $\sim_f$ on $Z$ as: $x \sim y \iff x = y \vee y = f(x)$.
+	Then $\indexmath[Z f]{Z_f} := Z/\sim_f$ is called the \indexbf{gluing} of $X$ and $Y$ along $f$.
+\end{definition}
+
+\chapter{Topological Manifolds}
+
+\backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
 \printbibliography[heading=bibliography, title={bibliography}]
 
