@@ -16,8 +16,7 @@
 \begin{document}
 \maketitle
 \frontmatter
-\phantomsection
-\addcontentsline{toc}{chapter}{Contents}
+
 \tableofcontents
 \mainmatter
 \chapter{Topological Spaces and Continuous Mappings}
@@ -343,7 +342,21 @@ $(X,\mathscr{T}_X)$ and $(Y,\mathscr{T}_Y)$ are both topological spaces. A bijec
 Two topological spaces $(X,\mathscr{T}_X)$ and $(Y, \mathscr{T}_Y)$ are said to be \indexbf{homeomorphic} if there exists a homeomorphism $f \colon X\to Y$.
 \end{definition}
 
-Homeomorphic topological spaces are identical with respect to their topological propoties since the theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other. In fact homeomorphic relations are equivalent relations.
+Homeomorphic topological spaces are identical with respect to their topological propoties since the Theorem~\ref{criterion_continuity} has shown that their open sets correspond to each other. In fact homeomorphic relations are equivalent relations.
+
+\begin{lemma}[Gluing lemma]%
+	\label{lemma: gluing}
+	$\mathscr F = \{F_i \mid \complement_X F_i \in \mathscr T, i \in n\}$, $X \subseteq {\cup \mathscr F}$, $f \colon X \to Y$. 
+	If $\forall F \in \mathscr F$, $f \vert_F \in C(F, Y)$, then $f \in C(X, Y)$.
+\end{lemma}
+\begin{proof}
+	$\forall F_Y ( \complement_Y F_Y \in \mathscr T)$, 
+	\begin{equation*}
+		f^{-1}(F_Y) = \bigcup_{i \in n} F_i \cap f^{-1}(F_Y) = \bigcup_{i \in n} f^{-1} \vert_{F_i} (F_Y).
+	\end{equation*}
+
+	The finite intersection of closed sets are also closed, while the pre-image of a closed set is also closed (when mapping is continuous). 
+\end{proof}
 
 \section{Closure}
 \begin{definition}\label{accumulation_point}
@@ -515,33 +528,33 @@ The sets of all interior points of $A$ is the \indexbf{interior} of $A$, noted b
 \end{definition}
 
 \begin{theorem}\label{interior_and_closure}
-Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
-$\interior A=\complement_X\big(
-	\overline{
-		\complement_X(A)}\big)$, 
-$\overline A = \complement_X\big(
-	\interior \complement_X(A)\big)$.
+	Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
+	$\interior A=\complement_X\big(
+		\overline{
+			\complement_X(A)}\big)$, 
+	$\overline A = \complement_X\big(
+		\interior \complement_X(A)\big)$.
 \end{theorem}
 \begin{proof}
-$x\in \interior A$ implies an open set $G$ which is a subset of $A$ and $x\in G$.
-The complement of $G$ is closed, thus its closure is $\complement_X(G)$ itself. 
-$\complement_X(A)\subseteq \complement_X(G) \rightarrow 
-	\overline{\complement_X(A)}\subseteq \complement_X(G)$ (Lemma \ref{subset_closure}), 
-therefore $x\notin \overline{\complement_X(A)}$, which is the first equation to prove.
+	$x\in \interior A$ implies an open set $G$ which is a subset of $A$ and $x\in G$.
+	The complement of $G$ is closed, thus its closure is $\complement_X(G)$ itself. 
+	$\complement_X(A)\subseteq \complement_X(G) \rightarrow 
+		\overline{\complement_X(A)}\subseteq \complement_X(G)$ (Lemma~\ref{subset_closure}), 
+	therefore $x\notin \overline{\complement_X(A)}$, which is the first equation to prove.
 
-To prove the second one only need to replace the $A$ with $\complement_X(A)$ in the first equation.
+	To prove the second one only need to replace the $A$ with $\complement_X(A)$ in the first equation.
 \end{proof}
 
 \begin{theorem}
-Let $(X,\mathscr T)$ be a topological space and $G$ be a subset of $X$. 
-\[
-	G\in \mathscr T \leftrightarrow
-		\interior G=G
-\]
+	Let $(X,\mathscr T)$ be a topological space and $G$ be a subset of $X$. 
+	\[
+		G\in \mathscr T \leftrightarrow
+			\interior G=G
+	\]
 \end{theorem}
 \begin{proof}
-$G$ is open \emph{iff} the complement of $G$ is closed. And $\complement_X (G) = \overline{\complement_X (G)}$.
-The complement of the both size of this equation and Theorem \ref{interior_and_closure} give the proof of the theorem.
+	$G$ is open \emph{iff} the complement of $G$ is closed. And $\complement_X (G) = \overline{\complement_X (G)}$.
+	The complement of the both size of this equation and Theorem \ref{interior_and_closure} give the proof of the theorem.
 \end{proof}
 
 With the propoties of closure and Theorem \ref{interior_and_closure} the folowing statements should be easy to prove:
@@ -556,11 +569,11 @@ $\interior (A\cap B) = \interior A \cap \interior B$, $\interior(\interior A) =\
 Therefore we can say that the interior of $A$ is the largest open set contianed in $A$.
 
 \begin{definition}
-Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
-A point $x$ is said to be a \indexbf{boundary point} of $A$ if 
-$\forall U\in \mathscr U(x)\big(
-	U\cap A\neq \varnothing \wedge U\cap \complement_X(A)\neq \varnothing\big)$.
-The set of all boundary points of $A$ is called the \indexbf{boundary} of $A$, noted by $\partial A$.
+	Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$. 
+	A point $x$ is said to be a \indexbf{boundary point} of $A$ if 
+	$\forall U\in \mathscr U(x)\big(
+		U\cap A\neq \varnothing \wedge U\cap \complement_X(A)\neq \varnothing\big)$.
+	The set of all boundary points of $A$ is called the \indexbf{boundary} of $A$, noted by $\partial A$.
 \end{definition}
 
 \begin{theorem}\label{boundary_propoties}
@@ -570,7 +583,7 @@ Let $(X,\mathscr T)$ be a topological space and $A$ be a subset of $X$.
 (3) $\overline A = \interior A\cup \partial A$.
 \end{theorem}
 \begin{proof}
-(1): Apply Theorem \ref{closure_neighbourhood} to both $A$ and $\complement_X(A)$.
+(1): Apply Theorem~\ref{closure_neighbourhood} to both $A$ and $\complement_X(A)$.
 
 (2): $\interior A \cup \partial A=
 	A\cup(\overline A\cap \overline{\complement_X (A)})=
@@ -766,7 +779,7 @@ Since they are some additional properties to our definition, they are often call
 \begin{definition}[$T_1$ \emph{or} Fr\'echet]%
 	\label{def: T1}
 	Let $(X, \mathscr T)$ be a topological space. 
-	If $\forall x \in X \,\forall y \in X (x \neq y)$, $\exists U \in \mathscr U(x) \,\exists V \in \mathscr U(y)$ s.t.\ $x \notin V \wedge y \notin U$, we say that $(X, \mathscr T)$ is a \emphbf{$T_1$~space}
+	If $\forall x \in X \,\forall y \in X (x \neq y)$, $\exists U \in \mathscr U(x) \,\exists V \in \mathscr U(y)$ s.t.\ $x \notin V \wedge y \notin U$, we say that $(X, \mathscr T)$ is a \emphbf{$T_1$~space}%
 		\index{T1 space@$T_1$~space}% 
 	or \indexbf{Fr\'echet space}.
 \end{definition}
@@ -784,7 +797,7 @@ Since they are some additional properties to our definition, they are often call
 \begin{definition}[$T_2$ \emph{or} Hausdorff]%
 	\label{def: T2}
 	Let $(X, \mathscr T)$ be a topological space. 
-	If $\forall x \in X \,\forall y \in X (x \neq y)$, $\exists U \in \mathscr U(x) \,\exists V \in \mathscr U(y)$ s.t.\ $U \cap V = \varnothing$, we say that $(X, \mathscr T)$ is a \emphbf{$T_2$~space}
+	If $\forall x \in X \,\forall y \in X (x \neq y)$, $\exists U \in \mathscr U(x) \,\exists V \in \mathscr U(y)$ s.t.\ $U \cap V = \varnothing$, we say that $(X, \mathscr T)$ is a \emphbf{$T_2$~space}%
 		\index{T2 space@$T_1$~space}% 
 	or \indexbf{Hausdorff space}.
 \end{definition}
@@ -794,7 +807,371 @@ Since they are some additional properties to our definition, they are often call
 	If $a$, $b$ are both limits of  $\langle x_n\rangle$, then $a = b$.
 \end{theorem}
 
+\section{Countability}
 
+\section{Compactness}
+
+\begin{definition}[Open cover]\label{definition: open cover}
+	Let $(X, \mathscr T)$ be a topological space, $K \in 2^X$ and $\varOmega \in 2^\mathscr T$. We call $\varOmega$ to be an \indexbf{open cover} over $K$, if $K \subset \cup \varOmega$. 
+	If there are two open covers~$\varOmega$, $\varOmega'$ over $K$, and $\varOmega' \subset \varOmega$, we say that $\varOmega'$ is a \indexbf{subcover} of $\varOmega$.
+\end{definition}
+
+\begin{definition}[Compact set]\label{definition: compact set}
+	A set~$K \in 2^X$ in topological space $(X, \mathscr T)$ is called a \indexbf{compact set} if each of its open covers has a \emph{finite} subcover. 
+\end{definition}
+
+Specially, $\varnothing$ is compact.
+
+\begin{theorem}\label{theorem: compact iff compact in subspace}
+	A set $K \subset X$ is compact in $(X,\mathscr T)$ \emphbf{iff} $K$ is compact in $(K, \mathscr T_K)$ itself. 
+\end{theorem}
+
+This theorem tells a truth that whether $K$ is compact or not doesn't dependent on the topological space it's in. 
+This fact can be easily proved: we just need to notice that every open set $G_K$ in $(K, \mathscr T_K)$ is an intersection of an open set $G$ in $(X, \mathscr T)$ and $K$. 
+
+\begin{theorem}[Compact $\to$ closed (Hausdorff)]\label{theorem: compact sets are closed in Hausdorff space}
+	If $K$ is compact in a Hausdorff space $(X, \mathscr T)$, then $K$ is a closed set in $(X, \mathscr T)$.
+\end{theorem}
+\begin{proof}
+	Let $x_0$ be a limit point of $K$, which means $\forall U(x_0)$, 
+	\[
+		\card U(x_0)\cap K \notin \mathbb{N}.
+	\]
+
+	Assume that $x_0 \notin K$. 
+	In a Hausdorff space, $\forall x \in K - \{x_0\}$, $\exists U(x)$ s.t. $U(x)\cap U(x_0)=\varnothing$. 
+	Such $U(x)$ construct an open cover $\varOmega=\left\{U(x)|x\in K \right\}\subset 2^K$. 
+	Since $K$ is compact, $\exists \varOmega' \subset \varOmega$ s.t.\ $\card \Omega \in \mathbb{N}$. 
+	\[
+		\left(\cup\Omega'\right)
+		\cap U(x_0)
+		=
+		\left(\bigcup_{k=1}^n{U_k}\right)
+		\cap U(x_0)
+		=
+		\bigcup_{k=1}^n\left(
+			U_k\cap U(x_0)
+		\right)
+		=
+		\varnothing\,.
+	\]
+
+	Since $K\subset \cup \Omega'$, $x_0$ is an exterior point of $K$, which leads to a contradiction. 
+
+	Hence $x_0 \in K$. $\overline K = K$.
+\end{proof}
+
+\begin{theorem}\label{theorem: compact nested sequences have non-empty limit}
+	Each decreasing \emph{\textbf{nested sequences}}\index{nested sequence} of non-empty compact sets has a non-empty limit, i.e.\ 
+	$\forall (K_n)_{n \in \mathbb N} \in \mathscr P(X)^\mathbb N$ s.t.\ $\forall n \in \mathbb N_+$, $K_n \supset K_{n+1}\wedge K_n \neq \varnothing$ $\wedge$ ($K_n$ is compact): 
+	$K_n \downarrow K \neq \varnothing$.
+\end{theorem}
+\begin{proof}
+	Assume that $K = \varnothing$. 
+	Compact subsets of $K_1$ are all colsed, while their complements are all open. An open cover $\varOmega$ can be constructed as $\{K_1 - K_n \mid n \in \mathbb N_+\}$. 
+	Since $K_1$ is compact, there would be a finite subcover $\varOmega' \subset \varOmega$, notice that $(X - K_n)_{n \in \mathbb N}$ is also a nested sequence, there must be one single $X - K_{n_0} \in \varOmega'$ that covers $K_1$, which means $K_{n_0} = \varnothing$ contradicting that $\forall n \in \mathbb N_+$, $K_n$ is non-empty.
+\end{proof}
+
+\begin{theorem}\label{theorem: closed subset of compact set}
+	A Closed subset $F$ of a compact set $K$ is also compact.
+\end{theorem}
+\begin{proof}
+	If $\varOmega_F \subset 2^K$ is an open cover of $F$. 
+	Notice that $K - F$ is open, $\varOmega = (\cup \varOmega_F) \cap \{K - F\}$ constructs an open cover over over $K$. 
+	Since $K$ is compact there must be a finite cover $\varOmega' \subset \varOmega$ which obviously also covers over $F$.
+\end{proof}
+
+The following propoties of compact sets are about topological spaces induced from metric spaces.
+
+\begin{definition}[net]\label{defintion: e-net}
+	$(X, d)$ is a metric space, $E \in 2^X$. 
+	$E$ is called an \indexbf{$\varepsilon$-net} if $\forall x \in X$,$\exists e \in E$, $d(e, x) < \varepsilon$.
+\end{definition}
+
+\begin{theorem}[Finite $\varepsilon$-net exists]\label{theorem: finite e-net exists (metric, compact)}
+	If $(K, d)$ is a compact metric space, then $\forall \varepsilon \in \mathbb R_+$, $\exists$ \emph{finite} $\varepsilon$-net in $(K, d)$. 
+\end{theorem}
+\begin{proof}
+	For each point $x\in K$, find it a $B(x,\varepsilon)$, of which an infinite cover $\Omega$ over $K$ is made. 
+	Since $K$ is compact, there exists a finite subcover $\varOmega' = \{B(x_i,\varepsilon)\}_{i \in n}$ ($n \in \mathbb N_+$). Therefore $\{x_i\}_{i \in n}$ is a finite $\varepsilon$-net in $K$.
+\end{proof}
+
+\begin{theorem}[Sequentially compact]\label{theorem: sequentially compact iff compact (metric)}
+	A metric space~$(K, d)$ is compact \emphbf{iff} it is \indexbf{sequentially compact}, 
+	that is, $\forall (x_n)_{n \in \mathbb N} \in K^\mathbb N$, it has a convergent subsequence $(x_{k_n})_{n \in \mathbb N}$ 
+		($k_n \in \mathbb N$; $k_{n+1} > k_n$)
+	whose limit $a \in K$.
+\end{theorem}
+
+To prove Theorem~\ref{theorem: sequentially compact iff compact (metric)}, we need to prove two lemmata first.
+
+\begin{lemma}\label{lemma: finite e-net exists (metric, sequentially compact)}
+	If $(K, d)$ is sequentially compact, then $\forall \varepsilon \in \mathbb R_+$, $\exists$ finite $\varepsilon$-net in $(K, d)$. 
+\end{lemma}
+\begin{proof}
+	Assume that $\exists \varepsilon_0 \in \mathbb R_+$, there were no finite  $\varepsilon_0$-net in $(K, d)$. 
+	Define such sequence: $ (x_n)_{n \in \mathbb N}$ s.t.\ $\forall n \in \mathbb N \; \forall k \in n$, $d(x_n, x_k) \geq \varepsilon_0$ 
+		(There would always be a next one since there exists no finite $\varepsilon_0$-net or $\{B(x_n; \varepsilon_0)\}_{n \in N}$ gives such). 
+		It has no convergent subsequence: 
+		if there were a $(x_{k_n})_{n \in \mathbb N}$ convergent to $a\in K$, $\exists N,M\in\mathbb{N}_+$, $d(x_N, x_M)\leq d(x_N, a)+d(x_M, a)\leq \varepsilon_0$, which lead to a contradictary. 
+\end{proof}
+
+\begin{lemma}\label{lemma: intersection of closed nested sequence (sequentially compact)}
+	If $(K, d)$ is sequentially compact then every nested sequence of closed non-empty sets $\{F_n\}_{n \in \mathbb N}$ in $K$ have a non-empty intersection.
+\end{lemma}
+\begin{proof}
+	Let $(x_{k_n})_{n \in \mathbb N}$ be a convergent subsequence of $(x_n)_{n \in \mathbb N}$, where $\forall n \in \mathbb N$, $x_n \in F_n$. 
+	Let $a$ be the limit of $(x_{k_n})_{n \in \mathbb N}$. 
+
+	Assume that $a \notin \bigcap_{n \in \mathbb N} F_n$, in a metric space, $\exists U(a) \in \mathscr U(a)$ s.t.\ $U(a) \cap \big(\bigcap_{n \in \mathbb N} F_n \big) = \varnothing$, therefore $U(a) \cap \big(\bigcap_{n \in \mathbb N} F_{k_n} \big)=\varnothing$. 
+	But this conflict the fact that $\exists N \in \mathbb N$, s.t.\ $n > N \to x_{k_n}\in U(a)$ while $x_{k_n} \in F_{k_n}$.
+\end{proof}
+
+Then we get back to the Theorem~\ref{theorem: sequentially compact iff compact (metric)}. 
+\begin{proof}
+
+	$\to$: 
+	If $\card \{x_n\}_{n \in \mathbb N} \in \mathbb N$, it is obvious; 
+	Now we let $\card \{x_n\}_{n \in \mathbb N} \notin \mathbb N$. 
+	We can always find finite $1/k$-net~$\{B(a_{k, i}, 1/k)\}_{i \in m}$
+		(Theorem~\ref{theorem: finite e-net exists (metric, compact)}, 
+			$m \in \mathbb N$, $a_i \in K$)%
+	, for all $k \in \mathbb N_+$. 
+	For each $k$, there must be at least one $B(a_{k, i_0}; 1/k)$
+		(for simplication, we denote $a_{k, i_0}$ by $a_k$)
+	that includes infinite elements in $(x_n)_{n \in \mathbb N}$. 
+	$\forall n \in \mathbb N_+$
+		(let $k_0 = 0$), 
+	select $x_{k_n} \in B(a_{n, 0}; 1/n)$, and $\{\overline B(x_n; 1/k)\}$ is a nested sequence of a closed non-empty sets in sequentially compact $K$,
+		(Lemma~\ref{lemma: intersection of closed nested sequence (sequentially compact)})
+	$\lim_{n\to \infty} x_{k_n} \in K$.
+	
+	$\gets$: 
+	Assume that there were an open cover $\varOmega$ over $K$ having no finite subcover, $\forall n \in \mathbb N_+$, $\exists$ finite $1/n$-net 
+		(Lemma~\ref{lemma: intersection of closed nested sequence (sequentially compact)})%
+	, in which there would be at least one $x_n$ whose $\overline B(x_n;\frac{1}{n})$ can't be covered finitely. 
+	Then $\overline B(x_n; 1/n) \downarrow B = \{a\}$ 
+		(Theorem~\ref{theorem: compact nested sequences have non-empty limit})
+	can't be finitely covered by any subcover of $\varOmega$, 
+	which means $\varOmega$ can't cover the whole $K$, leading to the contradiction.
+\end{proof}
+
+We now prove a very useful special case for compact sets: compact sets in $\mathbb R$.
+
+\begin{lemma}[$n$-dimemsional cuboids are compact]%
+	\label{lemma: n-dimensional cuboids are compact}
+	Let $I$ be a cuboid in $\mathbb R^n$ i.e.\ 
+	\begin{equation*}
+		I := \{\bv x \in \mathbb R_n \mid a_i \leq x_i \leq b_i, \forall i \in n\}\,.
+	\end{equation*}
+	The cuboid $I$ is compact.
+\end{lemma}
+\begin{proof}
+	We only need to prove that $I$ is sequentially compact (Theorem~\ref{theorem: sequentially compact iff compact (metric)}). 
+	Let $(\bv x_i)_{i \in \mathbb N} \in I^\mathbb N$. 
+	
+	Denote $S_0 := I$.
+	We divide $S_m$ ($m \in \mathbb N$) into $2^n$ parts by equally dividing every $I_i := \{\bv x \in \mathbb R_n \mid a_i \leq x_i \leq b_i\}$ into two. 
+	Choose one that contains inifinite points of $(\bv x_i)_{i \in \mathbb N}$ as $S_{m+1}$. 
+	Then we get a closed nested sequence $S := (S_i)_{i \in \mathbb N}$.
+	Notice that $\forall i \in \mathbb N$, $S_i$ can be conceived as a product of $n$ 1-dimension intervals. These intervals are also closed nested sequence, but in $\mathbb R$. 
+	We have leaned that $\exists! \bv \xi := (\xi_i)_{i \in n}$ s.t.\ $\{\bv \xi\} := \bigcap S$ from the theory of real numbers.
+
+	In every $S_k$ we can find an $\bv x_{i_k}$, which is a convergent subsequence of the arbitrary sequence~$(\bv x_i)_{i \in \mathbb N}$.
+\end{proof}
+
+\begin{theorem}[Compact iff closed and bounded in $\mathbb R^n$]%
+	\label{theorem: compact iff closed and bounded in Rn}
+	Let $K \in \mathscr P(\mathbb R^n)$, $n \in \mathbb N_+$.
+	The set~$K$ is compact \emph{iff} it is closed and bounded.
+\end{theorem}
+\begin{proof}
+	$\to$: 
+	We have proved that compact sets are closed in a Hausdorff space (Theorem~\ref{theorem: compact sets are closed in Hausdorff space}). 
+	Now we prove that $K$ is also bounded. 
+	Let $\bv x \in \mathbb R^n$, and we could find an open covers of $K$: 
+	\begin{equation*}
+		\varOmega := \{B(\bv x; n) \mid n \in \mathbb N_+\}\,.
+	\end{equation*}
+
+	Assume that we find a finite subcover $\varOmega' := \{B(\bv x; n_k) \mid k \in m\}$, then $d(K) < n_m$.
+
+	$\gets$: Since $K$ is bounded, we can find it a $n$-dimension cuboid~$I$, which we have proved to be compact (Lemma~\ref{lemma: n-dimensional cuboids are compact}). 
+	The closed set~$K$ in the compact set~$I$ is compact (Theorem~\ref{theorem: closed subset of compact set}).
+
+\end{proof}
+
+\begin{theorem}[Conservation of compactness]
+	\label{theorem: conservation of compactness}
+Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces. 
+Let $K \subset X$ be a compact set. 
+If $f \colon X \to Y \in C(X, Y)$, then $f(K)$ is compact.
+\end{theorem}
+\begin{proof}
+For each open cover $\Omega_Y = \{ G_Y \in \mathscr T_Y\} \subset \mathscr T_Y$ over $f( K)$, $f^{-1} ( G_Y) \in \mathscr T_X$ (Therem~\ref{theorem: criterion of continuity}). $f( K) \subset \cup\,\Omega_Y \Rightarrow K \subset f^{-1} \left(  \cup\,\Omega_Y \right) = \cup\,\Omega_X $, where $\Omega_X = \{ f^{-1} ( G_Y) \mid G_Y \in \Omega_Y\} $ is an open cover over $K$. Since $K$ is compact,
+$\exists \Omega'_X \subset \Omega_X\left( 
+\lvert \Omega'_X \rvert \in \mathbb{N}_+ 
+\;\wedge\;K\subset \cup\,\Omega'_X
+\right)$, $f( K) \subset f ( \cup\,\Omega'_X) $. $f ( G'_X) \in \Omega_Y$, hence $\Omega'_Y = \{ f ( G'_X) \mid G'_X \in \Omega'_X\}$ is a finite subcover over $f( K)$.
+\end{proof}
+
+
+\begin{theorem}[Weierstrass maximum-value theorem]
+\label{theorem: Weierstrass maximum-value}
+Let $K$ be a compact topological space, and $f \in C (K, \mathbb R)$.
+$\exists x_m, x_M \in K$, s.t.\ $f(x_m) = m := \inf f(K)$, $f(x_M) = M := \sup f(K)$.
+\end{theorem}
+\begin{proof}
+By Theorem~\ref{theorem: conservation of compactness}, $f(K)$ is also compact, and therefore closed and bounded (Theorem~\ref{theorem: compact iff closed and bounded in Rn}). 
+If $M \notin f(K)$, then open covers $\{ B(M; (M-m)/n) - \tilde B(M; (M-m)/(n + 1)) \mid  n \in \mathbb N_+\} $ would not have a finite subcover, which is a contradiction to the compactness of $f(K)$.
+\end{proof}
+
+\begin{theorem}[Bijective from compact space to Hausdorff space is homeomorphism]
+	\label{theorem: bijective from compact space to Hausdorff space is homeomorphism}
+Let $(K, \mathscr T_K)$ be a compact space and $(Y, \mathscr T_Y)$ be a Hausdorff space. 
+Let $f \in Y^K$ be a bijective.
+If $f \in C(K, Y)$, then $f$ is a homeomorphism.
+\end{theorem}
+\begin{proof}
+$\forall F = K - G$ s.t.\ $G \in \mathscr T_K$ is compact (Theorem~\ref{theorem: closed subset of compact set}). 
+Hence $f(F)$ is compact (Theorem~\ref{theorem: conservation of compactness}), then it is also closed
+(Theorem~\ref{theorem: compact sets are closed in Hausdorff space}). 
+This fact shows that $f^{-1}$ is continuous (Theorem~\ref{theorem: criterion of continuity}).
+\end{proof}
+
+\section{Connectness}
+
+\begin{definition}[Connectness]%
+	\index{connectness}%
+	\label{def: Connectness}
+	If a topological space $(X, \mathscr T)$ cannot be divided by two non-intersecting non-empty open sets, i.e.\ 
+	\begin{equation*}
+		\forall U \in \mathscr T (U \neq \varnothing \wedge U \neq X), \quad \complement_X U \notin \mathscr T,
+	\end{equation*}
+	then we say it is a \indexbf{connected} topological space.
+	If $X$ is a subspace of a topological space $Y$ and it is connected, we say $X$ is \emphbf{connected} in $Y$ or $X$ is a connected set in $Y$.
+\end{definition}
+
+If we write a non-connected space by the union of several non-intersecting connected subspaces, we call those connected subspaces \emphbf{connected branches}%
+	\index{connected branch}.
+
+\begin{theorem}[Conservation of connectedness]\label{theorem: conservation of connectedness}
+	Let $(X, \mathscr T_X)$ and $(Y, \mathscr T_Y)$ be two topological spaces, and $E \subset X$ be a connected set. 
+	If $f \in C(X, Y)$, then $f(E)$ is also connected.
+\end{theorem}
+\begin{proof}
+	Only to notice that the open-closed sets in $(f(E), \mathscr T_{f(E)})$ have corresponding open-closed pre-images in $(E, \mathscr T_E)$.
+\end{proof}
+
+
+\begin{theorem}\label{theorem: union of connected sets}
+	Let $(X, \mathscr T)$ be a topological space, and $\{C_\alpha\}_{\alpha \in A}$ be connected subsets of $X$. 
+	If $\bigcap_{ \alpha \in A} C_\alpha \neq \varnothing$, then $\bigcup\limits_{\alpha \in A} C_\alpha$ is also connected. 
+\end{theorem}
+\begin{proof}
+	Assume that $C = \bigcup_{\alpha \in A} C_\alpha$ were not connected, $\exists E \in 2^C$ s.t.\ $E \neq \varnothing$, $E \neq C$ and $E, C - E \in \mathscr T_C$. 
+	For $E$ is not empty there exists a $\beta \in A$ s.t.\ $E \cap C_\beta \neq \varnothing$. 
+	
+	Now we show that $C_\beta \subset  E$.
+	Suppose that $C_\beta \nsubseteq  E$, which implies that $(C - E) \cap C_\beta \neq \varnothing$. 
+	$E, C - E, C_\beta \in \mathscr T_C$, by the definition of the topology, 
+	$E \cap C_\beta, (C - E) \cap C_\beta \in \mathscr T_C$. 
+	This conflicts to the fact that $C_\beta$ is connected. 
+	Therefore $C_\beta \subset  E$. 
+
+	Hence, there exists a $B \subsetneqq A$, $\bigcup_{ \beta \in B} C_\beta = A$. 
+	Since $C_\gamma$, $\gamma \in A - B$ would have a empty intersection with $E$, which contradicts $\bigcap_{ \alpha \in A} C_\alpha \neq \varnothing$.
+\end{proof}
+
+\begin{theorem}\label{theorem: closure of connected set}
+	Connected sets have connected closure.
+\end{theorem}
+\begin{proof}
+	% TODO proof of the closure of a connected set is also a connected set
+\end{proof}
+
+
+\begin{theorem}\label{theorem: real connected sets}
+	$C \subset \mathbb R$ is connected \emphbf{iff}  $\forall x, z \in C \forall y \in \mathbb R (x < y < z)$  $\to $ $y \in C$.
+\end{theorem}
+\begin{proof}
+	$\to$:
+	Assume that there were such $y \in \mathbb R$ that $\exists x, z \in C$, $x < y < z$ but $y \notin C$. 
+	$\{x \in C \mid x < y\}$ and $\{x \in C \mid x > y\}$ are open in $C$ for they are intersection of open sets in $\mathbb R$ and $C$. 
+	Since they're each other's complement, they are both open-closed, which conflicts to the definition of a connected set.
+	
+	$\gets$: 
+	It can be proved that $(\inf C, \sup C) \subset C$. 
+	Assume that there were an open-closed proper subset $E \neq \varnothing$ contained in $C$. 
+	Find two points $x \in E$, $z \in C - E$. 
+	Without loss of generality, let $x < z$. 
+	Since $E$ and $C - E$ are closed, $c_1 = \inf \big( E \cap [a,b] \big) \in E$ while $c_2 = \inf \big((C - E) \cap [a, b]\big) \in C - E$. 
+	However $E \cap (C - E) = \varnothing$, hence $c_1 < c_2$, which means $(c_1, c_2) \cap E = \varnothing$. 
+	Here's the contradiction.
+\end{proof}
+
+\begin{theorem}[Intermediate-value theorem]%
+	\label{theorem: intermediate-value}
+	Let $(X, \mathscr T)$ be a connected topological space, and $f \in C(X, \mathbb R)$, $f(a) = A$, $f(b) = B$, $A < B$.
+	$\forall C \in [A, B]$, $\exists c \in X$, $f(c) = C$.
+\end{theorem}
+\begin{proof}
+	by Theorem~\ref{theorem: conservation of connectedness}, $f(X)$ must be a connected set. Hence by Theorem~\ref{theorem: real connected sets}, we know that $\forall C \in [A, B]$, $C \in f(X)$.
+\end{proof}
+
+\begin{definition}[Locally connected]\label{definition: locally connected}
+	A topological space $(X, \mathscr T)$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\exists U(x) $ s.t.\ $U(x)$ is connected.
+\end{definition}
+
+\begin{definition}[Path]%
+	\label{def: path}
+	A continuous map $a \colon [0, 1] \to X$ is a \indexbf{path}. $a(0)$ is called the \indexbf{initial point} and $a(1)$ is called the \indexbf{terminal point}
+	When $a(0) = a(1)$, $a$ is a \indexbf{loop}.
+\end{definition}
+
+In some texts, the domain of a path can be any closed interval.
+
+We can define the \indexbf{composition} of two paths $a$, $b$ with
+\begin{equation*}
+	\indexmath[ab]{ab}(t) = \begin{cases}
+		a(2t) & t \in [0, 1/2], \\
+		b(2t - 1) & t \in [1/2, 1],
+	\end{cases}
+\end{equation*}
+if $a(1) = b(0)$.
+
+\begin{theorem}%
+	\label{theorem: composition of path}
+	The composition of two paths is also a path.
+\end{theorem}
+\begin{proof}
+	See Lemma~\ref{lemma: gluing}.
+\end{proof}
+
+The \indexbf{inverse} of a path $a$ is $\indexmath[a bar]{\bar a}(t) = a(1 - t)$.
+
+\begin{definition}[Path-connected]%
+	\label{def: path connected}
+	If $\forall x, y \in X$, there exists a path $a$ in $X$ s.t.\ $a(0) = x$ and $a(1) = y$, we say that $X$ is \indexbf{path-connected}
+\end{definition}
+
+\begin{theorem}[Path-connected then connected]
+	A path-connected space is also connected.
+\end{theorem}
+
+\begin{theorem}[Conservation of path-connectedness]
+	The image of a connected mapping from a path-connected set is also path-connected.
+\end{theorem}
+
+
+
+\section{Convexity}
+
+\begin{definition}[Convexity]%
+	\index{convexity}%
+	\label{def: Convexity}
+	A \indexbf{convex set} is a set in Euclidean space that contains all points on the straight segment jointing any two points i.e.\ $\forall \bv x_1, \bv x_2 \in C$, $[\bv x_1, \bv x_2] \subset C$.
+\end{definition}
 
 \chapter{Product Spaces and Quotient Spaces}
 
@@ -811,6 +1188,27 @@ By definition, we can tell that the projection mappings $\pi_1 \colon X_1 \times
 	\label{theorem: continuity of component mappings to product space}
 	$f \colon Y \to X_1 \times X_2 \in C(Y, X_1 \times X_2) \iff \pi_1 \circ f \in C(Y, X_1) \wedge \pi_2 \circ f \in C(Y, X_2)$.
 \end{theorem}
+
+\begin{theorem}[Connectedness is productible]%
+	\label{theorem: Connectedness is productible}
+	If $X$ and $Y$ are two connected space, so is $X \times Y$.
+\end{theorem}
+\begin{proof}
+	% TODO: prove this
+\end{proof}
+
+\begin{theorem}[Path-connectedness is productible]%
+	\label{theorem: Path-connectedness is productible}
+	If $X$ and $Y$ are two path-connected space, so is $X \times Y$.
+\end{theorem}
+
+\begin{theorem}[Compactness is productible]%
+	\label{theorem: Compactness is productible}
+	If $X$ and $Y$ are two compact space, so is $X \times Y$.
+\end{theorem}
+\begin{proof}
+	% TODO: prove this
+\end{proof}
 
 \section{Quotient Space}
 

@@ -1,0 +1,122 @@
+% TeXplates/Mathematics.tex
+% v0.2.1
+% https://github.com/HoyanMok/TeXplates
+\documentclass[openany]{book} 
+% \documentclass{ctexbook} 如果用中文
+% \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
+% 五号 = 10.5pt，小四=12pt，四号=14pt
+% 其他可选参量如twocolumn, 两行排版
+\usepackage{../TeXplatesMathematics}
+\usepackage{xeCJK}
+\usepackage{xr-hyper}
+\externaldocument[PST-]{PointSetTopology}
+
+\addbibresource{PointSetTopology.bib} % 把这里改成实际的文件名
+
+\DeclareMathOperator{\rel}{rel}
+
+\title{Algebraic Topology}
+\author{Hoyan Mok}
+\begin{document}
+\maketitle
+\frontmatter
+
+\tableofcontents
+\mainmatter{}
+
+\chapter{Homotopy and Fundamental Group}
+\section{Homotopy}
+\begin{definition}[Homotopy]%
+    \label{def: Homotopy}
+    $f, g \in C(X, Y)$.
+    If $\exists H \in C(X \times [0, 1], Y)$ s.t.\ $H(x, 0) = f(x)$, $H(x, 1) = g(x)$, then we say $f$ and $g$ are \indexbf{homotopic}, denoted by $\indexmath[f simeq g]{f \simeq g} \colon X \to Y$ or just $X \to Y$.
+    $H$ is called a \indexbf{homotopy} between $f$ and $g$, denoted by $\indexmath[H colon f simeq g]{H \colon f \simeq g}$ or $\indexmath[f simeq_H g]{f \simeq_H g}$.
+\end{definition}
+
+For $t \in [0, 1]$, $h_t \colon X \to Y ;x \mapsto H(x, t)$ is called a \emphbf{$t$-slice}\index{t-slice@$t$-slice}.
+
+If $f$ is homotopic to a constant mapping, we say that $f$ is \indexbf{null-homotopic}.
+
+A \indexbf{linear homotopy} is a homotopy between two functions to $Y \subseteq \mathbb R^n$ that change linearly, i.e.\ 
+\begin{equation*}
+    H(x, t) = (1 - t) f(x) + t g(x).
+\end{equation*}
+
+
+\begin{theorem}[Maps to convex set are homotopic]%
+    \label{theorem: Maps to convex set are homotopic}
+    $f, g \in C(X, Y)$. If $Y$ is a convex set in $\mathbb R^n$, 
+    then $f \simeq g$.
+\end{theorem}
+\begin{proof}
+    Consider linear homotopy.
+\end{proof}
+
+\begin{theorem}%
+    \label{theorem: Homotopic relation is an equivalence relation}
+    Homotopic relation is an equivalence relation.
+\end{theorem}
+\begin{proof}
+    \emph{reflexity}.
+    $f \simeq f$, just take $H(x, t) = f(x)$ for any $t$ (Such homotopy is called a \indexbf{constant homotopy}).
+
+    \emph{Symmetry}. 
+    $f \simeq g$ then $g \simeq f$. Just take $\bar H(x, t) = H(x, 1 - t)$ (Here $\indexmath[H bar]{\bar H}$ is called the inverse of $H$).
+
+    \emph{Transivity}. 
+    $f \simeq g \wedge g \simeq h \to f \simeq h$. Let
+    \begin{equation*}
+        H_1 H_2 (x, 2t) = \begin{cases}
+            H_1(x, 2t) & t \in [0, 1/2], \\
+            H_2(x, 2t - 1) & t \in [1/2, 1].
+        \end{cases}
+    \end{equation*}
+    We can see that $H_1 H_2$ is also a homotopy (see Theorem~\ref{PST-theorem: composition of path} in Point Set Topology)
+\end{proof}
+
+Hence, we can define \indexbf{homotopy classes} on $C(X, Y)$, denoted by $\indexmath[X Y]{[X, Y]}$.
+
+As you might expect after reading the proof of Theorem~\ref{theorem: Homotopic relation is an equivalence relation}, the homotopies between mappings within a homotopy class form a group.
+
+\begin{theorem}
+    $f_1 \simeq f_2 \colon X \to Y$, $g_1 \simeq g_2 \colon Y \to Z$, then $g_1 \circ f_1 \simeq g_2 \circ g_2 \colon X \to Z$.
+\end{theorem}
+\begin{proof}
+    % The \indexbf{mapping cylinder} of a mapping $f \colon X \to Y$ is defined as
+    % \begin{equation*}
+    %     \indexmath[Mf]{\mathrm Mf} 
+    % \end{equation*}
+
+    Let $F \colon f_1 \simeq f_2$, $G \colon g_1 \simeq g_2$. 
+    Define:
+    \begin{equation*}
+        \bv F \colon X \times [0, 1] \to Y \times [0, 1]; x \mapsto (F(x, t), t). 
+    \end{equation*}
+
+    It can be verified tht $G \circ \bv F \colon g_1 \circ f_1 \simeq g_2 \circ g_2 \colon X \to Z$.
+\end{proof}
+
+\begin{theorem}[All mappings to a path-connected space are null-homotopic]
+    If $Y$ is path-connected, $y_0 \in Y$, 
+    then $[X, Y] = [x \mapsto y_0]$ (i.e.\ homotopy class of constant mapping to $\{y_0\}$)
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}[Homotopy relative to a set]
+    Let $A \subseteq X$, $H \colon f \simeq g$.
+    If $\forall a \in A$, $\forall t \in [0, 1]$, $f(a) = g(a) = H(a, t)$, we say that $f$ and $g$ are \indexbf{homotopic relative to $A$}, denoted by $\indexmath[H f simeq g rel A]{H \colon f \simeq g \rel A}$.
+\end{definition}
+
+
+\backmatter{}
+\nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
+\printbibliography[heading=bibliography, title={bibliography}]
+
+\indexprologue{Here listed the important symbols used in this notes}
+\printindex[symbol]
+
+\printindex
+% \printbibliography
+\end{document}
