@@ -78,35 +78,91 @@ Hence, we can define \indexbf{homotopy classes} on $C(X, Y)$, denoted by $\index
 
 As you might expect after reading the proof of Theorem~\ref{theorem: Homotopic relation is an equivalence relation}, the homotopies between mappings within a homotopy class form a group.
 
-\begin{theorem}
-    $f_1 \simeq f_2 \colon X \to Y$, $g_1 \simeq g_2 \colon Y \to Z$, then $g_1 \circ f_1 \simeq g_2 \circ g_2 \colon X \to Z$.
+\begin{theorem}[Composition of homotopies]%
+    \label{theorem: Composition of homotopies}
+    $f_1 \simeq f_2 \colon X \to Y$, $g_1 \simeq g_2 \colon Y \to Z$, then $g_1 \circ f_1 \simeq g_2 \circ f_2 \colon X \to Z$.
 \end{theorem}
-\begin{proof}
-    % The \indexbf{mapping cylinder} of a mapping $f \colon X \to Y$ is defined as
-    % \begin{equation*}
-    %     \indexmath[Mf]{\mathrm Mf} 
-    % \end{equation*}
-
+\begin{proof}[\textbf{Proof i}]
     Let $F \colon f_1 \simeq f_2$, $G \colon g_1 \simeq g_2$. 
     Define:
     \begin{equation*}
-        \bv F \colon X \times [0, 1] \to Y \times [0, 1]; x \mapsto (F(x, t), t). 
+        \bv F \colon X \times [0, 1] \to Y \times [0, 1]; 
+        (x, t) \mapsto (F(x, t), t). 
     \end{equation*}
 
     It can be verified tht $G \circ \bv F \colon g_1 \circ f_1 \simeq g_2 \circ g_2 \colon X \to Z$.
 \end{proof}
+\begin{proof}[\textbf{Proof ii}]
+    Let $F \colon f_1 \simeq f_2$, $G \colon g_1 \simeq g_2$. 
 
-\begin{theorem}[All mappings to a path-connected space are null-homotopic]
-    If $Y$ is path-connected, $y_0 \in Y$, 
+    We can verify that $H_1 \colon (x, t) \mapsto g_1 \circ F(x, t)$ is a homotopy between $g_1 \circ f_1$ and $g_1 \circ f_2$;
+    Similarly $H_2 \colon g_1 \circ f_2 \simeq g_2 \circ f_2$ can be defined.
+
+    Now consider $H = H_1 H_2$, or in detailed,
+    \begin{equation*}
+        H(x, t) = \begin{cases}
+            g_1 \circ F(x, 2t) & (x, t) \in X \times [0, 1/2] \\
+            G(f_2(x), 2t - 1). & (x, t) \in X \times [1/2, 1]
+        \end{cases}
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}[Identity map in convex space is null-homotopic]
+    
+\end{theorem}
+
+\begin{theorem}[All mappings from a convex set to a path-connected space are null-homotopic]
+    If $X \subseteq \mathbb R^n$ is a convex set, $Y$ is path-connected,  
+    then any $f \colon X \to Y$ is null-homotopic.
+\end{theorem}
+\begin{proof}
+    First we verify that the identity $\id_X$ is null-homotopic.
+    The linear homotopy can be constructed as:
+    \begin{equation*}
+        H_{x_0} (x, t) = tx + (1 - t) x_0.
+    \end{equation*}
+
+    Then, any $f \colon X \to Y$ can be written as $f = f \circ \id_X$, hence $f \simeq f \circ H_{x_0}(x, 1) = (x \mapsto f(x_0))$, which means $f$ is null-homotopic.
+\end{proof}
+
+\begin{theorem}[All constant mappings to a path-connected space belong to one homotopy class]%
+    \label{theorem: All constant mappings to a path-connected space belong to one homotopy class}
+    If $Y$ is a path-connected space, $y_0 \in Y$,
     then $[X, Y] = [x \mapsto y_0]$ (i.e.\ homotopy class of constant mapping to $\{y_0\}$)
 \end{theorem}
 \begin{proof}
-    
+    Let $f_1(x) = y_1$, $f_2(x) = y_2$ be two constant mappings, $a$ is a path from $y_1$ to $y_2$.
+    Then the homotopy between $f_1$ and $f_2$ can be defined as:
+    \begin{equation*}
+        H(x, t) = a(t).
+    \end{equation*}
 \end{proof}
+
+
 
 \begin{definition}[Homotopy relative to a set]
     Let $A \subseteq X$, $H \colon f \simeq g$.
     If $\forall a \in A$, $\forall t \in [0, 1]$, $f(a) = g(a) = H(a, t)$, we say that $f$ and $g$ are \indexbf{homotopic relative to $A$}, denoted by $\indexmath[H f simeq g rel A]{H \colon f \simeq g \rel A}$.
+\end{definition}
+
+We can have parallel results as Theorem~\ref{theorem: Homotopic relation is an equivalence relation} and Theorem~\ref{theorem: Composition of homotopies}:
+
+\begin{theorem}%
+    \label{theorem: Relatively homotopic relation is an equivalence relation}
+    Given $A \subseteq X$, $\simeq \rel A$ is an equivalence relation in $C(X, Y)$.
+\end{theorem}
+
+\begin{theorem}[Composition of relative homotopies]%
+    \label{theorem: Composition of relative homotopies}
+    $f_1 \simeq f_2 \colon X \to Y \rel A$, $g_1 \simeq g_2 \colon Y \to Z \rel B$, and $f_1(A) \subset B$, then $g_1 \circ f_1 \simeq g_2 \circ f_2 \colon X \to Z$.
+\end{theorem}
+
+\begin{definition}[Fixed-endpoint Homotopy]%
+    \label{def: Fixed-endpoint Homotopy}
+    Let $a$, $b$ be two paths in $X$. 
+    If $a \simeq b \rel \{0, 1\}$, we say that $a$ and $b$ are \indexbf{fixed-endpoint homotopic}\index{fixed-endpoint homotopy}.
+    The paths in $X$ modulus fixed-point homotopy is denoted by $\indexmath[X]{[X]}$, called the \indexbf{path classes}.
+    The path class which $a$ belongs to is denoted by $\indexmath[a]{\langle a \rangle}$.
 \end{definition}
 
 
