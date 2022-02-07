@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.2.1
+% v0.2.2
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{book} 
 % \documentclass{ctexbook} 如果用中文
@@ -14,6 +14,7 @@
 \title{Point Set Topology}
 \author{Hoyan Mok}
 \begin{document}
+\pagenumbering{Alph}
 \maketitle
 \frontmatter
 
@@ -1148,7 +1149,19 @@ if $a(1) = b(0)$.
 	See Lemma~\ref{lemma: gluing}.
 \end{proof}
 
+Notice that, the composition does not obey the associativity i.e.\ $(ab)c$ is not always equal to $a(bc)$.
+
+\begin{theorem}
+	$f \in C(X, Y)$, $a, b \in C([0, 1], X)$, $a(1) = b(0)$.
+	$(f \circ a) (f \circ b) = f \circ (ab)$.
+\end{theorem}
+
 The \indexbf{inverse} of a path $a$ is $\indexmath[a bar]{\bar a}(t) = a(1 - t)$.
+
+\begin{theorem}
+	$f \in C(X, Y)$, $a\in C([0, 1], X)$.
+	$\overline{f \circ a} = f \circ \bar a$.
+\end{theorem}
 
 \begin{definition}[Path-connected]%
 	\label{def: path connected}

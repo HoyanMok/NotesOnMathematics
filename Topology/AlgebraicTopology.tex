@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.2.1
+% v0.2.2
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany]{book} 
 % \documentclass{ctexbook} 如果用中文
@@ -13,11 +13,12 @@
 
 \addbibresource{PointSetTopology.bib} % 把这里改成实际的文件名
 
-\DeclareMathOperator{\rel}{rel}
+\newcommand*{\rel}{\mathbin{\mathrm{rel}}}
 
 \title{Algebraic Topology}
 \author{Hoyan Mok}
 \begin{document}
+\pagenumbering{Alph}
 \maketitle
 \frontmatter
 
@@ -107,26 +108,30 @@ As you might expect after reading the proof of Theorem~\ref{theorem: Homotopic r
     \end{equation*}
 \end{proof}
 
-\begin{theorem}[Identity map in convex space is null-homotopic]
-    
-\end{theorem}
-
-\begin{theorem}[All mappings from a convex set to a path-connected space are null-homotopic]
-    If $X \subseteq \mathbb R^n$ is a convex set, $Y$ is path-connected,  
-    then any $f \colon X \to Y$ is null-homotopic.
-\end{theorem}
+\begin{lemma}[Identity map in convex space is null-homotopic]
+    $X \subset \mathbb R^n$ is a convex space.
+    $\forall x_0 \in X$,
+    $\id_X \simeq (x \mapsto x_0)$.
+\end{lemma}
 \begin{proof}
-    First we verify that the identity $\id_X$ is null-homotopic.
     The linear homotopy can be constructed as:
     \begin{equation*}
         H_{x_0} (x, t) = tx + (1 - t) x_0.
     \end{equation*}
+\end{proof}
 
+\begin{theorem}[Continuous mappings from a convex set are null-homotopic]%
+    \label{theorem: Continuous mappings from a convex set are null-homotopic}
+    $X \subseteq \mathbb R^n$ is a convex set.
+    $\forall f \in C(X, Y)$, $f$ is null-homotopic.
+\end{theorem}
+\begin{proof}
+    Let $H_{x_0} (x, t) = tx + (1 - t) x_0$.
     Then, any $f \colon X \to Y$ can be written as $f = f \circ \id_X$, hence $f \simeq f \circ H_{x_0}(x, 1) = (x \mapsto f(x_0))$, which means $f$ is null-homotopic.
 \end{proof}
 
-\begin{theorem}[All constant mappings to a path-connected space belong to one homotopy class]%
-    \label{theorem: All constant mappings to a path-connected space belong to one homotopy class}
+\begin{theorem}[Constant mappings to a path-connected space belong to one homotopy class]%
+    \label{theorem: Constant mappings to a path-connected space belong to one homotopy class}
     If $Y$ is a path-connected space, $y_0 \in Y$,
     then $[X, Y] = [x \mapsto y_0]$ (i.e.\ homotopy class of constant mapping to $\{y_0\}$)
 \end{theorem}
@@ -165,6 +170,123 @@ We can have parallel results as Theorem~\ref{theorem: Homotopic relation is an e
     The path class which $a$ belongs to is denoted by $\indexmath[a]{\langle a \rangle}$.
 \end{definition}
 
+\section{Fundamental Group}
+
+\begin{theorem}
+    Let $a, b, c, d$ be four paths in $X$.
+    \begin{align*}
+        a \simeq b \rel \{0, 1\} &\IFF \bar a \simeq \bar b \rel \{0, 1\}, \\
+        a \simeq b \rel \{0, 1\} \wedge c \simeq d \rel \{0, 1\} \wedge a(1) = c(0) &\then ac \simeq bd \rel \{0, 1\}.
+    \end{align*}
+\end{theorem}
+
+\begin{definition}[Inverse and product of path classes]
+    $\alpha, \beta \in [X]$, $a \in \alpha$, $b \in \beta$.
+    $b(0) = a(1)$.
+    We define $\alpha^{-1} := \langle \bar a \rangle$ to be the \indexbf{inverse} of the path class~$\alpha$, and $\alpha \beta := \langle ab \rangle$ to be the \indexbf{product} of the two path classes~$\alpha$ and $\beta$.
+\end{definition}
+
+While the product of paths does not obey associativity, we have:
+\begin{theorem}[Associativity of product of path classes]%
+    \label{theorem: Associativity of product of path classes}
+    $\alpha, \beta, \gamma \in [X]$. $(\alpha \beta) \gamma = \alpha (\beta \gamma)$ (if they are productible).
+\end{theorem}
+\begin{proof}
+    Consider $\forall a \in \alpha$, $\forall b \in \beta$, $\forall c \in \gamma$.
+
+    Let $\tilde a(t) = t/3$, $\tilde b(t) = t/3 + 1/3$, $\tilde c(t) = t/3 + 2/3$. 
+    $\tilde a, \tilde b$ and $\tilde c$ are three paths in $[0, 1]$, and $\tilde a (\tilde b \tilde c) \simeq (\tilde a \tilde b) \tilde c \rel \{0, 1\}$, since $[0, 1]$ is convex, therefore there is a linear homotopy between the two product paths.
+
+    Now Let $f \colon [0, 1] \to X$ be
+    \begin{equation*}
+        f(t) = \begin{cases}
+            a(3t), & t \in [0, 1/3]; \\
+            b(3t - 1), & t \in [1/3, 2/3]; \\
+            c(3t - 2), & t \in [2/3, 1].
+        \end{cases}
+    \end{equation*}
+
+    $a(bc) = f \circ \tilde a (\tilde b \tilde c) \simeq f \circ (\tilde a \tilde b) \tilde c = (ab)c \rel \{0, 1\}$, by Theorem~\ref{theorem: Composition of homotopies}.
+\end{proof}
+
+\begin{theorem}[Identity-like properties of point path]%
+    \label{theorem: Identity-like properties of point path}
+    $\alpha \in [X]$. 
+    Let the initial and the terminal point of $\alpha$ be $x_0$ and $x_1$.
+    \begin{enumerate*}[label=\emph{(\roman*)}] % chktex 36
+        \item $\alpha^{-1} \alpha = \langle t \mapsto x_1 \rangle$, $\alpha \alpha^{-1} = \langle t \mapsto x_0 \rangle$;
+        \item $\alpha \langle t \mapsto x_0\rangle = \alpha = \langle t \mapsto x_1\rangle\alpha$.
+    \end{enumerate*}
+\end{theorem}
+\begin{proof}
+    Note that $\id_{[0, 1]}$ is a path in the convex set $[0, 1]$.
+\end{proof}
+
+For now path classes are not closed under production.
+
+\begin{definition}[Fundamental group]%
+    \label{def: Fundamental group}
+    $x_0 \in X$. 
+    The path classes of loops at $x_0$ (paths that have both endpoints at $x_0$), equiped with production, is the \indexbf{fundamental group} of $X$ at $x_0$, denoted by $\indexmath[pi1 X x0]{\pi_1(X, x_0)}$.
+\end{definition}
+
+\begin{definition}[Homomorphism induced by continuous function]
+    $f \in C(X, Y)$, $x_0 \in X$.
+    We define $f_\pi \colon [X] \to [Y]$ as $f_\pi (\langle a \rangle) = \langle f \circ a \rangle$, where $a$ is a path in $X$. 
+    
+    The limitation of $\indexmath[f pi]{f_\pi}$ on $\pi_1(X, x_0)$ is said to be a \indexbf{homomorphism induced by $f$}.
+\end{definition}
+
+For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly referring limitation).
+
+\begin{theorem}[Isomorphism induced by homeomrphism]%
+    \label{theorem: Isomorphism induced by homeomrphism}
+    Let $f$ be a homeomorphism from $X$ to $Y$, then $\forall x_0 \in X$, $f_\pi$ is an isomorphism from $\pi_1(X, x_0)$ to $\pi_1(Y, f(x_0))$.
+\end{theorem}
+\begin{proof}
+    $f^{-1} \circ f = \id_X \then (f^{-1})_\pi \circ f_\pi = \id_{\pi_1(X, x_0)}$, $f \circ f^{-1} = \id_Y \then f_\pi \circ (f^{-1})_\pi = \id_{\pi_1(Y, f(x_0))}$, therefore $(f^{-1})_\pi$ is the inverse of $f_\pi$.
+    An invertible homomorphism is an isomorphism. 
+\end{proof}
+
+\begin{theorem}[Fundamental groups of path connected space at different points are isomorphic]%
+    \label{theorem: Fundamental groups of path connected space at different points are isomorphic}
+    $X$ is path connected, $x_1, x_2 \in X$.
+    $\pi_1(X, x_1) \cong \pi_1(X, x_2)$.
+\end{theorem}
+\begin{proof}
+    $\langle a \rangle \in \pi_1(X, x_1)$, $\langle b \rangle \in \pi_1(X, x_2)$, $\langle c \rangle$ is a path class with initial point~$x_1$ and terminal point~$x_2$.
+
+    It can be vertify that
+    \begin{equation*}
+        g \colon \pi_1(X, x_1) \to \pi_2 (X, x_2); \langle a \rangle \mapsto \langle \bar c a c \rangle
+    \end{equation*}
+    is a homomorphism. Same as $g'(\langle b \rangle) = c b \bar c$.
+
+    \begin{equation*}
+        g \circ g'(\langle b \rangle) = \langle \bar c c b \bar c c\rangle = \id_{\pi_1(X, x_2)};
+        \quad
+        g' \circ g(\langle a \rangle) = \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_2)},
+    \end{equation*}
+    therefore $g$ is an isomorphism.
+\end{proof}
+
+With Theorem~\ref{theorem: Fundamental groups of path connected space at different points are isomorphic}, we can write the fundamental group of a path-connected space $X$ by $\indexmath[pi1 X]{\pi_1(X)}$.
+
+For different path-connected branches, a topological space can have different fundamental groups, while they are isomorphic within one branch.
+
+\begin{definition}[Simply connected]%
+    \label{def: simply connected}
+    If the fundamental group of a path connected space $X$ is trivial i.e.\ $\pi_1(X) \cong \{1\}$, we say that $X$ is \indexbf{simply connected}.
+\end{definition}
+
+\begin{theorem}[Convex set is simply connected]%
+    \label{theorem: Convex set is simply connected}
+    If $X \subset \mathbb R^n$ is convex, then $X$ is simply connected.
+\end{theorem}
+\begin{proof}
+    $x_0 \in X$, $a \in C([0, 1], X)$ s.t.\ $a(0) = a(1) = x_0$.
+    $H_{a, x_0}(s, t) = (1 - t) a(s) + t x_0$. 
+\end{proof}
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
