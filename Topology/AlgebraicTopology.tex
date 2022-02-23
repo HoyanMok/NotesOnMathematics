@@ -1,7 +1,7 @@
 % TeXplates/Mathematics.tex
 % v0.2.2
 % https://github.com/HoyanMok/TeXplates
-\documentclass[openany]{book} 
+\documentclass[openany, oneside, a5paper]{book} 
 % \documentclass{ctexbook} 如果用中文
 % \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
 % 五号 = 10.5pt，小四=12pt，四号=14pt
@@ -14,6 +14,7 @@
 \addbibresource{PointSetTopology.bib} % 把这里改成实际的文件名
 
 \newcommand*{\rel}{\mathbin{\mathrm{rel}}}
+\newcommand*{\pclass}[1]{\langle{#1}\rangle}    % path class
 
 \title{Algebraic Topology}
 \author{Hoyan Mok}
@@ -167,7 +168,7 @@ We can have parallel results as Theorem~\ref{theorem: Homotopic relation is an e
     Let $a$, $b$ be two paths in $X$. 
     If $a \simeq b \rel \{0, 1\}$, we say that $a$ and $b$ are \indexbf{fixed-endpoint homotopic}\index{fixed-endpoint homotopy}.
     The paths in $X$ modulus fixed-point homotopy is denoted by $\indexmath[X]{[X]}$, called the \indexbf{path classes}.
-    The path class which $a$ belongs to is denoted by $\indexmath[a]{\langle a \rangle}$.
+    The path class which $a$ belongs to is denoted by $\indexmath[a]{\pclass{a}}$.
 \end{definition}
 
 \section{Fundamental Group}
@@ -183,7 +184,7 @@ We can have parallel results as Theorem~\ref{theorem: Homotopic relation is an e
 \begin{definition}[Inverse and product of path classes]
     $\alpha, \beta \in [X]$, $a \in \alpha$, $b \in \beta$.
     $b(0) = a(1)$.
-    We define $\alpha^{-1} := \langle \bar a \rangle$ to be the \indexbf{inverse} of the path class~$\alpha$, and $\alpha \beta := \langle ab \rangle$ to be the \indexbf{product} of the two path classes~$\alpha$ and $\beta$.
+    We define $\alpha^{-1} := \pclass{\bar a}$ to be the \indexbf{inverse} of the path class~$\alpha$, and $\alpha \beta := \langle ab \rangle$ to be the \indexbf{product} of the two path classes~$\alpha$ and $\beta$.
 \end{definition}
 
 While the product of paths does not obey associativity, we have:
@@ -214,8 +215,8 @@ While the product of paths does not obey associativity, we have:
     $\alpha \in [X]$. 
     Let the initial and the terminal point of $\alpha$ be $x_0$ and $x_1$.
     \begin{enumerate*}[label=\emph{(\roman*)}] % chktex 36
-        \item $\alpha^{-1} \alpha = \langle t \mapsto x_1 \rangle$, $\alpha \alpha^{-1} = \langle t \mapsto x_0 \rangle$;
-        \item $\alpha \langle t \mapsto x_0\rangle = \alpha = \langle t \mapsto x_1\rangle\alpha$.
+        \item $\alpha^{-1} \alpha = \pclass{t \mapsto x_1}$, $\alpha \alpha^{-1} = \pclass{t \mapsto x_0}$;
+        \item $\alpha \pclass{t \mapsto x_0} = \alpha = \pclass{t \mapsto x_1}\alpha$.
     \end{enumerate*}
 \end{theorem}
 \begin{proof}
@@ -232,7 +233,7 @@ For now path classes are not closed under production.
 
 \begin{definition}[Homomorphism induced by continuous function]
     $f \in C(X, Y)$, $x_0 \in X$.
-    We define $f_\pi \colon [X] \to [Y]$ as $f_\pi (\langle a \rangle) = \langle f \circ a \rangle$, where $a$ is a path in $X$. 
+    We define $f_\pi \colon [X] \to [Y]$ as $f_\pi (\pclass{a}) = \langle f \circ a \rangle$, where $a$ is a path in $X$. 
     
     The limitation of $\indexmath[f pi]{f_\pi}$ on $\pi_1(X, x_0)$ is said to be a \indexbf{homomorphism induced by $f$}.
 \end{definition}
@@ -248,24 +249,62 @@ For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly 
     An invertible homomorphism is an isomorphism. 
 \end{proof}
 
+\begin{theorem}[Fundamental group of product space]%
+    \label{theorem: Fundamental group of product space}
+    $x_0 \in X$, $y_0 \in Y$.
+    \begin{equation*}
+        \pi_1(X \times Y, (x_0, y_0)) \cong \pi_1(X, x_0) \times \pi_1(Y, y_0).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $j_X \in C(X \times Y, X)$ and $j_Y \in C(X \times Y, Y)$ be projections ($j_X(x, y) = x$, $j_Y(x, y) = y$), and define a homomorphism
+    \begin{align*}
+        \varphi\colon && &\pi_1(X \times Y, (x_0, y_0)) &&\to &\pi_1(X, x_0) \times \pi_1(Y, y_0); \\
+        &&&\gamma &&\mapsto &((j_X)_\pi(\gamma), (j_Y)_\pi(\gamma)).
+    \end{align*}
+
+    $\varphi$ is a \emph{monomorphism}.
+    Let $\pclass{c} \in \ker \varphi$ i.e.\
+    \begin{equation*}
+        \varphi(\pclass{c}) = (\pclass{t \mapsto x_0}, \pclass{t \mapsto y_0}).
+    \end{equation*}
+    Let
+    \begin{equation*}
+       H_X \colon j_X \circ c \simeq  t \mapsto x_0 \rel \{0\},
+       \quad
+       H_Y \colon j_Y \circ c \simeq t \mapsto y_0\rel \{0\}.
+    \end{equation*}
+
+    The homotopy between $c$ and $t \mapsto (x_0, y_0)$ is defined as
+    \begin{equation*}
+        F \colon [0, 1]^2 \to X \times Y;
+        (t, s) \mapsto (H_X(t, s), H_Y(t, s)).
+    \end{equation*}
+
+    $\varphi$ is an \emph{epimorphism}.
+    $\forall \pclass{a} \in \pi_1(X, x_0)$ and $\forall \pclass{b} \in \pi_1(Y, y_0)$.
+    $c\colon t \mapsto (a(t), b(t)) \in C([0, 1], X \times Y)$.
+    $\pclass{c} \in \varphi^{-1}(\{(\pclass{a}, \pclass{b})\})$.
+\end{proof}
+
 \begin{theorem}[Fundamental groups of path connected space at different points are isomorphic]%
     \label{theorem: Fundamental groups of path connected space at different points are isomorphic}
     $X$ is path connected, $x_1, x_2 \in X$.
     $\pi_1(X, x_1) \cong \pi_1(X, x_2)$.
 \end{theorem}
 \begin{proof}
-    $\langle a \rangle \in \pi_1(X, x_1)$, $\langle b \rangle \in \pi_1(X, x_2)$, $\langle c \rangle$ is a path class with initial point~$x_1$ and terminal point~$x_2$.
+    $\pclass{a} \in \pi_1(X, x_1)$, $\pclass{b} \in \pi_1(X, x_2)$, $\pclass{c}$ is a path class with initial point~$x_1$ and terminal point~$x_2$.
 
-    It can be verify that
+    It can be verified that
     \begin{equation*}
-        g \colon \pi_1(X, x_1) \to \pi_2 (X, x_2); \langle a \rangle \mapsto \langle \bar c a c \rangle
+        g \colon \pi_1(X, x_1) \to \pi_2 (X, x_2); \pclass{a} \mapsto \langle \bar c a c \rangle
     \end{equation*}
-    is a homomorphism. Same as $g'(\langle b \rangle) = c b \bar c$.
+    is a homomorphism. Same as $g'(\pclass{b}) = c b \bar c$.
 
     \begin{equation*}
-        g \circ g'(\langle b \rangle) = \langle \bar c c b \bar c c\rangle = \id_{\pi_1(X, x_2)};
+        g \circ g'(\pclass{b}) = \langle \bar c c b \bar c c\rangle = \id_{\pi_1(X, x_2)};
         \quad
-        g' \circ g(\langle a \rangle) = \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_2)},
+        g' \circ g(\pclass{a}) = \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_2)},
     \end{equation*}
     therefore $g$ is an isomorphism.
 \end{proof}
@@ -288,7 +327,10 @@ For different path-connected branches, a topological space can have different fu
     $H_{a, x_0}(s, t) = (1 - t) a(s) + t x_0$. 
 \end{proof}
 
-Now we can calculate the fundamental group of $S^n$.
+\section{Examples of Fundamental Groups}
+
+\subsection{\texorpdfstring{$S^1$}{S1}}
+
 
 \begin{definition}[Lift]
     Let $X, Y, Z$ be three topological spaces, and $f \in C(X, Z)$, $p \in C(Y, Z)$. 
@@ -316,6 +358,108 @@ In some case, given $f$ and $p$, $\tilde f$ might do not exist.
     Since $[0, 1]$ is connected, the image of $t \mapsto \tilde a'(t) - \tilde a(t)$ must be connected, which is possible only if it is constant.
     $\tilde a'(0) = \tilde a(0) = x_0$, therefore $\tilde a = \tilde a'$.
 \end{proof}
+
+Notice that we have the freedom to set $\tilde a(0) \in \mathbb Z$ (the lift is unique after setting that), what really matter is the difference $\tilde a(1) - \tilde a(0)$.
+One can proof that $\indexmath[q a]{q(a)} := \tilde a(1) - \tilde a(0)$ does not depend on the chose of $\tilde a(0) \in \mathbb Z$. 
+We call $q(a)$ the \indexbf{loop number} of path~$a$.
+
+\begin{lemma}[Two loops that are never antipodal have the same loop number]%
+    \label{lemma: Two loops that are never antipodal have the same loop number}
+    Let $a$, $b$ be two loops at $z_0$ in $S^1$.
+    If $\forall t \in [0, 1]$, $a(t) \neq -b(t)$, then $q(a) = q(b)$.
+\end{lemma}
+\begin{proof}
+    Choose $\tilde a(0) = \tilde b(0) = 0$ (if not so, just translate the lift by an integer). 
+    In this case, $q(a) = \tilde a(1)$, $q(b) = \tilde b(1)$.
+
+    If $q(a) \neq q(b)$, without loss of generality, $q(a) > q(b)$, then $f := t \mapsto \tilde a(t) - \tilde b(t)$ is a continuous function from a compact space $[0, 1]$ to $\mathbb R$, therefore by the connectedness of $[0, 1]$, $\exists t_0 \in [0, 1]$ s.t.\ $f(t_0) = 1/2 \in [0, q(a) - q(b)]$, when
+    \begin{equation*}
+        p \circ \tilde a(t_0) + p \circ \tilde b(t_0) = \me^{2\pi\mi (\tilde b(t_0) + 1/2)} + \me^{2\pi\mi \tilde b(t_0)} = 0.
+    \end{equation*}
+\end{proof}
+
+\begin{lemma}[Same loop number iff homotopic ralative to endpoint]%
+    \label{lemma: Same loop number iff homotopic ralative to endpoint}
+    Let $a$, $b$ be two loops at $z_0$ in $S^1$.
+    $a \simeq b \rel \{0\}$ iff $q(a) = q(b)$.
+\end{lemma}
+\begin{proof}
+    $\to$: Let $H \colon a \simeq b \rel \{0\}$, $h_s = t \mapsto H(t, s)$, $f_t = s \mapsto H(t, s)$.
+
+    $\forall (t, s) \in [0, 1]^2$, $U := \{H(t, s) \me^{\mi \theta} \mid \theta \in (-\pi, \pi)\} \in \mathscr U_{S^1}(H(t, s))$. 
+    Since $f_t \in C([0, 1], S^1)$, $\exists V(s) \in \mathscr U_{[0, 1]}(s)$ s.t.\ $H(V(s)) \subset U$.
+    Which means, $\forall t \in [0, 1]$, $\forall s_1, s2 \in V(s)$, $f_t(s_1) \neq - f_t(s_2)$ or $h_{s_1}(t) \neq - h_{s_2}(t)$. 
+    By Lemma~\ref{lemma: Two loops that are never antipodal have the same loop number}, $q(h_s) = q(h_{s'})$.
+
+    $\varOmega = \{V(s) \mid s \in [0, 1]\}$ is an open cover of the compact space $[0, 1]$, therefore has a finite subcover $\varOmega = \{V_i \in \varOmega \mid i \in n\}$. 
+    In each $V(s_i)$, $h_s$ has the same loop numbers.
+
+    We therefore have $q(a) = q(h_0) = q(h_1) = q(b)$.
+
+    $\gets$: $H \colon [0, 1]^2 \to S^1; (t, s) \mapsto p((1 - s)\tilde a(t) - s \tilde b(t))$.
+\end{proof}
+
+\begin{theorem}\label{theorem: fundamental group of S^1 is Z}
+    $\pi_1(S^1) \cong \mathbb Z$.
+\end{theorem}
+\begin{proof}
+    $z_0 \in S^1$.
+    Let $Q \colon \pi_1(S^1, z_0) \to \mathbb Z; \pclass{a} \mapsto q(a)$.
+
+    $\forall \pclass{a}, \pclass{b} \in \pi_1(S^1, z_0)$, choose $\tilde a(1) = \tilde b(0)$,
+    \begin{align*}
+        Q(\pclass{a} \pclass{b}) &= Q(\langle a b \rangle) 
+        = q(ab) \\
+        &= \tilde b(1) - \tilde a(0) = \tilde b(1) - \tilde b(0) + \tilde a(1) - \tilde a(0) = q(a) + q(b) \\
+        &= Q(\pclass{a}) + Q(\pclass{b}),
+    \end{align*}
+    which means $Q$ is a homomorphism. 
+
+    By Lemma~\ref{lemma: Same loop number iff homotopic ralative to endpoint}, $Q$ is a monomorphism. 
+    $\forall n \in \mathbb Z$, $Q(\langle t \mapsto \me^{2\pi n t\mi}\rangle) = n$, therefore $Q$ is also an epimorphism.
+\end{proof}
+
+\subsection{\texorpdfstring{$S^n$, $n>2$}{Sn, n > 2}}
+
+The situation for $S^n$ is much simpler:
+\begin{theorem}\label{theorem: S^n for n >= 2 is simply connected}
+    $\forall n \in \mathbb N$, if $n \geq 2$, then $S^n$ is simply connected.
+\end{theorem}
+\begin{proof}
+    Let $x_0 \in S^n$, and $a$ be a loop at $x_0$ in $S^n$.
+    $x \in S^n$ and $x \neq x_0$.
+    Embed $S^n$ into $\mathbb R^{n+1}$ and let $B(x; \delta)$ be a $(n+1)$-D ball with radius $\delta$ around $x$ that $x_0 \notin B(x; \delta)$.
+
+    $a^{-1}(B(x; \delta) \cap S^n)$ is a collection of open, disjoint intervals in $[0, 1]$, which can be considered as an open cover of $a^{-1}(\{x\})$, which is compact.
+    Let the finite subcover of $a^{-1}(\{x\})$ be $\{(\alpha_i, \beta_i) \cap [0, 1] \mid \alpha_i, \beta_i \in \mathbb R, i \in m\}$, where $m \in \mathbb N$.
+
+    
+    Let $P \colon \mathbb R^{n+1} \times \mathbb R^{n+1} \times \mathbb R \to \mathbb R^{n+1}$ be:
+    \begin{equation*}
+        P(y, y_0, r) = \frac{y - y_0}{\|y - y_0\|} r + y_0,
+    \end{equation*}
+    which means project $y$ to the sphere with radius $r$ around $y_0$.
+
+    Now we define the loop $b$ that go as:
+    \begin{equation*}
+        b(t) = \begin{cases}
+            a(t),
+                & t \notin (\alpha_i, \beta_i), \forall i \in m; \\
+            P[P(a(t), x, \delta), 0, 1] , 
+                & t \in (\alpha_i, \beta_i) - a^{-1}(\{x\}), \exists i \in m; \\
+            \lim\limits_{\substack{t' \to t\\t' \in (\alpha_i, \beta_i) - a^{-1}(\{x\})}} b(t') , 
+                & t \in a^{-1}(\{x\}) \cap (\alpha_i, \beta_i), \exists i \in m,
+        \end{cases}
+    \end{equation*}
+    and the homotopy between $a$ and $b$ can be written as
+    \begin{equation*}
+        H \colon [0, 1]^2 \to S^n; (t, s) \mapsto P[(1 - s)a(t) + sb(t), 0, 1].
+    \end{equation*}
+
+    Since $b$ is a loop in $S^n - \{x\}$, while $S^n - \{x\} \cong \mathbb R^n$ (by stereographic projection), which is simply connected, we know that $b$ is homotopic to $t \mapsto x_0$ i.e.\ null-homotopic.
+\end{proof}
+
+By Theorem~\ref{theorem: Fundamental group of product space}, the fundamenal group of $T^2 := S^1 \times S^1$ is $\pi_1(T^2) \cong \mathbb Z \times \mathbb Z$, which is not isomorphic to $S^2$, therefore $T^2 \not\cong S^2$.
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
