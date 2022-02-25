@@ -15,3 +15,5 @@ Algebra/PUBLISH.bat
 *.bat
 Analysis/.vscode/settings.json
 Topology/.vscode/ltex.dictionary.en-US.txt
+Topology/.vscode/ltex.hiddenFalsePositives.en.txt
+.vscode/ltex.hiddenFalsePositives.en.txt

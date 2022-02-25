@@ -345,8 +345,8 @@ In some case, given $f$ and $p$, $\tilde f$ might do not exist.
 \end{lemma}
 \begin{proof}
     \emph{Existence}.
-    The collection of open sets that the images under $a$ do not cover $S^1$, $\{(\alpha_i, \beta_i) \cap [0, 1] \mid a_i, b_i \in \mathbb R^I\wedge S^1 \subsetneq a((\alpha_i, \beta_i))\}$, is a cover of $S^1$ by the definition of continuity.
-    Since $S^1$ is compact, there exists a finite subcover $\{(\alpha_i, \beta_i) \cap [0, 1] \mid a_i, b_i \in \mathbb R^n\wedge S^1 \subsetneq a((\alpha_i, \beta_i))\}$, where $n \in \mathbb N$.
+    The collection of open sets that the images under $a$ do not cover $S^1$, $\{(\alpha_i, \beta_i) \cap [0, 1] \mid a_i, b_i \in \mathbb R^I\wedge S^1 \subsetneq a((\alpha_i, \beta_i))\}$, is a cover of $[0, 1]$ by the definition of continuity.
+    Since $[0, 1]$ is compact, there exists a finite subcover $\{(\alpha_i, \beta_i) \cap [0, 1] \mid a_i, b_i \in \mathbb R^n\wedge S^1 \subsetneq a((\alpha_i, \beta_i))\}$, where $n \in \mathbb N$.
     By dividing these open intevals into closed intevals that has no inner points intersecting, we can get $\varOmega = \{I_k := [t_i, t_{i+1}] \mid k \in m\}$ (This can be done by sorting $\alpha_i$ and $\beta_i$).
 
     The mapping~$p$ is locally homeomorphic i.e.\ there exists $[x_i, x_i'] \subset \mathbb R$ s.t.\ $p_i := p|_{[x_i, x_i']} \colon [x_i, x_i'] \to a(I_i)$ is a homeomorphism (and $p_i(x_i) = a(t_i)$), therefore $\tilde a_i := p^{-1}_i \circ a$ is a lift of $a_i := a|_{I_i}$.

@@ -1,7 +1,7 @@
 % TeXplates/Mathematics.tex
 % v0.2.1
 % https://github.com/HoyanMok/TeXplates
-\documentclass[openany]{ctexbook} 
+\documentclass[openany, a5paper, oneside]{ctexbook} 
 % \documentclass{ctexbook} 如果用中文
 % \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
 % 五号 = 10.5pt，小四=12pt，四号=14pt
@@ -63,8 +63,8 @@
 
 笔记后附有符号列表和索引, 方便读者 (也是方便笔者自己) 查阅.
 
-你可以在\url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/Algebra}获得本笔记最新的PDF与\TeX{}源文档. 
-封面的来源是\url{https://commons.wikimedia.org/wiki/File:Rubik%27s_cube.svg}.
+你可以在 \url{https://github.com/HoyanMok/NotesOnMathematics/tree/master/Algebra} 获得本笔记最新的PDF与\TeX{}源文档. 
+封面的来源是 \url{https://commons.wikimedia.org/wiki/File:Rubik%27s_cube.svg}.
 
 \tableofcontents
 
@@ -310,13 +310,14 @@
 \begin{proof}
 	如果$\exists g_1, g_2 \in G$, s.t.\ $f(g_1) = f(g_2)$, 
 	那么
-	\begin{equation*}
+	\begin{align*}
 		f(g_1 * g_2^{-1}) 
-		= f(g_1) \circ f(g_2^{-1}) 
+		&= f(g_1) \circ f(g_2^{-1}) 
 		= f(g_1) \circ f(g_2)^{-1} \circ f(g_2) \circ f(g_2^{-1})
-		= e' \circ f(e)
+		//
+		&= e' \circ f(e)
 		= e'
-	\end{equation*}
+	\end{align*}
 	从而$g_1 * g_2^{-1} \in \ker f$, 同理$g_2^{-1} * g_1 \in \ker f$, 即$g_1^{-1} = g_2^{-1}$ 或 $g_1 = g_2$, 即: $f$是单的.
 \end{proof}
 
@@ -346,8 +347,9 @@
 	\begin{equation*}
 		(g * N) \cdot (g'* N)
 		:= \{s * t \mid s \in g * N, \; t \in g; * N\} 
-		= (g * g') * N
-	\end{equation*}, 单位元是 $e * N = N$ 自身.
+		= (g * g') * N,
+	\end{equation*}
+	单位元是 $e * N = N$ 自身.
 \end{definition}
 
 
@@ -433,9 +435,11 @@
 \end{theorem}
 \begin{proof}
 	单位元 $1$ 当然可逆. 由定义可逆元素的逆也是可逆的. 如果 $x, y \in R$ 可逆, 那么 
-	\begin{equation*}
-		(xy)(y^{-1} x^{-1}) = x(y y^{-1})x^{-1} = xx^{-1} = 1 =y^{-1} x^{-1} x y = (xy)^{-1} (xy),
-	\end{equation*}
+	\begin{align*}
+		(xy)(y^{-1} x^{-1}) &= x(y y^{-1})x^{-1} = xx^{-1} = 1 
+		\\
+		&=y^{-1} x^{-1} x y = (xy)^{-1} (xy),
+	\end{align*}
 	即 $xy$ 可逆.
 \end{proof}
 
@@ -575,7 +579,7 @@
 \end{definition}
 
 在 Euclidean~整环上, 我们总是可以作辗转相除法找到两个元的最大因. 而且作为其产物我们可以证明%
-	\footnote{详见\cite{kostrikin1982introduction}}%
+\footnote{详见\cite{kostrikin1982introduction}}%
 : 
 \begin{theorem}[Euclidean 整环上的 B\'ezout~定理]
 	设 $R$ 是 Euclidean~整环. 
@@ -596,7 +600,8 @@
 	首先, 素元和正则元自身就是一个素分解. 
 	所以现在我们设 $a = bc$, $b, c \notin U(R)$. 
 	由~\ref{item: Euclidean 函数}, $\delta(b) \leq \delta(a) $. 
-	假设 $\delta(b) = \delta(a)$, 那么由~\ref{item: 带余除法}, 我们作带余除法 $b = qa + r$: 而 $r = 0$ 的情况将意味着 $c \in U(R)$, 因此我们研究 $r \neq 0$ 且 $\delta(r) < \delta(a)$ 的情况. 
+	假设 $\delta(b) = \delta(a)$, 那么由 Eq.~\eqref{item: 带余除法}, 我们作带余除法 $b = qa + r$: 
+	而 $r = 0$ 的情况将意味着 $c \in U(R)$, 因此我们研究 $r \neq 0$ 且 $\delta(r) < \delta(a)$ 的情况. 
 	考虑 $b - qa = b(1 - qc)$, 由~\ref{item: Euclidean 函数}, $\delta(r) = \delta(b - qa) \geq \delta(b) = \delta(a)$, 这与 $\delta(r) < \delta(a)$ 矛盾. 
 	所以: $\delta(b) < \delta(a)$.
 
@@ -842,10 +847,11 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \begin{theorem}\label{corollary:秩与维数}
 	设 $ (\bv x_j)_{j \in m}$ 是线性空间 $V$ 的向量组.
 	\begin{align*}
-		\dim \langle \bv x_j\rangle_{j \in m} = r
-		\IFF
+		&\dim \langle \bv x_j\rangle_{j \in m} = r 
+		& \IFF &\\
+		&
 		\exists \{\bv x_{j_k}\}_{k \in r} \in 2^{\{\bv x_j\}_{j \in m}} 
-		&\left( 	
+		&&\left( 	
 			\text{$(\bv x_{j_k})_{k \in r}$ 是最大线性无关组}
 		\right)\,.
 	\end{align*}
@@ -955,20 +961,21 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \end{equation*}
 \end{theorem}
 \begin{proof}
-	设 $\dim (U \cap W) = m$, 有基底 $\hat e = (\basis e_i)_{i \in m}$, $\dim U = k$, $\dim W = \ell$. 由定理, $\dim U$ 可取基底 $(\basis e_0, \cdots \basis e_{m-1};\; \basis f_0, \cdots, \basis f_{k - m - 1})$, $\dim V$ 可取基底 $(\basis e_0, \cdots \basis e_{m-1};\; \basis g_0, \cdots, \basis g_{\ell - m - 1})$, 那么
+	设 $\dim (U \cap W) = m$, 有基底 $\hat e = (\basis e_i)_{i \in m}$, $\dim U = k$, $\dim W = \ell$. 
+	由定理, $\dim U$ 可取基底 $(\basis e_0, \ldots \basis e_{m-1};\; \basis f_0, \ldots, \basis f_{k - m - 1})$, $\dim V$ 可取基底 $(\basis e_0, \ldots \basis e_{m-1};\; \basis g_0, \ldots, \basis g_{\ell - m - 1})$, 那么
 	\begin{equation*}
 		U + W = \langle
-			\basis e_0, \cdots, \basis e_{m-1};\;
-			\basis f_0, \cdots, \basis f_{k - m - 1};\;
-			\basis g_0, \cdots, \basis g_{\ell - m - 1}
+			\basis e_0, \ldots, \basis e_{m-1};\;
+			\basis f_0, \ldots, \basis f_{k - m - 1};\;
+			\basis g_0, \ldots, \basis g_{\ell - m - 1}
 		\rangle\,.
 	\end{equation*}
 
 	接下来我们证明向量组
 	\begin{equation*}
-		\basis e_0, \cdots \basis e_{m-1};\;
-		\basis f_0, \cdots, \basis f_{k - m - 1};\;
-		\basis g_0, \cdots, \basis g_{\ell - m - 1}
+		\basis e_0, \ldots \basis e_{m-1};\;
+		\basis f_0, \ldots, \basis f_{k - m - 1};\;
+		\basis g_0, \ldots, \basis g_{\ell - m - 1}
 	\end{equation*}
 	线性独立. 若存在非平凡的线性组合:
 	\begin{equation*}
@@ -1043,21 +1050,23 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	
 	设 $\bv v + U \in V / U$.
 	因为 $V \oplus U + W$, $\exists \bv u \in U$, $\exists \bv w \in W$ s.t.\ $\bv v = \bv u + \bv w$. 从而
-	\begin{equation*}
+	\begin{align*}
 		\bv v + U 
-		= (\bv u + \bv w) + U
+		&= (\bv u + \bv w) + U
 		= (\bv x + U) + (\bv w + U)
-		= U + (\bv w + U)
+		\\
+		&= U + (\bv w + U)
 		= \bv w + U
 		= f(\bv w)\,, 
-	\end{equation*}
+	\end{align*}
 	所以 $f$ 是满的. 满射 $f$ 的单性由
-	\begin{equation*}
-		\ker f = \{\bv w \in W \mid f(\bv w) = U\} 
+	\begin{align*}
+		\ker f &= \{\bv w \in W \mid f(\bv w) = U\} 
 		= \{\bv w \in W \mid \bv w \in U\}
-		= W \cap U
+		\\
+		&= W \cap U
 		= \{\bv 0\} 
-	\end{equation*}
+	\end{align*}
 	保证.
 \end{proof}
 
@@ -1157,15 +1166,16 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 \begin{proof}
 	根据定理~\ref{theorem: 线性相关IFF线性组合}, $\exists j_0 \in m$ 使得 $\bv x_{j_0}$ 是其他 $(\bv x_j)_{j\in m;\; j \neq j_0}$ 的线性组合. 
 	根据行列式的性质, 将$j_0$ 列减去其他各列 ($j \neq j_0$) 乘上线性组合的系数~$\lambda_j$, 不改变行列式的值, 但该列变成了
-	\begin{equation*}
+	\begin{align*}
 		f_i(\bv x_{j_0}) 
 			- \sum_{j \in m;\; j \neq j_0} \alpha_j f_i(\bv x)
-			= f_i\left(\bv x_{j_0} 
+			&= f_i\left(\bv x_{j_0} 
 					- \sum_{j \in m;\; j \neq j_0} \alpha_j \bv x_j
 				\right)
-			= f_i(\bv 0)
+			\\
+			&= f_i(\bv 0)
 			= 0\,.
-	\end{equation*}
+	\end{align*}
 	
 	这给出了 $
 		\det\left( 
@@ -1225,13 +1235,14 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 		f \colon \prod_{i \in p} V_i  \to U
 	\end{equation*}
 	满足 $\forall i \in p$, 
-	\begin{equation*}
-		\forall (\bv a_j)_{j \in p;\;j \neq i} \in 
+	\begin{align*}
+		\forall (\bv a_j)_{j \in p;\;j \neq i} &\in 
 			\prod_{j \in p;\; j \neq i} V_j\,,
-		\quad
-		f_i \colon V_i \to U;\;\bv x \mapsto f(\bv a_0, \cdots, \bv a_{i - 1}, 
+		\\
+		f_i \colon V_i \to U;&
+		\;\bv x \mapsto f(\bv a_0, \cdots, \bv a_{i - 1}, 
 			\bv x, \bv a_{i + 1}, \cdots, \bv a_{p - 1}) \in \mathcal L (V_i, U)\,,
-	\end{equation*}
+	\end{align*}
 	则称 $f$ 是 $V_0$, \ldots, $V_{p - 1}$ 上的\indexbf{多重线性型}, 或 \emphbf{$p$-线性型}%
 		\index{p-线性型@$p$-线性型}%
 	. 这些多重线性型的集合记为 $\indexmath[L V 0 dots V p minus 1 U]{%
@@ -1275,16 +1286,17 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 多重线性型中我们特别关注\indexbf{双线性型} (bilinear form), 也就是 $2$-线性型在 $V_0 = V_1$ 的特殊情况.
 
 选定 $n$~维线性空间~$V$ 的基底 $\hat e$, 我们能将双线性型~$\mathscr B \in \mathcal L_2(V)$ 表成矩阵的形式:
-\begin{equation*}
+\begin{align*}
 	\mathscr B(\bv x, \bv y) 
-	= \mathscr B \left( 
+	&= \mathscr B \left( 
 		\sum_{i \in n} x_i \basis e_i,\, \sum_{j \in n} y_j \basis e_j
 	 \right)
-	= \sum_{i \in n} x_i \mathscr B \left( 
+	 \\
+	&= \sum_{i \in n} x_i \mathscr B \left( 
 		\basis e_i,\, \sum_{j \in n} y_j \basis e_j
 	 \right)
 	= \sum_{i \in n} \sum_{j \in n} x_i \mathscr B (\basis e_i, \basis e_j) y_j\,.
-\end{equation*}
+\end{align*}
 
 令 $\bv B = \big(\mathscr B(\basis e_i, \basis e_j))_{i, j\in n}$, 得:
 
@@ -1301,7 +1313,9 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	\end{equation*}
 \end{theorem}
 \begin{proof}
-	对于任意 $\mathscr B \in \mathcal L_2 (V; \mathbb F)$, 令 $\mathscr B^\mathrm T$ 表示 $\mathscr B^\mathrm T(\bv x, \bv y) = \mathscr B(\bv y, \bv x)$, 那么 $\mathscr B$ 总能写成对称双线性型~$(\mathscr B + \mathscr B^\mathrm T)/2$ 和反对称双线性型~$(\mathscr B - \mathscr B^\mathrm T)/2$ 的和. 
+	对于任意 $\mathscr B \in \mathcal L_2 (V; \mathbb F)$, 
+	令 $\mathscr B^\mathrm T$ 表示 $\mathscr B^\mathrm T(\bv x, \bv y) = \mathscr B(\bv y, \bv x)$, 
+	那么 $\mathscr B$ 总能写成对称双线性型~$(\mathscr B + \mathscr B^\mathrm T)/2$ 和反对称双线性型~$(\mathscr B - \mathscr B^\mathrm T)/2$ 的和. 
 	也就是说 $\mathcal L_2 (V; \mathbb F) = \mathcal L_2^+ (V; \mathbb F) + \mathcal L_2^- (V; \mathbb F)$.
 
 	设 $\mathscr B \in \mathcal L_2^+ (V; \mathbb F) \cap \mathcal L_2^- (V; \mathbb F)$. $\forall \bv x, \bv y \in V$, $\mathscr B(\bv y, \bv x) = - \mathscr B(\bv x, \bv y) = \mathscr B(\bv x, \bv y)$. 
@@ -1456,13 +1470,14 @@ i.e.\ $V = \langle\basis e_i\rangle_{i \in n}$.
 	考虑到 $\mathscr A(V) = \langle \mathscr A(\basis e_i) \rangle_{i \in n}$.
 	但 $\langle \mathscr A(\basis e_i) \rangle_{i \in k} = \{\bv 0\}$.
 	利用 $\mathscr A$ 的线性, 我们给出 $\forall (\lambda_i)_{i \in n} \in \mathbb F^n$:
-	\begin{equation*}
+	\begin{align*}
 		\sum_{i \in n} \lambda_i \mathscr A(\basis e_i) 
-			= \sum_{i \in n\,\wedge\, i \notin k} \lambda_i \mathscr A(\basis e_i) 
+			&= \sum_{i \in n\,\wedge\, i \notin k} \lambda_i \mathscr A(\basis e_i) 
 				+  \mathscr A\left( 
 					\sum_{i \in k} \lambda_i \basis e_i \right)
-			= \sum_{i \in n\,\wedge\, i \notin k} \lambda_i \mathscr A(\basis e_i) .
-	\end{equation*}
+			\\
+			&= \sum_{i \in n\,\wedge\, i \notin k} \lambda_i \mathscr A(\basis e_i) .
+	\end{align*}
 	
 	即是: $\big(\mathscr A(\basis e_i)\big)_{i \in n\,\wedge\, i \notin k}$ 将构成 $\mathscr A(V)$ 的一组基底. 从而:
 	\begin{equation*}
@@ -1655,11 +1670,19 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 	\end{equation*}
 	注意到 $\mathscr P_i \bv x \in \mathscr P_i(V)$, 从而 $V = \sum_{i \in m} \mathscr P_i(V)$.
 
-	现在要证它是一个直和. $\forall i \in m\; \forall \bv x \in \mathscr P_i(V) \cap \left( \sum_{j \in m;\; j \neq i} \mathscr P_j(V)\right)$, 
-	\begin{equation*}
-		\exists \bv (x_j)_{j \in m} \in V^m  \;\text{s.t.\ }
-			\bv x = \mathscr P_i \bv x_i = \sum_{j \in m;\; j \neq i} \mathscr P_j \bv x_j\,,
-	\end{equation*}
+	现在要证它是一个直和. 
+	$\forall i \in m$, 
+	\begin{align*}
+		\forall \bv x \in \mathscr P_i(V) &\cap \left( \sum_{j \in m;\; j \neq i} \mathscr P_j(V)\right), 
+		&
+		\exists \bv (x_j)_{j \in m} &\in V^m  
+		&
+		&\text{s.t.\ }
+		\\
+		\bv x = \mathscr P_i \bv x_i &= \sum_{j \in m;\; j \neq i} \mathscr P_j \bv x_j\,,
+		& &
+		& &
+	\end{align*}
 	将上式两侧同时作用算子~$\mathscr P_i$ 即有
 	\begin{equation*}
 		\mathscr P_i \bv x = \mathscr P_i^2 \bv x_i = \mathscr P_i \bv x_i = \bv x = 
@@ -1701,12 +1724,13 @@ $\mathscr P_i \mathscr P_j = \mathscr O$ 若 $i \neq j$;
 我们说 $\bv x$ 是对应特征值~$\lambda$ 的特征向量, 也可以说是 $\bv x \in \ker (\mathscr A - \lambda \id_V)$. 
 从而 $\det (\mathscr A - \lambda \id_V) = 0$. 
 考虑到行列式和坐标无关, 且对非退化方阵 $\bv P$:
-\begin{equation*}
+\begin{align*}
 	\det (\bv A' - \lambda \bv I) 
-	= \det (\bv P^{-1} \bv A \bv P - \lambda \bv P^{-1} \bv P) 
-	= \det \bv P^{-1} \det (\bv A - \lambda \bv I) \det \bv P
+	&= \det (\bv P^{-1} \bv A \bv P - \lambda \bv P^{-1} \bv P) 
+	\\
+	&= \det \bv P^{-1} \det (\bv A - \lambda \bv I) \det \bv P
 	= \det (\bv A - \lambda \bv I)\,,
-\end{equation*}
+\end{align*}
 我们可以定义与坐标无关的特征多项式:
 
 \begin{definition}[特征多项式]
@@ -1954,7 +1978,11 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	直到满足~\ref{item: 矛盾} 或~\ref{item: 消去} 为止. 
 	这个循环将总是能在有限次结束, 因为每次 $p$ 都减小了 $1$.
 
-	当过程到结束时, 如果满足~\ref{item: 矛盾}, 那么 $\prod_{k \in q} \sigma'_k (S)= (S, t) \prod_{k \in q, \, k \neq 0} \sigma'_k(S) = (S, t)(S) = t \neq S$, 与 $\id_n(S) = S$ 矛盾; 
+	当过程到结束时, 如果满足~\ref{item: 矛盾}, 那么
+	\begin{equation*}
+		\prod_{k \in q} \sigma'_k (S)= (S, t) \prod_{k \in q, \, k \neq 0} \sigma'_k(S) = (S, t)(S) = t \neq S,
+	\end{equation*}
+	与 $\id_n(S) = S$ 矛盾; 
 	那么, 只可能是满足~\ref{item: 消去}, 此时因 $(S, t)(S, t) = \id_n$, 将它们消去, 我们得到了 $\id_n$ 的 $q' = q - 2$ 个对换的分解. 
 	
 	重复这样的过程直到 $q' = 0$ 或 $q' = 1$ 为止, 而后者是不可能的, 因为 $\id_n$ 永远不可能等于对换. 所以: $q \equiv 0 \pmod 2$.
@@ -2361,11 +2389,13 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 			= \frac{R' - R}{G}\,,
 	\end{equation*}
 	且若 $Q \neq Q'$ 和 $R \neq R'$, 
-	\begin{equation*}
-		\deg (Q - Q') = \deg \frac{R' - R}{G} 
-			= \deg (R' - R) - \deg G \leq \max\{\deg R, \deg R'\} - \deg G
+	\begin{align*}
+		\deg (Q - Q') &= \deg \frac{R' - R}{G} 
+			= \deg (R' - R) - \deg G 
+			\\
+		&\leq \max\{\deg R, \deg R'\} - \deg G
 			< 0\,,
-	\end{equation*}
+	\end{align*}
 	这意味着多项式 $Q - Q'$ 有负的度数, 这是不可能的. 而 $Q = Q'$ 将能与 $R = R'$ 互相推出. 
 \end{proof}
 
@@ -2378,7 +2408,11 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 	
 	由 $\deg R < \deg Q$ 我们知道 $\deg (RQ') < \deg (QQ')$\footnote{因为域是无零因子的, 因此相乘讲意味着次数相加}, 同理 $\deg(R'Q) < \deg (QQ')$, 从而 $\deg(RQ' + R'Q) < \deg(QQ')$. 所以 $R/Q + R'/Q' \in \mathbb F_0(X)$.
 
-	而 $\deg(RR') = \deg R + \deg R' < \deg(Q) + \deg(Q') = \deg(QQ')$, 即 $(R/Q)(R'/Q') \in \mathbb F_0(X)$. 
+	而
+	\begin{equation*}
+		\deg(RR') = \deg R + \deg R' < \deg(Q) + \deg(Q') = \deg(QQ')
+	\end{equation*}
+	即 $(R/Q)(R'/Q') \in \mathbb F_0(X)$. 
 
 	最后 $1 \notin \mathbb F_0(X)$.
 \end{proof}
@@ -2388,7 +2422,7 @@ $,  我们称这个置换为\indexbf{轮换}或\indexbf{循环}, 并径直称 $\
 \end{definition}
 
 \begin{theorem}[真分式的最简分式分解]
-	$\forall R/Q \in \mathbb F_0(X)$, $\exists! \mathscr F:=\{R_i/Q_i\}_{i \in n} \in \mathscr P(\mathbb F_0(X))$ s.t.\ $\forall i \in n$, $R_i/Q_i$ 是最简的, 且 $\sum_{i \in n} R_i/Q_i = R/Q$.
+	$\forall R/Q \in \mathbb F_0(X)$, $\exists! \mathscr F:=\{R_i/Q_i\}_{i \in n} \in \mathscr P(\mathbb F_0(X))$ s.t.\ $\forall i \in n$, $R_i/Q_i$ 是最简的, 而且 $\sum_{i \in n} R_i/Q_i = R/Q$.
 \end{theorem}
 \begin{proof}
 	考虑到证明些繁琐, 又不是该笔记的重点, 这里只给出证明的思路. 
