@@ -1,7 +1,7 @@
 % TeXplates/Mathematics.tex
 % v0.2.2
 % https://github.com/HoyanMok/TeXplates
-\documentclass[openany]{book} 
+\documentclass[openany, a5paper]{book} 
 % \documentclass{ctexbook} 如果用中文
 % \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
 % 五号 = 10.5pt，小四=12pt，四号=14pt
@@ -20,7 +20,71 @@
 
 \tableofcontents
 \mainmatter
-\chapter{Topological Spaces and Continuous Mappings}
+\chapter[Topology and Cont.\ Map]{Topological Spaces and Continuous Mappings}
+
+\section{Topological Space}
+\begin{definition}\label{def: topology}
+We say $X$ is equiped with a \indexbf{topology} if we assigned a $\indexmath[T]{\mathscr{T}}\subset 2^X$, which has got the following propoties:
+\begin{conditionlist}[label=\alph*)]
+	\item $\varnothing\in\mathscr{T}; X\in\mathscr{T}$.
+	\item $\forall\alpha\in A(
+		G_\alpha\in\mathscr{T})\to 
+			\bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}$.
+	\item $G_1\in\mathscr{T}\wedge G_2\in\mathscr{T}\to G_1\cap G_2\in \mathscr{T}$.
+\end{conditionlist}
+
+Then we call $(X, \mathscr{T})$ a \indexbf{topological space}. Every $G \in \mathscr{T}$ is called an \indexbf{open set}.
+The complement of an open set is called a \indexbf{closed set}. 
+\end{definition}
+
+A trivial example of topological space is \indexbf{trivial topology}, which consists only of empty set and the space itself, i.e.\ $\mathscr{T} = \{\varnothing, X\}$. Another trivial example of topological space is \indexbf{discrete topology}, which consists of all the subsets of the space i.e.\ $\mathscr{T} = 2^X$.
+
+A \indexbf{cofinite space} is a base set $X$ equiped with a topology $\mathscr{T}$ defined as follows:
+\begin{align}\label{eq: cofinite space}
+	\mathscr{T} = \{
+		U \in 2^X \mid U = \varnothing \vee 
+		\text{$\complement_X U$ is finite} 
+	\}
+\end{align}
+\begin{proposition}
+The set $\mathscr{T}$ under definition~\eqref{eq: cofinite space} is a topology.
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=\alph*)]
+\item $\varnothing \in \mathscr{T}$, $X\in\mathscr T$.
+\item $\forall i \in I \left(
+	\left|\complement_X  A_i\right| \in \mathbb N\right) \to
+		\forall i_0\in I\left(
+			\left| \bigcap_{i\in I} \complement_X A_i\right| \leq 
+				\left|\complement_X A_{i_0}\right|\right)$, therefore $\bigcup_{i\in I}  A_i \in \mathscr T$.
+\item $\forall A\in \mathscr T \forall B \in \mathscr T(
+	A\cap B=\varnothing\in \mathscr{T} \vee
+		\complement_X (A\cap B) = \complement_X A\cup \complement_X B \text{ is finite} )$, 
+	therefore $\forall A\in \mathscr T \forall B \in \mathscr T(
+		A\cap B \in \mathscr T)$.
+\end{enumerate}
+\end{proof}
+
+Similarly, \indexbf{countable complement space} can be defined.
+
+Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. $\mathscr T_1\cup \mathscr T_2$ is possibly not a topology of $X$. For example, $\mathscr T _1 = \{ (x,+\infty) \mid x\in\mathbb R\}\cup\{ \varnothing,\mathbb R\}$ and $\mathscr T_2 = \{ (-\infty, y) \mid y\in\mathbb R\}\cup\{ \varnothing,\mathbb R\}$ are both topologies of $\mathbb R$, but there union $T_1\cup T_2$ is not. 
+
+\begin{theorem}
+Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. Their intersection $\mathscr T_1\cap \mathscr T_2$ is also a topology on $X$.
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=\alph*)]
+\item $\{\varnothing, X\} \subseteq \mathscr T_1\wedge 
+	\{\varnothing, X\} \subseteq  \mathscr T_2 \to 
+		\{\varnothing, X\}\subseteq \mathscr T_1\cap \mathscr T_2$.
+\item $\forall\alpha\in A(
+		G_\alpha\in\mathscr T_1\cap \mathscr T_2)\to 
+			\bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}_1 \wedge \bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}_2$. 
+\item $\forall G_1\in \mathscr T_1\cap \mathscr T_2 \forall G_2 \in \mathscr T_1\cap \mathscr T_2 \big(
+		G_1\cap G_2 \in \mathscr T_1 \wedge G_1\cap G_2\in\mathscr T_2\big)$			
+\end{enumerate}
+\end{proof}
+
 \section{Metric Space}
 \begin{definition}\label{metric_def}
 function
@@ -34,6 +98,14 @@ $\forall x_1,x_2,x_2\in X$ satisfied:
 	\item	$d(x_1,x_3)\leqslant d(x_1,x_2)+d(x_2,x_3)$ (Triangle inequality),
 \end{conditionlist}
 is called a \indexbf{metric} or \indexbf{distance} in $X$. Such $X$ is said to be equiped with metric $d$, $(X,d)$ is called a \indexbf{metric space}.
+\end{definition}
+
+\begin{definition}\label{induced_topology}
+	A topology $\mathscr{T}_d$ insisting of the open sets in a metric space $( X, d)$ is called a \indexbf{topology induced by metric} $d$.
+\end{definition}
+
+\begin{definition}\label{matrization}
+	Let $(X, \mathscr T)$ be a topological space. If there exists a metric $d\colon X^2\to \mathbb R$ s.t.\ $(X, \mathscr T)$ is induced by $d$ then call $(X, \mathscr T)$ a \indexbf{metrizable space}, $(X, d)$ is its \indexbf{metrization}.
 \end{definition}
 
 Some examples:
@@ -72,18 +144,22 @@ This is called \indexbf{Schwarz inequality}.
 If $\forall i=1,\cdots,n ( v_i=0)$ the equivalence has already been satisfied, therefore the following considers the situation that $\exists i\in \{1,\cdots n\}( v_i\neq 0)$. $\forall \lambda \in\mathbb R$, the quadratic polynomial of $\lambda$
 \begin{align*}
 	\sum ^n_{i=1} (u_i+\lambda v_i)^2 = 
-		\sum ^n_{i=1} u_i^2 +2\lambda \sum ^n_{i=1} u_iv_i + \lambda^2 \sum ^n_{i=1} v_i^2 \geq 0
+		\sum ^n_{i=1} u_i^2 +2\lambda \sum ^n_{i=1} u_i v_i + \lambda^2 \sum ^n_{i=1} v_i^2 \geq 0
 \end{align*}
-has at most one root. Hence $\Delta \leq 0$ will lead to the inequality \ref{Schwarz}.
+has at most one root. 
+Hence, $\Delta \leq 0$ will lead to the inequality~\eqref{Schwarz}.
 \end{proof}
 
 Apply this inequality to $\sum ^n_{i=1} ( u_i+v_i)^2 = 
 	\sum ^n_{i=1} u_i^2 +\sum ^n_{i=1}  v_i^2 +2\sum ^n_{i=1}  v_i\sum ^n_{i=1} u_i$ we can get
 \begin{align*}
-	\sum ^n_{i=1} ( u_i+v_i)^2 \leq 
+	\sum ^n_{i=1} ( u_i+v_i)^2 
+	&\leq 
 		\sum ^n_{i=1} u_i^2 +\sum ^n_{i=1}  v_i^2 +
-			2\sqrt{ \sum^n_{i=1} u_i^2}\sqrt{ \sum^n_{i=1} v_i^2} = \left(
-				\sqrt{ \sum^n_{i=1} u_i^2}+\sqrt{ \sum^n_{i=1} v_i^2} \right)^2 ,
+			2\sqrt{ \sum^n_{i=1} u_i^2}\sqrt{ \sum^n_{i=1} v_i^2} 
+	\\		
+	&= \left(
+		\sqrt{ \sum^n_{i=1} u_i^2}+\sqrt{ \sum^n_{i=1} v_i^2} \right)^2 ,
 \end{align*}
 in which substitude $u_i,v_i$ by $x_i-y_i, x_i+y_i$ will result in triangle inequality. The inequality holds as the $n$ limits to $+\infty$.
 
@@ -152,72 +228,6 @@ It can be proved that $\varnothing$ and $X$ itself is both open and closed.
 \end{enumerate}
 \end{proof}
 
-\section{Topological Space}
-\begin{definition}\label{topological_space}
-We say $X$ is equiped with a \indexbf{topological space} or equiped with \indexbf{topology} if we assigned a $\indexmath[T]{\mathscr{T}}\subset 2^X$, which has got the following propoties:
-\begin{conditionlist}[label=\alph*)]
-	\item $\varnothing\in\mathscr{T}; X\in\mathscr{T}$.
-	\item $\forall\alpha\in A(
-		G_\alpha\in\mathscr{T})\to 
-			\bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}$.
-	\item $G_1\in\mathscr{T}\wedge G_2\in\mathscr{T}\to G_1\cap G_2\in \mathscr{T}$.
-\end{conditionlist}
-
-Then we call $(X,\mathscr{T})$ a \indexbf{topological space}. Every $G\in \mathscr{T}$ is called an \indexbf{open set}. 
-\end{definition}
-
-\begin{definition}\label{induced_topology}
-A topology $\mathscr{T}_d$ insisting of the open sets in a metric space $( X, d)$ is called a \indexbf{topology induced by metric} $d$.
-\end{definition}
-
-A trivial example of topological space is \indexbf{trivial topology}, which consists only of empty set and the space itself, i.e.\ $\mathscr{T}=\{\varnothing, X\}$. Another trivial example of topological space is \indexbf{discrete topology}, which consists of all the subsets of the space i.e.\ $\mathscr{T} = 2^X$.
-
-A \indexbf{cofinite space} is a base set $X$ equiped with a topology $\mathscr{T}$ defined as follows:
-\begin{align}\label{cofinite_space}
-	\mathscr{T} = \{ U\in 2^X\mid U=\varnothing \vee \complement_X U \text{ is finite} \}
-\end{align}
-\begin{proposition}
-The set $\mathscr{T}$ under definition \ref{cofinite_space} is a topology.
-\end{proposition}
-\begin{proof}
-\begin{enumerate}[label=\alph*)]
-\item $\varnothing \in \mathscr{T}$, $X\in\mathscr T$.
-\item $\forall i \in I \left(
-	\left|\complement_X  A_i\right| \in \mathbb N\right) \to
-		\forall i_0\in I\left(
-			\left| \bigcap_{i\in I} \complement_X A_i\right| \leq 
-				\left|\complement_X A_{i_0}\right|\right)$, therefore $\bigcup_{i\in I}  A_i \in \mathscr T$.
-\item $\forall A\in \mathscr T \forall B \in \mathscr T(
-	A\cap B=\varnothing\in \mathscr{T} \vee
-		\complement_X (A\cap B) = \complement_X A\cup \complement_X B \text{ is finite} )$, 
-	therefore $\forall A\in \mathscr T \forall B \in \mathscr T(
-		A\cap B \in \mathscr T)$.
-\end{enumerate}
-\end{proof}
-
-Similarly, \indexbf{countable complement space} can be defined.
-
-Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. $\mathscr T_1\cup \mathscr T_2$ is possibly not a topology of $X$. For example, $\mathscr T _1 = \{ (x,+\infty) \mid x\in\mathbb R\}\cup\{ \varnothing,\mathbb R\}$ and $\mathscr T_2 = \{ (-\infty, y) \mid y\in\mathbb R\}\cup\{ \varnothing,\mathbb R\}$ are both topologies of $\mathbb R$, but there union $T_1\cup T_2$ is not. 
-
-\begin{theorem}
-Let $X$ be equiped with two topology $\mathscr T_1, \mathscr T_2$. Their intersection $\mathscr T_1\cap \mathscr T_2$ is also a topology on $X$.
-\end{theorem}
-\begin{proof}
-\begin{enumerate}[label=\alph*)]
-\item $\{\varnothing, X\} \subseteq \mathscr T_1\wedge 
-	\{\varnothing, X\} \subseteq  \mathscr T_2 \to 
-		\{\varnothing, X\}\subseteq \mathscr T_1\cap \mathscr T_2$.
-\item $\forall\alpha\in A(
-		G_\alpha\in\mathscr T_1\cap \mathscr T_2)\to 
-			\bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}_1 \wedge \bigcup\limits_{\alpha\in A}G_\alpha\in\mathscr{T}_2$. 
-\item $\forall G_1\in \mathscr T_1\cap \mathscr T_2 \forall G_2 \in \mathscr T_1\cap \mathscr T_2 \big(
-		G_1\cap G_2 \in \mathscr T_1 \wedge G_1\cap G_2\in\mathscr T_2\big)$			
-\end{enumerate}
-\end{proof}
-
-\begin{definition}\label{matrization}
-Let $(X, \mathscr T)$ be a topological space. If there exists a metric $d\colon X^2\to \mathbb R$ s.t.\ $(X, \mathscr T)$ is induced by $d$ then call $(X, \mathscr T)$ a \indexbf{metrizable space}, $(X, d)$ is its \indexbf{metrization}.
-\end{definition}
 
 \section{Neighbourhood}
 \begin{definition}\label{neighbourhood}
@@ -302,7 +312,7 @@ The set of continuous mappings from $X$ into $Y$ can be denoted by $C(X,Y)$ or $
 
 It can be easily proved that an identify function $e_X\colon X\to X$ where $X$ is equiped with a topology $\mathscr T$ is a continuous function.
 
-\begin{theorem}\label{criterion_continuity} (\indexbf{criterion of continuity})
+\begin{theorem}[\indexbf{criterion of continuity}]\label{theorem: criterion of continuity}
 
 Let $(X, \mathscr T)$, $(Y; \mathscr S)$ be two topological space. A mapping $f \colon X \to Y$ is continuous \emph{iff}
 \begin{align*}
@@ -762,7 +772,7 @@ This is the proof of $\mathscr B_x \subseteq \tilde{\mathscr B}_x$,
 and $\tilde{\mathscr B}_x \subseteq \mathscr B_x$ can be proved similarly.
 \end{proof}
 
-\chapter{Basic Properties of Topological Spaces}
+\chapter[Properties of Topology]{Basic Properties of Topological Spaces}
 
 \section{Seperability}
 
@@ -1186,7 +1196,7 @@ The \indexbf{inverse} of a path $a$ is $\indexmath[a bar]{\bar a}(t) = a(1 - t)$
 	A \indexbf{convex set} is a set in Euclidean space that contains all points on the straight segment jointing any two points i.e.\ $\forall \bv x_1, \bv x_2 \in C$, $[\bv x_1, \bv x_2] \subset C$.
 \end{definition}
 
-\chapter{Product Spaces and Quotient Spaces}
+\chapter[Product and Quotient Spaces]{Product Spaces and Quotient Spaces}
 
 \section{Product Space}
 

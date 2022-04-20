@@ -7,15 +7,6 @@
 % 五号 = 10.5pt，小四=12pt，四号=14pt
 % 其他可选参量如twocolumn, 两行排版
 
-\usepackage{xpatch}
-
-\ExplSyntaxOn{}
-\xpatchcmd \fontspec_new_script:nn
-	{ \__fontspec_warning:nxx }
-	{ \__fontspec_info:nxx }
-	{}{\fail}
-\ExplSyntaxOff % 沉默字体警告
-
 \usepackage{../TeXplatesMathematics}
 
 \addbibresource{Algebra.bib} % 把这里改成实际的文件名
@@ -133,7 +124,7 @@
 可逆幺半群$G$称为群, 即:
 \begin{definition}[群]
 	设有集合$G$. 若:
-	\begin{conditionlist}[label=G\arabic*)]\setcounter{enumi}{-1}
+	\begin{conditionlist}[label=G\arabic*)]\setcounter{enumi}{-1} % chktex 9
 		\item 定义了二元运算$\mathord{\cdot} \colon G^2 \to G; (x,y) \mapsto xy$.
 		\item 结合性: $\forall x,y,z\in G$, $(xy)z = x(yz)$.
 		\item 单位元: $\exists e\in G \forall x\in G$, $xe = ex = x$.
