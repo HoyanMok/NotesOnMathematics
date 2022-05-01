@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.2.2
+% v0.2.2b
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany, oneside, a5paper]{book} 
 % \documentclass{ctexbook} 如果用中文
@@ -173,6 +173,9 @@ We can have parallel results as Theorem~\ref{theorem: Homotopic relation is an e
 
 \section{Fundamental Group}
 
+Fundamental group of a topological space at a point is the path classes at this point.
+We need to introduce the multiplicative structure of path classes.
+
 \begin{theorem}
     Let $a, b, c, d$ be four paths in $X$.
     \begin{align*}
@@ -195,7 +198,13 @@ While the product of paths does not obey associativity, we have:
 \begin{proof}
     Consider $\forall a \in \alpha$, $\forall b \in \beta$, $\forall c \in \gamma$.
 
-    Let $\tilde a(t) = t/3$, $\tilde b(t) = t/3 + 1/3$, $\tilde c(t) = t/3 + 2/3$. 
+    Let
+    \begin{align*}
+        \tilde a(t) &= t/3, \\
+        \tilde b(t) &= t/3 + 1/3, \\
+        \tilde c(t) &= t/3 + 2/3.
+    \end{align*}
+
     $\tilde a, \tilde b$ and $\tilde c$ are three paths in $[0, 1]$, and $\tilde a (\tilde b \tilde c) \simeq (\tilde a \tilde b) \tilde c \rel \{0, 1\}$, since $[0, 1]$ is convex, therefore there is a linear homotopy between the two product paths.
 
     Now Let $f \colon [0, 1] \to X$ be
@@ -233,7 +242,13 @@ For now path classes are not closed under production.
 
 \begin{definition}[Homomorphism induced by continuous function]
     $f \in C(X, Y)$, $x_0 \in X$.
-    We define $f_\pi \colon [X] \to [Y]$ as $f_\pi (\pclass{a}) = \langle f \circ a \rangle$, where $a$ is a path in $X$. 
+    We define 
+    \begin{equation*}
+        f_\pi \colon [X] \to [Y],
+        \quad
+        \pclass{a} \mapsto \langle f \circ a \rangle
+    \end{equation*}
+    where $a$ is a path in $X$. 
     
     The limitation of $\indexmath[f pi]{f_\pi}$ on $\pi_1(X, x_0)$ is said to be a \indexbf{homomorphism induced by $f$}.
 \end{definition}
@@ -245,7 +260,15 @@ For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly 
     Let $f$ be a homeomorphism from $X$ to $Y$, then $\forall x_0 \in X$, $f_\pi$ is an isomorphism from $\pi_1(X, x_0)$ to $\pi_1(Y, f(x_0))$.
 \end{theorem}
 \begin{proof}
-    $f^{-1} \circ f = \id_X \then (f^{-1})_\pi \circ f_\pi = \id_{\pi_1(X, x_0)}$, $f \circ f^{-1} = \id_Y \then f_\pi \circ (f^{-1})_\pi = \id_{\pi_1(Y, f(x_0))}$, therefore $(f^{-1})_\pi$ is the inverse of $f_\pi$.
+    \begin{align*}
+        f^{-1} \circ f &= \id_X 
+        \then 
+        (f^{-1})_\pi \circ f_\pi = \id_{\pi_1(X, x_0)}; \\
+        f \circ f^{-1} &= \id_Y 
+        \then 
+        f_\pi \circ (f^{-1})_\pi = \id_{\pi_1(Y, f(x_0))},
+    \end{align*}
+    therefore $(f^{-1})_\pi$ is the inverse of $f_\pi$.
     An invertible homomorphism is an isomorphism. 
 \end{proof}
 
@@ -296,22 +319,41 @@ For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly 
     $\pclass{a} \in \pi_1(X, x_1)$, $\pclass{b} \in \pi_1(X, x_2)$, $\pclass{c}$ is a path class with initial point~$x_1$ and terminal point~$x_2$.
 
     It can be verified that
-    \begin{equation*}
-        g \colon \pi_1(X, x_1) \to \pi_2 (X, x_2); \pclass{a} \mapsto \langle \bar c a c \rangle
-    \end{equation*}
-    is a homomorphism. Same as $g'(\pclass{b}) = c b \bar c$.
+    \begin{equation}\label{homomorphism between fundamental groups at two points in one space}
+        g_c \colon \pi_1(X, x_1) \to \pi_2 (X, x_2); \pclass{a} \mapsto \langle \bar c a c \rangle
+    \end{equation}
+    is a homomorphism. Same as $g_{\bar c} (\pclass{b}) = c b \bar c$.
 
-    \begin{equation*}
-        g \circ g'(\pclass{b}) = \langle \bar c c b \bar c c\rangle = \id_{\pi_1(X, x_2)};
-        \quad
-        g' \circ g(\pclass{a}) = \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_2)},
-    \end{equation*}
-    therefore $g$ is an isomorphism.
+    \begin{align*}
+        g_c \circ g_{\bar c} (\pclass{b}) &= \langle \bar c c b \bar c c\rangle = \id_{\pi_1(X, x_2)};
+        \\
+        g_{\bar c} \circ g_c (\pclass{a}) &= \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_2)},
+    \end{align*}
+    therefore $g_c$ is an isomorphism.
 \end{proof}
 
 With Theorem~\ref{theorem: Fundamental groups of path connected space at different points are isomorphic}, we can write the fundamental group of a path-connected space $X$ by $\indexmath[pi1 X]{\pi_1(X)}$.
 
 For different path-connected branches, a topological space can have different fundamental groups, while they are isomorphic within one branch.
+
+\begin{theorem}%
+    \label{theorem: relations between two induced homomorphisms}
+    Let $X$ and $Y$ be two topological spaces, $f_1 \simeq f_2 \colon X \to Y$, $x_0 \in X$, $f_1(x_0) = y_1$, $f_2(x_0) = y_2$; 
+    If $\exists c \in C([0, 1], Y)$ s.t.\ $c(0) = y_1$, $c(1) = y_2$, and $g_c$ is defined as in Eq.~\eqref{homomorphism between fundamental groups at two points in one space},
+    then $g_c \circ f_{1, \pi} = f_{2, \pi}$.
+\end{theorem}
+
+\begin{equation*}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQAdDtLAfXIAUADVIACAB69iAShABfUuky58hFACZS66nSat2XHvwEBNMQE9e62QqXY8BIpuI6GLNok7c+gs6MvkNjowUADm8ESgAGYAThAAtkhkIDgQSOQ0bvqeUbzAmqKGWHLyiiCxCUiaKWmIGbru7KG8AMal0XGJiMmpVZl6HuV5GYXeJXKUckA
+\begin{tikzcd}
+    &  & {\pi_1(Y, y_1)} \arrow[dd, "g_c"] \\
+{\pi_1(X, x_0)} \arrow[rrd, "{f_{2, \pi}}"] \arrow[rru, "{f_{1, \pi}}"] &  &                                   \\
+    &  & {\pi_1(Y, y_2)}                  
+\end{tikzcd}
+\end{equation*}
+\begin{proof}
+    %TODO: finish this proof
+\end{proof}
 
 \begin{definition}[Simply connected]%
     \label{def: simply connected}
@@ -337,12 +379,29 @@ For different path-connected branches, a topological space can have different fu
     If $\indexmath[f]{\tilde f} \in C(X, Y)$, s.t.\ $f = p \circ \tilde f $, we say that $\tilde f$ is a \indexbf{lift} of $f$. 
 \end{definition}
 
+\begin{equation*}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQANEAX1PU1z5CKcqWLU6TVuwCaPPiAzY8BIgCYxEhizaIQALR4SYUAObwioAGYAnCAFskokDghINkneyvzrdx4hkLm6IHtrSemi+ILYOTjSuSEHhuiAAOml4jLAABD40jPQARjCMAAoCKsIgNlimABY4IDRw9VhWTYjk3JTcQA
+\begin{tikzcd}
+    & X \arrow[rd, "f"] \arrow[ld, "\tilde f"'] &   \\
+Y \arrow[rr, "p"] &                                           & Z
+\end{tikzcd}
+\end{equation*}
+
 In some case, given $f$ and $p$, $\tilde f$ might do not exist.
 
 \begin{lemma}[Lift of path]
     $a \in C([0, 1], S^1)$, $p \colon \mathbb R \to S^1; x \mapsto \me^{2\pi x \mi}$. Let $t_0 \in \mathbb R$ s.t.\ $p(x_0) = a(0)$.
-    There exists a unique lift~$\tilde a \in C(\mathbb R, S^1)$ of $a$ s.t.\ $\tilde a(0) = x_0$.
+    There exists a unique lift~$\tilde a \in C([0, 1], \mathbb R)$ of $a$ s.t.\ $\tilde a(0) = x_0$.
 \end{lemma}
+
+\begin{equation*}
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkRlzSACYykAL6l0mXPkIoufGgxZtEIADqKAtvRwALAEZbuAJUHCQGbHgJEATKWl0mrdgGUAesUHUQMKAHN4RUADMAJwgVJC4QHAgkK1s5dnpDAODQxDIIqMQY2XsFNESQIJCwmkikNOz5JUU8RlhuBJpGei0YRgAFUTMJEECsLw0cNwEgA
+\begin{tikzcd}
+    & {[0, 1]} \arrow[rd, "a"] \arrow[ld, "\tilde a"'] &     \\
+\mathbb R \arrow[rr, "p"] &                                                  & S^1
+\end{tikzcd}
+\end{equation*}
+
 \begin{proof}
     \emph{Existence}.
     The collection of open sets that the images under $a$ do not cover $S^1$, $\{(\alpha_i, \beta_i) \cap [0, 1] \mid a_i, b_i \in \mathbb R^I\wedge S^1 \subsetneq a((\alpha_i, \beta_i))\}$, is a cover of $[0, 1]$ by the definition of continuity.
@@ -460,6 +519,143 @@ The situation for $S^n$ is much simpler:
 \end{proof}
 
 By Theorem~\ref{theorem: Fundamental group of product space}, the fundamenal group of $T^2 := S^1 \times S^1$ is $\pi_1(T^2) \cong \mathbb Z \times \mathbb Z$, which is not isomorphic to $S^2$, therefore $T^2 \not\cong S^2$.
+
+\section{Homotopy Types}
+
+\begin{definition}[Homotopy type]
+    If $\exists f \in C(X, Y)$, $\exists g \in C(Y, X)$ s.t.\ 
+    \begin{align*}
+        g \circ f \simeq \id_X,
+        &&
+        f \circ g \simeq \id_Y,
+    \end{align*}
+    then we say $X$ and $Y$ are \indexbf{homotopy equivalent}, or they are of the same \indexbf{homotopy type}, denoted by $\indexmath[X simeq Y]{X \simeq Y}$.
+    $f$ is called a \indexbf{homotopy map} or a \indexbf{homotopy equivalence} from $X$ to $Y$, and $g$ is called a \indexbf{homotopy inverse} of $f$.
+\end{definition}
+
+An inverse of a homotopy map is not unique.
+
+Some examples of spaces having same homotopy types:
+\begin{itemize}
+    \item $\mathbb R \simeq \mathbb R^n$ ($n \in \mathbb N_+$).
+    \item $X \times [0, 1] \simeq X$.
+\end{itemize}
+
+\begin{theorem}\label{theorem: homotopy map induces isomorphism}
+    If $X \simeq Y$ and $f$ is a homotopy map from $X$ to $Y$, $f(x_0) = y_0$, then $f_\pi$ is an isomorphism from $\pi_1(X, x_0)$ to $\pi_1(Y, y_0)$.
+\end{theorem}
+\begin{proof}
+    %TODO: finish this
+\end{proof}
+
+
+Spaces with the simplest homotopy type are contractable spaces.
+
+\begin{definition}[Contractable space]%
+    \label{def: contractable space}
+    If $X \simeq \{x\}$, we call $X$ a \indexbf{contractable space}.
+\end{definition}
+
+
+
+\section{Retractability}
+
+\begin{definition}[Retractability]%
+    \label{definition: retractability}
+    $A \subset X$, $i \colon A \to X$ is an \indexbf{inclusion} from $A$ to $X$, meaning $\forall a \in A$, $i(a) = a$. 
+    If $\exists r \in C(X, A)$ s.t.\ $r \circ i = \id_A$, then $A$ is called a \indexbf{retract} of $X$, $r$ is a \indexbf{retraction}, and $X$ is said to be \indexbf{retractable}.
+\end{definition}
+
+\begin{definition}[Deformation retractability]%
+    \label{definition: deformation retractability}
+    $A \subset X$, $i \colon A \to X$ is an inclusion. 
+    If $\exists r \in C(X, A)$ s.t.\ $r \circ i = \id_A \wedge H \colon i \circ r \simeq \id_X$, then $A$ is called a \indexbf{deformation retract} of $X$, $H$ is a \indexbf{deformation retraction} of $X$, and $X$ is said to be \indexbf{deformation retractable}.
+\end{definition}
+
+\begin{theorem}[Spaces are homotopically equivalent to their deformation retracts]
+    If $X \simeq Y$ and $X$ is a deformation retract of $Y$, then $X \simeq Y$.
+    And, the retraction $r \colon Y \to X$ and the inclusion $i \colon X \to Y$ are homotopy inverse to each other.
+\end{theorem}
+
+\begin{theorem}[Contractable space can be deformatively retracted to all its points]
+    If $X$ is a contractable space, $\forall x \in X$, $\{x\}$ is a deformation retract of $X$.
+\end{theorem}
+
+
+\begin{definition}[Strong deformation retractability]%
+    \label{definition: strong deformation retractability}
+    $A \subset X$, $i \colon A \to X$ is an inclusion. 
+    If $\exists r \in C(X, A)$ s.t.\ $r \circ i = \id_A \wedge H \colon i \circ r \simeq \id_X \rel A$, then $A$ is called a \indexbf{strong deformation retract} of $X$, $H$ is a \indexbf{strong deformation retraction} of $X$, and $X$ is said to be \indexbf{strongly deformation retractable}.
+\end{definition}
+
+Some examples:
+\begin{itemize}
+    \item $X \times [0, 1]$ has strong deformation retracts $X \times \{t\}$ for each $t \in [0, 1]$.
+    \item $S^{n-1}$ is a strong deformation retract of $\mathbb R^n \backslash \{0\}$. 
+    \item Topological cone $CX = X \times [0, 1] / X \times \{1\}$ has a strong deformation retract at the tip of the cone i.e.\ $X \times \{1\}$.
+    \item M\"obius belt can be strong-deformatively retracted to the circle which is the centre line of the belt.
+\end{itemize}
+
+\chapter{Van-Kampen Theorem}
+\section{Free Abelian Group and Finitely Generated Group}
+In this section, we only talk about Abelian groups, and their multiplications are called ``addition''.
+
+
+\begin{definition}[Free Abelian group]%
+    \label{definition: free abelian group}
+    Let $(F, +)$ be an Abelian group.
+    If $\exists A \subset F$ s.t.\ $\forall f \in F$, $\exists! n_f \colon A \to \mathbb Z$ s.t.\ 
+    \begin{equation*}
+        f = \sum_{a \in A} n_f(a) a,
+        \quad 
+        \card \{a \in A \mid n_f(a) \neq 0\} \in \mathbb N,
+    \end{equation*}
+    then we call $F$ a \indexbf{free Abelian group}, $A$ is a \indexbf{basis} of $F$.
+\end{definition}
+
+In plain words, all elements in $F$ can be uniquely decided by finite integer-linear combinations of the elements in $A$.
+Notice that $A$ can be infinite.
+
+\begin{theorem}[Homomorphism induced by any function of basis to a group]%
+    \label{theorem: homomorphism induced by any function of A to a group}
+    Let $F$ be a free Abelian group, $A$ be a basis of $F$, $G$ is another Abelian group.
+    $\forall f \colon A \to G$, $\exists! \varphi \in \Hom(F, G)$ s.t.\ $\forall a \in A$, $\varphi(a) = f(a)$.
+\end{theorem}
+\begin{proof}
+    If $x = \sum_{i \in m} n_i a_i \in F$ ($n_i \in \mathbb Z$, $m \in \mathbb N$, $a_i \in A$), then
+    \begin{equation*}
+        \varphi(x) = \sum_{i \in m} n_i f(a_i).
+    \end{equation*}
+\end{proof}
+
+\begin{definition}[Finitely generated group]%
+    \label{definition: finitely generated group}
+    $(F, +)$ is an Abelian group.
+    If $\exists A \subset F$ s.t.\ $\card A \in \mathbb Z$ and $\forall f \in F$, $\exists n_f \colon A \to \mathbb Z$ s.t.\ 
+    \begin{equation*}
+        f = \sum_{a \in A} n_f(a) a,
+    \end{equation*}
+    then $F$ is called a \indexbf{finitely generated group}, $A$ \emphbf{generates} $F$\index{generate}.
+\end{definition}
+
+\begin{theorem}[Finitely generated iff quotient of a free Abelian group]
+    $F$ is an Abelian group.
+    $F$ is finitely generated $\IFF$ there exists a free Abelian group $H$, $\exists j \colon H \to F$ s.t.\ $j$ is an epimorphism.
+    
+\end{theorem}
+
+\section{Free Product of Groups}
+
+\section{Van-Kampen Theorem}
+
+\chapter{Covering Space}
+\section{Covering space}
+\begin{definition}
+    Let $E$, $B$ be two topological spaces, $p \in C(E, B)$.
+    If $\forall b in B$, $\exists U \in \mathscr U(b)$ s.t.\ $p^{-1}(U) = \coprod_{i \in I} U_i$ and $\forall i \in I$, $p|_{U_i}$ is a homeomorphism from $U_i$ to $U$,
+    then we call $\indexmath[E p]{(E, p)}$ a \indexbf{covering space}, $p$ is a \indexbf{covering map}, $B$ is the \indexbf{base space}.
+\end{definition}
+
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献

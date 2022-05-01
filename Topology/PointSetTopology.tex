@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.2.2
+% v0.2.2b
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany, a5paper]{book} 
 % \documentclass{ctexbook} 如果用中文
@@ -1131,7 +1131,7 @@ If we write a non-connected space by the union of several non-intersecting conne
 \end{proof}
 
 \begin{definition}[Locally connected]\label{definition: locally connected}
-	A topological space $(X, \mathscr T)$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\exists U(x) $ s.t.\ $U(x)$ is connected.
+	A topological space $(X, \mathscr T)$ is said to be \indexbf{locally connected} if $\forall x \in X$, $\forall U \in \mathscr U(x)$,  $\exists V \in \mathscr T$ s.t.\ $x \in V \subset$ and $V$ is connected.
 \end{definition}
 
 \begin{definition}[Path]%
@@ -1185,6 +1185,11 @@ The \indexbf{inverse} of a path $a$ is $\indexmath[a bar]{\bar a}(t) = a(1 - t)$
 \begin{theorem}[Conservation of path-connectedness]
 	The image of a connected mapping from a path-connected set is also path-connected.
 \end{theorem}
+
+\begin{definition}[Local path-connectness]%
+	\label{def: local path-connectness}
+	Let $(X, \mathscr T)$ be a topological space. $X$ is said to be \indexbf{locally path-connected} if $\forall x \in X$, $\forall U \in \mathscr U(x)$,  $\exists V \in \mathscr T$ s.t.\ $x \in V \subset U$ and $V$ is path-connected.
+\end{definition}
 
 
 
