@@ -11,7 +11,7 @@
 \usepackage{xr-hyper}
 \externaldocument[PST-]{PointSetTopology}
 
-\addbibresource{PointSetTopology.bib} % 把这里改成实际的文件名
+\addbibresource{AlgebraicTopology.bib} % 把这里改成实际的文件名
 
 \newcommand*{\rel}{\mathbin{\mathrm{rel}}}
 \newcommand*{\pclass}[1]{\langle{#1}\rangle}    % path class
@@ -598,7 +598,7 @@ Some examples:
 
 \chapter{Van-Kampen Theorem}
 \section{Free Abelian Group and Finitely Generated Group}
-In this section, we only talk about Abelian groups, and their multiplications are called ``addition''.
+In this section, we only talk about Abelian groups, and their multiplications are called ``addition'', i.e.\ $(G, +)$.
 
 
 \begin{definition}[Free Abelian group]%
@@ -616,6 +616,8 @@ In this section, we only talk about Abelian groups, and their multiplications ar
 In plain words, all elements in $F$ can be uniquely decided by finite integer-linear combinations of the elements in $A$.
 Notice that $A$ can be infinite.
 
+Typical free Abelian groups are integer vectors groups $\mathbb Z^n$ ($n \in \mathbb N_+$), while $Z$
+
 \begin{theorem}[Homomorphism induced by any function of basis to a group]%
     \label{theorem: homomorphism induced by any function of A to a group}
     Let $F$ be a free Abelian group, $A$ be a basis of $F$, $G$ is another Abelian group.
@@ -628,20 +630,70 @@ Notice that $A$ can be infinite.
     \end{equation*}
 \end{proof}
 
-\begin{definition}[Finitely generated group]%
-    \label{definition: finitely generated group}
+\begin{definition}[Finitely generated Abelian group]%
+    \label{definition: finitely generated Abelian group}
     $(F, +)$ is an Abelian group.
     If $\exists A \subset F$ s.t.\ $\card A \in \mathbb Z$ and $\forall f \in F$, $\exists n_f \colon A \to \mathbb Z$ s.t.\ 
     \begin{equation*}
         f = \sum_{a \in A} n_f(a) a,
     \end{equation*}
-    then $F$ is called a \indexbf{finitely generated group}, $A$ \emphbf{generates} $F$\index{generate}.
+    then $F$ is called a \indexbf{finitely generated Abelian group}, $A$ \emphbf{generates} $F$\index{generate}.
+    $A$ is a \indexbf{generating set} of $F$.
 \end{definition}
+
+
 
 \begin{theorem}[Finitely generated iff quotient of a free Abelian group]
     $F$ is an Abelian group.
     $F$ is finitely generated $\IFF$ there exists a free Abelian group $H$, $\exists j \colon H \to F$ s.t.\ $j$ is an epimorphism.
-    
+\end{theorem}
+
+\begin{definition}[Direct sum of Abelian group]
+    Let $H_i$ ($i \in n$) be Abelian subgroups of $H$. 
+    If $\forall h \in H$, $\exists! h_i$ ($i \in n$) s.t.\
+    \begin{equation*}
+        h = \sum_{i \in n} h_i,
+    \end{equation*}
+    then we say that $H$ is a \indexbf{direct sum} of $H_i$ ($i \in n$), denoted as:
+    \begin{equation*}
+        H = \bigoplus_{i \in n} H_i.
+    \end{equation*}
+\end{definition}
+
+If $H_i$ are not subgroup of $H$ and $H \cong \bigoplus_{i \in n} H_i$, $H$ is also called a direct sum of $H_i$ ($i \in n$).
+In order to avoid confusion, this is called an outer direct sum.
+
+The following theorem is very useful to construct a direct sum:
+
+\begin{theorem}
+    $H_1$, $H_2$, $H$ are Abelian groups. 
+    If $H = H_1 + H_2$ (this is the Abelian group version of $H = H_1 H_2$) and $H_1 \cap H_2 = \{0\}$, then $H = H_1 \oplus H_2$.
+\end{theorem}
+
+\begin{theorem}
+    Let $j \colon H \to F$ be an epimorphism, $F$ is a free Abelian group.
+    \begin{equation*}
+        H \cong \ker j \oplus F.
+    \end{equation*}
+\end{theorem}
+
+We define some concepts that are very familar in vector spaces:
+\begin{definition}[Independence and basis]
+    Let $H$ be an Abelian group, $A$ is a subset of $H$.
+    If $\forall n \colon A \to \mathbb Z$, 
+    \begin{equation*}
+        \sum_{a \in A} n(a) a = 0
+        \then
+        \forall a \in A,\;
+        n(a) = 0,
+    \end{equation*}
+    then $A$ is an \indexbf{independent} set.
+    And if $A$ generates $H$, we call it a \indexbf{basis} of $H$.
+\end{definition}
+
+\begin{theorem}
+    Let $H$ be an Abelian group, and there exists a basis of $H$.
+    All bases of $H$ have same cardinality.
 \end{theorem}
 
 \section{Free Product of Groups}
@@ -650,11 +702,58 @@ Notice that $A$ can be infinite.
 
 \chapter{Covering Space}
 \section{Covering space}
-\begin{definition}
-    Let $E$, $B$ be two topological spaces, $p \in C(E, B)$.
-    If $\forall b in B$, $\exists U \in \mathscr U(b)$ s.t.\ $p^{-1}(U) = \coprod_{i \in I} U_i$ and $\forall i \in I$, $p|_{U_i}$ is a homeomorphism from $U_i$ to $U$,
-    then we call $\indexmath[E p]{(E, p)}$ a \indexbf{covering space}, $p$ is a \indexbf{covering map}, $B$ is the \indexbf{base space}.
+
+\begin{definition}[Even cover]
+    Let $p \colon E \to B$ be a continuous surjective, $\mathscr T_E$ is the topology of $E$, $U$ be an open subset of $B$, $I$ be an index set.
+    If $\exists \langle V_i\rangle_{i \in I} \in \mathscr T_E^I$ s.t.\ 
+    \begin{equation*}
+        p^{-1}(U) = \coprod_{i \in I} V_i,
+    \end{equation*}
+    and $p|_{U_i} \colon U_i \to U$ is a homeomorphism from $U_i$ to $U$,
+    then $U$ is said to be evenly covered by $p$. 
+    Each $U_i$ is called a \indexbf{sheet} or a \indexbf{slice}.
 \end{definition}
+
+\begin{definition}[Covering space]
+    Let $p \colon E \to B$ be a continuous surjective.
+    If $\forall b \in B$, $\exists U \in \mathscr U(b)$ (\indexbf{evenly covered neighbourhood}) s.t.\ 
+    $U$ is evenly covered by $p$,
+    then we call $\indexmath[E p]{(E, p)}$ a \indexbf{covering space}, $p$ is a \indexbf{covering map}, $B$ is the \indexbf{base space}. 
+\end{definition}
+
+Many authors (\cite{基础拓扑学讲义}) impose path connectivity and local path connectivity onto $E$ and $B$.
+
+\begin{theorem}
+    Let $(E, p)$ be a covering space.
+    $p$ is an open mapping.
+\end{theorem}
+\begin{proof}
+    Let $G$ be an open set in $E$.
+    $\forall b \in p(G)$, $\exists U \in \mathscr U(b)$ s.t.\ $U$ is evenly covered by $p$.
+
+    Choose $e \in p^{-1}(b)$, which should be contained in a sheet $V \subset p^{-1}(U)$.
+    $V \cap G$ is open, and since $p|_V$ is a homoemorphism, $p(V \cap G) \subset U \cap p(G) \subset p(G)$ is an open set contained in $G$ which $b$ belongs to.
+
+    Therefore, $p(G)$ is open.
+\end{proof}
+
+\begin{theorem}[Restriction of a covering map]
+    Let $(E, p)$ be a covering space onto $B$, $B_0 \subset B$, $E_0 = p^{-1}(B_0)$.
+    $(E_0, p |_{E_0})$ is a covering space onto $B_0$.
+\end{theorem}
+
+\begin{theorem}[Product of covering maps]
+    Let $(E, p)$ and $(F, q)$ be covering spaces onto $B$ and $C$.
+    The \indexbf{product} of $(E, p)$ and $(F, q)$ ($E$ and $F$, or $p$ and $q$)
+    \begin{align*}
+        p \times q \colon
+         E \times F &\to B \times C;
+         \\
+         (e, f) &\mapsto (p(e), q(f)),
+    \end{align*}
+    is also a covering map (onto $B \times C$).
+\end{theorem}
+
 
 
 \backmatter{}
