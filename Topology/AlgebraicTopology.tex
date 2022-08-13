@@ -327,7 +327,7 @@ For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly 
     \begin{align*}
         g_c \circ g_{\bar c} (\pclass{b}) &= \langle \bar c c b \bar c c\rangle = \id_{\pi_1(X, x_2)};
         \\
-        g_{\bar c} \circ g_c (\pclass{a}) &= \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_2)},
+        g_{\bar c} \circ g_c (\pclass{a}) &= \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_1)},
     \end{align*}
     therefore $g_c$ is an isomorphism.
 \end{proof}
@@ -645,7 +645,7 @@ Typical free Abelian groups are integer vectors groups $\mathbb Z^n$ ($n \in \ma
 
 \begin{theorem}[Finitely generated iff quotient of a free Abelian group]
     $F$ is an Abelian group.
-    $F$ is finitely generated $\IFF$ there exists a free Abelian group $H$, $\exists j \colon H \to F$ s.t.\ $j$ is an epimorphism.
+    $F$ is finitely generated $\IFF$ there exists a free Abelian group $H$, whose basis is finite, $\exists j \colon H \to F$ s.t.\ $j$ is an epimorphism.
 \end{theorem}
 
 \begin{definition}[Direct sum of Abelian group]
@@ -697,6 +697,29 @@ We define some concepts that are very familar in vector spaces:
 \end{theorem}
 
 \section{Free Product of Groups}
+
+\begin{definition}
+    Let $G$ and $H$ be groups.
+    The \indexbf{free product} $G * H$ is defined as a string of alternative $g$s and $h$s from $G \backslash \{1_G\}$ and $H \backslash \{1_H\}$, that is
+    \begin{align*}
+        g_0 h_0 \cdots g_n h_n,
+        \quad
+        \text{or, }
+        \quad
+        g_0 h_0 \cdots g_n h_n g_{n+1},
+        \\
+        \text{or, }
+        \quad
+        h_0 g_1 h_1 \cdots g_n h_n,
+        \quad
+        \text{or, }
+        \quad
+        h_0 g_1 h_1 \cdots g_n h_n g_{n+1},
+    \end{align*}
+    and the string that has zero length, denoted by $1 \in G * H$.
+
+    The product of two strings in $G * H$ is either concatenation (when ends are from different groups) or multiplication (when ends are from the same group). 
+\end{definition}
 
 \section{Van-Kampen Theorem}
 
