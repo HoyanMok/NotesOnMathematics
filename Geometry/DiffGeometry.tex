@@ -37,6 +37,8 @@ The scalar field over a manifold, form an algebra.
     \end{enumerate}
 \end{definition}
 
+The space of all vector fields on $M$ is denoted by $\indexmath[Vect(M)]{\Vect(M)}$
+
 \begin{definition}[tangent vector]
     Let $v$ be a vector field over $M$, $p$ be a point on $M$.
     The tangent vector $v_p$ at $p$ is defined as a $C^{(\infty)}(M) \to C^{(\infty)}(M)$ map that satisfies
@@ -109,14 +111,36 @@ then we call $\gamma$ the \indexbf{integral curve} through $p := gamma(0)$ of th
 \section{1-forms}
 
 \begin{definition}[1-form]
-    A \indexbf{1-form} $\dif \omega$ on $M$ is a $\Vect(M) \to C^{(\infty)}(M)$ which satisfies that
+    A \indexbf{1-form} $\omega$ on $M$ is a $\Vect(M) \to C^{(\infty)}(M)$ which satisfies that
     \begin{enumerate}[label=(\alph*)]
         \item $\forall v, w \in \Vect(M)$, $\forall f, g \in C^{(\infty)}(M)$, 
         \begin{equation}
-            \dif \omega (fv + gw) = f \dif \omega (v) + g \dif \omega (w)
+            \omega (fv + gw) = f \omega (v) + g \omega (w).
         \end{equation}
     \end{enumerate}
 \end{definition}
+
+The space of all 1-forms on $M$ is denoted as $\indexmath[Omega1(M)]{\varOmega^1(M)}$.
+
+The operator $\dif$, when given a $C^{(\infty)}(M)$ function (which is called a \indexbf{0-form}), would give a 1-form:
+\begin{equation}
+    (\dif f) (v) = v(f).
+\end{equation}
+
+This is called the \indexbf{exterior derivative} or \indexbf{differential} of $f$.
+
+The \indexbf{cotangent vector} or \indexbf{covector} is similar as the tangent vector:
+\begin{equation}
+    \omega_p(v_p) = \omega(v)(p).
+\end{equation}
+
+The space of cotangent vectors at $p$ on $M$ is denoted by $\indexmath[Tp ast M]{T_p^*M}$.
+
+1-forms are contravariant, that is, if $\varphi \colon M \to N$, then
+\begin{equation}
+    (\varphi^* \omega_q) (v_p) = \omega_q(\varphi_* v_p),
+\end{equation}
+where $\varphi(p) = q$.
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
