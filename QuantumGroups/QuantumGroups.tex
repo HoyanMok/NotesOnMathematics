@@ -1,0 +1,235 @@
+% TeXplates/Mathematics.tex
+% v0.2.2
+% https://github.com/HoyanMok/TeXplates
+\documentclass[openany, a5paper]{book} 
+% \documentclass{ctexbook} 如果用中文
+% \documentclass[10pt,a4paper]{ctexart}  字体大小和纸张大小，默认分别为10pt和letterpaper
+% 五号 = 10.5pt，小四=12pt，四号=14pt
+% 其他可选参量如twocolumn, 两行排版
+
+\usepackage{../TeXplatesMathematics}
+\addbibresource{QuantumGroups.bib} % 把这里改成实际的文件名
+
+% 文章标题页信息:
+\title{Quantum Groups}
+\author{Hoyan Mok\thanks{hoyanmok@outlook.com}}
+\date{\today} % 自动生成日期
+% \titlepic{\includegraphics{latex-project-logo.pdf}}
+
+\DeclareMathOperator{\Op}{Op}
+
+\begin{document}
+\pagenumbering{Alph}
+\maketitle % 打印标题
+\frontmatter
+\chapter{Preface}
+
+% \paragraph{Classical and Quantum Mechanics}
+% In classical mechanics, the phase space $M$ is a \indexbf{Poisson manifold}.
+% A Lie bracket $\{,\} \colon \mathcal F(M) \times \mathcal F(M) \to \mathcal F(M) $ is defined, which is called the \indexbf{Poisson bracket}.
+% The dynamical equations:
+% \begin{equation}\label{equation: classical dynamics}
+% 	\diff{}{t} f(m(t)) = \{\mathcal H, f\} (m(t)),
+% \end{equation}
+% where $f \in \mathcal F(M)$, $\mathcal H \in \mathcal F(M)$ is the Hamiltonian, $m \colon \mathbb R \to M$ is a path in the phase space. 
+
+% In quantum mechanics, the space $M$ is replaced by a complex Hilbert space $V$ (devided by norm), $\mathcal F(M)$ is replaced by the algebra $\Op(V)$.
+% The dynamical equations now become
+% \begin{equation}\label{equation: Heisenberg}
+% 	\diff{A}{t} = [H, A],
+% \end{equation}
+% for $A, H \in \Op(V)$.
+
+% The quantisation is to find a $\mathcal Q \colon \mathcal F(M) \to \Op(V)$ s.t.\ 
+% \begin{equation}
+% 	\mathcal Q(\{f, g\}) = \frac{[\mathcal Q(f_1), \mathcal Q(f_2)]}{\mi \hbar}
+% \end{equation}
+
+% Yet, such $\mathcal Q$ just does not always exist, even for simple $M$.
+
+% \paragraph{Space and Algebra}
+
+% A space is determined by the algebra of functions defined on it.
+
+% {
+% 	\small
+% 	\centering
+% 	\begin{tabular}{@{}p{.28\textwidth}p{.6\textwidth}@{}}
+% 		\toprule
+% 		Space & Algebra \\ \midrule
+% 		Affine algebraic variety over $\mathbb C$ & Commutative algebra of regular functions on $\mathbb C$ \\
+% 		Compact topological space & Commutative $\mathrm C^*$-algebra of complex-valued continuous functions \\ \bottomrule
+% 		\end{tabular}
+% }
+
+% Given an algebra $\mathcal F(G)$ of functions on group $G$, the multiplication $\mu \colon G \times G \to G$ gives a pullback $\mu^* \colon \mathcal F(G) \to \mathcal F(G \times G)$.
+% If $\mathcal F(G)$ and $\otimes$ between algebras are defined appropriately, $\mathcal F(G \times G) \cong \mathcal F(G) \otimes \mathcal F(G)$, and
+% \begin{equation}
+% 	\varDelta = \mu^* \colon \mathcal F(G) \to \mathcal F(G) \otimes \mathcal F(G)
+% \end{equation}
+% is defined, and it is called the \indexbf{comultiplication}.
+
+% The inverse map $i \colon G \to G$ induces
+% \begin{equation}
+% 	S = i^* \colon \mathcal F(G) \to \mathcal F(G),
+% \end{equation}
+% called the \indexbf{antipode}, and evaluation at the identity $e \in G$ ($f \mapsto f(e)$) gives an
+% \begin{equation}
+% 	\varepsilon \colon \mathcal F(G) \to \mathbb C,
+% \end{equation} 
+% called the \indexbf{counit}.
+
+% $\varDelta$, $S$ and $\varepsilon$ give $\mathcal F(G)$ the structure of a \indexbf{Hopf algebra}.
+% The category of spaces dual to the category of Hopf algebras (with some restriction) can be defined as the categories of \indexbf{quantum groups}.
+
+
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Poisson-Lie Groups and Lie Bialgebras}
+\section{Poisson Manifolds}
+
+\begin{definition}[Poisson bracket]
+	Let $M$ be a smooth manifold of finite dimension $m$, 
+	$C^{(\infty)}(M)$ be the algebra of smooth real-valued functions on $M$.
+
+	A \indexbf{Poisson bracket} on $M$ is an $\mathbb R$-bilinear map
+	\begin{equation}
+		\{, \} \colon C^{(\infty)}(M) \times C^{(\infty)}(M) \to C^{(\infty)}(M),
+	\end{equation}
+	which satisfies the following conditions:
+	\begin{enumerate}
+		\item Anti-symmetric:
+		\begin{equation}
+			\{f, g\} = -\{g, f\},
+		\end{equation}
+		\item Jacobi identity:
+		\begin{equation}
+			\{f, \{g, h\}\} + \{g, \{h, f\}\} + \{h, \{f, g\}\} = 0,
+		\end{equation}
+		\item Leibniz identity:
+		\begin{equation}
+			\{f, \{gh\}\} = \{f, g\} h + \{f, h\} g,
+		\end{equation}
+	\end{enumerate}
+	for any $f, g, h \in C^{(\infty)}(M)$.
+\end{definition}
+
+$X_f = \{f, \} \colon g \mapsto \{f, g\}$ defines a vector field on $M$, called the \indexbf{Hamiltonian vector field}.
+\begin{equation}
+	B_M \colon T^*M \to TM; \dif f \mapsto X_f.
+\end{equation}
+
+$\exists w_M \in TM^{\otimes 2}$ (\indexbf{Poisson bivector}), s.t.\ $\{f, g\} = (\dif f \otimes \dif g)(w_M)$.
+
+In coordinates:
+\begin{equation}
+	\{f, g\} = w^{ij}(x) \partial_i f(x) \partial_j g(x).
+\end{equation}
+
+\begin{definition}[Poisson map]
+	Let $N$, $M$ be two Poisson manifolds.
+	If $F \colon N \to M$ is smooth and $\forall f, g \in C^{(\infty)}(M)$,
+	\begin{equation}
+		\{f, g\}_M \circ F = \{f \circ F, g \circ F\}_N,
+	\end{equation}
+	then $F$ is called a \indexbf{Poisson map}.
+\end{definition}
+
+If $y = F(x)$, $x \in N$, in coordinates:
+\begin{align*}
+	w_M^{ij}(y) \pdiff{f}{y^i}(y) \pdiff{g}{y^i}(y)
+	&= w_N^{k\ell}(x) \pdiff{f \circ F}{x^k}(x) \pdiff{g \circ F}{x^\ell}(x)
+	\\
+	&= w_N^{k\ell}(x) \pdiff{f}{y^i}(y) \pdiff{g}{y^j}(y) \pdiff{F^i}{x^k} \pdiff{F^j}{x^\ell}
+\end{align*}
+\hence
+\begin{equation}
+	(F'(x) \otimes F'(x)) (w_N(x)) = w_M(F(x)).
+\end{equation}
+
+\begin{definition}[Poisson submanifold]
+	Let $S$ be a submanifold of $M$.
+	The inclusion map $S \hookrightarrow M$ is a Poisson map \emph{iff} $\forall x \in S$,
+	$w_M(x) \in (T_x S)^{\otimes 2}$. 
+	In this case, $S$ is called a \indexbf{Poisson submanifold} of $M$.
+\end{definition}
+
+\begin{definition}[Product of Poisson manifolds]
+	Let $M$ and $N$ be Poisson manifolds, their product $M \times N$,
+	with $\{, \}_{M \times N}$ defined as
+	\begin{equation}
+		\begin{aligned}
+		\{f, g\}_{M \times N} (x, y) =& \{
+			x \mapsto f(x, y),
+			x \mapsto g(x, y)
+			\}_M (x)
+		\\
+		&
+		+ \{
+			y \mapsto f(x, y),
+			y \mapsto g(x, y)
+		\}_N (y),
+		\end{aligned}
+	\end{equation}
+	is also a Poisson manifold.
+\end{definition}
+
+$X_f = \{f, \} \colon g \mapsto \{f, g\}$ defines a vector field on $M$, called the \indexbf{Hamiltonian vector field}.
+\begin{equation}
+	B_M \colon T^*M \to TM;\; 
+	\dif f \mapsto X_f.
+\end{equation}
+
+If $B$ is an isomorphism, $M$ is said to be \indexbf{symplectic}.
+Equivalently this means that $\forall x \in M$, $w(x)$ is a non-degenerate bilinear form on $T^*_x M$.
+In this case, $(B \otimes B)^{-1} (w) =: \omega \in T^* M \otimes T^* M$ is a non-degenerate 2-form on $M$.
+
+\begin{definition}[Symplectic leaves]\label{definition: symplectic leaves}
+	Let $M$ be a Poisson manifold.
+	Define an equivalence relation $\sim$ as $x \sim y$ \emph{iff} $x$ and $y$ can be joined by a piecewise smooth curve on $M$, each smooth segment of which is part of an integral curve of a Hamiltonian vector field on $M$.
+	Then each class in $M / \sim$ is called a \indexbf{symplectic leaf}. 
+\end{definition}
+
+\begin{theorem}[Symplectic leaves are Poisson submanifolds] 
+	$\forall L \in M / \sim$ (defined in Def.~\ref{definition: symplectic leaves}), $L$ is a Poisson submanifold of $M$.
+\end{theorem}
+
+\paragraph{Example: Lie-Poisson structure}
+\begin{definition}[Lie-Poisson structure]
+	Let $\mathfrak g$ be a $m$D Lie algebra, whose bases are $x_i$ ($i \in m$), and Lie bracket is defined as
+	\begin{equation}\label{equation: Lie bracket}
+		[x_i, x_j] = c^k_{ij} x_k.
+	\end{equation}
+	We can define the Poisson bracket on $\mathfrak g^*$ as
+	\begin{equation}
+		\{f_1,f_2\}(\xi) = \langle[(\dif f_1)_\xi, (\dif f_2)_\xi], \xi\rangle,
+	\end{equation}
+	or in coordinates form:
+	\begin{equation}
+		\{f_1, f_2\}(\xi) = c^k_{ij} \pdiff{f_1}{x^i} \pdiff{f_2}{x^j} \langle\xi, x_k\rangle.
+	\end{equation}
+\end{definition}
+
+Note that the bases of $T^* \mathfrak g^* \cong (\mathfrak g^*)^* \cong \mathfrak g$ can be considered as $x_i$ i.e.\ bases of $\mathfrak g$,
+\begin{equation}
+	\dif f = \pdiff{f}{x_i} x_i,
+\end{equation}
+and where the $x_i$ which partial derivative with respect to are coordinates on $\mathfrak g^*$.
+
+
+\appendix
+\chapter{Appendix}
+
+\backmatter
+\nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
+\printbibliography[heading=bibliography, title={Bibliography}]
+
+\indexprologue{Here listed the important symbols used in these notes.}
+\printindex[symbol]
+
+\printindex
+
+\end{document}
