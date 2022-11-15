@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.sty
-% v0.4.0
+% v0.5.0
 % https://github.com/HoyanMok/TeXplates
 
 \ProvidesPackage{TeXplatesMathematics}
@@ -50,6 +50,7 @@
 		\newtheorem{definition}{Definition}[section] %定义
 		\newtheorem{proposition}{Proposition} %命题
 	\renewcommand{\proofname}{\textbf{Proof}}
+\RequirePackage{mathtools}
 
 \renewcommand{\thetheorem}{%
 	\arabic{section}.\arabic{theorem}%
@@ -130,6 +131,22 @@
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\diag}{diag}
+
+% Categories
+\newcommand{\catname}[1]{\mathsf{#1}}
+
+\DeclareMathOperator{\obj}{obj}
+\DeclareMathOperator{\Set}{\catname{Set}}
+\DeclareMathOperator{\Top}{\catname{Top}}
+\DeclareMathOperator{\Mod}{\catname{Mod}}
+\DeclareMathOperator{\Grp}{\catname{Grp}}
+\DeclareMathOperator{\Ab}{\catname{Ab}}
+\DeclareMathOperator{\Ring}{\catname{Ring}}
+\DeclareMathOperator{\CRing}{\catname{CRing}}
+\DeclareMathOperator{\Asc}{\catname{Asc}}
+\DeclareMathOperator{\Ord}{\catname{Ord}}
+\DeclareMathOperator{\hTop}{\catname{hTop}}
+
 
 % \DeclareMathOperator*{\指令}{显示} 
 % 带星号的版本会像\lim一样
