@@ -15,6 +15,8 @@
 \tableofcontents
 \mainmatter{}
 
+\part{Domestic Differential Geometry}
+
 \chapter{Manifolds}
 
 \chapter{Scalar and Vector Fields}
@@ -60,38 +62,11 @@ The derivative of a path $\gamma \colon [0, 1] \to M$ (or $\mathbb R \to M$) in 
 
 We can see that $\gamma'(t) \in T_{\gamma(t)} M$.
 
-\section{Covariant and Contravariant}
-
-\begin{definition}[pullback]
-    Let $f$ be a scalar field over $M$, $\varphi \in C^{(\infty)}(M, N)$. Then the \indexbf{pullback} of $f$ by $\varphi$ is defined as
-    \begin{equation}
-        \varphi^* f = f \circ \varphi \in C^{(\infty)}(N).
-    \end{equation}
-\end{definition}
-
-Fields that are pullbacked are \indexbf{covariant} fields.
-
-\begin{definition}[pushforward]
-    Let $v_p$ be a tangent vector of $M$ at $p$, $\varphi \in C^{(\infty)}(M, N)$, $q = \varphi(p)$. Then the \indexbf{pushforward} of $v_p$ by $\varphi$ is defined as
-    \begin{equation}
-        (\varphi_* v)_q(f) = v_p(\varphi^* f).
-    \end{equation}
-\end{definition}
-
-Note that the pushforward of a vector field can only be obtained when $\varphi$ is a diffeomorphism.
-
-Fields that are pushforwarded are \indexbf{contravariant} fields.
-
-Mathematicians and physicists might have disagreement on whether a tangent vector is covariant or contravariant.
-This is because of that physicists might consider the coordinates ($v^\mu$) of a tangent vector as a vector field, instead of linear combination of bases $\partial_\mu$.
-
-\section{Flows}
-
 Let a path $\gamma \colon \mathbb R$ follows a vector field (a velocity field), that is
 \begin{equation}
     \gamma'(t) = v_{\gamma(t)},
 \end{equation}
-then we call $\gamma$ the \indexbf{integral curve} through $p := gamma(0)$ of the vector field $v$.
+then we call $\gamma$ the \indexbf{integral curve} through $p := \gamma(0)$ of the vector field $v$.
 
 \begin{definition}
     Suppose $v$ is an integrable vector field.
@@ -104,6 +79,122 @@ then we call $\gamma$ the \indexbf{integral curve} through $p := gamma(0)$ of th
 
 \begin{equation}
     \diff{}{t}\varphi_t(p) = v_{\varphi_t(p)}.
+\end{equation}
+
+\section{Covariant and Contravariant}
+
+\begin{definition}[pullback]
+    Let $f$ be a scalar field over $N$, $\varphi \in C^{(\infty)}(M, N)$. Then the \indexbf{pullback} of $f$ by $\varphi$ 
+    \begin{equation}
+        \varphi^* \colon C^{(\infty)}(N) \to C^{(\infty)}(M),
+    \end{equation}
+    is defined as
+    \begin{equation}
+        \varphi^* f = f \circ \varphi \in C^{(\infty)}(M).
+    \end{equation}
+\end{definition}
+
+Fields that are pullbacked are \indexbf{covariant} fields.
+
+\begin{definition}[pushforward]
+    Let $v_p$ be a tangent vector of $M$ at $p$, $\varphi \in C^{(\infty)}(M, N)$, $q = \varphi(p)$. 
+    Then the \indexbf{pushforward} of $v_p$ by $\varphi$ 
+    \begin{equation}
+        \varphi_* \colon T_p M \to T_q N,
+    \end{equation}
+    is defined as
+    \begin{equation}
+        (\varphi_* v)_q(f) = v_p(\varphi^* f).
+    \end{equation}
+\end{definition}
+
+Note that the pushforward of a vector field can only be obtained when $\varphi$ is a diffeomorphism.
+
+Fields that are pushforwarded are \indexbf{contravariant} fields.
+
+Mathematicians and physicists might have disagreement on whether a tangent vector is covariant or contravariant.
+This is because of that physicists might consider the coordinates ($v^\mu$) of a tangent vector as a vector field, instead of linear combination of bases $\partial_\mu$.
+
+\section{Components of Vector Fields}
+
+Let $\varphi \colon U \to \mathbb R^n$ be a chart of $M$ ($U \subset M$).
+
+Let $p \in U$, $\varphi(p) = x = (x^\mu)$ ($\mu = 0, \ldots, n-1$).
+Locally, a function $f \in C^{(\infty)}(M)$ can be written as
+\begin{equation}
+    (\varphi^{-1})^* f = f \circ \varphi^{-1} \colon M \to \mathbb R,
+\end{equation}
+and a vector field $v \in \Vect(M)$ can be written as
+\begin{equation}
+    (\varphi_* v)_{x} = \varphi_* v_p \colon C^{(\infty)}(\mathbb R^n) \to \mathbb R,
+\end{equation}
+or
+\begin{equation}
+    \varphi_* v  \in \Vect(\mathbb R^n)
+\end{equation}
+
+
+
+Since $T_x\mathbb R^n \cong \mathbb R^n$ is a linear space, one can find a basis for $T_x\mathbb R^n$ as
+\begin{equation}
+    \partial_\mu \colon C^{(\infty)} (\mathbb R^n) \to C^{(\infty)} (\mathbb R^n),
+\end{equation}
+and $(\varphi_* v)_x = v^\mu (x) \partial_\mu$.
+
+Pushing forward $v^\mu (x) \partial_\mu$ by $\varphi^{-1}$ one obtains $v$.
+
+In an abuse of symbols, one may just omit the pullback and pushforward, and refer to the $f$ and $v$ by $(\varphi^{-1})^* f$ and $\varphi_*v$.
+
+Consider another chart $\psi \colon U \to \mathbb R^n$ of $M$,
+and
+\begin{equation}
+    y = \psi(p),
+    \quad
+    (\psi_* v)_x = u^\mu \partial_\mu,
+\end{equation}
+where we have chosen the same basis in $T_y \mathbb R^n$ as in $T_x\mathbb R^n$.
+
+We would like to know how to relate $v^\mu$ and $u^\mu$ i.e.\ we want to know how the components of $v$ transforms under a coordinate transformation $\tau = \psi \circ \varphi^{-1}$.
+
+Consider any $f \in C^{(\infty)}(M)$, 
+\begin{equation}
+    v(f) = \varphi_* v((\varphi^{-1})_* f)
+    = \psi_* v((\psi^{-1})_* f)
+\end{equation}
+\hence
+\begin{equation}
+    u^\mu \partial_\mu (f \circ \psi^{-1})
+    = v^\mu \partial_\mu (f \circ \varphi^{-1})
+    = v^\mu \partial_\mu (f \circ \psi^{-1} \circ \tau)
+    = v^\mu {\tau'}^\nu_\mu \partial_\nu (f \circ \psi^{-1})
+\end{equation}
+\hence
+\begin{equation}
+    u^\mu = v^\nu {\tau'}^\mu_\nu,
+\end{equation}
+where
+\begin{equation}
+    {\tau'}^\mu_\nu = \pdiff{y^\mu}{x^\nu}.
+\end{equation}
+
+\section{Lie Bracket}
+\begin{definition}[Lie bracket]
+    Let $v, w \in \Vect(M)$, then the \indexbf{Lie bracket} of $v$ and $w$ is defined as
+    \begin{equation}
+        [v, w] \colon C^{(\infty)}(M) \to C^{(\infty)}(M);
+        \;
+        f \mapsto v \circ w (f) - w \circ v (f).
+    \end{equation}
+\end{definition}
+
+The Lie bracket is an antisymmetric bilinear map\footnote{Note that it is not $C^{(\infty)}$-linear}, and an important property of the Lie bracket is the Leibniz rule:
+\begin{equation}
+    [v, w] (fg) = {[v, w] (f)} g + f {[v, w] (g)}.
+\end{equation}
+
+Another important property of the Lie bracket is the Jacobi identity:
+\begin{equation}
+    [v, [w, u]] + [w, [u, v]] + [u, [v, w]] = 0.
 \end{equation}
 
 \chapter{Differential Forms}
@@ -120,7 +211,7 @@ then we call $\gamma$ the \indexbf{integral curve} through $p := gamma(0)$ of th
     \end{enumerate}
 \end{definition}
 
-The space of all 1-forms on $M$ is denoted as $\indexmath[Omega1(M)]{\varOmega^1(M)}$.
+The space of all 1-forms on $M$ is denoted as $\indexmath[Omega 1 (M)]{\Omega^1(M)}$, which is a module over $C^{(\infty)}(M)$.
 
 The operator $\dif$, when given a $C^{(\infty)}(M)$ function (which is called a \indexbf{0-form}), would give a 1-form:
 \begin{equation}
@@ -136,11 +227,277 @@ The \indexbf{cotangent vector} or \indexbf{covector} is similar as the tangent v
 
 The space of cotangent vectors at $p$ on $M$ is denoted by $\indexmath[Tp ast M]{T_p^*M}$.
 
-1-forms are contravariant, that is, if $\varphi \colon M \to N$, then
+1-forms are covariant, that is, if $\varphi \colon M \to N$, then the pushforward of a 1-form $\omega$ by $\varphi$ is
 \begin{equation}
-    (\varphi^* \omega_q) (v_p) = \omega_q(\varphi_* v_p),
+    (\varphi^* \omega)_p (v_p) = \omega_q(\varphi_* v_p),
 \end{equation}
 where $\varphi(p) = q$.
+
+\begin{theorem}
+    $f \in C^{(\infty)}(N)$, $\varphi \colon M \to N$ is differential, then
+    \begin{equation}
+        \varphi^* (\dif f) = \dif (\varphi^* f).
+    \end{equation}
+\end{theorem}
+
+\section{Components of 1-Forms}
+
+Let $\varphi \colon U \to \mathbb R^n$ be a chart of $M$ ($U \subset M$).
+
+Let $p \in U$, $\varphi(p) = x = (x^\mu)$ ($\mu = 0, \ldots, n-1$).
+Locally a 1-form $\omega \in \Omega^1(M)$ can be written as 
+\begin{equation}
+    (\varphi^{-1})^* \omega \in T^*_x \mathbb R^n.
+\end{equation}
+
+A natural way to impose a basis $\dif x^\mu$ in $T^*_x \mathbb R^n$ is 
+\begin{equation}
+    \dif x^\mu (\partial_\nu) = \delta^\mu_\nu,
+\end{equation}
+and $(\varphi^{-1})^*\omega = \omega_\mu(x) \dif x^\mu$.
+
+Now by the definition of 1-form:
+\begin{equation}
+    \omega_\mu \dif x^{\mu} (v^\nu \partial_\nu)
+    = v^\nu \omega_\mu \delta^\mu_\nu = v^\mu \omega_\mu.
+\end{equation}
+
+By the transformation rule of components of a vector, one have
+\begin{equation}
+    {\tau'}^\nu_\mu \alpha_\nu = \omega_\mu,
+\end{equation}
+where $\psi \colon U \to \mathbb R^n$, $(\psi^{-1})_*\omega = \alpha_\mu \dif x^\mu$, $\tau = \psi \circ \varphi^{-1}$.
+
+\section{\texorpdfstring{$k$-Forms}{k-Forms}}
+
+\begin{definition}
+    If we assign an antisymmetric multilinear $k$-form $\omega_p \in \bigotimes_{i \in k} T^*_p M$ to each point $p \in M$, we say we have a \emphbf{$k$-form} on $M$.%
+    \index{k-form@{$k$-form}}
+
+    The collection of all $k$-forms is denoted by $\indexmath[Omega k (M)]{\Omega^k(M)}$, and $\indexmath[Omega(M)]{\Omega(M)} := \bigcup_{k \in \mathbb N} \Omega^k(M)$.
+\end{definition}
+
+\begin{theorem}[Dimension of forms]
+    If $M$ is an $n$D manifold, then the dimension of $\Omega^k(M)$ is $\frac{n!}{k! (n - k)!}$ ($k \leq n$), and $0$ for $k > n$; The dimension of $\Omega(M)$ is $2^n$.
+\end{theorem}
+
+\begin{definition}[Wedge product]
+    The \indexbf{wedge product} $\indexmath[wedge]{\wedge}$ is defined as a binary operater that takes a $k$-form and $\ell$-form and gives a $(k + \ell)$-forms, satisfying $\forall \alpha \in \Omega^k(M)$, $\forall \beta \in \Omega^\ell(M)$:
+    \begin{enumerate}[label=(\alph*)]
+        \item (Associativity) $\forall \gamma \in \Omega^m(M)$,
+        \begin{equation}
+            (\alpha \wedge \beta) \wedge \gamma = \alpha \wedge (\beta \wedge \gamma).
+        \end{equation}
+        \item (Supercommutativity) 
+        \begin{equation}
+            \alpha \wedge \beta = (-1)^{k \ell} \beta \wedge \alpha.
+        \end{equation}
+        \item (Distributiveness) $\forall \gamma \in \Omega^\ell(M)$,
+        \begin{equation}
+            \alpha \wedge (\beta + \gamma) = \alpha \wedge \beta + \alpha \wedge \gamma.
+        \end{equation}
+        \item (Bilinearity over $C^{(\infty)}(M)$) $\forall f \in C^{(\infty)}(M)$,
+        \begin{equation}
+            (f \alpha) \wedge \beta = f (\alpha \wedge \beta).
+        \end{equation}
+        \item (Naturality) If $\varphi \colon M \to N$ is a smooth map, then the pullback of a form by $\varphi$ can be given by repeatingly applying ($\forall \gamma \in \Omega^\ell(M)$)
+        \begin{equation}
+            \begin{aligned}
+                \varphi^* (\beta + \gamma) &= \varphi^* \alpha + \varphi^* \beta
+                \\ 
+                \varphi^* (\alpha \wedge \beta) &= \varphi^* \alpha \wedge \varphi^* \beta,
+            \end{aligned}
+        \end{equation}
+        while the pullback of a 0-form and a 1-form agree with what we have already defined before.
+    \end{enumerate}
+\end{definition}
+
+By convention if $f \in C^{(\infty)}(M)$ then
+\begin{equation}
+    f \wedge \omega =: f\omega.
+\end{equation}
+
+It can be shown that any $k$-form $\omega$ can be written as
+\begin{equation}
+    (\varphi^{-1})^* \omega = \frac{\omega_{\mu_1 \cdots \mu_k}}{n!} \bigwedge_{i = 1}^k \dif x^{\mu_i},
+\end{equation}
+where $\varphi \colon M \to \mathbb R^n$ is a chart.
+
+\section{Exterior Derivative}
+\begin{definition}[Exterior derivative]
+    The \indexbf{exterior derivative} $\indexmath[exterior derivative]{\dif}$ is defined as a linear operator that takes a $k$-form and gives a $(k + 1)$-form, satisfying $\forall \alpha \in \Omega^k(M)$, $\forall \beta \in \Omega^\ell(M)$:
+    \begin{enumerate}[label=(\alph*)]
+        \item (Linearity) $\forall \lambda, \mu \in \mathbb R$, $\forall \gamma \in \Omega^\ell(M)$,
+        \begin{equation}
+            \dif (\lambda\beta + \mu\gamma) = \lambda \dif \alpha + \mu \dif \beta.
+        \end{equation}
+        \item (Leibniz rule)
+        \begin{equation}
+            \dif (\alpha \wedge \beta) = \dif \alpha \wedge \beta + (-1)^k \alpha \wedge \dif \beta.
+        \end{equation}
+        \item
+        \begin{equation}
+            \dif[2] \omega = 0.
+        \end{equation}
+        \item (Naturality) If $\varphi \colon M \to N$ is a smooth map, then 
+        \begin{equation}
+            \varphi^* \dif \omega = \dif \varphi^* \omega.
+        \end{equation}
+    \end{enumerate}
+    
+\end{definition}
+
+\chapter{Metric}
+\section{Pseudo-Riemannian Metric}
+\begin{definition}[Psedudo-Riemannian metric]
+    Let $M$ be a manifold.
+    A \indexbf{pseudo-Riemannian metric} or simply \indexbf{metric} $g$ on a manifold $M$ is a field ($g \in \Gamma(T^*M \otimes T^*M)$) that $\forall p \in M$, 
+    \begin{equation}
+        g_p \colon T^*_p M \times T^*_p M \to \mathbb R, 
+    \end{equation}
+    is a bilinear form satisfying the following properties:
+    \begin{enumerate}[label=(\alph*)]
+        \item (Symmetry) $\forall u, v \in T_p M$,
+        \begin{equation}
+            g_p(u, v) = g_p(v, u).
+        \end{equation}
+        \item (Non-degenerate)
+        \begin{equation}
+            u \mapsto g_p(u, \dummy) \colon T_p M \to T^*_p M 
+        \end{equation}
+        is an isomorphism.
+        \item (Bilinearity) $\forall p \in M$, $\forall u, v \in T_p M$, $\forall \lambda, \mu \in \mathbb R$,
+        \begin{equation}
+            g_p(\lambda u + \mu v, w) = \lambda g_p(u, w) + \mu g_p(v, w).
+        \end{equation}
+        \item (Smoothness) If $v, u \in \Vect(M)$, then
+        \begin{equation}
+            p \mapsto g_p(v_p, u_p) \in C^{(\infty)}(M).
+        \end{equation}
+    \end{enumerate}
+\end{definition}
+
+Given a metric, $\forall p \in M$, we can always find an orthonormal basis $\{e_\mu\}$ of $T_p M$ such that
+\begin{equation}
+    g_p(e_\mu, e_\nu) = \sign(\mu) \delta_{\mu\nu},
+\end{equation}
+where $\sign(\mu) = \pm 1$.
+Conventionally we order the basis such that $\sign(\mu) = 1$ for $\mu \in s$ and $\sign(\mu) = -1$ for $\mu - s \in n - s$, and say that the metric has \indexbf{signature} $(s, n - s)$.
+
+If $\gamma \colon [0, 1] \to M$ is a smooth path and $\forall t, s \in [0, 1]$,
+\begin{equation}
+    g(\gamma'(t), \gamma'(t)) g(\gamma'(s), \gamma'(s)) \geq 0,
+\end{equation}
+then we can define the arclength of $\gamma$ as
+\begin{equation}
+    \int_0^1 \sqrt{|g(\gamma'(t), \gamma'(t))|} \dif t
+\end{equation}
+if the integral converges.
+
+The metric gives an \indexbf{inner product} on $\Vect(M)$:
+\begin{equation}
+    \langle u, v \rangle := g(u, v).
+\end{equation}
+
+The metric also gives a way to relate a vector field $v$ to a 1-form $\omega$.
+If $v$ and $\omega$ satisfies:
+$\forall u \in \Vect(M)$, 
+\begin{equation}
+    g(v, u) = \omega(u),
+\end{equation}
+then we say that $v$ is the corresponding vector field of $\omega$, and $\omega$ is the corresponding 1-form of $v$.
+
+We can also define the \indexbf{inner product} on $\Omega^1(M)$ by 
+\begin{equation}
+    \langle \alpha, \beta\rangle = \langle a, b\rangle,
+\end{equation}
+where $a$ and $b$ is the corresponding vector fields of $\alpha$ and $\beta$.
+
+The \indexbf{inner product} on $\Omega^k(M)$ is defined by induction with
+\begin{equation}
+    \langle \bigwedge_{i \in k} \alpha_i, \bigwedge_{i \in k} \beta_i \rangle 
+    = \det(\langle \alpha_i, \beta_j \rangle)_{i, j \in k}.
+\end{equation}
+
+Hence, if $\{e_\mu\}$ is an orthonormal basis (field) of $T_p M$, while the corresponding covectors are $\{f^\mu\}$ ($f^\mu(e_\nu) = \delta^\mu_\nu$) then
+\begin{equation}
+    \langle \bigwedge_{i \in k} f^{\mu_i}, \bigwedge_{i \in k} f^{\mu_i}\rangle
+    = \prod_{i \in k} \sign(\mu_i).
+\end{equation}
+
+Specially, when $f, g \in \Omega^0(M) = C^{(\infty)}(M)$,
+\begin{equation}
+    \langle f, g \rangle = fg.
+\end{equation}
+
+\section{Volume Form}
+
+Notice that if $M$ is an $n$D manifold, $\dim \Omega^n(M) = 1$, meaning at $p \in M$, $\{\omega_p \mid \omega \in \Omega^n(M)\}$ can be labelled by a parametre $\lambda_p \in \mathbb R$. 
+If we have a basis $\{f^\mu\}$ of $T^*_p M$ (or corresponding vectors $\{e_\mu\}$), then
+\begin{equation}
+    \{\omega_p \mid \omega \in \Omega^n(M)\} = \lambda_p \bigwedge_{\mu \in n} f^\mu.
+\end{equation}
+
+If there were another basis $\{g^\mu\}$ of $T^*_p M$ (or corresponding vectors $\{h_\mu\}$), and the transformation between the two bases is given by
+\begin{equation}
+    P e^\mu = f^\mu,
+\end{equation}
+where $P \in \Aut(T^*_p M)$.
+When $\det P > 0$, we say that $\{f^\mu\}$ and $\{g^\mu\}$ have the same \indexbf{orientation}.
+
+%TODO: how to give a oriented basis field without a chart?
+
+
+\begin{definition}[Volume form]
+    Let $M$ be an orientable manifold.
+    If $\forall p \in M$, we find an oriented orthonormal basis $\{f_\mu\}$ of $T_p^* M$ at point $p$, 
+    then the \indexbf{volume form} $\indexmath[vol]{\vol}$ is defined by
+    \begin{equation}
+        \bigwedge_{\mu \in n} f_\mu = \vol_p.
+    \end{equation}
+\end{definition}
+
+\section{Hodge Star Operator}
+
+\begin{definition}[Hodge Star Operator]
+    Let $M$ be an orientable manifold.
+    The \indexbf{Hodge star operator} $\indexmath[star]{\star}$ is defined by the linear map
+    \begin{equation}
+        \star \colon \Omega^k(M) \to \Omega^{n - k}(M),
+    \end{equation}
+    $\forall \alpha, \beta \in \Omega^k(M)$,
+    \begin{equation}
+        \alpha \wedge \star \beta = \langle \alpha, \beta \rangle \vol.
+    \end{equation}
+    
+    We call $\star \omega$ the \indexbf{dual} of $\omega$.
+\end{definition}
+
+The special case is when $k = 0$,
+\begin{equation}
+    \star f = f \vol,
+\end{equation}
+and $k = n$,
+\begin{equation}
+    \star (f \vol) = f \prod_{\mu \in n} \sign(\mu) = (-1)^{n - s} f
+\end{equation}
+if the signature of the metric is $(s, n - s)$.
+
+
+
+\section{Metric and Coordinates}
+
+\chapter{De Rham Theory}
+\section{Closed and Exact 1-Forms}
+\section{Stokes' Theorem}
+\section{De Rham Cohomology}
+
+\chapter{Bundles and Connections}
+
+\chapter{Curvature}
+
+\chapter{Pseudo-Riemannian Geometry}
+
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
