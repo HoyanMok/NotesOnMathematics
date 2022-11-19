@@ -307,9 +307,67 @@ A diagram $D$ \indexbf{commutes} iff $A, B \in D(\obj \mathcal D)$, the composit
 \end{definition}
 %TODO: how to strictly express this
 
+All natural transformations between two functors $F, G \colon \mathcal C \to \mathcal D$ is denoted as $\Nat(F, G)$. 
+However, $\Nat(F, G)$ can only be considered as an object in our metalanguage, since it does not even have to be a class.
+
 A \indexbf{natural isomorphism} is a natural transformation $\alpha \colon F \to G$ such that $\forall A \in \obj(\mathcal C)$, $\alpha_A$ is an isomorphism.
 
 Natural transformations can compose, and for any functor, there exists an identity natural isomorphism.
+
+You can define the contravariant version of natrual transformation too.
+
+\begin{theorem}[Yoneda lemma]%
+	\label{theorem: Yoneda lemma}
+	Let $\mathcal C$ be a category and $F \colon \mathcal C \to \Set$ be a functor.
+	Then, $\forall A \in \obj(\mathcal C)$, $\Nat(\Hom_{\mathcal C}(A, \dummy), G)$ is a set\footnote{Why?}%
+	, and there exists a bijection
+	\begin{equation}
+		y \colon \Nat(\Hom_{\mathcal C}(A, \dummy), G) \to F(A)
+	\end{equation}
+	s.t.\ 
+	\begin{equation}
+		y(\tau) = \tau_A (1_A).
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	$\tau \in \Nat(\Hom_{\mathcal C}(A, \dummy), G)$ means $\forall A, B \in \obj(\mathcal C)$, the diagram
+	\begin{equation}
+		\begin{tikzcd}
+			{\Hom_{\mathcal C}(A, B)} \arrow[d, "\varphi_*"] \arrow[r, "\tau_B"] & F(B) \arrow[d, "F(\varphi)"] \\
+			{\Hom_{\mathcal C}(A, C)} \arrow[r, "\tau_C"]                        & F(C)                          
+		\end{tikzcd}
+	\end{equation}
+	commutes.
+	Setting $B = A$ we have
+	\begin{equation}
+		\begin{tikzcd}
+			{\Hom_{\mathcal C}(A, A)} \arrow[d, "\varphi_*"] \arrow[r, "\tau_A"] & F(A) \arrow[d, "F(\varphi)"] \\
+			{\Hom_{\mathcal C}(A, C)} \arrow[r, "\tau_C"]                        & F(C)                          
+		\end{tikzcd}
+	\end{equation}
+	which gives
+	\begin{equation}
+		F(\varphi) \tau_A(1_A) = \tau_C \varphi_*(1_A) = \tau_C(\varphi).
+	\end{equation}
+
+	\paragraph{Injectivity}
+	Now assuming there exists another natural transformation $\sigma \colon \Hom_{\mathcal C}(A, \dummy) \to G$ such that $\sigma_A(1_A) = \tau_A(1_A)$, we have $\forall C \in \obj(\mathcal C)$,
+	\begin{equation}
+		\sigma_C(\varphi) = F(\varphi) \sigma_A(1_A) = F(\varphi) \tau_A(1_A) = \tau_C(\varphi),
+	\end{equation}
+	i.e.\ $y(\tau) = y(\sigma) \to \tau = \sigma$, or in plain words, $y$ is an injection.
+
+	\paragraph{Surjectivity}
+	$\forall a \in F(A)$, find a morphism $\tau_A \colon \Hom_{\mathcal C}(A, A) \to F(A)$ s.t.\ $\tau_A(1_A) = a$ (this is always possible e.g.\ we can set $\tau_A$ to be the constant function $\Hom_{\mathcal C}(A, A) \ni f \mapsto a$).
+	Then, $\forall C \in \obj(\mathcal C)$, $\forall \varphi \in \Hom_{\mathcal C}(A, C)$, define morphism as $\tau_C(\varphi) = F(\varphi)(a)$.
+
+	We have not yet proved that $\tau$ is natural, so we check if $\psi \in \Hom_{\mathcal C}(B, C)$, $\forall \vartheta \in \Hom_{\mathcal C}(A, B)$:
+	\begin{equation}
+		\tau_C \psi_* (\vartheta) = F(\psi_* \vartheta) (a)
+		= F(\psi \vartheta ) (a) = F(\psi)  F(\vartheta) (a)
+		= F(\psi) \tau_B (\vartheta).
+	\end{equation}
+\end{proof}
 
 \appendix
 \chapter{Appendix}
