@@ -493,6 +493,91 @@ if the signature of the metric is $(s, n - s)$.
 \section{De Rham Cohomology}
 
 \chapter{Bundles and Connections}
+\section{Fibre Bundles}
+\begin{definition}[Bundle]
+    A \indexbf{bundle} is a triple $(E, \pi, B)$, where $\pi \colon E \to B$ is a surjective map.
+    $E$ is called the \indexbf{total space}, $\pi$ is called the \indexbf{projection map}, and $B$ is called the \indexbf{base space}.
+
+    A bundle $(E, \pi, B)$ can be denoted as $\pi \colon E \to B$ or $\begin{tikzcd}
+        E \arrow[r, "\pi"] & B
+    \end{tikzcd}$.
+\end{definition}
+
+\begin{definition}[Fibre]
+    For $p \in B$, $\pi^{-1}(\{p\})$ is the \indexbf{fibre} over $b$.
+\end{definition}
+
+\begin{definition}[Subbundle]
+    Let $\pi \colon E \to B$ be a bundle. $F \subset E$, $C \subset B$, $\rho \colon F \to C$.
+    If $\pi|_{C} = \rho$, then $\rho \colon F \to C$ is called a \indexbf{subbundle} of $\pi \colon E \to B$.
+\end{definition}
+
+\begin{definition}[Section]
+    A \indexbf{section} is a map $s \colon B \to E$ such that
+    \begin{equation}
+        p \circ s = \id_B.
+    \end{equation}
+
+    All sections of a bundle $\pi \colon E \to B$ is denoted as $\indexmath[Gamma(E)]{\Gamma(E)}$.
+\end{definition}
+
+
+\begin{definition}[Fibre bundle]
+    A \indexbf{fibre bundle} $(E, \pi, B, F)$ is a bundle $\pi \colon E \to B$, where $E$, $B$, $F$ are topology spaces, and $\pi$ is a continuous map, and $\forall p \in B$, $\exists U \in \mathscr U(p)$ s.t.\ 
+    \begin{equation}
+        \varphi \colon \pi^{-1}(U) \to U \times F,
+    \end{equation}
+    is a homeomorphism and $\pi_1 \circ \varphi = \pi$.
+    $\pi_1$ is defined as $\pi_1(p, q) = p$.
+
+    A fibre bundle can be denoted as the exact sequence
+    \begin{equation}
+        \begin{tikzcd}
+            F \arrow[r] & E \arrow[r, "\pi"] & B
+        \end{tikzcd}
+    \end{equation}
+
+    The last condition is called the \indexbf{local triviality condition}.
+    $F$ is called the \indexbf{standard fibre}
+\end{definition}
+
+If $E = B \times F$, then $(E, \pi, B, F)$ is called a \indexbf{trivial fibre bundle}.
+
+\begin{definition}[Morphism]
+    Let $\pi \colon E \to B$, $\rho \colon F \to C$ be two fibre bundles.
+    A \indexbf{morphism} $(\varphi, \psi)$ is a pair of two continuous maps such that
+    \begin{equation}
+        \begin{tikzcd}
+            E \arrow[d, "\pi"] \arrow[r, "\psi"] & F \arrow[d, "\rho"] \\
+            B \arrow[r, "\varphi"]               & C                  
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+\end{definition}
+
+\section{Vector Bundles}
+\begin{definition}[Vector bundle]
+    A \indexbf{vector bundle} is a fibre bundle $(E, \pi, B, F)$, where $F$ is a vector space, and the local trivialisation $\varphi \colon \pi^{-1}(U) \to U \times F$ ($U$ is a neibourhood of $p \in B$) satisfies that $\forall x \in U$, $\forall v \in F$, 
+    \begin{equation}
+        \begin{aligned}
+            F &\to \pi^{-1}(\{x\}) \\ 
+            v &\mapsto \varphi^{-1}(x, v)
+        \end{aligned}
+    \end{equation}
+    is a linear isomorphism (\indexbf{fibrewise linear}).
+\end{definition}
+
+\begin{definition}[Morphism (vector bundle)]
+    The morphism between two vector bundles $(E, \pi, B, F)$ and $(E', \pi', B', F')$ is a morphism $(\varphi, \psi)$ such that $\forall x \in B$, 
+    \begin{equation}
+        \psi_* \colon \pi^{-1}(\{x\}) \to (\pi')^{-1}(\{\varphi(x)\})
+    \end{equation}
+    is a linear homomorphism.
+\end{definition}
+
+\begin{definition}[Tangent bundle]
+    The \indexbf{tangent bundle} $\indexmath[TM]{{TM}}$ is the vector bundle over a $n$D manifold $M$ with the standard fibre $T_p M = \mathbb R^n$.
+\end{definition}
 
 \chapter{Curvature}
 
