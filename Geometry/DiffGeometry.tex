@@ -675,10 +675,105 @@ where $\indexmath[D0]{D^0}$ is called the \indexbf{standard flat connection} (wh
 
 \chapter{Curvature}
 
+\begin{definition}[Curvature]
+    A \indexbf{curvature} of a connection $D$ on a smooth vector bundle $(E, \pi, M, F)$ is a section $F \in \Gamma(\End(E) \otimes \Omega^2(M))$ (a \emph{$\End(E)$-valued $2$-form}) defined as
+    \begin{equation}
+        F(v, w) s = D_v D_w s - D_w D_v s - D_{[v, w]} s,
+        \quad
+        v, w \in \Gamma(TM),
+        \quad
+        s \in \Gamma(E).
+    \end{equation} 
+\end{definition}
 
+If $\forall v, w \in \Gamma(TM)$, $\forall s \in \Gamma(E)$, $F(v, w) s = 0$, then $D$ is called a \indexbf{flat connection}.
+
+Consider a local trivialisation $\varphi \colon E|_U \to U \times F$ ($U \subset M$) s.t.\ 
+\begin{equation}
+    s = s^i e_i := s^i\varphi^{-1}(f_i),
+\end{equation}
+where $s \in \Gamma(E|_U)$, $s^i \in C^{(\infty)}(U)$ and $\{f_i\}_{i \in m}$ is a set of bases of $F$,
+and $\sigma \colon U \to \mathbb R^n$ is a chart of $M$, $\sigma_* d_\mu := \partial_\mu$.
+Notice that $[\partial_\mu, \partial_\nu] = 0$,
+\begin{equation}
+    \begin{aligned}
+        &F(v, u) (s^i e_i) 
+        = v^\mu u^\nu F(d_\mu, d_\nu) (s^i e_i)
+        \\
+        &= v^\mu u^\nu [
+            D_\mu (d_\nu(s^i)e_i + s^i A_{\nu i}^j e_j)
+            - D_\nu (d_\mu(s^i)e_i + s^i A_{\mu i}^j e_j)
+        ]
+        \\
+        &= v^\mu u^\nu \big[
+            d_\nu d_\mu (s^i) e_i + d_\nu (s^i) A_{\mu i}^j e_j
+            + d_\mu(s^i A_{\nu i}^j) e_j + s^i A_{\nu i}^j A_{\mu j}^k e_k
+        \\
+        &\quad
+        - d_\mu d_\nu(s^i) e_i - d_\mu(s^i) A_{\nu i}^j e_j
+        - d_\nu(s^i A_{\mu i}^j) e_j - s^i A_{\mu i}^j A_{\nu j}^k e_k
+        \big]
+        \\
+        &= v^\mu u^\nu s^i\big[ 
+            d_\mu (A_{\nu i}^k) + A_{\nu i}^j A_{\mu j}^k
+            - d_\nu (A_{\mu i}^k) - A_{\mu i}^j A_{\nu j}^k 
+        \big] e_k
+    \end{aligned}
+\end{equation}
+
+\section{Bianchi Identity}
+
+\begin{equation}
+    [D_u, [D_v, D_w]] + [D_v, [D_w, D_u]] + [D_w, [D_u, D_v]] = 0
+\end{equation}
+
+\begin{equation}
+    [D_\mu, F_{\nu \lambda}] + [D_\nu, F_{\lambda \mu}] + [D_\lambda, F_{\mu \nu}] = 0
+\end{equation}
 
 \chapter{Pseudo-Riemannian Geometry}
+\section{Tensors}
 
+\begin{definition}[Tensor]
+    Let $M$ be a smooth manifold.
+    A $(r, s)$-\indexbf{tensor} is a smooth section of the tensor product of $r$th tensor power of $TM$ and $s$th tensor power of $T^*M$:
+    \begin{equation}
+        t \in \Gamma(TM^{\otimes r} \otimes T^*M^{\otimes s}).
+    \end{equation}
+\end{definition}
+
+In local coordinates:
+\begin{equation}
+    t^{\mu_1 \cdots \mu_r}_{\nu_1 \cdots \nu_s} \bigotimes_{k = 1}^r \partial_{\mu_k} \otimes \bigotimes_{k = 1}^s \partial_{\nu_k}.
+\end{equation}
+
+It is conventional to use the local coordinates in pseudo-Riemannian geometry, and do not distinguish between a tensor and its components, written in forms of \indexbf{abstract indices}, where indices are written just to indicates types and operations on tensors.
+
+And since we can raise and lower indices of a tensor, it is sometimes important to distinguish the orders between covariant and contravariant indices.
+e.g.\ ${T^\mu}_\nu \neq {T^\nu}_\mu$.
+
+%TODO: operations...
+
+\section{Levi-Civita Connection}
+\begin{definition}[Levi-Civita connection]
+    Let $E \to M$ be a smooth vector bundle, where $M$ is a Riemanian manifold with metric $g \in T^*M \otimes T^*M$.
+    Let $\nabla \in \Gamma(\End(E) \otimes T^*M^{\otimes 2})$ be a connection on $E$.
+    Then $\indexmath[nabla]{\nabla}$ is called a \indexbf{Levi-Civita connection} if
+    \begin{equation}
+        u g(v, w) = g(\nabla_u v, w) + g(v, \nabla_u w),
+    \end{equation} 
+    and
+    \begin{equation}
+        [v, w] = \nabla_v w - \nabla_w v,
+    \end{equation}
+    where $u, v, w \in \Gamma(TM)$.
+\end{definition}
+
+In local coordinates:
+\begin{equation}
+    \nabla_\alpha \partial_\beta = \Gamma^\gamma_{\alpha\beta} \partial_\gamma,
+\end{equation}
+where $\indexmath[Gamma]{\Gamma^\gamma_{\alpha\beta}}$ is the \indexbf{Christoffel symbol}.
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
