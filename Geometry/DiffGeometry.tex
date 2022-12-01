@@ -575,11 +575,107 @@ If $E = B \times F$, then $(E, \pi, B, F)$ is called a \indexbf{trivial fibre bu
     is a linear homomorphism.
 \end{definition}
 
+\begin{definition}[Smooth vector bundle]
+    A \indexbf{smooth vector bundle} is a vector bundle $(E, \pi, B, F)$, where the projection $\pi \colon E \to B$ and the local trivialisation $\varphi \colon \pi^{-1}(U) \to U \times F$ are smooth.
+\end{definition}
+
 \begin{definition}[Tangent bundle]
-    The \indexbf{tangent bundle} $\indexmath[TM]{{TM}}$ is the vector bundle over a $n$D manifold $M$ with the standard fibre $T_p M = \mathbb R^n$.
+    The \indexbf{tangent bundle} $\indexmath[TM]{{TM}}$ is the smooth vector bundle over an $n$D smooth manifold $M$ with the standard fibre $T_p M = \mathbb R^n$.
+\end{definition}
+
+A vector field $v \in \Vect(M)$ is the smooth section of the tangent bundle $\Gamma(TM)$.
+
+\begin{definition}[Cotangent bundle]
+    The \indexbf{cotangent bundle} of an $n$D manifold $M$, 
+    denoted by $\indexmath[T ast M]{{T^*M}}$, 
+    is the smooth vector bundle over with the standard fibre $T^*_p M = (\mathbb R^n)^*$.
+\end{definition}
+
+A 1-form $\omega \in \Omega^1(M)$ is the smooth section of the cotangent bundle $\Gamma(T^*M)$.
+
+\section{Constructions of Vector Bundles}
+\begin{definition}[Duality]
+    %TODO
+\end{definition}
+
+\section{Connections}
+
+\begin{definition}[Connection]
+    A \indexbf{connection} on a smooth vector bundle $(E, \pi, M, F)$ is map
+    \begin{equation}
+        D \colon \Gamma(TM) \times \Gamma(E) \to \Gamma(E),
+    \end{equation}
+    that satisfies the following conditions:
+    $\forall v, w \in \Gamma(TM)$, $\forall s, t \in \Gamma(E)$, $\forall f \in C^{(\infty)}(M)$,
+    \begin{enumerate}[label=(\alph*)]
+        \item $D_v (s + t) = D_v s + D_v t$;
+        \item $D_v (fs) = v(f) s +  f D_v s$;
+        \item $D_{v + w} s = D_v s + D_w s$;
+        \item $D_{fv} s = f D_v s$.
+    \end{enumerate}
+\end{definition}
+
+When a vector field $v \in \Gamma(TM)$ is given to the connection $D$, the map $D_v \colon \Gamma(E) \to \Gamma(E)$ is called the \indexbf{covariant derivative} with respect to $v$.
+
+\begin{definition}[Vector potential]
+    A \indexbf{vector potential} $A$ is an $\End(E)$-valued 1-form, that is
+    \begin{equation}
+        A \in \Gamma(\End(E) \otimes T^*M),
+    \end{equation}
+    where $\End(E) \cong E \otimes E^*$ can be considered as a vector bundle over $M$ with the standard fibre $\End(E_p) \cong E_p \otimes E_p^*$ ($p \in E$).
+\end{definition}
+
+Locally if $s \in \Gamma(E)$ we can have a trivialisation $\varphi \colon E|_U \to U \times F$ ($U \subset M$).
+If we assign a basis $\{f_i\}_{i \in m}$ for the $m$D standard fibre $F$, then 
+\begin{equation}
+    s = s^i e_i := s^i\varphi^{-1}(f_i),
+    \quad s^i \in C^{(\infty)}(U),
+\end{equation} 
+where we can call $\{s^i\}_{i \in m}$ the \indexbf{components of the section} $s$.
+With this specific normalisation, one can define that
+\begin{equation}
+    D^0_v s = v(s^i) e_i
+\end{equation}
+where $\indexmath[D0]{D^0}$ is called the \indexbf{standard flat connection} (which depends on trivialisation).
+
+
+\begin{theorem}
+    Let $(E, \pi, M, F)$ be a smooth vector bundle.
+    If $D$ is a connection on $E$, $A \in \Gamma(\End(E)) \otimes T^*M$, then
+    the $D + A$, which defined as
+    \begin{equation}
+        D + A \colon (v, s)  \mapsto D_v s + A(v) s,
+    \end{equation}
+    is also a connection.
+\end{theorem}
+
+\begin{theorem}
+    Let $(E, \pi, M, F)$ be a smooth vector bundle, and $D^0$ is the standard flat connection on $U \subset E$ with the trivialisation $\varphi \colon E|_U \to U \times F$.
+    If $D$ is a connection on a $(E, \pi, M, F)$,
+    then $\exists A \in \Gamma(\End(E)) \otimes T^*M$ s.t.\ 
+    \begin{equation}
+        D = D^0 + A.
+    \end{equation}
+\end{theorem}
+
+\section{Parallel Transport}
+
+\begin{definition}[Parallel transport]
+    Let $(E, \pi, M, F)$ be a smooth vector bundle, and $D$ is a connection on $E$.
+    A \indexbf{paralell transport} of $s_0 \in \pi^{-1}(\{p\})$ ($p \in M$)along a curve $\gamma \colon [0, 1] \to M$ is a section $s \in \Gamma(E|_{\gamma([0, 1])})$ such that
+    \begin{equation}
+        \forall t \in [0, 1], 
+        \quad 
+        D_{\gamma'(t)} s(t) = 0,
+        \quad
+        s(0) = s_0,
+    \end{equation}
+    where $s(t) := s_{\gamma(t)}$.
 \end{definition}
 
 \chapter{Curvature}
+
+
 
 \chapter{Pseudo-Riemannian Geometry}
 
