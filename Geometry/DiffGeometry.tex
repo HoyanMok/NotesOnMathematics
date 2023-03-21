@@ -122,7 +122,7 @@ Let $\varphi \colon U \to \mathbb R^n$ be a chart of $M$ ($U \subset M$).
 Let $p \in U$, $\varphi(p) = x = (x^\mu)$ ($\mu = 0, \ldots, n-1$).
 Locally, a function $f \in C^{(\infty)}(M)$ can be written as
 \begin{equation}
-    (\varphi^{-1})^* f = f \circ \varphi^{-1} \colon M \to \mathbb R,
+    (\varphi^{-1})^* f = f \circ \varphi^{-1} \colon \mathbb R^n \to \mathbb R,
 \end{equation}
 and a vector field $v \in \Vect(M)$ can be written as
 \begin{equation}
@@ -747,12 +747,46 @@ In local coordinates:
     t^{\mu_1 \cdots \mu_r}_{\nu_1 \cdots \nu_s} \bigotimes_{k = 1}^r \partial_{\mu_k} \otimes \bigotimes_{k = 1}^s \partial_{\nu_k}.
 \end{equation}
 
-It is conventional to use the local coordinates in pseudo-Riemannian geometry, and do not distinguish between a tensor and its components, written in forms of \indexbf{abstract indices}, where indices are written just to indicates types and operations on tensors.
+It is conventional to use the local coordinates form in pseudo-Riemannian geometry, 
+and do not distinguish between a tensor and its components, 
+written in forms of \indexbf{abstract indices}, 
+where indices are written just to indicates types and operations on tensors.
 
 And since we can raise and lower indices of a tensor, it is sometimes important to distinguish the orders between covariant and contravariant indices.
 e.g.\ ${T^\mu}_\nu \neq {T^\nu}_\mu$.
 
-%TODO: operations...
+\paragraph{Tensor Product}
+Let $T_1$, $T_2$ be $(p_1, q_1)$ and $(p_2, q_2)$ tensors, we can have their tensor product:
+\begin{equation}
+    T_1 \otimes T_2 \in \Gamma(TM^{\otimes (p_1 + p_2)} \otimes T^*M^{\otimes (q_1 + q_2)}),
+\end{equation}
+where at each point $p \in M$, the tensor product is but the tensor product of the corresponding multilinear functions.
+
+In abstract indices, we have:
+\begin{equation}
+    &{(T_1 \otimes T_2)^{\mu_1 \cdots \mu_{p_1 + p_2}}}_{\nu_1 \cdots \nu_{q_1 + q_2}}
+    \\
+    &= {T_1^{\mu_0 \cdots \mu_{p_1 - 1}}}_{\nu_0 \cdots \nu_{q_0 - 1}} 
+    {T_2^{\mu_{p_1} \cdots \mu_{p_1 + p_2 - 1}}}_{\nu_{q_1} \cdots \nu_{q_1 + q_2 - 1}}.
+\end{equation}
+
+\paragraph{Contractions}
+
+The contraction is a generalisation of the inner product of vectors.
+Let $T$ is a $(p + 1, q + 1)$ tensor, we can define the $(i, p + j)$ contraction of $T$ as
+{\small
+\begin{equation}
+    &\tr_{(i, p+j)} T \colon  TM^p \times T^*M^q \to \mathbb{R}
+    \\
+    &\; (v_0, \ldots, v_{i-1},  v_{i+1}, \ldots, v_p, \omega_0, \ldots, \omega_{j-1}, \omega_{j+1}, \ldots, \omega_q) \mapsto 
+    \\
+    &
+    \sum_{\mu \in N} T(v_0, \ldots, v_{i-1}, \partial_\mu, v_{i+1}, \ldots, v_p, \omega_0, \ldots, \omega_{j-1}, \dif x^\mu,\omega_{j+1}, \ldots, \omega_q).
+\end{equation}
+}
+
+The index-free notation can be found at~\cite{Yuri-Vyatkin-StackExchange}.
+
 
 \section{Levi-Civita Connection}
 \begin{definition}[Levi-Civita connection]
@@ -774,6 +808,21 @@ In local coordinates:
     \nabla_\alpha \partial_\beta = \Gamma^\gamma_{\alpha\beta} \partial_\gamma,
 \end{equation}
 where $\indexmath[Gamma]{\Gamma^\gamma_{\alpha\beta}}$ is the \indexbf{Christoffel symbol}.
+
+For any $T \in \Gamma(TM^{\otimes p} \otimes T^*M^{\otimes q})$, we have
+\begin{equation}
+    \nabla T 
+    &= {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{q - 1}; \mu} \bigotimes_{k \in p} \partial_{\alpha_k} \otimes \bigotimes_{\ell \in q} \dif x^{\beta_\ell} \otimes \dif x^\mu
+\end{equation}
+\begin{equation}
+    {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{q - 1}; \mu} &= {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{q - 1}, \mu} 
+    \\
+    &
+    + \sum_{i \in p} \Gamma^{\alpha_i}_{\lambda \mu} {T^{\alpha_0 \cdots \alpha_{i-1} \lambda \alpha_{i + 1} \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{q - 1}}
+    \\
+    &
+    - \sum_{i \in q} \Gamma^{\lambda}_{\beta_i \mu} {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{i-1} \lambda \beta_{i + 1} \cdots \beta_{q - 1}}.
+\end{equation}
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
