@@ -323,6 +323,27 @@ It can be shown that any $k$-form $\omega$ can be written as
 \end{equation}
 where $\varphi \colon M \to \mathbb R^n$ is a chart.
 
+\begin{definition}[Interior product]\label{def: interior product}
+    Let $v \in \Gamma(TM)$, we can define the \indexbf{interior product} $\indexmath[iv]{i_v} \colon \Omega^k(M) \to \Omega^{k - 1}(M)$ by:
+    $\forall \omega \in \Omega^k(M)$, $\forall v_i$ ($i \in k - 1$):
+    \begin{equation}
+        i_v(\omega) (v_0, \ldots,v_{k-2}) = \omega (v, v_0, \ldots, v_{k-2}).
+    \end{equation}
+
+    Specially, if $k = 0$, then $i_v(\omega) = 0$.
+\end{definition}
+
+\begin{theorem}
+    $\forall v \in \Gamma(TM)$, 
+    \begin{enumerate}
+        \item $i_v$ is a $C^{(\infty)}(M)$-linear function;
+        \item $\forall \alpha \in \Omega^k(M)$, $\forall \beta \in \Omega(M)$,
+        \begin{equation}
+            i_v (\alpha \wedge \beta) = i_v (\alpha) \wedge \beta + (-1)^k \alpha \wedge i_v (\beta).
+        \end{equation}
+    \end{enumerate}
+\end{theorem}
+
 \section{Exterior Derivative}
 \begin{definition}[Exterior derivative]
     The \indexbf{exterior derivative} $\indexmath[exterior derivative]{\dif}$ is defined as a linear operator that takes a $k$-form and gives a $(k + 1)$-form, satisfying $\forall \alpha \in \Omega^k(M)$, $\forall \beta \in \Omega^\ell(M)$:
@@ -345,6 +366,34 @@ where $\varphi \colon M \to \mathbb R^n$ is a chart.
         \end{equation}
     \end{enumerate}
     
+\end{definition}
+
+\section{Derivation ana Antiderivation}
+\begin{definition}[Derivation]\label{def: derivation}\index{derivation}
+    A map $\theta \colon \Omega(M) \to \Omega(M)$ is called a \indexbf{derivation of degree $k$} ($k \in \mathbb Z$) if
+    $\forall p \in \mathbb N$, $\theta[\Omega^p(M)] \subset \Omega^{p+k}(M)$
+    and, $\theta$ is a homomorphism of the $\mathbb R$-exterior algebra.
+    Or, explicitly, $\theta$ is $\mathbb R$-linear, and $\forall \alpha, \beta \in \Omega(M)$,
+    \begin{equation}
+        \theta (\alpha \wedge \beta) 
+        = \theta (\alpha) \wedge \beta
+            + \alpha \wedge \theta (\beta).
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Antiderivation]\label{def: antiderivation}\index{antiderivation}
+    A map $\theta \colon \Omega(M) \to \Omega(M)$ is called an \indexbf{antiderivation of degree $k$} ($k \in \mathbb Z$) if 
+    \begin{enumerate*}[label=\roman*)]
+        \item $\forall p \in \mathbb N$, $\theta[\Omega^p(M)] \subset \Omega^{p+k}(M)$, 
+        \item $\theta$ is $\mathbb R$-linear, 
+        \item $\forall \alpha \in \Omega^p(M)$,
+        $\beta \in \Omega(M)$,
+    \end{enumerate*}
+    \begin{equation}
+        \theta (\alpha \wedge \beta) 
+        = \theta (\alpha) \wedge \beta
+            + (-1)^p \alpha \wedge \theta (\beta).
+    \end{equation}
 \end{definition}
 
 \chapter{Metric}
@@ -405,7 +454,7 @@ $\forall u \in \Vect(M)$,
 \begin{equation}
     g(v, u) = \omega(u),
 \end{equation}
-then we say that $v$ is the corresponding vector field of $\omega$, and $\omega$ is the corresponding 1-form of $v$.
+then we say that $v$ is the corresponding vector field of $\omega$, denoted by $v = \indexmath[omega sharp]{\omega^\sharp}$, and $\omega$ is the corresponding 1-form of $v$, denoted by $\omega = \indexmath[v flat]{v^\flat}$.
 
 We can also define the \indexbf{inner product} on $\Omega^1(M)$ by 
 \begin{equation}
@@ -413,7 +462,9 @@ We can also define the \indexbf{inner product} on $\Omega^1(M)$ by
 \end{equation}
 where $a$ and $b$ is the corresponding vector fields of $\alpha$ and $\beta$.
 
-The \indexbf{inner product} on $\Omega^k(M)$ is defined by induction with
+The \indexbf{inner product}%
+    \footnote{This inner product makes $\Omega_p(M)$ for each $p \in M$, yet not for $\Omega(M)$. The full inner product requires integration over $M$.}
+on $\Omega^k(M)$ is defined by induction with
 \begin{equation}
     \langle \bigwedge_{i \in k} \alpha_i, \bigwedge_{i \in k} \beta_i \rangle 
     = \det(\langle \alpha_i, \beta_j \rangle)_{i, j \in k}.
@@ -483,7 +534,48 @@ and $k = n$,
 \end{equation}
 if the signature of the metric is $(s, n - s)$.
 
+The Hodge star operator is also called the \indexbf{Hodge duality} because:
+\begin{theorem}\label{theorem: hodge duality}
+    $\forall \alpha \in \Omega^p(M)$,
+    \begin{equation}
+        \star \star \alpha = (-1)^{p(n - p)} \alpha\sign(g),
+    \end{equation}
+    where $\sign(g) := \det g / |\det g|$.
+\end{theorem}
 
+\begin{definition}[Codifferential]
+    Let $M$ be an orientable manifold.
+    The \indexbf{codifferential} $\indexmath[delta]{\delta}$ is defined by
+    \begin{equation}
+        \delta \colon \Omega^k(M) \to \Omega^{k - 1}(M),
+    \end{equation}
+    $\forall \alpha \in \Omega^k(M)$,
+    \begin{equation}
+        \delta \alpha = \star \dif \star \alpha.
+    \end{equation}
+    
+\end{definition}
+
+\begin{definition}[Laplacian]
+    The \indexbf{Laplacian} $\indexmath[square]{\square}$ is defined by
+    \begin{equation}
+        \square := \dif \circ \delta + \delta \circ \dif.
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    \begin{equation}
+        \square \circ \star = \star \circ \square,
+    \end{equation}
+    \begin{equation}
+        \square \circ \delta = \delta \circ \square,
+    \end{equation}
+    \begin{equation}
+        \square \circ \dif = \dif \circ \square.
+    \end{equation}
+\end{theorem}
+
+% self-adjointness of the Laplacian, and d and delta are adjoint to each other (page 660 of GR)
 
 \section{Metric and Coordinates}
 
@@ -662,8 +754,8 @@ where $\indexmath[D0]{D^0}$ is called the \indexbf{standard flat connection} (wh
 
 \begin{definition}[Parallel transport]
     Let $(E, \pi, M, F)$ be a smooth vector bundle, and $D$ is a connection on $E$.
-    A \indexbf{paralell transport} of $s_0 \in \pi^{-1}(\{p\})$ ($p \in M$)along a curve $\gamma \colon [0, 1] \to M$ is a section $s \in \Gamma(E|_{\gamma([0, 1])})$ such that
-    \begin{equation}
+    A \indexbf{paralell transport} of $s_0 \in \pi^{-1}(\{p\})$ ($p \in M$) along a curve $\gamma \colon [0, 1] \to M$ is a section $s \in \Gamma(E|_{\gamma([0, 1])})$ such that
+    \begin{equation}\label{eq: paralell transport}
         \forall t \in [0, 1], 
         \quad 
         D_{\gamma'(t)} s(t) = 0,
@@ -672,6 +764,21 @@ where $\indexmath[D0]{D^0}$ is called the \indexbf{standard flat connection} (wh
     \end{equation}
     where $s(t) := s_{\gamma(t)}$.
 \end{definition}
+
+If $s =:v$ is a vector field, the Eq.~\eqref{eq: paralell transport} can be rewritten as
+\begin{equation}
+    \diff {u \circ \gamma} {t} (t) + A[\gamma'(t)] u \circ \gamma(t) = 0,
+\end{equation}
+which is a 1st order ODE.
+Given $\gamma_x(0) = x \in M$, there is a unique curve $\gamma_x$ associated to the vector field $u$.
+
+We can extend the domain of $\gamma_x$ to $\mathbb R$ (note that $\mathbb R$ is diffeomorphic to $(0, 1)$), and define:
+\begin{equation}
+    \phi \colon \mathbb R \times M \to M; (t, x) \mapsto \gamma_x(t),
+\end{equation}
+which is called the \indexbf{flow} of $u$.  % TODO: the domain shall be restricted to J_x ...
+
+
 
 \chapter{Curvature}
 
@@ -732,19 +839,22 @@ Notice that $[\partial_\mu, \partial_\nu] = 0$,
 \end{equation}
 
 \chapter{Pseudo-Riemannian Geometry}
+% TODO: since most of the topics are on Pseudo-Riemannian Geometry
+%       rearrange?
 \section{Tensors}
 
-\begin{definition}[Tensor]
+\begin{definition}[Tensor]\label{def: tensor}
     Let $M$ be a smooth manifold.
     A $(r, s)$-\indexbf{tensor} is a smooth section of the tensor product of $r$th tensor power of $TM$ and $s$th tensor power of $T^*M$:
     \begin{equation}
-        t \in \Gamma(TM^{\otimes r} \otimes T^*M^{\otimes s}).
+        t \in \Gamma(TM^{\otimes r} \otimes T^*M^{\otimes s})
+        =: \indexmath[TMrs]{TM^r_s}.
     \end{equation}
 \end{definition}
 
 In local coordinates:
 \begin{equation}
-    t^{\mu_1 \cdots \mu_r}_{\nu_1 \cdots \nu_s} \bigotimes_{k = 1}^r \partial_{\mu_k} \otimes \bigotimes_{k = 1}^s \partial_{\nu_k}.
+    t^{\mu_1 \cdots \mu_r}_{\nu_1 \cdots \nu_s} \bigotimes_{k = 1}^r \partial_{\mu_k} \otimes \bigotimes_{k = 1}^s \dif x^{\nu_k}.
 \end{equation}
 
 It is conventional to use the local coordinates form in pseudo-Riemannian geometry, 
@@ -755,38 +865,207 @@ where indices are written just to indicates types and operations on tensors.
 And since we can raise and lower indices of a tensor, it is sometimes important to distinguish the orders between covariant and contravariant indices.
 e.g.\ ${T^\mu}_\nu \neq {T^\nu}_\mu$.
 
+\paragraph{Raising and Lowering of Indices}
+We have defined $\omega^\sharp$ for a $1$-form and $v^{\flat}$ for a vector field.
+Now we can generalise the definition for any $(p, q)$ tensor $T$ that:
+\begin{align}
+    &T^\sharp \in \Gamma(TM^{\otimes (p + q)}), 
+    \\
+    &T^\sharp(\omega_0, \ldots, \omega_{p+q-1}) 
+    = T(\omega_0, \ldots, \omega_{p-1}, \omega_p^\sharp, \ldots, \omega_{p+q-1}^\sharp); 
+    \\
+    &T^{\flat} \in \Gamma(T^*M^{\otimes (p + q)}),
+    \\
+    &T^{\flat}(v_0, \ldots, v_{p+q-1})
+    = T(v_0^{\flat}, \ldots, v_{p-1}^{\flat}, v_p, \ldots, v_{p+q-1}).
+\end{align}
+
+We can even raise or lower some instead of all indices in $T$, by writing $T^{\sharp i\flat j}$ or $T^{\sharp\{i_0, \ldots\}\flat\{j_0, \ldots\}}$.
+
+In abstract indices, it is conventional to keep the order of the indices including the raised and lowered ones, and abuse the original symbol of the tensor, for example if $T$ is a $(3, 4)$ tensor:
+\begin{equation}
+    {(T^{\sharp4})^{\alpha_0 \alpha_1 \alpha_2 \mu}}_{\beta_0 \beta_2\beta_3}
+    =: {{{T^{\alpha_0 \alpha_1 \alpha_2}}_{\beta_0}}^{\mu}}_{\beta_2\beta_3} 
+\end{equation}
+
+Strictly speaking, the tensors after raising or lowering indices might not be the tensors as we defined in Def.~\ref{def: tensor}, since it might belong to e.g.\ 
+\begin{equation}
+    TM^{\otimes r} \otimes T^*M \otimes TM^{\otimes s} \otimes T^*M^{\otimes t}
+\end{equation}
+where the order of the tensor product is not canonical.
+One way to avoid this is to reorder the indices, but this approach is not conventional to those who use abstract indices.
+Since we can still consider the ``tensors'' as multilinear maps, we can include these non-canonical tensors, while, in order to avoid confusion in the order of indices, we will prefer to use the abstract indices form if there is any ambiguity.
+
+
 \paragraph{Tensor Product}
 Let $T_1$, $T_2$ be $(p_1, q_1)$ and $(p_2, q_2)$ tensors, we can have their tensor product:
 \begin{equation}
-    T_1 \otimes T_2 \in \Gamma(TM^{\otimes (p_1 + p_2)} \otimes T^*M^{\otimes (q_1 + q_2)}),
+    T_1 \otimes T_2 \in TM^{p_1 + p_2}_{q_1 + q_2},
 \end{equation}
 where at each point $p \in M$, the tensor product is but the tensor product of the corresponding multilinear functions.
 
 In abstract indices, we have:
-\begin{equation}
+\begin{align}
     &{(T_1 \otimes T_2)^{\mu_1 \cdots \mu_{p_1 + p_2}}}_{\nu_1 \cdots \nu_{q_1 + q_2}}
     \\
     &= {T_1^{\mu_0 \cdots \mu_{p_1 - 1}}}_{\nu_0 \cdots \nu_{q_0 - 1}} 
     {T_2^{\mu_{p_1} \cdots \mu_{p_1 + p_2 - 1}}}_{\nu_{q_1} \cdots \nu_{q_1 + q_2 - 1}}.
-\end{equation}
+\end{align}
 
 \paragraph{Contractions}
 
 The contraction is a generalisation of the inner product of vectors.
 Let $T$ is a $(p + 1, q + 1)$ tensor, we can define the $(i, p + j)$ contraction of $T$ as
 {\small
-\begin{equation}
-    &\tr_{(i, p+j)} T \colon  TM^p \times T^*M^q \to \mathbb{R}
+\begin{align}
+    &\tr_{(i, p+j)} T \colon  T^*M^p \times TM^q \to \mathbb{R}
     \\
-    &\; (v_0, \ldots, v_{i-1},  v_{i+1}, \ldots, v_p, \omega_0, \ldots, \omega_{j-1}, \omega_{j+1}, \ldots, \omega_q) \mapsto 
+    &\; (\omega_0, \ldots, \omega_{i-1}, \omega_{i+1}, \ldots, \omega_p,  v_0, \ldots, v_{j-1},  v_{j+1}, \ldots, v_q) \mapsto 
     \\
     &
-    \sum_{\mu \in N} T(v_0, \ldots, v_{i-1}, \partial_\mu, v_{i+1}, \ldots, v_p, \omega_0, \ldots, \omega_{j-1}, \dif x^\mu,\omega_{j+1}, \ldots, \omega_q).
-\end{equation}
+    \sum_{\mu \in N} T(\omega_0, \ldots, \omega_{i-1}, \dif x^\mu,\omega_{i+1}, \ldots, \omega_p,  v_0, \ldots, v_{j-1},  \partial_\mu,v_{j+1}, \ldots, v_q).
+\end{align}
 }
 
 The index-free notation can be found at~\cite{Yuri-Vyatkin-StackExchange}.
 
+\section{Diffeomorphism and Invariance}
+
+Let $\phi \colon M \to N$ be a diffeomorphism, we have already known that we have pushforward $\phi_*$ for $(p, 0)$-tensors, and pullback $\phi^*$ for $(0, q)$-tensors.
+Since $\phi$ is a diffeomorphism, both $\phi^*$ and $\phi_*$ are isomorphisms, and we can generalise the definitions to obtain a pair of isomorphisms:
+\begin{equation}
+    \phi_* \colon TM^p_q \to TN^p_q, \quad \phi^* \colon T^*N^p_q \to T^*M^p_q,
+\end{equation}
+such that $\phi_* \circ \phi^* = \phi_* \circ \phi^*$, and
+\begin{align}
+    &\phi_* T(\omega_0, \ldots, \omega_p, v_0, \ldots, v_q)
+    \\
+    &\quad =
+    T(\phi^* \omega_0, \ldots, \phi^* \omega_p, \phi^{-1}_* v_0, \ldots, \phi^{-1}_* v_q),
+\end{align}
+\begin{align}
+    &\phi^* T(\omega_0, \ldots, \omega_p, v_0, \ldots, v_q)
+    \\
+    &\quad =
+    T((\phi^{-1})^* \omega_0, \ldots, (\phi^{-1})^* \omega_p, \phi_* v_0, \ldots, \phi_* v_q).
+\end{align}
+
+The special case when $M = N$ ($\phi$ is an endomorphism), if $\phi_*T = T$, then we say that $T$ is \indexbf{invariant} under $\phi$.
+
+\begin{theorem}
+    Let $\phi \colon M \to N$ be a diffeomorphism, $T \in TM^p_q$, and $S \in TN^r_s$.
+    \begin{enumerate}
+        \item $\phi^*$ and $\phi_*$ are isomorphisms of $\mathbb R$-algebras.
+        \item $\phi_* (T \otimes S) = \phi_* T \otimes \phi_*S$, and $\phi^* (T \otimes S) = \phi^* T \otimes \phi^*S$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Let $\phi \colon M \to N$ be a \emph{homeomorphism} (differentiable map), then $\forall \alpha, \beta \in \Omega(M)$, we have
+    \begin{equation}
+        \phi^* (\alpha \wedge \beta) = \phi^* \alpha \wedge \phi^* \beta,
+    \end{equation}
+    that is, $\phi^*$ is the induced homeomorphism of the exterior algebra $\Omega(M)$.
+\end{theorem}
+
+\section{Lie Derivative}
+
+Let $u$ be a vector field on $M$, and $\phi$ be the corresponding flow.
+
+\begin{definition}[Lie derivative]
+    Let $T$ be a $(p, q)$ tensor, then the \indexbf{Lie derivative} of $T$ along $u$ is defined as
+    \begin{equation}\label{eq: lie derivative}
+        \mathcal L_u T = \lim_{t \to 0} \frac{\phi^*_t T - T}{t}.
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    $u, v \in \Vect(M)$.
+    \begin{enumerate}
+        \item $\mathcal L_{u + v} = \mathcal L_u + \mathcal L_v$.
+        \item $\mathcal L_{[u, v]} = \mathcal L_u \mathcal L_v - \mathcal L_v \mathcal L_u =: [\mathcal L_u, \mathcal L_v]$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    $u \in \Vect(M)$, $T \in TM^p_q$, $S \in TM^r_s$.
+    \begin{enumerate}
+        \item $\mathcal L_u $ is $\mathbb R$-linear.
+        \item $\mathcal L_u (T \otimes S) = \mathcal L_u T \otimes S + T \otimes \mathcal L_u S$ (\indexbf{Leibniz law}).
+        \item $\tr_{(i, j)} \mathcal L_u T = \mathcal L_u \tr_{(i, j)} T$.
+        \item $\forall f \in C^{(\infty)}(M)$, $\mathcal L_u f = u(f)$.
+        \item $\forall v \in \Vect(M)$, $\mathcal L_u v = [u, v]$.
+    \end{enumerate}
+\end{theorem}
+
+Applying the laws, we can calculate
+\begin{equation}
+    \mathcal L_u \omega(v) = u[\omega(v)] - \omega([u, v]),
+    \quad
+    \omega \in \Omega^1(M)
+\end{equation}
+by $u [\omega(v)] = T_u [\omega(v)] = T_u \tr_{(0, 0)} (\omega \otimes v) = T_u \omega(v) + \omega([u, v])$.
+Similarly:
+\begin{align}
+    &\mathcal L_u \omega(v_0, \ldots, v_{q - 1}) 
+    = u[\omega(v_0, \ldots, v_{q - 1})] 
+    \\
+    &\qquad - \omega([u, v_0], \ldots, v_{q - 1})
+    - \cdots - \omega(v_0, \ldots, [u, v_{q - 1}]).
+\end{align}
+
+And, in local coordinates, we have
+
+\begin{align}
+    &{\mathcal L_u T^{\alpha_0 \cdots \alpha_{p-1}}}_{\beta_0 \cdots \beta_{q-1}}
+    = u^\mu {T^{\alpha_0 \cdots \alpha_{p-1}}}_{\beta_0 \cdots \beta_{q-1} ,\mu}
+    \\
+    &\quad
+    - {T^{\mu \alpha_1 \cdots \alpha_{p-1}}}_{\beta_0 \cdots \beta_{q-1}} {u^{\alpha_0}}_{,\mu}
+    \cdots - {T^{\alpha_0 \cdots \alpha_{p-2} \mu}}_{\beta_0 \cdots \beta_{q-1}} {u^{\alpha_{p-1}}}_{,\mu} 
+    \\
+    &\quad
+    + {T^{\alpha_0 \cdots \alpha_{p-1}}}_{\mu\beta_1 \cdots \beta_{q-1}} {u^{\mu}}_{,\beta_0}
+    \cdots + {T^{\alpha_0 \cdots \alpha_{p-1}}}_{\beta_0 \cdots \beta_{q-2} \mu} {u^{\mu}}_{,\beta_{q-1}}.
+\end{align}
+
+\begin{definition}[Divergence]
+    Let $u \in \Vect(M)$, then the \indexbf{divergence} of $u$ is defined as
+    \begin{equation}
+        \operatorname{div} u = (-1)^{\sign(g)} \star (\mathcal L_u \vol)
+    \end{equation}
+\end{definition}
+
+% TODO: propeties of divergence
+
+\begin{definition}[Killing field]
+    If $u \in \Vect(M)$ is such that $\mathcal L_u g = 0$, then $u$ is called a \indexbf{Killing field}. 
+    The equation
+    \begin{equation}
+        \mathcal L_u g = 0,
+        \quad \text{or} \quad
+        u_{(\alpha;\beta)} = 0
+    \end{equation}
+    is called the \indexbf{Killing equation}.
+\end{definition}
+
+\begin{theorem}[\indexbf{Cartan's formula}]
+    \begin{equation}
+        \mathcal L_u |_{\Omega(M)} = \dif \circ i_u + i_u \circ \dif.
+    \end{equation}
+\end{theorem}
+
+\begin{corollary}
+    \begin{equation}
+        \mathcal L_u |_{\Omega(M)} \circ \dif = \dif \circ \mathcal L_u |_{\Omega(M)}.
+    \end{equation}
+\end{corollary}
+
+\begin{corollary}
+    \begin{equation}
+        i_{[u, v]} = [\mathcal L_u |_{\Omega(M)}, i_v].
+    \end{equation}
+\end{corollary}
 
 \section{Levi-Civita Connection}
 \begin{definition}[Levi-Civita connection]
@@ -810,11 +1089,11 @@ In local coordinates:
 where $\indexmath[Gamma]{\Gamma^\gamma_{\alpha\beta}}$ is the \indexbf{Christoffel symbol}.
 
 For any $T \in \Gamma(TM^{\otimes p} \otimes T^*M^{\otimes q})$, we have
-\begin{equation}
+\begin{align}
     \nabla T 
     &= {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{q - 1}; \mu} \bigotimes_{k \in p} \partial_{\alpha_k} \otimes \bigotimes_{\ell \in q} \dif x^{\beta_\ell} \otimes \dif x^\mu
-\end{equation}
-\begin{equation}
+\end{align}
+\begin{align}
     {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{q - 1}; \mu} &= {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{q - 1}, \mu} 
     \\
     &
@@ -822,6 +1101,19 @@ For any $T \in \Gamma(TM^{\otimes p} \otimes T^*M^{\otimes q})$, we have
     \\
     &
     - \sum_{i \in q} \Gamma^{\lambda}_{\beta_i \mu} {T^{\alpha_0 \cdots \alpha_{p - 1}}}_{\beta_0 \cdots \beta_{i-1} \lambda \beta_{i + 1} \cdots \beta_{q - 1}}.
+\end{align}
+
+It is useful to define the generalisation of divergence:
+\begin{equation}
+    \nabla \cdot T = \tr_{(0, q)} (\nabla T)
+\end{equation}
+if $T$ is a $(p, q)$ tensor.
+
+It can be shown that
+\begin{equation}
+    \nabla \cdot u = \operatorname{div} u = \delta u^\flat,
+    \quad
+    u \in \Vect(M).
 \end{equation}
 
 \backmatter{}
