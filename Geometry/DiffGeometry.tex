@@ -1067,26 +1067,51 @@ And, in local coordinates, we have
     \end{equation}
 \end{corollary}
 
+As an application of Cartan's formula, we can prove the following theorem by induction.
+\begin{theorem}\label{theorem: exterior differential formula}
+    {\small
+        \begin{align}
+        &\dif \omega(u_0, \ldots, u_p) 
+            = \sum_{i \in p + 1} (-1)^i u_i \omega(u_0, \ldots, u_{i-1}, u_{i+1}, \ldots, u_p)
+            \\
+            &
+            + \sum_{\substack{
+                (i, j) \in (p + 1)^2
+                \\
+                i < j
+                }} (-1)^ {i + j} \omega([u_i, u_j], u_1, \ldots, u_{i-1}, u_{i+1}, \ldots, u_{j-1}, u_{j+1}, \ldots, u_p).
+    \end{align}
+    }
+\end{theorem}
+
 \section{Levi-Civita Connection}
 \begin{definition}[Levi-Civita connection]
     Let $E \to M$ be a smooth vector bundle, where $M$ is a Riemanian manifold with metric $g \in T^*M \otimes T^*M$.
-    Let $\nabla \in \Gamma(\End(E) \otimes T^*M^{\otimes 2})$ be a connection on $E$.
+    Let $\nabla \in \Gamma(\End(E) \otimes T^*M)$ be a connection on $E$.
     Then $\indexmath[nabla]{\nabla}$ is called a \indexbf{Levi-Civita connection} if
     \begin{equation}
         u g(v, w) = g(\nabla_u v, w) + g(v, \nabla_u w),
     \end{equation} 
     and
-    \begin{equation}
+    \begin{equation}\label{eq: torsion free}
         [v, w] = \nabla_v w - \nabla_w v,
     \end{equation}
     where $u, v, w \in \Gamma(TM)$.
 \end{definition}
+
+Since $T(u, v) = \nabla_u v - \nabla_v u - [v, u]$ is called the \indexbf{torsion} of $u$ and $v$, 
+Eq.~\eqref{eq: torsion free} is called the \indexbf{torsion free} condition.
 
 In local coordinates:
 \begin{equation}
     \nabla_\alpha \partial_\beta = \Gamma^\gamma_{\alpha\beta} \partial_\gamma,
 \end{equation}
 where $\indexmath[Gamma]{\Gamma^\gamma_{\alpha\beta}}$ is the \indexbf{Christoffel symbol}.
+
+The torsion free condition is equivalent to
+\begin{equation}\label{eq: torsion free (coordinate)}
+    \Gamma^\gamma_{\alpha\beta} = \Gamma^\gamma_{\beta\alpha}.
+\end{equation}
 
 For any $T \in \Gamma(TM^{\otimes p} \otimes T^*M^{\otimes q})$, we have
 \begin{align}
@@ -1115,6 +1140,45 @@ It can be shown that
     \quad
     u \in \Vect(M).
 \end{equation}
+
+\begin{theorem}
+    $\forall u \in \Gamma(TM)$,
+    \begin{equation}
+        \nabla_u \tr_{(i, j)} = \tr_{(i, j)} \nabla_u.
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}\label{theorem: covariant derivative and exterior differential (1-form)}
+    $\forall \omega \in \Gamma(T^*M)$,
+    \begin{equation}
+        - \dif \omega(u, v) = \nabla \omega(u, v) - \nabla\omega(v, u).
+    \end{equation}
+    (Notice that $\nabla \omega(u, v) = (\nabla_v \omega) (u)$)
+\end{theorem}
+\begin{proof}
+    \begin{equation}
+        u[\omega(v)] = u g(\omega^\sharp, v) = \nabla \omega(v, u) + \omega(\nabla_u v)
+    \end{equation}
+    \hence (Theorem~\ref{theorem: exterior differential formula})
+    \begin{align}
+        \nabla \omega(v, u) - \nabla \omega (u, v) 
+        &= u[\omega(v)] - v[\omega(u)] - \omega([u, v])
+        \\
+        &= \dif \omega(u, v)
+    \end{align}
+\end{proof}
+
+In fact, the Theorem~\ref{theorem: covariant derivative and exterior differential (1-form)} is but a special case of:
+\begin{theorem}\label{theorem: covariant derivative and exterior differential}
+    $\forall \omega \in \Omega^p(M)$,
+    \begin{equation}
+        (-1)^p \dif \omega(u_0, \ldots, u_p) = 
+        (p + 1) \sum_{\pi \in S_{p + 1}} \nabla \omega (u_{\pi(0)}, \ldots, u_{\pi(p)}).
+    \end{equation}
+    
+\end{theorem}
+
+
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
