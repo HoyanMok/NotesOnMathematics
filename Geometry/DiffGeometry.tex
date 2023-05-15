@@ -579,10 +579,152 @@ The Hodge star operator is also called the \indexbf{Hodge duality} because:
 
 \section{Metric and Coordinates}
 
-\chapter{De Rham Theory}
+\chapter{DeRham Theory}
 \section{Closed and Exact 1-Forms}
+
+\begin{definition}[Closed and exact forms]
+    Consider $\dif \colon \Omega(M) \to \Omega(M)$.
+    The differential forms in $\ker \dif$ is said to be \indexbf{closed}, and the differential forms in $\dif(\Omega(M))$ is said to be \indexbf{exact}.
+\end{definition}
+
+For closed form:
+\begin{equation}
+    \dif \omega = 0,
+\end{equation}
+
+For exact form:
+\begin{equation}
+    \exists \alpha \in \Omega(M),
+    \quad
+    \omega = \dif \alpha,
+\end{equation}
+where $\alpha$ is often called \emph{potential}.
+
+
+
+We want to study, 
+given two points $p$, $q$ that are located in the same arcwise connected component of $M$, 
+and a smooth path $\gamma \colon [0, 1] \to M$ s.t.\ $\gamma(0) = p$, $\gamma(1) = q$,
+for a closed 1-form $E$,
+\begin{equation}
+    \phi(p, q) := - \int_\gamma E := - \int_0^1 E_{\gamma(t)} (\gamma'(t)) \,\dif t.
+\end{equation}
+
+We want to know that how $\phi$ depends on the choice of $\gamma$.
+
+
+Assumes that there are two smooth paths $\gamma_1$ and $\gamma_2$ connecting $p$ and $q$,
+and a fix-ends smooth homotopy $H \colon [0, 1] \times [0, 1] \to M$ s.t.\ 
+\begin{equation}
+    H(0, t) = \gamma_1(t),
+    \quad
+    H(1, t) = \gamma_2(t),
+    \quad
+    H(s, 0) = p,
+    \quad
+    H(s, 1) = q.
+\end{equation}
+
+By choosing proper charts (if there is no chart that can cover the whole path, we break the path into pieces),
+\begin{align}
+    I_s 
+    &= \int_{H(s, \dummy)} E 
+    = \int_0^1 E_{H(s, t)}(H'(s, t)) \dif t
+    \\
+    &= \int_0^1 E_\mu [H(s, t)] \partial_t H^\mu(s, t) \dif t,
+\end{align}
+where $H'(s, t)$ is the tangent vector of $H(s, \dummy)$ at $t$.
+
+\begin{align}
+    \diff{I_s}{s}
+    &= \diff{} s \int_0^1 E_\mu [H(s, t)] \partial_t H^\mu(s, t) \dif t
+    \\
+    &= \int_0^1 \big(
+        \partial_s E_\mu [H(s, t)] \partial_t H^\mu
+        +
+        E_\mu [H(s, t)] \partial_s\partial_t H^\mu
+    \big) 
+    \dif t
+    \\
+    &= \partial_s \left.\big(
+      E_\mu(H(s, t)) H^\mu(s, t)  
+    \big)\right|^{t = 1}_{t=0}
+    \\
+    &\phantom{= {}}
+    + \int_0^1 \big(
+        \partial_s E_\mu [H(s, t)] \partial_t H^\mu
+        -
+        \partial_t E_\mu [H(s, t)] \partial_s H^\mu
+    \big) 
+    \dif t
+    \\
+    &=
+    \partial_s (E_\mu(q) q^\mu - E_\mu(p) p^\mu)
+    \\
+    &\phantom{= {}} 
+    + \int_0^1 \partial_\nu E_\mu \big(
+        \partial_s H^\nu  \partial_t H^\mu
+        -
+        \partial_t H_\nu \partial_s H^\mu
+    \big) \,\dif t
+    \\
+    &= \int (\dif E)_{\mu\nu} \partial_s H^\mu \partial_t H
+    = 0.
+\end{align}
+
+Now we have proven that if $\gamma_1$ and $\gamma_2$ are homotopic, then the integral for $\phi(p, q)$ is the same.
+
+Then, if $M$ is simply connected, then a closed form $E$ is also exact, and
+\begin{equation}
+    E = - \dif \phi(p, \dummy).
+\end{equation}
+
+
 \section{Stokes' Theorem}
-\section{De Rham Cohomology}
+\section{DeRham Cohomology}
+
+We have shown that, if the manifold is simply connected, then a closed 1-form must also be exact.
+The study of whether a closed form is exact is called the \indexbf{deRham cohomology}.
+
+Since $\dif \circ \dif = 0$, we know that
+\begin{equation}
+    \dif(\Omega(M)) \subset \dif(\ker \dif).
+\end{equation} 
+
+% One has an short exact sequence
+
+% % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRGJAF9T1Nd9CKAIzkqtRizYAdKQGsYAJwAEULjxAZseAkQBMo6vWatEIGQHkAtjADmdABQBZAJRreWgUQDMB8celSUFgAZvYW1nZOzq7c7vw6KAAsvkaSphycYjBQNvBEoMEKEJZIZCA4EEhCsSCFxVXUFUj6fmlmUvg4dG61RSWILU2IPq0m7UHBPXX9I0OJmZxAA
+% \begin{tikzcd}
+%     0 \arrow[r] & \ker \dif \arrow[r, "\iota"] & \Omega(M) \arrow[r, "\dif"] & \dif(\Omega(M)) \arrow[r] & 0
+% \end{tikzcd},
+
+The space of exact $p$-forms is denoted by $\indexmath[Bp(M)]{B^p(M)}$ and the space of closed $p$-forms is denoted by $\indexmath[Zp(M)]{Z^p(M)}$.
+
+\begin{definition}[DeRham cohomology]
+    The $p$-th \indexbf{deRham cohomology} of $M$ is defined as
+    \begin{equation}
+        \indexmath[Hp(M)]{H^p(M)} = Z^p(M) /B^p(M).
+    \end{equation}
+\end{definition}
+
+Every element of $H^p(M)$ is a \indexbf{cohomologous class}:
+\begin{equation}
+    [\omega] = \{
+        \omega' \in Z^p(M) \mid \omega - \omega' \in B^p(M)
+    \}.
+\end{equation}
+
+For $p = 0$, $B^0(M) = \{0\}$ (there is no ($-1$)-form), and $H^0(M) = Z^0(M)$, where $Z^0(M)$ is made of $f$ that is constant in every connected components of $M$.
+Let $\chi_i$ be the characteristic function of $M$'s $i$th connected components $M_i$ (we assume that $\{M_i\}$ is finite)
+\begin{equation}
+    H^0(M) = Z^0(M) = \left\{
+        f
+    \middle\vert
+        f = x^i \chi_i
+    \right\}
+    \cong \mathbb R^n,
+\end{equation}
+where $n$ is the number of connected components of $M$.
 
 \chapter{Bundles and Connections}
 \section{Fibre Bundles}
@@ -686,8 +828,40 @@ A vector field $v \in \Vect(M)$ is the smooth section of the tangent bundle $\Ga
 A 1-form $\omega \in \Omega^1(M)$ is the smooth section of the cotangent bundle $\Gamma(T^*M)$.
 
 \section{Constructions of Vector Bundles}
-\begin{definition}[Duality]
-    %TODO
+% \begin{definition}[Duality]
+%     %TODO
+% \end{definition}
+
+We use local trivialisation to destruct a vector bundle into trivial bundles.
+We can also construct a vector bundle by ``gluing'' trivial bundles.
+We must make sure that in the intersections of bases, we must make sure that they are compactible by introducing \emph{transition functions} to relate points on the fibres.
+Naturally, transition functions make a group structure.
+
+\begin{definition}[$G$-bundle]\label{definition: G-bundle}
+    Consider an open cover $\mathcal U = \{U_i \mid i \in I\}$ of the manifold $M$. For each $i \in I$, there is a trivial vector bundle $\begin{tikzcd}
+        U_i \times V \arrow[r, "\pi_i"] & U_i
+    \end{tikzcd}$
+    with vector fibre $V$.
+    $\rho \colon G \to \GL(V)$ is a representation of $G$ on $V$.    
+
+    For any $p \in M$, if $p \in \bigcap_{j \in J} U_j$ ($J \subset I$),
+    then $\pi^{-1}(\{p\})$ is identified 
+    by a equivalence class in $\bigsqcup_{j \in J} \pi_j^{-1} (p)$ 
+    where two points are equivalent if they are related by the transformation
+    \begin{align}
+        \rho_*(g_{jj'}(p)) \colon & U_j \times V \to U_{j'} \times V;
+        \\
+                                & (p, v) \mapsto (p, \rho(g_{jj'}(p)v)),
+    \end{align}
+    where the \indexbf{transition functions} $g_{ij} \in G$ satisfy that:
+    \begin{enumerate}
+        \item $g_{ii} = 1$;
+        \item $g_{ij} g_{jk} g_{ki} = 1$.
+    \end{enumerate}
+
+    The bundle $\begin{tikzcd}
+        E \arrow[r, "\pi"] & M
+    \end{tikzcd}$ is then called the \emphbf{$G$-bundle}\index[G-bundle]{$G$-bundle}, where $G$ is the \indexbf{gauge group}.
 \end{definition}
 
 \section{Connections}

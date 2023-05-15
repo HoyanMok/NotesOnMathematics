@@ -1,5 +1,5 @@
 % TeXplates/Mathematics.tex
-% v0.2.2b
+% v0.9.0
 % https://github.com/HoyanMok/TeXplates
 \documentclass[openany, oneside, a5paper]{book} 
 % \documentclass{ctexbook} 如果用中文
@@ -8,7 +8,6 @@
 % 其他可选参量如twocolumn, 两行排版
 \usepackage{../TeXplatesMathematics}
 \usepackage{xeCJK}
-\usepackage{xr-hyper}
 \externaldocument[PST-]{PointSetTopology}
 
 \addbibresource{AlgebraicTopology.bib} % 把这里改成实际的文件名
@@ -178,10 +177,10 @@ We need to introduce the multiplicative structure of path classes.
 
 \begin{theorem}
     Let $a, b, c, d$ be four paths in $X$.
-    \begin{align*}
+    \begin{align}
         a \simeq b \rel \{0, 1\} &\IFF \bar a \simeq \bar b \rel \{0, 1\}, \\
         a \simeq b \rel \{0, 1\} \wedge c \simeq d \rel \{0, 1\} \wedge a(1) = c(0) &\then ac \simeq bd \rel \{0, 1\}.
-    \end{align*}
+    \end{align}
 \end{theorem}
 
 \begin{definition}[Inverse and product of path classes]
@@ -199,11 +198,11 @@ While the product of paths does not obey associativity, we have:
     Consider $\forall a \in \alpha$, $\forall b \in \beta$, $\forall c \in \gamma$.
 
     Let
-    \begin{align*}
+    \begin{align}
         \tilde a(t) &= t/3, \\
         \tilde b(t) &= t/3 + 1/3, \\
         \tilde c(t) &= t/3 + 2/3.
-    \end{align*}
+    \end{align}
 
     $\tilde a, \tilde b$ and $\tilde c$ are three paths in $[0, 1]$, and $\tilde a (\tilde b \tilde c) \simeq (\tilde a \tilde b) \tilde c \rel \{0, 1\}$, since $[0, 1]$ is convex, therefore there is a linear homotopy between the two product paths.
 
@@ -260,14 +259,14 @@ For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly 
     Let $f$ be a homeomorphism from $X$ to $Y$, then $\forall x_0 \in X$, $f_\pi$ is an isomorphism from $\pi_1(X, x_0)$ to $\pi_1(Y, f(x_0))$.
 \end{theorem}
 \begin{proof}
-    \begin{align*}
+    \begin{align}
         f^{-1} \circ f &= \id_X 
         \then 
         (f^{-1})_\pi \circ f_\pi = \id_{\pi_1(X, x_0)}; \\
         f \circ f^{-1} &= \id_Y 
         \then 
         f_\pi \circ (f^{-1})_\pi = \id_{\pi_1(Y, f(x_0))},
-    \end{align*}
+    \end{align}
     therefore $(f^{-1})_\pi$ is the inverse of $f_\pi$.
     An invertible homomorphism is an isomorphism. 
 \end{proof}
@@ -281,10 +280,10 @@ For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly 
 \end{theorem}
 \begin{proof}
     Let $j_X \in C(X \times Y, X)$ and $j_Y \in C(X \times Y, Y)$ be projections ($j_X(x, y) = x$, $j_Y(x, y) = y$), and define a homomorphism
-    \begin{align*}
+    \begin{align}
         \varphi\colon && &\pi_1(X \times Y, (x_0, y_0)) &&\to &\pi_1(X, x_0) \times \pi_1(Y, y_0); \\
         &&&\gamma &&\mapsto &((j_X)_\pi(\gamma), (j_Y)_\pi(\gamma)).
-    \end{align*}
+    \end{align}
 
     $\varphi$ is a \emph{monomorphism}.
     Let $\pclass{c} \in \ker \varphi$ i.e.\
@@ -324,11 +323,11 @@ For simplicity, we would write such homomorphism by $f_\pi$ (without explicitly 
     \end{equation}
     is a homomorphism. Same as $g_{\bar c} (\pclass{b}) = c b \bar c$.
 
-    \begin{align*}
+    \begin{align}
         g_c \circ g_{\bar c} (\pclass{b}) &= \langle \bar c c b \bar c c\rangle = \id_{\pi_1(X, x_2)};
         \\
         g_{\bar c} \circ g_c (\pclass{a}) &= \langle c \bar c a c \bar c\rangle = \id_{\pi_1(X, x_1)},
-    \end{align*}
+    \end{align}
     therefore $g_c$ is an isomorphism.
 \end{proof}
 
@@ -466,12 +465,12 @@ We call $q(a)$ the \indexbf{loop number} of path~$a$.
     Let $Q \colon \pi_1(S^1, z_0) \to \mathbb Z; \pclass{a} \mapsto q(a)$.
 
     $\forall \pclass{a}, \pclass{b} \in \pi_1(S^1, z_0)$, choose $\tilde a(1) = \tilde b(0)$,
-    \begin{align*}
+    \begin{align}
         Q(\pclass{a} \pclass{b}) &= Q(\langle a b \rangle) 
         = q(ab) \\
         &= \tilde b(1) - \tilde a(0) = \tilde b(1) - \tilde b(0) + \tilde a(1) - \tilde a(0) = q(a) + q(b) \\
         &= Q(\pclass{a}) + Q(\pclass{b}),
-    \end{align*}
+    \end{align}
     which means $Q$ is a homomorphism. 
 
     By Lemma~\ref{lemma: Same loop number iff homotopic ralative to endpoint}, $Q$ is a monomorphism. 
@@ -524,11 +523,11 @@ By Theorem~\ref{theorem: Fundamental group of product space}, the fundamenal gro
 
 \begin{definition}[Homotopy type]
     If $\exists f \in C(X, Y)$, $\exists g \in C(Y, X)$ s.t.\ 
-    \begin{align*}
+    \begin{align}
         g \circ f \simeq \id_X,
         &&
         f \circ g \simeq \id_Y,
-    \end{align*}
+    \end{align}
     then we say $X$ and $Y$ are \indexbf{homotopy equivalent}, or they are of the same \indexbf{homotopy type}, denoted by $\indexmath[X simeq Y]{X \simeq Y}$.
     $f$ is called a \indexbf{homotopy map} or a \indexbf{homotopy equivalence} from $X$ to $Y$, and $g$ is called a \indexbf{homotopy inverse} of $f$.
 \end{definition}
@@ -701,7 +700,7 @@ We define some concepts that are very familar in vector spaces:
 \begin{definition}
     Let $G$ and $H$ be groups.
     The \indexbf{free product} $G * H$ is defined as a string of alternative $g$s and $h$s from $G \backslash \{1_G\}$ and $H \backslash \{1_H\}$, that is
-    \begin{align*}
+    \begin{align}
         g_0 h_0 \cdots g_n h_n,
         \quad
         \text{or, }
@@ -715,7 +714,7 @@ We define some concepts that are very familar in vector spaces:
         \text{or, }
         \quad
         h_0 g_1 h_1 \cdots g_n h_n g_{n+1},
-    \end{align*}
+    \end{align}
     and the string that has zero length, denoted by $1 \in G * H$.
 
     The product of two strings in $G * H$ is either concatenation (when ends are from different groups) or multiplication (when ends are from the same group). 
@@ -768,16 +767,14 @@ Many authors (\cite{基础拓扑学讲义}) impose path connectivity and local p
 \begin{theorem}[Product of covering maps]
     Let $(E, p)$ and $(F, q)$ be covering spaces onto $B$ and $C$.
     The \indexbf{product} of $(E, p)$ and $(F, q)$ ($E$ and $F$, or $p$ and $q$)
-    \begin{align*}
+    \begin{align}
         p \times q \colon
          E \times F &\to B \times C;
          \\
          (e, f) &\mapsto (p(e), q(f)),
-    \end{align*}
+    \end{align}
     is also a covering map (onto $B \times C$).
 \end{theorem}
-
-
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
