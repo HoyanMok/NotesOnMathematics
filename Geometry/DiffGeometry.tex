@@ -861,8 +861,25 @@ Naturally, transition functions make a group structure.
 
     The bundle $\begin{tikzcd}
         E \arrow[r, "\pi"] & M
-    \end{tikzcd}$ is then called the \emphbf{$G$-bundle}\index[G-bundle]{$G$-bundle}, where $G$ is the \indexbf{gauge group}.
+    \end{tikzcd}$ is then called the \emphbf{$G$-bundle}\index[G-bundle]{$G$-bundle},
+    the element of which is denoted as $\indexmath[p, vp]{[p, v_p]}$ for some $v_p \in U_i$
+    , where $G$ is the \indexbf{gauge group}.
 \end{definition}
+
+One can show that the $G$-bundles are also vector bundles.
+
+Consider transformations of the sections of the $G$-bundle.
+If $T \colon E_p \to E_p$ can be expressed by \emph{some} $g \in G$ s.t.\ 
+\begin{equation}
+    T([p, v_p]) = [p, \rho(g) v_p],
+\end{equation}
+then we say $T$ \indexbf{lives in} $G$. 
+Similarly we can define when $T$ lives in $\mathfrak{g}$.
+
+Notice that we do not specify which $g \in G$ corresponds to $T$, because we have the freedom to choose the $v_p$ as the representative of the equivalence class, and for different $v_p$, we have different $g \in G$.
+
+If, $\forall p \in M$, we have $T_p \colon E_p \to E_p$ that $T_p$ lives in $G$, we call $T$ a \indexbf{gauge transformation}.
+The set of all gauge transformations is denoted as $\indexmath[G]{\mathcal G}$\footnote{physicists call it the \indexbf{gauge group}, as opposite to $G$.}.
 
 \section{Connections}
 
@@ -918,11 +935,36 @@ where $\indexmath[D0]{D^0}$ is called the \indexbf{standard flat connection} (wh
 \begin{theorem}
     Let $(E, \pi, M, F)$ be a smooth vector bundle, and $D^0$ is the standard flat connection on $U \subset E$ with the trivialisation $\varphi \colon E|_U \to U \times F$.
     If $D$ is a connection on a $(E, \pi, M, F)$,
-    then $\exists A \in \Gamma(\End(E)) \otimes T^*M$ s.t.\ 
+    then $\exists A \in \Gamma(\End(E|_U)) \otimes T^*U$ s.t.\ 
     \begin{equation}
-        D = D^0 + A.
+        D|_U = D^0 + A.
     \end{equation}
 \end{theorem}
+
+\begin{definition}[$G$-connection]
+    Let $E$ be a $G$-bundle, we define a \emphbf{$G$-connection}\index{G-connection@$G$-connection} as a connection $D$ on $E$ that
+    \begin{equation}
+        D = D^0 + A,
+    \end{equation}
+    where in any local coordinates $A = A_\mu \dif x^\mu$, $A_\mu \in \End(E)$ lives in $\mathfrak g$.
+\end{definition}
+
+\begin{definition}[Gauge transformation of $G$-connection]
+    Let $E$ be a $G$-bundle with $G$-connection $D$. 
+    If $g \in \mathcal G$ is a gauge transformation, then
+    \begin{equation}
+        D'_v (s) = g D_v(g^{-1}s) 
+    \end{equation}
+    is also a $G$-connection, and we say that $D$ and $D'$ are \indexbf{gauge equivalent}.
+\end{definition}
+
+In local coordinates, 
+\begin{equation}
+    A'_\mu = g A_\mu g^{-1} + g \partial_\mu g^{-1}.
+\end{equation}
+
+Let $\mathcal A$ be the space of all $G$-connections on $E$, then we say $\mathcal A / \mathcal G$ is the space of connections modulo gauge transformation.
+
 
 \section{Parallel Transport}
 
@@ -952,7 +994,32 @@ We can extend the domain of $\gamma_x$ to $\mathbb R$ (note that $\mathbb R$ is 
 \end{equation}
 which is called the \indexbf{flow} of $u$.  % TODO: the domain shall be restricted to J_x ...
 
+\begin{definition}[Holonomy]
+    Let $D$ be a connection on a smooth vector bundle $(E, \pi, M, F)$, $\gamma$ is a (piecewise) smooth curve in $M$, with ends $\gamma(0) = p$ and $\gamma(1) = q$.
+    $u_0 \in E_p$.
+    The \indexbf{holonomy} of $u$ along $\gamma$ is the map
+    \begin{equation}
+        \indexmath[H(gamma, D)]{H(\gamma, D)} \colon E_p \to E_q,
+    \end{equation}
+    such that $H(\gamma, D) u_0$ is the end of the parallel transport of $u_0$ along $\gamma$.
+\end{definition}
 
+It can be shown that $H(\gamma, D)$ is a linear transformation, and it transforms as
+\begin{equation}
+    H(\gamma, D') = g(q) H(\gamma, D) g(p)^{-1}
+\end{equation}
+under gauge transformation $g \in \mathcal G$.
+
+Specially, if $\gamma$ is a loop ($p = q$), then $H(\gamma, D) \in \End(E)_p$ (and it can be proved to be living in $G$), and $H(\gamma, D') = g(p) H(\gamma, D) g(p)^{-1}$.
+Therefore, $\tr H(\gamma, D)$ is a \indexbf{gauge invariant}.
+
+\begin{definition}[Wilson loop]
+    Let $D$ be a connection on a smooth vector bundle $(E, \pi, M, F)$, $\gamma$ is a (piecewise) smooth loop in $M$.
+    The \indexbf{Wilson loop} is defined as 
+    \begin{equation}
+        \indexmath[W(gamma, D)]{W(\gamma, D)} := \tr H(\gamma, D).
+    \end{equation}
+\end{definition}
 
 \chapter{Curvature}
 
