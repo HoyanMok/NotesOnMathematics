@@ -965,6 +965,32 @@ In local coordinates,
 
 Let $\mathcal A$ be the space of all $G$-connections on $E$, then we say $\mathcal A / \mathcal G$ is the space of connections modulo gauge transformation.
 
+Given a connection $D$ on $E$, we can construct conncections for different structures built upon $E$.
+
+The \indexbf{dual connection} $D^*$ on $E^*$ is defined as
+\begin{equation}
+    (D^*_v \sigma) (s) = v[\sigma(s)] - \sigma (D_v s),
+\end{equation}
+where $v \in \Gamma(TM)$, $s \in \Gamma(E)$, $\sigma \in \Gamma(E^*)$.
+
+The \indexbf{direct sum of connections} $D \oplus D'$ on $E \oplus E'$ is defined as
+\begin{equation}
+    (D \oplus D')_v (s \oplus s') = D_v s \oplus D'_v s',
+\end{equation}
+where $v \in \Gamma(TM)$, $s \in \Gamma(E)$, $s' \in \Gamma(E')$.
+
+The \indexbf{tensor product of connections} $D \otimes D'$ on $E \otimes E'$ is defined as
+\begin{equation}
+    (D \otimes D')_v (s \otimes s') = D_v s \otimes s' + s \otimes D'_v s',
+\end{equation}
+where $v \in \Gamma(TM)$, $s \in \Gamma(E)$, $s' \in \Gamma(E')$.
+
+Since $\End(E) \cong E \otimes E^*$, the connection $D$ (we use the same symbol for $D$ on $E$) on $\End(E)$ can be shown to 
+\begin{equation}
+    D_v T (s) = D_v(Ts) - T(D_v s),
+\end{equation}
+where $v \in \Gamma(TM)$, $s \in \Gamma(E)$, $T \in \Gamma(\End(E))$.
+
 
 \section{Parallel Transport}
 
@@ -1069,15 +1095,186 @@ Notice that $[\partial_\mu, \partial_\nu] = 0$,
     \end{aligned}
 \end{equation}
 
+If we write $F(d_\mu, d_\nu) = {F^i}_{\mu\nu j} e_i \otimes e^j$,
+then
+\begin{equation}
+    {F^i}_{\mu\nu j} = d_\mu (A_{\nu j}^i) - d_\nu (A_{\mu j}^i) + A_{\mu k}^i A_{\nu j}^k - A_{\nu k}^i A_{\mu j}^k.
+\end{equation}
+
+By definition, we have
+\begin{equation}
+    F(u, v) = - F(v, u).
+\end{equation}
+
+\begin{theorem}
+    Let $D$ be a $G$-connection on a $G$-bundle $E$, $F$ is the curvature of $D$.
+    If $g \in \mathcal G$, $F'$ is the corresponding curvature of $D' = g D g^{-1}$, 
+    then $\forall u, v \in \Gamma(TM)$
+    \begin{equation}
+        F'(u, v) = g F(u, v) g^{-1}.
+    \end{equation}
+\end{theorem}
+
+\section{\texorpdfstring{$E$-Valued $p$-Form}{E-Valued p-Form}}
+
+\begin{definition}
+    We define the \emphbf{$E$-valued $p$-form} as a section of $E \otimes \bigwedge\nolimits^p T^*M$, denoted as $\indexmath[Omega p E M]{\Omega^p_E(M)}$.\index{E-valued p-form@$E$-valued $p$-form}
+\end{definition}
+
+Also, we define the wedge product of a $E$-valued $p$-form and a $q$-form as
+\begin{equation}
+    \left(
+        \sum_i s_i \otimes \omega_i 
+    \right) \wedge \mu := \sum_i s_i \otimes (\omega_i \wedge \mu). 
+\end{equation}
+
+\begin{definition}[Exterior covariant derivative]
+    We define the \indexbf{exterior covariant derivative} as a map
+    $\indexmath[dD]{\dif_D} \colon \Omega_E^p(M) \to \Omega_E^{p+1}(M)$ s.t.
+    \begin{equation}
+        i_v (\dif_E s) = D_v s,
+    \end{equation}
+    where $i_v$ is the interior product, $D$ is a connection on $E$ and $s \in \Omega^0_E(M) = \Gamma(E)$, and
+    \begin{equation}
+        \dif_D \sum_i s_i \otimes \omega_i := 
+        \sum_i (
+            \dif_D s_i \wedge \omega_i
+            + s \otimes \dif \omega_i
+        ),
+    \end{equation}
+    for $\omega_i \in \Omega^p(M)$.
+\end{definition}
+
+In local coordinates ($\varphi \colon M \to \mathbb R^n$, $\varphi^* \dif x^\mu = e^\mu$)
+\begin{equation}
+    \frac 1 {p!} \dif_D (s_{i_1 \cdots i_p} \otimes e^{i_1} \wedge \cdots \wedge e^{i_p})
+    = D_\mu s_{i_1 \cdots i_p} \otimes e^\mu \wedge e^{i_1} \wedge \cdots \wedge e^{i_p}.
+\end{equation}
+
+\begin{theorem}
+    Let $\eta \in \Omega^p_E(M)$ be a $E$-valued $p$-form, and $F \in \Omega^2_{\End(E)}(M)$ is the curvature form of connection $D$ on $E$,
+    \begin{equation}
+        \dif[2]_D \eta (u, v, w_0, \ldots, w_{p-1}) = F(u, v) \eta(w_0, \ldots, w_{p-1}).
+    \end{equation}
+\end{theorem}
+
+We can denote $(u, v, w_0, \ldots, w_{p-1}) \mapsto F(u, v) \eta(w_0, \ldots, w_{p-1})$ as $\indexmath[F wedge eta]{F \wedge \eta}$, therefore
+\begin{equation}
+    \dif[2]_D \eta = F \wedge \eta.
+\end{equation}
+
 \section{Bianchi Identity}
 
+\begin{theorem}[Bianchi identity]
+    Given any connection $D$ on $E$, for the curvature $F$ we have
+    \begin{equation}
+        \dif_D F = 0,
+    \end{equation}
+    where $\dif_D$ should be understood as the exterior covariant derivative of $D$ on $\End(E)$.
+\end{theorem}
+\begin{proof}
+    It can be proved (by calculating in local coordinates) that $\forall \omega \in \Omega^p_{\End(E)}(M)$, $\forall \eta \in \Omega_E(M)$,
+    \begin{equation}
+        \dif_D (\omega \wedge \eta) = \dif_D \omega \wedge \eta + (-1)^p \omega \wedge \dif_D \eta.
+    \end{equation}
+
+    Hence, 
+    \begin{align}
+        \dif[3]_D \eta &= \dif_D (F \wedge \eta)
+        = \dif_D F \wedge \eta + (-1)^2 F \wedge \dif_D \eta
+        \\
+        &= \dif_D F \wedge \eta + F \wedge \dif_D \eta.
+    \end{align}
+    
+    On the other hand,
+    \begin{equation}
+        \dif[3]_D \eta = F \wedge \dif_D \eta.
+    \end{equation}
+
+    \hence
+    \begin{equation}
+        \dif_D F \wedge \eta = 0,
+    \end{equation}
+    for any $\eta \in \Omega_E(M)$.
+\end{proof}
+
+In local coordinates, we have
 \begin{equation}
-    [D_u, [D_v, D_w]] + [D_v, [D_w, D_u]] + [D_w, [D_u, D_v]] = 0
+    D_\mu F_{\nu \lambda} + D_\nu F_{\lambda \mu} + D_\lambda F_{\mu \nu} = 0.
 \end{equation}
 
-\begin{equation}
-    [D_\mu, F_{\nu \lambda}] + [D_\nu, F_{\lambda \mu}] + [D_\lambda, F_{\mu \nu}] = 0
+Or, using the definition of $D$ on $\End(E)$, if written in $D$ on $E$:
+\begin{equation}\label{eq: Bianchi identity (D and F, local coordinates)}
+    [D_\mu, F_{\nu \lambda}] + [D_\nu, F_{\lambda \mu}] + [D_\lambda, F_{\mu \nu}] = 0,
 \end{equation}
+or
+\begin{equation}\label{eq: Bianchi identity (D, local coordinates)}
+    [D_u, [D_v, D_w]] + [D_v, [D_w, D_u]] + [D_w, [D_u, D_v]] = 0.
+\end{equation}
+
+We can have a different approach.
+We need several algebraic constructions first.
+
+We define the wedge product of two $\End(E)$-valued forms as
+\begin{equation}
+    \sum_i (S_i \otimes \omega_i) \wedge \sum_j(T_j \otimes \mu_j) 
+    := \sum_{i, j} (S_i T_j) \otimes (\omega_i \wedge \mu_j).
+\end{equation}
+
+
+It can be proved that
+\begin{equation}
+    \dif_D (\omega \wedge \mu) = \dif_D \omega \wedge \mu + (-1)^p \omega \wedge \dif_D \mu,
+\end{equation}
+if $\omega$ is a $\End(E)$-valued $p$-form.
+
+\begin{definition}[Graded commutator]
+    For $\End(E)$-valued forms $\omega$ and $\mu$, we define the \indexbf{graded commutator} as
+    \begin{equation}
+        [\omega, \mu] := \omega \wedge \mu - (-1)^{pq} \mu \wedge \omega.
+    \end{equation}
+\end{definition}
+
+The graded commutator gives a graded Lie algebra structure on $\Omega^*_{\End(E)}(M)$, with graded antisymmetric:
+\begin{equation}
+    [\omega, \mu] = - (-1)^{pq} [\mu, \omega],
+\end{equation}
+and \indexbf{graded Jacobi identity}:
+\begin{equation}
+    (-1)^{pr} [\omega, [\mu, \nu]] + (-1)^{pq} [\mu, [\nu, \omega]] + (-1)^{qr} [\nu, [\omega, \mu]] = 0.
+\end{equation}
+
+\begin{proof}[Alternative proof for Bianchi identity]
+    Let $\dif := \dif_{D^0}$ in some local trivialisation of $E$ ($E|_U \cong U \times V$).
+    Since $D^0$ is flat, we have $\dif[2] = 0$.
+
+    If $D = D^0 + A$, then
+    for $\omega \in \Omega_E(U)$, 
+    \begin{equation}\label{eq: exterior covariant derivative of E-valued form in local trivialisation}
+        \dif_D \omega = \dif \omega + A \wedge \omega;
+    \end{equation}
+    while $T \in \Omega_{\End(E)}(U)$,
+    \begin{equation}
+        \dif_D T = \dif T + [A, T].
+    \end{equation}
+
+    \hence
+    \begin{equation}
+        \dif[2]_D \omega = 
+        \dif_D \eqref{eq: exterior covariant derivative of E-valued form in local trivialisation} = (\dif A + A \wedge A) \wedge \omega.
+    \end{equation}
+    \hence
+    \begin{equation}
+        F = \dif A + A \wedge A.
+    \end{equation}
+
+    \begin{equation}
+        \dif_D F = \dif F + [A, F] 
+        = \dif(A \wedge A) + [A, \dif A + A \wedge A] = 0.
+    \end{equation}
+\end{proof}
+
+
 
 \chapter{Pseudo-Riemannian Geometry}
 % TODO: since most of the topics are on Pseudo-Riemannian Geometry
