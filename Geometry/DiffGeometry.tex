@@ -532,7 +532,7 @@ and $k = n$,
 \begin{equation}
     \star (f \vol) = f \prod_{\mu \in n} \sign(\mu) = (-1)^{n - s} f
 \end{equation}
-if the signature of the metric is $(s, n - s)$.
+if the signature of the metric is $(s, n - s)$ ($s$ positives and $n - s$ negatives).
 
 The Hodge star operator is also called the \indexbf{Hodge duality} because:
 \begin{theorem}\label{theorem: hodge duality}
@@ -542,6 +542,14 @@ The Hodge star operator is also called the \indexbf{Hodge duality} because:
     \end{equation}
     where $\sign(g) := \det g / |\det g|$.
 \end{theorem}
+
+In local coordinates, 
+\begin{equation}
+    \star \alpha 
+        = \frac {\varepsilon_{i_0\cdots i_{n - 1}}} {p!}
+            \alpha_{j_0 \cdots j_{p - 1}}\prod_{k \in p} g^{i_k j_k}
+            \sqrt{- \det g} \bigwedge_{\ell \in n \backslash p} \dif x^{i_\ell}.
+\end{equation}
 
 \begin{definition}[Codifferential]
     Let $M$ be an orientable manifold.
@@ -1095,10 +1103,10 @@ Notice that $[\partial_\mu, \partial_\nu] = 0$,
     \end{aligned}
 \end{equation}
 
-If we write $F(d_\mu, d_\nu) = {F^i}_{\mu\nu j} e_i \otimes e^j$,
+If we write $F(d_\mu, d_\nu) = {F^i}_{j\mu\nu} e_i \otimes e^j$,
 then
 \begin{equation}
-    {F^i}_{\mu\nu j} = d_\mu (A_{\nu j}^i) - d_\nu (A_{\mu j}^i) + A_{\mu k}^i A_{\nu j}^k - A_{\nu k}^i A_{\mu j}^k.
+    {F^i}_{j\mu\nu} = d_\mu (A_{\nu j}^i) - d_\nu (A_{\mu j}^i) + A_{\mu k}^i A_{\nu j}^k - A_{\nu k}^i A_{\mu j}^k.
 \end{equation}
 
 By definition, we have
@@ -1132,7 +1140,7 @@ Also, we define the wedge product of a $E$-valued $p$-form and a $q$-form as
     We define the \indexbf{exterior covariant derivative} as a map
     $\indexmath[dD]{\dif_D} \colon \Omega_E^p(M) \to \Omega_E^{p+1}(M)$ s.t.
     \begin{equation}
-        i_v (\dif_E s) = D_v s,
+        i_v (\dif_D s) = D_v s,
     \end{equation}
     where $i_v$ is the interior product, $D$ is a connection on $E$ and $s \in \Omega^0_E(M) = \Gamma(E)$, and
     \begin{equation}
@@ -1162,6 +1170,22 @@ We can denote $(u, v, w_0, \ldots, w_{p-1}) \mapsto F(u, v) \eta(w_0, \ldots, w_
 \begin{equation}
     \dif[2]_D \eta = F \wedge \eta.
 \end{equation}
+
+\begin{theorem}[Gauge transformation of exterior covariant derivative]
+    Let $E$ be a $G$-bundle and $D$ is the $G$-connection on $E$.
+    $g \in \mathcal G$ is a gauge transformation of $E$, then
+    \begin{equation}
+        \dif_{gDg^{-1}} = g \dif_D g^{-1}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    \begin{align}
+        \dif_{gDg^{-1}} (gs) (v, u_0, \ldots, u_{p-1}) 
+            &= g D_v g^{-1} gs (u_0, \ldots, u_{p-1})
+            \\
+            &= g \dif_D s (v, u_0, \ldots, u_{p-1})
+    \end{align}
+\end{proof}
 
 \section{Bianchi Identity}
 
@@ -1524,7 +1548,7 @@ As an application of Cartan's formula, we can prove the following theorem by ind
 
 \section{Levi-Civita Connection}
 \begin{definition}[Levi-Civita connection]
-    Let $E \to M$ be a smooth vector bundle, where $M$ is a Riemanian manifold with metric $g \in T^*M \otimes T^*M$.
+    Let $E \to M$ be a smooth vector bundle, where $M$ is a Riemannian manifold with metric $g \in T^*M \otimes T^*M$.
     Let $\nabla \in \Gamma(\End(E) \otimes T^*M)$ be a connection on $E$.
     Then $\indexmath[nabla]{\nabla}$ is called a \indexbf{Levi-Civita connection} if
     \begin{equation}
@@ -1538,7 +1562,8 @@ As an application of Cartan's formula, we can prove the following theorem by ind
 \end{definition}
 
 Since $T(u, v) = \nabla_u v - \nabla_v u - [v, u]$ is called the \indexbf{torsion} of $u$ and $v$, 
-Eq.~\eqref{eq: torsion free} is called the \indexbf{torsion free} condition.
+Eq.~\eqref{eq: torsion free} is called the \indexbf{torsion free} condition. 
+In the torsion free condition is missing, then the connection $\nabla$ is called an \indexbf{affine connection}.
 
 In local coordinates:
 \begin{equation}
@@ -1616,7 +1641,28 @@ In fact, the Theorem~\ref{theorem: covariant derivative and exterior differentia
     
 \end{theorem}
 
+\section{Curvatues}
 
+The \indexbf{Rieman tensor} $\Riem$ is defined as the curvature of the affine connection $\nabla$:
+\begin{equation}
+    \Riem(u, v) w = \nabla_u \nabla_v w - \nabla_v \nabla_u w - \nabla_{[u, v]} w.
+\end{equation}
+
+It is conventional to write the components of $\Riem$ as
+\begin{equation}
+    {R^\mu}_{\nu\alpha\beta} = \dif x^\mu (\Riem(\partial_\alpha, \partial_\beta) \partial_\nu), 
+\end{equation}
+and consider it as a $(1, 3)$-tensor.
+
+The trace of the linear map $u \mapsto \Riem(u, v) w$ is defined as $\Ric(v, w)$ where $\Ric$ is the \indexbf{Ricci tensor}, with components
+\begin{equation}
+    R_{\mu\nu} = {R^\alpha}_{\mu\alpha\nu}.
+\end{equation}
+
+Finnally, the trace of $u \mapsto \Ric(u, \dummy)^\sharp$ is called the \indexbf{scalar curvature} or \indexbf{Ricci scalar}:
+\begin{equation}
+    R = g^{\mu\nu} R_{\mu\nu} =: \tr_g \Ric.
+\end{equation}
 
 \backmatter{}
 \nocite{*} % 这个表示列出所有没有在文中被引用的参考文献
