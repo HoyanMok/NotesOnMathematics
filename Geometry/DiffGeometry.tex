@@ -908,6 +908,8 @@ The set of all gauge transformations is denoted as $\indexmath[G]{\mathcal G}$\f
 
 When a vector field $v \in \Gamma(TM)$ is given to the connection $D$, the map $D_v \colon \Gamma(E) \to \Gamma(E)$ is called the \indexbf{covariant derivative} with respect to $v$.
 
+If $E = TM$, the connection is called a \indexbf{affine connection}.
+
 \begin{definition}[Vector potential]
     A \indexbf{vector potential} $A$ is an $\End(E)$-valued 1-form, that is
     \begin{equation}
@@ -999,6 +1001,21 @@ Since $\End(E) \cong E \otimes E^*$, the connection $D$ (we use the same symbol 
 \end{equation}
 where $v \in \Gamma(TM)$, $s \in \Gamma(E)$, $T \in \Gamma(\End(E))$.
 
+Let $S \subset M$ be a submanifold, 
+and $E$ a vector bundle over $M$, 
+with connection $D$, while the restriction of $E$ to $S$ is $E|_S$.
+Note that even if $v \in \Gamma(TS)$, $s \in \Gamma(E|_S)$, 
+$D_v s $ is not necessarily in $\Gamma(E|_S)$.
+
+\begin{definition}[Projection of connection]
+    Let $N$ be a submanifold of $M$, and $\nabla$ be the affine connection of $M$.
+    If we have a projection $P \in \Gamma(T^*M \otimes TN)$ that linear maps a vector field on $M$ to a vector field on $N$, and $\forall v \in \Vect(N)$, $Pv = v$,
+    then the \indexbf{projection} of $\nabla$ onto $N$ is defined as
+    \begin{equation}
+        \forall v \in \Gamma(TN), \quad
+        \nabla^{(P)}_v = P \circ \nabla_v
+    \end{equation}
+\end{definition}
 
 \section{Parallel Transport}
 
@@ -1551,7 +1568,7 @@ As an application of Cartan's formula, we can prove the following theorem by ind
     Let $E \to M$ be a smooth vector bundle, where $M$ is a Riemannian manifold with metric $g \in T^*M \otimes T^*M$.
     Let $\nabla \in \Gamma(\End(E) \otimes T^*M)$ be a connection on $E$.
     Then $\indexmath[nabla]{\nabla}$ is called a \indexbf{Levi-Civita connection} if
-    \begin{equation}
+    \begin{equation}\label{eq: metric compatibility}
         u g(v, w) = g(\nabla_u v, w) + g(v, \nabla_u w),
     \end{equation} 
     and
@@ -1563,7 +1580,7 @@ As an application of Cartan's formula, we can prove the following theorem by ind
 
 Since $T(u, v) = \nabla_u v - \nabla_v u - [v, u]$ is called the \indexbf{torsion} of $u$ and $v$, 
 Eq.~\eqref{eq: torsion free} is called the \indexbf{torsion free} condition. 
-In the torsion free condition is missing, then the connection $\nabla$ is called an \indexbf{affine connection}.
+The Eq.~\eqref{eq: metric compatibility} is called the \indexbf{metric} condition.
 
 In local coordinates:
 \begin{equation}
@@ -1640,6 +1657,32 @@ In fact, the Theorem~\ref{theorem: covariant derivative and exterior differentia
     \end{equation}
     
 \end{theorem}
+
+Note that the parallel transport of a tangent vector along some submanifold might be no longer tangent to that submanifold, and hence we have:
+
+\begin{definition}[Autoparallel submanifold]
+    Let $N$ be a submanifold of $M$, and $\nabla$ be the Levi-Civita connection of $M$.
+    Then $N$ is called \indexbf{autoparallel} if
+    \begin{equation}
+        \forall u, v \in \Gamma(TN), \quad
+        \nabla_u v \in \Gamma(TN).
+    \end{equation}
+\end{definition}
+
+
+Autoparallel curves in $M$ are called \indexbf{geodesics}.
+
+\begin{definition}[Projection of connection with respect to the metric]
+    Let $N$ be a submanifold of $M$, and $\nabla$ be the Levi-Civita connection of $M$.
+    Given a linear projection $P \in \Gamma(\End(TN) \otimes T^*M)$,
+    the \indexbf{projection} of $\nabla$ onto $N$ with respect to $g$ is a projection in the sense of affine connection if $P$ satisfies that
+    \begin{equation}
+        \forall u \in \Gamma(TM), \quad
+        \forall v \in \Gamma(TN), \quad
+        \langle P(v), u \rangle = \langle v, u \rangle.
+    \end{equation}
+\end{definition}
+
 
 \section{Curvatues}
 
