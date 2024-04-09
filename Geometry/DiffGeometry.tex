@@ -810,7 +810,7 @@ If $E = B \times F$, then $(E, \pi, B, F)$ is called a \indexbf{trivial fibre bu
 \end{definition}
 
 \begin{definition}[Morphism (vector bundle)]
-    The morphism between two vector bundles $(E, \pi, B, F)$ and $(E', \pi', B', F')$ is a morphism $(\varphi, \psi)$ such that $\forall x \in B$, 
+    A morphism from a vector bundle $(E, \pi, B, F)$ to $(E', \pi', B', F')$ is a morphism (of fibre bundles) $(\varphi, \psi)$ such that $\forall x \in B$, 
     \begin{equation}
         \psi_* \colon \pi^{-1}(\{x\}) \to (\pi')^{-1}(\{\varphi(x)\})
     \end{equation}
@@ -871,7 +871,7 @@ Naturally, transition functions make a group structure.
         E \arrow[r, "\pi"] & M
     \end{tikzcd}$ is then called the \emphbf{$G$-bundle}\index[G-bundle]{$G$-bundle},
     the element of which is denoted as $\indexmath[p, vp]{[p, v_p]}$ for some $v_p \in U_i$
-    , where $G$ is the \indexbf{gauge group}.
+    , where $G$ is the \indexbf{gauge group} or \textbf{structure group}
 \end{definition}
 
 One can show that the $G$-bundles are also vector bundles.
@@ -888,6 +888,54 @@ Notice that we do not specify which $g \in G$ corresponds to $T$, because we hav
 
 If, $\forall p \in M$, we have $T_p \colon E_p \to E_p$ that $T_p$ lives in $G$, we call $T$ a \indexbf{gauge transformation}.
 The set of all gauge transformations is denoted as $\indexmath[G]{\mathcal G}$\footnote{physicists call it the \indexbf{gauge group}, as opposite to $G$.}.
+
+\section{Principal Bundles}
+
+\begin{definition}[Principal bundle]
+    Let $G$ be a topological group, $\begin{tikzcd}
+        P \arrow[r, "\pi"] & M
+    \end{tikzcd}$ be a fibre bundle.
+    If there is a continuous right action $P \times G \to P$ s.t.\ $\forall x \in M$, $\forall p, q \in P_x$
+    \begin{equation}
+        P_x g \subseteq P_x,
+        \quad
+        \exists g \in G 
+        \;\text{s.t.\ }
+        p g = q,
+        \quad
+        \forall g \in G\;
+        {p g = p} \to {g = 1},
+    \end{equation}
+    that is, $P_x$ is a $G$-torsor, and, $\forall x \in M$, the right action $G \to P_x$ is a homeomorphism, then we say $P$ is a \indexbf{principal $G$-bundle}.
+\end{definition}
+
+The prototypical example of a principal bundle is the \indexbf{frame bundle}, that is a principal $\GL(\mathbb R, n)$-bundle on a $n$-D manifold $M$.
+
+\begin{theorem}
+    Let $P$ be a (smooth) manifold, $G$ a topological group with (smooth) left action on $P$:
+    \begin{equation}
+        G \times P \to P,
+    \end{equation}
+    which is free and transitive, that is $\forall p, q \in P$, 
+    \begin{equation}
+        \exists g \in G \;\text{s.t.\ } g p = q,
+        \quad
+        \forall g \in G\; {g p = p} \to {g = 1},
+    \end{equation}
+    then $P$ is a principal $G$-bundle, with base space $M = P / G$.
+\end{theorem}
+
+We are more interested in the structure group than in the fibre, hence we can compare two bundles with the same structure group but different fibres:
+
+\begin{definition}[Associated bundle]
+    If the structure group $G$ of a bundle $E \to M$ has an (smooth) action on $F'$, one can construct a new bundle $E' \to M$ with fibre $F'$ and with structure group $G$, called the \indexbf{associated bundle} of $E$ with group $G$ with fibre $F'$.
+\end{definition}
+
+\begin{theorem}
+    All fibre bundles can be constructed by the associated bundle of some principal bundles.
+\end{theorem}
+
+The theorem reduce the classification of fibre bundle to the classification of principal bundles.
 
 \section{Connections}
 
@@ -1017,6 +1065,38 @@ $D_v s $ is not necessarily in $\Gamma(E|_S)$.
     \end{equation}
 \end{definition}
 
+\begin{definition}[Principal connection]
+    Let $P \to M$ be a smooth principal $G$-bundle, where the right-action $p \mapsto p g$ will be written as $R_g$.
+    If a $\mathfrak g$-valued 1-form $\omega$ on $P$, that is, $\omega \in \Omega^1_{\mathfrak g}(P) \cong \Gamma(\mathfrak g \otimes T^*P)$ that can be written as
+    \begin{equation}
+        \omega_p = X_p \dif f_p,
+        \quad 
+        p \in P, \,
+        X_p \in \mathfrak g,\,
+        f \in C^{(\infty)}(P) \cong \Omega^0(P),
+    \end{equation}
+    or
+    \begin{equation}
+    \begin{aligned}
+        \omega \colon & \Vect(P) \to C^{(\infty)}(P),
+        \\
+        & v \mapsto (p \mapsto v(f)(p) X_p),
+    \end{aligned}
+    \end{equation}
+    s.t.\ 
+    $\forall g \in G$, 
+    \begin{equation}
+        \Ad_g(R^*_g \omega) = \omega,
+    \end{equation}
+    and, $\forall p \in P$, if $\gamma \colon \mathbb R \to P$ is a smooth path s.t.\ $\gamma(0) = p$, and $\forall t \in \mathbb R$, $\exists g_t \in G$, $\gamma(t) = p g_t = R_{g_t}(p)$ and such $t \mapsto g_t$ is smooth, then
+    \begin{equation}
+        \omega_p(\gamma'(0)) = \left.
+            \diff {g_t} t
+        \right|_{t = 0} \in \mathfrak g, 
+    \end{equation}
+    then we say $\omega$ is a \indexbf{principal $G$-connection} on $P$.
+\end{definition}
+
 \section{Parallel Transport}
 
 \begin{definition}[Parallel transport]
@@ -1075,13 +1155,9 @@ Therefore, $\tr H(\gamma, D)$ is a \indexbf{gauge invariant}.
 \chapter{Curvature}
 
 \begin{definition}[Curvature]
-    A \indexbf{curvature} of a connection $D$ on a smooth vector bundle $(E, \pi, M, F)$ is a section $F \in \Gamma(\End(E) \otimes \Omega^2(M))$ (a \emph{$\End(E)$-valued $2$-form}) defined as
+    The \indexbf{curvature} of a connection $D$ on a smooth vector bundle $(E, \pi, M, F)$ is a section $F \in \Gamma(\End(E) \otimes \Omega^2(M))$ (a \emph{$\End(E)$-valued $2$-form}) defined as $\forall v, w \in \Gamma(TM)$, $s \in \Gamma(E)$:
     \begin{equation}
-        F(v, w) s = D_v D_w s - D_w D_v s - D_{[v, w]} s,
-        \quad
-        v, w \in \Gamma(TM),
-        \quad
-        s \in \Gamma(E).
+        F(v, w) s = D_v D_w s - D_w D_v s - D_{[v, w]} s.
     \end{equation} 
 \end{definition}
 
@@ -1315,6 +1391,80 @@ and \indexbf{graded Jacobi identity}:
     \end{equation}
 \end{proof}
 
+\chapter{Chern Classes}
+\section{Chern Form}
+\begin{definition}[Chern form]
+    Let $M$ be a $2n$-D manifold.
+    $E \to M$ is a vecor bundle with connection~$D$, and $F$ the curvature of $D$.
+    The $2k$-form
+    \begin{equation}
+        \indexmath[tr (F k)]{\tr(F^k)} := \tr \bigwedge_{\dummy \in n} F 
+    \end{equation}
+    is called the $k$-th \indexbf{Chern form} of $E$.
+\end{definition}
+
+\begin{theorem}[Chern forms are closed]
+    $\tr(F^k) \in Z^{2k}(M)$, i.e.\ 
+    \begin{equation}
+        \dif \tr(F^k) = 0.
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        &\dif \tr (F^k) = \tr \dif_D (F^k)
+        \\
+        &= \tr \left( 
+            \dif_D F \wedge F^{k-1}
+            + F \wedge \dif_D F \wedge F^{k-2}
+            + \cdots
+            + F^{k-1} \wedge \dif_D F
+         \right) 
+        \\
+        &= 0
+    \end{align*}
+\end{proof}
+
+\begin{theorem}\label{theorem: difference of chern forms is exact}
+    Given two connection, $D$, $D'$, the difference of the corresponding Chern forms is an exact form, i.e.\
+    \begin{equation}
+        \exists \omega \in \Omega^{2k-1}(M) 
+        \quad
+        \tr(F^k) - \tr (F'^k) = \dif \omega.
+    \end{equation}
+\end{theorem}
+
+
+\begin{theorem}\label{theorem: Chern class is topological invariant}
+    The integral of the $n$-th Chern form over the $2n$-D manifold is a topological invariant of the vector bundle, i.e.\ 
+    the integral
+    \begin{equation}
+        c(E) = \int_M \tr(F^n)
+    \end{equation} 
+    is independent of the choice of connection $D$.
+\end{theorem}
+
+\section{Chern Classes}
+
+Due to Theorem~\ref{theorem: difference of chern forms is exact}, one can define the $n$th Chern class of $E$ as
+\begin{definition}[Chern classes]
+    The $k$th \indexbf{Chern class} of $E$ is defined as
+    \begin{equation}
+        \indexmath[ck(E)]{c_k(E)} := \{
+            \tr(F^k) + \dif \omega
+            \mid \omega \in \Omega^{2k-1}(M)
+        \}  = [\tr (F^k)] \in H^{2k}(M).
+    \end{equation}
+    
+\end{definition}
+
+\begin{theorem}[Integral Chern class]
+    If $E \to M$ is a complex vector bundle (the standard bundle $F$ is a complex vector space) over $M$, which is a $2n$-D compact and oriented manifold, then the integral
+    \begin{equation}
+        \frac 1 {k!} \left( 
+            \frac{\mi}{2\pi}
+         \right)^k c_k(E) = \int_M \tr(F^k)
+    \end{equation}
+\end{theorem}
 
 
 \chapter{Pseudo-Riemannian Geometry}
