@@ -1230,7 +1230,7 @@ Also, we define the wedge product of a $E$-valued $p$-form and a $q$-form as
 \end{equation}
 
 \begin{definition}[Exterior covariant derivative]
-    We define the \indexbf{exterior covariant derivative} as a map
+    We can define the \indexbf{exterior covariant derivative} as a linear map
     $\indexmath[dD]{\dif_D} \colon \Omega_E^p(M) \to \Omega_E^{p+1}(M)$ s.t.
     \begin{equation}
         i_v (\dif_D s) = D_v s,
@@ -1249,7 +1249,7 @@ Also, we define the wedge product of a $E$-valued $p$-form and a $q$-form as
 In local coordinates ($\varphi \colon M \to \mathbb R^n$, $\varphi^* \dif x^\mu = e^\mu$)
 \begin{equation}
     \frac 1 {p!} \dif_D (s_{i_1 \cdots i_p} \otimes e^{i_1} \wedge \cdots \wedge e^{i_p})
-    = D_\mu s_{i_1 \cdots i_p} \otimes e^\mu \wedge e^{i_1} \wedge \cdots \wedge e^{i_p}.
+    = \frac{D_\mu s_{i_1 \cdots i_p}}{p!} \otimes e^\mu \wedge e^{i_1} \wedge \cdots \wedge e^{i_p}.
 \end{equation}
 
 \begin{theorem}
@@ -1393,6 +1393,43 @@ and \indexbf{graded Jacobi identity}:
 
 \chapter{Chern Classes}
 \section{Chern Form}
+
+We define $\tr \omega \in \Omega^p(M)$ for a $\End(E)$-valued $p$-form $\omega$ by
+\begin{equation}
+    i_{v} \tr \omega = \tr (i_v \omega)    
+\end{equation}
+
+\begin{theorem}[graded cyclic property of trace]
+    For $\omega \in \Omega^p_{\End(E)}(M)$, $\mu \in \Omega^q_{\End(E)}(M)$, we have
+    \begin{equation}
+        \tr([\omega, \mu]) = 0.
+    \end{equation}
+\end{theorem}
+
+\begin{corollary}[graded cyclic property of trace]
+    For $\omega \in \Omega^p_{\End(E)}(M)$, $\mu \in \Omega^q_{\End(E)}(M)$:
+    \begin{equation}
+        \tr (\omega \wedge \mu) = (-1)^{pq} \tr (\mu \wedge \omega).
+    \end{equation}
+\end{corollary}
+
+\begin{theorem}
+    Let $D$ be a connection on $E$, $\omega \in \Omega^p_{\End(E)}(M)$, then
+    \begin{equation}
+        \dif \tr \omega = \tr \dif_D \omega.
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[trace-induced inner product]
+    Let $M$ be a $n$-D oriented and compact manifold, with pseudo-Riemannian metric $g$, and $\omega, \mu \in \Omega^p_{\End(E)}(M)$, then
+    \begin{equation}
+        \int_M \tr (\omega \wedge \star\mu) = \int_M \tr (\mu \wedge \star\omega).
+    \end{equation}
+\end{theorem}
+
+
+
+
 \begin{definition}[Chern form]
     Let $M$ be a $2n$-D manifold.
     $E \to M$ is a vecor bundle with connection~$D$, and $F$ the curvature of $D$.
@@ -1402,6 +1439,19 @@ and \indexbf{graded Jacobi identity}:
     \end{equation}
     is called the $k$-th \indexbf{Chern form} of $E$.
 \end{definition}
+
+If (locally) $D = D^0 + A$, and we use the abbr.\ $\dif_0 = \dif_{D^0}$:
+\begin{equation}
+\begin{aligned}
+    \tr (F^k)
+    &= \tr \bigwedge_{\dummy \in n} (\dif_0 A + A \wedge A)
+    \\
+    &= \tr (A^{2k})
+    + \tr \sum_{\ell \in k}
+            A^{2 \ell} \wedge \dif_0 A \wedge A^{2(k - \ell - 1)}
+    + \cdots
+\end{aligned}
+\end{equation}
 
 \begin{theorem}[Chern forms are closed]
     $\tr(F^k) \in Z^{2k}(M)$, i.e.\ 
@@ -1465,6 +1515,27 @@ Due to Theorem~\ref{theorem: difference of chern forms is exact}, one can define
          \right)^k c_k(E) = \int_M \tr(F^k)
     \end{equation}
 \end{theorem}
+
+\section{Chern-Simons Form}
+
+For a trivial bundle, one can always define a flat connection $D^0$, whose curvature $F^0$ vanishes, and hence the Chern form also vanishes.
+Since adding $A$ to the connection only change the Chern form by an exact form, we can see that the Chern form of any connection is not only closed but also exact, for a trivial bundle.
+
+\begin{definition}[Chern-Simons form]
+    Let $E \to M$ be a trivial vector bundle with a connection $D = D^0 + A$, where $D^0$ is a flat connection.
+
+    The $k$-th \indexbf{Chern-Simons form} of $D$ is defined as the $(2k - 1)$-form $\omega_\text{Ch-S}$ that
+    \begin{equation}
+        \dif_{D^0} \omega_\text{Ch-S} = \tr (F^k).
+    \end{equation}
+\end{definition}
+
+The reason why we do not define the Chern-Simons form for non-trivial bundle is that in general there might be different flat connections at different neibourhoods of $M$, and we can not define a globally unique Chern-Simons form.
+
+Let us consider the case of $k = 2$, where the Chern form is
+\begin{equation}
+    \tr(F \wedge F) = \dif A + A \wedge A
+\end{equation}
 
 
 \chapter{Pseudo-Riemannian Geometry}
